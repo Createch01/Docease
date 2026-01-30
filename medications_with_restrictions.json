@@ -1,0 +1,241 @@
+{
+  "medications_with_restrictions": [
+    {
+      "id": 1,
+      "name": "Doliprane",
+      "dosage": "1000mg",
+      "category": "Analgésique",
+      "interaction_risk": ["Warfarine"],
+      "restriction": {
+        "status": "autorise",
+        "minAge": 3,
+        "maxAge": null,
+        "reason": ""
+      },
+      "incompatibleWith": []
+    },
+    {
+      "id": 2,
+      "name": "Advil",
+      "dosage": "400mg",
+      "category": "Analgésique",
+      "interaction_risk": ["Warfarine", "Lithium", "Méthotrexate"],
+      "restriction": {
+        "status": "attention",
+        "minAge": 12,
+        "maxAge": null,
+        "reason": "Déconseillé chez l'enfant < 12 ans sans avis médical"
+      },
+      "incompatibleWith": ["Warfarine", "Héparine", "AINS", "Aspirine"]
+    },
+    {
+      "id": 3,
+      "name": "Aspirine Adulte 500mg",
+      "dosage": "500mg",
+      "category": "Analgésique / Antiplaquettaire",
+      "interaction_risk": ["Warfarine", "Héparine", "AINS"],
+      "restriction": {
+        "status": "interdit",
+        "minAge": 15,
+        "maxAge": null,
+        "reason": "Risque élevé de syndrome de Reye chez l'enfant - Utiliser formulation pédiatrique"
+      },
+      "incompatibleWith": ["Warfarine", "Héparine", "Ibuprofène", "Naproxène", "Méthotrexate"]
+    },
+    {
+      "id": 4,
+      "name": "Augmentin",
+      "dosage": "875mg",
+      "category": "Antibiotique",
+      "interaction_risk": ["Méthotrexate", "Warfarine"],
+      "restriction": {
+        "status": "autorise",
+        "minAge": 0,
+        "maxAge": null,
+        "reason": "Disponible en formulation pédiatrique"
+      },
+      "incompatibleWith": []
+    },
+    {
+      "id": 5,
+      "name": "Clamoxyl",
+      "dosage": "500mg",
+      "category": "Antibiotique",
+      "interaction_risk": ["Méthotrexate"],
+      "restriction": {
+        "status": "autorise",
+        "minAge": 0,
+        "maxAge": null,
+        "reason": "Disponible en suspension pédiatrique"
+      },
+      "incompatibleWith": []
+    },
+    {
+      "id": 6,
+      "name": "Warfarine",
+      "dosage": "5mg",
+      "category": "Anticoagulant",
+      "interaction_risk": ["Aspirine", "AINS", "Méthotrexate"],
+      "restriction": {
+        "status": "attention",
+        "minAge": 10,
+        "maxAge": null,
+        "reason": "Risque élevé d'hémorragie - Suivi INR obligatoire"
+      },
+      "incompatibleWith": [
+        "Aspirine",
+        "Ibuprofène",
+        "Naproxène",
+        "Diclofénac",
+        "AINS",
+        "Héparine"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Héparine",
+      "dosage": "25000 UI/ml",
+      "category": "Anticoagulant",
+      "interaction_risk": ["Aspirine", "AINS"],
+      "restriction": {
+        "status": "attention",
+        "minAge": 0,
+        "maxAge": null,
+        "reason": "Utiliser héparine pédiatrique selon le poids"
+      },
+      "incompatibleWith": [
+        "Warfarine",
+        "Aspirine",
+        "Ibuprofène",
+        "AINS"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Méthotrexate",
+      "dosage": "10mg/ml",
+      "category": "Immunosuppresseur",
+      "interaction_risk": [
+        "Pénicillines",
+        "Céphalosporines",
+        "AINS",
+        "Acide folique"
+      ],
+      "restriction": {
+        "status": "attention",
+        "minAge": 3,
+        "maxAge": null,
+        "reason": "Toxicité rénale et hématologique - Suivi biologique obligatoire"
+      },
+      "incompatibleWith": [
+        "Acide folique (simultanément)",
+        "Pénicillines",
+        "AINS"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Acide Folique 5mg",
+      "dosage": "5mg",
+      "category": "Vitamine",
+      "interaction_risk": ["Méthotrexate"],
+      "restriction": {
+        "status": "autorise",
+        "minAge": 0,
+        "maxAge": null,
+        "reason": "Utiliser seul ou 48h après Méthotrexate"
+      },
+      "incompatibleWith": [
+        "Méthotrexate (simultanément)"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Fluconazole Pédiatrique 20mg/ml",
+      "dosage": "20mg/ml",
+      "category": "Antifongique",
+      "interaction_risk": ["Warfarine", "Méthotrexate"],
+      "restriction": {
+        "status": "autorise",
+        "minAge": 0,
+        "maxAge": null,
+        "reason": "Formulation pédiatrique - Dosage adapté au poids"
+      },
+      "incompatibleWith": []
+    },
+    {
+      "id": 11,
+      "name": "Fluconazole Adulte 200mg",
+      "dosage": "200mg",
+      "category": "Antifongique",
+      "interaction_risk": ["Warfarine"],
+      "restriction": {
+        "status": "interdit",
+        "minAge": 15,
+        "maxAge": null,
+        "reason": "Dosage adulte - Utiliser formulation pédiatrique pour enfants"
+      },
+      "incompatibleWith": []
+    },
+    {
+      "id": 12,
+      "name": "Amoxicilline Adulte 1000mg",
+      "dosage": "1000mg",
+      "category": "Antibiotique",
+      "interaction_risk": ["Méthotrexate"],
+      "restriction": {
+        "status": "attention",
+        "minAge": 12,
+        "maxAge": null,
+        "reason": "Dosage adulte - Préférer suspension pédiatrique pour enfants < 12 ans"
+      },
+      "incompatibleWith": []
+    },
+    {
+      "id": 13,
+      "name": "Amoxicilline Pédiatrique 250mg/5ml",
+      "dosage": "250mg/5ml",
+      "category": "Antibiotique",
+      "interaction_risk": ["Méthotrexate"],
+      "restriction": {
+        "status": "autorise",
+        "minAge": 0,
+        "maxAge": null,
+        "reason": "Formulation pédiatrique - Dosage adapté au poids et à l'âge"
+      },
+      "incompatibleWith": []
+    }
+  ],
+  "validation_rules": {
+    "enfant_interdit": {
+      "trigger": "age < 15 AND medicine.restriction.status === 'interdit'",
+      "alert_type": "ENFANT_INTERDIT",
+      "severity": "CRITIQUE",
+      "ui_component": "Bannière rouge clignotante",
+      "allow_override": true
+    },
+    "incompatibilite": {
+      "trigger": "medicine.incompatibleWith.includes(other_medicine.name)",
+      "alert_type": "INCOMPATIBILITE",
+      "severity": "CRITIQUE",
+      "ui_component": "Bannière clignotante avec icône pulsante",
+      "allow_override": true
+    },
+    "attention_age": {
+      "trigger": "age < medicine.restriction.minAge",
+      "alert_type": "CONTRE_INDICATION",
+      "severity": "ATTENTION",
+      "ui_component": "Bannière orange",
+      "allow_override": false
+    }
+  },
+  "notes": [
+    "Les propriétés 'restriction' et 'incompatibleWith' doivent être ajoutées à chaque médicament",
+    "Pour les enfants: toujours privilégier les formulations pédiatriques (suspension, solution)",
+    "Les seuils d'âge peuvent être adaptés selon les recommandations locales",
+    "L'Aspirine est INTERDITE pour les enfants < 15 ans en raison du risque de Reye",
+    "Les AINS doivent être évités chez les enfants < 12 ans sans justification médicale",
+    "Warfarine + AINS = Hémorragie grave INTERDITE sauf circonstances exceptionnelles",
+    "Méthotrexate nécessite suivi biologique mensuel et supplémentation folique obligatoire"
+  ]
+}

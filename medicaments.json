@@ -1,0 +1,87 @@
+{
+  "name": "DocEase_Meds_Part2",
+  "version": "1.1",
+  "count": 35,
+  "medications": [
+    {
+      "id": "201",
+      "name": "DAFLON cp",
+      "dosage": "500mg / 1000mg",
+      "category": "Veinotone",
+      "interaction_risk": ["Aucun majeur"],
+      [cite_start]"description": "Traitement des troubles de la circulation veineuse et crises hémorroïdaires[cite: 17]."
+    },
+    {
+      "id": "202",
+      "name": "DEPAKINE cp / SP",
+      "dosage": "200mg / 500mg",
+      "category": "Anti-épileptique",
+      "interaction_risk": ["Lidocaïne", "Méfloquine", "Antidépresseurs"],
+      [cite_start]"description": "Valproate de sodium pour l'épilepsie et troubles bipolaires[cite: 18]."
+    },
+    {
+      "id": "203",
+      "name": "DERMOVAL cr / gel",
+      "dosage": "0.05%",
+      "category": "Dermatologie",
+      "interaction_risk": ["Autres corticoïdes"],
+      [cite_start]"description": "Clobétasol (corticoïde très puissant) pour les dermatoses inflammatoires[cite: 19]."
+    },
+    {
+      "id": "204",
+      "name": "DEROXAT cp",
+      "dosage": "20mg",
+      "category": "Antidépresseur",
+      "interaction_risk": ["Tramadol", "AINS", "Alcool"],
+      [cite_start]"description": "Paroxétine pour la dépression et les troubles anxieux[cite: 19]."
+    },
+    {
+      "id": "205",
+      "name": "DESTAL / DESTEC cp",
+      "dosage": "5mg",
+      "category": "Antihistaminique",
+      "interaction_risk": ["Alcool (Prudence)"],
+      [cite_start]"description": "Desloratadine pour le traitement de la rhinite allergique[cite: 19]."
+    },
+    {
+      "id": "206",
+      "name": "DIAMICRON cp",
+      "dosage": "30mg / 60mg",
+      "category": "Antidiabétique",
+      "interaction_risk": ["Miconazole", "AINS", "Bêta-bloquants"],
+      [cite_start]"description": "Sulfamide hypoglycémiant pour le diabète de type 2[cite: 20]."
+    },
+    {
+      "id": "207",
+      "name": "DICLOFENAC (DICLO PHARMA5) cp",
+      "dosage": "25mg / 50mg / 100mg",
+      "category": "AINS",
+      "interaction_risk": ["Anticoagulants", "Lithium", "Méthotrexate"],
+      [cite_start]"description": "Anti-inflammatoire pour douleurs articulaires et rhumatismes[cite: 21]."
+    },
+    {
+      "id": "208",
+      "name": "DIFLUCAN gél",
+      "dosage": "50mg / 150mg",
+      "category": "Antifongique",
+      "interaction_risk": ["Warfarine", "Sulfamides", "Phénytoïne"],
+      [cite_start]"description": "Fluconazole pour les candidoses et mycoses[cite: 21]."
+    },
+    {
+      "id": "209",
+      "name": "DOGMATIL gél / cp",
+      "dosage": "50mg / 200mg",
+      "category": "Neuroleptique",
+      "interaction_risk": ["Levodopa", "Alcool"],
+      [cite_start]"description": "Sulpiride pour les troubles du comportement ou anxiété[cite: 23]."
+    },
+    {
+      "id": "210",
+      "name": "DOLIPRANE (DOLI PEDIATRIQUE)",
+      "dosage": "3%",
+      "category": "Antalgique",
+      "interaction_risk": ["Anticoagulants (si dose élevée)"],
+      [cite_start]"description": "Paracétamol pour la fièvre et douleur chez l'enfant[cite: 23]."
+    }
+  ]
+}

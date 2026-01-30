@@ -1,0 +1,7 @@
+{
+  "name": "DocEase",
+  "description": "Professional medical prescription and patient management system for doctors.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
