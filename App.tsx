@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import LoadingIndicator from './components/LoadingIndicator';
 import WaveBackground from './components/WaveBackground';
+import PinDialog from './components/PinDialog';
 import { dataService } from './services/dataService';
 import { Patient } from './types';
 
@@ -29,6 +30,7 @@ const App: React.FC = () => {
   const [activePatient, setActivePatient] = useState<Patient | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
   const doctor = dataService.getDoctorInfo();
 
   useEffect(() => {
@@ -78,6 +80,10 @@ const App: React.FC = () => {
     { id: 'analytics', label: 'Finances', icon: BarChart3 },
     { id: 'settings', label: 'Paramètres', icon: Settings },
   ];
+
+  if (doctor.pinEnabled && !authenticated) {
+    return <PinDialog onAuthenticated={() => setAuthenticated(true)} />;
+  }
 
   return (
     <div className="flex h-screen overflow-hidden font-sans text-gray-900 relative">

@@ -3,11 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   Save, Languages, MapPin, Phone, Mail, Download, RefreshCw,
   Database, ShieldCheck, Activity, Users, FileText, Pill, CalendarDays,
-  Image as ImageIcon, Sliders, Type as TypeIcon, Lock, Key, Palette
+  Image as ImageIcon, Sliders, Type as TypeIcon, Lock, Key, Palette, DownloadCloud
 } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { settingsService } from '../services/settingsService';
 import { DoctorInfo, PrescriptionAppearance } from '../types';
+import { invoke } from '@tauri-apps/api/core';
 
 const SettingsPanel: React.FC = () => {
   const [info, setInfo] = useState<DoctorInfo>(dataService.getDoctorInfo());
@@ -17,6 +18,8 @@ const SettingsPanel: React.FC = () => {
   const [confirmPinInput, setConfirmPinInput] = useState('');
   const [pinEnabledLocal, setPinEnabledLocal] = useState<boolean>(info.pinEnabled || false);
   const [dbStats, setDbStats] = useState(dataService.getDatabaseStats());
+  const [updateAvailable, setUpdateAvailable] = useState(false);
+  const [updateInfo, setUpdateInfo] = useState<any>(null);
   const backupInputRef = useRef<HTMLInputElement>(null);
   const logoInputRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +56,33 @@ const SettingsPanel: React.FC = () => {
     };
     reader.readAsText(file);
   };
+  const handleCheckUpdate = async () => {
+    try {
+      const update = await invoke('plugin:updater|check');
+      if (update) {
+        setUpdateAvailable(true);
+        setUpdateInfo(update);
+        alert(`Mise à jour disponible: ${update.version}\n${update.body}`);
+      } else {
+        alert("Aucune mise à jour disponible.");
+      }
+    } catch (error) {
+      console.error("Erreur lors de la vérification des mises à jour:", error);
+      alert("Erreur lors de la vérification des mises à jour.");
+    }
+  };
 
+  const handleInstallUpdate = async () => {
+    if (updateInfo) {
+      try {
+        await invoke('plugin:updater|install');
+        alert("Mise à jour installée. L'application va redémarrer.");
+      } catch (error) {
+        console.error("Erreur lors de l'installation:", error);
+        alert("Erreur lors de l'installation de la mise à jour.");
+      }
+    }
+  };
   const handleSaveSecurity = () => {
     if (pinEnabledLocal) {
       if (!pinInput) {
@@ -369,6 +398,38 @@ const SettingsPanel: React.FC = () => {
 
             <div className="mt-6 pt-6 border-t border-gray-100 flex items-center gap-2 text-[10px] font-black text-emerald-600 uppercase">
               <ShieldCheck size={14} /> Données stockées localement sur ce PC
+            </div>
+          </div>
+
+          {/* UPDATER PANEL */}
+          <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-blue-100">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center">
+                <DownloadCloud size={20} />
+              </div>
+              <h3 className="text-sm font-black uppercase tracking-widest text-gray-900">Mises à Jour</h3>
+            </div>
+
+            <div className="space-y-4">
+              <button
+                onClick={handleCheckUpdate}
+                className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-2xl shadow-lg shadow-blue-100 transition-all active:scale-95 uppercase text-xs tracking-widest"
+              >
+                <DownloadCloud size={16} /> Vérifier les Mises à Jour
+              </button>
+
+              {updateAvailable && (
+                <button
+                  onClick={handleInstallUpdate}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-green-600 hover:bg-green-700 text-white font-black rounded-2xl shadow-lg shadow-green-100 transition-all active:scale-95 uppercase text-xs tracking-widest"
+                >
+                  <Download size={16} /> Installer la Mise à Jour
+                </button>
+              )}
+
+              <p className="text-[10px] text-gray-500 leading-relaxed">
+                Vérifiez régulièrement les mises à jour pour bénéficier des dernières améliorations et corrections de sécurité.
+              </p>
             </div>
           </div>
 

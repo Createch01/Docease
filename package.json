@@ -1,15 +1,19 @@
 {
   "name": "veo-studio",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.1.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "tauri:dev": "tauri dev",
+    "build:web": "vite build",
+    "build:desktop": "tauri build",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@google/genai": "^1.22.0",
+    "@tauri-apps/api": "^2.9.1",
     "@tauri-apps/plugin-process": "^2.3.1",
     "@tauri-apps/plugin-updater": "^2.9.0",
     "lucide-react": "^0.408.0",

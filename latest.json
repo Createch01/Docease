@@ -1,0 +1,11 @@
+{
+  "version": "0.1.1",
+  "notes": "DocEase v0.1.1 - improvements and fixes",
+  "pub_date": "2026-01-31T00:00:00.000Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVURk9PQzJ5RHovV2UrbThEcmRhdGJHUlRaWjMvczhOZGtaQU9pbG5mb3p1QW1OYkVzNkQ0K2x5L0l6ZFRqTElCYTJ4dkNyTTZhV1JVeFhCSDIyVWR0UU5yVDVKeDNCbWdNPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzY5ODgwODY2CWZpbGU6RG9jZWFzZV8wLjEuMV94NjQtc2V0dXAuZXhlCnJWY0RyTEJ2OFhoaHF1MmtwQjlZREFkdGxqVVV4bSs2c1VXdWIvNGRDcWNKQW8wdHRlei9Od2QxTUw5bjNlOExPcytGSnJ0dE50VjVTZzdQc0JxN0FRPT0K",
+      "url": "https://github.com/Createch01/docease/releases/download/v0.1.1/Docease_0.1.1_x64-setup.exe"
+    }
+  }
+}

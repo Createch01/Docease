@@ -1,0 +1,116 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Rust cache
+        uses: swatinem/rust-cache@v2
+        with:
+          workspaces: './src-tauri -> target'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build application
+        run: npm run build
+
+      - name: Build and sign Tauri app
+        env:
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        run: npx tauri build
+
+      - name: Generate latest.json
+        run: |
+          $releaseUrl = "https://github.com/Createch01/docease/releases/download/${{ github.ref_name }}"
+          $latestJson = @{
+            version = "${{ github.ref_name }}".TrimStart('v')
+            notes = "DocEase ${{ github.ref_name }} - improvements and fixes"
+            pub_date = (Get-Date -Format "yyyy-MM-ddTHH:mm:ss.000Z")
+            platforms = @{
+              "windows-x86_64" = @{
+                signature = Get-Content ".\src-tauri\target\release\bundle\nsis\Docease_${{ github.ref_name }}_x64-setup.exe.sig" -Raw
+                url = "$releaseUrl/Docease_${{ github.ref_name }}_x64-setup.exe"
+              }
+            }
+          } | ConvertTo-Json -Depth 10
+          $latestJson | Out-File -FilePath latest.json -Encoding UTF8
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload MSI
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./src-tauri/target/release/bundle/msi/Docease_${{ github.ref_name }}_x64_en-US.msi
+          asset_name: Docease_${{ github.ref_name }}_x64_en-US.msi
+          asset_content_type: application/octet-stream
+
+      - name: Upload MSI Signature
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./src-tauri/target/release/bundle/msi/Docease_${{ github.ref_name }}_x64_en-US.msi.sig
+          asset_name: Docease_${{ github.ref_name }}_x64_en-US.msi.sig
+          asset_content_type: text/plain
+
+      - name: Upload EXE
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./src-tauri/target/release/bundle/nsis/Docease_${{ github.ref_name }}_x64-setup.exe
+          asset_name: Docease_${{ github.ref_name }}_x64-setup.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload EXE Signature
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./src-tauri/target/release/bundle/nsis/Docease_${{ github.ref_name }}_x64-setup.exe.sig
+          asset_name: Docease_${{ github.ref_name }}_x64-setup.exe.sig
+          asset_content_type: text/plain
+
+      - name: Upload latest.json
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./latest.json
+          asset_name: latest.json
+          asset_content_type: application/json

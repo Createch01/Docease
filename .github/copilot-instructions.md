@@ -34,7 +34,7 @@ DocEase is a medical prescription management system built with React + Tauri for
 - **Component State**: Use `useState<Set<string>>` for `overriddenWarnings` to track dismissed alerts
 
 ## File References
-- [types.ts](types.ts) - Core interfaces including `MedicineRestriction`, `PrescriptionItem`
-- [components/PrescriptionEditor.tsx](components/PrescriptionEditor.tsx) - Safety validation logic
-- [services/dataService.ts](services/dataService.ts) - Data management and default medicines
-- [medications_with_restrictions.json](medications_with_restrictions.json) - Example medicine data structure
+- [types.ts](../types.ts) - Core interfaces including `MedicineRestriction`, `PrescriptionItem`
+- [components/PrescriptionEditor.tsx](../components/PrescriptionEditor.tsx) - Safety validation logic
+- [services/dataService.ts](../services/dataService.ts) - Data management and default medicines
+- [medications_with_restrictions.json](../medications_with_restrictions.json) - Example medicine data structure

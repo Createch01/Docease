@@ -1,7 +1,7 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
   "productName": "Docease",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "identifier": "com.docease.desktop",
   "build": {
     "frontendDist": "../dist",
@@ -26,6 +26,7 @@
   "bundle": {
     "active": true,
     "targets": "all",
+    "createUpdaterArtifacts": true,
     "icon": [
       "icons/32x32.png",
       "icons/128x128.png",
@@ -37,7 +38,7 @@
   "plugins": {
     "updater": {
       "active": true,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDJGMTE4REVBNzUyRDI3QTkKUldTcEp5MTE2bzBSTHdEbDFzMDhuUncvRlR5WXNvTDI0aU5WL3UyaHFLRlFaTU50dlk5Qk5tR0gK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU5RkYzQ0M4QjZFMDM4QzUKUldURk9PQzJ5RHovV2IvS2FzekRzMWpiZXptaDhTT1N0M3J6SWlLeXRFUU54eHpNQWkrTXM1enIK",
       "endpoints": [
         "https://github.com/Createch01/docease/releases/latest/download/latest.json"
       ]
