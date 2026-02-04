@@ -38,7 +38,7 @@
   "plugins": {
     "updater": {
       "active": true,
-      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDU5RkYzQ0M4QjZFMDM4QzUKUldURk9PQzJ5RHovV2IvS2FzekRzMWpiZXptaDhTT1N0M3J6SWlLeXRFUU54eHpNQWkrTXM1enIK",
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDA1QTQ3Rjg1MDlDRUE4NDUKUldSRnFNNEpoWCtrQlo5QTZUd2k5ajBnSmw4NDBIWWs2VWFPMzBkWFRMREJRWkV1dGp0QTB2bGkK",
       "endpoints": [
         "https://github.com/Createch01/docease/releases/latest/download/latest.json"
       ]
