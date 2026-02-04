@@ -53,6 +53,13 @@ export interface DoctorInfo {
   // QR Code
   qrCodeContent: string;
   qrCodePosition: 'top-right' | 'bottom-right' | 'none';
+
+  // Professional IDs
+  inpe?: string;
+  ice?: string;
+  taxId?: string;
+  patente?: string;
+  rc?: string;
 }
 
 export type FontSizeOption = 'small' | 'medium' | 'large';
