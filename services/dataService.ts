@@ -1,6 +1,7 @@
 
-import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority } from '../types';
+import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, PatientInvoice, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
 import { GoogleGenAI, Type } from "@google/genai";
+import { storageService } from './storageService';
 
 const STORAGE_KEYS = {
   DOCTOR_INFO: 'meddoc_doctor_info',
@@ -12,68 +13,33 @@ const STORAGE_KEYS = {
   TASKS: 'meddoc_tasks',
   APPOINTMENTS: 'meddoc_appointments',
   CAPACITIES: 'meddoc_capacities',
-  LAST_BACKUP: 'meddoc_last_backup'
+  EXPENSES: 'meddoc_expenses',
+  LAST_BACKUP: 'meddoc_last_backup',
+  MEDICAL_RESOURCES: 'meddoc_medical_resources',
+  CONSULTATIONS: 'meddoc_consultations',
+  LAB_REQUESTS: 'meddoc_lab_requests',
+  MEDICAL_RESULTS: 'meddoc_medical_results',
+  INVOICES: 'meddoc_invoices',
+  HONORARY_NOTES: 'meddoc_honorary_notes',
+  HONORARY_MASTER_SERVICES: 'meddoc_honorary_master_services',
+  MEDICAL_CERTIFICATES: 'meddoc_medical_certificates'
 };
 
+const DEFAULT_HONORARY_SERVICES: HonoraryMasterService[] = [
+  { id: 'h-1', name: 'Consultation spécialisée', price: 300 },
+  { id: 'h-2', name: 'Echographie abdominale', price: 400 },
+  { id: 'h-3', name: 'Suivi', price: 150 },
+  { id: 'h-4', name: 'Bilan', price: 500 },
+  { id: 'h-5', name: 'Urgence', price: 500 },
+  { id: 'h-6', name: 'Pansement', price: 100 },
+  { id: 'h-7', name: 'Petite chirurgie', price: 500 }
+];
+
 const DEFAULT_MEDICINES: Medicine[] = [
-  // --- SÉRIE DOLIPRANE & ANTALGIQUES ---
   { id: 'm-doli-1', name: 'DOLIPRANE 500 mg cp', category: 'Antalgique', defaultDosage: '1 à 2 cp x 3/j', defaultTiming: 'Indifférent' },
   { id: 'm-doli-2', name: 'DOLIPRANE 1000 mg cp', category: 'Antalgique', defaultDosage: '1 cp x 3/j', defaultTiming: 'Après repas' },
-  { id: 'm-doli-3', name: 'DOLIPRANE SP', category: 'Sirop', defaultDosage: '1 dose poids x 3/j', defaultTiming: 'Indifférent' },
-  { id: 'm-dolig', name: 'DOLIGRIPPE sachet', category: 'Autre', defaultDosage: '1 SA x 3/j (eau chaude)', defaultTiming: 'Indifférent' },
-  { id: 'm-dolir-cp', name: 'DOLIRHUME cp', category: 'Autre', defaultDosage: '1 cp x 3/j', defaultTiming: 'Indifférent' },
-  { id: 'm-dolir-sp', name: 'DOLIRHUME SP', category: 'Sirop', defaultDosage: '1 càc x 3/j', defaultTiming: 'Indifférent' },
-  { id: 'm-dolis-500', name: 'DOLISTOP 500 mg cp', category: 'Antalgique', defaultDosage: '1 cp x 3/j', defaultTiming: 'Indifférent' },
-  { id: 'm-dolis-1000', name: 'DOLISTOP 1000 mg cp', category: 'Antalgique', defaultDosage: '1 cp x 2/j', defaultTiming: 'Indifférent' },
-
-  // --- SÉRIE ACARBOSE / ACARD / ACCUPRIL ---
-  { id: 'm-acarb-100', name: 'ACARBOSE 100 mg cp', category: 'Autre', defaultDosage: '1 cp x 3/j', defaultTiming: 'Pendant repas' },
-  { id: 'm-acard-50', name: 'ACARD 50 mg cp', category: 'Antalgique', defaultDosage: '1 cp/j', defaultTiming: 'Après repas' },
-  { id: 'm-accu-5', name: 'ACCUPRIL 5 mg cp', category: 'Autre', defaultDosage: '1 cp le matin', defaultTiming: 'Avant repas' },
-  { id: 'm-accu-20', name: 'ACCUPRIL 20 mg cp', category: 'Autre', defaultDosage: '1 cp le matin', defaultTiming: 'Avant repas' },
-
-  // --- SÉRIE ACLAV & ANTIBIOTIQUES ---
   { id: 'm-aclav-500', name: 'ACLAV 500/62.5 mg SA', category: 'Antibiotique', defaultDosage: '1 SA x 2/j', defaultTiming: 'Pendant repas', interactionGroup: 'amoxicilline' },
   { id: 'm-aclav-1g', name: 'ACLAV 1 g/125 mg SA', category: 'Antibiotique', defaultDosage: '1 SA x 2/j', defaultTiming: 'Pendant repas', interactionGroup: 'amoxicilline' },
-  { id: 'm-aclav-inj', name: 'ACLAV 1 g inj', category: 'Antibiotique', defaultDosage: '1 inj chaque 12h', defaultTiming: 'Indifférent' },
-  { id: 'm-amox-1g', name: 'AMOXIL 1 g cp', category: 'Antibiotique', defaultDosage: '1 cp x 2/j', defaultTiming: 'Pendant repas', interactionGroup: 'amoxicilline' },
-
-  // --- SÉRIE DIGESTION ---
-  { id: 'm-acdig', name: 'ACDIGEST gel', category: 'Sirop', defaultDosage: '1 càc après repas x 3/j', defaultTiming: 'Après repas' },
-  { id: 'm-actid', name: 'ACTIDIGEST cp', category: 'Autre', defaultDosage: '1 cp après repas x 3/j', defaultTiming: 'Après repas' },
-  { id: 'm-domp-cp', name: 'DOMPERIDONE 10 mg cp', category: 'Autre', defaultDosage: '1 cp x 3/j', defaultTiming: 'Avant repas' },
-  { id: 'm-domp-sp', name: 'DOMPERIDONE SP', category: 'Sirop', defaultDosage: '1 dose poids x 3/j', defaultTiming: 'Avant repas' },
-  { id: 'm-duphalac', name: 'DUPHALAC SP', category: 'Sirop', defaultDosage: '1 càs x 3/j', defaultTiming: 'Indifférent' },
-  { id: 'm-duspat-135', name: 'DUSPATALIN 135 mg cp', category: 'Autre', defaultDosage: '1 cp matin et soir', defaultTiming: 'Avant repas' },
-
-  // --- SÉRIE CORTICOÏDES & THYROÏDE ---
-  { id: 'm-euth-25', name: 'EUTHYROX 25 µg cp', category: 'Autre', defaultDosage: '1 cp/j le matin à jeun', defaultTiming: 'Avant repas' },
-  { id: 'm-euth-50', name: 'EUTHYROX 50 µg cp', category: 'Autre', defaultDosage: '1 cp/j le matin à jeun', defaultTiming: 'Avant repas' },
-  { id: 'm-euth-75', name: 'EUTHYROX 75 µg cp', category: 'Autre', defaultDosage: '1 cp/j le matin à jeun', defaultTiming: 'Avant repas' },
-  { id: 'm-euth-100', name: 'EUTHYROX 100 µg cp', category: 'Autre', defaultDosage: '1 cp/j le matin à jeun', defaultTiming: 'Avant repas' },
-
-  // --- SÉRIE VITAMINES ---
-  { id: 'm-acfol', name: 'ACFOL 5 mg cp', category: 'Vitamine', defaultDosage: '1 cp/j', defaultTiming: 'Indifférent' },
-  { id: 'm-addmag', name: 'ADDITIVA MAGNESIUM cp', category: 'Vitamine', defaultDosage: '1 cp/j', defaultTiming: 'Après repas' },
-  { id: 'm-actimag', name: 'ACTIMAG cp', category: 'Vitamine', defaultDosage: '1 cp/j', defaultTiming: 'Après repas' },
-
-  // --- SÉRIE DERMATO ---
-  { id: 'm-acno-10', name: 'ACNO 10 mg cp', category: 'Autre', defaultDosage: '1 cp/j le soir', defaultTiming: 'Indifférent' },
-  { id: 'm-acno-20', name: 'ACNO 20 mg cp', category: 'Autre', defaultDosage: '1 cp/j le soir', defaultTiming: 'Indifférent' },
-  { id: 'm-acnelyse', name: 'ACNELYSE crème', category: 'Autre', defaultDosage: '1 app locale le soir', defaultTiming: 'Indifférent' },
-
-  // --- SÉRIE ALLERGIE ---
-  { id: 'm-aerius-cp', name: 'AERIUS 5 mg cp', category: 'Autre', defaultDosage: '1 cp/j', defaultTiming: 'Indifférent' },
-  { id: 'm-aerius-sp', name: 'AERIUS sirop', category: 'Sirop', defaultDosage: '1 dose poids x 1/j', defaultTiming: 'Indifférent' },
-
-  // --- SÉRIE RESPIRATOIRE ---
-  { id: 'm-exomuc-200', name: 'EXOMUC 200 mg SA', category: 'Autre', defaultDosage: '1 SA x 3/j', defaultTiming: 'Indifférent' },
-  { id: 'm-fluim-200', name: 'FLUIMUCIL 200 mg SA', category: 'Autre', defaultDosage: '1 SA x 3/j', defaultTiming: 'Indifférent' },
-  { id: 'm-aeroline', name: 'AEROLINE spray', category: 'Autre', defaultDosage: '1 à 2 bouffées si crise', defaultTiming: 'Indifférent' },
-
-  // --- SÉRIE GYNÉCO ---
-  { id: 'm-duf-10', name: 'DUFASTON 10 mg cp', category: 'Autre', defaultDosage: 'Selon schéma gynécologique', defaultTiming: 'Indifférent' },
-  { id: 'm-adepal', name: 'ADEPAL cp', category: 'Autre', defaultDosage: '1 cp/j pendant 21 jours', defaultTiming: 'Indifférent' }
 ];
 
 const notifyUpdate = (key: string) => {
@@ -89,63 +55,192 @@ export const CATEGORY_POSOLOGY: Record<MedicineCategory, { dosage: string; timin
   'Autre': { dosage: '', timing: 'Indifférent' }
 };
 
+import { loadMoroccanDrugs } from './drugLoader';
+
+// IN-MEMORY CACHE
+let cache: Record<string, any> = {};
+let isInitialized = false;
+let initPromise: Promise<void> | null = null;
+
 export const dataService = {
-  getMedicines: (): Medicine[] => {
-    const data = localStorage.getItem(STORAGE_KEYS.MEDICINES);
-    return data ? JSON.parse(data) : DEFAULT_MEDICINES;
-  },
+  initialize: async () => {
+    if (isInitialized) return;
+    if (initPromise) return initPromise;
 
-  saveMedicine: (medicine: Medicine) => {
-    const medicines = dataService.getMedicines();
-    const index = medicines.findIndex(m => m.id === medicine.id);
-    if (index !== -1) {
-      medicines[index] = medicine;
-    } else {
-      medicines.push(medicine);
-    }
-    localStorage.setItem(STORAGE_KEYS.MEDICINES, JSON.stringify(medicines));
-    notifyUpdate(STORAGE_KEYS.MEDICINES);
-  },
+    initPromise = (async () => {
+      // Load all data into memory
+      const keys = Object.keys(STORAGE_KEYS) as (keyof typeof STORAGE_KEYS)[];
+      const loadPromises = keys.map(async (key) => {
+        const storageKey = STORAGE_KEYS[key];
+        const defaultValue = key === 'PATIENTS' ? [] :
+          key === 'PRESCRIPTIONS' ? [] :
+            key === 'QUEUE' ? [] :
+              key === 'DOCTOR_INFO' ? { nameFr: 'Dr. Docteur', specialtyFr: 'Spécialité', addressFr: '', phone: '', email: '', pinEnabled: false } :
+                [];
+        cache[storageKey] = await storageService.load(storageKey, defaultValue);
+      });
 
-  deleteMedicine: (id: string) => {
-    const medicines = dataService.getMedicines().filter(m => m.id !== id);
-    localStorage.setItem(STORAGE_KEYS.MEDICINES, JSON.stringify(medicines));
-    notifyUpdate(STORAGE_KEYS.MEDICINES);
-  },
+      await Promise.all(loadPromises);
 
-  importMedicines: (newMedicines: Medicine[]) => {
-    const existing = dataService.getMedicines();
-    const merged = [...existing];
-    newMedicines.forEach(nm => {
-      if (!merged.some(m => m.name.toLowerCase() === nm.name.toLowerCase())) {
-        merged.push({
-          ...nm,
-          id: nm.id || Date.now().toString() + Math.random().toString(36).substr(2, 5)
+      // Automatic Cleanup: Deduplicate local medicines by name
+      const medKey = STORAGE_KEYS.MEDICINES;
+      if (cache[medKey] && Array.isArray(cache[medKey])) {
+        const originalCount = cache[medKey].length;
+        const seen = new Set<string>();
+        const uniqueMeds: Medicine[] = [];
+
+        cache[medKey].forEach((m: Medicine) => {
+          const norm = m.name.trim().toLowerCase();
+          if (!seen.has(norm)) {
+            seen.add(norm);
+            uniqueMeds.push(m);
+          }
         });
+
+        if (uniqueMeds.length !== originalCount) {
+          cache[medKey] = uniqueMeds;
+          await storageService.save(medKey, uniqueMeds);
+          console.log(`🧹 Cleaned up ${originalCount - uniqueMeds.length} duplicate medications from storage.`);
+        }
+      }
+
+      isInitialized = true;
+      notifyUpdate('all');
+      console.log("🚀 DataService initialized successfully");
+    })();
+
+    return initPromise;
+  },
+
+  getMedicines: (): Medicine[] => {
+    const storageKey = STORAGE_KEYS.MEDICINES;
+    const localMedicines: Medicine[] = cache[storageKey] || [];
+    const staticMedicines = loadMoroccanDrugs();
+
+    // Deduplicate by name, prioritizing local overrides
+    const seen = new Set<string>();
+    const result: Medicine[] = [];
+
+    // 1. Add local medicines first
+    localMedicines.forEach(m => {
+      const normalized = m.name.trim().toLowerCase();
+      if (!seen.has(normalized)) {
+        seen.add(normalized);
+        result.push(m);
       }
     });
-    localStorage.setItem(STORAGE_KEYS.MEDICINES, JSON.stringify(merged));
-    notifyUpdate(STORAGE_KEYS.MEDICINES);
+
+    // 2. Add static medicines only if not already present in local
+    staticMedicines.forEach(m => {
+      const normalized = m.name.trim().toLowerCase();
+      if (!seen.has(normalized)) {
+        seen.add(normalized);
+        result.push(m);
+      }
+    });
+
+    return result;
   },
 
-  checkInteractions: (currentMedNames: string[], newInteractionGroup?: string): string | undefined => {
-    if (!newInteractionGroup) return undefined;
-    const allMeds = dataService.getMedicines();
-    for (const name of currentMedNames) {
-      const med = allMeds.find(m => m.name.toLowerCase() === name.toLowerCase());
-      if (med && med.interactionGroup && med.interactionGroup.toLowerCase() === newInteractionGroup.toLowerCase()) {
-        return med.name;
-      }
+  saveMedicine: async (medicine: Medicine) => {
+    const storageKey = STORAGE_KEYS.MEDICINES;
+    const localMedicines: Medicine[] = cache[storageKey] || [];
+
+    // Normalize name for comparison
+    const targetName = medicine.name.trim().toLowerCase();
+
+    // Check if we are updating an existing entry by ID OR by same name
+    const index = localMedicines.findIndex(m =>
+      m.id === medicine.id || m.name.trim().toLowerCase() === targetName
+    );
+
+    let updatedLocal;
+    if (index !== -1) {
+      // Preserve the original ID if it was a name match but different ID
+      const originalId = localMedicines[index].id;
+      updatedLocal = localMedicines.map((m, i) => i === index ? { ...medicine, id: originalId } : m);
+    } else {
+      updatedLocal = [...localMedicines, medicine];
     }
-    return undefined;
+
+    cache[storageKey] = updatedLocal;
+    await storageService.save(storageKey, updatedLocal);
+    notifyUpdate(storageKey);
+  },
+
+  deleteMedicine: async (id: string) => {
+    const storageKey = STORAGE_KEYS.MEDICINES;
+    // Note: We can only delete from LOCAL storage
+    const localMedicines = (cache[storageKey] || []).filter((m: Medicine) => m.id !== id);
+    cache[storageKey] = localMedicines;
+    await storageService.save(storageKey, localMedicines);
+    notifyUpdate(storageKey);
+  },
+
+  importMedicines: async (newMedicines: Medicine[]) => {
+    const storageKey = STORAGE_KEYS.MEDICINES;
+    const localMedicines: Medicine[] = cache[storageKey] || [];
+    const staticMedicines = loadMoroccanDrugs();
+
+    const updatedLocal = [...localMedicines];
+    let addedCount = 0;
+
+    newMedicines.forEach(nm => {
+      if (!nm.name) return;
+
+      const normalizedName = nm.name.trim().toLowerCase();
+
+      // Check if already in local or static
+      const alreadyInLocal = updatedLocal.some(m => m.name.trim().toLowerCase() === normalizedName);
+      const alreadyInStatic = staticMedicines.some(m => m.name.trim().toLowerCase() === normalizedName);
+
+      if (!alreadyInLocal && !alreadyInStatic) {
+        updatedLocal.push({
+          ...nm,
+          id: nm.id || `C-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`
+        });
+        addedCount++;
+      }
+    });
+
+    if (addedCount > 0) {
+      cache[storageKey] = updatedLocal;
+      await storageService.save(storageKey, updatedLocal);
+      notifyUpdate(storageKey);
+    }
+    console.log(`📥 Import: ${addedCount} medicines added (skipped ${newMedicines.length - addedCount} duplicates)`);
+  },
+
+  deduplicateMedicines: async () => {
+    const storageKey = STORAGE_KEYS.MEDICINES;
+    const localMedicines = cache[storageKey] || [];
+    const originalCount = localMedicines.length;
+
+    const seen = new Set<string>();
+    const uniqueMeds: Medicine[] = [];
+
+    localMedicines.forEach((m: Medicine) => {
+      const norm = m.name.trim().toLowerCase();
+      if (!seen.has(norm)) {
+        seen.add(norm);
+        uniqueMeds.push(m);
+      }
+    });
+
+    if (uniqueMeds.length !== originalCount) {
+      cache[storageKey] = uniqueMeds;
+      await storageService.save(storageKey, uniqueMeds);
+      notifyUpdate(storageKey);
+      return originalCount - uniqueMeds.length;
+    }
+    return 0;
   },
 
   getDatabaseStats: () => {
-    const patients = JSON.parse(localStorage.getItem(STORAGE_KEYS.PATIENTS) || '[]');
-    const prescriptions = JSON.parse(localStorage.getItem(STORAGE_KEYS.PRESCRIPTIONS) || '[]');
+    const patients = dataService.getAllPatients();
+    const prescriptions = dataService.getPrescriptions();
     const medicines = dataService.getMedicines();
-    const appointments = JSON.parse(localStorage.getItem(STORAGE_KEYS.APPOINTMENTS) || '[]');
-
+    const appointments = dataService.getAppointments();
     return {
       patientCount: patients.length,
       prescriptionCount: prescriptions.length,
@@ -155,21 +250,24 @@ export const dataService = {
     };
   },
 
-  exportFullBackup: () => {
+  exportFullBackup: async () => {
+    // Collect all data from cache (source of truth for both file and localStorage backend)
     const backup: Record<string, any> = {};
     Object.keys(STORAGE_KEYS).forEach(key => {
       const storageKey = STORAGE_KEYS[key as keyof typeof STORAGE_KEYS];
-      const data = localStorage.getItem(storageKey);
-      if (data) backup[storageKey] = JSON.parse(data);
+      const data = cache[storageKey];
+      if (data) backup[storageKey] = data;
     });
 
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
-    const date = new Date().toISOString().split('T')[0];
     link.href = url;
-    link.download = `SAUVEGARDE_CABINET_${date}.json`;
+    link.download = `DOCEASE_SAUVEGARDE_${timestamp}.json`;
     link.click();
+
+    await storageService.save(STORAGE_KEYS.LAST_BACKUP, new Date().toISOString());
     localStorage.setItem(STORAGE_KEYS.LAST_BACKUP, new Date().toISOString());
   },
 
@@ -178,19 +276,18 @@ export const dataService = {
       const backup = JSON.parse(jsonData);
       Object.keys(backup).forEach(key => {
         localStorage.setItem(key, JSON.stringify(backup[key]));
+        // Also set the doc_ease_ version for compatibility
+        localStorage.setItem(`doc_ease_${key}`, JSON.stringify(backup[key]));
       });
       notifyUpdate('all');
       return true;
-    } catch (e) {
-      return false;
-    }
+    } catch (e) { return false; }
   },
 
   getDoctorInfo: (): DoctorInfo => {
-    const data = localStorage.getItem(STORAGE_KEYS.DOCTOR_INFO);
+    const storageKey = STORAGE_KEYS.DOCTOR_INFO;
     const defaultLogo = "/logo.png";
-
-    return data ? JSON.parse(data) : {
+    return cache[storageKey] || {
       nameAr: 'الدكتور مولاي رشيد البلغيتي',
       specialtyAr: 'اختصاصي في أمراض القلب والشرايين',
       diplomasAr: 'رئيس سابق بقسم أمراض القلب بمستشفى أكادير وتارودانت\nدبلوم الفحص بالصدى بوردو فرنسا',
@@ -214,217 +311,462 @@ export const dataService = {
       pinEnabled: false,
       pin: '',
       qrCodeContent: 'https://docease.pro',
-      qrCodePosition: 'top-right'
-      ,
-      showQRCode: true
+      qrCodePosition: 'top-right',
+      showQRCode: true,
+      users: [],
+      activeUser: undefined
     };
   },
 
-  saveDoctorInfo: (info: DoctorInfo) => {
-    localStorage.setItem(STORAGE_KEYS.DOCTOR_INFO, JSON.stringify(info));
-    notifyUpdate(STORAGE_KEYS.DOCTOR_INFO);
+  saveDoctorInfo: async (info: DoctorInfo) => {
+    const storageKey = STORAGE_KEYS.DOCTOR_INFO;
+    cache[storageKey] = info;
+    await storageService.save(storageKey, info);
+    notifyUpdate(storageKey);
   },
 
-  getAllPatients: (): Patient[] => {
-    const data = localStorage.getItem(STORAGE_KEYS.PATIENTS);
-    return data ? JSON.parse(data) : [];
+  getAllPatients: (): Patient[] => cache[STORAGE_KEYS.PATIENTS] || [],
+
+  // --- USER MANAGEMENT ---
+  getUsers: (): AppUser[] => {
+    const info = dataService.getDoctorInfo();
+    return info.users || [];
+  },
+
+  saveUser: async (user: AppUser) => {
+    const info = dataService.getDoctorInfo();
+    const users = [...(info.users || [])];
+    const index = users.findIndex(u => u.id === user.id);
+    if (index !== -1) users[index] = user;
+    else users.push({ ...user, id: user.id || Date.now().toString() });
+    await dataService.saveDoctorInfo({ ...info, users });
+  },
+
+  deleteUser: async (id: string) => {
+    const info = dataService.getDoctorInfo();
+    const users = (info.users || []).filter(u => u.id !== id);
+    await dataService.saveDoctorInfo({ ...info, users });
+  },
+
+  getActiveUser: (): AppUser | undefined => {
+    const info = dataService.getDoctorInfo();
+    return info.activeUser;
+  },
+
+  setActiveUser: async (user: AppUser | undefined) => {
+    const info = dataService.getDoctorInfo();
+    await dataService.saveDoctorInfo({ ...info, activeUser: user });
   },
 
   searchPatients: (term: string): Patient[] => {
     const patients = dataService.getAllPatients();
     if (!term) return [];
     const lowerTerm = term.toLowerCase();
-    return patients.filter(p =>
-      p.name.toLowerCase().includes(lowerTerm) ||
-      (p.phone && p.phone.includes(term))
-    ).slice(0, 5);
+    return patients.filter(p => p.name.toLowerCase().includes(lowerTerm) || (p.phone && p.phone.includes(term))).slice(0, 5);
   },
 
-  getPatientProfile: (name: string): Patient | null => {
+  getPatientProfile: (idOrName: string): Patient | null => {
     const patients = dataService.getAllPatients();
-    return patients.find(p => p.name.toUpperCase() === name.toUpperCase()) || null;
+    // 1. Try match by ID
+    const byId = patients.find(p => p.id === idOrName);
+    if (byId) return byId;
+    // 2. Fallback to name (backward compatibility)
+    return patients.find(p => p.name.toUpperCase() === idOrName.toUpperCase()) || null;
   },
 
-  savePatientProfile: (patient: Patient) => {
+  savePatientProfile: async (patient: Patient) => {
+    const storageKey = STORAGE_KEYS.PATIENTS;
     const patients = dataService.getAllPatients();
-    const nameUpper = patient.name.toUpperCase();
-    const index = patients.findIndex(p => p.name.toUpperCase() === nameUpper);
-    if (index !== -1) {
-      patients[index] = { ...patients[index], ...patient };
-    } else {
-      patients.push({ ...patient, id: patient.id || Date.now().toString() });
-    }
-    localStorage.setItem(STORAGE_KEYS.PATIENTS, JSON.stringify(patients));
-    notifyUpdate(STORAGE_KEYS.PATIENTS);
-  },
 
-  getTodayQueue: (): Patient[] => {
-    const data = localStorage.getItem(STORAGE_KEYS.QUEUE);
-    const queue: Patient[] = data ? JSON.parse(data) : [];
-    const today = new Date().toISOString().split('T')[0];
-    return queue.filter(p => p.registeredDate === today);
-  },
-
-  registerPatient: (patient: Patient) => {
-    const queue = dataService.getTodayQueue();
-    const fullPatient = {
+    const updatedPatient = {
       ...patient,
       id: patient.id || Date.now().toString(),
-      registeredDate: new Date().toISOString().split('T')[0]
+      registeredDate: patient.registeredDate || new Date().toISOString()
     };
-    queue.push(fullPatient);
-    localStorage.setItem(STORAGE_KEYS.QUEUE, JSON.stringify(queue));
-    dataService.savePatientProfile(fullPatient);
-    notifyUpdate(STORAGE_KEYS.QUEUE);
+
+    const index = patients.findIndex(p => p.id === updatedPatient.id);
+    let updatedPatients;
+
+    if (index !== -1) {
+      updatedPatients = patients.map((p, i) => i === index ? { ...p, ...updatedPatient } : p);
+    } else {
+      updatedPatients = [...patients, updatedPatient];
+    }
+
+    cache[storageKey] = updatedPatients;
+    await storageService.save(storageKey, updatedPatients);
+    notifyUpdate(storageKey);
+    return updatedPatient;
   },
 
-  deleteFromQueue: (id: string) => {
+  registerPatient: async (patient: Patient) => {
+    // 1. Permanent storage
+    const saved = await dataService.savePatientProfile(patient);
+    // 2. Add to today's queue
+    await dataService.saveToQueue(saved);
+  },
+
+  getTodayQueue: (): Patient[] => cache[STORAGE_KEYS.QUEUE] || [],
+
+  saveToQueue: async (patient: Patient) => {
+    const storageKey = STORAGE_KEYS.QUEUE;
+    const queue = dataService.getTodayQueue();
+    if (!queue.some(p => p.id === patient.id)) {
+      const updatedQueue = [...queue, patient];
+      cache[storageKey] = updatedQueue;
+      await storageService.save(storageKey, updatedQueue);
+      notifyUpdate(storageKey);
+    }
+  },
+
+  deleteFromQueue: async (id: string) => {
+    const storageKey = STORAGE_KEYS.QUEUE;
     const queue = dataService.getTodayQueue().filter(p => p.id !== id);
-    localStorage.setItem(STORAGE_KEYS.QUEUE, JSON.stringify(queue));
-    notifyUpdate(STORAGE_KEYS.QUEUE);
+    cache[storageKey] = queue;
+    await storageService.save(storageKey, queue);
+    notifyUpdate(storageKey);
   },
 
-  updatePatientInQueue: (id: string, patient: Patient) => {
-    const data = localStorage.getItem(STORAGE_KEYS.QUEUE);
-    let queue: Patient[] = data ? JSON.parse(data) : [];
+  updatePatientInQueue: async (id: string, patient: Patient) => {
+    const storageKey = STORAGE_KEYS.QUEUE;
+    const queue = dataService.getTodayQueue();
     const index = queue.findIndex(p => p.id === id);
     if (index !== -1) {
-      queue[index] = { ...patient, id };
-      localStorage.setItem(STORAGE_KEYS.QUEUE, JSON.stringify(queue));
-      dataService.savePatientProfile(queue[index]);
-      notifyUpdate(STORAGE_KEYS.QUEUE);
+      const updatedItem = { ...patient, id };
+      const updatedQueue = queue.map((p, i) => i === index ? updatedItem : p);
+      cache[storageKey] = updatedQueue;
+      await storageService.save(storageKey, updatedQueue);
+      await dataService.savePatientProfile(updatedItem);
+      notifyUpdate(storageKey);
     }
   },
 
   getPrescriptions: (): Prescription[] => {
-    const data = localStorage.getItem(STORAGE_KEYS.PRESCRIPTIONS);
-    return data ? JSON.parse(data) : [];
+    const storageKey = STORAGE_KEYS.PRESCRIPTIONS;
+    return cache[storageKey] || [];
   },
 
-  savePrescription: (prescription: Prescription) => {
+  savePrescription: async (prescription: Prescription) => {
+    const storageKey = STORAGE_KEYS.PRESCRIPTIONS;
     const prescriptions = dataService.getPrescriptions();
-    prescriptions.push(prescription);
-    localStorage.setItem(STORAGE_KEYS.PRESCRIPTIONS, JSON.stringify(prescriptions));
+    const updatedPrescriptions = [...prescriptions, prescription];
+
+    cache[storageKey] = updatedPrescriptions;
+    await storageService.save(storageKey, updatedPrescriptions);
 
     const patient = dataService.getPatientProfile(prescription.patientId);
-    if (patient) {
-      dataService.savePatientProfile({
-        ...patient,
-        age: prescription.patientAge || patient.age,
-        weight: prescription.patientWeight || patient.weight
-      });
-    }
-    notifyUpdate(STORAGE_KEYS.PRESCRIPTIONS);
+    if (patient) await dataService.savePatientProfile({ ...patient, age: prescription.patientAge || patient.age, weight: prescription.patientWeight || patient.weight });
+
+    notifyUpdate(storageKey);
   },
 
-  archiveDay: () => {
+  updatePrescription: async (prescription: Prescription) => {
+    const storageKey = STORAGE_KEYS.PRESCRIPTIONS;
     const prescriptions = dataService.getPrescriptions();
-    const today = new Date().toISOString().split('T')[0];
-    const todaysPrescriptions = prescriptions.filter(p => p.date === today);
-    if (todaysPrescriptions.length === 0) return;
-    const totalRevenue = todaysPrescriptions.reduce((sum, p) => sum + p.amount, 0);
-    const reports = dataService.getDailyReports();
-    reports.push({ date: today, totalRevenue, prescriptionsCount: todaysPrescriptions.length });
-    localStorage.setItem(STORAGE_KEYS.DAILY_REPORTS, JSON.stringify(reports));
-    localStorage.setItem(STORAGE_KEYS.QUEUE, JSON.stringify([]));
-    dataService.exportFullBackup();
-    notifyUpdate('archive');
-  },
-
-  getDailyReports: (): DailyReport[] => {
-    const data = localStorage.getItem(STORAGE_KEYS.DAILY_REPORTS);
-    return data ? JSON.parse(data) : [];
-  },
-
-  getTasks: (): Task[] => {
-    const data = localStorage.getItem(STORAGE_KEYS.TASKS);
-    return data ? JSON.parse(data) : [];
-  },
-
-  saveTask: (task: Task) => {
-    const tasks = dataService.getTasks();
-    const existingIndex = tasks.findIndex(t => t.id === task.id);
-    if (existingIndex !== -1) {
-      tasks[existingIndex] = task;
-    } else {
-      tasks.push(task);
+    const index = prescriptions.findIndex(p => p.id === prescription.id);
+    if (index !== -1) {
+      const updatedPrescriptions = prescriptions.map((p, i) => i === index ? prescription : p);
+      cache[storageKey] = updatedPrescriptions;
+      await storageService.save(storageKey, updatedPrescriptions);
+      notifyUpdate(storageKey);
     }
-    localStorage.setItem(STORAGE_KEYS.TASKS, JSON.stringify(tasks));
-    notifyUpdate(STORAGE_KEYS.TASKS);
   },
 
-  deleteTask: (id: string) => {
+  deletePrescription: async (id: string) => {
+    const storageKey = STORAGE_KEYS.PRESCRIPTIONS;
+    const prescriptions = dataService.getPrescriptions().filter(p => p.id !== id);
+    cache[storageKey] = prescriptions;
+    await storageService.save(storageKey, prescriptions);
+    notifyUpdate(storageKey);
+  },
+
+  getExpenses: (): Expense[] => cache[STORAGE_KEYS.EXPENSES] || [],
+
+  saveExpense: async (expense: Expense) => {
+    const storageKey = STORAGE_KEYS.EXPENSES;
+    const expenses = dataService.getExpenses();
+    const index = expenses.findIndex(e => e.id === expense.id);
+    let updatedExpenses;
+
+    if (index !== -1) {
+      updatedExpenses = expenses.map((e, i) => i === index ? expense : e);
+    } else {
+      updatedExpenses = [...expenses, { ...expense, id: expense.id || Date.now().toString() }];
+    }
+    cache[storageKey] = updatedExpenses;
+    await storageService.save(storageKey, updatedExpenses);
+    notifyUpdate(storageKey);
+  },
+
+  deleteExpense: async (id: string) => {
+    const storageKey = STORAGE_KEYS.EXPENSES;
+    const expenses = dataService.getExpenses().filter(e => e.id !== id);
+    cache[storageKey] = expenses;
+    await storageService.save(storageKey, expenses);
+    notifyUpdate(storageKey);
+  },
+
+  getDailyReports: (): DailyReport[] => cache[STORAGE_KEYS.DAILY_REPORTS] || [],
+
+  getTasks: (): Task[] => cache[STORAGE_KEYS.TASKS] || [],
+
+  saveTask: async (task: Task) => {
+    const storageKey = STORAGE_KEYS.TASKS;
+    const tasks = dataService.getTasks();
+    const idx = tasks.findIndex(t => t.id === task.id);
+    if (idx !== -1) tasks[idx] = task; else tasks.push(task);
+    cache[storageKey] = tasks;
+    await storageService.save(storageKey, tasks);
+    notifyUpdate(storageKey);
+  },
+
+  deleteTask: async (id: string) => {
+    const storageKey = STORAGE_KEYS.TASKS;
     const tasks = dataService.getTasks().filter(t => t.id !== id);
-    localStorage.setItem(STORAGE_KEYS.TASKS, JSON.stringify(tasks));
-    notifyUpdate(STORAGE_KEYS.TASKS);
+    cache[storageKey] = tasks;
+    await storageService.save(storageKey, tasks);
+    notifyUpdate(storageKey);
   },
 
-  getAppointments: (): Appointment[] => {
-    const data = localStorage.getItem(STORAGE_KEYS.APPOINTMENTS);
-    return data ? JSON.parse(data) : [];
+  getAppointments: (): Appointment[] => cache[STORAGE_KEYS.APPOINTMENTS] || [],
+
+  saveAppointment: async (appointment: Appointment) => {
+    const storageKey = STORAGE_KEYS.APPOINTMENTS;
+    const all = dataService.getAppointments();
+    const idx = all.findIndex(a => a.id === appointment.id);
+    if (idx !== -1) all[idx] = appointment; else all.push(appointment);
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  getMedicalResources: (): MedicalResource[] => cache[STORAGE_KEYS.MEDICAL_RESOURCES] || [],
+
+  saveMedicalResource: async (res: MedicalResource) => {
+    const storageKey = STORAGE_KEYS.MEDICAL_RESOURCES;
+    const all = dataService.getMedicalResources();
+    const idx = all.findIndex(r => r.id === res.id);
+    if (idx !== -1) all[idx] = res; else all.push({ ...res, id: res.id || Date.now().toString() });
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  // --- NEW DOSSIER ENTITIES ---
+  getConsultations: (patientId?: string): ClinicalConsultation[] => {
+    const storageKey = STORAGE_KEYS.CONSULTATIONS;
+    const all: ClinicalConsultation[] = cache[storageKey] || [];
+    return patientId ? all.filter(c => c.patientId === patientId) : all;
+  },
+
+  saveConsultation: async (consultation: ClinicalConsultation) => {
+    const storageKey = STORAGE_KEYS.CONSULTATIONS;
+    const all = dataService.getConsultations();
+    const index = all.findIndex(c => c.id === consultation.id);
+    if (index !== -1) all[index] = consultation;
+    else all.push(consultation);
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  getLabRequests: (patientId?: string): LabRequest[] => {
+    const storageKey = STORAGE_KEYS.LAB_REQUESTS;
+    const all: LabRequest[] = cache[storageKey] || [];
+    return patientId ? all.filter((r: LabRequest) => r.patientId === patientId) : all;
+  },
+
+  saveLabRequest: async (req: LabRequest) => {
+    const storageKey = STORAGE_KEYS.LAB_REQUESTS;
+    const all = dataService.getLabRequests();
+    const index = all.findIndex(l => l.id === req.id);
+    if (index !== -1) all[index] = req; else all.push(req);
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  getMedicalResults: (patientId?: string): MedicalResult[] => {
+    const storageKey = STORAGE_KEYS.MEDICAL_RESULTS;
+    const all: MedicalResult[] = cache[storageKey] || [];
+    return patientId ? all.filter(r => r.patientId === patientId) : all;
+  },
+
+  saveMedicalResult: async (result: MedicalResult) => {
+    const storageKey = STORAGE_KEYS.MEDICAL_RESULTS;
+    const all = dataService.getMedicalResults();
+    const index = all.findIndex(r => r.id === result.id);
+    if (index !== -1) all[index] = result; else all.push(result);
+
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  getInvoices: (patientId?: string): PatientInvoice[] => {
+    const storageKey = STORAGE_KEYS.INVOICES;
+    const all: PatientInvoice[] = cache[storageKey] || [];
+    return patientId ? all.filter(i => i.patientId === patientId) : all;
+  },
+
+  saveInvoice: async (invoice: PatientInvoice) => {
+    const storageKey = STORAGE_KEYS.INVOICES;
+    const all = dataService.getInvoices();
+    const index = all.findIndex(i => i.id === invoice.id);
+    if (index !== -1) all[index] = invoice;
+    else all.push(invoice);
+
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  // --- HONORARY NOTES ---
+  getHonoraryNotes: (patientId?: string): HonoraryNote[] => {
+    const storageKey = STORAGE_KEYS.HONORARY_NOTES;
+    const all: HonoraryNote[] = cache[storageKey] || [];
+    return patientId ? all.filter(n => n.patientId === patientId) : all;
+  },
+
+  saveHonoraryNote: async (note: HonoraryNote) => {
+    const storageKey = STORAGE_KEYS.HONORARY_NOTES;
+    const all = dataService.getHonoraryNotes();
+    const index = all.findIndex(n => n.id === note.id);
+    if (index !== -1) all[index] = note;
+    else all.push(note);
+
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  deleteHonoraryNote: async (id: string) => {
+    const storageKey = STORAGE_KEYS.HONORARY_NOTES;
+    const all = dataService.getHonoraryNotes().filter(n => n.id !== id);
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  getHonoraryMasterServices: (): HonoraryMasterService[] => {
+    const storageKey = STORAGE_KEYS.HONORARY_MASTER_SERVICES;
+    return cache[storageKey] || DEFAULT_HONORARY_SERVICES;
+  },
+
+  saveHonoraryMasterService: async (service: HonoraryMasterService) => {
+    const storageKey = STORAGE_KEYS.HONORARY_MASTER_SERVICES;
+    const all = dataService.getHonoraryMasterServices();
+    const index = all.findIndex(s => s.id === service.id);
+    if (index !== -1) all[index] = service;
+    else all.push(service);
+
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  deleteHonoraryMasterService: async (id: string) => {
+    const storageKey = STORAGE_KEYS.HONORARY_MASTER_SERVICES;
+    const all = dataService.getHonoraryMasterServices().filter(s => s.id !== id);
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  // --- MEDICAL CERTIFICATES ---
+  getMedicalCertificates: (patientId?: string): MedicalCertificate[] => {
+    const storageKey = STORAGE_KEYS.MEDICAL_CERTIFICATES;
+    const all: MedicalCertificate[] = cache[storageKey] || [];
+    return patientId ? all.filter(c => c.patientId === patientId) : all;
+  },
+
+  saveMedicalCertificate: async (cert: MedicalCertificate) => {
+    const storageKey = STORAGE_KEYS.MEDICAL_CERTIFICATES;
+    const all = dataService.getMedicalCertificates();
+    const index = all.findIndex(c => c.id === cert.id);
+    if (index !== -1) all[index] = cert;
+    else all.push({ ...cert, id: cert.id || Date.now().toString() });
+
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  deleteMedicalCertificate: async (id: string) => {
+    const storageKey = STORAGE_KEYS.MEDICAL_CERTIFICATES;
+    const all = dataService.getMedicalCertificates().filter(c => c.id !== id);
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  archiveDay: async () => {
+    const storageKey = STORAGE_KEYS.QUEUE;
+    cache[storageKey] = [];
+    await storageService.save(storageKey, []);
+    notifyUpdate(storageKey);
   },
 
   getAppointmentsByDate: (date: string): Appointment[] => {
-    return dataService.getAppointments().filter(app => app.date === date);
+    return dataService.getAppointments().filter(a => a.date === date);
   },
 
-  saveAppointment: (appointment: Appointment) => {
-    const appointments = dataService.getAppointments();
-    const index = appointments.findIndex(a => a.id === appointment.id);
-    if (index !== -1) {
-      appointments[index] = appointment;
-    } else {
-      appointments.push(appointment);
-    }
-    localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(appointments));
-    notifyUpdate(STORAGE_KEYS.APPOINTMENTS);
-  },
-
-  deleteAppointment: (id: string) => {
-    const appointments = dataService.getAppointments().filter(app => app.id !== id);
-    localStorage.setItem(STORAGE_KEYS.APPOINTMENTS, JSON.stringify(appointments));
-    notifyUpdate(STORAGE_KEYS.APPOINTMENTS);
+  deleteAppointment: async (id: string) => {
+    const storageKey = STORAGE_KEYS.APPOINTMENTS;
+    const all = dataService.getAppointments().filter(a => a.id !== id);
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
   },
 
   getDailyCapacity: (date: string): number => {
     const data = localStorage.getItem(STORAGE_KEYS.CAPACITIES);
     const capacities = data ? JSON.parse(data) : {};
-    return capacities[date] || 15;
+    return capacities[date] || 15; // Default 15
   },
 
-  setDailyCapacity: (date: string, limit: number) => {
-    const data = localStorage.getItem(STORAGE_KEYS.CAPACITIES);
-    const capacities = data ? JSON.parse(data) : {};
+  setDailyCapacity: async (date: string, limit: number) => {
+    const storageKey = STORAGE_KEYS.CAPACITIES;
+    const capacities = cache[storageKey] || {};
     capacities[date] = limit;
-    localStorage.setItem(STORAGE_KEYS.CAPACITIES, JSON.stringify(capacities));
-    notifyUpdate(STORAGE_KEYS.CAPACITIES);
+    cache[storageKey] = capacities;
+    await storageService.save(storageKey, capacities);
+    notifyUpdate(storageKey);
   },
 
-  classifyAppointmentPriority: async (note: string): Promise<{ priority: AppointmentPriority, reason: string }> => {
+  classifyAppointmentPriority: async (note: string): Promise<{ priority: AppointmentPriority; reason: string }> => {
+    const genAI = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '', apiVersion: 'v1' });
+
+    const prompt = `
+      Analyse ce motif de rendez-vous médical et détermine la priorité :
+      Motif: "${note}"
+      
+      Priorités possibles : 
+      - URGENT : Menace vitale, douleur intense, détresse respiratoire, etc.
+      - INITIAL : Premier rendez-hui ou nouveau problème.
+      - ROUTINE : Suivi, renouvellement, contrôle.
+      
+      Réponds au format JSON strict :
+      { "priority": "URGENT" | "INITIAL" | "ROUTINE", "reason": "Bref raisonnement en français" }
+    `;
+
     try {
-      const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
-      const response = await ai.models.generateContent({
-        model: 'gemini-3-flash-preview',
-        contents: `Analyses cette raison de visite médicale et détermines l'ordre de priorité (URGENT, INITIAL, ou ROUTINE). 
-        - URGENT: Douleurs thoraciques, détresse respiratoire, forte fièvre, blessures graves.
-        - INITIAL: Première consultation, nouveaux symptômes non critiques.
-        - ROUTINE: Renouvellement, suivi régulier, contrôle de routine.
-        Raison: "${note}"`,
+      const response = await genAI.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: [{ role: "user", parts: [{ text: prompt }] }],
         config: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: Type.OBJECT,
-            properties: {
-              priority: { type: Type.STRING, enum: ['URGENT', 'INITIAL', 'ROUTINE'] },
-              reason: { type: Type.STRING }
-            },
-            required: ['priority', 'reason']
-          }
+          responseMimeType: "application/json"
         }
       });
-      return JSON.parse(response.text);
+
+      let text = response.text || "{}";
+      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
+      return JSON.parse(text);
     } catch (error) {
-      return { priority: 'ROUTINE', reason: "Classification automatique indisponible" };
+      console.error("AI Priority Error:", error);
+      return { priority: 'ROUTINE', reason: "Analyse automatique indisponible" };
     }
   }
 };
+
+(window as any).dataService = dataService;

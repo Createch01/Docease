@@ -1,0 +1,28 @@
+[
+  {
+    "age": 0,
+    "allergies": "Pénicilline, ",
+    "consultationFee": 198,
+    "id": "1772552631189",
+    "name": "el mahdi choukri",
+    "pathologies": "",
+    "phone": "0623180653",
+    "registeredDate": "2026-03-03T15:43:51.189Z",
+    "sex": "M",
+    "type": "Adult",
+    "weight": ""
+  },
+  {
+    "age": 0,
+    "allergies": "",
+    "consultationFee": 199,
+    "id": "1772552731269",
+    "name": "mahdi choukri",
+    "pathologies": "",
+    "phone": "065545321123",
+    "registeredDate": "2026-03-03T15:45:31.269Z",
+    "sex": "M",
+    "type": "Adult",
+    "weight": ""
+  }
+]

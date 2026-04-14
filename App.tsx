@@ -1,15 +1,19 @@
 
 import React, { useState, Suspense, useEffect } from 'react';
+import { I18nProvider, useI18n } from './i18n';
 import {
   LayoutDashboard, Users, FileText, Settings, BarChart3, PlusCircle,
   Pill, FolderOpen, CheckSquare, CalendarRange, Activity,
-  ChevronLeft, ChevronRight, Menu, X
+  ChevronLeft, ChevronRight, Menu, X, Bell, Database, Search
 } from 'lucide-react';
 import LoadingIndicator from './components/LoadingIndicator';
 import WaveBackground from './components/WaveBackground';
 import PinDialog from './components/PinDialog';
+import ToastContainer from './components/ToastContainer';
 import { dataService } from './services/dataService';
-import { Patient } from './types';
+import { autoImportService } from './services/autoImportService';
+import { Patient, AppUser, Permission, PrescriptionDraft } from './types';
+import { LogOut, BookOpen } from 'lucide-react';
 
 // Lazy loading components for code splitting
 const Dashboard = React.lazy(() => import('./components/Dashboard'));
@@ -22,71 +26,207 @@ const PatientDossier = React.lazy(() => import('./components/PatientDossier'));
 const TaskManager = React.lazy(() => import('./components/TaskManager'));
 const AppointmentManager = React.lazy(() => import('./components/AppointmentManager'));
 const DrugCompatibility = React.lazy(() => import('./components/DrugCompatibility'));
+const NotificationCenter = React.lazy(() => import('./components/NotificationCenter'));
+const SmartDocInterface = React.lazy(() => import('./components/SmartDoc/SmartDocInterface'));
+const GlobalSearch = React.lazy(() => import('./components/GlobalSearch'));
 
-type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'medicines' | 'analytics' | 'settings' | 'tasks' | 'compatibility';
+type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'medicines' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc';
 
 const App: React.FC = () => {
+  return (
+    <I18nProvider>
+      <AppContent />
+    </I18nProvider>
+  );
+};
+
+const AppContent: React.FC = () => {
+  const { t, lang, dir } = useI18n();
   const [currentView, setCurrentView] = useState<View>('dashboard');
   const [activePatient, setActivePatient] = useState<Patient | null>(null);
+  const [activePrescription, setActivePrescription] = useState<any | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
+  const [prescriptionDraft, setPrescriptionDraft] = useState<PrescriptionDraft | null>(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const activeUser = dataService.getActiveUser();
   const doctor = dataService.getDoctorInfo();
 
   useEffect(() => {
+    const init = async () => {
+      // Automatic JSON Scan & Import on startup
+      await autoImportService.runAutoImport();
+
+      // Initialize Professional Data Architecture
+      await dataService.initialize();
+
+      setAuthenticated(!!dataService.getActiveUser());
+      setIsDataLoaded(true);
+    };
+
+    init();
+
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsMobileMenuOpen(false);
       }
     };
+
+    // Listen for updates from dataService
+    const handleUpdate = () => {
+      setAuthenticated(!!dataService.getActiveUser());
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+      if (e.key === '/') {
+        // Only trigger if not in an input/textarea
+        if (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+          e.preventDefault();
+          setIsSearchOpen(true);
+        }
+      }
+    };
+
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener('meddoc_data_update', handleUpdate);
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('meddoc_data_update', handleUpdate);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   const handleStartConsultation = (patient?: Patient) => {
     if (patient) {
       setActivePatient(patient);
-    } else {
-      setActivePatient(null);
+      if (prescriptionDraft?.patient?.id !== patient.id) {
+        setPrescriptionDraft(null);
+      }
     }
+    setActivePrescription(null);
     setCurrentView('new-prescription');
   };
 
+  const hasPermission = (permission: string) => {
+    if (!activeUser) return true; // Doctor (admin) has all permissions
+    if (activeUser.role === 'Admin') return true;
+    return activeUser.permissions?.includes(permission as Permission);
+  };
+
   const renderView = () => {
+    // Permission Guards
+    if (currentView === 'patients' && !hasPermission('MANAGE_PATIENTS')) return <AccessDenied />;
+    if (currentView === 'dossier' && !hasPermission('MANAGE_PATIENTS')) return <AccessDenied />;
+    if (currentView === 'appointments' && !hasPermission('MANAGE_APPOINTMENTS')) return <AccessDenied />;
+    if (currentView === 'new-prescription' && !hasPermission('CREATE_PRESCRIPTION')) return <AccessDenied />;
+    if (currentView === 'medicines' && !hasPermission('CREATE_PRESCRIPTION')) return <AccessDenied />;
+    if (currentView === 'analytics' && !hasPermission('VIEW_FINANCES')) return <AccessDenied />;
+    if (currentView === 'settings' && !hasPermission('MANAGE_SETTINGS')) return <AccessDenied />;
+
     switch (currentView) {
-      case 'dashboard': return <Dashboard onNewPrescription={handleStartConsultation} />;
+      case 'dashboard': return (
+        <Dashboard
+          onNewPrescription={handleStartConsultation}
+          onNavigate={setCurrentView}
+          onViewDossier={(patientId) => {
+            const p = dataService.getAllPatients().find(pat => pat.id === patientId || pat.name === patientId);
+            if (p) setActivePatient(p);
+            setCurrentView('dossier');
+          }}
+        />
+      );
       case 'patients': return <PatientManager onConsult={handleStartConsultation} />;
       case 'appointments': return <AppointmentManager />;
-      case 'dossier': return <PatientDossier />;
-      case 'new-prescription': return <PrescriptionEditor initialPatient={activePatient} onFinish={() => { setActivePatient(null); setCurrentView('dashboard'); }} />;
+      case 'dossier': return <PatientDossier initialPatient={activePatient} onNavigate={(view, data) => {
+        if (view === 'smart-doc') setCurrentView('smart-doc');
+        if (view === 'prescriptions' && data?.prescription) {
+          setActivePrescription(data.prescription);
+          setCurrentView('new-prescription');
+        }
+        if (view === 'new-prescription') {
+          handleStartConsultation(data?.patient);
+        }
+      }} />;
+      case 'new-prescription': return (
+        <PrescriptionEditor
+          initialPatient={activePatient}
+          initialPrescription={activePrescription}
+          draft={prescriptionDraft}
+          onDraftChange={setPrescriptionDraft}
+          onFinish={() => {
+            setActivePatient(null);
+            setActivePrescription(null);
+            setPrescriptionDraft(null); // Clear draft on finish
+            setCurrentView('dashboard');
+          }}
+        />
+      );
       case 'medicines': return <MedicineManager />;
       case 'compatibility': return <DrugCompatibility />;
       case 'analytics': return <Analytics />;
       case 'tasks': return <TaskManager />;
       case 'settings': return <SettingsPanel />;
+      case 'notifications': return <NotificationCenter onNavigate={(view, data) => {
+        if (data?.patientId) {
+          const allPatients = dataService.getAllPatients();
+          const targetPatient = allPatients.find(p => p.id === data.patientId);
+          if (targetPatient) setActivePatient(targetPatient);
+        }
+        setCurrentView(view as View);
+      }} />;
+      case 'smart-doc': return <SmartDocInterface />;
       default: return <Dashboard onNewPrescription={handleStartConsultation} />;
     }
   };
 
+  const AccessDenied = () => (
+    <div className="flex flex-col items-center justify-center h-full text-center p-10 opacity-50">
+      <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+        <LogOut size={32} className="text-gray-400" />
+      </div>
+      <h3 className="text-xl font-black text-gray-900 uppercase">{t('access_denied')}</h3>
+      <p className="text-sm font-bold text-gray-400 mt-2">{t('access_denied_desc')}</p>
+    </div>
+  );
+
   const navItems = [
-    { id: 'dashboard', label: 'Tableau de bord', icon: LayoutDashboard },
-    { id: 'patients', label: 'Salle d\'Attente', icon: Users },
-    { id: 'appointments', label: 'Rendez-vous', icon: CalendarRange },
-    { id: 'tasks', label: 'Tâches & Rappels', icon: CheckSquare },
-    { id: 'dossier', label: 'Dossiers Patients', icon: FolderOpen },
-    { id: 'new-prescription', label: 'Nouvelle Ordonnance', icon: PlusCircle, highlight: true },
-    { id: 'medicines', label: 'Médicaments', icon: Pill },
-    { id: 'compatibility', label: 'Interactions', icon: Activity },
-    { id: 'analytics', label: 'Finances', icon: BarChart3 },
-    { id: 'settings', label: 'Paramètres', icon: Settings },
-  ];
+    { id: 'dashboard', label: t('dashboard'), icon: LayoutDashboard, requiredPermission: 'ACCESS_DASHBOARD' },
+    { id: 'patients', label: t('waiting_room'), icon: Users, requiredPermission: 'MANAGE_PATIENTS' },
+    { id: 'appointments', label: t('appointments'), icon: CalendarRange, requiredPermission: 'MANAGE_APPOINTMENTS' },
+    { id: 'tasks', label: t('tasks'), icon: CheckSquare, requiredPermission: 'ACCESS_DASHBOARD' },
+    { id: 'new-prescription', label: t('new_consultation'), icon: PlusCircle, requiredPermission: 'CREATE_PRESCRIPTION' },
+    { id: 'dossier', label: t('patients'), icon: FolderOpen, requiredPermission: 'MANAGE_PATIENTS' },
+    { id: 'smart-doc', label: t('smart_doc'), icon: FileText, highlight: true, requiredPermission: 'USE_AI_ASSISTANT' },
+    { id: 'medicines', label: t('medical_management') || 'Gestion Médicale Pro', icon: Database, highlight: true, requiredPermission: 'CREATE_PRESCRIPTION' },
+    { id: 'compatibility', label: t('interactions') || 'Interactions', icon: Activity, requiredPermission: 'CREATE_PRESCRIPTION' },
+    { id: 'analytics', label: t('accounting') || t('analytics'), icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
+    { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'ACCESS_DASHBOARD' },
+    { id: 'settings', label: t('settings'), icon: Settings, requiredPermission: 'MANAGE_SETTINGS' },
+  ].filter(item => !item.requiredPermission || hasPermission(item.requiredPermission));
+
+  if (!isDataLoaded) {
+    return (
+      <div className="flex h-screen items-center justify-center bg-emerald-50">
+        <LoadingIndicator />
+      </div>
+    );
+  }
 
   if (doctor.pinEnabled && !authenticated) {
     return <PinDialog onAuthenticated={() => setAuthenticated(true)} />;
   }
 
   return (
-    <div className="flex h-screen overflow-hidden font-sans text-gray-900 relative">
+    <div className={`flex h-screen overflow-hidden font-sans text-gray-900 relative ${lang === 'ar' ? 'font-arabic' : ''}`} dir={dir}>
       {/* Wave Background */}
       <WaveBackground />
 
@@ -170,15 +310,54 @@ const App: React.FC = () => {
               )}
             </button>
           ))}
+
+          <button
+            onClick={() => setIsSearchOpen(true)}
+            className={`
+              w-full flex items-center transition-smooth border rounded-xl font-black text-xs uppercase tracking-widest mt-6
+              ${isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-3'}
+              bg-white/40 text-emerald-700 border-emerald-200/50 hover:bg-emerald-100 hover:border-emerald-300 shadow-sm
+            `}
+          >
+            <Search size={20} className="text-emerald-700" />
+            {!isCollapsed && (
+              <div className="flex justify-between items-center flex-1">
+                <span>{t('search_patient')}</span>
+                <span className="text-[10px] text-emerald-400 border border-emerald-100 px-1 rounded">/</span>
+              </div>
+            )}
+          </button>
         </nav>
 
         {!isCollapsed && (
-          <div className="p-4 border-t border-emerald-200/20">
+          <div className="p-4 border-t border-emerald-200/20 space-y-3">
+            <div className="bg-emerald-900/40 backdrop-blur-md rounded-2xl p-4 text-white border border-emerald-500/20">
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-xs uppercase">
+                  {activeUser?.name.charAt(0) || 'D'}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] opacity-70 font-bold uppercase tracking-widest truncate">{t('user') || 'Utilisateur'}</p>
+                  <p className="text-xs font-bold truncate">{activeUser?.name || doctor.nameFr}</p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => {
+                    dataService.setActiveUser(undefined);
+                    setAuthenticated(false);
+                  }}
+                  className="w-full py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all border border-emerald-500/20 flex items-center justify-center gap-2"
+                >
+                  <LogOut size={12} /> {t('logout') || 'Quitter la Session'}
+                </button>
+              </div>
+            </div>
+
             <div className="gradient-emerald-teal rounded-2xl p-4 text-white shadow-soft-lg">
-              <p className="text-[10px] opacity-70 mb-1 font-bold uppercase tracking-widest">Système</p>
               <p className="text-[10px] font-semibold flex items-center gap-2">
                 <span className="w-2 h-2 bg-emerald-200 rounded-full animate-pulse"></span>
-                Mode Hors-ligne
+                {t('offline_mode') || 'Mode Hors-ligne'}
               </p>
             </div>
           </div>
@@ -194,6 +373,25 @@ const App: React.FC = () => {
         }>
           {renderView()}
         </Suspense>
+
+        {isSearchOpen && (
+          <Suspense fallback={null}>
+            <GlobalSearch
+              onClose={() => setIsSearchOpen(false)}
+              onSelectPatient={(p) => {
+                setActivePatient(p);
+                setCurrentView('dossier');
+                setIsSearchOpen(false);
+              }}
+              onConsult={(p) => {
+                handleStartConsultation(p);
+                setIsSearchOpen(false);
+              }}
+            />
+          </Suspense>
+        )}
+
+        <ToastContainer />
       </main>
     </div>
   );

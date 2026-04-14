@@ -1,0 +1,90 @@
+[
+  {
+    "amount": 200,
+    "date": "2026-03-02",
+    "id": "1772453378762",
+    "items": [
+      {
+        "category": "Médicament",
+        "dosage": "",
+        "duration": "7 jours",
+        "frequency": "3 fois par jour",
+        "id": "1772452381537",
+        "medicineName": "DOLIGRIPPE",
+        "referenceDosage": "",
+        "strength": null,
+        "timing": "Après repas"
+      }
+    ],
+    "patientAge": 0,
+    "patientId": "ahmed bennani",
+    "patientType": "Adult"
+  },
+  {
+    "amount": 150,
+    "date": "2026-03-02",
+    "id": "1772457795452",
+    "items": [
+      {
+        "category": "Médicament",
+        "dosage": "",
+        "duration": "7 jours",
+        "frequency": "3 fois par jour",
+        "id": "1772457744338",
+        "medicineName": "DOLAMINE",
+        "referenceDosage": "20 mg",
+        "strength": "20 mg",
+        "timing": "Indifférent"
+      },
+      {
+        "category": "M04AA01 (xanthine oxidase inhibitor)",
+        "dosage": "",
+        "duration": "7 jours",
+        "form": "",
+        "frequency": "3 fois par jour",
+        "id": "1772457781690",
+        "medicineName": "ZYLORIC 300 mg comprimé",
+        "referenceDosage": "Gout (hyperuricemia)",
+        "strength": "300 mg",
+        "timing": "Indifférent"
+      }
+    ],
+    "patientAge": 0,
+    "patientId": "hayat",
+    "patientType": "Woman",
+    "patientWeight": ""
+  },
+  {
+    "amount": 200,
+    "date": "2026-03-02",
+    "id": "1772462795949",
+    "items": [
+      {
+        "category": "Médicament",
+        "dosage": "20 mg/0.5",
+        "duration": "7 jours",
+        "frequency": "3 fois par jour",
+        "id": "1772462767896",
+        "medicineName": "DOCETAXEL",
+        "referenceDosage": "20 mg/0.5",
+        "strength": "20 mg/0.5",
+        "timing": "Après repas"
+      },
+      {
+        "category": "Médicament",
+        "dosage": "120 mg",
+        "duration": "7 jours",
+        "frequency": "3 fois par jour",
+        "id": "1772462780016",
+        "medicineName": "DOLICOX",
+        "referenceDosage": "120 mg",
+        "strength": "120 mg",
+        "timing": "Après repas"
+      }
+    ],
+    "patientAge": 22,
+    "patientId": "hayat",
+    "patientType": "Woman",
+    "patientWeight": ""
+  }
+]

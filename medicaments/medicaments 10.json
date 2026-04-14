@@ -1,0 +1,2070 @@
+{
+  "schema_version": "1.1",
+  "items": [
+    {
+      "id": "MED_0001",
+      "brand_name": "PIZEDA",
+      "strength": "400 mg",
+      "form": "comprimé",
+      "raw_label": "PIZEDA 400 mg comprimé",
+      "active_ingredient": "pyrazinamide",
+      "atc_class": "J04AK01 (antitubercular; pyrazinamide)",
+      "indications": [
+        "Tuberculosis (always in combination regimen)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to pyrazinamide",
+        "Severe hepatic disease/active hepatitis",
+        "Acute gout (or history of severe hyperuricemia)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use in children only under specialist TB regimen; dose is weight-based; monitor liver enzymes and uric acid."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use if benefits outweigh risks as part of TB regimen; monitor closely (hepatic toxicity).",
+        "lactation": "Compatible; monitor infant for jaundice/GI upset."
+      },
+      "major_interactions": [
+        {
+          "with": "Hepatotoxic drugs (e.g., isoniazid, rifampicin, alcohol)",
+          "risk": "Increased risk of liver injury"
+        },
+        {
+          "with": "Probenecid/allopurinol",
+          "risk": "May alter uric acid; gout risk/management"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0002",
+      "brand_name": "PIZEDA",
+      "strength": "500 mg",
+      "form": "comprimé",
+      "raw_label": "PIZEDA 500 mg comprimé",
+      "active_ingredient": "pyrazinamide",
+      "atc_class": "J04AK01 (antitubercular; pyrazinamide)",
+      "indications": [
+        "Tuberculosis (always in combination regimen)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to pyrazinamide",
+        "Severe hepatic disease/active hepatitis",
+        "Acute gout (or history of severe hyperuricemia)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use in children only under specialist TB regimen; dose is weight-based; monitor liver enzymes and uric acid."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use if benefits outweigh risks as part of TB regimen; monitor closely (hepatic toxicity).",
+        "lactation": "Compatible; monitor infant for jaundice/GI upset."
+      },
+      "major_interactions": [
+        {
+          "with": "Hepatotoxic drugs (e.g., isoniazid, rifampicin, alcohol)",
+          "risk": "Increased risk of liver injury"
+        },
+        {
+          "with": "Probenecid/allopurinol",
+          "risk": "May alter uric acid; gout risk/management"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0003",
+      "brand_name": "PLANTAIN",
+      "strength": "",
+      "form": "sirop",
+      "raw_label": "PLANTAIN sirop",
+      "active_ingredient": "plantain (Plantago lanceolata) extract (herbal)",
+      "atc_class": "R05X (other cough and cold preparations; herbal)",
+      "indications": [
+        "Irritative cough / throat irritation (symptomatic relief)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to plantain or excipients"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Avoid in infants; for children, follow label dosing; seek medical advice if cough persists."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Limited data; use with caution.",
+        "lactation": "Limited data; use with caution."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0004",
+      "brand_name": "PLAQUENIL",
+      "strength": "200 mg",
+      "form": "comprimé pelliculé",
+      "raw_label": "PLAQUENIL 200 mg comprimé pelliculé",
+      "active_ingredient": "hydroxychloroquine",
+      "atc_class": "P01BA02 (antimalarial; DMARD)",
+      "indications": [
+        "Systemic lupus erythematosus",
+        "Rheumatoid arthritis",
+        "Malaria prophylaxis/treatment (sensitive strains)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to 4-aminoquinolines",
+        "Pre-existing retinopathy (avoid/relative)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Often used during pregnancy when indicated (e.g., lupus); specialist guidance.",
+        "lactation": "Compatible; small amounts in milk; monitor infant if long-term."
+      },
+      "major_interactions": [
+        {
+          "with": "Drugs that prolong QT (e.g., certain antiarrhythmics, antipsychotics)",
+          "risk": "Additive QT prolongation risk"
+        },
+        {
+          "with": "Digoxin",
+          "risk": "May increase digoxin levels; monitor"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0005",
+      "brand_name": "PLAREL",
+      "strength": "75 mg",
+      "form": "comprimé pelliculé",
+      "raw_label": "PLAREL 75 mg comprimé pelliculé",
+      "active_ingredient": "clopidogrel",
+      "atc_class": "B01AC04 (platelet aggregation inhibitor)",
+      "indications": [
+        "Prevention of atherothrombotic events after myocardial infarction, ischemic stroke, or established peripheral arterial disease",
+        "Acute coronary syndrome (with aspirin) / after stent per cardiology protocol"
+      ],
+      "contraindications": [
+        "Active pathological bleeding (e.g., peptic ulcer, intracranial hemorrhage)",
+        "Severe hepatic impairment",
+        "Hypersensitivity to clopidogrel"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Not routinely indicated in children; specialist use only."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Limited data; use only if clearly needed.",
+        "lactation": "Limited data; consider alternative or monitor infant for bleeding/bruising."
+      },
+      "major_interactions": [
+        {
+          "with": "NSAIDs/anticoagulants",
+          "risk": "Bleeding risk increases"
+        },
+        {
+          "with": "Strong CYP2C19 inhibitors (e.g., omeprazole/esomeprazole)",
+          "risk": "May reduce clopidogrel activation/effect"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0006",
+      "brand_name": "PLASMION",
+      "strength": "15 g",
+      "form": "solution perfusion",
+      "raw_label": "PLASMION 15 g solution perfusion",
+      "active_ingredient": "succinylated gelatin (modified fluid gelatin) 4% (colloid volume expander)",
+      "atc_class": "B05AA06 (plasma substitutes; gelatin agents)",
+      "indications": [
+        "Treatment of hypovolemia/shock when plasma volume expansion is needed"
+      ],
+      "contraindications": [
+        "Known hypersensitivity to gelatin/colloids",
+        "Hypervolemia or severe fluid overload",
+        "Severe heart failure",
+        "Severe renal failure with oliguria/anuria (use only with close monitoring)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use with specialist guidance; dose based on hemodynamic response; monitor for anaphylaxis and coagulation effects."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if clearly needed (limited data).",
+        "lactation": "Use with caution; limited data."
+      },
+      "major_interactions": [
+        {
+          "with": "Other IV fluids/colloids",
+          "risk": "Risk of fluid overload; monitor hemodynamics"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0007",
+      "brand_name": "PLASTENAN",
+      "strength": "NEO",
+      "form": "pommade",
+      "raw_label": "PLASTENAN NEO pommade",
+      "active_ingredient": "acexamate sodium",
+      "atc_class": "D03AX (cicatrizing agents; wound healing)",
+      "indications": [
+        "Adjunct local treatment of wounds, burns, skin ulcers, and erosions (to promote healing)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to acexamate or excipients"
+      ],
+      "age_rules": [
+        {
+          "population": "all",
+          "rule": "Topical use; avoid use on large infected areas unless infection is treated."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Topical: expected low systemic absorption; use if needed.",
+        "lactation": "Topical: use if needed; avoid application on nipple area."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0008",
+      "brand_name": "PLAVIX",
+      "strength": "75 mg",
+      "form": "comprimé pelliculé",
+      "raw_label": "PLAVIX 75 mg comprimé pelliculé",
+      "active_ingredient": "clopidogrel",
+      "atc_class": "B01AC04 (platelet aggregation inhibitor)",
+      "indications": [
+        "Secondary prevention after MI/ischemic stroke/PAD",
+        "Acute coronary syndrome (often with aspirin)",
+        "After PCI/stent (dual antiplatelet therapy)"
+      ],
+      "contraindications": [
+        "Active pathological bleeding (e.g., peptic ulcer, intracranial hemorrhage)",
+        "Severe hepatic impairment"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if clearly needed; clinician decision.",
+        "lactation": "Generally compatible; monitor infant for bruising/bleeding."
+      },
+      "major_interactions": [
+        {
+          "with": "Omeprazole/esomeprazole",
+          "risk": "May reduce activation of clopidogrel; consider alternative PPI"
+        },
+        {
+          "with": "NSAIDs/anticoagulants",
+          "risk": "Increased bleeding risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0009",
+      "brand_name": "PLAVIX",
+      "strength": "300 mg",
+      "form": "comprimé pelliculé",
+      "raw_label": "PLAVIX 300 mg comprimé pelliculé",
+      "active_ingredient": "clopidogrel",
+      "atc_class": "B01AC04 (platelet aggregation inhibitor)",
+      "indications": [
+        "Secondary prevention after MI/ischemic stroke/PAD",
+        "Acute coronary syndrome (often with aspirin)",
+        "After PCI/stent (dual antiplatelet therapy)"
+      ],
+      "contraindications": [
+        "Active pathological bleeding (e.g., peptic ulcer, intracranial hemorrhage)",
+        "Severe hepatic impairment"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if clearly needed; clinician decision.",
+        "lactation": "Generally compatible; monitor infant for bruising/bleeding."
+      },
+      "major_interactions": [
+        {
+          "with": "Omeprazole/esomeprazole",
+          "risk": "May reduce activation of clopidogrel; consider alternative PPI"
+        },
+        {
+          "with": "NSAIDs/anticoagulants",
+          "risk": "Increased bleeding risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0010",
+      "brand_name": "PNEUMO",
+      "strength": "23",
+      "form": "solution injectable",
+      "raw_label": "PNEUMO 23 solution injectable",
+      "active_ingredient": "pneumococcal polysaccharide vaccine (23-valent, PPSV23)",
+      "atc_class": "J07AL01 (pneumococcal vaccines)",
+      "indications": [
+        "Active immunization against Streptococcus pneumoniae disease in adults/at-risk groups (per national schedule)"
+      ],
+      "contraindications": [
+        "Severe allergic reaction (e.g., anaphylaxis) to a previous dose or vaccine component",
+        "Postpone vaccination in case of moderate/severe acute illness"
+      ],
+      "age_rules": [
+        {
+          "population": "adults",
+          "rule": "Typically used in ≥65 years and/or high-risk conditions; revaccination per schedule."
+        },
+        {
+          "population": "pediatrics",
+          "rule": "May be used in certain high-risk children ≥2 years per schedule; follow national guidance."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "May be given if risk of pneumococcal disease is high; consult clinician.",
+        "lactation": "Compatible."
+      },
+      "major_interactions": [
+        {
+          "with": "Immunosuppressive therapy",
+          "risk": "Reduced vaccine response; vaccinate prior to therapy when possible"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0011",
+      "brand_name": "PNEUMOCCID",
+      "strength": "125 mg/5 ml poudre",
+      "form": "suspension buvable",
+      "raw_label": "PNEUMOCCID 125 mg/5 ml poudre suspension buvable",
+      "active_ingredient": "amoxicillin",
+      "atc_class": "J01CA04 (penicillins; aminopenicillins)",
+      "indications": [
+        "Susceptible bacterial infections (ENT/respiratory, urinary tract, skin/soft tissue) per prescriber",
+        "Helicobacter pylori eradication (in combination regimens)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to penicillins",
+        "History of severe immediate hypersensitivity to beta‑lactams (e.g., cephalosporins/carbapenems)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Dose is weight-based; adjust in renal impairment; consider risk of rash in infectious mononucleosis."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally considered safe when indicated.",
+        "lactation": "Generally compatible; may cause infant diarrhea/thrush."
+      },
+      "major_interactions": [
+        {
+          "with": "Warfarin/other anticoagulants",
+          "risk": "May increase INR; monitor"
+        },
+        {
+          "with": "Allopurinol",
+          "risk": "May increase risk of rash"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0012",
+      "brand_name": "PNEUMOCCID",
+      "strength": "250 mg/5 ml poudre",
+      "form": "suspension buvable",
+      "raw_label": "PNEUMOCCID 250 mg/5 ml poudre suspension buvable",
+      "active_ingredient": "amoxicillin",
+      "atc_class": "J01CA04 (penicillins; aminopenicillins)",
+      "indications": [
+        "Susceptible bacterial infections (ENT/respiratory, urinary tract, skin/soft tissue) per prescriber",
+        "Helicobacter pylori eradication (in combination regimens)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to penicillins",
+        "History of severe immediate hypersensitivity to beta‑lactams (e.g., cephalosporins/carbapenems)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Dose is weight-based; adjust in renal impairment; consider risk of rash in infectious mononucleosis."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally considered safe when indicated.",
+        "lactation": "Generally compatible; may cause infant diarrhea/thrush."
+      },
+      "major_interactions": [
+        {
+          "with": "Warfarin/other anticoagulants",
+          "risk": "May increase INR; monitor"
+        },
+        {
+          "with": "Allopurinol",
+          "risk": "May increase risk of rash"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0013",
+      "brand_name": "PNEUMOCCID",
+      "strength": "500 mg/5 ml poudre",
+      "form": "suspension buvable",
+      "raw_label": "PNEUMOCCID 500 mg/5 ml poudre suspension buvable",
+      "active_ingredient": "amoxicillin",
+      "atc_class": "J01CA04 (penicillins; aminopenicillins)",
+      "indications": [
+        "Susceptible bacterial infections (ENT/respiratory, urinary tract, skin/soft tissue) per prescriber",
+        "Helicobacter pylori eradication (in combination regimens)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to penicillins",
+        "History of severe immediate hypersensitivity to beta‑lactams (e.g., cephalosporins/carbapenems)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Dose is weight-based; adjust in renal impairment; consider risk of rash in infectious mononucleosis."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally considered safe when indicated.",
+        "lactation": "Generally compatible; may cause infant diarrhea/thrush."
+      },
+      "major_interactions": [
+        {
+          "with": "Warfarin/other anticoagulants",
+          "risk": "May increase INR; monitor"
+        },
+        {
+          "with": "Allopurinol",
+          "risk": "May increase risk of rash"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0014",
+      "brand_name": "PNEUMOCCID",
+      "strength": "250 mg",
+      "form": "comprimé dispersible",
+      "raw_label": "PNEUMOCCID 250 mg comprimé dispersible",
+      "active_ingredient": "amoxicillin",
+      "atc_class": "J01CA04 (penicillins; aminopenicillins)",
+      "indications": [
+        "Susceptible bacterial infections (ENT/respiratory, urinary tract, skin/soft tissue) per prescriber",
+        "Helicobacter pylori eradication (in combination regimens)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to penicillins",
+        "History of severe immediate hypersensitivity to beta‑lactams (e.g., cephalosporins/carbapenems)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Dose is weight-based; adjust in renal impairment; consider risk of rash in infectious mononucleosis."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally considered safe when indicated.",
+        "lactation": "Generally compatible; may cause infant diarrhea/thrush."
+      },
+      "major_interactions": [
+        {
+          "with": "Warfarin/other anticoagulants",
+          "risk": "May increase INR; monitor"
+        },
+        {
+          "with": "Allopurinol",
+          "risk": "May increase risk of rash"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0015",
+      "brand_name": "PNEUMOCCID",
+      "strength": "500 mg",
+      "form": "comprimé dispersible",
+      "raw_label": "PNEUMOCCID 500 mg comprimé dispersible",
+      "active_ingredient": "amoxicillin",
+      "atc_class": "J01CA04 (penicillins; aminopenicillins)",
+      "indications": [
+        "Susceptible bacterial infections (ENT/respiratory, urinary tract, skin/soft tissue) per prescriber",
+        "Helicobacter pylori eradication (in combination regimens)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to penicillins",
+        "History of severe immediate hypersensitivity to beta‑lactams (e.g., cephalosporins/carbapenems)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Dose is weight-based; adjust in renal impairment; consider risk of rash in infectious mononucleosis."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally considered safe when indicated.",
+        "lactation": "Generally compatible; may cause infant diarrhea/thrush."
+      },
+      "major_interactions": [
+        {
+          "with": "Warfarin/other anticoagulants",
+          "risk": "May increase INR; monitor"
+        },
+        {
+          "with": "Allopurinol",
+          "risk": "May increase risk of rash"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0016",
+      "brand_name": "PNEUMOCCID",
+      "strength": "1 g",
+      "form": "comprimé dispersible",
+      "raw_label": "PNEUMOCCID 1 g comprimé dispersible",
+      "active_ingredient": "amoxicillin",
+      "atc_class": "J01CA04 (penicillins; aminopenicillins)",
+      "indications": [
+        "Susceptible bacterial infections (ENT/respiratory, urinary tract, skin/soft tissue) per prescriber",
+        "Helicobacter pylori eradication (in combination regimens)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to penicillins",
+        "History of severe immediate hypersensitivity to beta‑lactams (e.g., cephalosporins/carbapenems)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Dose is weight-based; adjust in renal impairment; consider risk of rash in infectious mononucleosis."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally considered safe when indicated.",
+        "lactation": "Generally compatible; may cause infant diarrhea/thrush."
+      },
+      "major_interactions": [
+        {
+          "with": "Warfarin/other anticoagulants",
+          "risk": "May increase INR; monitor"
+        },
+        {
+          "with": "Allopurinol",
+          "risk": "May increase risk of rash"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0017",
+      "brand_name": "PNEUMOREL",
+      "strength": "80 mg",
+      "form": "comprimé enrobé",
+      "raw_label": "PNEUMOREL 80 mg comprimé enrobé",
+      "active_ingredient": "fenspiride",
+      "atc_class": "R03BX03 (other drugs for obstructive airway diseases; fenspiride)",
+      "indications": [
+        "Symptomatic treatment of cough/bronchial inflammation in respiratory tract conditions (where approved)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to fenspiride"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use is restricted/withdrawn in many countries due to cardiac rhythm risk; follow local regulatory guidance; avoid in young children if not recommended."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Not recommended (limited data).",
+        "lactation": "Not recommended (limited data)."
+      },
+      "major_interactions": [
+        {
+          "with": "QT-prolonging drugs",
+          "risk": "Potential additive arrhythmia risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0018",
+      "brand_name": "PNEUMOVAX",
+      "strength": "23",
+      "form": "suspension injectable [V]",
+      "raw_label": "PNEUMOVAX 23 suspension injectable [V]",
+      "active_ingredient": "pneumococcal polysaccharide vaccine (23-valent)",
+      "atc_class": "J07AL01 (pneumococcal vaccines)",
+      "indications": [
+        "Prevention of pneumococcal disease in eligible persons (risk-based; typically ≥2 years)"
+      ],
+      "contraindications": [
+        "Severe allergic reaction to previous dose/components",
+        "Acute severe febrile illness (postpone)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics/adults",
+          "rule": "Follow national immunization schedule; check age/risk eligibility and booster timing."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Can be given if indicated (risk-based).",
+        "lactation": "Compatible."
+      },
+      "major_interactions": [
+        {
+          "with": "Immunosuppressive therapy",
+          "risk": "Reduced immune response; time vaccination appropriately"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0019",
+      "brand_name": "POLERY",
+      "strength": "",
+      "form": "sirop adulte",
+      "raw_label": "POLERY sirop adulte",
+      "active_ingredient": "codeine + erysimum (herbal) (cough suppressant)",
+      "atc_class": "R05DA (opioids; antitussives)",
+      "indications": [
+        "Dry cough (short-term symptomatic relief)"
+      ],
+      "contraindications": [
+        "Respiratory depression/severe asthma",
+        "Children <12 years; adolescents 12–18 with compromised respiration",
+        "Breastfeeding",
+        "Known CYP2D6 ultra-rapid metabolizer",
+        "Hypersensitivity to codeine/opioids"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Contraindicated under 12 years; avoid 12–18 with respiratory compromise; use lowest effective dose for shortest time."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid, especially in late pregnancy (neonatal respiratory depression/withdrawal).",
+        "lactation": "Contraindicated (risk of morphine toxicity in infant)."
+      },
+      "major_interactions": [
+        {
+          "with": "Alcohol, benzodiazepines, other CNS depressants",
+          "risk": "Additive sedation/respiratory depression"
+        },
+        {
+          "with": "Other opioids",
+          "risk": "Overdose/respiratory depression"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0020",
+      "brand_name": "POLYCLAR",
+      "strength": "250 mg",
+      "form": "comprimé enrobé",
+      "raw_label": "POLYCLAR 250 mg comprimé enrobé",
+      "active_ingredient": "clarithromycin",
+      "atc_class": "J01FA09 (macrolide antibiotic)",
+      "indications": [
+        "Respiratory tract infections (e.g., sinusitis, bronchitis, pneumonia) due to susceptible bacteria",
+        "Skin/soft tissue infections",
+        "Helicobacter pylori eradication (in combination regimens)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to macrolides",
+        "Concomitant use with certain QT-prolonging/ergot drugs (risk arrhythmia/ergotism)",
+        "History of QT prolongation/ventricular arrhythmia (avoid)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use pediatric formulations/dose weight-based; monitor for GI side effects."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid if possible, especially 1st trimester; use only if needed.",
+        "lactation": "Passes into milk; generally compatible but monitor infant for GI effects."
+      },
+      "major_interactions": [
+        {
+          "with": "Statins (simvastatin/lovastatin)",
+          "risk": "Risk of myopathy/rhabdomyolysis; avoid"
+        },
+        {
+          "with": "Warfarin",
+          "risk": "May increase INR; monitor"
+        },
+        {
+          "with": "QT-prolonging drugs",
+          "risk": "Arrhythmia risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0021",
+      "brand_name": "POLYDEXA",
+      "strength": "",
+      "form": "solution auriculaire",
+      "raw_label": "POLYDEXA solution auriculaire",
+      "active_ingredient": "neomycin + polymyxin B + dexamethasone (otic drops)",
+      "atc_class": "S02CA06 (corticosteroids and antiinfectives in combination; otological)",
+      "indications": [
+        "Bacterial otitis externa / infected otitis with inflammation (short course)"
+      ],
+      "contraindications": [
+        "Perforated tympanic membrane / tympanostomy tube (risk ototoxicity)",
+        "Viral or fungal ear infections",
+        "Hypersensitivity to aminoglycosides/polymyxins/corticosteroids"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use only if indicated; avoid if tympanic membrane not intact."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Topical otic: low systemic exposure; use if needed.",
+        "lactation": "Compatible; minimal systemic absorption."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0022",
+      "brand_name": "POLYFER",
+      "strength": "50 mg/5 ml",
+      "form": "sirop",
+      "raw_label": "POLYFER 50 mg/5 ml sirop",
+      "active_ingredient": "iron (oral iron supplement)",
+      "atc_class": "B03A (iron preparations)",
+      "indications": [
+        "Treatment and prevention of iron deficiency"
+      ],
+      "contraindications": [
+        "Iron overload disorders (hemochromatosis/hemosiderosis)",
+        "Non–iron-deficiency anemia"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Keep out of reach (overdose risk); dose depends on elemental iron content and weight."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Commonly used/safe when indicated for iron deficiency.",
+        "lactation": "Compatible."
+      },
+      "major_interactions": [
+        {
+          "with": "Tetracyclines/quinolones/levothyroxine",
+          "risk": "Reduced absorption—separate dosing by several hours"
+        },
+        {
+          "with": "Antacids",
+          "risk": "Reduced iron absorption"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        {
+          "with": "Other iron supplements",
+          "risk": "Risk of excess iron"
+        }
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0023",
+      "brand_name": "POLYGYNAX",
+      "strength": "",
+      "form": "capsule vaginale",
+      "raw_label": "POLYGYNAX capsule vaginale",
+      "active_ingredient": "neomycin + polymyxin B + nystatin (vaginal)",
+      "atc_class": "G01AA51 (antibacterial/antifungal combinations)",
+      "indications": [
+        "Mixed vaginal infections where indicated (bacterial + Candida)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to components"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if needed; follow local guidance.",
+        "lactation": "Compatible; minimal systemic absorption."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0024",
+      "brand_name": "POLYMAZINE",
+      "strength": "50 mg",
+      "form": "comprimé pelliculé [P]",
+      "raw_label": "POLYMAZINE 50 mg comprimé pelliculé [P]",
+      "active_ingredient": "chlorpromazine",
+      "atc_class": "N05AA01 (phenothiazine antipsychotic)",
+      "indications": [
+        "Schizophrenia and other psychoses",
+        "Severe agitation/anxiety (short-term, specialist)",
+        "Intractable nausea/vomiting or hiccups (specialist use)"
+      ],
+      "contraindications": [
+        "Coma/CNS depression",
+        "Severe circulatory collapse",
+        "Known hypersensitivity to phenothiazines",
+        "History of agranulocytosis related to phenothiazines"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Specialist use only; risk of extrapyramidal symptoms and sedation; dose weight-based."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if clearly needed; neonatal extrapyramidal/withdrawal symptoms possible if used late pregnancy.",
+        "lactation": "Not recommended; passes into milk and may sedate infant."
+      },
+      "major_interactions": [
+        {
+          "with": "CNS depressants (alcohol, benzodiazepines, opioids)",
+          "risk": "Increased sedation/respiratory depression"
+        },
+        {
+          "with": "QT-prolonging drugs",
+          "risk": "Arrhythmia risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        {
+          "with": "Other antipsychotics",
+          "risk": "Additive adverse effects (QT, EPS, sedation)"
+        }
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0025",
+      "brand_name": "POLYMAZINE",
+      "strength": "100 mg",
+      "form": "comprimé pelliculé [P]",
+      "raw_label": "POLYMAZINE 100 mg comprimé pelliculé [P]",
+      "active_ingredient": "chlorpromazine",
+      "atc_class": "N05AA01 (phenothiazine antipsychotic)",
+      "indications": [
+        "Schizophrenia and other psychoses",
+        "Severe agitation/anxiety (short-term, specialist)",
+        "Intractable nausea/vomiting or hiccups (specialist use)"
+      ],
+      "contraindications": [
+        "Coma/CNS depression",
+        "Severe circulatory collapse",
+        "Known hypersensitivity to phenothiazines",
+        "History of agranulocytosis related to phenothiazines"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Specialist use only; risk of extrapyramidal symptoms and sedation; dose weight-based."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if clearly needed; neonatal extrapyramidal/withdrawal symptoms possible if used late pregnancy.",
+        "lactation": "Not recommended; passes into milk and may sedate infant."
+      },
+      "major_interactions": [
+        {
+          "with": "CNS depressants (alcohol, benzodiazepines, opioids)",
+          "risk": "Increased sedation/respiratory depression"
+        },
+        {
+          "with": "QT-prolonging drugs",
+          "risk": "Arrhythmia risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        {
+          "with": "Other antipsychotics",
+          "risk": "Additive adverse effects (QT, EPS, sedation)"
+        }
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0026",
+      "brand_name": "POLYNORM",
+      "strength": "1 mg",
+      "form": "comprimé pelliculé",
+      "raw_label": "POLYNORM 1 mg comprimé pelliculé",
+      "active_ingredient": "repaglinide",
+      "atc_class": "A10BX02 (other blood glucose lowering drugs; meglitinides)",
+      "indications": [
+        "Type 2 diabetes mellitus (adjunct to diet and exercise)"
+      ],
+      "contraindications": [
+        "Type 1 diabetes",
+        "Diabetic ketoacidosis",
+        "Severe hepatic impairment",
+        "Concomitant use with gemfibrozil"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Not recommended in children; safety/efficacy not established."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid (limited data); insulin preferred.",
+        "lactation": "Avoid (limited data)."
+      },
+      "major_interactions": [
+        {
+          "with": "Gemfibrozil",
+          "risk": "Markedly increases repaglinide exposure—contraindicated"
+        },
+        {
+          "with": "Other hypoglycemics",
+          "risk": "Hypoglycemia risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0027",
+      "brand_name": "POLYNORM",
+      "strength": "2 mg",
+      "form": "comprimé pelliculé",
+      "raw_label": "POLYNORM 2 mg comprimé pelliculé",
+      "active_ingredient": "repaglinide",
+      "atc_class": "A10BX02 (other blood glucose lowering drugs; meglitinides)",
+      "indications": [
+        "Type 2 diabetes mellitus (adjunct to diet and exercise)"
+      ],
+      "contraindications": [
+        "Type 1 diabetes",
+        "Diabetic ketoacidosis",
+        "Severe hepatic impairment",
+        "Concomitant use with gemfibrozil"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Not recommended in children; safety/efficacy not established."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid (limited data); insulin preferred.",
+        "lactation": "Avoid (limited data)."
+      },
+      "major_interactions": [
+        {
+          "with": "Gemfibrozil",
+          "risk": "Markedly increases repaglinide exposure—contraindicated"
+        },
+        {
+          "with": "Other hypoglycemics",
+          "risk": "Hypoglycemia risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0028",
+      "brand_name": "POLYPRED",
+      "strength": "20 mg",
+      "form": "comprimé effervescent",
+      "raw_label": "POLYPRED 20 mg comprimé effervescent",
+      "active_ingredient": "prednisolone",
+      "atc_class": "H02AB06 (systemic corticosteroid)",
+      "indications": [
+        "Inflammatory and allergic conditions requiring systemic corticosteroid therapy (per clinician)"
+      ],
+      "contraindications": [
+        "Systemic fungal infections",
+        "Live vaccines during high-dose systemic corticosteroid therapy",
+        "Hypersensitivity to prednisolone"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use lowest effective dose; monitor growth, blood pressure, and adrenal suppression."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "May be used if needed; use lowest effective dose; monitor maternal glucose/BP.",
+        "lactation": "Compatible at usual doses; high doses may warrant timing feeds."
+      },
+      "major_interactions": [
+        {
+          "with": "NSAIDs",
+          "risk": "Increased GI ulcer/bleeding risk"
+        },
+        {
+          "with": "Vaccines",
+          "risk": "Reduced response; avoid live vaccines at immunosuppressive doses"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        {
+          "with": "Other systemic corticosteroids",
+          "risk": "Additive adverse effects"
+        }
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0029",
+      "brand_name": "POLYTAR",
+      "strength": "AF",
+      "form": "shampoing",
+      "raw_label": "POLYTAR AF shampoing",
+      "active_ingredient": "coal tar (shampoo)",
+      "atc_class": "D05AA (antipsoriatics; tar preparations)",
+      "indications": [
+        "Psoriasis and seborrheic dermatitis of the scalp (symptomatic)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to coal tar",
+        "Inflamed/broken skin (avoid)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use with caution; avoid prolonged/large-area use; rinse well to avoid eye irritation."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Topical: use with caution and avoid large areas.",
+        "lactation": "Topical: compatible; avoid application on nipple area."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0030",
+      "brand_name": "POLYTAR",
+      "strength": "LIQUIDE 1%",
+      "form": "shampoing",
+      "raw_label": "POLYTAR LIQUIDE 1% shampoing",
+      "active_ingredient": "coal tar (shampoo)",
+      "atc_class": "D05AA (antipsoriatics; tar preparations)",
+      "indications": [
+        "Psoriasis and seborrheic dermatitis of the scalp (symptomatic)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to coal tar",
+        "Inflamed/broken skin (avoid)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use with caution; avoid prolonged/large-area use; rinse well to avoid eye irritation."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Topical: use with caution and avoid large areas.",
+        "lactation": "Topical: compatible; avoid application on nipple area."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0031",
+      "brand_name": "POLYZAPIN",
+      "strength": "5 mg",
+      "form": "comprimé [P]",
+      "raw_label": "POLYZAPIN 5 mg comprimé [P]",
+      "active_ingredient": "olanzapine",
+      "atc_class": "N05AH03 (atypical antipsychotic)",
+      "indications": [
+        "Schizophrenia",
+        "Bipolar disorder (acute mania and maintenance, per specialist)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to olanzapine"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Adolescent use is specialist-only; monitor weight, glucose, lipids, and sedation."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if benefits outweigh risks; neonatal extrapyramidal/withdrawal symptoms possible if used late pregnancy.",
+        "lactation": "Not recommended; passes into milk—risk of sedation/poor feeding."
+      },
+      "major_interactions": [
+        {
+          "with": "CNS depressants",
+          "risk": "Additive sedation"
+        },
+        {
+          "with": "Drugs causing weight gain/metabolic effects",
+          "risk": "Additive metabolic risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        {
+          "with": "Other antipsychotics",
+          "risk": "Additive adverse effects"
+        }
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0032",
+      "brand_name": "POLYZAPIN",
+      "strength": "10 mg",
+      "form": "comprimé [P]",
+      "raw_label": "POLYZAPIN 10 mg comprimé [P]",
+      "active_ingredient": "olanzapine",
+      "atc_class": "N05AH03 (atypical antipsychotic)",
+      "indications": [
+        "Schizophrenia",
+        "Bipolar disorder (acute mania and maintenance, per specialist)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to olanzapine"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Adolescent use is specialist-only; monitor weight, glucose, lipids, and sedation."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if benefits outweigh risks; neonatal extrapyramidal/withdrawal symptoms possible if used late pregnancy.",
+        "lactation": "Not recommended; passes into milk—risk of sedation/poor feeding."
+      },
+      "major_interactions": [
+        {
+          "with": "CNS depressants",
+          "risk": "Additive sedation"
+        },
+        {
+          "with": "Drugs causing weight gain/metabolic effects",
+          "risk": "Additive metabolic risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        {
+          "with": "Other antipsychotics",
+          "risk": "Additive adverse effects"
+        }
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0033",
+      "brand_name": "PONSTYL",
+      "strength": "500 mg",
+      "form": "comprimé enrobé",
+      "raw_label": "PONSTYL 500 mg comprimé enrobé",
+      "active_ingredient": "mefenamic acid",
+      "atc_class": "M01AG01 (NSAID)",
+      "indications": [
+        "Pain",
+        "Primary dysmenorrhea"
+      ],
+      "contraindications": [
+        "Active GI ulcer/bleeding",
+        "Severe renal/hepatic impairment",
+        "Severe heart failure",
+        "NSAID hypersensitivity/asthma"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid in 3rd trimester; otherwise only if necessary.",
+        "lactation": "Short-term generally ok; monitor infant."
+      },
+      "major_interactions": [
+        {
+          "with": "Anticoagulants/antiplatelets",
+          "risk": "Bleeding risk"
+        },
+        {
+          "with": "ACE inhibitors/diuretics",
+          "risk": "Renal risk; reduced antihypertensive effect"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0034",
+      "brand_name": "PONSTYL",
+      "strength": "",
+      "form": "500 mg suppositoire",
+      "raw_label": "PONSTYL 500 mg suppositoire",
+      "active_ingredient": "mefenamic acid",
+      "atc_class": "M01AG01 (NSAID)",
+      "indications": [
+        "Pain",
+        "Primary dysmenorrhea"
+      ],
+      "contraindications": [
+        "Active GI ulcer/bleeding",
+        "Severe renal/hepatic impairment",
+        "Severe heart failure",
+        "NSAID hypersensitivity/asthma"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid in 3rd trimester; otherwise only if necessary.",
+        "lactation": "Short-term generally ok; monitor infant."
+      },
+      "major_interactions": [
+        {
+          "with": "Anticoagulants/antiplatelets",
+          "risk": "Bleeding risk"
+        },
+        {
+          "with": "ACE inhibitors/diuretics",
+          "risk": "Renal risk; reduced antihypertensive effect"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0035",
+      "brand_name": "POSICYCLINE",
+      "strength": "0.01",
+      "form": "collyre",
+      "raw_label": "POSICYCLINE 0.01 collyre",
+      "active_ingredient": "oxytetracycline (ophthalmic antibiotic)",
+      "atc_class": "S01AA04 (ophthalmic antibiotics; tetracyclines)",
+      "indications": [
+        "Bacterial conjunctivitis/blepharitis due to susceptible organisms"
+      ],
+      "contraindications": [
+        "Hypersensitivity to tetracyclines"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Topical ophthalmic use: can be used under clinician guidance; avoid contact lenses during infection."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Topical: low systemic exposure; use if clearly needed.",
+        "lactation": "Topical: compatible."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0036",
+      "brand_name": "POSINE",
+      "strength": "0.120-0.025 g/100",
+      "form": "collyre",
+      "raw_label": "POSINE 0.120-0.025 g/100 collyre",
+      "active_ingredient": "synephrine tartrate + chlorhexidine digluconate",
+      "atc_class": "S01AX (ophthalmic antiseptics/other ophthalmologicals)",
+      "indications": [
+        "Irritated/red eyes (symptomatic) and adjunct antiseptic eye care (per product label)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to components",
+        "Narrow-angle glaucoma (sympathomimetics may worsen)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Avoid in very young children unless prescribed; do not use with contact lenses; limit duration."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if necessary; limit duration.",
+        "lactation": "Use with caution; limit duration."
+      },
+      "major_interactions": [
+        {
+          "with": "Other topical ocular sympathomimetics",
+          "risk": "Additive vasoconstriction/irritation"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0037",
+      "brand_name": "POTASSIUM",
+      "strength": "LAPROPHAN 15%",
+      "form": "sirop",
+      "raw_label": "POTASSIUM LAPROPHAN 15% sirop",
+      "active_ingredient": "potassium chloride",
+      "atc_class": "A12BA01 (potassium)",
+      "indications": [
+        "Treatment/prevention of hypokalemia"
+      ],
+      "contraindications": [
+        "Hyperkalemia",
+        "Severe renal impairment",
+        "Untreated Addison’s disease",
+        "Concomitant use with potassium-sparing diuretics unless monitored"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use only with medical supervision; dose based on potassium deficit; monitor serum potassium."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use if needed with monitoring.",
+        "lactation": "Compatible with monitoring."
+      },
+      "major_interactions": [
+        {
+          "with": "ACE inhibitors/ARBs/potassium-sparing diuretics",
+          "risk": "Hyperkalemia risk"
+        },
+        {
+          "with": "NSAIDs",
+          "risk": "Hyperkalemia risk (esp. renal impairment)"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        {
+          "with": "Other potassium supplements/salt substitutes",
+          "risk": "Hyperkalemia risk"
+        }
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0038",
+      "brand_name": "PRADAXA",
+      "strength": "75 mg",
+      "form": "gélule",
+      "raw_label": "PRADAXA 75 mg gélule",
+      "active_ingredient": "dabigatran etexilate",
+      "atc_class": "B01AE07 (direct thrombin inhibitor)",
+      "indications": [
+        "Stroke/systemic embolism prevention in non‑valvular AF",
+        "Treatment and secondary prevention of DVT/PE",
+        "VTE prophylaxis after orthopedic surgery (where approved)"
+      ],
+      "contraindications": [
+        "Active clinically significant bleeding",
+        "Severe renal impairment (avoid/contra depending on CrCl)",
+        "Mechanical prosthetic heart valves",
+        "Hepatic disease with coagulopathy"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally avoid; use alternatives (e.g., LMWH) if anticoagulation needed.",
+        "lactation": "Avoid/limited data; alternative preferred."
+      },
+      "major_interactions": [
+        {
+          "with": "P‑gp inhibitors (e.g., amiodarone, verapamil, ketoconazole)",
+          "risk": "May increase dabigatran exposure/bleeding risk"
+        },
+        {
+          "with": "NSAIDs/antiplatelets",
+          "risk": "Bleeding risk increases"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0039",
+      "brand_name": "PRADAXA",
+      "strength": "110 mg",
+      "form": "gélule",
+      "raw_label": "PRADAXA 110 mg gélule",
+      "active_ingredient": "dabigatran etexilate",
+      "atc_class": "B01AE07 (direct thrombin inhibitor)",
+      "indications": [
+        "Stroke/systemic embolism prevention in non‑valvular AF",
+        "Treatment and secondary prevention of DVT/PE",
+        "VTE prophylaxis after orthopedic surgery (where approved)"
+      ],
+      "contraindications": [
+        "Active clinically significant bleeding",
+        "Severe renal impairment (avoid/contra depending on CrCl)",
+        "Mechanical prosthetic heart valves",
+        "Hepatic disease with coagulopathy"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally avoid; use alternatives (e.g., LMWH) if anticoagulation needed.",
+        "lactation": "Avoid/limited data; alternative preferred."
+      },
+      "major_interactions": [
+        {
+          "with": "P‑gp inhibitors (e.g., amiodarone, verapamil, ketoconazole)",
+          "risk": "May increase dabigatran exposure/bleeding risk"
+        },
+        {
+          "with": "NSAIDs/antiplatelets",
+          "risk": "Bleeding risk increases"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0040",
+      "brand_name": "PRADAXA",
+      "strength": "150 mg",
+      "form": "gélule",
+      "raw_label": "PRADAXA 150 mg gélule",
+      "active_ingredient": "dabigatran etexilate",
+      "atc_class": "B01AE07 (direct thrombin inhibitor)",
+      "indications": [
+        "Stroke/systemic embolism prevention in non‑valvular AF",
+        "Treatment and secondary prevention of DVT/PE",
+        "VTE prophylaxis after orthopedic surgery (where approved)"
+      ],
+      "contraindications": [
+        "Active clinically significant bleeding",
+        "Severe renal impairment (avoid/contra depending on CrCl)",
+        "Mechanical prosthetic heart valves",
+        "Hepatic disease with coagulopathy"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally avoid; use alternatives (e.g., LMWH) if anticoagulation needed.",
+        "lactation": "Avoid/limited data; alternative preferred."
+      },
+      "major_interactions": [
+        {
+          "with": "P‑gp inhibitors (e.g., amiodarone, verapamil, ketoconazole)",
+          "risk": "May increase dabigatran exposure/bleeding risk"
+        },
+        {
+          "with": "NSAIDs/antiplatelets",
+          "risk": "Bleeding risk increases"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0041",
+      "brand_name": "PRAVAFENIX",
+      "strength": "",
+      "form": "gélule",
+      "raw_label": "PRAVAFENIX gélule",
+      "active_ingredient": "pravastatin + fenofibrate (fixed-dose combination)",
+      "atc_class": "C10BA (lipid modifying agents; statins in combination) ",
+      "indications": [
+        "Mixed dyslipidemia when combination therapy is indicated (specialist)"
+      ],
+      "contraindications": [
+        "Severe liver disease",
+        "Severe renal impairment",
+        "Gallbladder disease",
+        "Pregnancy and breastfeeding",
+        "Hypersensitivity to components"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Not recommended in children; specialist use only."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Contraindicated.",
+        "lactation": "Contraindicated."
+      },
+      "major_interactions": [
+        {
+          "with": "Other fibrates/statins",
+          "risk": "Myopathy/rhabdomyolysis risk"
+        },
+        {
+          "with": "Warfarin",
+          "risk": "INR may increase; monitor"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        {
+          "with": "Other statins/fibrates",
+          "risk": "Duplicate lipid therapy; increased myopathy risk"
+        }
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0042",
+      "brand_name": "PRAVASTATINE",
+      "strength": "GT 10 mg",
+      "form": "comprimé",
+      "raw_label": "PRAVASTATINE GT 10 mg comprimé",
+      "active_ingredient": "pravastatin",
+      "atc_class": "C10AA03 (statin)",
+      "indications": [
+        "Hypercholesterolemia",
+        "Cardiovascular risk reduction"
+      ],
+      "contraindications": [
+        "Pregnancy",
+        "Breastfeeding",
+        "Active liver disease"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Contraindicated.",
+        "lactation": "Contraindicated."
+      },
+      "major_interactions": [
+        {
+          "with": "Fibrates/niacin",
+          "risk": "Myopathy/rhabdomyolysis risk"
+        },
+        {
+          "with": "Cyclosporine",
+          "risk": "Increased statin exposure; dose adjust/monitor"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0043",
+      "brand_name": "PRAVASTATINE",
+      "strength": "GT 20 mg",
+      "form": "comprimé",
+      "raw_label": "PRAVASTATINE GT 20 mg comprimé",
+      "active_ingredient": "pravastatin",
+      "atc_class": "C10AA03 (statin)",
+      "indications": [
+        "Hypercholesterolemia",
+        "Cardiovascular risk reduction"
+      ],
+      "contraindications": [
+        "Pregnancy",
+        "Breastfeeding",
+        "Active liver disease"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Contraindicated.",
+        "lactation": "Contraindicated."
+      },
+      "major_interactions": [
+        {
+          "with": "Fibrates/niacin",
+          "risk": "Myopathy/rhabdomyolysis risk"
+        },
+        {
+          "with": "Cyclosporine",
+          "risk": "Increased statin exposure; dose adjust/monitor"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0044",
+      "brand_name": "PRAVASTATINE",
+      "strength": "GT 40 mg",
+      "form": "comprimé",
+      "raw_label": "PRAVASTATINE GT 40 mg comprimé",
+      "active_ingredient": "pravastatin",
+      "atc_class": "C10AA03 (statin)",
+      "indications": [
+        "Hypercholesterolemia",
+        "Cardiovascular risk reduction"
+      ],
+      "contraindications": [
+        "Pregnancy",
+        "Breastfeeding",
+        "Active liver disease"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Contraindicated.",
+        "lactation": "Contraindicated."
+      },
+      "major_interactions": [
+        {
+          "with": "Fibrates/niacin",
+          "risk": "Myopathy/rhabdomyolysis risk"
+        },
+        {
+          "with": "Cyclosporine",
+          "risk": "Increased statin exposure; dose adjust/monitor"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0045",
+      "brand_name": "PRAVATOR",
+      "strength": "20 mg",
+      "form": "comprimé",
+      "raw_label": "PRAVATOR 20 mg comprimé",
+      "active_ingredient": "pravastatin",
+      "atc_class": "C10AA03 (statin)",
+      "indications": [
+        "Hypercholesterolemia",
+        "Cardiovascular risk reduction"
+      ],
+      "contraindications": [
+        "Pregnancy",
+        "Breastfeeding",
+        "Active liver disease"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Contraindicated.",
+        "lactation": "Contraindicated."
+      },
+      "major_interactions": [
+        {
+          "with": "Fibrates/niacin",
+          "risk": "Myopathy risk"
+        },
+        {
+          "with": "Cyclosporine",
+          "risk": "Increased levels; monitor"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0046",
+      "brand_name": "PRAXILENE",
+      "strength": "200 mg",
+      "form": "comprimé pelliculé",
+      "raw_label": "PRAXILENE 200 mg comprimé pelliculé",
+      "active_ingredient": "naftidrofuryl",
+      "atc_class": "C04AX21 (peripheral vasodilator)",
+      "indications": [
+        "Intermittent claudication (peripheral arterial disease)"
+      ],
+      "contraindications": [
+        "Hypersensitivity"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid unless necessary (limited data).",
+        "lactation": "Avoid/unknown; discuss clinician."
+      },
+      "major_interactions": [
+        {
+          "with": "Anticoagulants/antiplatelets",
+          "risk": "Caution: bleeding risk (monitor)"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0047",
+      "brand_name": "PRAZOL",
+      "strength": "20 mg",
+      "form": "gélule",
+      "raw_label": "PRAZOL 20 mg gélule",
+      "active_ingredient": "omeprazole",
+      "atc_class": "A02BC01 (proton pump inhibitor)",
+      "indications": [
+        "GERD/erosive esophagitis",
+        "Gastric/duodenal ulcer",
+        "H. pylori eradication (in combination)",
+        "NSAID ulcer prophylaxis"
+      ],
+      "contraindications": [
+        "Hypersensitivity to PPIs"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally considered safe.",
+        "lactation": "Generally considered safe."
+      },
+      "major_interactions": [
+        {
+          "with": "Clopidogrel",
+          "risk": "Reduced activation possible; avoid omeprazole if on clopidogrel when alternatives exist"
+        },
+        {
+          "with": "Warfarin/phenytoin",
+          "risk": "May increase levels; monitor"
+        },
+        {
+          "with": "Drugs requiring acidic pH (e.g., ketoconazole)",
+          "risk": "Reduced absorption"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0048",
+      "brand_name": "PRETERAX",
+      "strength": "2.5 mg/0.625 mg",
+      "form": "comprimé pelliculé",
+      "raw_label": "PRETERAX 2.5 mg/0.625 mg comprimé pelliculé",
+      "active_ingredient": "perindopril + indapamide",
+      "atc_class": "C09BA04 (ACE inhibitor + diuretic)",
+      "indications": [
+        "Hypertension"
+      ],
+      "contraindications": [
+        "Pregnancy",
+        "History of angioedema",
+        "Severe renal impairment (or bilateral renal artery stenosis)",
+        "Hypokalemia (indapamide)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Contraindicated (ACE inhibitors are fetotoxic).",
+        "lactation": "Not recommended; avoid."
+      },
+      "major_interactions": [
+        {
+          "with": "Potassium supplements/potassium-sparing diuretics",
+          "risk": "Hyperkalemia risk"
+        },
+        {
+          "with": "NSAIDs",
+          "risk": "Reduced antihypertensive effect; renal risk"
+        },
+        {
+          "with": "Lithium",
+          "risk": "Lithium toxicity risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0049",
+      "brand_name": "PREVENAR",
+      "strength": "13",
+      "form": "suspension injectable [V]",
+      "raw_label": "PREVENAR 13 suspension injectable [V]",
+      "active_ingredient": "pneumococcal conjugate vaccine (13‑valent)",
+      "atc_class": "J07AL02 (pneumococcal vaccines)",
+      "indications": [
+        "Prevention of pneumococcal disease per immunization schedule"
+      ],
+      "contraindications": [
+        "Severe allergic reaction to previous dose/components",
+        "Acute severe febrile illness (postpone)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics/adults",
+          "rule": "Follow national immunization schedule; check age/risk eligibility and booster timing."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Can be given if indicated (risk-based).",
+        "lactation": "Compatible."
+      },
+      "major_interactions": [
+        {
+          "with": "Immunosuppressants",
+          "risk": "Reduced immune response"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0050",
+      "brand_name": "PRIMPERAN",
+      "strength": "0.001",
+      "form": "solution buvable",
+      "raw_label": "PRIMPERAN 0.001 solution buvable",
+      "active_ingredient": "metoclopramide",
+      "atc_class": "A03FA01 (prokinetic/antiemetic)",
+      "indications": [
+        "Nausea/vomiting (short-term)",
+        "Gastroparesis (short-term)"
+      ],
+      "contraindications": [
+        "GI obstruction/perforation/hemorrhage",
+        "Pheochromocytoma",
+        "Epilepsy",
+        "History of tardive dyskinesia"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Often used when needed; lowest effective dose/shortest duration.",
+        "lactation": "Compatible; monitor infant for sedation/extrapyramidal effects."
+      },
+      "major_interactions": [
+        {
+          "with": "Antipsychotics",
+          "risk": "Increased extrapyramidal symptoms risk"
+        },
+        {
+          "with": "Levodopa/dopamine agonists",
+          "risk": "Antagonistic effects"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0051",
+      "brand_name": "PRIMPERAN",
+      "strength": "10 mg",
+      "form": "comprimé sécable",
+      "raw_label": "PRIMPERAN 10 mg comprimé sécable",
+      "active_ingredient": "metoclopramide",
+      "atc_class": "A03FA01 (prokinetic/antiemetic)",
+      "indications": [
+        "Nausea/vomiting (short-term)",
+        "Gastroparesis (short-term)"
+      ],
+      "contraindications": [
+        "GI obstruction/perforation/hemorrhage",
+        "Pheochromocytoma",
+        "Epilepsy",
+        "History of tardive dyskinesia"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Often used when needed; lowest effective dose/shortest duration.",
+        "lactation": "Compatible; monitor infant for sedation/extrapyramidal effects."
+      },
+      "major_interactions": [
+        {
+          "with": "Antipsychotics",
+          "risk": "Increased extrapyramidal symptoms risk"
+        },
+        {
+          "with": "Levodopa/dopamine agonists",
+          "risk": "Antagonistic effects"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0052",
+      "brand_name": "PRIORIX",
+      "strength": "préparation",
+      "form": "injectable [V]",
+      "raw_label": "PRIORIX préparation injectable [V]",
+      "active_ingredient": "measles+mumps+rubella live attenuated vaccine (MMR)",
+      "atc_class": "J07BD52 (MMR vaccines)",
+      "indications": [
+        "Immunization against measles, mumps, rubella"
+      ],
+      "contraindications": [
+        "Pregnancy",
+        "Severe immunodeficiency",
+        "Severe allergy to vaccine components"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics/adults",
+          "rule": "Follow national immunization schedule; check age/risk eligibility and booster timing."
+        }
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Contraindicated (live vaccine). Avoid pregnancy for ~1 month after.",
+        "lactation": "Compatible; breastfeeding not a contraindication."
+      },
+      "major_interactions": [
+        {
+          "with": "Immunosuppressants",
+          "risk": "Contraindicated or reduced response; defer vaccination"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0053",
+      "brand_name": "SCIPRALEX",
+      "strength": "10 mg",
+      "form": "comprimé pelliculé sécable [P]",
+      "raw_label": "SCIPRALEX 10 mg comprimé pelliculé sécable [P]",
+      "active_ingredient": "escitalopram",
+      "atc_class": "N06AB10 (SSRI antidepressant)",
+      "indications": [
+        "Major depressive disorder",
+        "Generalized anxiety disorder",
+        "Panic disorder (varies by label)"
+      ],
+      "contraindications": [
+        "Concomitant MAO inhibitors",
+        "Hypersensitivity"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "May be used if benefits outweigh risks; monitor neonatal adaptation if late pregnancy.",
+        "lactation": "Generally compatible; monitor infant for irritability/sedation/poor feeding."
+      },
+      "major_interactions": [
+        {
+          "with": "MAO inhibitors/linezolid",
+          "risk": "Serotonin syndrome risk"
+        },
+        {
+          "with": "Other serotonergic drugs (triptans, tramadol)",
+          "risk": "Serotonin syndrome risk"
+        },
+        {
+          "with": "NSAIDs/anticoagulants",
+          "risk": "Bleeding risk increases"
+        },
+        {
+          "with": "QT-prolonging drugs",
+          "risk": "Additive QT risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        "Psychotropic medication: avoid duplicate therapy within same class without prescriber review."
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    },
+    {
+      "id": "MED_0054",
+      "brand_name": "SCIPRALEX",
+      "strength": "20 mg",
+      "form": "comprimé pelliculé sécable [P]",
+      "raw_label": "SCIPRALEX 20 mg comprimé pelliculé sécable [P]",
+      "active_ingredient": "escitalopram",
+      "atc_class": "N06AB10 (SSRI antidepressant)",
+      "indications": [
+        "Major depressive disorder",
+        "Generalized anxiety disorder",
+        "Panic disorder (varies by label)"
+      ],
+      "contraindications": [
+        "Concomitant MAO inhibitors",
+        "Hypersensitivity"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "May be used if benefits outweigh risks; monitor neonatal adaptation if late pregnancy.",
+        "lactation": "Generally compatible; monitor infant for irritability/sedation/poor feeding."
+      },
+      "major_interactions": [
+        {
+          "with": "MAO inhibitors/linezolid",
+          "risk": "Serotonin syndrome risk"
+        },
+        {
+          "with": "Other serotonergic drugs (triptans, tramadol)",
+          "risk": "Serotonin syndrome risk"
+        },
+        {
+          "with": "NSAIDs/anticoagulants",
+          "risk": "Bleeding risk increases"
+        },
+        {
+          "with": "QT-prolonging drugs",
+          "risk": "Additive QT risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [
+        "Psychotropic medication: avoid duplicate therapy within same class without prescriber review."
+      ],
+      "needs_enrichment": false,
+      "sources": []
+    }
+  ]
+}

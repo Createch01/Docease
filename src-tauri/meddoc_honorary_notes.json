@@ -1,0 +1,129 @@
+[
+  {
+    "date": "2026-03-02",
+    "id": "1772457312444",
+    "invoiceNumber": "2026-0001",
+    "patientId": "1772381294301",
+    "patientName": "ahmed bennani",
+    "paymentMode": "CASH",
+    "services": [
+      {
+        "checked": true,
+        "name": "Consultation",
+        "price": 300
+      }
+    ],
+    "status": "PAID",
+    "totalAmount": 300,
+    "totalInWords": "Trois cents DH"
+  },
+  {
+    "date": "2026-03-02",
+    "id": "1772457322589",
+    "invoiceNumber": "2026-0002",
+    "patientId": "1772381294301",
+    "patientName": "ahmed bennani",
+    "patientPhone": "0623142325",
+    "paymentMode": "CASH",
+    "services": [],
+    "status": "PAID",
+    "totalAmount": 0,
+    "totalInWords": "Zéro Dirhams"
+  },
+  {
+    "date": "2026-03-02",
+    "id": "1772460782317",
+    "invoiceNumber": "2026-0003",
+    "patientId": "1772381294301",
+    "patientName": "ahmed bennani",
+    "paymentMode": "CASH",
+    "services": [
+      {
+        "checked": true,
+        "name": "Consultation",
+        "price": 300
+      }
+    ],
+    "status": "PAID",
+    "totalAmount": 300,
+    "totalInWords": "Trois cents DH"
+  },
+  {
+    "date": "2026-03-02",
+    "id": "1772460823377",
+    "invoiceNumber": "2026-0004",
+    "patientId": "1772381294301",
+    "patientName": "ahmed bennani",
+    "patientPhone": "0623142325",
+    "paymentMode": "CASH",
+    "services": [],
+    "status": "PAID",
+    "totalAmount": 200,
+    "totalInWords": "Deux cents Dirhams"
+  },
+  {
+    "date": "2026-03-02",
+    "id": "1772460856668",
+    "invoiceNumber": "2026-0005",
+    "patientId": "1772381294301",
+    "patientName": "ahmed bennani",
+    "patientPhone": "0623142325",
+    "paymentMode": "CASH",
+    "services": [],
+    "status": "PAID",
+    "totalAmount": 200,
+    "totalInWords": "Deux cents Dirhams"
+  },
+  {
+    "date": "2026-03-02",
+    "id": "1772461235516",
+    "invoiceNumber": "2026-0006",
+    "patientId": "1772381294301",
+    "patientName": "ahmed bennani",
+    "patientPhone": "0623142325",
+    "paymentMode": "CASH",
+    "services": [],
+    "status": "PAID",
+    "totalAmount": 220.5,
+    "totalInWords": "Deux cent vingt Dirhams et cinquante Centimes"
+  },
+  {
+    "date": "2026-03-02",
+    "id": "1772461239280",
+    "invoiceNumber": "2026-0007",
+    "patientId": "1772381294301",
+    "patientName": "ahmed bennani",
+    "patientPhone": "0623142325",
+    "paymentMode": "CASH",
+    "services": [],
+    "status": "PAID",
+    "totalAmount": 220.5,
+    "totalInWords": "Deux cent vingt Dirhams et cinquante Centimes"
+  },
+  {
+    "date": "2026-03-02",
+    "id": "1772461930989",
+    "invoiceNumber": "2026-0008",
+    "patientId": "1772457675105",
+    "patientName": "hayat",
+    "patientPhone": "0634251678",
+    "paymentMode": "CASH",
+    "services": [],
+    "status": "PAID",
+    "totalAmount": 289.89,
+    "totalInWords": "Deux cent quatre-vingt-neuf Dirhams et quatre-vingt-neuf Centimes"
+  },
+  {
+    "date": "2026-03-02",
+    "id": "1772465376588",
+    "invoiceNumber": "2026-0009",
+    "patientId": "1772462738758",
+    "patientName": "hayat",
+    "patientPhone": "0684556677",
+    "paymentMode": "CASH",
+    "services": [],
+    "status": "PAID",
+    "totalAmount": 3.13,
+    "totalInWords": "Trois Dirhams et treize Centimes"
+  }
+]

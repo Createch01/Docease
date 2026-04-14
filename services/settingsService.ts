@@ -7,6 +7,15 @@ const DEFAULT_APPEARANCE: PrescriptionAppearance = {
   fontSize: 'medium',
   logoUrl: undefined,
   logoScale: 1,
+  fontFamily: 'serif',
+  headerLayout: 'classic',
+  watermarkOpacity: 0.04,
+  showBorder: true,
+  footerColor: '#ef4444', // Red-500
+  footerVerticalOffset: 0,
+  contentVerticalPadding: 40,
+  enableQrCode: false,
+  qrCodeSize: 120,
 };
 
 export const settingsService = {
@@ -85,8 +94,16 @@ export const settingsService = {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result as string);
-      reader.onerror = reject;
+      reader.onerror = (error) => reject(error);
       reader.readAsDataURL(file);
     });
+  },
+
+  getLanguage(): string {
+    return localStorage.getItem('docease_language') || 'fr';
+  },
+
+  saveLanguage(lang: string): void {
+    localStorage.setItem('docease_language', lang);
   },
 };

@@ -1,0 +1,395 @@
+{
+  "schema_version": "1.1",
+  "items": [
+    {
+      "id": "MED_O0001",
+      "brand_name": "O'MAG",
+      "strength": "300 mg",
+      "form": "comprimé effervescent",
+      "raw_label": "O'MAG 300 mg comprimé effervescent",
+      "active_ingredient": "magnesium (salt form not specified in available sources)",
+      "atc_class": "A12CC (magnesium supplements) – class-level mapping",
+      "indications": [
+        "Magnesium supplementation in deficiency states (e.g., hypomagnesemia)."
+      ],
+      "contraindications": [
+        "Hypersensitivity to components",
+        "Severe renal impairment (risk of hypermagnesemia)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally considered acceptable if supplementation is needed; avoid excessive doses; consult clinician.",
+        "lactation": "Compatible; monitor infant if high doses."
+      },
+      "major_interactions": [
+        {
+          "with": "Tetracyclines / fluoroquinolones (oral)",
+          "risk": "Reduced absorption; separate administration by 2–4 hours"
+        },
+        {
+          "with": "Bisphosphonates",
+          "risk": "Reduced absorption; separate administration"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": true,
+      "sources": [
+        "https://www.medicaments.info/omegafoline"
+      ]
+    },
+    {
+      "id": "MED_O0002",
+      "brand_name": "O-LINE",
+      "strength": "5 mg",
+      "form": "comprimé orodispersible",
+      "raw_label": "O-LINE 5 mg comprimé orodispersible [P]",
+      "active_ingredient": "olanzapine",
+      "atc_class": "N05AH03 (atypical antipsychotic)",
+      "indications": [
+        "Schizophrenia",
+        "Bipolar disorder (acute manic episodes; maintenance per specialist)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to olanzapine/excipients"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if benefits outweigh risks; discuss with prescriber (possible neonatal effects if used late pregnancy).",
+        "lactation": "Not recommended; olanzapine passes into breast milk—use only if clinician advises."
+      },
+      "major_interactions": [
+        {
+          "with": "CNS depressants (alcohol, sedatives)",
+          "risk": "Additive sedation"
+        },
+        {
+          "with": "Smoking (CYP1A2 induction)",
+          "risk": "May lower olanzapine levels"
+        },
+        {
+          "with": "Fluvoxamine (CYP1A2 inhibitor)",
+          "risk": "May increase olanzapine levels"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://med.ma/medicaments/O-LINE"
+      ]
+    },
+    {
+      "id": "MED_O0003",
+      "brand_name": "O-LINE",
+      "strength": "10 mg",
+      "form": "comprimé orodispersible",
+      "raw_label": "O-LINE 10 mg comprimé orodispersible [P]",
+      "active_ingredient": "olanzapine",
+      "atc_class": "N05AH03 (atypical antipsychotic)",
+      "indications": [
+        "Schizophrenia",
+        "Bipolar disorder (acute manic episodes; maintenance per specialist)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to olanzapine/excipients"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if benefits outweigh risks; discuss with prescriber (possible neonatal effects if used late pregnancy).",
+        "lactation": "Not recommended; olanzapine passes into breast milk—use only if clinician advises."
+      },
+      "major_interactions": [
+        {
+          "with": "CNS depressants (alcohol, sedatives)",
+          "risk": "Additive sedation"
+        },
+        {
+          "with": "Smoking (CYP1A2 induction)",
+          "risk": "May lower olanzapine levels"
+        },
+        {
+          "with": "Fluvoxamine (CYP1A2 inhibitor)",
+          "risk": "May increase olanzapine levels"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://med.ma/medicaments/O-LINE"
+      ]
+    },
+    {
+      "id": "MED_O0004",
+      "brand_name": "O-LINE",
+      "strength": "15 mg",
+      "form": "comprimé orodispersible",
+      "raw_label": "O-LINE 15 mg comprimé orodispersible [P]",
+      "active_ingredient": "olanzapine",
+      "atc_class": "N05AH03 (atypical antipsychotic)",
+      "indications": [
+        "Schizophrenia",
+        "Bipolar disorder (acute manic episodes; maintenance per specialist)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to olanzapine/excipients"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if benefits outweigh risks; discuss with prescriber (possible neonatal effects if used late pregnancy).",
+        "lactation": "Not recommended; olanzapine passes into breast milk—use only if clinician advises."
+      },
+      "major_interactions": [
+        {
+          "with": "CNS depressants (alcohol, sedatives)",
+          "risk": "Additive sedation"
+        },
+        {
+          "with": "Smoking (CYP1A2 induction)",
+          "risk": "May lower olanzapine levels"
+        },
+        {
+          "with": "Fluvoxamine (CYP1A2 inhibitor)",
+          "risk": "May increase olanzapine levels"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://med.ma/medicaments/O-LINE"
+      ]
+    },
+    {
+      "id": "MED_O0005",
+      "brand_name": "O-LINE",
+      "strength": "20 mg",
+      "form": "comprimé orodispersible",
+      "raw_label": "O-LINE 20 mg comprimé orodispersible [P]",
+      "active_ingredient": "olanzapine",
+      "atc_class": "N05AH03 (atypical antipsychotic)",
+      "indications": [
+        "Schizophrenia",
+        "Bipolar disorder (acute manic episodes; maintenance per specialist)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to olanzapine/excipients"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if benefits outweigh risks; discuss with prescriber (possible neonatal effects if used late pregnancy).",
+        "lactation": "Not recommended; olanzapine passes into breast milk—use only if clinician advises."
+      },
+      "major_interactions": [
+        {
+          "with": "CNS depressants (alcohol, sedatives)",
+          "risk": "Additive sedation"
+        },
+        {
+          "with": "Smoking (CYP1A2 induction)",
+          "risk": "May lower olanzapine levels"
+        },
+        {
+          "with": "Fluvoxamine (CYP1A2 inhibitor)",
+          "risk": "May increase olanzapine levels"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://med.ma/medicaments/O-LINE"
+      ]
+    },
+    {
+      "id": "MED_O0006",
+      "brand_name": "OCET",
+      "strength": "200 mg",
+      "form": "comprimé enrobé",
+      "raw_label": "OCET 200 mg comprimé",
+      "active_ingredient": "ofloxacin",
+      "atc_class": "S01AE01 (fluoroquinolones, ophthalmologic) – as listed by local directory; systemic class J01MA01",
+      "indications": [
+        "Bacterial infections susceptible to ofloxacin (per prescriber; urinary/genital/respiratory/ENT, etc.)."
+      ],
+      "contraindications": [
+        "Hypersensitivity to quinolones/fluoroquinolones",
+        "History of tendon disorders related to quinolone use (avoid)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid unless no safer alternative; consult clinician (class warning).",
+        "lactation": "Caution; discuss with clinician."
+      },
+      "major_interactions": [
+        {
+          "with": "Theophylline",
+          "risk": "Increased theophylline levels; monitor"
+        },
+        {
+          "with": "Antacids/iron/zinc (oral)",
+          "risk": "Reduced absorption; separate dosing"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://www.dwa.ma/medicament/5c4f24adf56176139d6d7020-OCET200-MG"
+      ]
+    },
+    {
+      "id": "MED_O0007",
+      "brand_name": "OCREVUS",
+      "strength": "",
+      "form": "solution à diluer pour perfusion",
+      "raw_label": "OCREVUS solution à diluer pour perfusion",
+      "active_ingredient": "ocrelizumab",
+      "atc_class": "L04AA26 (immunosuppressants – monoclonal antibody)",
+      "indications": [
+        "Relapsing forms of multiple sclerosis (RMS)",
+        "Primary progressive multiple sclerosis (PPMS)"
+      ],
+      "contraindications": [
+        "Active hepatitis B infection",
+        "Severe active infection (defer infusion)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Avoid during pregnancy; effective contraception recommended during treatment and for a period after last dose (per SmPC).",
+        "lactation": "Breastfeeding: discuss with specialist; monoclonal antibodies can pass into milk—decision individualized."
+      },
+      "major_interactions": [
+        {
+          "with": "Other immunosuppressants / live vaccines",
+          "risk": "Higher infection risk; avoid live vaccines during and after treatment per guidance"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://www.vidal.fr/medicaments/substances/ocrelizumab-26169.html",
+        "https://www.nps.org.au/medicine-finder/ocrevus-injection"
+      ]
+    },
+    {
+      "id": "MED_O0008",
+      "brand_name": "OCTAGAM",
+      "strength": "50 mg/ml",
+      "form": "solution pour perfusion",
+      "raw_label": "OCTAGAM 50 mg/ml solution pour perfusion",
+      "active_ingredient": "human normal immunoglobulin (IVIg)",
+      "atc_class": "J06BA02 (immunoglobulins, normal human)",
+      "indications": [
+        "Replacement therapy in primary/secondary immunodeficiency (per product)",
+        "Immunomodulation indications such as ITP/Kawasaki/GBS (per approved label)"
+      ],
+      "contraindications": [
+        "Hypersensitivity to immunoglobulins",
+        "IgA deficiency with anti-IgA antibodies (risk of anaphylaxis)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use if clearly needed; generally used when indicated; specialist decision.",
+        "lactation": "Compatible/likely acceptable; monitor infant; specialist decision."
+      },
+      "major_interactions": [
+        {
+          "with": "Live attenuated vaccines (e.g., MMR, varicella)",
+          "risk": "Reduced vaccine efficacy—delay vaccination per guidance"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": true,
+      "sources": [
+        "https://www.vidal.fr/medicaments/substances/immunoglobuline-humaine-normale-18369.html"
+      ]
+    },
+    {
+      "id": "MED_O0009",
+      "brand_name": "OCTANATE",
+      "strength": "50 UI/ml",
+      "form": "poudre + solvant solution injectable",
+      "raw_label": "OCTANATE 50 UI/ml poudre + solvant solution injectable",
+      "active_ingredient": "human coagulation factor VIII",
+      "atc_class": "B02BD02 (coagulation factor VIII)",
+      "indications": [
+        "Treatment and prophylaxis of bleeding in hemophilia A (factor VIII deficiency)."
+      ],
+      "contraindications": [
+        "Hypersensitivity to factor VIII/excipients",
+        "Known inhibitors with inadequate response (specialist management)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use if needed in hemophilia A; specialist guidance.",
+        "lactation": "Use if needed; specialist guidance."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://univadis.fr/viewarticle/octanate-50-ui-ml-pdre-et-solv-pr-sol-inj-702890"
+      ]
+    },
+    {
+      "id": "MED_O0010",
+      "brand_name": "OCTANATE",
+      "strength": "100 UI/ml",
+      "form": "poudre + solvant solution injectable",
+      "raw_label": "OCTANATE 100 UI/ml poudre + solvant solution injectable",
+      "active_ingredient": "human coagulation factor VIII",
+      "atc_class": "B02BD02 (coagulation factor VIII)",
+      "indications": [
+        "Treatment and prophylaxis of bleeding in hemophilia A (factor VIII deficiency)."
+      ],
+      "contraindications": [
+        "Hypersensitivity to factor VIII/excipients",
+        "Known inhibitors with inadequate response (specialist management)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use if needed in hemophilia A; specialist guidance.",
+        "lactation": "Use if needed; specialist guidance."
+      },
+      "major_interactions": [],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://univadis.fr/viewarticle/octanate-50-ui-ml-pdre-et-solv-pr-sol-inj-702890"
+      ]
+    },
+    {
+      "id": "MED_O0011",
+      "brand_name": "OCTAPLEX",
+      "strength": "500 UI",
+      "form": "poudre + solvant solution pour perfusion",
+      "raw_label": "OCTAPLEX 500 UI poudre + solvant solution pour perfusion",
+      "active_ingredient": "human prothrombin complex concentrate (Factors II, VII, IX, X + Proteins C/S)",
+      "atc_class": "B02BD01 (coagulation factors II, VII, IX and X in combination)",
+      "indications": [
+        "Urgent reversal of vitamin K antagonist (VKA) therapy (e.g., warfarin) in major bleeding or before urgent surgery (per label)."
+      ],
+      "contraindications": [
+        "Hypersensitivity",
+        "Disseminated intravascular coagulation (unless life-threatening and specialist)",
+        "History of heparin-induced thrombocytopenia (if product contains heparin)"
+      ],
+      "age_rules": [],
+      "pregnancy_lactation": {
+        "pregnancy": "Use only if clearly needed; specialist decision.",
+        "lactation": "Use only if clearly needed; specialist decision."
+      },
+      "major_interactions": [
+        {
+          "with": "Anticoagulants (VKA)",
+          "risk": "This product reverses VKA effect; careful INR monitoring"
+        },
+        {
+          "with": "Thrombosis risk factors",
+          "risk": "May increase thromboembolic risk"
+        }
+      ],
+      "duplicate_therapy_warnings": [],
+      "needs_enrichment": false,
+      "sources": [
+        "https://www.medicines.org.uk/emc/files/pil.5371.pdf"
+      ]
+    }
+  ]
+}

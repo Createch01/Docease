@@ -1,0 +1,127 @@
+{
+  "schema_version": "risk_dossier_v1",
+  "category": "Diabète: prudence (glycémie/sucres)",
+  "count": 4,
+  "items": [
+    {
+      "id": "MED_0015",
+      "raw_label": "TOUJEO 300 unités/ml stylo pré-rempli",
+      "brand_name": "TOUJEO",
+      "strength": "300 unités",
+      "form": "",
+      "active_ingredient": "insulin glargine",
+      "atc_class": "A10AE04 (long‑acting insulin analogue)",
+      "reasons": [
+        "sucres/excipients"
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Can be used if clinically needed; insulin is standard in pregnancy.",
+        "lactation": "Compatible."
+      },
+      "contraindications": [
+        "Hypoglycemia",
+        "Hypersensitivity"
+      ],
+      "age_rules": [],
+      "major_interactions": [
+        {
+          "with": "Other glucose‑lowering drugs",
+          "risk": "Hypoglycemia"
+        },
+        {
+          "with": "Beta‑blockers",
+          "risk": "Mask hypoglycemia symptoms"
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": "MED_ST_0131",
+      "raw_label": "TABUNEX 0.05 µg spray nasal",
+      "brand_name": "TABUNEX",
+      "strength": "0.05 µg",
+      "form": "spray nasal",
+      "active_ingredient": "budesonide (nasal)",
+      "atc_class": "R01AD05 (intranasal corticosteroid)",
+      "reasons": [
+        "corticoïdes (↑glycémie)"
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Generally safe when needed.",
+        "lactation": "Compatible."
+      },
+      "contraindications": [
+        "Hypersensitivity"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Approved in children depending on age; monitor growth with long-term use."
+        }
+      ],
+      "major_interactions": [
+        {
+          "with": "Strong CYP3A4 inhibitors",
+          "risk": "↑ corticosteroid exposure"
+        }
+      ],
+      "sources": []
+    },
+    {
+      "id": "MED_ST_0174",
+      "raw_label": "TOBRADEX 0.1%/0.3% collyre",
+      "brand_name": "TOBRADEX",
+      "strength": "0.1%",
+      "form": "/0.3% collyre",
+      "active_ingredient": "tobramycin + dexamethasone",
+      "atc_class": "S01CA01 (antibiotic + corticosteroid ophthalmic)",
+      "reasons": [
+        "corticoïdes (↑glycémie)"
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use if benefits outweigh risks; minimize duration.",
+        "lactation": "Caution; minimal systemic absorption."
+      },
+      "contraindications": [
+        "Viral/fungal ocular infections",
+        "Untreated purulent ocular infection (evaluate)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use under ophthalmology guidance."
+        }
+      ],
+      "major_interactions": [],
+      "sources": []
+    },
+    {
+      "id": "MED_ST_0175",
+      "raw_label": "TOBRADEX 0.3%/1% pommade ophtalmique",
+      "brand_name": "TOBRADEX",
+      "strength": "0.3%",
+      "form": "/1% pommade ophtalmique",
+      "active_ingredient": "tobramycin + dexamethasone",
+      "atc_class": "S01CA01 (antibiotic + corticosteroid ophthalmic)",
+      "reasons": [
+        "corticoïdes (↑glycémie)"
+      ],
+      "pregnancy_lactation": {
+        "pregnancy": "Use if benefits outweigh risks; minimize duration.",
+        "lactation": "Caution; minimal systemic absorption."
+      },
+      "contraindications": [
+        "Viral/fungal ocular infections",
+        "Untreated purulent ocular infection (evaluate)"
+      ],
+      "age_rules": [
+        {
+          "population": "pediatrics",
+          "rule": "Use under ophthalmology guidance."
+        }
+      ],
+      "major_interactions": [],
+      "sources": []
+    }
+  ]
+}
