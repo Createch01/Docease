@@ -2,8 +2,8 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import {Video} from '@google/genai';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import { Video } from '@google/genai';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   AspectRatio,
   GenerateVideoParams,
@@ -16,8 +16,10 @@ import {
 import {
   ArrowRightIcon,
   ChevronDownIcon,
+  ClockIcon,
   FilmIcon,
   FramesModeIcon,
+  HashIcon,
   PlusIcon,
   RectangleStackIcon,
   ReferencesModeIcon,
@@ -42,7 +44,7 @@ const modeIcons: Record<GenerationMode, React.ReactNode> = {
   [GenerationMode.EXTEND_VIDEO]: <FilmIcon className="w-5 h-5" />,
 };
 
-const fileToBase64 = <T extends {file: File; base64: string}>(
+const fileToBase64 = <T extends { file: File; base64: string }>(
   file: File,
 ): Promise<T> => {
   return new Promise((resolve, reject) => {
@@ -50,7 +52,7 @@ const fileToBase64 = <T extends {file: File; base64: string}>(
     reader.onload = () => {
       const base64 = (reader.result as string).split(',')[1];
       if (base64) {
-        resolve({file, base64} as T);
+        resolve({ file, base64 } as T);
       } else {
         reject(new Error('Failed to read file as base64.'));
       }
@@ -71,12 +73,11 @@ const CustomSelect: React.FC<{
   icon: React.ReactNode;
   children: React.ReactNode;
   disabled?: boolean;
-}> = ({label, value, onChange, icon, children, disabled = false}) => (
+}> = ({ label, value, onChange, icon, children, disabled = false }) => (
   <div>
     <label
-      className={`text-xs block mb-1.5 font-medium ${
-        disabled ? 'text-gray-500' : 'text-gray-400'
-      }`}>
+      className={`text-xs block mb-1.5 font-medium ${disabled ? 'text-gray-500' : 'text-gray-400'
+        }`}>
       {label}
     </label>
     <div className="relative">
@@ -91,9 +92,41 @@ const CustomSelect: React.FC<{
         {children}
       </select>
       <ChevronDownIcon
-        className={`w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none ${
-          disabled ? 'text-gray-600' : 'text-gray-400'
-        }`}
+        className={`w-5 h-5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none ${disabled ? 'text-gray-600' : 'text-gray-400'
+          }`}
+      />
+    </div>
+  </div>
+);
+
+const CustomInput: React.FC<{
+  label: string;
+  value: string | number;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  icon: React.ReactNode;
+  type?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  min?: number;
+}> = ({ label, value, onChange, icon, type = "text", placeholder, disabled = false, min }) => (
+  <div>
+    <label
+      className={`text-xs block mb-1.5 font-medium ${disabled ? 'text-gray-500' : 'text-gray-400'
+        }`}>
+      {label}
+    </label>
+    <div className="relative">
+      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        {icon}
+      </div>
+      <input
+        type={type}
+        min={min}
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        disabled={disabled}
+        className="w-full bg-[#1f1f1f] border border-gray-600 rounded-lg pl-10 pr-3 py-2.5 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 disabled:bg-gray-700/50 disabled:border-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed"
       />
     </div>
   </div>
@@ -105,7 +138,7 @@ const ImageUpload: React.FC<{
   image?: ImageFile | null;
   label: React.ReactNode;
   className?: string;
-}> = ({onSelect, onRemove, image, label, className = "w-28 h-20"}) => {
+}> = ({ onSelect, onRemove, image, label, className = "w-28 h-20" }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -164,7 +197,7 @@ const VideoUpload: React.FC<{
   onRemove?: () => void;
   video?: VideoFile | null;
   label: React.ReactNode;
-}> = ({onSelect, onRemove, video, label}) => {
+}> = ({ onSelect, onRemove, video, label }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -257,6 +290,9 @@ const PromptForm: React.FC<PromptFormProps> = ({
     initialValues?.inputVideoObject ?? null,
   );
   const [isLooping, setIsLooping] = useState(initialValues?.isLooping ?? false);
+  const [duration, setDuration] = useState<number>(initialValues?.duration ?? 5);
+  const [fps, setFps] = useState<number>(initialValues?.fps ?? 24);
+  const [seed, setSeed] = useState<number | string>(initialValues?.seed ?? '');
 
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const [isModeSelectorOpen, setIsModeSelectorOpen] = useState(false);
@@ -277,6 +313,9 @@ const PromptForm: React.FC<PromptFormProps> = ({
       setInputVideo(initialValues.inputVideo ?? null);
       setInputVideoObject(initialValues.inputVideoObject ?? null);
       setIsLooping(initialValues.isLooping ?? false);
+      setDuration(initialValues.duration ?? 5);
+      setFps(initialValues.fps ?? 24);
+      setSeed(initialValues.seed ?? '');
     }
   }, [initialValues]);
 
@@ -325,6 +364,9 @@ const PromptForm: React.FC<PromptFormProps> = ({
         inputVideo,
         inputVideoObject,
         isLooping,
+        duration,
+        fps,
+        seed: (seed !== '' && !isNaN(Number(seed))) ? Number(seed) : undefined,
       });
     },
     [
@@ -341,6 +383,9 @@ const PromptForm: React.FC<PromptFormProps> = ({
       inputVideoObject,
       onGenerate,
       isLooping,
+      duration,
+      fps,
+      seed,
     ],
   );
 
@@ -358,12 +403,14 @@ const PromptForm: React.FC<PromptFormProps> = ({
   };
 
   const promptPlaceholder = {
-    [GenerationMode.TEXT_TO_VIDEO]: 'Describe the video you want to create...',
+    [GenerationMode.TEXT_TO_VIDEO]:
+      'Ex: Un drone survole une plage tropicale au coucher du soleil, vagues douces, 4k, cinématique...',
     [GenerationMode.FRAMES_TO_VIDEO]:
-      'Describe motion between start and end frames (optional)...',
+      'Ex: La caméra zoome lentement vers le château, créant une transition fluide vers la porte d\'entrée...',
     [GenerationMode.REFERENCES_TO_VIDEO]:
-      'Describe a video using reference images...',
-    [GenerationMode.EXTEND_VIDEO]: 'Describe what happens next (optional)...',
+      'Ex: Animer ce personnage dansant sous la pluie, en gardant le style artistique des références...',
+    [GenerationMode.EXTEND_VIDEO]:
+      'Ex: Le protagoniste se retourne et sourit mystérieusement à la caméra...',
   }[generationMode];
 
   const selectableModes = [
@@ -432,7 +479,7 @@ const PromptForm: React.FC<PromptFormProps> = ({
                   key={index}
                   image={img}
                   label=""
-                  onSelect={() => {}}
+                  onSelect={() => { }}
                   onRemove={() =>
                     setReferenceImages((imgs) => imgs.filter((_, i) => i !== index))
                   }
@@ -583,6 +630,41 @@ const PromptForm: React.FC<PromptFormProps> = ({
                   1080p/4k videos can't be extended
                 </p>
               ) : null}
+            </div>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-gray-700">
+            <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
+              Paramètres Avancés
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <CustomSelect
+                label="Durée"
+                value={duration.toString()}
+                onChange={(e) => setDuration(Number(e.target.value))}
+                icon={<ClockIcon className="w-5 h-5 text-gray-400" />}>
+                <option value="5">5 Secondes</option>
+                <option value="10">10 Secondes</option>
+              </CustomSelect>
+
+              <CustomSelect
+                label="FPS"
+                value={fps.toString()}
+                onChange={(e) => setFps(Number(e.target.value))}
+                icon={<FilmIcon className="w-5 h-5 text-gray-400" />}>
+                <option value="24">24 FPS</option>
+                <option value="30">30 FPS</option>
+              </CustomSelect>
+
+              <CustomInput
+                label="Seed"
+                type="number"
+                value={seed}
+                placeholder="Aléatoire (vide)"
+                min={0}
+                onChange={(e) => setSeed(e.target.value)}
+                icon={<HashIcon className="w-5 h-5 text-gray-400" />}
+              />
             </div>
           </div>
         </div>

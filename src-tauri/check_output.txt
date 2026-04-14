@@ -1,0 +1,15 @@
+    Checking app v0.1.2 (C:\Users\hp\Downloads\DOCEASE\src-tauri)
+error[E0599]: no method named `toLowerCase` found for reference `&str` in the current scope
+  --> src\lib.rs:14:47
+   |
+14 |                     let lower_name = filename.toLowerCase();
+   |                                               ^^^^^^^^^^^
+   |
+help: there is a method `to_lowercase` with a similar name
+   |
+14 -                     let lower_name = filename.toLowerCase();
+14 +                     let lower_name = filename.to_lowercase();
+   |
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `app` (lib) due to 1 previous error

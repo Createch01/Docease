@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { AlertTriangle, CheckCircle, Search, Pill, RefreshCw, X } from 'lucide-react';
 import { dataService } from '../services/dataService';
+import { drugRulesService } from '../services/drugRules';
 import { Medicine } from '../types';
 
 const DrugCompatibility: React.FC = () => {
@@ -39,29 +40,21 @@ const DrugCompatibility: React.FC = () => {
 
     const checkInteractions = (medicines: Medicine[]) => {
         setIsChecking(true);
-        // Simple mock interaction check based on interaction groups in dataService
-        // In a real app, this would query a more complex API or database
 
-        let warning = null;
+        // Use the centralized drug rules service
+        const items = medicines.map(m => ({
+            id: m.id,
+            medicineName: m.name,
+            dosage: m.defaultDosage || '',
+            timing: m.defaultTiming || 'Indifférent'
+        }));
 
-        // Check for matching interaction groups
-        const groups: Record<string, string[]> = {};
+        // Mock a patient for the safety check (Adult context)
+        const mockPatient: any = { type: 'Adult', age: 40 };
+        const alerts = drugRulesService.checkRules(mockPatient, items);
 
-        medicines.forEach(med => {
-            if (med.interactionGroup) {
-                if (!groups[med.interactionGroup]) {
-                    groups[med.interactionGroup] = [];
-                }
-                groups[med.interactionGroup].push(med.name);
-            }
-        });
-
-        for (const [group, meds] of Object.entries(groups)) {
-            if (meds.length > 1) {
-                warning = `Interaction détectée: ${meds.join(' et ')} appartiennent au même groupe (${group}).`;
-                break;
-            }
-        }
+        const interactionAlert = alerts.find(a => a.type === 'INTERACTION' || a.type === 'DOUBLON');
+        let warning = interactionAlert ? `${interactionAlert.title}: ${interactionAlert.message}` : null;
 
         setTimeout(() => {
             setInteractionResult(warning);
@@ -138,7 +131,7 @@ const DrugCompatibility: React.FC = () => {
                 {/* Results Area */}
                 {selectedMedicines.length >= 2 && (
                     <div className={`p-6 rounded-xl border-l-4 transition-all duration-300 ${isChecking ? 'bg-gray-50 border-gray-300' :
-                            interactionResult ? 'bg-red-50 border-red-500' : 'bg-emerald-50 border-emerald-500'
+                        interactionResult ? 'bg-red-50 border-red-500' : 'bg-emerald-50 border-emerald-500'
                         }`}>
                         <div className="flex items-start gap-4">
                             {isChecking ? (
@@ -151,13 +144,13 @@ const DrugCompatibility: React.FC = () => {
 
                             <div>
                                 <h3 className={`text-lg font-bold mb-1 ${isChecking ? 'text-gray-700' :
-                                        interactionResult ? 'text-red-700' : 'text-emerald-700'
+                                    interactionResult ? 'text-red-700' : 'text-emerald-700'
                                     }`}>
                                     {isChecking ? 'Analyse en cours...' :
                                         interactionResult ? 'Interaction Détectée' : 'Aucune interaction connue'}
                                 </h3>
                                 <p className={`${isChecking ? 'text-gray-500' :
-                                        interactionResult ? 'text-red-600' : 'text-emerald-600'
+                                    interactionResult ? 'text-red-600' : 'text-emerald-600'
                                     }`}>
                                     {isChecking ? 'Veuillez patienter pendant que nous vérifions la compatibilité.' :
                                         interactionResult || 'Ces médicaments peuvent être pris ensemble selon nos données actuelles.'}

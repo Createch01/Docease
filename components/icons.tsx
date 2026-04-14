@@ -8,9 +8,11 @@ import {
   ArrowRight,
   Baseline,
   ChevronDown,
+  Clock,
   Download,
   Film,
   FileImage,
+  Hash,
   Image,
   KeyRound,
   Layers,
@@ -88,6 +90,14 @@ export const DownloadIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => 
 
 export const FileImageIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <FileImage {...defaultProps} {...props} />
+);
+
+export const ClockIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <Clock {...defaultProps} {...props} />
+);
+
+export const HashIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <Hash {...defaultProps} {...props} />
 );
 
 // This icon had a different stroke width in the original file, so we preserve it.
