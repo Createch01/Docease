@@ -1,0 +1,5229 @@
+[
+  {
+    "id": "S-S-CORT",
+    "brand_name": "S-CORT",
+    "generic_name": "Prednisolone",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticostéroïdes",
+    "drug_class": "Glucocorticoïde",
+    "indications": [
+      "Maladies inflammatoires",
+      "Auto-immunes",
+      "Asthme aigu",
+      "Réactions allergiques sévères",
+      "Croup"
+    ],
+    "contraindications": [
+      "Infection systémique non contrôlée",
+      "Vaccins vivants (forte dose)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Dose minimale.",
+      "breastfeeding": "Compatible à faible dose."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "1-2 mg/kg/j cure courte. Asthme aigu: 1 mg/kg/j x 3-5j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "5-60 mg/j selon indication.",
+      "children": "1-2 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 34.7,
+        "packaging": "Boite de 20",
+        "laboratory": "MC PHARMA"
+      }
+    ],
+    "drugbank_id": "DB00860",
+    "adverse_effects": [
+      "Hyperglycémie",
+      "Ostéoporose",
+      "Cushing",
+      "Immunodépression",
+      "Retard croissance (enfant)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque ulcère GI",
+        "recommendation": "IPP si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Antidiabétiques oraux"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hyperglycémie",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Phénytoïne",
+          "Phénobarbital"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité corticoïde",
+        "recommendation": "Augmenter dose si nécessaire."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/s-cort-20-mg-comprime"
+  },
+  {
+    "id": "S-SAFLU",
+    "brand_name": "SAFLU",
+    "generic_name": "Salmétérol + Fluticasone",
+    "strength": "125 µg / 25 µg",
+    "form": "Suspension",
+    "route": "Inhalée",
+    "atc_code": "R03AK06",
+    "therapeutic_group": "Antiasthmatiques",
+    "drug_class": "Association LABA + CSI",
+    "indications": [
+      "Asthme persistant modéré à sévère",
+      "BPCO avec exacerbations fréquentes"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Crise d'asthme aiguë (pas un traitement de secours)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Maintenir contrôle de l'asthme.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 4,
+      "warning": "≥ 4 ans.",
+      "dose_rule": "≥ 4 ans: 25/50 µg 2 inhalations 2x/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "1-2 inhalations 2x/j selon dosage.",
+      "children": "≥ 4 ans: 25/50 µg 2 inh 2x/j."
+    },
+    "market_data": [
+      {
+        "price": 140.0,
+        "packaging": "pour inhalation Flacon de 120 doses",
+        "laboratory": "CIPLA MAROC"
+      }
+    ],
+    "drugbank_id": "DB00588",
+    "adverse_effects": [
+      "Candidose oropharyngée",
+      "Dysphonie",
+      "Céphalées",
+      "Tremblements",
+      "Tachycardie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ritonavir",
+          "Kétoconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation exposition fluticasone → Cushing",
+        "recommendation": "Éviter association prolongée."
+      },
+      {
+        "interacting_drugs": [
+          "Propranolol",
+          "Bêta-bloquants non sélectifs"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Antagonisme bronchodilatateur",
+        "recommendation": "Utiliser BB cardiosélectifs si nécessaire."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/saflu-125-g-25-g-suspension"
+  },
+  {
+    "id": "S-SALBUMOL",
+    "brand_name": "SALBUMOL",
+    "generic_name": "Salbutamol",
+    "strength": "0.5 MG / ML",
+    "form": "Solution",
+    "route": "Inhalée / Orale / IV",
+    "atc_code": "R03AC02",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "Bêta-2 agoniste courte durée (SABA)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 25.6,
+        "packaging": "injectable Boîte de 6",
+        "laboratory": "GLAXO SMITHKLINE"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/salbumol-0-5-mg-ml-solution"
+  },
+  {
+    "id": "S-SALCROZINE",
+    "brand_name": "SALCROZINE",
+    "generic_name": "Sulfasalazine",
+    "strength": "FAES 500 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A07EC01",
+    "therapeutic_group": "Anti-inflammatoires intestinaux",
+    "drug_class": "Aminosalicylé (5-ASA + sulfapyridine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 274.0,
+        "packaging": "gastrorésistant Boite de 100",
+        "laboratory": "IBERMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/salcrozine-faes-500-mg-comprime"
+  },
+  {
+    "id": "S-SAPHIR",
+    "brand_name": "SAPHIR",
+    "generic_name": "Amoxicilline + Acide clavulanique",
+    "strength": "1 G / 125 MG",
+    "form": "Sachet",
+    "route": "Orale",
+    "atc_code": "J01CR02",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Pénicilline + inhibiteur bêta-lactamase",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 82.3,
+        "packaging": "Boite de 12",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/saphir-1-g-125-mg-sachet"
+  },
+  {
+    "id": "S-SARGENOR",
+    "brand_name": "SARGENOR",
+    "generic_name": "Arginine (aspartate)",
+    "strength": "1 G",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A14AA",
+    "therapeutic_group": "Suppléments",
+    "drug_class": "Acide aminé tonifiant",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 15,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 54.2,
+        "packaging": "effervescent Boîte de 2 tubes de 10",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/sargenor-1-g-comprime"
+  },
+  {
+    "id": "S-SCANDICAINE",
+    "brand_name": "SCANDICAINE",
+    "generic_name": "Mépivaïne",
+    "strength": "30 MG / ML",
+    "form": "Solution",
+    "route": "Injectable (locale)",
+    "atc_code": "N01BB03",
+    "therapeutic_group": "Anesthésiques locaux",
+    "drug_class": "Anesthésique local (amide)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 354.0,
+        "packaging": "injectable Boîte de 50 cartouches de 1.8 ml",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/scandicaine-30-mg-ml-solution"
+  },
+  {
+    "id": "S-SCANDONEST",
+    "brand_name": "SCANDONEST",
+    "generic_name": "Mépivaïne + Adrénaline",
+    "strength": "30 MG / ML",
+    "form": "Solution",
+    "route": "Injectable (locale)",
+    "atc_code": "N01BB53",
+    "therapeutic_group": "Anesthésiques locaux",
+    "drug_class": "Anesthésique local + vasoconstricteur",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 330.0,
+        "packaging": "injectable à usage dentaire en cartouche Boite de 50",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/scandonest-30-mg-ml-solution"
+  },
+  {
+    "id": "S-SCARMED",
+    "brand_name": "SCARMED",
+    "generic_name": "Silicone (gel cicatrisant)",
+    "strength": "SILICONE",
+    "form": "Gel",
+    "route": "Cutanée",
+    "atc_code": "D03AX",
+    "therapeutic_group": "Cicatrisants",
+    "drug_class": "Gel de silicone",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 136.67,
+        "packaging": "Tube de 15 G",
+        "laboratory": "NON RENSEIGNÉ"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/scarmed-silicone-gel"
+  },
+  {
+    "id": "S-SECONIL",
+    "brand_name": "SECONIL",
+    "generic_name": "Sucralfate",
+    "strength": "2 G",
+    "form": "Granulés",
+    "route": "Orale",
+    "atc_code": "A02BX02",
+    "therapeutic_group": "Protecteurs gastriques",
+    "drug_class": "Sel d'aluminium du sucrose sulfaté",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 40.4,
+        "packaging": "en sachet Boite unitaire",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/seconil-2-g-granules"
+  },
+  {
+    "id": "S-SECTRAL",
+    "brand_name": "SECTRAL",
+    "generic_name": "Acébutolol",
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C07AB04",
+    "therapeutic_group": "Bêta-bloquants",
+    "drug_class": "Bêta-bloquant cardiosélectif + ASI",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 37.8,
+        "packaging": "pelliculé Boîte de 20",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sectral-200-mg-comprime"
+  },
+  {
+    "id": "S-SEDATIF",
+    "brand_name": "SEDATIF",
+    "generic_name": "Homéopathie (sédatif)",
+    "strength": "PC",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "",
+    "therapeutic_group": "Homéopathie",
+    "drug_class": "Préparation homéopathique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 42.5,
+        "packaging": "Boîte de 40",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "drug_interactions": [],
+    "adverse_effects": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/sedatif-pc-comprime"
+  },
+  {
+    "id": "S-SEDERGINE",
+    "brand_name": "SEDERGINE",
+    "generic_name": "Aspirine + Vitamine C",
+    "strength": "330 MG / 200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N02BA51",
+    "therapeutic_group": "Analgésiques",
+    "drug_class": "AINS + Vitamine C",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 16,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 15.3,
+        "packaging": "effervescent Boîte de 20",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/sedergine-330-mg-200-mg-comprime"
+  },
+  {
+    "id": "S-SEEBRI",
+    "brand_name": "SEEBRI",
+    "generic_name": "Glycopyrronium (inhalé)",
+    "strength": "BREEZHALER 50 µg",
+    "form": "Gélule",
+    "route": "Inhalée",
+    "atc_code": "R03BB06",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "Anticholinergique longue durée (LAMA)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 457.0,
+        "packaging": "avec inhalateur Inhalateur et 30 gélules",
+        "laboratory": "NOVARTIS PHARMA MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/seebri-breezhaler-50-g-gelule"
+  },
+  {
+    "id": "S-SENNA+VITAMINE",
+    "brand_name": "SENNA+VITAMINE",
+    "generic_name": "Séné + Vitamine C",
+    "strength": "C",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A06AB06",
+    "therapeutic_group": "Laxatifs",
+    "drug_class": "Laxatif stimulant + Vitamine C",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 79.5,
+        "packaging": "effervescent Boite de 20",
+        "laboratory": "SYNAPSE SANTÉ"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/senna-vitamine-c-comprime"
+  },
+  {
+    "id": "S-SEPCEN",
+    "brand_name": "SEPCEN",
+    "generic_name": "Céfaclor",
+    "strength": "250 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01DC04",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Céphalosporine 2e génération",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 51.4,
+        "packaging": "Boîte de 10",
+        "laboratory": "IBERMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sepcen-250-mg-comprime"
+  },
+  {
+    "id": "S-SEPTANEST",
+    "brand_name": "SEPTANEST",
+    "generic_name": "Articaïne + Adrénaline",
+    "strength": "40 MG / ML 1 / 100000",
+    "form": "Solution",
+    "route": "Injectable (locale)",
+    "atc_code": "N01BB58",
+    "therapeutic_group": "Anesthésiques locaux",
+    "drug_class": "Anesthésique local + vasoconstricteur (dentaire)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 4,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 466.0,
+        "packaging": "injectable Boîte de 50 cartouches de 1.7 ml",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/septanest-40-mg-ml-1-100000-solution"
+  },
+  {
+    "id": "S-SERELYS",
+    "brand_name": "SERELYS",
+    "generic_name": "Complément ménopause (extrait pollen)",
+    "strength": "PERIMENOPAUSE MENOPAUSE",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "",
+    "therapeutic_group": "Compléments",
+    "drug_class": "Extrait de pollen",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 213.34,
+        "packaging": "Boite de 60",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/serelys-perimenopause-menopause-comprime"
+  },
+  {
+    "id": "S-SERETIDE",
+    "brand_name": "SERETIDE",
+    "generic_name": "Salmétérol + Fluticasone",
+    "strength": "AÉROSOL 50 µg / 25 µg",
+    "form": "Suspension",
+    "route": "Inhalée",
+    "atc_code": "R03AK06",
+    "therapeutic_group": "Antiasthmatiques",
+    "drug_class": "Association LABA + CSI",
+    "indications": [
+      "Asthme persistant modéré à sévère",
+      "BPCO avec exacerbations fréquentes"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Crise d'asthme aiguë (pas un traitement de secours)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Maintenir contrôle de l'asthme.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 4,
+      "warning": "≥ 4 ans.",
+      "dose_rule": "≥ 4 ans: 25/50 µg 2 inhalations 2x/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "1-2 inhalations 2x/j selon dosage.",
+      "children": "≥ 4 ans: 25/50 µg 2 inh 2x/j."
+    },
+    "market_data": [
+      {
+        "price": 140.0,
+        "packaging": "pour inhalation Flacon de 120 doses",
+        "laboratory": "GLAXO SMITHKLINE"
+      }
+    ],
+    "drugbank_id": "DB00588",
+    "adverse_effects": [
+      "Candidose oropharyngée",
+      "Dysphonie",
+      "Céphalées",
+      "Tremblements",
+      "Tachycardie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ritonavir",
+          "Kétoconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation exposition fluticasone → Cushing",
+        "recommendation": "Éviter association prolongée."
+      },
+      {
+        "interacting_drugs": [
+          "Propranolol",
+          "Bêta-bloquants non sélectifs"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Antagonisme bronchodilatateur",
+        "recommendation": "Utiliser BB cardiosélectifs si nécessaire."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/seretide-aerosol-50-g-25-g-suspension"
+  },
+  {
+    "id": "S-SERFLUX",
+    "brand_name": "SERFLUX",
+    "generic_name": "Salmétérol + Fluticasone",
+    "strength": "25 µG / 250 µG",
+    "form": "Suspension",
+    "route": "Inhalée",
+    "atc_code": "R03AK06",
+    "therapeutic_group": "Antiasthmatiques",
+    "drug_class": "Association LABA + CSI",
+    "indications": [
+      "Asthme persistant modéré à sévère",
+      "BPCO avec exacerbations fréquentes"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Crise d'asthme aiguë (pas un traitement de secours)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Maintenir contrôle de l'asthme.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 4,
+      "warning": "≥ 4 ans.",
+      "dose_rule": "≥ 4 ans: 25/50 µg 2 inhalations 2x/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "1-2 inhalations 2x/j selon dosage.",
+      "children": "≥ 4 ans: 25/50 µg 2 inh 2x/j."
+    },
+    "market_data": [
+      {
+        "price": 169.6,
+        "packaging": "pour inhalation Flacon pressurisé contenant 120 doses",
+        "laboratory": "RIM PHARMA"
+      }
+    ],
+    "drugbank_id": "DB00588",
+    "adverse_effects": [
+      "Candidose oropharyngée",
+      "Dysphonie",
+      "Céphalées",
+      "Tremblements",
+      "Tachycardie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ritonavir",
+          "Kétoconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation exposition fluticasone → Cushing",
+        "recommendation": "Éviter association prolongée."
+      },
+      {
+        "interacting_drugs": [
+          "Propranolol",
+          "Bêta-bloquants non sélectifs"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Antagonisme bronchodilatateur",
+        "recommendation": "Utiliser BB cardiosélectifs si nécessaire."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/serflux-25-g-250-g-suspension"
+  },
+  {
+    "id": "S-SICCAPROTECT",
+    "brand_name": "SICCAPROTECT",
+    "generic_name": "Carbomère + Dexpanthénol (collyre)",
+    "strength": "30 MG / ML / 14 MG / ML",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01XA20",
+    "therapeutic_group": "Larmes artificielles",
+    "drug_class": "Lubrifiant ophtalmique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 20.6,
+        "packaging": "Flacon de 10 ml",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/siccaprotect-30-mg-ml-14-mg-ml-collyre"
+  },
+  {
+    "id": "S-SIFROL",
+    "brand_name": "SIFROL",
+    "generic_name": "Pramipexole",
+    "strength": "0.52 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N04BC05",
+    "therapeutic_group": "Antiparkinsoniens",
+    "drug_class": "Agoniste dopaminergique D2/D3",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 168.0,
+        "packaging": "libération prolongée Boite de 30",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sifrol-0-52-mg-comprime"
+  },
+  {
+    "id": "S-SIGLIMET",
+    "brand_name": "SIGLIMET",
+    "generic_name": "Sitagliptine + Metformine",
+    "strength": "50 MG / 1000 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A10BD07",
+    "therapeutic_group": "Antidiabétiques",
+    "drug_class": "Association DPP-4i + biguanide",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 235.0,
+        "packaging": "pelliculé Boite de 60",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/siglimet-50-mg-1000-mg-comprime"
+  },
+  {
+    "id": "S-SIGLIVIA",
+    "brand_name": "SIGLIVIA",
+    "generic_name": "Sitagliptine",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A10BH01",
+    "therapeutic_group": "Antidiabétiques",
+    "drug_class": "Inhibiteur DPP-4 (gliptine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 225.0,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/siglivia-100-mg-comprime"
+  },
+  {
+    "id": "S-SIL-ONCO-BCG",
+    "brand_name": "SIL-ONCO-BCG",
+    "generic_name": "BCG (immunothérapie vésicale)",
+    "strength": "40 MG / ML",
+    "form": "Pastille",
+    "route": "Intravésicale",
+    "atc_code": "L03AX03",
+    "therapeutic_group": "Immunostimulants",
+    "drug_class": "BCG vivant (immunothérapie cancer vessie)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 925.0,
+        "packaging": "et poudre pour instillation intravesicale Boite de 3 flacons de poudre de 4 ml",
+        "laboratory": "INSTITUT PASTEUR MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sil-onco-bcg-40-mg-ml-pastille"
+  },
+  {
+    "id": "S-SIMCOR",
+    "brand_name": "SIMCOR",
+    "generic_name": "Simvastatine",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10AA01",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine (inhibiteur HMG-CoA réductase)",
+    "indications": [
+      "Hypercholestérolémie",
+      "Prévention cardiovasculaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique",
+      "Grossesse",
+      "Allaitement",
+      "Myopathie active"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "≥ 10 ans pour HF.",
+      "dose_rule": "≥ 10 ans: 10-40 mg/j le soir."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr < 30: début 5 mg/j."
+    },
+    "dosage": {
+      "adult": "10-40 mg/j le soir. Max 80 mg/j (si déjà toléré).",
+      "children": "10-40 mg/j le soir."
+    },
+    "market_data": [
+      {
+        "price": 48.0,
+        "packaging": "Boite de 30",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "DB00641",
+    "adverse_effects": [
+      "Myalgies",
+      "Rhabdomyolyse (rare)",
+      "Élévation transaminases"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Gemfibrozil",
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Clarithromycine",
+          "Érythromycine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4",
+          "Fibrates"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "SUSPENDRE simvastatine."
+      },
+      {
+        "interacting_drugs": [
+          "Acide fusidique",
+          "Fucidine"
+        ],
+        "interacting_classes": [
+          "Antibiotiques stéroïdiens"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "SUSPENDRE simvastatine."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Max simvastatine 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Amlodipine",
+          "Diltiazem",
+          "Vérapamil"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs calciques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux simvastatine",
+        "recommendation": "Max 20 mg/j (amlodipine), 10 mg/j (diltiazem/vérapamil)."
+      },
+      {
+        "interacting_drugs": [
+          "Jus de pamplemousse"
+        ],
+        "interacting_classes": [
+          "Aliments"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux",
+        "recommendation": "Éviter pamplemousse."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/simcor-20-mg-comprime"
+  },
+  {
+    "id": "S-SIMDAX",
+    "brand_name": "SIMDAX",
+    "generic_name": "Lévosimendan",
+    "strength": "2.25 MG / ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "C01CX08",
+    "therapeutic_group": "Cardiotoniques",
+    "drug_class": "Sensibilisateur au calcium + ouvreur canaux K+",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 7987.0,
+        "packaging": "à diluer pour perfusion IV Flacon de 5 ml",
+        "laboratory": "AFRIC-PHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/simdax-2-25-mg-ml-solution"
+  },
+  {
+    "id": "S-SIMVACOL",
+    "brand_name": "SIMVACOL",
+    "generic_name": "Simvastatine",
+    "strength": "40 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10AA01",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine (inhibiteur HMG-CoA réductase)",
+    "indications": [
+      "Hypercholestérolémie",
+      "Prévention cardiovasculaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique",
+      "Grossesse",
+      "Allaitement",
+      "Myopathie active"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "≥ 10 ans pour HF.",
+      "dose_rule": "≥ 10 ans: 10-40 mg/j le soir."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr < 30: début 5 mg/j."
+    },
+    "dosage": {
+      "adult": "10-40 mg/j le soir. Max 80 mg/j (si déjà toléré).",
+      "children": "10-40 mg/j le soir."
+    },
+    "market_data": [
+      {
+        "price": 73.4,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "RIM PHARMA"
+      }
+    ],
+    "drugbank_id": "DB00641",
+    "adverse_effects": [
+      "Myalgies",
+      "Rhabdomyolyse (rare)",
+      "Élévation transaminases"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Gemfibrozil",
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Clarithromycine",
+          "Érythromycine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4",
+          "Fibrates"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "SUSPENDRE simvastatine."
+      },
+      {
+        "interacting_drugs": [
+          "Acide fusidique",
+          "Fucidine"
+        ],
+        "interacting_classes": [
+          "Antibiotiques stéroïdiens"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "SUSPENDRE simvastatine."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Max simvastatine 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Amlodipine",
+          "Diltiazem",
+          "Vérapamil"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs calciques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux simvastatine",
+        "recommendation": "Max 20 mg/j (amlodipine), 10 mg/j (diltiazem/vérapamil)."
+      },
+      {
+        "interacting_drugs": [
+          "Jus de pamplemousse"
+        ],
+        "interacting_classes": [
+          "Aliments"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux",
+        "recommendation": "Éviter pamplemousse."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/simvacol-40-mg-comprime"
+  },
+  {
+    "id": "S-SIMVASTATINE",
+    "brand_name": "SIMVASTATINE",
+    "generic_name": "Simvastatine",
+    "strength": "MAPHAR 20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10AA01",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 44.2,
+        "packaging": "pelliculé sécable Boite de 28",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "drug_interactions": [],
+    "adverse_effects": [],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/simvastatine-maphar-20-mg-comprime"
+  },
+  {
+    "id": "S-SINGULAIR",
+    "brand_name": "SINGULAIR",
+    "generic_name": "Montélukast",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R03DC03",
+    "therapeutic_group": "Antiasthmatiques",
+    "drug_class": "Antagoniste des récepteurs des leucotriènes",
+    "indications": [
+      "Asthme persistant léger à modéré (en complément ou alternative aux CSI)",
+      "Prévention asthme d'effort",
+      "Rhinite allergique saisonnière et perannuelle"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0.5,
+      "warning": "≥ 6 mois (granulés). ≥ 2 ans (cp 4mg). ≥ 6 ans (cp 5mg). ≥ 15 ans (cp 10mg).",
+      "dose_rule": "6m-5 ans: 4 mg/j. 6-14 ans: 5 mg/j. ≥ 15 ans: 10 mg/j. Le soir."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "10 mg/j le soir.",
+      "children": "6m-5 ans: 4 mg/j. 6-14 ans: 5 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 205.0,
+        "packaging": "pelliculé Boîte de 28",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "DB00471",
+    "adverse_effects": [
+      "Céphalées",
+      "Douleurs abdominales",
+      "Troubles neuropsychiatriques (agitation, dépression, idées suicidaires — RARE mais signalé, surtout enfant)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Phénobarbital",
+          "Phénytoïne",
+          "Rifampicine"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution des taux de montélukast",
+        "recommendation": "Surveiller efficacité."
+      }
+    ],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/singulair-10-mg-comprime"
+  },
+  {
+    "id": "S-SINTROM",
+    "brand_name": "SINTROM",
+    "generic_name": "Acénocoumarol",
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AA07",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Antivitamine K (AVK, coumarine)",
+    "indications": [
+      "Thrombose veineuse profonde",
+      "Embolie pulmonaire",
+      "Fibrillation auriculaire",
+      "Prothèse valvulaire mécanique",
+      "Prévention thromboembolique"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Ulcère GD évolutif",
+      "AVC hémorragique récent",
+      "HTA maligne",
+      "Insuffisance hépatique sévère",
+      "Grossesse (1er et 3e trimestres)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CONTRE-INDIQUÉ au 1er trimestre (embryopathie warfarinique: hypoplasie nasale, chondrodysplasie ponctuée) et au 3e trimestre (hémorragie fœtale). Au 2e trimestre: possible si héparine impossible.",
+      "breastfeeding": "Compatible (ne passe pas dans le lait en quantité significative)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie sous surveillance INR stricte.",
+      "dose_rule": "0.1-0.2 mg/kg/j. Ajuster selon INR cible (2-3)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Prudence en IRC. Surveillance INR renforcée."
+    },
+    "dosage": {
+      "adult": "Dose initiale: 4 mg/j. Ajuster selon INR (cible 2-3, ou 2.5-3.5 pour valve mécanique). INR à J3, puis 2-3x/sem, puis 1x/mois.",
+      "children": "0.1-0.2 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 20.0,
+        "packaging": "sécable Boîte de 10",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "DB01418",
+    "adverse_effects": [
+      "Hémorragies (PRINCIPAL RISQUE)",
+      "Nécrose cutanée (rare, début traitement)",
+      "Alopécie",
+      "Troubles digestifs"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS",
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Éviter AINS. Aspirine: seulement si indication cardio stricte sous surveillance."
+      },
+      {
+        "interacting_drugs": [
+          "Fluconazole",
+          "Miconazole",
+          "Voriconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure INR → hémorragie",
+        "recommendation": "Surveiller INR tous les 2 jours. Réduire dose AVK."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Cordarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR (inhibition CYP2C9)",
+        "recommendation": "Réduire AVK de 30-50%. Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Métronidazole",
+          "Flagyl",
+          "Nidazol"
+        ],
+        "interacting_classes": [
+          "Nitroimidazolés"
+        ],
+        "severity": "DANGER",
+        "effect": "Potentialisation AVK → hémorragie",
+        "recommendation": "Surveiller INR fréquemment."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution INR → perte d'efficacité → risque thrombotique",
+        "recommendation": "Surveiller INR. Augmenter dose AVK."
+      },
+      {
+        "interacting_drugs": [
+          "Vitamine K",
+          "Konakion"
+        ],
+        "interacting_classes": [
+          "Vitamine K"
+        ],
+        "severity": "INFO",
+        "effect": "ANTIDOTE — diminue l'INR",
+        "recommendation": "Usage thérapeutique pour corriger un surdosage."
+      },
+      {
+        "interacting_drugs": [
+          "Paracétamol (>2g/j pendant >3j)"
+        ],
+        "interacting_classes": [
+          "Analgésiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée de l'INR",
+        "recommendation": "Surveiller INR si paracétamol > 2g/j > 3 jours."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sintrom-4-mg-comprime"
+  },
+  {
+    "id": "S-SIPROZONE",
+    "brand_name": "SIPROZONE",
+    "generic_name": "Ésoméprazole",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A02BC05",
+    "therapeutic_group": "IPP",
+    "drug_class": "Inhibiteur pompe à protons",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 35.0,
+        "packaging": "Boite de 20",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/siprozone-20-mg-comprime"
+  },
+  {
+    "id": "S-SLINDA",
+    "brand_name": "SLINDA",
+    "generic_name": "Drospirénone",
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G03AC10",
+    "therapeutic_group": "Contraceptifs",
+    "drug_class": "Progestatif (contraception sans œstrogène)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 102.8,
+        "packaging": "pelliculé Boite de 1*28",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/slinda-4-mg-comprime"
+  },
+  {
+    "id": "S-SMECTA",
+    "brand_name": "SMECTA",
+    "generic_name": "Diosmectite",
+    "strength": "3 G",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "A07BC05",
+    "therapeutic_group": "Antidiarrhéiques",
+    "drug_class": "Argile médicinale (adsorbant)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 49.0,
+        "packaging": "pour suspension buvable en sachet Boîte de 30",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/smecta-3-g-poudre"
+  },
+  {
+    "id": "S-SMOFKABIVEN",
+    "brand_name": "SMOFKABIVEN",
+    "generic_name": "Nutrition parentérale",
+    "strength": "E",
+    "form": "Emulsion",
+    "route": "IV",
+    "atc_code": "B05BA10",
+    "therapeutic_group": "Solutions de nutrition",
+    "drug_class": "Nutrition parentérale totale",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1624.0,
+        "packaging": "pour perfusion en poche de 1970 ML à 3 compartiments Boite de 4 poches",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/smofkabiven-e-emulsion"
+  },
+  {
+    "id": "S-SOCLAV",
+    "brand_name": "SOCLAV",
+    "generic_name": "Amoxicilline + Acide clavulanique",
+    "strength": "1 G / 125 MG",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "J01CR02",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Pénicilline + inhibiteur bêta-lactamase",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 86.9,
+        "packaging": "pour suspension buvable en sachet Boîte de 12",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/soclav-1-g-125-mg-poudre"
+  },
+  {
+    "id": "S-SODRIX",
+    "brand_name": "SODRIX",
+    "generic_name": "Indapamide",
+    "strength": "LP 1.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C03BA11",
+    "therapeutic_group": "Diurétiques",
+    "drug_class": "Thiazidique apparenté",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 30.1,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sodrix-lp-1-5-mg-comprime"
+  },
+  {
+    "id": "S-SOLFICAR",
+    "brand_name": "SOLFICAR",
+    "generic_name": "Nicardipine",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA04",
+    "therapeutic_group": "Inhibiteurs calciques",
+    "drug_class": "Dihydropyridine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 168.2,
+        "packaging": "Boite de 30",
+        "laboratory": "PHI"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/solficar-10-mg-comprime"
+  },
+  {
+    "id": "S-SOLUMEDROL",
+    "brand_name": "SOLUMEDROL",
+    "generic_name": "Méthylprednisolone",
+    "strength": "120 MG / 2 ML",
+    "form": "Injectable",
+    "route": "IV / IM",
+    "atc_code": "H02AB04",
+    "therapeutic_group": "Corticostéroïdes",
+    "drug_class": "Glucocorticoïde (bolus IV)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 57.6,
+        "packaging": "1 Flacon + 1 ampoule",
+        "laboratory": "PFIZER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/solumedrol-120-mg-2-ml-injectable"
+  },
+  {
+    "id": "S-SOLUPRED",
+    "brand_name": "SOLUPRED",
+    "generic_name": "Prednisolone",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticostéroïdes",
+    "drug_class": "Glucocorticoïde",
+    "indications": [
+      "Maladies inflammatoires",
+      "Auto-immunes",
+      "Asthme aigu",
+      "Réactions allergiques sévères",
+      "Croup"
+    ],
+    "contraindications": [
+      "Infection systémique non contrôlée",
+      "Vaccins vivants (forte dose)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Dose minimale.",
+      "breastfeeding": "Compatible à faible dose."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "1-2 mg/kg/j cure courte. Asthme aigu: 1 mg/kg/j x 3-5j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "5-60 mg/j selon indication.",
+      "children": "1-2 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 48.7,
+        "packaging": "effervescent Boîte de 20",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "DB00860",
+    "adverse_effects": [
+      "Hyperglycémie",
+      "Ostéoporose",
+      "Cushing",
+      "Immunodépression",
+      "Retard croissance (enfant)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque ulcère GI",
+        "recommendation": "IPP si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Antidiabétiques oraux"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hyperglycémie",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Phénytoïne",
+          "Phénobarbital"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité corticoïde",
+        "recommendation": "Augmenter dose si nécessaire."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/solupred-20-mg-comprime"
+  },
+  {
+    "id": "S-SOMATULINE",
+    "brand_name": "SOMATULINE",
+    "generic_name": "Lanréotide",
+    "strength": "LP 120 MG",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "H01CB03",
+    "therapeutic_group": "Analogues somatostatine",
+    "drug_class": "Analogue somatostatine (acromégalie, TNE)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 12747.0,
+        "packaging": "injectable Boîte de 1 seringue préremplie de 0.5 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/somatuline-lp-120-mg-solution"
+  },
+  {
+    "id": "S-SOPHOS",
+    "brand_name": "SOPHOS",
+    "generic_name": "Sofosbuvir",
+    "strength": "400 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J05AP01",
+    "therapeutic_group": "Antiviraux VHC",
+    "drug_class": "Inhibiteur NS5B (nucléotidique)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 3,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 3000.0,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sophos-400-mg-comprime"
+  },
+  {
+    "id": "S-SORAFENAT",
+    "brand_name": "SORAFENAT",
+    "generic_name": "Sorafénib",
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "L01EX02",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur multikinase",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 10600.0,
+        "packaging": "pelliculé Boite de 60",
+        "laboratory": "AMANYS PHARMA (Ex SAHAM PHARMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sorafenat-200-mg-comprime"
+  },
+  {
+    "id": "S-SORAFENIB",
+    "brand_name": "SORAFENIB",
+    "generic_name": "Sorafénib",
+    "strength": "PHARMACARE 200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "L01EX02",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur multikinase",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 10600.0,
+        "packaging": "pelliculé Boite de 60",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "drug_interactions": [],
+    "adverse_effects": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sorafenib-pharmacare-200-mg-comprime"
+  },
+  {
+    "id": "S-SOTRET",
+    "brand_name": "SOTRET",
+    "generic_name": "Isotrétinoïne",
+    "strength": "10 MG",
+    "form": "Capsule",
+    "route": "Orale",
+    "atc_code": "D10BA01",
+    "therapeutic_group": "Dermatologiques - Antiacnéiques",
+    "drug_class": "Rétinoïde systémique",
+    "indications": [
+      "Acné sévère nodulaire ou conglobata",
+      "Acné résistante aux traitements conventionnels"
+    ],
+    "contraindications": [
+      "Grossesse (TÉRATOGÈNE MAJEUR)",
+      "Allaitement",
+      "Insuffisance hépatique sévère",
+      "Hypervitaminose A",
+      "Hyperlipidémie non contrôlée",
+      "Association avec tétracyclines"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "STRICTEMENT CONTRE-INDIQUÉ. Tératogène majeur (malformations crâniofaciales, cardiaques, SNC). Test de grossesse négatif obligatoire avant traitement, chaque mois pendant, et 1 mois après. Double contraception obligatoire.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "≥ 12 ans.",
+      "dose_rule": "0.5-1 mg/kg/j en 1-2 prises pendant 16-24 semaines. Dose cumulée cible: 120-150 mg/kg."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: réduire dose initiale."
+    },
+    "dosage": {
+      "adult": "0.5-1 mg/kg/j pendant 16-24 semaines. Prendre avec un repas gras.",
+      "children": "≥ 12 ans: 0.5-1 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 140.2,
+        "packaging": "molle Boite de 30",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A"
+      }
+    ],
+    "drugbank_id": "DB00982",
+    "adverse_effects": [
+      "Sécheresse cutanéomuqueuse (lèvres, yeux, nez)",
+      "Chéilite",
+      "Élévation transaminases",
+      "Hypertriglycéridémie",
+      "Myalgies",
+      "Dépression/idées suicidaires (controversé)",
+      "Tératogénicité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Doxycycline",
+          "Tétracycline",
+          "Minocycline"
+        ],
+        "interacting_classes": [
+          "Tétracyclines"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypertension intracrânienne bénigne (pseudotumor cerebri)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Vitamine A",
+          "Rétinol"
+        ],
+        "interacting_classes": [
+          "Vitamine A"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypervitaminose A → toxicité hépatique + HTIC",
+        "recommendation": "NE PAS supplémenter en vitamine A."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Hépatotoxicité additive",
+        "recommendation": "Éviter l'association."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sotret-10-mg-capsule"
+  },
+  {
+    "id": "S-SOUFRANE",
+    "brand_name": "SOUFRANE",
+    "generic_name": "Sévoflurane",
+    "strength": "2 %",
+    "form": "Solution",
+    "route": "Inhalée",
+    "atc_code": "N01AB08",
+    "therapeutic_group": "Anesthésiques généraux",
+    "drug_class": "Agent halogéné d'inhalation",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 15.2,
+        "packaging": "pour pulvérisation nasale Flacon de 20 ml",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/soufrane-2-solution"
+  },
+  {
+    "id": "S-SOVIDEX",
+    "brand_name": "SOVIDEX",
+    "generic_name": "Dexlansoprazole",
+    "strength": "12.5 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A02BC06",
+    "therapeutic_group": "IPP",
+    "drug_class": "IPP à double libération",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 5159.0,
+        "packaging": "Boite de 30",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sovidex-12-5-mg-gelule"
+  },
+  {
+    "id": "S-SPASFON",
+    "brand_name": "SPASFON",
+    "generic_name": "Phloroglucinol",
+    "strength": "0.15 G / 0.15 G",
+    "form": "Suppositoire",
+    "route": "Orale / Rectale",
+    "atc_code": "A03AX12",
+    "therapeutic_group": "Antispasmodiques",
+    "drug_class": "Antispasmodique musculotrope",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 21.1,
+        "packaging": "Boîte de 8",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/spasfon-0-15-g-0-15-g-suppositoire"
+  },
+  {
+    "id": "S-SPASMAG",
+    "brand_name": "SPASMAG",
+    "generic_name": "Magnésium (pidolate)",
+    "strength": "1.2 G",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "A12CC09",
+    "therapeutic_group": "Suppléments",
+    "drug_class": "Magnésium oral",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 49.4,
+        "packaging": "buvable 30 ampoules de 5 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/spasmag-1-2-g-solution"
+  },
+  {
+    "id": "S-SPASMOMEN",
+    "brand_name": "SPASMOMEN",
+    "generic_name": "Otilonium",
+    "strength": "40 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A03AB06",
+    "therapeutic_group": "Antispasmodiques",
+    "drug_class": "Ammonium quaternaire antispasmodique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 38.2,
+        "packaging": "Boite de 30",
+        "laboratory": "PHI"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/spasmomen-40-mg-comprime"
+  },
+  {
+    "id": "S-SPASMOPRIV",
+    "brand_name": "SPASMOPRIV",
+    "generic_name": "Mébévérine",
+    "strength": "100 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A03AA04",
+    "therapeutic_group": "Antispasmodiques",
+    "drug_class": "Musculotrope antispasmodique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 26.9,
+        "packaging": "Boîte de 20",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/spasmopriv-100-mg-gelule"
+  },
+  {
+    "id": "S-SPECTRUM",
+    "brand_name": "SPECTRUM",
+    "generic_name": "Ofloxacine (collyre)",
+    "strength": "0.3 %",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01AE01",
+    "therapeutic_group": "Anti-infectieux ophtalmiques",
+    "drug_class": "Fluoroquinolone ophtalmique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 28.3,
+        "packaging": "Flacon de 5 ml",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/spectrum-0-3-collyre"
+  },
+  {
+    "id": "S-SPIBAC",
+    "brand_name": "SPIBAC",
+    "generic_name": "Spiramycine",
+    "strength": "1.5 MUI",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01FA02",
+    "therapeutic_group": "Antibactériens - Macrolides",
+    "drug_class": "Macrolide",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 42.0,
+        "packaging": "pelliculé Boite de 16",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/spibac-1-5-mui-comprime"
+  },
+  {
+    "id": "S-SPIOLTO",
+    "brand_name": "SPIOLTO",
+    "generic_name": "Tiotropium + Olodatérol",
+    "strength": "RESPIMAT 2.5 µG / 2.4 µG/ DOSE",
+    "form": "Sol",
+    "route": "Inhalée",
+    "atc_code": "R03AL06",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "LAMA + LABA",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 683.0,
+        "packaging": "à inhaler Boite unitaire",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/spiolto-respimat-2-5-g-2-4-g-dose-sol"
+  },
+  {
+    "id": "S-SPIRALIDE",
+    "brand_name": "SPIRALIDE",
+    "generic_name": "Spiramycine",
+    "strength": "1.5 MUI",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01FA02",
+    "therapeutic_group": "Antibactériens - Macrolides",
+    "drug_class": "Macrolide",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 45.2,
+        "packaging": "pelliculé Boîte de 16",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/spiralide-1-5-mui-comprime"
+  },
+  {
+    "id": "S-SPIRAZOLE",
+    "brand_name": "SPIRAZOLE",
+    "generic_name": "Spiramycine + Métronidazole",
+    "strength": "0.75 MUI / 125 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01RA04",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Macrolide + Nitroimidazolé",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 71.9,
+        "packaging": "pelliculé Boîte de 30",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/spirazole-0-75-mui-125-mg-comprime"
+  },
+  {
+    "id": "S-SPIRIVA",
+    "brand_name": "SPIRIVA",
+    "generic_name": "Tiotropium",
+    "strength": "18 µG",
+    "form": "Gélule",
+    "route": "Inhalée",
+    "atc_code": "R03BB04",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "LAMA (anticholinergique longue durée)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 427.0,
+        "packaging": "pour inhalation + inhalateur 30 gelules + un inhalateur",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/spiriva-18-g-gelule"
+  },
+  {
+    "id": "S-SSB",
+    "brand_name": "SSB",
+    "generic_name": "Sulfasalazine",
+    "strength": "400 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A07EC01",
+    "therapeutic_group": "Anti-inflammatoires intestinaux",
+    "drug_class": "Aminosalicylé (5-ASA + sulfapyridine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 3000.0,
+        "packaging": "Boite de 28",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/ssb-400-mg-comprime"
+  },
+  {
+    "id": "S-STAGID",
+    "brand_name": "STAGID",
+    "generic_name": "Metformine",
+    "strength": "700 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A10BA02",
+    "therapeutic_group": "Antidiabétiques",
+    "drug_class": "Biguanide",
+    "indications": [
+      "Diabète de type 2 (1ère intention)"
+    ],
+    "contraindications": [
+      "DFGe <30",
+      "Acidocétose",
+      "IH sévère",
+      "Alcoolisme",
+      "IC décompensée",
+      "État de choc"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé pendant la grossesse.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "≥ 10 ans.",
+      "dose_rule": "≥ 10 ans: début 500 mg/j, max 2000 mg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "DFGe 30-44: max 1000 mg/j. DFGe <30: CI."
+    },
+    "dosage": {
+      "adult": "Début 500 mg 1-2x/j. Max 3000 mg/j.",
+      "children": "500-2000 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 36.2,
+        "packaging": "sécable Boîte de 30",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "DB00331",
+    "adverse_effects": [
+      "Troubles digestifs",
+      "Acidose lactique (rare mais grave)",
+      "Déficit B12 (prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Acidose lactique",
+        "recommendation": "ÉVITER l'alcool."
+      },
+      {
+        "interacting_drugs": [
+          "Iode (produits de contraste)"
+        ],
+        "interacting_classes": [
+          "Produits de contraste iodés"
+        ],
+        "severity": "DANGER",
+        "effect": "Acidose lactique",
+        "recommendation": "Arrêter metformine 48h avant et après examen."
+      }
+    ],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/stagid-700-mg-comprime"
+  },
+  {
+    "id": "S-STALEVO",
+    "brand_name": "STALEVO",
+    "generic_name": "Lévodopa + Carbidopa + Entacapone",
+    "strength": "100 MG / 25 MG / 200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N04BA03",
+    "therapeutic_group": "Antiparkinsoniens",
+    "drug_class": "Lévodopa + iDDC + iCOMT",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 317.0,
+        "packaging": "pelliculé Boîte de 30",
+        "laboratory": "NOVARTIS PHARMA MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/stalevo-100-mg-25-mg-200-mg-comprime"
+  },
+  {
+    "id": "S-STANLIP",
+    "brand_name": "STANLIP",
+    "generic_name": "Fénofibrate",
+    "strength": "145 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10AB05",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Fibrate",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 64.8,
+        "packaging": "pelliculé Boite de 14",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/stanlip-145-mg-comprime"
+  },
+  {
+    "id": "S-STANORM",
+    "brand_name": "STANORM",
+    "generic_name": "Amlodipine",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteurs calciques",
+    "drug_class": "Dihydropyridine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 57.8,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/stanorm-10-mg-comprime"
+  },
+  {
+    "id": "S-STÄRK+",
+    "brand_name": "STÄRK+",
+    "generic_name": "Fer + Vitamines B",
+    "strength": "FER + VITAMINE B12 ET B6",
+    "form": "Suspension",
+    "route": "Orale",
+    "atc_code": "B03AE",
+    "therapeutic_group": "Antianémiques",
+    "drug_class": "Fer + Vitamines B",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 115.0,
+        "packaging": "buvable Flacon de 120 ML",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/stark-fer-vitamine-b12-et-b6-suspension"
+  },
+  {
+    "id": "S-STARMOX",
+    "brand_name": "STARMOX",
+    "generic_name": "Amoxicilline",
+    "strength": "1 G",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01CA04",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Aminopénicilline",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 51.4,
+        "packaging": "dispersible Boîte de 12",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/starmox-1-g-comprime"
+  },
+  {
+    "id": "S-STARPEN",
+    "brand_name": "STARPEN",
+    "generic_name": "Pénicilline V",
+    "strength": "1000 000 UI",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01CE02",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Pénicilline orale",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 30.7,
+        "packaging": "Boîte de 12",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/starpen-1000-000-ui-comprime"
+  },
+  {
+    "id": "S-STARVAL",
+    "brand_name": "STARVAL",
+    "generic_name": "Valsartan",
+    "strength": "160 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA03",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "ARA2 (sartan)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 153.0,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_DANGER"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/starval-160-mg-comprime"
+  },
+  {
+    "id": "S-STATICOL",
+    "brand_name": "STATICOL",
+    "generic_name": "Atorvastatine",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10AA05",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 50.0,
+        "packaging": "enrobé sécable Boîte de 14",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/staticol-20-mg-comprime"
+  },
+  {
+    "id": "S-STATOR",
+    "brand_name": "STATOR",
+    "generic_name": "Atorvastatine",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10AA05",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 90.0,
+        "packaging": "Boîte de 30",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/stator-20-mg-comprime"
+  },
+  {
+    "id": "S-STAXOM",
+    "brand_name": "STAXOM",
+    "generic_name": "Moxifloxacine",
+    "strength": "400 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01MA14",
+    "therapeutic_group": "Fluoroquinolones",
+    "drug_class": "Fluoroquinolone 4e gén.",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 130.3,
+        "packaging": "Boite de 5",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/staxom-400-mg-comprime"
+  },
+  {
+    "id": "S-STELARA",
+    "brand_name": "STELARA",
+    "generic_name": "Ustékinumab",
+    "strength": "130 MG",
+    "form": "Solution",
+    "route": "SC / IV",
+    "atc_code": "L04AC05",
+    "therapeutic_group": "Immunosuppresseurs",
+    "drug_class": "Anti-IL12/23 (anticorps monoclonal)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 26060.0,
+        "packaging": "à diluer pour perfusion Boite d'un flacon de 30 ml",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/stelara-130-mg-solution"
+  },
+  {
+    "id": "S-STEROFUNDIN",
+    "brand_name": "STEROFUNDIN",
+    "generic_name": "Solution cristalloïde IV",
+    "strength": "ISO 500 ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "B05BB01",
+    "therapeutic_group": "Solutions IV",
+    "drug_class": "Solution isotonique équilibrée",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 236.0,
+        "packaging": "pour perfusion sous flacon Ecoflac plus Boite de 10",
+        "laboratory": "PHI"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sterofundin-iso-500-ml-solution"
+  },
+  {
+    "id": "S-STEROGYL",
+    "brand_name": "STEROGYL",
+    "generic_name": "Cholécalciférol (Vitamine D3)",
+    "strength": "15 H 600 000 UI",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "A11CC05",
+    "therapeutic_group": "Vitamines",
+    "drug_class": "Vitamine D3",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 12.1,
+        "packaging": "huileuse buvable et injectable Boîte de 1 ampoule de 1.5 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/sterogyl-15-h-600-000-ui-solution"
+  },
+  {
+    "id": "S-STIMACTIV",
+    "brand_name": "STIMactiv",
+    "generic_name": "Complément tonique",
+    "strength": "Tonus",
+    "form": "Ampoule",
+    "route": "Orale",
+    "atc_code": "",
+    "therapeutic_group": "Compléments",
+    "drug_class": "Complément alimentaire tonique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 99.0,
+        "packaging": "buvable Boite de 10",
+        "laboratory": "BIOCODEX MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/stimactiv-tonus-ampoule"
+  },
+  {
+    "id": "S-STIMOL",
+    "brand_name": "STIMOL",
+    "generic_name": "Citrulline malate",
+    "strength": "1 G / 10 ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "A13A",
+    "therapeutic_group": "Toniques",
+    "drug_class": "Acide aminé stimulant",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 43.0,
+        "packaging": "buvable en ampoule Boîte de 20",
+        "laboratory": "BIOCODEX MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/stimol-1-g-10-ml-solution"
+  },
+  {
+    "id": "S-STIVARGA",
+    "brand_name": "STIVARGA",
+    "generic_name": "Régorafénib",
+    "strength": "40 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "L01EX05",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur multikinase",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 26806.0,
+        "packaging": "pelliculé Boite de 3 flacons de 28",
+        "laboratory": "BAYER S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/stivarga-40-mg-comprime"
+  },
+  {
+    "id": "S-STORIXIA",
+    "brand_name": "STORIXIA",
+    "generic_name": "Étoricoxib",
+    "strength": "120 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M01AH05",
+    "therapeutic_group": "AINS",
+    "drug_class": "Inhibiteur sélectif COX-2 (coxib)",
+    "indications": [
+      "Arthrose",
+      "PR",
+      "Spondylarthrite",
+      "Goutte aiguë",
+      "Douleurs dentaires post-opératoires"
+    ],
+    "contraindications": [
+      "HTA non contrôlée",
+      "IC (NYHA II-IV)",
+      "Cardiopathie ischémique",
+      "AVC",
+      "Ulcère GD actif",
+      "IRC sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "CI au 3e trimestre.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 16,
+      "warning": "≥ 16 ans.",
+      "dose_rule": "≥ 16 ans: doses adultes."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: CI."
+    },
+    "dosage": {
+      "adult": "Arthrose: 30-60 mg/j. PR: 90 mg/j. Goutte: 120 mg/j max 8j.",
+      "children": "≥ 16 ans: idem."
+    },
+    "market_data": [
+      {
+        "price": 81.7,
+        "packaging": "pelliculé Boite de 7",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "DB01628",
+    "adverse_effects": [
+      "HTA",
+      "Œdèmes",
+      "Troubles digestifs",
+      "Événements cardiovasculaires (IDM, AVC)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation toxicité MTX",
+        "recommendation": "Surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs SRAA"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller PA + créatinine."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/storixia-120-mg-comprime"
+  },
+  {
+    "id": "S-STREPSILS",
+    "brand_name": "STREPSILS",
+    "generic_name": "Amylmétacrésol + Alcool dichlorobenzylique",
+    "strength": "CITRON SANS SUCRE 0.6 MG / 1.2 MG",
+    "form": "Pastille",
+    "route": "Buccale",
+    "atc_code": "R02AA20",
+    "therapeutic_group": "Antiseptiques ORL",
+    "drug_class": "Pastille antiseptique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 37.6,
+        "packaging": "à sucer Boite de 16",
+        "laboratory": "PHI"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/strepsils-citron-sans-sucre-0-6-mg-1-2-mg-pastille"
+  },
+  {
+    "id": "S-STREPTOCID",
+    "brand_name": "STREPTOCID",
+    "generic_name": "Sulfadiazine",
+    "strength": "125 MG / 5ML",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "J01EC02",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Sulfamide",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 14.3,
+        "packaging": "pour suspension buvable Flacon de 60 ml",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/streptocid-125-mg-5ml-poudre"
+  },
+  {
+    "id": "S-STRUCTUM",
+    "brand_name": "STRUCTUM",
+    "generic_name": "Chondroïtine sulfate",
+    "strength": "500 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "M01AX25",
+    "therapeutic_group": "Antiarthrosiques",
+    "drug_class": "Antiarthrosique d'action lente",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 207.0,
+        "packaging": "Boîte de 60",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/structum-500-mg-gelule"
+  },
+  {
+    "id": "S-SULFOBACTIN",
+    "brand_name": "SULFOBACTIN",
+    "generic_name": "Triméthoprime + Sulfaméthoxazole",
+    "strength": "250 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01EE01",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Association sulfamide + diaminopyrimidine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0.5,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 25.7,
+        "packaging": "Boîte de 16",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sulfobactin-250-mg-comprime"
+  },
+  {
+    "id": "S-SULIAT",
+    "brand_name": "SULIAT",
+    "generic_name": "Amlodipine + Valsartan",
+    "strength": "5 MG / 160 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09DB01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "Association IC + ARA2",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 185.2,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "AFRIC-PHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/suliat-5-mg-160-mg-comprime"
+  },
+  {
+    "id": "S-SUN",
+    "brand_name": "SUN",
+    "generic_name": "Cholécalciférol (Vitamine D3)",
+    "strength": "D3",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "A11CC05",
+    "therapeutic_group": "Vitamines",
+    "drug_class": "Vitamine D3",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 77.0,
+        "packaging": "buvable en gouttes Flacon de 30 ml avec compte gouttes",
+        "laboratory": "DEVA PHARMACEUTIQUE"
+      }
+    ],
+    "drugbank_id": "",
+    "drug_interactions": [],
+    "adverse_effects": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/sun-d3-solution"
+  },
+  {
+    "id": "S-SUPERDIET",
+    "brand_name": "SUPERDIET",
+    "generic_name": "Probiotiques (complément)",
+    "strength": "DIGIAFLORE BIO",
+    "form": "Ampoule",
+    "route": "Orale",
+    "atc_code": "A07FA",
+    "therapeutic_group": "Probiotiques",
+    "drug_class": "Probiotiques (complément)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 278.0,
+        "packaging": "buvable Boite de 20",
+        "laboratory": "NON RENSEIGNÉ"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/superdiet-digiaflore-bio-ampoule"
+  },
+  {
+    "id": "S-SUPRADYN",
+    "brand_name": "SUPRADYN",
+    "generic_name": "Multivitamines + Minéraux",
+    "strength": "BOOST",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A11AA",
+    "therapeutic_group": "Compléments",
+    "drug_class": "Multivitamines + Minéraux",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 59.0,
+        "packaging": "effervescent Boite de 10",
+        "laboratory": "BAYER S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/supradyn-boost-comprime"
+  },
+  {
+    "id": "S-SUPRALER",
+    "brand_name": "SUPRALER",
+    "generic_name": "Desloratadine",
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 21.0,
+        "packaging": "enrobé Boîte de 7",
+        "laboratory": "GENPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/supraler-5-mg-comprime"
+  },
+  {
+    "id": "S-SUPRIMASE",
+    "brand_name": "SUPRIMASE",
+    "generic_name": "Fluconazole",
+    "strength": "150 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "J02AC01",
+    "therapeutic_group": "Antifongiques",
+    "drug_class": "Triazolé",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 22.4,
+        "packaging": "Boîte de 1",
+        "laboratory": "ATLAS PHARM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/suprimase-150-mg-gelule"
+  },
+  {
+    "id": "S-SURGAM",
+    "brand_name": "SURGAM",
+    "generic_name": "Acide tiaprofénique",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M01AE11",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide propionique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 31.8,
+        "packaging": "sécable Boîte de 30",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/surgam-100-mg-comprime"
+  },
+  {
+    "id": "S-SUTENT",
+    "brand_name": "SUTENT",
+    "generic_name": "Sunitinib",
+    "strength": "12.5 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "L01EX01",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur multikinase",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 9920.0,
+        "packaging": "Boîte de 30",
+        "laboratory": "PFIZER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sutent-12-5-mg-gelule"
+  },
+  {
+    "id": "S-SUVAS",
+    "brand_name": "SUVAS",
+    "generic_name": "Rosuvastatine",
+    "strength": "IBERMA 10 MG",
+    "form": "Comprimés",
+    "route": "Orale",
+    "atc_code": "C10AA07",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 153.0,
+        "packaging": "pelliculés Boite de 30",
+        "laboratory": "IBERMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/suvas-iberma-10-mg-comprimes"
+  },
+  {
+    "id": "S-SUVÉAL",
+    "brand_name": "SUVÉAL",
+    "generic_name": "Complément oculaire (lutéine + oméga-3)",
+    "strength": "DUO",
+    "form": "Capsules",
+    "route": "Orale",
+    "atc_code": "",
+    "therapeutic_group": "Compléments",
+    "drug_class": "Complément oculaire",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 221.9,
+        "packaging": "Boite de 60",
+        "laboratory": "NON RENSEIGNÉ"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/suveal-duo-capsules"
+  },
+  {
+    "id": "S-SUVREZA",
+    "brand_name": "SUVREZA",
+    "generic_name": "Rosuvastatine + Ézétimibe",
+    "strength": "10 MG / 10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10BA06",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine + inhibiteur absorption cholestérol",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 318.0,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/suvreza-10-mg-10-mg-comprime"
+  },
+  {
+    "id": "S-SYMBICORT",
+    "brand_name": "SYMBICORT",
+    "generic_name": "Budésonide + Formotérol",
+    "strength": "TURBUHALER 200 µg / 6 µg",
+    "form": "Poudre",
+    "route": "Inhalée",
+    "atc_code": "R03AK07",
+    "therapeutic_group": "Antiasthmatiques",
+    "drug_class": "Association CSI + LABA (particules extrafines ou Turbuhaler)",
+    "indications": [
+      "Asthme persistant modéré à sévère",
+      "BPCO sévère",
+      "Mode SMART (entretien + secours)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Maintenir contrôle de l'asthme.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "≥ 6 ans (200/6 µg).",
+      "dose_rule": "≥ 6 ans: 1-2 inhalations 2x/j (200/6 µg)."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "1-2 inhalations 2x/j (+ secours si SMART). Max 8 inh/j en SMART.",
+      "children": "≥ 6 ans: 1-2 inh 2x/j."
+    },
+    "market_data": [
+      {
+        "price": 297.0,
+        "packaging": "pour inhalation Flacon de 120 doses",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "DB01222",
+    "adverse_effects": [
+      "Candidose oropharyngée",
+      "Dysphonie",
+      "Tremblements",
+      "Tachycardie",
+      "Hypokaliémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Bêta-bloquants non sélectifs"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Antagonisme formotérol",
+        "recommendation": "Utiliser cardiosélectifs."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation exposition budésonide",
+        "recommendation": "Éviter association prolongée."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/symbicort-turbuhaler-200-g-6-g-poudre"
+  },
+  {
+    "id": "S-SYNERGIA",
+    "brand_name": "SYNERGIA",
+    "generic_name": "Complément mémoire",
+    "strength": "MÉMOIRE ET CONCENTRATION MC2",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "",
+    "therapeutic_group": "Compléments",
+    "drug_class": "Complément mémoire/concentration",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 69.3,
+        "packaging": "à croquer Boite de 30",
+        "laboratory": "NON RENSEIGNÉ"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/synergia-memoire-et-concentration-mc2-comprime"
+  },
+  {
+    "id": "S-SYSTRAL",
+    "brand_name": "SYSTRAL",
+    "generic_name": "Chlorphénoxamine (topique)",
+    "strength": "15 MG / G",
+    "form": "Pommade",
+    "route": "Cutanée",
+    "atc_code": "D04AA13",
+    "therapeutic_group": "Antiprurigineux",
+    "drug_class": "Antihistaminique topique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 15.5,
+        "packaging": "Tube de 20 g",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/systral-15-mg-g-pommade"
+  }
+]

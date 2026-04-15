@@ -1,0 +1,6554 @@
+[
+  {
+    "id": "P-PACLI",
+    "brand_name": "PACLI",
+    "generic_name": "Paclitaxel",
+    "strength": "SPAL-L 100 100 MG / 16.7 ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "L01CD01",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Taxane",
+    "indications": [
+      "Cancer du sein",
+      "Cancer de l'ovaire",
+      "Cancer du poumon",
+      "Sarcome de Kaposi"
+    ],
+    "contraindications": [
+      "Neutropénie <1500/mm³",
+      "Grossesse",
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Selon protocole oncologique.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 1081.0,
+        "packaging": "à diluer pour perfusion Boite de 1 flacon unidose de 20 ml",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pacli-spal-l-100-100-mg-16-7-ml-solution"
+  },
+  {
+    "id": "P-PACLITAXEL",
+    "brand_name": "PACLITAXEL",
+    "generic_name": "Paclitaxel",
+    "strength": "ISIO 100 MG / 16.7 ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "L01CD01",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Taxane",
+    "indications": [
+      "Cancer du sein",
+      "Cancer de l'ovaire",
+      "Cancer du poumon",
+      "Sarcome de Kaposi"
+    ],
+    "contraindications": [
+      "Neutropénie <1500/mm³",
+      "Grossesse",
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Selon protocole oncologique.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 1115.0,
+        "packaging": "à diluer pour perfusion Boite de 1 flacon",
+        "laboratory": "ISIO LABORATOIRE"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/paclitaxel-isio-100-mg-16-7-ml-solution"
+  },
+  {
+    "id": "P-PANALGIC",
+    "brand_name": "PANALGIC",
+    "generic_name": "Paracétamol + Caféine",
+    "strength": "500 MG / 50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N02BE51",
+    "therapeutic_group": "Analgésiques",
+    "drug_class": "Paracétamol + caféine",
+    "indications": [
+      "Douleurs légères à modérées",
+      "Céphalées"
+    ],
+    "contraindications": [
+      "IH sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 15,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 cp/4-6h. Max 6 cp/j.",
+      "children": "≥ 15 ans."
+    },
+    "market_data": [
+      {
+        "price": 14.0,
+        "packaging": "Boîte de 16",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hépatotoxicité (surdosage)",
+      "Insomnie (caféine)"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/panalgic-500-mg-50-mg-comprime"
+  },
+  {
+    "id": "P-PANTOPRAZOLE",
+    "brand_name": "PANTOPRAZOLE",
+    "generic_name": "Pantoprazole",
+    "strength": "GT 20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A02BC02",
+    "therapeutic_group": "IPP",
+    "drug_class": "Inhibiteur pompe à protons",
+    "indications": [
+      "RGO",
+      "Ulcère GD",
+      "Éradication H. pylori",
+      "Prévention lésions AINS",
+      "Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "20-40 mg/j. H. pylori: 40 mg 2x/j + ATB.",
+      "children": "≥ 12 ans: 20-40 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 85.9,
+        "packaging": "Boite de 20",
+        "laboratory": "ATLAS PHARM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées",
+      "Diarrhée",
+      "Hypomagnésémie (prolongé)",
+      "Fractures (prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX haute dose",
+        "recommendation": "Prudence."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/pantoprazole-gt-20-mg-comprime"
+  },
+  {
+    "id": "P-PARACETAMOL",
+    "brand_name": "PARACETAMOL",
+    "generic_name": "Paracétamol (IV)",
+    "strength": "B BRAUN 10 MG",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "N02BE01",
+    "therapeutic_group": "Analgésiques",
+    "drug_class": "Paracétamol injectable",
+    "indications": [
+      "Douleurs modérées",
+      "Fièvre (si voie orale impossible)"
+    ],
+    "contraindications": [
+      "IH sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1g IV/6h. Max 4g/j.",
+      "children": "15 mg/kg/6h."
+    },
+    "market_data": [
+      {
+        "price": 130.1,
+        "packaging": "pour perfusion 10 poches de 50 ml",
+        "laboratory": "PHI"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hépatotoxicité",
+      "Hypotension (perfusion rapide)"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/paracetamol-b-braun-10-mg-solution"
+  },
+  {
+    "id": "P-PARANTAL",
+    "brand_name": "PARANTAL",
+    "generic_name": "Paracétamol",
+    "strength": "1 G",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N02BE01",
+    "therapeutic_group": "Analgésiques / Antipyrétiques",
+    "drug_class": "Paracétamol",
+    "indications": [
+      "Douleurs légères à modérées",
+      "Fièvre"
+    ],
+    "contraindications": [
+      "IH sévère",
+      "Allergie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500-1000 mg/4-6h. Max 3-4 g/j.",
+      "children": "15 mg/kg/4-6h. Max 60 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 13.7,
+        "packaging": "effervescent Boîte de 8",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hépatotoxicité (surdosage >4g/j)",
+      "Réactions allergiques (rare)"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/parantal-1-g-comprime"
+  },
+  {
+    "id": "P-PECTRYL",
+    "brand_name": "PECTRYL",
+    "generic_name": "Oxomémazine",
+    "strength": "0.06 G / 6 G",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AD08",
+    "therapeutic_group": "Antitussifs",
+    "drug_class": "Phénothiazine antitussive",
+    "indications": [
+      "Toux sèche non productive"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire",
+      "<2 ans"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "10-15 mL/j.",
+      "children": "≥ 2 ans: 0.15 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 21.2,
+        "packaging": "Flacon de 150 ml",
+        "laboratory": "PH: 15.00 dhs - LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pectryl-0-06-g-6-g-sirop"
+  },
+  {
+    "id": "P-PEDOVEX",
+    "brand_name": "PEDOVEX",
+    "generic_name": "Clopidogrel",
+    "strength": "75 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AC04",
+    "therapeutic_group": "Antiagrégants plaquettaires",
+    "drug_class": "Thiénopyridine (prodrogue, inhibiteur P2Y12)",
+    "indications": [
+      "Syndrome coronarien aigu (en bithérapie avec aspirine)",
+      "Post-stent coronaire",
+      "Prévention AVC et IDM (si allergie aspirine)",
+      "AOMI"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "75 mg/j. SCA: dose de charge 300-600 mg puis 75 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 255.0,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "DB00758",
+    "adverse_effects": [
+      "Hémorragie",
+      "Purpura thrombotique thrombocytopénique (rare)",
+      "Troubles digestifs"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Oméprazole",
+          "Ésoméprazole"
+        ],
+        "interacting_classes": [
+          "IPP (inhibiteurs CYP2C19)"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution activation clopidogrel → perte efficacité",
+        "recommendation": "Préférer pantoprazole si IPP nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (bithérapie voulue post-SCA)",
+        "recommendation": "IPP en protection. Durée selon indication."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "AOD"
+        ],
+        "interacting_classes": [
+          "Anticoagulants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur (trithérapie)",
+        "recommendation": "Durée minimale. Surveillance étroite."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter AINS."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/pedovex-75-mg-comprime"
+  },
+  {
+    "id": "P-PEMETEA",
+    "brand_name": "PEMETEA",
+    "generic_name": "Pémétrexed",
+    "strength": "100 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "L01BA04",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Antimétabolite antifolique",
+    "indications": [
+      "Mésothéliome pleural malin",
+      "CBNPC non épidermoïde"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "ClCr <45"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500 mg/m² IV/3 sem. Prémédication: acide folique + B12.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 1586.0,
+        "packaging": "pour solution à diluer pour perfusion Boite de 1 flacon de 10 ML",
+        "laboratory": "AMANYS PHARMA (Ex SAHAM PHARMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pemetea-100-mg-poudre"
+  },
+  {
+    "id": "P-PEMETREXED",
+    "brand_name": "PEMETREXED",
+    "generic_name": "Pémétrexed",
+    "strength": "ISIO 100 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "L01BA04",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Antimétabolite antifolique",
+    "indications": [
+      "Mésothéliome pleural malin",
+      "CBNPC non épidermoïde"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "ClCr <45"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500 mg/m² IV/3 sem. Prémédication: acide folique + B12.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 1585.0,
+        "packaging": "pour solution à diluer pour perfusion Boite de 1 flacon",
+        "laboratory": "ISIO LABORATOIRE"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pemetrexed-isio-100-mg-poudre"
+  },
+  {
+    "id": "P-PEMITRA",
+    "brand_name": "PEMITRA",
+    "generic_name": "Pémétrexed",
+    "strength": "500 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "L01BA04",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Antimétabolite antifolique",
+    "indications": [
+      "Mésothéliome pleural malin",
+      "CBNPC non épidermoïde"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "ClCr <45"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500 mg/m² IV/3 sem. Prémédication: acide folique + B12.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 6196.0,
+        "packaging": "pour solution à diluer pour perfusion Flacon de 60 ML",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pemitra-500-mg-poudre"
+  },
+  {
+    "id": "P-PEMORIAL",
+    "brand_name": "PEMORIAL",
+    "generic_name": "Pémétrexed",
+    "strength": "100 MG (25 MG / ML)",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "L01BA04",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Antimétabolite antifolique",
+    "indications": [
+      "Mésothéliome pleural malin",
+      "CBNPC non épidermoïde"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "ClCr <45"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500 mg/m² IV/3 sem. Prémédication: acide folique + B12.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 20674.0,
+        "packaging": "à diluer pour perfusion Boite d'un flacon de 4 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pemorial-100-mg-25-mg-ml-solution"
+  },
+  {
+    "id": "P-PENISTAPH",
+    "brand_name": "PENISTAPH",
+    "generic_name": "Cloxacilline",
+    "strength": "125 MG / 5 ML",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "J01CF02",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Pénicilline M (anti-staphylococcique)",
+    "indications": [
+      "Infections staphylococciques sensibles",
+      "Infections cutanées",
+      "Infections ostéo-articulaires"
+    ],
+    "contraindications": [
+      "Allergie pénicillines"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500 mg-1 g 4x/j à jeun. Sévère: 8-12 g/j IV.",
+      "children": "50-100 mg/kg/j en 3-4 prises."
+    },
+    "market_data": [
+      {
+        "price": 24.3,
+        "packaging": "pour solution buvable Flacon de 100 ml",
+        "laboratory": "GALENICA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Diarrhée",
+      "Réactions allergiques",
+      "Élévation transaminases"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/penistaph-125-mg-5-ml-poudre"
+  },
+  {
+    "id": "P-PENITARD",
+    "brand_name": "PENITARD",
+    "generic_name": "Benzathine benzylpénicilline",
+    "strength": "0.6 MUI (IM)",
+    "form": "Poudre",
+    "route": "IM",
+    "atc_code": "J01CE08",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Pénicilline retard",
+    "indications": [
+      "Angine streptococcique (prévention RAA)",
+      "Syphilis",
+      "Prophylaxie RAA"
+    ],
+    "contraindications": [
+      "Allergie pénicillines"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1.2 MUI IM dose unique (angine). 2.4 MUI IM/sem x 3 (syphilis tardive).",
+      "children": "600000 UI (<30 kg) ou 1.2 MUI (>30 kg) IM."
+    },
+    "market_data": [
+      {
+        "price": 8.3,
+        "packaging": "pour solution injectable Flacon de poudre et 1 ampoule de solvant",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/penitard-0-6-mui-im-poudre"
+  },
+  {
+    "id": "P-PENTASA",
+    "brand_name": "PENTASA",
+    "generic_name": "Mésalazine (5-ASA)",
+    "strength": "1 G",
+    "form": "Suppositoire",
+    "route": "Orale / Rectale",
+    "atc_code": "A07EC02",
+    "therapeutic_group": "Anti-inflammatoires intestinaux",
+    "drug_class": "Aminosalicylé",
+    "indications": [
+      "RCH (traitement d'attaque et d'entretien)",
+      "Maladie de Crohn colique"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux salicylés",
+      "IRC sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Attaque: 2-4 g/j PO. Entretien: 1.5-2 g/j. Supp: 1 g/j.",
+      "children": "30-50 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 315.0,
+        "packaging": "Boîte de 15",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées",
+      "Nausées",
+      "Diarrhée",
+      "Néphrite interstitielle (rare)"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pentasa-1-g-suppositoire"
+  },
+  {
+    "id": "P-PERDEX",
+    "brand_name": "PERDEX",
+    "generic_name": "Indapamide",
+    "strength": "LP 1.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C03BA11",
+    "therapeutic_group": "Diurétiques",
+    "drug_class": "Thiazidique apparenté",
+    "indications": [
+      "HTA"
+    ],
+    "contraindications": [
+      "Hypokaliémie sévère",
+      "Encéphalopathie hépatique",
+      "IH sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1.5 mg/j LP ou 2.5 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 30.1,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "PH: 20.35 dhs - POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypokaliémie",
+      "Hyponatrémie",
+      "Hyperuricémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypokaliémie → toxicité digitalique",
+        "recommendation": "Surveiller K+."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution effet diurétique",
+        "recommendation": "Surveiller PA."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/perdex-lp-1-5-mg-comprime"
+  },
+  {
+    "id": "P-PERGOVERIS",
+    "brand_name": "PERGOVERIS",
+    "generic_name": "Follitropine alfa + Lutropine alfa",
+    "strength": "150 UI / 75 UI",
+    "form": "Poudre",
+    "route": "SC",
+    "atc_code": "G03GA30",
+    "therapeutic_group": "Gonadotrophines",
+    "drug_class": "FSH + LH recombinantes",
+    "indications": [
+      "Stimulation ovarienne (FIV)",
+      "Insuffisance gonadotrope"
+    ],
+    "contraindications": [
+      "Cancer ovarien/utérin",
+      "Kyste ovarien",
+      "Grossesse"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "75-150 UI/j SC. Ajuster selon réponse ovarienne.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 982.0,
+        "packaging": "et solvant pour solution injectable Boite contenant un flacon de 3 Ml et un flacon de solvant de 3ML",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pergoveris-150-ui-75-ui-poudre"
+  },
+  {
+    "id": "P-PERIACTINE",
+    "brand_name": "PERIACTINE",
+    "generic_name": "Cyproheptadine",
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 sédatif + orexigène",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire",
+      "Stimulation appétit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire",
+      "Nourrisson"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "4 mg 3x/j.",
+      "children": "≥ 2 ans: 2-4 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 16.1,
+        "packaging": "pelliculé Boîte de 30",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/periactine-4-mg-comprime"
+  },
+  {
+    "id": "P-PERIANEST",
+    "brand_name": "PERIANEST",
+    "generic_name": "Bupivacaïne",
+    "strength": "0.0025",
+    "form": "Solution",
+    "route": "Injectable (locale)",
+    "atc_code": "N01BB01",
+    "therapeutic_group": "Anesthésiques locaux",
+    "drug_class": "Anesthésique local longue durée",
+    "indications": [
+      "Anesthésie locale et locorégionale",
+      "Rachianesthésie",
+      "Péridurale"
+    ],
+    "contraindications": [
+      "Allergie amides",
+      "Bloc cardiaque",
+      "Hypovolémie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Selon technique. Max 2 mg/kg.",
+      "children": "Selon technique et poids."
+    },
+    "market_data": [
+      {
+        "price": 39.2,
+        "packaging": "Injectable Flacon 20 ml",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/perianest-0-0025-solution"
+  },
+  {
+    "id": "P-PERIDYS",
+    "brand_name": "PERIDYS",
+    "generic_name": "Dompéridone",
+    "strength": "1 MG / ML",
+    "form": "Suspension",
+    "route": "Orale",
+    "atc_code": "A03FA03",
+    "therapeutic_group": "Prokinétiques",
+    "drug_class": "Antagoniste D2 périphérique",
+    "indications": [
+      "Nausées/vomissements",
+      "Gastroparésie"
+    ],
+    "contraindications": [
+      "Allongement QT",
+      "IH modérée/sévère",
+      "Prolactinome"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "10 mg 3x/j. Max 30 mg/j. Durée max 7j.",
+      "children": "Susp: 0.25 mg/kg 3x/j."
+    },
+    "market_data": [
+      {
+        "price": 34.7,
+        "packaging": "buvable Flacon de 200 ml",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Allongement QT",
+      "Arythmies",
+      "Hyperprolactinémie",
+      "Galactorrhée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Fluconazole",
+          "Érythromycine",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation taux → allongement QT",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Sotalol",
+          "Halopéridol"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant QT"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Allongement QT additif",
+        "recommendation": "CONTRE-INDIQUÉ."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL",
+      "ALLONGEMENT_QT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/peridys-1-mg-ml-suspension"
+  },
+  {
+    "id": "P-PERIOLIMEL",
+    "brand_name": "PERIOLIMEL",
+    "generic_name": "Nutrition parentérale",
+    "strength": "N4E",
+    "form": "Émulsion",
+    "route": "IV",
+    "atc_code": "B05BA10",
+    "therapeutic_group": "Solutions de nutrition",
+    "drug_class": "Nutrition parentérale",
+    "indications": [
+      "Alimentation parentérale si voie entérale impossible"
+    ],
+    "contraindications": [
+      "Hypertriglycéridémie sévère",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Selon besoins caloriques et protéiques.",
+      "children": "Selon poids et besoins."
+    },
+    "market_data": [
+      {
+        "price": 576.0,
+        "packaging": "pour perfusion en poche Poche de 2000 ml",
+        "laboratory": "AFRIC-PHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/periolimel-n4e-emulsion"
+  },
+  {
+    "id": "P-PERJETA",
+    "brand_name": "PERJETA",
+    "generic_name": "Pertuzumab",
+    "strength": "420 MG",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "L01FD02",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Anti-HER2 (anticorps monoclonal)",
+    "indications": [
+      "Cancer du sein HER2+ métastatique (avec trastuzumab + docétaxel)",
+      "Néoadjuvant cancer sein HER2+"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "FEVG <40%"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Dose charge 840 mg IV puis 420 mg/3 sem.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 25900.0,
+        "packaging": "pour perfusion 1 flacon de 20 ml",
+        "laboratory": "PH: 30232.50 dhs - ROCHE S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/perjeta-420-mg-solution"
+  },
+  {
+    "id": "P-PERMIXON",
+    "brand_name": "PERMIXON",
+    "generic_name": "Serenoa repens (palmier nain)",
+    "strength": "160 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "G04CX02",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Phytothérapie prostatique",
+    "indications": [
+      "Troubles fonctionnels de l'HBP (stade I-II)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "160 mg 2x/j ou 320 mg/j.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 143.3,
+        "packaging": "Boîte de 30",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/permixon-160-mg-gelule"
+  },
+  {
+    "id": "P-PERNABOL",
+    "brand_name": "PERNABOL",
+    "generic_name": "Dexchlorphéniramine",
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AB02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 sédatif",
+    "indications": [
+      "Allergies",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 mg/j.",
+      "children": "≥ 2 ans: 0.5-1 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 15.7,
+        "packaging": "Boîte de 30",
+        "laboratory": "GALENICA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/pernabol-4-mg-comprime"
+  },
+  {
+    "id": "P-PEROVASC",
+    "brand_name": "PEROVASC",
+    "generic_name": "Périndopril",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09AA04",
+    "therapeutic_group": "Antihypertenseurs - IEC",
+    "drug_class": "IEC",
+    "indications": [
+      "HTA",
+      "IC",
+      "Prévention CV",
+      "Néphropathie"
+    ],
+    "contraindications": [
+      "Grossesse 2e-3e T",
+      "Sténose bilatérale artères rénales",
+      "Angioedème sous IEC"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "4-8 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 75.9,
+        "packaging": "sécable Boîte de 30",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Toux sèche",
+      "Hyperkaliémie",
+      "Hypotension",
+      "Angioedème"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA",
+        "recommendation": "CI diabétique."
+      },
+      {
+        "interacting_drugs": [
+          "Potassium",
+          "Spironolactone"
+        ],
+        "interacting_classes": [
+          "Épargneurs K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie",
+        "recommendation": "Surveiller K+."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/perovasc-10-mg-comprime"
+  },
+  {
+    "id": "P-PEVAGINE",
+    "brand_name": "PEVAGINE",
+    "generic_name": "Éconazole (vaginal)",
+    "strength": "1 %",
+    "form": "Crème",
+    "route": "Vaginale",
+    "atc_code": "G01AF05",
+    "therapeutic_group": "Antifongiques gynécologiques",
+    "drug_class": "Imidazolé vaginal",
+    "indications": [
+      "Candidose vulvo-vaginale"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1 ovule 150 mg le soir x 3j ou 1 ovule 300 mg dose unique.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 29.5,
+        "packaging": "dermique Tube de 30 g",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pevagine-1-creme"
+  },
+  {
+    "id": "P-PEVARYL",
+    "brand_name": "PEVARYL",
+    "generic_name": "Éconazole",
+    "strength": "1 %",
+    "form": "Emulsion",
+    "route": "Cutanée",
+    "atc_code": "D01AC03",
+    "therapeutic_group": "Antifongiques cutanés",
+    "drug_class": "Imidazolé",
+    "indications": [
+      "Mycoses cutanées",
+      "Pityriasis versicolor",
+      "Intertrigo"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 applications/j x 2-4 sem.",
+      "children": "Idem."
+    },
+    "market_data": [
+      {
+        "price": 54.2,
+        "packaging": "dermique Flacon de 30 ml",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/pevaryl-1-emulsion"
+  },
+  {
+    "id": "P-PHANERE",
+    "brand_name": "PHANERE",
+    "generic_name": "Complément cheveux/ongles",
+    "strength": "BOOST",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "",
+    "therapeutic_group": "Compléments",
+    "drug_class": "Complément capillaire",
+    "indications": [
+      "Chute de cheveux",
+      "Ongles fragiles"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 cp/j pendant 3-6 mois.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 175.0,
+        "packaging": "Boite de 60",
+        "laboratory": "PPC: 250.00 dhs - NON RENSEIGNÉ"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/phanere-boost-comprime"
+  },
+  {
+    "id": "P-PHARMACRISTINE",
+    "brand_name": "PHARMACRISTINE",
+    "generic_name": "Vincristine",
+    "strength": "1 MG / 1 ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "L01CA02",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Alcaloïde de la pervenche",
+    "indications": [
+      "Leucémies",
+      "Lymphomes",
+      "Tumeur de Wilms",
+      "Neuroblastome"
+    ],
+    "contraindications": [
+      "Neuropathie sévère",
+      "Forme intrathécale FORMELLEMENT CI (fatale)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1.4 mg/m² IV (max 2 mg/injection).",
+      "children": "Selon protocole oncologique."
+    },
+    "market_data": [
+      {
+        "price": 55.9,
+        "packaging": "injectable IV Boîte de 1 Flacon de 1 ml",
+        "laboratory": "PH: 36.93 dhs - NOVOPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pharmacristine-1-mg-1-ml-solution"
+  },
+  {
+    "id": "P-PHARMAFLAM",
+    "brand_name": "PHARMAFLAM",
+    "generic_name": "Diclofénac",
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale / IM / Cutanée",
+    "atc_code": "M01AB05",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide phénylacétique",
+    "indications": [
+      "Douleurs inflammatoires",
+      "Arthrose",
+      "PR",
+      "Dysménorrhée",
+      "Douleurs post-opératoires",
+      "Colique néphrétique (IM)"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère (NYHA III-IV)",
+      "3e trimestre grossesse",
+      "Allergie AINS",
+      "Cardiopathie ischémique",
+      "AVC"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre. Déconseillé 1er-2e.",
+      "breastfeeding": "Compatible courte durée."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 16,
+      "warning": "≥ 16 ans (forme orale). Suppositoire: ≥ 1 an en pédiatrie (hors AMM).",
+      "dose_rule": "≥ 16 ans: 75-150 mg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "75-150 mg/j en 2-3 prises. IM: 75 mg/j max 2j.",
+      "children": "≥ 16 ans: doses adultes."
+    },
+    "market_data": [
+      {
+        "price": 43.6,
+        "packaging": "Boîte de 30",
+        "laboratory": "PHARMED"
+      }
+    ],
+    "drugbank_id": "DB00586",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Ulcère GI",
+      "Hémorragie",
+      "Insuffisance rénale",
+      "Risque CV accru"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2",
+          "Diurétiques"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Triple whammy (AINS + IEC + diurétique) → IRA",
+        "recommendation": "Surveiller créatinine et PA. Hydrater."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/pharmaflam-50-mg-comprime"
+  },
+  {
+    "id": "P-PHARMATEX",
+    "brand_name": "PHARMATEX",
+    "generic_name": "Chlorure de benzalkonium (spermicide)",
+    "strength": "18.9 MG",
+    "form": "Capsule",
+    "route": "Vaginale",
+    "atc_code": "G02BB01",
+    "therapeutic_group": "Contraceptifs locaux",
+    "drug_class": "Spermicide",
+    "indications": [
+      "Contraception locale"
+    ],
+    "contraindications": [
+      "Irritation vaginale",
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1 capsule vaginale avant chaque rapport.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 28.0,
+        "packaging": "molle vaginale Boite de 6",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pharmatex-18-9-mg-capsule"
+  },
+  {
+    "id": "P-PHARMAURACIL",
+    "brand_name": "PHARMAURACIL",
+    "generic_name": "Fluorouracile (5-FU)",
+    "strength": "250 MG / 10 ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "L01BC02",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Antimétabolite (antipyrimidine)",
+    "indications": [
+      "Cancer colorectal",
+      "Cancer du sein",
+      "Cancer gastrique",
+      "Kératose actinique (topique)"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Déficit en DPD",
+      "Aplasie médullaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Selon protocole oncologique.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 27.0,
+        "packaging": "injectable IV Boîte unitaire",
+        "laboratory": "PH: 10.97 dhs - NOVOPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pharmauracil-250-mg-10-ml-solution"
+  },
+  {
+    "id": "P-PHENERGAN",
+    "brand_name": "PHENERGAN",
+    "generic_name": "Prométhazine",
+    "strength": "0.1 %",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AD02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Phénothiazine antihistaminique sédative",
+    "indications": [
+      "Allergies",
+      "Insomnie",
+      "Nausées/vomissements",
+      "Prémédication"
+    ],
+    "contraindications": [
+      "Glaucome à angle fermé",
+      "Rétention urinaire",
+      "Enfant <2 ans"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "25-75 mg/j.",
+      "children": "≥ 2 ans: 1 mg/kg/j en 2-3 prises."
+    },
+    "market_data": [
+      {
+        "price": 12.4,
+        "packaging": "Flacon de 125 ml",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence",
+      "Sécheresse buccale",
+      "Photosensibilisation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Opioïdes",
+          "BZD"
+        ],
+        "interacting_classes": [
+          "Dépresseurs SNC"
+        ],
+        "severity": "DANGER",
+        "effect": "Sédation excessive",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/phenergan-0-1-sirop"
+  },
+  {
+    "id": "P-PHENYLEPHRINE",
+    "brand_name": "PHENYLEPHRINE",
+    "generic_name": "Phényléphrine",
+    "strength": "AGUETTANT 50 μg / ML + 5 MG / ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "C01CA06",
+    "therapeutic_group": "Vasopresseurs",
+    "drug_class": "Agoniste alpha-1 adrénergique",
+    "indications": [
+      "Hypotension peropératoire",
+      "Choc vasoplégique"
+    ],
+    "contraindications": [
+      "HTA sévère",
+      "Thyrotoxicose"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "50-200 µg IV bolus. Perf: 0.5-5 µg/kg/min.",
+      "children": "Selon poids."
+    },
+    "market_data": [
+      {
+        "price": 1365.0,
+        "packaging": "injectable Boite de 10 ampoules de 10 ml",
+        "laboratory": "HEMOLAB-PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/phenylephrine-aguettant-50-g-ml-5-mg-ml-solution"
+  },
+  {
+    "id": "P-PHIPIXA",
+    "brand_name": "PHIPIXA",
+    "generic_name": "Amlodipine",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteurs calciques",
+    "drug_class": "Dihydropyridine",
+    "indications": [
+      "HTA",
+      "Angor stable",
+      "Angor vasospastique"
+    ],
+    "contraindications": [
+      "Hypotension sévère",
+      "Choc cardiogénique"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "5-10 mg/j.",
+      "children": "≥ 6 ans: 2.5-5 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 133.3,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "PHI"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Œdèmes chevilles",
+      "Flush",
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Simvastatine"
+        ],
+        "interacting_classes": [
+          "Statines CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux simvastatine",
+        "recommendation": "Max simvastatine 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux ciclosporine",
+        "recommendation": "Doser."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/phipixa-10-mg-comprime"
+  },
+  {
+    "id": "P-PHOCYTAN",
+    "brand_name": "PHOCYTAN",
+    "generic_name": "Fructose-1,6-diphosphate",
+    "strength": "0.66 MMOL / ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "V06DD",
+    "therapeutic_group": "Solutions métaboliques",
+    "drug_class": "Substrat énergétique",
+    "indications": [
+      "Ischémie myocardique (adjuvant)",
+      "États de choc (adjuvant)"
+    ],
+    "contraindications": [
+      "Intolérance au fructose"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Selon protocole IV.",
+      "children": "Selon poids."
+    },
+    "market_data": [
+      {
+        "price": 533.0,
+        "packaging": "à diluer pour perfusion Boite de 10 ampoules de 10 ml",
+        "laboratory": "HEMOLAB-PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/phocytan-0-66-mmol-ml-solution"
+  },
+  {
+    "id": "P-PHOSPHATE",
+    "brand_name": "PHOSPHATE",
+    "generic_name": "Dexaméthasone",
+    "strength": "DE DEXAMETHASONE VIATRIS 20 MG / 5 ML",
+    "form": "Solution",
+    "route": "IV / IM",
+    "atc_code": "H02AB02",
+    "therapeutic_group": "Corticostéroïdes",
+    "drug_class": "Glucocorticoïde puissant",
+    "indications": [
+      "Inflammation sévère",
+      "Œdème cérébral",
+      "NVCI",
+      "Croup",
+      "COVID sévère"
+    ],
+    "contraindications": [
+      "Infection non contrôlée"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "0.5-20 mg/j selon indication.",
+      "children": "Croup: 0.15-0.6 mg/kg dose unique."
+    },
+    "market_data": [
+      {
+        "price": 272.0,
+        "packaging": "injectable Boîte de 10 flacons",
+        "laboratory": "PH: 179.71 dhs - SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque ulcère GI",
+        "recommendation": "IPP si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Antidiabétiques"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hyperglycémie",
+        "recommendation": "Surveiller glycémie."
+      }
+    ],
+    "adverse_effects": [
+      "Hyperglycémie",
+      "Immunodépression",
+      "Ostéoporose",
+      "Cushing"
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/phosphate-de-dexamethasone-viatris-20-mg-5-ml-solution"
+  },
+  {
+    "id": "P-PIASCLEDINE",
+    "brand_name": "PIASCLEDINE",
+    "generic_name": "Insaponifiables avocat-soja",
+    "strength": "300 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "M01AX14",
+    "therapeutic_group": "Antiarthrosiques",
+    "drug_class": "Antiarthrosique d'action lente",
+    "indications": [
+      "Arthrose (traitement symptomatique d'action lente)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "300 mg/j en 1 prise.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 175.7,
+        "packaging": "Boîte de 30",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/piascledine-300-mg-gelule"
+  },
+  {
+    "id": "P-PIMLOR",
+    "brand_name": "PIMLOR",
+    "generic_name": "Amlodipine",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteurs calciques",
+    "drug_class": "Dihydropyridine",
+    "indications": [
+      "HTA",
+      "Angor stable",
+      "Angor vasospastique"
+    ],
+    "contraindications": [
+      "Hypotension sévère",
+      "Choc cardiogénique"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "5-10 mg/j.",
+      "children": "≥ 6 ans: 2.5-5 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 33.6,
+        "packaging": "Boite de 14",
+        "laboratory": "PH: 22.20 dhs - PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Œdèmes chevilles",
+      "Flush",
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Simvastatine"
+        ],
+        "interacting_classes": [
+          "Statines CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux simvastatine",
+        "recommendation": "Max simvastatine 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux ciclosporine",
+        "recommendation": "Doser."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pimlor-10-mg-comprime"
+  },
+  {
+    "id": "P-PINO",
+    "brand_name": "PINO",
+    "generic_name": "Allopurinol",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M04AA01",
+    "therapeutic_group": "Antigoutteux",
+    "drug_class": "Inhibiteur xanthine oxydase",
+    "indications": [
+      "Goutte chronique",
+      "Prévention lithiase urique",
+      "Hyperuricémie chimio-induite"
+    ],
+    "contraindications": [
+      "Crise de goutte aiguë (ne pas initier)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "100-600 mg/j. Début 100 mg.",
+      "children": "10-20 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 79.9,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "KEMIPHARM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Rash",
+      "DRESS syndrome (GRAVE)",
+      "Crise de goutte initiale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Azathioprine",
+          "Mercaptopurine"
+        ],
+        "interacting_classes": [
+          "Thiopurines"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité hématologique sévère",
+        "recommendation": "Réduire thiopurine de 50-75%."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Amoxicilline"
+        ],
+        "interacting_classes": [
+          "Aminopénicillines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque éruption cutanée",
+        "recommendation": "Surveiller."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pino-100-mg-comprime"
+  },
+  {
+    "id": "P-PIROCAM",
+    "brand_name": "PIROCAM",
+    "generic_name": "Piroxicam",
+    "strength": "SOTHEMA 20 MG / ML",
+    "form": "Solution",
+    "route": "Orale / IM",
+    "atc_code": "M01AC01",
+    "therapeutic_group": "AINS",
+    "drug_class": "Oxicam",
+    "indications": [
+      "PR",
+      "Arthrose",
+      "SPA"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "20 mg/j en 1 prise.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 20.6,
+        "packaging": "injectable 2 ampoules",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Ulcère GI",
+      "Hémorragie",
+      "Réactions cutanées sévères (SJS/NET)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pirocam-sothema-20-mg-ml-solution"
+  },
+  {
+    "id": "P-PLAQUENIL",
+    "brand_name": "PLAQUENIL",
+    "generic_name": "Hydroxychloroquine",
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "P01BA02",
+    "therapeutic_group": "Antipaludéens / Immunomodulateurs",
+    "drug_class": "Amino-4-quinoléine",
+    "indications": [
+      "Lupus érythémateux systémique",
+      "Polyarthrite rhumatoïde",
+      "Paludisme (zones sensibles)"
+    ],
+    "contraindications": [
+      "Rétinopathie",
+      "Hypersensibilité",
+      "Déficit en G6PD (prudence)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Peut être poursuivi pendant la grossesse pour lupus/PR.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "≥ 6 ans.",
+      "dose_rule": "6.5 mg/kg/jour. Max: 400 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Prudence en IRC sévère."
+    },
+    "dosage": {
+      "adult": "200-400 mg/jour.",
+      "children": "6.5 mg/kg/jour."
+    },
+    "market_data": [
+      {
+        "price": 47.7,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "DB01611",
+    "adverse_effects": [
+      "Rétinopathie (usage prolongé — fond d'œil annuel)",
+      "Nausées",
+      "Myopathie",
+      "Allongement QT (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation digoxinémie",
+        "recommendation": "Doser digoxine."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux ciclosporine",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Antidiabétiques oraux"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypoglycémie (effet hypoglycémiant propre de l'HCQ)",
+        "recommendation": "Surveiller glycémie."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/plaquenil-200-mg-comprime"
+  },
+  {
+    "id": "P-PLASMION",
+    "brand_name": "PLASMION",
+    "generic_name": "Gélatine fluide modifiée (colloïde)",
+    "strength": "15 G",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "B05AA06",
+    "therapeutic_group": "Substituts plasmatiques",
+    "drug_class": "Colloïde de remplissage",
+    "indications": [
+      "Remplissage vasculaire (hypovolémie, choc)"
+    ],
+    "contraindications": [
+      "Hypervolémie",
+      "Insuffisance cardiaque décompensée",
+      "Allergie gélatine"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500-1500 mL IV. Max 20 mL/kg/j.",
+      "children": "10-20 mL/kg."
+    },
+    "market_data": [
+      {
+        "price": 77.2,
+        "packaging": "pour perfusion POCHE de 500 ml",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/plasmion-15-g-solution"
+  },
+  {
+    "id": "P-PLAVIX",
+    "brand_name": "PLAVIX",
+    "generic_name": "Clopidogrel",
+    "strength": "300 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AC04",
+    "therapeutic_group": "Antiagrégants plaquettaires",
+    "drug_class": "Thiénopyridine (prodrogue, inhibiteur P2Y12)",
+    "indications": [
+      "Syndrome coronarien aigu (en bithérapie avec aspirine)",
+      "Post-stent coronaire",
+      "Prévention AVC et IDM (si allergie aspirine)",
+      "AOMI"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "75 mg/j. SCA: dose de charge 300-600 mg puis 75 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 242.0,
+        "packaging": "pelliculé Boîte de 4",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "DB00758",
+    "adverse_effects": [
+      "Hémorragie",
+      "Purpura thrombotique thrombocytopénique (rare)",
+      "Troubles digestifs"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Oméprazole",
+          "Ésoméprazole"
+        ],
+        "interacting_classes": [
+          "IPP (inhibiteurs CYP2C19)"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution activation clopidogrel → perte efficacité",
+        "recommendation": "Préférer pantoprazole si IPP nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (bithérapie voulue post-SCA)",
+        "recommendation": "IPP en protection. Durée selon indication."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "AOD"
+        ],
+        "interacting_classes": [
+          "Anticoagulants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur (trithérapie)",
+        "recommendation": "Durée minimale. Surveillance étroite."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter AINS."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/plavix-300-mg-comprime"
+  },
+  {
+    "id": "P-PNEUMOCCID",
+    "brand_name": "PNEUMOCCID",
+    "generic_name": "Céfpodoxime",
+    "strength": "250 MG / 5ML",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "J01DD13",
+    "therapeutic_group": "Antibactériens - C3G",
+    "drug_class": "Céphalosporine 3e gén. orale",
+    "indications": [
+      "ORL (otite, sinusite)",
+      "Infections respiratoires basses",
+      "Infections urinaires",
+      "Gonorrhée"
+    ],
+    "contraindications": [
+      "Allergie céphalosporines"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "100-200 mg 2x/j.",
+      "children": "8 mg/kg/j en 2 prises."
+    },
+    "market_data": [
+      {
+        "price": 40.3,
+        "packaging": "pour suspension buvable Boîte de 2 flacons de 60 ml",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Diarrhée",
+      "Nausées",
+      "Réactions allergiques"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pneumoccid-250-mg-5ml-poudre"
+  },
+  {
+    "id": "P-PODOXRED",
+    "brand_name": "PODOXRED",
+    "generic_name": "Céfpodoxime",
+    "strength": "500 MG",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "J01DD13",
+    "therapeutic_group": "Antibactériens - C3G",
+    "drug_class": "Céphalosporine 3e gén. orale",
+    "indications": [
+      "ORL (otite, sinusite)",
+      "Infections respiratoires basses",
+      "Infections urinaires",
+      "Gonorrhée"
+    ],
+    "contraindications": [
+      "Allergie céphalosporines"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "100-200 mg 2x/j.",
+      "children": "8 mg/kg/j en 2 prises."
+    },
+    "market_data": [
+      {
+        "price": 4647.0,
+        "packaging": "pour solution à diluer pour perfusion Flacon de 50 ml",
+        "laboratory": "AXESS PHARMA (EX HAYDELENA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Diarrhée",
+      "Nausées",
+      "Réactions allergiques"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/podoxred-500-mg-poudre"
+  },
+  {
+    "id": "P-POLAMINOFEN",
+    "brand_name": "POLAMINOFEN",
+    "generic_name": "Dexchlorphéniramine",
+    "strength": "10 MG / ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "R06AB02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 sédatif",
+    "indications": [
+      "Allergies",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 mg/j.",
+      "children": "≥ 2 ans: 0.5-1 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 28.2,
+        "packaging": "pour perfusion I.V Boite d'une poche de 100 ML de solution",
+        "laboratory": "PHARMAPROM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/polaminofen-10-mg-ml-solution"
+  },
+  {
+    "id": "P-POLGYL",
+    "brand_name": "POLGYL",
+    "generic_name": "Métronidazole (IV)",
+    "strength": "(0.5%) 500 MG / 100 ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "P01AB01",
+    "therapeutic_group": "Antiparasitaires / Antibactériens",
+    "drug_class": "Nitroimidazolé",
+    "indications": [
+      "Infections anaérobies sévères",
+      "Prophylaxie chirurgicale",
+      "C. difficile sévère"
+    ],
+    "contraindications": [
+      "Consommation d'alcool"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500 mg IV/8h.",
+      "children": "20-30 mg/kg/j en 3 perfusions."
+    },
+    "market_data": [
+      {
+        "price": 30.7,
+        "packaging": "pour perfusion(IV) en poche de 100 ml Boite unitaire",
+        "laboratory": "PHARMAPROM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Nausées",
+      "Goût métallique",
+      "Neuropathie (prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Effet antabuse",
+        "recommendation": "INTERDIRE alcool pendant et 48h après."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/polgyl-0-5-500-mg-100-ml-solution"
+  },
+  {
+    "id": "P-POLIVY",
+    "brand_name": "POLIVY",
+    "generic_name": "Polatuzumab védotine",
+    "strength": "140 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "L01FX18",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Anticorps conjugué anti-CD79b",
+    "indications": [
+      "Lymphome diffus à grandes cellules B (en rechute/réfractaire)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1.8 mg/kg IV/3 sem x 6 cycles + BR.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 92200.0,
+        "packaging": "pour solution à diluer pour perfusion Boite de 1 flacon",
+        "laboratory": "ROCHE S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/polivy-140-mg-poudre"
+  },
+  {
+    "id": "P-POLYFER",
+    "brand_name": "POLYFER",
+    "generic_name": "Fer (polymaltose)",
+    "strength": "50 MG / 5 ML",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "B03AB05",
+    "therapeutic_group": "Antianémiques",
+    "drug_class": "Fer oral (complexe polymaltose)",
+    "indications": [
+      "Anémie ferriprive",
+      "Carence martiale"
+    ],
+    "contraindications": [
+      "Surcharge en fer",
+      "Hémochromatose"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "100-200 mg Fe/j.",
+      "children": "3-5 mg Fe/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 28.3,
+        "packaging": "Flacon de 150 ml",
+        "laboratory": "KOSMO PHARM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/polyfer-50-mg-5-ml-sirop"
+  },
+  {
+    "id": "P-POLYNORM",
+    "brand_name": "POLYNORM",
+    "generic_name": "Rispéridone",
+    "strength": "1 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AX08",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Antipsychotique atypique",
+    "indications": [
+      "Schizophrénie",
+      "Trouble bipolaire (manie)",
+      "Agressivité (démence, enfant)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 5,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 mg/j.",
+      "children": "≥ 5 ans: 0.25-2.5 mg/j selon poids."
+    },
+    "market_data": [
+      {
+        "price": 42.0,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "PH: 27.75 dhs - POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Prise de poids",
+      "Hyperprolactinémie",
+      "Syndrome extrapyramidal",
+      "Sédation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Paroxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux rispéridone",
+        "recommendation": "Réduire dose."
+      },
+      {
+        "interacting_drugs": [
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux rispéridone",
+        "recommendation": "Augmenter dose."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/polynorm-1-mg-comprime"
+  },
+  {
+    "id": "P-PONSTYL",
+    "brand_name": "PONSTYL",
+    "generic_name": "Acide méfénamique",
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M01AG01",
+    "therapeutic_group": "AINS",
+    "drug_class": "Fénamate",
+    "indications": [
+      "Douleurs",
+      "Dysménorrhée"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC sévère",
+      "3e trimestre"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "500 mg 3x/j.",
+      "children": "≥ 12 ans."
+    },
+    "market_data": [
+      {
+        "price": 27.0,
+        "packaging": "enrobé Boîte de 20",
+        "laboratory": "PFIZER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/ponstyl-500-mg-comprime"
+  },
+  {
+    "id": "P-POSIFORMIN",
+    "brand_name": "POSIFORMIN",
+    "generic_name": "Acide fusidique (ophtalmique)",
+    "strength": "2 %",
+    "form": "Pommade",
+    "route": "Ophtalmique",
+    "atc_code": "S01AA13",
+    "therapeutic_group": "Anti-infectieux ophtalmiques",
+    "drug_class": "Acide fusidique topique",
+    "indications": [
+      "Conjonctivite bactérienne"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1 goutte 2x/j x 7j.",
+      "children": "Idem adulte."
+    },
+    "market_data": [
+      {
+        "price": 120.8,
+        "packaging": "ophtalmique désinfectante Tube de 5 g",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/posiformin-2-pommade"
+  },
+  {
+    "id": "P-POTASSIUM",
+    "brand_name": "POTASSIUM",
+    "generic_name": "Potassium (KCl)",
+    "strength": "LAPROPHAN 15 %",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "A12BA01",
+    "therapeutic_group": "Suppléments minéraux",
+    "drug_class": "Chlorure de potassium",
+    "indications": [
+      "Hypokaliémie",
+      "Prévention hypokaliémie sous diurétiques"
+    ],
+    "contraindications": [
+      "Hyperkaliémie",
+      "IRC sévère (anurie)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 g/j en doses fractionnées.",
+      "children": "1-3 mEq/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 24.6,
+        "packaging": "Flacon 125 ml",
+        "laboratory": "PH: 16.25 dhs - LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "drug_interactions": [],
+    "adverse_effects": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/potassium-laprophan-15-sirop"
+  },
+  {
+    "id": "P-PRADAXA",
+    "brand_name": "PRADAXA",
+    "generic_name": "Dabigatran",
+    "strength": "110 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "B01AE07",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct de la thrombine",
+    "indications": [
+      "Prévention AVC dans la FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Prothèse valvulaire mécanique",
+      "ClCr <30 (en Europe, <15 aux USA)",
+      "Insuffisance hépatique sévère",
+      "Association avec kétoconazole, ciclosporine, itraconazole, dronédarone systémiques"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Non recommandé.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-50: 110 mg 2x/j (FA). ClCr <30: contre-indiqué (Europe). Antidote: idarucizumab (Praxbind)."
+    },
+    "dosage": {
+      "adult": "FA: 150 mg 2x/j (ou 110 mg 2x/j si ≥80 ans ou risque hémorragique). TVP/EP: 150 mg 2x/j après 5j d'héparine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 365.0,
+        "packaging": "Boite de 30",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "DB06695",
+    "adverse_effects": [
+      "Hémorragie",
+      "Dyspepsie",
+      "Gastrite",
+      "Hémorragie GI (plus fréquente qu'AVK)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ciclosporine",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp puissants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux → hémorragie",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp modérés"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation taux dabigatran",
+        "recommendation": "Réduire dabigatran à 110 mg 2x/j. Prendre simultanément."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux dabigatran de 12-60%",
+        "recommendation": "Surveiller. Pas d'ajustement de dose systématique."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "Éviter association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "AINS",
+          "Clopidogrel"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de bithérapie/trithérapie."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/pradaxa-110-mg-gelule"
+  },
+  {
+    "id": "P-PRAZOL",
+    "brand_name": "PRAZOL",
+    "generic_name": "Oméprazole",
+    "strength": "20 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A02BC01",
+    "therapeutic_group": "IPP",
+    "drug_class": "Inhibiteur pompe à protons",
+    "indications": [
+      "RGO",
+      "Ulcère GD",
+      "H. pylori",
+      "Prévention lésions AINS",
+      "Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association nelfinavir"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an.",
+      "dose_rule": "1-2 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "20-40 mg/j.",
+      "children": "1-2 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 28.0,
+        "packaging": "Boîte de 7",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "DB00338",
+    "adverse_effects": [
+      "Céphalées",
+      "Diarrhée",
+      "Hypomagnésémie (prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution activation clopidogrel",
+        "recommendation": "Préférer pantoprazole."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX",
+        "recommendation": "Prudence haute dose MTX."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/prazol-20-mg-gelule"
+  },
+  {
+    "id": "P-PREDNI",
+    "brand_name": "PREDNI",
+    "generic_name": "Prednisolone",
+    "strength": "COOPER 20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticostéroïdes",
+    "drug_class": "Glucocorticoïde",
+    "indications": [
+      "Maladies inflammatoires",
+      "Auto-immunes",
+      "Asthme aigu",
+      "Allergies sévères",
+      "Croup"
+    ],
+    "contraindications": [
+      "Infection non contrôlée",
+      "Vaccins vivants (forte dose)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "5-60 mg/j.",
+      "children": "1-2 mg/kg/j cure courte."
+    },
+    "market_data": [
+      {
+        "price": 40.0,
+        "packaging": "effervescent sécable Boîte de 20",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hyperglycémie",
+      "Ostéoporose",
+      "Cushing",
+      "Immunodépression",
+      "Retard croissance"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque ulcère GI",
+        "recommendation": "IPP."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Antidiabétiques"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hyperglycémie",
+        "recommendation": "Surveiller glycémie."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/predni-cooper-20-mg-comprime"
+  },
+  {
+    "id": "P-PREDNISOLONE",
+    "brand_name": "PREDNISOLONE",
+    "generic_name": "Prednisolone",
+    "strength": "WIN 20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticostéroïdes",
+    "drug_class": "Glucocorticoïde",
+    "indications": [
+      "Maladies inflammatoires",
+      "Auto-immunes",
+      "Asthme aigu",
+      "Allergies sévères",
+      "Croup"
+    ],
+    "contraindications": [
+      "Infection non contrôlée",
+      "Vaccins vivants (forte dose)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "5-60 mg/j.",
+      "children": "1-2 mg/kg/j cure courte."
+    },
+    "market_data": [
+      {
+        "price": 35.5,
+        "packaging": "effervescent Boîte de 20",
+        "laboratory": "PH: 23.46 dhs - MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hyperglycémie",
+      "Ostéoporose",
+      "Cushing",
+      "Immunodépression",
+      "Retard croissance"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque ulcère GI",
+        "recommendation": "IPP."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Antidiabétiques"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hyperglycémie",
+        "recommendation": "Surveiller glycémie."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/prednisolone-win-20-mg-comprime"
+  },
+  {
+    "id": "P-PREJECT",
+    "brand_name": "PREJECT",
+    "generic_name": "Dexlansoprazole",
+    "strength": "30 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A02BC06",
+    "therapeutic_group": "IPP",
+    "drug_class": "IPP double libération",
+    "indications": [
+      "RGO",
+      "Œsophagite érosive"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "30-60 mg/j.",
+      "children": "≥ 12 ans: 30-60 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 107.1,
+        "packaging": "enrobé Boite de 3",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/preject-30-mg-comprime"
+  },
+  {
+    "id": "P-PRELECTAL",
+    "brand_name": "PRELECTAL",
+    "generic_name": "Périndopril + Amlodipine",
+    "strength": "10 MG / 2.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09BB04",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "IEC + IC",
+    "indications": [
+      "HTA (bithérapie fixe)"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Sténose bilatérale"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1 cp/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 157.9,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "PH: 104.32 dhs - STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Toux",
+      "Œdèmes chevilles",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité",
+        "recommendation": "Surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/prelectal-10-mg-2-5-mg-comprime"
+  },
+  {
+    "id": "P-PRETERAX",
+    "brand_name": "PRETERAX",
+    "generic_name": "Périndopril + Indapamide",
+    "strength": "2.5 MG / 0.625 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09BA04",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "IEC + diurétique",
+    "indications": [
+      "HTA (bithérapie fixe)"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Hypokaliémie sévère",
+      "IH sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1 cp/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 92.6,
+        "packaging": "pelliculé Boîte de 30",
+        "laboratory": "SERVIER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Toux",
+      "Hypokaliémie",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/preterax-2-5-mg-0-625-mg-comprime"
+  },
+  {
+    "id": "P-PREVALIN",
+    "brand_name": "PREVALIN",
+    "generic_name": "Spray anti-allergique (barrière)",
+    "strength": "ALLERGY ADULTE",
+    "form": "Spray",
+    "route": "Nasale",
+    "atc_code": "R01AX",
+    "therapeutic_group": "Dispositifs nasaux",
+    "drug_class": "Barrière protectrice nasale",
+    "indications": [
+      "Prévention rhinite allergique (barrière nasale)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 pulvérisations/narine avant exposition.",
+      "children": "≥ 6 ans: idem."
+    },
+    "market_data": [
+      {
+        "price": 72.0,
+        "packaging": "nasal 20 ML",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/prevalin-allergy-adulte-spray"
+  },
+  {
+    "id": "P-PREZAR",
+    "brand_name": "PREZAR",
+    "generic_name": "Losartan",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "ARA2",
+    "indications": [
+      "HTA",
+      "Néphropathie diabétique"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Sténose bilatérale"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "50-100 mg/j.",
+      "children": "≥ 6 ans: 0.7 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 138.1,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "PH: 98.58 dhs - BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Vertiges",
+      "Hyperkaliémie",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA",
+        "recommendation": "CI diabétique."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/prezar-100-mg-comprime"
+  },
+  {
+    "id": "P-PRILVAS",
+    "brand_name": "PRILVAS",
+    "generic_name": "Ésoméprazole",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A02BC05",
+    "therapeutic_group": "IPP",
+    "drug_class": "IPP",
+    "indications": [
+      "RGO",
+      "Ulcère GD",
+      "H. pylori",
+      "Prévention lésions AINS"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association nelfinavir"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "20-40 mg/j.",
+      "children": "≥ 1 an: 10-40 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 66.4,
+        "packaging": "Boîte de 28",
+        "laboratory": "AFRIC-PHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées",
+      "Diarrhée",
+      "Hypomagnésémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution activation clopidogrel",
+        "recommendation": "Préférer pantoprazole."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/prilvas-20-mg-comprime"
+  },
+  {
+    "id": "P-PRIMACAINE",
+    "brand_name": "PRIMACAINE",
+    "generic_name": "Articaïne + Adrénaline",
+    "strength": "ADRENALINEE 1/100 000",
+    "form": "Solution",
+    "route": "Injectable (locale)",
+    "atc_code": "N01BB58",
+    "therapeutic_group": "Anesthésiques locaux",
+    "drug_class": "Anesthésique dentaire",
+    "indications": [
+      "Anesthésie locale dentaire"
+    ],
+    "contraindications": [
+      "Allergie amides",
+      "Bloc cardiaque"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 4,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 cartouches selon procédure.",
+      "children": "≥ 4 ans: dose selon poids."
+    },
+    "market_data": [
+      {
+        "price": 306.0,
+        "packaging": "pour usage dentaire Boîte de 50 cartouches",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/primacaine-adrenalinee-1-100-000-solution"
+  },
+  {
+    "id": "P-PRIMALAN",
+    "brand_name": "PRIMALAN",
+    "generic_name": "Méquitazine",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AD07",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Phénothiazine anti-H1",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Allongement QT",
+      "Bradycardie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "10 mg/j.",
+      "children": "≥ 2 ans: 1.25-5 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 44.8,
+        "packaging": "sécable Boîte de 14",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLONGEMENT_QT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/primalan-10-mg-comprime"
+  },
+  {
+    "id": "P-PRIMOLUT-NOR",
+    "brand_name": "PRIMOLUT-NOR",
+    "generic_name": "Noréthistérone",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G03DC02",
+    "therapeutic_group": "Progestatifs",
+    "drug_class": "Progestatif de synthèse",
+    "indications": [
+      "Endométriose",
+      "Ménométrorragies",
+      "Report de menstruation"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Thromboembolie",
+      "Cancer sein"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "5-15 mg/j.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 41.4,
+        "packaging": "sécable Boîte de 30",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/primolut-nor-10-mg-comprime"
+  },
+  {
+    "id": "P-PRINCI-B",
+    "brand_name": "PRINCI-B",
+    "generic_name": "Vitamines B1+B6",
+    "strength": "FORT",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A11DB",
+    "therapeutic_group": "Vitamines",
+    "drug_class": "Vitamines du groupe B",
+    "indications": [
+      "Carence en vitamines B1 et B6",
+      "Neuropathie carencielle"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 cp/j.",
+      "children": "1 cp/j."
+    },
+    "market_data": [
+      {
+        "price": 47.3,
+        "packaging": "pelliculé Boîte de 30",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/princi-b-fort-comprime"
+  },
+  {
+    "id": "P-PRIRIL",
+    "brand_name": "PRIRIL",
+    "generic_name": "Lisinopril",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09AA03",
+    "therapeutic_group": "Antihypertenseurs - IEC",
+    "drug_class": "IEC",
+    "indications": [
+      "HTA",
+      "IC",
+      "Post-IDM"
+    ],
+    "contraindications": [
+      "Grossesse 2e-3e T",
+      "Angioedème sous IEC"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "5-40 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 76.1,
+        "packaging": "Boite de 30",
+        "laboratory": "PH: 50.28 dhs - PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Toux sèche",
+      "Hyperkaliémie",
+      "Angioedème"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Potassium",
+          "Spironolactone"
+        ],
+        "interacting_classes": [
+          "Épargneurs K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie",
+        "recommendation": "Surveiller K+."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/priril-10-mg-comprime"
+  },
+  {
+    "id": "P-PRODEFEN",
+    "brand_name": "PRODEFEN",
+    "generic_name": "Probiotiques",
+    "strength": "PLUS",
+    "form": "Sachet",
+    "route": "Orale",
+    "atc_code": "A07FA",
+    "therapeutic_group": "Probiotiques",
+    "drug_class": "Probiotiques",
+    "indications": [
+      "Prévention diarrhée sous antibiotiques",
+      "Troubles fonctionnels intestinaux"
+    ],
+    "contraindications": [
+      "Immunodépression sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 sachets/j.",
+      "children": "1 sachet/j."
+    },
+    "market_data": [
+      {
+        "price": 119.0,
+        "packaging": "Boite de 10",
+        "laboratory": "VERSALYA SA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/prodefen-plus-sachet"
+  },
+  {
+    "id": "P-PRODOL",
+    "brand_name": "PRODOL",
+    "generic_name": "Ibuprofène",
+    "strength": "20 MG / ML",
+    "form": "Suspension",
+    "route": "Orale",
+    "atc_code": "M01AE01",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide propionique",
+    "indications": [
+      "Douleur",
+      "Fièvre",
+      "Inflammation",
+      "Dysménorrhée"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0.25,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "200-400 mg 3x/j. Max 2400 mg/j.",
+      "children": "≥ 3 mois: 20-30 mg/kg/j en 3-4 prises."
+    },
+    "market_data": [
+      {
+        "price": 19.1,
+        "packaging": "buvable pédiatrique Flacon de 150 ml",
+        "laboratory": "GALENICA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Douleurs gastriques",
+      "Ulcère",
+      "Hémorragie",
+      "Insuffisance rénale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine (faible dose)"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Annulation effet antiagrégant aspirine",
+        "recommendation": "Prendre aspirine 30 min AVANT ibuprofène."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/prodol-20-mg-ml-suspension"
+  },
+  {
+    "id": "P-PROFENID",
+    "brand_name": "PROFENID",
+    "generic_name": "Kétoprofène",
+    "strength": "100 MG / 2 ML",
+    "form": "Solution",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AE03",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide propionique",
+    "indications": [
+      "Rhumatismes inflammatoires",
+      "Douleurs post-opératoires",
+      "Dysménorrhée",
+      "Colique néphrétique"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "≥ 15 ans.",
+      "dose_rule": "≥ 15 ans: doses adultes."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "PO: 100-200 mg/j. IM: 100 mg/j max 3j.",
+      "children": "≥ 15 ans."
+    },
+    "market_data": [
+      {
+        "price": 50.6,
+        "packaging": "injectable Boîte de 6 ampoules",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "DB01009",
+    "adverse_effects": [
+      "Douleurs gastriques",
+      "Ulcère GI",
+      "Photosensibilisation (gel)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/profenid-100-mg-2-ml-solution"
+  },
+  {
+    "id": "P-PROFLOX",
+    "brand_name": "PROFLOX",
+    "generic_name": "Ciprofloxacine",
+    "strength": "250 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01MA02",
+    "therapeutic_group": "Fluoroquinolones",
+    "drug_class": "Fluoroquinolone 2e gén.",
+    "indications": [
+      "Infections urinaires",
+      "Prostatite",
+      "Infections GI",
+      "Infections respiratoires",
+      "Anthrax"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "Enfant <18 ans",
+      "Tendinopathie sous FQ",
+      "Association tizanidine"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "250-750 mg 2x/j.",
+      "children": "Non recommandé <18 ans sauf exceptions."
+    },
+    "market_data": [
+      {
+        "price": 51.4,
+        "packaging": "Boîte de 10",
+        "laboratory": "GALENICA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Tendinopathie",
+      "Neuropathie périphérique",
+      "Photosensibilisation",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tizanidine"
+        ],
+        "interacting_classes": [
+          "Myorelaxants alpha-2"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation massive taux tizanidine",
+        "recommendation": "FORMELLEMENT CI."
+      },
+      {
+        "interacting_drugs": [
+          "Théophylline"
+        ],
+        "interacting_classes": [
+          "Bases xanthiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation théophyllinémie → convulsions",
+        "recommendation": "Doser théophylline."
+      },
+      {
+        "interacting_drugs": [
+          "Antiacides",
+          "Fer",
+          "Calcium"
+        ],
+        "interacting_classes": [
+          "Cations divalents"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution absorption",
+        "recommendation": "Espacer 2h."
+      },
+      {
+        "interacting_drugs": [
+          "Corticostéroïdes"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque tendinopathie/rupture tendineuse",
+        "recommendation": "Éviter."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/proflox-250-mg-comprime"
+  },
+  {
+    "id": "P-PROGAST",
+    "brand_name": "PROGAST",
+    "generic_name": "Oméprazole",
+    "strength": "20 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A02BC01",
+    "therapeutic_group": "IPP",
+    "drug_class": "Inhibiteur pompe à protons",
+    "indications": [
+      "RGO",
+      "Ulcère GD",
+      "H. pylori",
+      "Prévention lésions AINS",
+      "Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association nelfinavir"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an.",
+      "dose_rule": "1-2 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "20-40 mg/j.",
+      "children": "1-2 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 49.3,
+        "packaging": "Boîte de 14",
+        "laboratory": "SPIMACO"
+      }
+    ],
+    "drugbank_id": "DB00338",
+    "adverse_effects": [
+      "Céphalées",
+      "Diarrhée",
+      "Hypomagnésémie (prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution activation clopidogrel",
+        "recommendation": "Préférer pantoprazole."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX",
+        "recommendation": "Prudence haute dose MTX."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/progast-20-mg-gelule"
+  },
+  {
+    "id": "P-PROGOR",
+    "brand_name": "PROGOR",
+    "generic_name": "Diltiazem",
+    "strength": "180 MG LP",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "C08DB01",
+    "therapeutic_group": "Inhibiteurs calciques",
+    "drug_class": "Benzothiazépine",
+    "indications": [
+      "HTA",
+      "Angor stable et vasospastique"
+    ],
+    "contraindications": [
+      "BAV 2e-3e degré",
+      "IC décompensée",
+      "Bradycardie",
+      "Association dantrolène IV"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "LP: 180-360 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 122.0,
+        "packaging": "Boîte de 28",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Bradycardie",
+      "Constipation",
+      "Œdèmes",
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Dantrolène"
+        ],
+        "interacting_classes": [
+          "Myorelaxants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Fibrillation ventriculaire",
+        "recommendation": "FORMELLEMENT CI."
+      },
+      {
+        "interacting_drugs": [
+          "Bêta-bloquants"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie, BAV, IC",
+        "recommendation": "Déconseillé."
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine"
+        ],
+        "interacting_classes": [
+          "Statines CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux",
+        "recommendation": "Max simvastatine 10 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation taux ciclosporine",
+        "recommendation": "Doser et ajuster."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/progor-180-mg-lp-gelule"
+  },
+  {
+    "id": "P-PROGRAF",
+    "brand_name": "PROGRAF",
+    "generic_name": "Tacrolimus",
+    "strength": "1 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "L04AD02",
+    "therapeutic_group": "Immunosuppresseurs",
+    "drug_class": "Inhibiteur de la calcineurine (macrolide)",
+    "indications": [
+      "Prévention du rejet de greffe (rein, foie, cœur)",
+      "Dermatite atopique sévère (topique)"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association avec ciclosporine"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Peut être poursuivi si nécessaire (grossesse sous greffe). Risque de prématurité et hyperkaliémie néonatale.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie (greffe).",
+      "dose_rule": "0.15-0.3 mg/kg/j en 2 prises. Ajuster selon C0."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Néphrotoxique intrinsèque. Surveiller créatinine. Pas d'ajustement initial mais adapter selon taux résiduels."
+    },
+    "dosage": {
+      "adult": "0.1-0.2 mg/kg/j en 2 prises. Ajuster selon C0 cible (5-15 ng/mL selon greffe et délai).",
+      "children": "0.15-0.3 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 1630.0,
+        "packaging": "Boîte de 100",
+        "laboratory": "PH: 1330.00 dhs - PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "DB00864",
+    "adverse_effects": [
+      "Néphrotoxicité",
+      "Neurotoxicité (tremblements, céphalées)",
+      "Diabète post-greffe",
+      "Hyperkaliémie",
+      "HTA",
+      "Infections",
+      "Lymphomes"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Néoral"
+        ],
+        "interacting_classes": [
+          "Autres inhibiteurs calcineurine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Néphrotoxicité synergique sévère",
+        "recommendation": "JAMAIS associer. Wash-out 24h entre les deux."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Voriconazole",
+          "Fluconazole",
+          "Clarithromycine",
+          "Érythromycine",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure des taux → néphrotoxicité",
+        "recommendation": "Doser tacrolimus et réduire dose (parfois de 50-75%)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → rejet de greffe",
+        "recommendation": "Doser tacrolimus. Augmenter dose. Éviter millepertuis."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Aminosides",
+          "Amphotéricine B"
+        ],
+        "interacting_classes": [
+          "Néphrotoxiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Néphrotoxicité additive",
+        "recommendation": "Éviter. Surveiller créatinine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/prograf-1-mg-gelule"
+  },
+  {
+    "id": "P-PROJEVA",
+    "brand_name": "PROJEVA",
+    "generic_name": "Progestérone micronisée",
+    "strength": "200 MG",
+    "form": "Capsule",
+    "route": "Orale / Vaginale",
+    "atc_code": "G03DA04",
+    "therapeutic_group": "Progestatifs",
+    "drug_class": "Progestérone naturelle",
+    "indications": [
+      "Insuffisance lutéale",
+      "Soutien FIV",
+      "Ménométrorragies",
+      "THS (complément)"
+    ],
+    "contraindications": [
+      "Cancer sein/organes génitaux",
+      "Hémorragie non diagnostiquée",
+      "Thromboembolie récente",
+      "IH sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "PO: 200-300 mg/j le soir. Vaginal (FIV): 200-600 mg/j.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 62.1,
+        "packaging": "molle orale ou vaginale Boite de 15",
+        "laboratory": "PH: 41.05 dhs - VERSALYA SA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence (PO)",
+      "Vertiges",
+      "Spotting"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inducteurs CYP3A4"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux progestérone",
+        "recommendation": "Préférer voie vaginale."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/projeva-200-mg-capsule"
+  },
+  {
+    "id": "P-PROKININ",
+    "brand_name": "PROKININ",
+    "generic_name": "Dompéridone",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A03FA03",
+    "therapeutic_group": "Prokinétiques",
+    "drug_class": "Antagoniste D2 périphérique",
+    "indications": [
+      "Nausées/vomissements",
+      "Gastroparésie"
+    ],
+    "contraindications": [
+      "Allongement QT",
+      "IH modérée/sévère",
+      "Prolactinome"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "10 mg 3x/j. Max 30 mg/j. Durée max 7j.",
+      "children": "Susp: 0.25 mg/kg 3x/j."
+    },
+    "market_data": [
+      {
+        "price": 21.5,
+        "packaging": "pélliculé Boite de 30",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Allongement QT",
+      "Arythmies",
+      "Hyperprolactinémie",
+      "Galactorrhée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Fluconazole",
+          "Érythromycine",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation taux → allongement QT",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Sotalol",
+          "Halopéridol"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant QT"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Allongement QT additif",
+        "recommendation": "CONTRE-INDIQUÉ."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL",
+      "ALLONGEMENT_QT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/prokinin-10-mg-comprime"
+  },
+  {
+    "id": "P-PROLIFEN",
+    "brand_name": "PROLIFEN",
+    "generic_name": "Clomifène",
+    "strength": "50 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "G03GB02",
+    "therapeutic_group": "Inducteurs de l'ovulation",
+    "drug_class": "Anti-œstrogène (SERM)",
+    "indications": [
+      "Induction ovulation (infertilité anovulatoire)"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Kyste ovarien",
+      "Cancer hormono-dépendant",
+      "IH"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "50 mg/j J2-J6. Max 100 mg/j.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 68.6,
+        "packaging": "Boîte de 10",
+        "laboratory": "PH: 45.32 dhs - PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/prolifen-50-mg-gelule"
+  },
+  {
+    "id": "P-PROMENOL",
+    "brand_name": "PROMENOL",
+    "generic_name": "Cimicifuga (complément ménopause)",
+    "strength": "CIMICIFUGA RACEMOSA 6.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "",
+    "therapeutic_group": "Compléments",
+    "drug_class": "Phytothérapie ménopause",
+    "indications": [
+      "Bouffées de chaleur liées à la ménopause"
+    ],
+    "contraindications": [
+      "Hépatopathie",
+      "Cancer hormono-dépendant"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 cp/j.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 199.5,
+        "packaging": "Boite de 90",
+        "laboratory": "PPC: 285.00 dhs - ESNAPHARM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/promenol-cimicifuga-racemosa-6-5-mg-comprime"
+  },
+  {
+    "id": "P-PROPOFOL-LIPURO",
+    "brand_name": "PROPOFOL-LIPURO",
+    "generic_name": "Propofol",
+    "strength": "1 % (10 MG / 1 ML)",
+    "form": "Émulsion",
+    "route": "IV",
+    "atc_code": "N01AX10",
+    "therapeutic_group": "Anesthésiques généraux",
+    "drug_class": "Anesthésique IV",
+    "indications": [
+      "Induction et entretien de l'anesthésie générale",
+      "Sédation en réanimation"
+    ],
+    "contraindications": [
+      "Allergie soja/œuf (certaines formulations)",
+      "Enfant <1 mois (sédation réa)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Induction: 1.5-2.5 mg/kg IV. Entretien: 4-12 mg/kg/h.",
+      "children": "Induction: 2.5-4 mg/kg."
+    },
+    "market_data": [
+      {
+        "price": 275.0,
+        "packaging": "injectable (IV) ou pour perfusion Boite de 5 ampoules de 20 ml",
+        "laboratory": "PHI"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/propofol-lipuro-1-10-mg-1-ml-emulsion"
+  },
+  {
+    "id": "P-PROSTIGMINE",
+    "brand_name": "PROSTIGMINE",
+    "generic_name": "Néostigmine",
+    "strength": "0.5 MG / ML",
+    "form": "Solution",
+    "route": "IV / IM",
+    "atc_code": "N07AA01",
+    "therapeutic_group": "Parasympathomimétiques",
+    "drug_class": "Inhibiteur réversible acétylcholinestérase",
+    "indications": [
+      "Décurarisation post-anesthésie",
+      "Myasthénie gravis",
+      "Iléus post-opératoire"
+    ],
+    "contraindications": [
+      "Obstruction mécanique GI/urinaire",
+      "Péritonite"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Décurarisation: 0.5-2.5 mg IV. Myasthénie: 15-30 mg PO 3-6x/j.",
+      "children": "Selon poids."
+    },
+    "market_data": [
+      {
+        "price": 38.3,
+        "packaging": "injectable Boîte de 6 ampoules 1 ml",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/prostigmine-0-5-mg-ml-solution"
+  },
+  {
+    "id": "P-PROTADEX",
+    "brand_name": "PROTADEX",
+    "generic_name": "Ranitidine",
+    "strength": "150 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A02BA02",
+    "therapeutic_group": "Antiulcéreux - Anti-H2",
+    "drug_class": "Antagoniste H2",
+    "indications": [
+      "Ulcère GD",
+      "RGO",
+      "Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "150 mg 2x/j ou 300 mg/soir.",
+      "children": "2-4 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 962.0,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/protadex-150-mg-comprime"
+  },
+  {
+    "id": "P-PROTAMINE",
+    "brand_name": "PROTAMINE",
+    "generic_name": "Protamine",
+    "strength": "CHOAY 1000 UAH / ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "V03AB14",
+    "therapeutic_group": "Antidotes",
+    "drug_class": "Antidote de l'héparine",
+    "indications": [
+      "Neutralisation de l'héparine (antidote)"
+    ],
+    "contraindications": [
+      "Allergie protamine/poisson"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1 mg neutralise ~100 UI d'héparine. Injection IV lente.",
+      "children": "Idem."
+    },
+    "market_data": [
+      {
+        "price": 155.3,
+        "packaging": "injectable Boîte de 1 Flacon de 10 ml",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/protamine-choay-1000-uah-ml-solution"
+  },
+  {
+    "id": "P-PROTEC",
+    "brand_name": "PROTEC",
+    "generic_name": "Amoxicilline + Acide clavulanique",
+    "strength": "1 G",
+    "form": "Poudre",
+    "route": "Orale / IV",
+    "atc_code": "J01CR02",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Pénicilline + inhibiteur bêta-lactamase",
+    "indications": [
+      "ORL",
+      "Respiratoires",
+      "Urinaires",
+      "Cutanées",
+      "Dentaires",
+      "Morsures animales"
+    ],
+    "contraindications": [
+      "Allergie pénicillines",
+      "Ictère/hépatite sous amox-clav antérieur"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1g/125mg 2-3x/j.",
+      "children": "80 mg/kg/j (amox) en 2-3 prises."
+    },
+    "market_data": [
+      {
+        "price": 57.9,
+        "packaging": "pour solution injectable 1 flacon de 10 ml",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Diarrhée",
+      "Nausées",
+      "Candidose",
+      "Hépatite cholestatique (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution clairance MTX",
+        "recommendation": "Surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation INR possible",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/protec-1-g-poudre"
+  },
+  {
+    "id": "P-PROTON",
+    "brand_name": "PROTON",
+    "generic_name": "Oméprazole",
+    "strength": "20 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A02BC01",
+    "therapeutic_group": "IPP",
+    "drug_class": "Inhibiteur pompe à protons",
+    "indications": [
+      "RGO",
+      "Ulcère GD",
+      "H. pylori",
+      "Prévention lésions AINS",
+      "Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association nelfinavir"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an.",
+      "dose_rule": "1-2 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "20-40 mg/j.",
+      "children": "1-2 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 49.3,
+        "packaging": "Boîte de 14",
+        "laboratory": "AFRIC-PHAR"
+      }
+    ],
+    "drugbank_id": "DB00338",
+    "adverse_effects": [
+      "Céphalées",
+      "Diarrhée",
+      "Hypomagnésémie (prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution activation clopidogrel",
+        "recommendation": "Préférer pantoprazole."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX",
+        "recommendation": "Prudence haute dose MTX."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/proton-20-mg-gelule"
+  },
+  {
+    "id": "P-PROVIVE",
+    "brand_name": "PROVIVE",
+    "generic_name": "Propofol",
+    "strength": "1 %",
+    "form": "Émulsion",
+    "route": "IV",
+    "atc_code": "N01AX10",
+    "therapeutic_group": "Anesthésiques généraux",
+    "drug_class": "Anesthésique IV",
+    "indications": [
+      "Induction et entretien de l'anesthésie générale",
+      "Sédation en réanimation"
+    ],
+    "contraindications": [
+      "Allergie soja/œuf (certaines formulations)",
+      "Enfant <1 mois (sédation réa)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "Induction: 1.5-2.5 mg/kg IV. Entretien: 4-12 mg/kg/h.",
+      "children": "Induction: 2.5-4 mg/kg."
+    },
+    "market_data": [
+      {
+        "price": 159.6,
+        "packaging": "injectable ( IV) 5 flacons de 20 ml",
+        "laboratory": "AMANYS PHARMA (Ex SAHAM PHARMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/provive-1-emulsion"
+  },
+  {
+    "id": "P-PULMICORT",
+    "brand_name": "PULMICORT",
+    "generic_name": "Budésonide (nébulisation)",
+    "strength": "0.5 µg / 2 ML",
+    "form": "Suspension",
+    "route": "Inhalée",
+    "atc_code": "R03BA02",
+    "therapeutic_group": "Corticostéroïdes inhalés",
+    "drug_class": "CSI (nébulisation)",
+    "indications": [
+      "Croup",
+      "Asthme aigu (enfant)",
+      "Asthme persistant léger-modéré"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "TB pulmonaire active"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0.5,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "0.5-2 mg/j en 1-2 nébulisations.",
+      "children": "Croup: 2 mg dose unique. Asthme: 0.5-1 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 204.0,
+        "packaging": "pour inhalation par nébuliseur en récipient unidose Boite de 20 de 2 ml",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Candidose oropharyngée",
+      "Dysphonie",
+      "Toux"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/pulmicort-0-5-g-2-ml-suspension"
+  },
+  {
+    "id": "P-PULMOFLUIDE",
+    "brand_name": "PULMOFLUIDE",
+    "generic_name": "Carbocistéine",
+    "strength": "SIMPLE",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R05CB03",
+    "therapeutic_group": "Mucolytiques",
+    "drug_class": "Mucolytique",
+    "indications": [
+      "Bronchite",
+      "Affections bronchopulmonaires avec hypersécrétion"
+    ],
+    "contraindications": [
+      "Ulcère GD"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "750 mg 3x/j.",
+      "children": "≥ 2 ans: 10-15 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 16.8,
+        "packaging": "Flacon de 150 ml",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/pulmofluide-simple-sirop"
+  },
+  {
+    "id": "P-PUREGON",
+    "brand_name": "PUREGON",
+    "generic_name": "Follitropine bêta",
+    "strength": "300 UI / 0.36 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "G03GA06",
+    "therapeutic_group": "Gonadotrophines",
+    "drug_class": "FSH recombinante",
+    "indications": [
+      "Stimulation ovarienne (FIV)",
+      "Anovulation"
+    ],
+    "contraindications": [
+      "Cancer ovarien",
+      "Kyste ovarien"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "75-300 UI/j SC.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 1382.0,
+        "packaging": "Injectable Boîte de 1",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/puregon-300-ui-0-36-ml-solution"
+  },
+  {
+    "id": "P-PURINOL",
+    "brand_name": "PURINOL",
+    "generic_name": "Allopurinol",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M04AA01",
+    "therapeutic_group": "Antigoutteux",
+    "drug_class": "Inhibiteur xanthine oxydase",
+    "indications": [
+      "Goutte chronique",
+      "Prévention lithiase urique",
+      "Hyperuricémie chimio-induite"
+    ],
+    "contraindications": [
+      "Crise de goutte aiguë (ne pas initier)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "100-600 mg/j. Début 100 mg.",
+      "children": "10-20 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 13.9,
+        "packaging": "Boîte de 28",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Rash",
+      "DRESS syndrome (GRAVE)",
+      "Crise de goutte initiale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Azathioprine",
+          "Mercaptopurine"
+        ],
+        "interacting_classes": [
+          "Thiopurines"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité hématologique sévère",
+        "recommendation": "Réduire thiopurine de 50-75%."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Amoxicilline"
+        ],
+        "interacting_classes": [
+          "Aminopénicillines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque éruption cutanée",
+        "recommendation": "Surveiller."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/purinol-100-mg-comprime"
+  },
+  {
+    "id": "P-PYLERA",
+    "brand_name": "PYLERA",
+    "generic_name": "Bismuth + Métronidazole + Tétracycline",
+    "strength": "140 / 125 / 125 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A02BD08",
+    "therapeutic_group": "Anti-H. pylori",
+    "drug_class": "Quadrithérapie bismuthée",
+    "indications": [
+      "Éradication H. pylori (quadrithérapie bismuthée avec IPP)"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Enfant <18 ans",
+      "IRC sévère"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "3 gélules 4x/j pendant 10 jours + IPP 2x/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 751.0,
+        "packaging": "Boite de 120",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Selles noires (bismuth)",
+      "Nausées",
+      "Goût métallique",
+      "Photosensibilisation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Effet antabuse (métronidazole)",
+        "recommendation": "INTERDIRE alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pylera-140-125-125-mg-comprime"
+  },
+  {
+    "id": "P-PYOCIADIM",
+    "brand_name": "PYOCIADIM",
+    "generic_name": "Céfépime",
+    "strength": "1 G",
+    "form": "Poudre",
+    "route": "IV / IM",
+    "atc_code": "J01DE01",
+    "therapeutic_group": "Antibactériens - C4G",
+    "drug_class": "Céphalosporine 4e génération",
+    "indications": [
+      "Infections sévères à BGN",
+      "Neutropénie fébrile",
+      "Pneumonie nosocomiale",
+      "Méningite"
+    ],
+    "contraindications": [
+      "Allergie céphalosporines"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1-2 g IV/8-12h. Neutropénie fébrile: 2 g/8h.",
+      "children": "50 mg/kg/8h."
+    },
+    "market_data": [
+      {
+        "price": 97.6,
+        "packaging": "pour usage parenteral 1 flacon",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Diarrhée",
+      "Réactions allergiques",
+      "Neurotoxicité (IRC, surdosage)"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/pyociadim-1-g-poudre"
+  },
+  {
+    "id": "P-PYOSTACINE",
+    "brand_name": "PYOSTACINE",
+    "generic_name": "Pristinamycine",
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01FG01",
+    "therapeutic_group": "Antibactériens - Synergistines",
+    "drug_class": "Streptogramine",
+    "indications": [
+      "Infections ORL et respiratoires",
+      "Infections cutanées",
+      "Infections staphylococciques",
+      "Infections dentaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "1 g 2-3x/j pendant repas.",
+      "children": "≥ 6 ans: 50 mg/kg/j en 2-3 prises."
+    },
+    "market_data": [
+      {
+        "price": 179.5,
+        "packaging": "pelliculé Boîte de 16",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Rash"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/pyostacine-500-mg-comprime"
+  }
+]

@@ -95,7 +95,7 @@ const MedicalDirectory: React.FC = () => {
             </div>
 
             {/* Search & Filters */}
-            <div className="bg-white p-2 rounded-[2.5rem] shadow-sm border border-gray-100 flex flex-col md:flex-row items-center gap-2">
+            <div className="bg-white p-2 rounded-[2.5rem] shadow-sm border border-gray-100 flex flex-col items-center gap-2">
                 <div className="relative flex-1 w-full">
                     <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
                     <input
@@ -105,21 +105,6 @@ const MedicalDirectory: React.FC = () => {
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="w-full pl-16 pr-8 py-5 bg-transparent border-none outline-none font-bold text-gray-700 text-lg placeholder:text-gray-300"
                     />
-                </div>
-
-                <div className="flex items-center gap-2 p-2">
-                    {(['All', 'JSON', 'PDF', 'Word', 'Manuel'] as const).map(f => (
-                        <button
-                            key={f}
-                            onClick={() => setActiveFilter(f)}
-                            className={`px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all ${activeFilter === f
-                                    ? 'bg-gray-900 text-white shadow-lg'
-                                    : 'text-gray-400 hover:bg-gray-50'
-                                }`}
-                        >
-                            {f === 'All' ? 'Tout' : f}
-                        </button>
-                    ))}
                 </div>
             </div>
 

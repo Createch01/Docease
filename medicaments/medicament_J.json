@@ -1,0 +1,2256 @@
+[
+  {
+    "id": "jakavi_15_mg_comprimé_pelliculé_boite_de_56",
+    "brand_name": "JAKAVI",
+    "generic_name": "Ruxolitinib",
+    "composition": [
+      "Ruxolitinib"
+    ],
+    "strength": "15 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "L01XE18",
+    "therapeutic_group": "Oncologie / Hématologie",
+    "drug_class": "Inhibiteur JAK1/JAK2",
+    "drugbank_id": "DB08877",
+    "mechanism": "Inhibiteur sélectif des Janus kinases JAK1 et JAK2. Bloque la voie de signalisation JAK-STAT (transducteurs de signaux et activateurs de transcription), réduisant la prolifération et la survie des cellules hématopoïétiques anormales dépendantes de JAK.",
+    "half_life": "3h (ruxolitinib), 5.8h (métabolite actif)",
+    "indications": [
+      "Myélofibrose primitive, post-polycythémie ou post-thrombocythémie essentielle (adulte, splénomégalie ou symptômes)",
+      "Polycythémie vraie résistante/intolérante à l'hydroxyurée",
+      "Maladie du greffon contre l'hôte (GvHD) aiguë et chronique réfractaire aux corticoïdes (≥12 ans)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au ruxolitinib",
+      "Grossesse",
+      "Allaitement",
+      "Infections actives graves"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, clarithromycine, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation ruxolitinib — réduire dose 50%"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, phénytoïne)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — doubler dose"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqués pendant traitement"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué — données animales défavorables. Contraception efficace requise.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "Autorisé dès 12 ans pour GvHD réfractaire",
+      "dose_rule": "5-10 mg 2x/j selon indication et tolérance"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose si DFG < 60 mL/min. Hémodialyse: dose unique après séance."
+    },
+    "dosage": {
+      "adult": "Myélofibrose: 15-20 mg 2x/j selon numération plaquettaire. GvHD: 10 mg 2x/j.",
+      "children": "5-10 mg 2x/j (≥12 ans)"
+    },
+    "adverse_effects": [
+      "Thrombopénie",
+      "Anémie",
+      "Neutropénie",
+      "Infections (zona, tuberculose réactivation)",
+      "Céphalées",
+      "Vertiges",
+      "Élévation cholestérol"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 56",
+        "price_ppv_dhs": 30291.0,
+        "price_ph_dhs": null,
+        "laboratory": "NOVARTIS PHARMA MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/jakavi-15-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/jakavi-15-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "ENFANT_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB08877",
+      "drugs_com": "https://www.drugs.com/ruxolitinib.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, clarithromycine, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation ruxolitinib — réduire dose 50%"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, phénytoïne)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — doubler dose"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqués pendant traitement"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/jakavi-15-mg-comprime-pellicule/"
+  },
+  {
+    "id": "jakavi_20_mg_comprimé_pelliculé_boite_de_56",
+    "brand_name": "JAKAVI",
+    "generic_name": "Ruxolitinib",
+    "composition": [
+      "Ruxolitinib"
+    ],
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "L01XE18",
+    "therapeutic_group": "Oncologie / Hématologie",
+    "drug_class": "Inhibiteur JAK1/JAK2",
+    "drugbank_id": "DB08877",
+    "mechanism": "Inhibiteur sélectif des Janus kinases JAK1 et JAK2. Bloque la voie de signalisation JAK-STAT (transducteurs de signaux et activateurs de transcription), réduisant la prolifération et la survie des cellules hématopoïétiques anormales dépendantes de JAK.",
+    "half_life": "3h (ruxolitinib), 5.8h (métabolite actif)",
+    "indications": [
+      "Myélofibrose primitive, post-polycythémie ou post-thrombocythémie essentielle (adulte, splénomégalie ou symptômes)",
+      "Polycythémie vraie résistante/intolérante à l'hydroxyurée",
+      "Maladie du greffon contre l'hôte (GvHD) aiguë et chronique réfractaire aux corticoïdes (≥12 ans)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au ruxolitinib",
+      "Grossesse",
+      "Allaitement",
+      "Infections actives graves"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, clarithromycine, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation ruxolitinib — réduire dose 50%"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, phénytoïne)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — doubler dose"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqués pendant traitement"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué — données animales défavorables. Contraception efficace requise.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "Autorisé dès 12 ans pour GvHD réfractaire",
+      "dose_rule": "5-10 mg 2x/j selon indication et tolérance"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose si DFG < 60 mL/min. Hémodialyse: dose unique après séance."
+    },
+    "dosage": {
+      "adult": "Myélofibrose: 15-20 mg 2x/j selon numération plaquettaire. GvHD: 10 mg 2x/j.",
+      "children": "5-10 mg 2x/j (≥12 ans)"
+    },
+    "adverse_effects": [
+      "Thrombopénie",
+      "Anémie",
+      "Neutropénie",
+      "Infections (zona, tuberculose réactivation)",
+      "Céphalées",
+      "Vertiges",
+      "Élévation cholestérol"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 56",
+        "price_ppv_dhs": 30291.0,
+        "price_ph_dhs": null,
+        "laboratory": "NOVARTIS PHARMA MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/jakavi-20-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/jakavi-20-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "ENFANT_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB08877",
+      "drugs_com": "https://www.drugs.com/ruxolitinib.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, clarithromycine, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation ruxolitinib — réduire dose 50%"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, phénytoïne)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — doubler dose"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqués pendant traitement"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/jakavi-20-mg-comprime-pellicule/"
+  },
+  {
+    "id": "jakavi_5_mg_comprimé_pelliculé_boite_de_56",
+    "brand_name": "JAKAVI",
+    "generic_name": "Ruxolitinib",
+    "composition": [
+      "Ruxolitinib"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "L01XE18",
+    "therapeutic_group": "Oncologie / Hématologie",
+    "drug_class": "Inhibiteur JAK1/JAK2",
+    "drugbank_id": "DB08877",
+    "mechanism": "Inhibiteur sélectif des Janus kinases JAK1 et JAK2. Bloque la voie de signalisation JAK-STAT (transducteurs de signaux et activateurs de transcription), réduisant la prolifération et la survie des cellules hématopoïétiques anormales dépendantes de JAK.",
+    "half_life": "3h (ruxolitinib), 5.8h (métabolite actif)",
+    "indications": [
+      "Myélofibrose primitive, post-polycythémie ou post-thrombocythémie essentielle (adulte, splénomégalie ou symptômes)",
+      "Polycythémie vraie résistante/intolérante à l'hydroxyurée",
+      "Maladie du greffon contre l'hôte (GvHD) aiguë et chronique réfractaire aux corticoïdes (≥12 ans)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au ruxolitinib",
+      "Grossesse",
+      "Allaitement",
+      "Infections actives graves"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, clarithromycine, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation ruxolitinib — réduire dose 50%"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, phénytoïne)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — doubler dose"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqués pendant traitement"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué — données animales défavorables. Contraception efficace requise.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "Autorisé dès 12 ans pour GvHD réfractaire",
+      "dose_rule": "5-10 mg 2x/j selon indication et tolérance"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose si DFG < 60 mL/min. Hémodialyse: dose unique après séance."
+    },
+    "dosage": {
+      "adult": "Myélofibrose: 15-20 mg 2x/j selon numération plaquettaire. GvHD: 10 mg 2x/j.",
+      "children": "5-10 mg 2x/j (≥12 ans)"
+    },
+    "adverse_effects": [
+      "Thrombopénie",
+      "Anémie",
+      "Neutropénie",
+      "Infections (zona, tuberculose réactivation)",
+      "Céphalées",
+      "Vertiges",
+      "Élévation cholestérol"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 56",
+        "price_ppv_dhs": 15864.0,
+        "price_ph_dhs": null,
+        "laboratory": "NOVARTIS PHARMA MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/jakavi-5-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/jakavi-5-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "ENFANT_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB08877",
+      "drugs_com": "https://www.drugs.com/ruxolitinib.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, clarithromycine, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation ruxolitinib — réduire dose 50%"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, phénytoïne)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — doubler dose"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqués pendant traitement"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/jakavi-5-mg-comprime-pellicule/"
+  },
+  {
+    "id": "janumet_50_/_1000_mg_comprimé_boîte_de_56",
+    "brand_name": "JANUMET",
+    "generic_name": "Sitagliptine + Metformine",
+    "composition": [
+      "Sitagliptine",
+      "Metformine"
+    ],
+    "strength": "50 / 1000 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "A10BD07",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Inhibiteur DPP-4 + Biguanide",
+    "drugbank_id": "DB01261",
+    "mechanism": "Association synergique: Sitagliptine (inhibiteur DPP-4 — augmente incrétines actives GLP-1/GIP, stimule sécrétion insuline glucose-dépendante) + Metformine (biguanide — réduit production hépatique glucose, améliore insulino-sensibilité).",
+    "half_life": "Sitagliptine 12h, Metformine 4-8h",
+    "indications": [
+      "Diabète de type 2 non contrôlé par metformine seule ou sitagliptine seule",
+      "En association avec d'autres antidiabétiques"
+    ],
+    "contraindications": [
+      "DFG < 30 mL/min",
+      "Insuffisance hépatique",
+      "Acidose lactique antérieure",
+      "Injection de produit de contraste iodé (48h)"
+    ],
+    "interactions": [
+      {
+        "drug": "Produits de contraste iodés",
+        "severity": "majeure",
+        "effect": "Arrêter Metformine 48h avant — risque acidose lactique"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "majeure",
+        "effect": "Risque d'acidose lactique (composante Metformine)"
+      },
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque hypoglycémie augmenté"
+      }
+    ],
+    "pregnancy": {
+      "category": "B/C",
+      "warning": "Non recommandé — passer à insuline pendant la grossesse.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution si DFG 30-60 (réduire dose Metformine). Contre-indiqué si DFG < 30."
+    },
+    "dosage": {
+      "adult": "Sitagliptine 50 mg + Metformine 850 ou 1000 mg, 2x/j avec repas",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Douleurs abdominales",
+      "Nasopharyngite",
+      "Hypoglycémie (en association)",
+      "Pancreatite (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 56",
+        "price_ppv_dhs": 376.0,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/janumet-50-1000-mg-comprime/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/janumet-50-1000-mg-comprime/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "INTERACTION_ALCOOL",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01261",
+      "drugs_com": "https://www.drugs.com/sitagliptin-metformin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Produits de contraste iodés",
+        "severity": "majeure",
+        "effect": "Arrêter Metformine 48h avant — risque acidose lactique"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "majeure",
+        "effect": "Risque d'acidose lactique (composante Metformine)"
+      },
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque hypoglycémie augmenté"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/janumet-50-1000-mg-comprime/"
+  },
+  {
+    "id": "janumet_50_/_850_mg_comprimé_boîte_de_56",
+    "brand_name": "JANUMET",
+    "generic_name": "Sitagliptine + Metformine",
+    "composition": [
+      "Sitagliptine",
+      "Metformine"
+    ],
+    "strength": "50 / 850 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "A10BD07",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Inhibiteur DPP-4 + Biguanide",
+    "drugbank_id": "DB01261",
+    "mechanism": "Association synergique: Sitagliptine (inhibiteur DPP-4 — augmente incrétines actives GLP-1/GIP, stimule sécrétion insuline glucose-dépendante) + Metformine (biguanide — réduit production hépatique glucose, améliore insulino-sensibilité).",
+    "half_life": "Sitagliptine 12h, Metformine 4-8h",
+    "indications": [
+      "Diabète de type 2 non contrôlé par metformine seule ou sitagliptine seule",
+      "En association avec d'autres antidiabétiques"
+    ],
+    "contraindications": [
+      "DFG < 30 mL/min",
+      "Insuffisance hépatique",
+      "Acidose lactique antérieure",
+      "Injection de produit de contraste iodé (48h)"
+    ],
+    "interactions": [
+      {
+        "drug": "Produits de contraste iodés",
+        "severity": "majeure",
+        "effect": "Arrêter Metformine 48h avant — risque acidose lactique"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "majeure",
+        "effect": "Risque d'acidose lactique (composante Metformine)"
+      },
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque hypoglycémie augmenté"
+      }
+    ],
+    "pregnancy": {
+      "category": "B/C",
+      "warning": "Non recommandé — passer à insuline pendant la grossesse.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution si DFG 30-60 (réduire dose Metformine). Contre-indiqué si DFG < 30."
+    },
+    "dosage": {
+      "adult": "Sitagliptine 50 mg + Metformine 850 ou 1000 mg, 2x/j avec repas",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Douleurs abdominales",
+      "Nasopharyngite",
+      "Hypoglycémie (en association)",
+      "Pancreatite (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 56",
+        "price_ppv_dhs": 428.0,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/janumet-50-850-mg-comprime/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/janumet-50-850-mg-comprime/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "INTERACTION_ALCOOL",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01261",
+      "drugs_com": "https://www.drugs.com/sitagliptin-metformin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Produits de contraste iodés",
+        "severity": "majeure",
+        "effect": "Arrêter Metformine 48h avant — risque acidose lactique"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "majeure",
+        "effect": "Risque d'acidose lactique (composante Metformine)"
+      },
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque hypoglycémie augmenté"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/janumet-50-850-mg-comprime/"
+  },
+  {
+    "id": "januvia_100_mg_comprimé_pelliculé_boîte_de_28",
+    "brand_name": "JANUVIA",
+    "generic_name": "Sitagliptine",
+    "composition": [
+      "Sitagliptine"
+    ],
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "A10BH01",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Inhibiteur DPP-4",
+    "drugbank_id": "DB01261",
+    "mechanism": "Inhibiteur sélectif et réversible de la dipeptidyl-peptidase-4 (DPP-4). Augmente les taux d'incrétines actives (GLP-1 et GIP), stimulant la sécrétion d'insuline de façon glucose-dépendante et réduisant la sécrétion de glucagon.",
+    "half_life": "12h",
+    "indications": [
+      "Diabète de type 2 (en monothérapie ou association)",
+      "Avec metformine, sulfonylurées, glitazones, insuline, ou SGLT2i"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la sitagliptine",
+      "Diabète type 1",
+      "Acidocétose diabétique"
+    ],
+    "interactions": [
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque d'hypoglycémie — réduire dose sulfonylurée"
+      },
+      {
+        "drug": "Digoxine",
+        "severity": "faible",
+        "effect": "Légère augmentation taux digoxine — surveiller"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Non recommandé — données insuffisantes. Passer à insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose: 50 mg/j si DFG 30-50 mL/min, 25 mg/j si DFG < 30 mL/min."
+    },
+    "dosage": {
+      "adult": "100 mg/j en 1 prise (ou 50 mg/j si association sulfonylurée/insuline)",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Nasopharyngite",
+      "Céphalées",
+      "Hypoglycémie (en association)",
+      "Nausées",
+      "Pancréatite aiguë (rare)",
+      "Arthralgie"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boîte de 28",
+        "price_ppv_dhs": 393.0,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/januvia-100-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/januvia-100-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01261",
+      "drugs_com": "https://www.drugs.com/sitagliptin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque d'hypoglycémie — réduire dose sulfonylurée"
+      },
+      {
+        "drug": "Digoxine",
+        "severity": "faible",
+        "effect": "Légère augmentation taux digoxine — surveiller"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/januvia-100-mg-comprime-pellicule/"
+  },
+  {
+    "id": "januvia_50_mg_comprimé_pelliculé_boîte_de_28",
+    "brand_name": "JANUVIA",
+    "generic_name": "Sitagliptine",
+    "composition": [
+      "Sitagliptine"
+    ],
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "A10BH01",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Inhibiteur DPP-4",
+    "drugbank_id": "DB01261",
+    "mechanism": "Inhibiteur sélectif et réversible de la dipeptidyl-peptidase-4 (DPP-4). Augmente les taux d'incrétines actives (GLP-1 et GIP), stimulant la sécrétion d'insuline de façon glucose-dépendante et réduisant la sécrétion de glucagon.",
+    "half_life": "12h",
+    "indications": [
+      "Diabète de type 2 (en monothérapie ou association)",
+      "Avec metformine, sulfonylurées, glitazones, insuline, ou SGLT2i"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la sitagliptine",
+      "Diabète type 1",
+      "Acidocétose diabétique"
+    ],
+    "interactions": [
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque d'hypoglycémie — réduire dose sulfonylurée"
+      },
+      {
+        "drug": "Digoxine",
+        "severity": "faible",
+        "effect": "Légère augmentation taux digoxine — surveiller"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Non recommandé — données insuffisantes. Passer à insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose: 50 mg/j si DFG 30-50 mL/min, 25 mg/j si DFG < 30 mL/min."
+    },
+    "dosage": {
+      "adult": "100 mg/j en 1 prise (ou 50 mg/j si association sulfonylurée/insuline)",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Nasopharyngite",
+      "Céphalées",
+      "Hypoglycémie (en association)",
+      "Nausées",
+      "Pancréatite aiguë (rare)",
+      "Arthralgie"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boîte de 28",
+        "price_ppv_dhs": 301.0,
+        "price_ph_dhs": null,
+        "laboratory": "MERCK SHARP AND DOHME",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/januvia-50-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/januvia-50-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01261",
+      "drugs_com": "https://www.drugs.com/sitagliptin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque d'hypoglycémie — réduire dose sulfonylurée"
+      },
+      {
+        "drug": "Digoxine",
+        "severity": "faible",
+        "effect": "Légère augmentation taux digoxine — surveiller"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/januvia-50-mg-comprime-pellicule/"
+  },
+  {
+    "id": "jardiance_10_mg_comprimé_pelliculé_boite_de_30",
+    "brand_name": "JARDIANCE",
+    "generic_name": "Empagliflozine",
+    "composition": [
+      "Empagliflozine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "A10BK03",
+    "therapeutic_group": "Antidiabétique / Cardiologie",
+    "drug_class": "Inhibiteur SGLT2 (gliflozine)",
+    "drugbank_id": "DB09038",
+    "mechanism": "Inhibiteur sélectif et réversible du co-transporteur sodium-glucose de type 2 (SGLT2) rénal. Bloque la réabsorption tubulaire du glucose filtré, augmentant la glycosurie et réduisant la glycémie indépendamment de l'insuline. Effets cardiovasculaires et rénaux bénéfiques additionnels.",
+    "half_life": "12.4h",
+    "indications": [
+      "Diabète de type 2 (avec ou sans autres antidiabétiques)",
+      "Insuffisance cardiaque avec FEVG réduite (avec ou sans DT2)",
+      "Insuffisance rénale chronique (DFG ≥ 20 mL/min)"
+    ],
+    "contraindications": [
+      "DFG < 20 mL/min (pour DT2)",
+      "Grossesse",
+      "Allaitement",
+      "Diabète type 1",
+      "Acidocétose diabétique"
+    ],
+    "interactions": [
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque hypoglycémie — réduire dose sulfonylurée/insuline"
+      },
+      {
+        "drug": "Diurétiques de l'anse",
+        "severity": "modérée",
+        "effect": "Risque déshydratation et hypotension additionné"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué — données animales défavorables. Passer à insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé (insuffisant de données)",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "DT2: éviter si DFG < 45. IC/IRC: pas d'ajustement si DFG ≥ 20. Surveiller DFG régulièrement."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le matin (avec ou sans aliments). Peut augmenter à 25 mg/j pour DT2.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Infections génitales mycosiques (très fréquentes)",
+      "Infections urinaires",
+      "Polyurie",
+      "Hypotension orthostatique",
+      "Acidocétose euglycémique (rare)",
+      "Gangrène de Fournier (très rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 30",
+        "price_ppv_dhs": 448.0,
+        "price_ph_dhs": null,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/jardiance-10-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/jardiance-10-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB09038",
+      "drugs_com": "https://www.drugs.com/empagliflozin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque hypoglycémie — réduire dose sulfonylurée/insuline"
+      },
+      {
+        "drug": "Diurétiques de l'anse",
+        "severity": "modérée",
+        "effect": "Risque déshydratation et hypotension additionné"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/jardiance-10-mg-comprime-pellicule/"
+  },
+  {
+    "id": "jardiance_25_mg_comprimé_pelliculé_boite_de_30",
+    "brand_name": "JARDIANCE",
+    "generic_name": "Empagliflozine",
+    "composition": [
+      "Empagliflozine"
+    ],
+    "strength": "25 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "A10BK03",
+    "therapeutic_group": "Antidiabétique / Cardiologie",
+    "drug_class": "Inhibiteur SGLT2 (gliflozine)",
+    "drugbank_id": "DB09038",
+    "mechanism": "Inhibiteur sélectif et réversible du co-transporteur sodium-glucose de type 2 (SGLT2) rénal. Bloque la réabsorption tubulaire du glucose filtré, augmentant la glycosurie et réduisant la glycémie indépendamment de l'insuline. Effets cardiovasculaires et rénaux bénéfiques additionnels.",
+    "half_life": "12.4h",
+    "indications": [
+      "Diabète de type 2 (avec ou sans autres antidiabétiques)",
+      "Insuffisance cardiaque avec FEVG réduite (avec ou sans DT2)",
+      "Insuffisance rénale chronique (DFG ≥ 20 mL/min)"
+    ],
+    "contraindications": [
+      "DFG < 20 mL/min (pour DT2)",
+      "Grossesse",
+      "Allaitement",
+      "Diabète type 1",
+      "Acidocétose diabétique"
+    ],
+    "interactions": [
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque hypoglycémie — réduire dose sulfonylurée/insuline"
+      },
+      {
+        "drug": "Diurétiques de l'anse",
+        "severity": "modérée",
+        "effect": "Risque déshydratation et hypotension additionné"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué — données animales défavorables. Passer à insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé (insuffisant de données)",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "DT2: éviter si DFG < 45. IC/IRC: pas d'ajustement si DFG ≥ 20. Surveiller DFG régulièrement."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le matin (avec ou sans aliments). Peut augmenter à 25 mg/j pour DT2.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Infections génitales mycosiques (très fréquentes)",
+      "Infections urinaires",
+      "Polyurie",
+      "Hypotension orthostatique",
+      "Acidocétose euglycémique (rare)",
+      "Gangrène de Fournier (très rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 30",
+        "price_ppv_dhs": 448.0,
+        "price_ph_dhs": null,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/jardiance-25-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/jardiance-25-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB09038",
+      "drugs_com": "https://www.drugs.com/empagliflozin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Insuline / Sulfonylurées",
+        "severity": "modérée",
+        "effect": "Risque hypoglycémie — réduire dose sulfonylurée/insuline"
+      },
+      {
+        "drug": "Diurétiques de l'anse",
+        "severity": "modérée",
+        "effect": "Risque déshydratation et hypotension additionné"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/jardiance-25-mg-comprime-pellicule/"
+  },
+  {
+    "id": "jentadueto_2.5_mg_/_1000_mg_comprimé_pelliculé_boite_de_56",
+    "brand_name": "JENTADUETO",
+    "generic_name": "Linagliptine + Metformine",
+    "composition": [
+      "Linagliptine",
+      "Metformine"
+    ],
+    "strength": "2.5 MG / 1000 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "A10BD11",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Inhibiteur DPP-4 + Biguanide",
+    "drugbank_id": "DB08882",
+    "mechanism": "Linagliptine (inhibiteur DPP-4 — augmente GLP-1/GIP actifs) + Metformine (biguanide — réduit production hépatique glucose). Double mécanisme complémentaire sans risque hypoglycémie en monothérapie.",
+    "half_life": "Linagliptine >100h (liaison protéines), Metformine 4-8h",
+    "indications": [
+      "Diabète de type 2 non contrôlé par metformine ou linagliptine seule"
+    ],
+    "contraindications": [
+      "DFG < 30 mL/min",
+      "Insuffisance hépatique",
+      "Acidose lactique antérieure"
+    ],
+    "interactions": [
+      {
+        "drug": "Produits de contraste iodés",
+        "severity": "majeure",
+        "effect": "Arrêter Metformine 48h avant"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "majeure",
+        "effect": "Risque acidose lactique (Metformine)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Non recommandé — passer à insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Avantage linagliptine: éliminée principalement par voie biliaire — mais Metformine contre-indiquée si DFG < 30."
+    },
+    "dosage": {
+      "adult": "Linagliptine 2.5 mg + Metformine 850 ou 1000 mg, 2x/j avec repas",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Nasopharyngite",
+      "Hypoglycémie (en association)",
+      "Pancréatite (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 56",
+        "price_ppv_dhs": 471.0,
+        "price_ph_dhs": null,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/jentadueto-2-5-mg-1000-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/jentadueto-2-5-mg-1000-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "INTERACTION_ALCOOL",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB08882",
+      "drugs_com": "https://www.drugs.com/linagliptin-metformin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Produits de contraste iodés",
+        "severity": "majeure",
+        "effect": "Arrêter Metformine 48h avant"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "majeure",
+        "effect": "Risque acidose lactique (Metformine)"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/jentadueto-2-5-mg-1000-mg-comprime-pellicule/"
+  },
+  {
+    "id": "jentadueto_2.5_mg_/_850_mg_comprimé_pelliculé_boite_de_56",
+    "brand_name": "JENTADUETO",
+    "generic_name": "Linagliptine + Metformine",
+    "composition": [
+      "Linagliptine",
+      "Metformine"
+    ],
+    "strength": "2.5 MG / 850 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "A10BD11",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Inhibiteur DPP-4 + Biguanide",
+    "drugbank_id": "DB08882",
+    "mechanism": "Linagliptine (inhibiteur DPP-4 — augmente GLP-1/GIP actifs) + Metformine (biguanide — réduit production hépatique glucose). Double mécanisme complémentaire sans risque hypoglycémie en monothérapie.",
+    "half_life": "Linagliptine >100h (liaison protéines), Metformine 4-8h",
+    "indications": [
+      "Diabète de type 2 non contrôlé par metformine ou linagliptine seule"
+    ],
+    "contraindications": [
+      "DFG < 30 mL/min",
+      "Insuffisance hépatique",
+      "Acidose lactique antérieure"
+    ],
+    "interactions": [
+      {
+        "drug": "Produits de contraste iodés",
+        "severity": "majeure",
+        "effect": "Arrêter Metformine 48h avant"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "majeure",
+        "effect": "Risque acidose lactique (Metformine)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Non recommandé — passer à insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Avantage linagliptine: éliminée principalement par voie biliaire — mais Metformine contre-indiquée si DFG < 30."
+    },
+    "dosage": {
+      "adult": "Linagliptine 2.5 mg + Metformine 850 ou 1000 mg, 2x/j avec repas",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Nasopharyngite",
+      "Hypoglycémie (en association)",
+      "Pancréatite (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 56",
+        "price_ppv_dhs": 471.0,
+        "price_ph_dhs": null,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/jentadueto-2-5-mg-850-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/jentadueto-2-5-mg-850-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "INTERACTION_ALCOOL",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB08882",
+      "drugs_com": "https://www.drugs.com/linagliptin-metformin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Produits de contraste iodés",
+        "severity": "majeure",
+        "effect": "Arrêter Metformine 48h avant"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "majeure",
+        "effect": "Risque acidose lactique (Metformine)"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/jentadueto-2-5-mg-850-mg-comprime-pellicule/"
+  },
+  {
+    "id": "jevtana_60_mg_/_1.5_ml_solution_à_diluer_pour_perfusion_flacon_de_1.5_ml",
+    "brand_name": "JEVTANA",
+    "generic_name": "Cabazitaxel",
+    "composition": [
+      "Cabazitaxel"
+    ],
+    "strength": "60 MG / 1.5 ML",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "L01CD04",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Taxane (inhibiteur polymérisation microtubules)",
+    "drugbank_id": "DB06772",
+    "mechanism": "Taxane semi-synthétique de 2e génération. Se fixe sur la tubuline, stabilisant les microtubules et inhibant leur dépolymérisation — blocage mitose en phase G2/M. Actif sur cellules résistantes au docétaxel (faible affinité pour P-gp).",
+    "half_life": "95h",
+    "indications": [
+      "Cancer de la prostate métastatique résistant à la castration, après docétaxel (en association avec prednisone/prednisolone)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au cabazitaxel ou au polysorbate 80",
+      "Neutropénie sévère (< 1500/mm³)",
+      "Insuffisance hépatique sévère",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation cabazitaxel — éviter"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, phénytoïne, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — éviter"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqués"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — embryotoxique et tératogène. Contraception efficace pendant et 6 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution si DFG < 30 mL/min. Contre-indiqué si insuffisance hépatique sévère."
+    },
+    "dosage": {
+      "adult": "25 mg/m² IV en 1h toutes les 3 semaines avec prednisone 10 mg/j oral.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Neutropénie fébrile (toxicité dose-limitante)",
+      "Anémie",
+      "Diarrhée",
+      "Fatigue",
+      "Nausées",
+      "Neuropathie périphérique",
+      "Dysurie",
+      "Hématurie"
+    ],
+    "market_data": [
+      {
+        "packaging": "à diluer pour perfusion Flacon de 1.5 ml",
+        "price_ppv_dhs": 22044.0,
+        "price_ph_dhs": null,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/jevtana-60-mg-1-5-ml-solution-a-diluer-pour-perfusion/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/jevtana-60-mg-1-5-ml-solution-a-diluer-pour-perfusion/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06772",
+      "drugs_com": "https://www.drugs.com/cabazitaxel.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation cabazitaxel — éviter"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, phénytoïne, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — éviter"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqués"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/jevtana-60-mg-1-5-ml-solution-a-diluer-pour-perfusion/"
+  },
+  {
+    "id": "josacine_1_g_comprimé_dispersible_boîte_de_10",
+    "brand_name": "JOSACINE",
+    "generic_name": "Josamycine",
+    "composition": [
+      "Josamycine"
+    ],
+    "strength": "1 G",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "J01FA07",
+    "therapeutic_group": "Antibiotique",
+    "drug_class": "Macrolide",
+    "drugbank_id": "DB13158",
+    "mechanism": "Macrolide antibactériostatique. Se fixe sur la sous-unité 50S du ribosome bactérien, inhibant la translocation et la synthèse protéique. Spectre: Gram+ (streptocoques, staphylocoques), germes intracellulaires (Mycoplasma, Chlamydia, Legionella).",
+    "half_life": "1.5-2h",
+    "indications": [
+      "Infections ORL et respiratoires à germes sensibles",
+      "Infections cutanées",
+      "Infections génitales à Chlamydia",
+      "Alternative aux pénicillines en cas d'allergie",
+      "Toxoplasmose (hors 1re ligne)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Insuffisance hépatique sévère",
+      "Association terfénadine, astémizole, cisapride (torsades de pointes)"
+    ],
+    "interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — utilisé pour toxoplasmose gestationnelle (hors 1er trimestre).",
+      "breastfeeding": "Compatible avec précaution."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable chez l'enfant et le nourrisson",
+      "dose_rule": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "1-2 g/j en 2-3 prises (500 mg 2-4x/j)",
+      "children": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Douleurs abdominales",
+      "Diarrhée",
+      "Élévation transaminases",
+      "Réactions allergiques",
+      "Allongement QT (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "dispersible Boîte de 10",
+        "price_ppv_dhs": 172.9,
+        "price_ph_dhs": null,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/josacine-1-g-comprime-dispersible/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/josacine-1-g-comprime-dispersible/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB13158",
+      "drugs_com": "https://www.drugs.com/josamycin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/josacine-1-g-comprime-dispersible/"
+  },
+  {
+    "id": "josacine_125_mg_/_5_ml_poudre_pour_suspension_buvable_flacon_de_60_ml",
+    "brand_name": "JOSACINE",
+    "generic_name": "Josamycine",
+    "composition": [
+      "Josamycine"
+    ],
+    "strength": "125 MG / 5 ML",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "J01FA07",
+    "therapeutic_group": "Antibiotique",
+    "drug_class": "Macrolide",
+    "drugbank_id": "DB13158",
+    "mechanism": "Macrolide antibactériostatique. Se fixe sur la sous-unité 50S du ribosome bactérien, inhibant la translocation et la synthèse protéique. Spectre: Gram+ (streptocoques, staphylocoques), germes intracellulaires (Mycoplasma, Chlamydia, Legionella).",
+    "half_life": "1.5-2h",
+    "indications": [
+      "Infections ORL et respiratoires à germes sensibles",
+      "Infections cutanées",
+      "Infections génitales à Chlamydia",
+      "Alternative aux pénicillines en cas d'allergie",
+      "Toxoplasmose (hors 1re ligne)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Insuffisance hépatique sévère",
+      "Association terfénadine, astémizole, cisapride (torsades de pointes)"
+    ],
+    "interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — utilisé pour toxoplasmose gestationnelle (hors 1er trimestre).",
+      "breastfeeding": "Compatible avec précaution."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable chez l'enfant et le nourrisson",
+      "dose_rule": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "1-2 g/j en 2-3 prises (500 mg 2-4x/j)",
+      "children": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Douleurs abdominales",
+      "Diarrhée",
+      "Élévation transaminases",
+      "Réactions allergiques",
+      "Allongement QT (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour suspension buvable Flacon de 60 ml",
+        "price_ppv_dhs": 42.9,
+        "price_ph_dhs": null,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/josacine-125-mg-5-ml-poudre-pour-suspension-buvable/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/josacine-125-mg-5-ml-poudre-pour-suspension-buvable/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB13158",
+      "drugs_com": "https://www.drugs.com/josamycin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/josacine-125-mg-5-ml-poudre-pour-suspension-buvable/"
+  },
+  {
+    "id": "josacine_250_mg_/_5_ml_poudre_pour_suspension_buvable_flacon_de_60_ml",
+    "brand_name": "JOSACINE",
+    "generic_name": "Josamycine",
+    "composition": [
+      "Josamycine"
+    ],
+    "strength": "250 MG / 5 ML",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "J01FA07",
+    "therapeutic_group": "Antibiotique",
+    "drug_class": "Macrolide",
+    "drugbank_id": "DB13158",
+    "mechanism": "Macrolide antibactériostatique. Se fixe sur la sous-unité 50S du ribosome bactérien, inhibant la translocation et la synthèse protéique. Spectre: Gram+ (streptocoques, staphylocoques), germes intracellulaires (Mycoplasma, Chlamydia, Legionella).",
+    "half_life": "1.5-2h",
+    "indications": [
+      "Infections ORL et respiratoires à germes sensibles",
+      "Infections cutanées",
+      "Infections génitales à Chlamydia",
+      "Alternative aux pénicillines en cas d'allergie",
+      "Toxoplasmose (hors 1re ligne)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Insuffisance hépatique sévère",
+      "Association terfénadine, astémizole, cisapride (torsades de pointes)"
+    ],
+    "interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — utilisé pour toxoplasmose gestationnelle (hors 1er trimestre).",
+      "breastfeeding": "Compatible avec précaution."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable chez l'enfant et le nourrisson",
+      "dose_rule": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "1-2 g/j en 2-3 prises (500 mg 2-4x/j)",
+      "children": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Douleurs abdominales",
+      "Diarrhée",
+      "Élévation transaminases",
+      "Réactions allergiques",
+      "Allongement QT (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour suspension buvable Flacon de 60 ml",
+        "price_ppv_dhs": 73.4,
+        "price_ph_dhs": null,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/josacine-250-mg-5-ml-poudre-pour-suspension-buvable/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/josacine-250-mg-5-ml-poudre-pour-suspension-buvable/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB13158",
+      "drugs_com": "https://www.drugs.com/josamycin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/josacine-250-mg-5-ml-poudre-pour-suspension-buvable/"
+  },
+  {
+    "id": "josacine_500_mg_/_5ml_poudre_pour_suspension_buvable_flacon_de_60_ml",
+    "brand_name": "JOSACINE",
+    "generic_name": "Josamycine",
+    "composition": [
+      "Josamycine"
+    ],
+    "strength": "500 MG / 5ML",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "J01FA07",
+    "therapeutic_group": "Antibiotique",
+    "drug_class": "Macrolide",
+    "drugbank_id": "DB13158",
+    "mechanism": "Macrolide antibactériostatique. Se fixe sur la sous-unité 50S du ribosome bactérien, inhibant la translocation et la synthèse protéique. Spectre: Gram+ (streptocoques, staphylocoques), germes intracellulaires (Mycoplasma, Chlamydia, Legionella).",
+    "half_life": "1.5-2h",
+    "indications": [
+      "Infections ORL et respiratoires à germes sensibles",
+      "Infections cutanées",
+      "Infections génitales à Chlamydia",
+      "Alternative aux pénicillines en cas d'allergie",
+      "Toxoplasmose (hors 1re ligne)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Insuffisance hépatique sévère",
+      "Association terfénadine, astémizole, cisapride (torsades de pointes)"
+    ],
+    "interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — utilisé pour toxoplasmose gestationnelle (hors 1er trimestre).",
+      "breastfeeding": "Compatible avec précaution."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable chez l'enfant et le nourrisson",
+      "dose_rule": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "1-2 g/j en 2-3 prises (500 mg 2-4x/j)",
+      "children": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Douleurs abdominales",
+      "Diarrhée",
+      "Élévation transaminases",
+      "Réactions allergiques",
+      "Allongement QT (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour suspension buvable Flacon de 60 ml",
+        "price_ppv_dhs": 119.3,
+        "price_ph_dhs": null,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/josacine-500-mg-5ml-poudre-pour-suspension-buvable/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/josacine-500-mg-5ml-poudre-pour-suspension-buvable/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB13158",
+      "drugs_com": "https://www.drugs.com/josamycin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/josacine-500-mg-5ml-poudre-pour-suspension-buvable/"
+  },
+  {
+    "id": "josacine_500_mg_comprimé_pelliculé_boîte_de_20",
+    "brand_name": "JOSACINE",
+    "generic_name": "Josamycine",
+    "composition": [
+      "Josamycine"
+    ],
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "J01FA07",
+    "therapeutic_group": "Antibiotique",
+    "drug_class": "Macrolide",
+    "drugbank_id": "DB13158",
+    "mechanism": "Macrolide antibactériostatique. Se fixe sur la sous-unité 50S du ribosome bactérien, inhibant la translocation et la synthèse protéique. Spectre: Gram+ (streptocoques, staphylocoques), germes intracellulaires (Mycoplasma, Chlamydia, Legionella).",
+    "half_life": "1.5-2h",
+    "indications": [
+      "Infections ORL et respiratoires à germes sensibles",
+      "Infections cutanées",
+      "Infections génitales à Chlamydia",
+      "Alternative aux pénicillines en cas d'allergie",
+      "Toxoplasmose (hors 1re ligne)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Insuffisance hépatique sévère",
+      "Association terfénadine, astémizole, cisapride (torsades de pointes)"
+    ],
+    "interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — utilisé pour toxoplasmose gestationnelle (hors 1er trimestre).",
+      "breastfeeding": "Compatible avec précaution."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable chez l'enfant et le nourrisson",
+      "dose_rule": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "1-2 g/j en 2-3 prises (500 mg 2-4x/j)",
+      "children": "30-50 mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Nausées",
+      "Douleurs abdominales",
+      "Diarrhée",
+      "Élévation transaminases",
+      "Réactions allergiques",
+      "Allongement QT (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boîte de 20",
+        "price_ppv_dhs": 131.1,
+        "price_ph_dhs": null,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/josacine-500-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/josacine-500-mg-comprime-pellicule/",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB13158",
+      "drugs_com": "https://www.drugs.com/josamycin.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Ergotamine, dihydroergotamine",
+        "severity": "majeure",
+        "effect": "Vasospasme sévère — contre-indiqué"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "modérée",
+        "effect": "Augmentation INR"
+      },
+      {
+        "drug": "Théophylline, ciclosporine",
+        "severity": "modérée",
+        "effect": "Augmentation taux (inhibition CYP3A4)"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/josacine-500-mg-comprime-pellicule/"
+  },
+  {
+    "id": "josuni_12.5_mg_gélule_flacon_de_30",
+    "brand_name": "JOSUNI",
+    "generic_name": "Sunitinib",
+    "composition": [
+      "Sunitinib"
+    ],
+    "strength": "12.5 MG",
+    "form": "Gélule",
+    "route": "Voir notice",
+    "atc_code": "L01XE04",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Inhibiteur multi-tyrosine kinase (VEGFR, PDGFR, c-Kit)",
+    "drugbank_id": "DB01268",
+    "mechanism": "Inhibiteur oral multi-tyrosine kinase (VEGFR-1/2/3, PDGFR-α/β, c-Kit, FLT3, CSF-1R, RET). Bloque la signalisation VEGF et PDGF — effet anti-angiogénique et antiprolifératif direct sur cellules tumorales.",
+    "half_life": "40-60h (sunitinib), 80-110h (métabolite actif SU12662)",
+    "indications": [
+      "Carcinome rénal à cellules claires avancé (1re ligne)",
+      "Tumeur stromale gastro-intestinale (GIST) résistante à l'imatinib",
+      "Tumeurs neuroendocrines pancréatiques (pNET) bien différenciées avancées"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "QTc prolongé",
+      "Hypersensibilité au sunitinib"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation sunitinib — réduire dose 37.5 mg"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — augmenter dose max 87.5 mg"
+      },
+      {
+        "drug": "Médicaments allongeant QT",
+        "severity": "majeure",
+        "effect": "Risque torsades de pointes"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — tératogène. Contraception efficace pendant et 4 semaines après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire (précaution en IR sévère)"
+    },
+    "dosage": {
+      "adult": "50 mg/j PO pendant 4 semaines, puis 2 semaines d'arrêt (cycle 6 semaines). GIST/pNET: 37.5 mg/j en continu.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "HTA (très fréquente)",
+      "Fatigue",
+      "Diarrhée",
+      "Nausées",
+      "Érythrodysesthésie palmo-plantaire (syndrome pieds-mains)",
+      "Hypothyroïdie",
+      "Allongement QT",
+      "Hépatotoxicité"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 30",
+        "price_ppv_dhs": 5159.0,
+        "price_ph_dhs": null,
+        "laboratory": "ISIO LABORATOIRE",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/josuni-12-5-mg-gelule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/josuni-12-5-mg-gelule/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01268",
+      "drugs_com": "https://www.drugs.com/sunitinib.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation sunitinib — réduire dose 37.5 mg"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — augmenter dose max 87.5 mg"
+      },
+      {
+        "drug": "Médicaments allongeant QT",
+        "severity": "majeure",
+        "effect": "Risque torsades de pointes"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/josuni-12-5-mg-gelule/"
+  },
+  {
+    "id": "josuni_25_mg_gélule_flacon_de_30",
+    "brand_name": "JOSUNI",
+    "generic_name": "Sunitinib",
+    "composition": [
+      "Sunitinib"
+    ],
+    "strength": "25 MG",
+    "form": "Gélule",
+    "route": "Voir notice",
+    "atc_code": "L01XE04",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Inhibiteur multi-tyrosine kinase (VEGFR, PDGFR, c-Kit)",
+    "drugbank_id": "DB01268",
+    "mechanism": "Inhibiteur oral multi-tyrosine kinase (VEGFR-1/2/3, PDGFR-α/β, c-Kit, FLT3, CSF-1R, RET). Bloque la signalisation VEGF et PDGF — effet anti-angiogénique et antiprolifératif direct sur cellules tumorales.",
+    "half_life": "40-60h (sunitinib), 80-110h (métabolite actif SU12662)",
+    "indications": [
+      "Carcinome rénal à cellules claires avancé (1re ligne)",
+      "Tumeur stromale gastro-intestinale (GIST) résistante à l'imatinib",
+      "Tumeurs neuroendocrines pancréatiques (pNET) bien différenciées avancées"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "QTc prolongé",
+      "Hypersensibilité au sunitinib"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation sunitinib — réduire dose 37.5 mg"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — augmenter dose max 87.5 mg"
+      },
+      {
+        "drug": "Médicaments allongeant QT",
+        "severity": "majeure",
+        "effect": "Risque torsades de pointes"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — tératogène. Contraception efficace pendant et 4 semaines après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire (précaution en IR sévère)"
+    },
+    "dosage": {
+      "adult": "50 mg/j PO pendant 4 semaines, puis 2 semaines d'arrêt (cycle 6 semaines). GIST/pNET: 37.5 mg/j en continu.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "HTA (très fréquente)",
+      "Fatigue",
+      "Diarrhée",
+      "Nausées",
+      "Érythrodysesthésie palmo-plantaire (syndrome pieds-mains)",
+      "Hypothyroïdie",
+      "Allongement QT",
+      "Hépatotoxicité"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 30",
+        "price_ppv_dhs": 9919.0,
+        "price_ph_dhs": null,
+        "laboratory": "ISIO LABORATOIRE",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/josuni-25-mg-gelule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/josuni-25-mg-gelule/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01268",
+      "drugs_com": "https://www.drugs.com/sunitinib.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation sunitinib — réduire dose 37.5 mg"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — augmenter dose max 87.5 mg"
+      },
+      {
+        "drug": "Médicaments allongeant QT",
+        "severity": "majeure",
+        "effect": "Risque torsades de pointes"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/josuni-25-mg-gelule/"
+  },
+  {
+    "id": "josuni_50_mg_gélule_flacon_de_30",
+    "brand_name": "JOSUNI",
+    "generic_name": "Sunitinib",
+    "composition": [
+      "Sunitinib"
+    ],
+    "strength": "50 MG",
+    "form": "Gélule",
+    "route": "Voir notice",
+    "atc_code": "L01XE04",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Inhibiteur multi-tyrosine kinase (VEGFR, PDGFR, c-Kit)",
+    "drugbank_id": "DB01268",
+    "mechanism": "Inhibiteur oral multi-tyrosine kinase (VEGFR-1/2/3, PDGFR-α/β, c-Kit, FLT3, CSF-1R, RET). Bloque la signalisation VEGF et PDGF — effet anti-angiogénique et antiprolifératif direct sur cellules tumorales.",
+    "half_life": "40-60h (sunitinib), 80-110h (métabolite actif SU12662)",
+    "indications": [
+      "Carcinome rénal à cellules claires avancé (1re ligne)",
+      "Tumeur stromale gastro-intestinale (GIST) résistante à l'imatinib",
+      "Tumeurs neuroendocrines pancréatiques (pNET) bien différenciées avancées"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "QTc prolongé",
+      "Hypersensibilité au sunitinib"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation sunitinib — réduire dose 37.5 mg"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — augmenter dose max 87.5 mg"
+      },
+      {
+        "drug": "Médicaments allongeant QT",
+        "severity": "majeure",
+        "effect": "Risque torsades de pointes"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — tératogène. Contraception efficace pendant et 4 semaines après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire (précaution en IR sévère)"
+    },
+    "dosage": {
+      "adult": "50 mg/j PO pendant 4 semaines, puis 2 semaines d'arrêt (cycle 6 semaines). GIST/pNET: 37.5 mg/j en continu.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "HTA (très fréquente)",
+      "Fatigue",
+      "Diarrhée",
+      "Nausées",
+      "Érythrodysesthésie palmo-plantaire (syndrome pieds-mains)",
+      "Hypothyroïdie",
+      "Allongement QT",
+      "Hépatotoxicité"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 30",
+        "price_ppv_dhs": 19439.0,
+        "price_ph_dhs": null,
+        "laboratory": "ISIO LABORATOIRE",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/josuni-50-mg-gelule/"
+      }
+    ],
+    "notice_url": "https://medicamenat.ma/medicament/josuni-50-mg-gelule/",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01268",
+      "drugs_com": "https://www.drugs.com/sunitinib.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation sunitinib — réduire dose 37.5 mg"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité — augmenter dose max 87.5 mg"
+      },
+      {
+        "drug": "Médicaments allongeant QT",
+        "severity": "majeure",
+        "effect": "Risque torsades de pointes"
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicamenat.ma/medicament/josuni-50-mg-gelule/"
+  }
+]

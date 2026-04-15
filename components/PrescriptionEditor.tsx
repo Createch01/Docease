@@ -69,6 +69,8 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
   const [isAiChecking, setIsAiChecking] = useState(false);
   const [overriddenWarnings, setOverriddenWarnings] = useState<Set<string>>(new Set());
   const [overrideModal, setOverrideModal] = useState<{ isOpen: boolean; notificationId: string; reason: string }>({ isOpen: false, notificationId: '', reason: '' });
+  const [selectedCategory, setSelectedCategory] = useState<MedicineCategory | 'Tous'>('Tous');
+  const [categories, setCategories] = useState<(MedicineCategory | 'Tous')[]>(['Tous']);
 
   // SMART MODE STATES
   const [isSmartMode, setIsSmartMode] = useState(false);
@@ -93,6 +95,10 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
     phone: q.phone || '',
     consultationFee: q.consultationFee || 200
   }));
+
+  useEffect(() => {
+    setCategories(['Tous', ...dataService.getTherapeuticGroups()]);
+  }, []);
 
   // PERSISTENCE EFFECT
   useEffect(() => {
@@ -271,7 +277,11 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
     const allMeds = dataService.getMedicines();
 
     const filtered = allMeds
-      .filter(m => m.name.toLowerCase().includes(searchLower))
+      .filter(m => {
+        const matchesSearch = m.name.toLowerCase().includes(searchLower);
+        const matchesCategory = selectedCategory === 'Tous' || m.category === selectedCategory;
+        return matchesSearch && matchesCategory;
+      })
       .sort((a, b) => {
         const aLower = a.name.toLowerCase();
         const bLower = b.name.toLowerCase();
@@ -282,7 +292,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
         if (aStarts && !bStarts) return -1;
         if (!aStarts && bStarts) return 1;
 
-        return aLower.localeCompare(bLower);
+        return aLower.localeCompare(bLower, 'fr');
       })
       .slice(0, 50); // Limit to 50 for performance
 
@@ -653,9 +663,13 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
                     placeholder={t('search_med_placeholder')}
                     className={`w-full ${dir === 'rtl' ? 'pr-16 md:pr-20 pl-12' : 'pl-16 md:pl-20 pr-12'} py-6 bg-white border border-gray-100 rounded-3xl font-black text-xl outline-none focus:border-emerald-500 focus:ring-[12px] focus:ring-emerald-500/5 shadow-soft-lg transition-all`}
                   />
-                  {medicineSearch && (
+                  {(medicineSearch || selectedCategory !== 'Tous') && (
                     <button
-                      onClick={() => { setMedicineSearch(''); setSuggestions([]); }}
+                      onClick={() => {
+                        setMedicineSearch('');
+                        setSelectedCategory('Tous');
+                        setSuggestions([]);
+                      }}
                       className={`absolute ${dir === 'rtl' ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 p-2 bg-gray-50 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-xl transition-all`}
                     >
                       <CloseX size={18} />
@@ -976,7 +990,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
 
       <div className="hidden print:block fixed inset-0 z-0 bg-white">{renderPrescriptionPage('print')}</div>
       {renderPrescriptionPage('export')}
-    </div>
+    </div >
   );
 };
 

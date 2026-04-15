@@ -1,0 +1,863 @@
+[
+  {
+    "id": "welin_30_mg_capsules_gastro_r_sistante",
+    "brand_name": "WELIN",
+    "generic_name": "Duloxétine",
+    "strength": "30 MG",
+    "form": "Capsules gastro résistante",
+    "route": "Orale",
+    "atc_code": "N06AX21",
+    "therapeutic_group": "Antidépresseurs",
+    "drug_class": "Inhibiteur de la recapture de la sérotonine et de la noradrénaline (IRSN)",
+    "indications": [
+      "Épisode dépressif majeur",
+      "Trouble anxieux généralisé",
+      "Douleur neuropathique diabétique périphérique",
+      "Fibromyalgie",
+      "Incontinence urinaire d'effort (femme)"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la duloxétine",
+      "Association avec IMAO (wash-out 14 jours)",
+      "Insuffisance hépatique sévère",
+      "Insuffisance rénale sévère (ClCr < 30 mL/min)",
+      "HTA non contrôlée",
+      "Association avec fluvoxamine (inhibiteur puissant CYP1A2)",
+      "Association avec ciprofloxacine (inhibiteur puissant CYP1A2)"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (Moclobémide, Sélégiline)",
+        "severity": "majeure",
+        "effect": "Syndrome sérotoninergique potentiellement fatal"
+      },
+      {
+        "drug": "Fluvoxamine, Ciprofloxacine",
+        "severity": "majeure",
+        "effect": "Augmentation majeure des taux de duloxétine (inhibition CYP1A2)"
+      },
+      {
+        "drug": "Tramadol, Triptans",
+        "severity": "majeure",
+        "effect": "Syndrome sérotoninergique"
+      },
+      {
+        "drug": "Warfarine, Aspirine, AINS",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru (effet antisérotoninergique plaquettaire)"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Hépatotoxicité accrue + sédation"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé, surtout au 3e trimestre. Risque de syndrome de sevrage néonatal (irritabilité, tremblements, difficultés alimentaires) et d'HTAP néonatale persistante.",
+      "breastfeeding": "Passage dans le lait (0.14% dose maternelle). Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Risque accru d'idéation suicidaire chez l'enfant et l'adolescent.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr < 30 mL/min: CONTRE-INDIQUÉ. ClCr 30-60: pas d'ajustement systématique mais prudence (début dose faible)."
+    },
+    "dosage": {
+      "adult": "Dépression/Anxiété: début 30 mg/j (WELIN 30), cible 60 mg/j (WELIN 60) en 1 prise. Douleur neuropathique: 60 mg/j. Fibromyalgie: 60 mg/j. Max: 120 mg/j (rarement nécessaire). Prendre pendant ou en dehors des repas. NE PAS OUVRIR LES CAPSULES (gastro-résistant). Arrêt PROGRESSIF sur 1-2 semaines.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 139.5,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "ZENITH PHARMA",
+        "url": "https://www.medicament.ma/medicament/welin-30-mg-capsules-gastro-resistante"
+      }
+    ],
+    "drugbank_id": "DB00476",
+    "mechanism": "Inhibition de la recapture de la sérotonine (5-HT) et de la noradrénaline (NA) → augmentation de la neurotransmission monoaminergique → effet antidépresseur, anxiolytique et antalgique central.",
+    "half_life": "12 heures (8-17h)",
+    "adverse_effects": [
+      "Nausées (très fréquent, surtout début traitement)",
+      "Sécheresse buccale",
+      "Céphalées",
+      "Somnolence ou insomnie",
+      "Constipation",
+      "Vertiges",
+      "Fatigue",
+      "Troubles sexuels (diminution libido, anorgasmie)",
+      "Hypersudation",
+      "HTA (surveiller PA régulièrement)",
+      "Élévation des transaminases",
+      "Hépatotoxicité (rare mais grave)",
+      "Syndrome de sevrage à l'arrêt brutal (vertiges, paresthésies, anxiété, nausées, irritabilité)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Moclobémide",
+          "Sélégiline",
+          "Phénelzine",
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Syndrome sérotoninergique potentiellement fatal (hyperthermie, rigidité, myoclonies, instabilité autonome, confusion, coma)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Respecter un wash-out de 14 jours entre IMAO et duloxétine, et 5 jours entre duloxétine et IMAO."
+      },
+      {
+        "interacting_drugs": [
+          "Fluvoxamine",
+          "Ciprofloxacine",
+          "Énoxacine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP1A2"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation de 5-6x des taux de duloxétine → toxicité sérotoninergique et hépatique",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Tramadol",
+          "Tapentadol",
+          "Fentanyl",
+          "Morphine"
+        ],
+        "interacting_classes": [
+          "Opioïdes sérotoninergiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Syndrome sérotoninergique + risque de convulsions",
+        "recommendation": "Éviter tramadol si possible. Si opioïde nécessaire: morphine à dose minimale avec surveillance."
+      },
+      {
+        "interacting_drugs": [
+          "Sumatriptan",
+          "Rizatriptan",
+          "Zolmitriptan",
+          "Frovatriptan"
+        ],
+        "interacting_classes": [
+          "Triptans"
+        ],
+        "severity": "DANGER",
+        "effect": "Syndrome sérotoninergique",
+        "recommendation": "Utiliser avec prudence. Surveiller signes sérotoninergiques."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "Anticoagulants oraux (AVK)"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru (effet antisérotoninergique plaquettaire de la duloxétine + interaction CYP2D6)",
+        "recommendation": "Surveiller l'INR fréquemment à l'initiation et à l'arrêt de la duloxétine."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS",
+          "Antiagrégants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (surtout hémorragie GI)",
+        "recommendation": "Surveiller signes de saignement. IPP en protection si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Hépatotoxicité accrue + sédation excessive",
+        "recommendation": "DÉCONSEILLER fortement la consommation d'alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "INTERACTION_ALCOOL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/welin-30-mg-capsules-gastro-resistante"
+  },
+  {
+    "id": "welin_60_mg_capsules_gastro_r_sistante_p",
+    "brand_name": "WELIN",
+    "generic_name": "Duloxétine",
+    "strength": "60 MG",
+    "form": "Capsules gastro résistante [P]",
+    "route": "Orale",
+    "atc_code": "N06AX21",
+    "therapeutic_group": "Antidépresseurs",
+    "drug_class": "Inhibiteur de la recapture de la sérotonine et de la noradrénaline (IRSN)",
+    "indications": [
+      "Épisode dépressif majeur",
+      "Trouble anxieux généralisé",
+      "Douleur neuropathique diabétique périphérique",
+      "Fibromyalgie",
+      "Incontinence urinaire d'effort (femme)"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la duloxétine",
+      "Association avec IMAO (wash-out 14 jours)",
+      "Insuffisance hépatique sévère",
+      "Insuffisance rénale sévère (ClCr < 30 mL/min)",
+      "HTA non contrôlée",
+      "Association avec fluvoxamine (inhibiteur puissant CYP1A2)",
+      "Association avec ciprofloxacine (inhibiteur puissant CYP1A2)"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (Moclobémide, Sélégiline)",
+        "severity": "majeure",
+        "effect": "Syndrome sérotoninergique potentiellement fatal"
+      },
+      {
+        "drug": "Fluvoxamine, Ciprofloxacine",
+        "severity": "majeure",
+        "effect": "Augmentation majeure des taux de duloxétine (inhibition CYP1A2)"
+      },
+      {
+        "drug": "Tramadol, Triptans",
+        "severity": "majeure",
+        "effect": "Syndrome sérotoninergique"
+      },
+      {
+        "drug": "Warfarine, Aspirine, AINS",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru (effet antisérotoninergique plaquettaire)"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Hépatotoxicité accrue + sédation"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé, surtout au 3e trimestre. Risque de syndrome de sevrage néonatal (irritabilité, tremblements, difficultés alimentaires) et d'HTAP néonatale persistante.",
+      "breastfeeding": "Passage dans le lait (0.14% dose maternelle). Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Risque accru d'idéation suicidaire chez l'enfant et l'adolescent.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr < 30 mL/min: CONTRE-INDIQUÉ. ClCr 30-60: pas d'ajustement systématique mais prudence (début dose faible)."
+    },
+    "dosage": {
+      "adult": "Dépression/Anxiété: début 30 mg/j (WELIN 30), cible 60 mg/j (WELIN 60) en 1 prise. Douleur neuropathique: 60 mg/j. Fibromyalgie: 60 mg/j. Max: 120 mg/j (rarement nécessaire). Prendre pendant ou en dehors des repas. NE PAS OUVRIR LES CAPSULES (gastro-résistant). Arrêt PROGRESSIF sur 1-2 semaines.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 245.0,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "ZENITH PHARMA",
+        "url": "https://www.medicament.ma/medicament/welin-60-mg-capsules-gastro-resistante-p"
+      }
+    ],
+    "drugbank_id": "DB00476",
+    "mechanism": "Inhibition de la recapture de la sérotonine (5-HT) et de la noradrénaline (NA) → augmentation de la neurotransmission monoaminergique → effet antidépresseur, anxiolytique et antalgique central.",
+    "half_life": "12 heures (8-17h)",
+    "adverse_effects": [
+      "Nausées (très fréquent, surtout début traitement)",
+      "Sécheresse buccale",
+      "Céphalées",
+      "Somnolence ou insomnie",
+      "Constipation",
+      "Vertiges",
+      "Fatigue",
+      "Troubles sexuels (diminution libido, anorgasmie)",
+      "Hypersudation",
+      "HTA (surveiller PA régulièrement)",
+      "Élévation des transaminases",
+      "Hépatotoxicité (rare mais grave)",
+      "Syndrome de sevrage à l'arrêt brutal (vertiges, paresthésies, anxiété, nausées, irritabilité)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Moclobémide",
+          "Sélégiline",
+          "Phénelzine",
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Syndrome sérotoninergique potentiellement fatal (hyperthermie, rigidité, myoclonies, instabilité autonome, confusion, coma)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Respecter un wash-out de 14 jours entre IMAO et duloxétine, et 5 jours entre duloxétine et IMAO."
+      },
+      {
+        "interacting_drugs": [
+          "Fluvoxamine",
+          "Ciprofloxacine",
+          "Énoxacine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP1A2"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation de 5-6x des taux de duloxétine → toxicité sérotoninergique et hépatique",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Tramadol",
+          "Tapentadol",
+          "Fentanyl",
+          "Morphine"
+        ],
+        "interacting_classes": [
+          "Opioïdes sérotoninergiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Syndrome sérotoninergique + risque de convulsions",
+        "recommendation": "Éviter tramadol si possible. Si opioïde nécessaire: morphine à dose minimale avec surveillance."
+      },
+      {
+        "interacting_drugs": [
+          "Sumatriptan",
+          "Rizatriptan",
+          "Zolmitriptan",
+          "Frovatriptan"
+        ],
+        "interacting_classes": [
+          "Triptans"
+        ],
+        "severity": "DANGER",
+        "effect": "Syndrome sérotoninergique",
+        "recommendation": "Utiliser avec prudence. Surveiller signes sérotoninergiques."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "Anticoagulants oraux (AVK)"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru (effet antisérotoninergique plaquettaire de la duloxétine + interaction CYP2D6)",
+        "recommendation": "Surveiller l'INR fréquemment à l'initiation et à l'arrêt de la duloxétine."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS",
+          "Antiagrégants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (surtout hémorragie GI)",
+        "recommendation": "Surveiller signes de saignement. IPP en protection si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Hépatotoxicité accrue + sédation excessive",
+        "recommendation": "DÉCONSEILLER fortement la consommation d'alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "INTERACTION_ALCOOL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/welin-60-mg-capsules-gastro-resistante-p"
+  },
+  {
+    "id": "wellbutrin_xr_150_mg_comprim_lib_ration_modifi_e_p",
+    "brand_name": "WELLBUTRIN XR",
+    "generic_name": "Bupropion",
+    "strength": "150 MG",
+    "form": "Comprimé à libération modifiée [P]",
+    "route": "Orale",
+    "atc_code": "N06AX12",
+    "therapeutic_group": "Antidépresseurs",
+    "drug_class": "Inhibiteur de la recapture de la noradrénaline et de la dopamine (IRND)",
+    "indications": [
+      "Épisode dépressif majeur",
+      "Aide au sevrage tabagique (sous le nom Zyban)",
+      "Trouble déficitaire de l'attention (hors AMM)"
+    ],
+    "contraindications": [
+      "Épilepsie ou antécédent de convulsions",
+      "Tumeur du SNC",
+      "Anorexie/boulimie nerveuse (risque de convulsions)",
+      "Sevrage alcoolique ou benzodiazépinique en cours",
+      "Association avec IMAO (wash-out 14 jours)",
+      "Insuffisance hépatique sévère (Child-Pugh C)",
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Risque de crise hypertensive"
+      },
+      {
+        "drug": "Médicaments abaissant le seuil épileptogène (tramadol, neuroleptiques, théophylline)",
+        "severity": "majeure",
+        "effect": "Risque accru de convulsions dose-dépendant"
+      },
+      {
+        "drug": "Tamoxifène",
+        "severity": "majeure",
+        "effect": "Le bupropion est un inhibiteur puissant du CYP2D6 → diminution de l'activation du tamoxifène"
+      },
+      {
+        "drug": "Métoprolol, Flécaïnide, Propafénone",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de ces substrats CYP2D6"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Risque accru de convulsions"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données limitées. Utiliser uniquement si le bénéfice justifie le risque. Pas d'augmentation démontrée des malformations majeures dans les registres.",
+      "breastfeeding": "Passage dans le lait. Le bupropion et ses métabolites sont retrouvés dans le lait maternel. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Risque accru d'idéation suicidaire chez l'enfant et l'adolescent.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr < 90: envisager réduction de dose. Hémodialyse: le bupropion et ses métabolites sont peu dialysables."
+    },
+    "dosage": {
+      "adult": "Dépression XR: début 150 mg/j le matin pendant 4 jours, puis 300 mg/j en 1 prise. Max: 450 mg/j. NE JAMAIS ÉCRASER OU MÂCHER (libération modifiée → risque de pic de dose et de convulsions). Sevrage tabagique: 150 mg/j x 6j, puis 150 mg 2x/j x 7-12 sem.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 251.0,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "GLAXO SMITHKLINE",
+        "url": "https://www.medicament.ma/medicament/wellbutrin-xr-150-mg-comprime-a-liberation-modifiee-p"
+      }
+    ],
+    "drugbank_id": "DB01156",
+    "mechanism": "Inhibition de la recapture de la noradrénaline (NA) et de la dopamine (DA). Ne bloque PAS la recapture de la sérotonine → profil distinct des ISRS/IRSN. Pas d'effet antisérotoninergique, anticholinergique ou antihistaminique significatif.",
+    "half_life": "21 heures (métabolite actif hydroxybupropion: 20h)",
+    "adverse_effects": [
+      "Insomnie (très fréquent — prendre le matin)",
+      "Sécheresse buccale",
+      "Nausées",
+      "Céphalées",
+      "Agitation, anxiété",
+      "Tremblements",
+      "Constipation",
+      "CONVULSIONS (dose-dépendant: 0.1% à 300 mg/j, 0.4% à 450 mg/j)",
+      "Perte de poids (pas de prise de poids contrairement aux ISRS)",
+      "HTA",
+      "Réactions allergiques retardées (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Moclobémide",
+          "Sélégiline",
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque de crise hypertensive et de toxicité",
+        "recommendation": "CONTRE-INDIQUÉ. Wash-out 14 jours."
+      },
+      {
+        "interacting_drugs": [
+          "Tramadol",
+          "Acupan"
+        ],
+        "interacting_classes": [
+          "Analgésiques abaissant le seuil épileptogène"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru de convulsions (le bupropion abaisse le seuil épileptogène de façon dose-dépendante)",
+        "recommendation": "Éviter tramadol. Préférer paracétamol ou AINS comme antalgique."
+      },
+      {
+        "interacting_drugs": [
+          "Halopéridol",
+          "Chlorpromazine",
+          "Rispéridone",
+          "Clozapine"
+        ],
+        "interacting_classes": [
+          "Neuroleptiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque de convulsions + augmentation des taux de neuroleptique (inhibition CYP2D6 par bupropion)",
+        "recommendation": "Prudence. Réduire dose de neuroleptique si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Tamoxifène"
+        ],
+        "interacting_classes": [
+          "Anti-œstrogènes"
+        ],
+        "severity": "DANGER",
+        "effect": "Le bupropion inhibe fortement le CYP2D6 → diminution de la conversion du tamoxifène en endoxifène (métabolite actif) → perte d'efficacité antitumorale",
+        "recommendation": "ÉVITER l'association. Choisir un antidépresseur n'inhibant pas le CYP2D6 (escitalopram, venlafaxine)."
+      },
+      {
+        "interacting_drugs": [
+          "Métoprolol",
+          "Nébivolol",
+          "Flécaïnide",
+          "Propafénone"
+        ],
+        "interacting_classes": [
+          "Substrats CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux des substrats CYP2D6 par inhibition enzymatique",
+        "recommendation": "Réduire dose du substrat CYP2D6 si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru de convulsions + diminution tolérance à l'alcool",
+        "recommendation": "Minimiser ou éviter la consommation d'alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "EPILEPSIE",
+      "INTERACTION_ALCOOL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/wellbutrin-xr-150-mg-comprime-a-liberation-modifiee-p"
+  },
+  {
+    "id": "wellbutrin_xr_300_mg_comprim_lib_ration_modifi_e_p",
+    "brand_name": "WELLBUTRIN XR",
+    "generic_name": "Bupropion",
+    "strength": "300 MG",
+    "form": "Comprimé à libération modifiée [P]",
+    "route": "Orale",
+    "atc_code": "N06AX12",
+    "therapeutic_group": "Antidépresseurs",
+    "drug_class": "Inhibiteur de la recapture de la noradrénaline et de la dopamine (IRND)",
+    "indications": [
+      "Épisode dépressif majeur",
+      "Aide au sevrage tabagique (sous le nom Zyban)",
+      "Trouble déficitaire de l'attention (hors AMM)"
+    ],
+    "contraindications": [
+      "Épilepsie ou antécédent de convulsions",
+      "Tumeur du SNC",
+      "Anorexie/boulimie nerveuse (risque de convulsions)",
+      "Sevrage alcoolique ou benzodiazépinique en cours",
+      "Association avec IMAO (wash-out 14 jours)",
+      "Insuffisance hépatique sévère (Child-Pugh C)",
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Risque de crise hypertensive"
+      },
+      {
+        "drug": "Médicaments abaissant le seuil épileptogène (tramadol, neuroleptiques, théophylline)",
+        "severity": "majeure",
+        "effect": "Risque accru de convulsions dose-dépendant"
+      },
+      {
+        "drug": "Tamoxifène",
+        "severity": "majeure",
+        "effect": "Le bupropion est un inhibiteur puissant du CYP2D6 → diminution de l'activation du tamoxifène"
+      },
+      {
+        "drug": "Métoprolol, Flécaïnide, Propafénone",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de ces substrats CYP2D6"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Risque accru de convulsions"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données limitées. Utiliser uniquement si le bénéfice justifie le risque. Pas d'augmentation démontrée des malformations majeures dans les registres.",
+      "breastfeeding": "Passage dans le lait. Le bupropion et ses métabolites sont retrouvés dans le lait maternel. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Risque accru d'idéation suicidaire chez l'enfant et l'adolescent.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr < 90: envisager réduction de dose. Hémodialyse: le bupropion et ses métabolites sont peu dialysables."
+    },
+    "dosage": {
+      "adult": "Dépression XR: début 150 mg/j le matin pendant 4 jours, puis 300 mg/j en 1 prise. Max: 450 mg/j. NE JAMAIS ÉCRASER OU MÂCHER (libération modifiée → risque de pic de dose et de convulsions). Sevrage tabagique: 150 mg/j x 6j, puis 150 mg 2x/j x 7-12 sem.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 468.0,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "GLAXO SMITHKLINE",
+        "url": "https://www.medicament.ma/medicament/wellbutrin-xr-300-mg-comprime-a-liberation-modifiee-p"
+      }
+    ],
+    "drugbank_id": "DB01156",
+    "mechanism": "Inhibition de la recapture de la noradrénaline (NA) et de la dopamine (DA). Ne bloque PAS la recapture de la sérotonine → profil distinct des ISRS/IRSN. Pas d'effet antisérotoninergique, anticholinergique ou antihistaminique significatif.",
+    "half_life": "21 heures (métabolite actif hydroxybupropion: 20h)",
+    "adverse_effects": [
+      "Insomnie (très fréquent — prendre le matin)",
+      "Sécheresse buccale",
+      "Nausées",
+      "Céphalées",
+      "Agitation, anxiété",
+      "Tremblements",
+      "Constipation",
+      "CONVULSIONS (dose-dépendant: 0.1% à 300 mg/j, 0.4% à 450 mg/j)",
+      "Perte de poids (pas de prise de poids contrairement aux ISRS)",
+      "HTA",
+      "Réactions allergiques retardées (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Moclobémide",
+          "Sélégiline",
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque de crise hypertensive et de toxicité",
+        "recommendation": "CONTRE-INDIQUÉ. Wash-out 14 jours."
+      },
+      {
+        "interacting_drugs": [
+          "Tramadol",
+          "Acupan"
+        ],
+        "interacting_classes": [
+          "Analgésiques abaissant le seuil épileptogène"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru de convulsions (le bupropion abaisse le seuil épileptogène de façon dose-dépendante)",
+        "recommendation": "Éviter tramadol. Préférer paracétamol ou AINS comme antalgique."
+      },
+      {
+        "interacting_drugs": [
+          "Halopéridol",
+          "Chlorpromazine",
+          "Rispéridone",
+          "Clozapine"
+        ],
+        "interacting_classes": [
+          "Neuroleptiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque de convulsions + augmentation des taux de neuroleptique (inhibition CYP2D6 par bupropion)",
+        "recommendation": "Prudence. Réduire dose de neuroleptique si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Tamoxifène"
+        ],
+        "interacting_classes": [
+          "Anti-œstrogènes"
+        ],
+        "severity": "DANGER",
+        "effect": "Le bupropion inhibe fortement le CYP2D6 → diminution de la conversion du tamoxifène en endoxifène (métabolite actif) → perte d'efficacité antitumorale",
+        "recommendation": "ÉVITER l'association. Choisir un antidépresseur n'inhibant pas le CYP2D6 (escitalopram, venlafaxine)."
+      },
+      {
+        "interacting_drugs": [
+          "Métoprolol",
+          "Nébivolol",
+          "Flécaïnide",
+          "Propafénone"
+        ],
+        "interacting_classes": [
+          "Substrats CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux des substrats CYP2D6 par inhibition enzymatique",
+        "recommendation": "Réduire dose du substrat CYP2D6 si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru de convulsions + diminution tolérance à l'alcool",
+        "recommendation": "Minimiser ou éviter la consommation d'alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "EPILEPSIE",
+      "INTERACTION_ALCOOL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/wellbutrin-xr-300-mg-comprime-a-liberation-modifiee-p"
+  },
+  {
+    "id": "winduza_100_mg_poudre_pour_suspension_injectable",
+    "brand_name": "WINDUZA",
+    "generic_name": "Azacitidine",
+    "strength": "100 MG",
+    "form": "Poudre pour suspension injectable",
+    "route": "SC",
+    "atc_code": "L01BC07",
+    "therapeutic_group": "Antinéoplasiques - Antimétabolites",
+    "drug_class": "Analogue pyrimidinique (agent hypométhylant)",
+    "indications": [
+      "Syndromes myélodysplasiques (SMD) de risque intermédiaire-2 et élevé",
+      "Leucémie myélomonocytaire chronique (LMMC) avec 10-29% de blastes",
+      "Leucémie aiguë myéloïde (LAM) avec 20-30% de blastes et dysplasie multilignée (si patient non éligible à la greffe)"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'azacitidine ou au mannitol",
+      "Tumeurs hépatiques malignes avancées",
+      "Grossesse et allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Pas d'interactions CYP significatives (métabolisé par hydrolyse spontanée et désamination)",
+        "severity": "mineure",
+        "effect": "Faible potentiel d'interactions médicamenteuses pharmacocinétiques"
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CONTRE-INDIQUÉ. Tératogène et embryotoxique démontré chez l'animal. Contraception efficace obligatoire pendant le traitement et au moins 3 mois après l'arrêt (homme) et 6 mois (femme).",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait maternel possible."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Sécurité et efficacité pédiatriques non établies.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Pas d'ajustement si ClCr ≥ 30 mL/min. Données limitées si ClCr < 30. Surveiller fonction rénale et bicarbonates (risque d'acidose tubulaire rénale)."
+    },
+    "dosage": {
+      "adult": "75 mg/m² SC quotidien x 7 jours par cycle de 28 jours. Minimum 6 cycles recommandés pour évaluer la réponse. Poursuivre tant que le patient en bénéficie. Prémédication antiémétique recommandée. Rotation des sites d'injection SC (cuisse, abdomen, bras).",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 1919.0,
+        "price_ph": 1343.3,
+        "packaging": "Boite de 1 flacon",
+        "laboratory": "SOTHEMA",
+        "url": "https://www.medicament.ma/medicament/winduza-100-mg-poudre-pour-suspension-injectable"
+      }
+    ],
+    "drugbank_id": "DB00928",
+    "mechanism": "Analogue de la cytidine → incorporation dans l'ADN et l'ARN → inhibition de l'ADN méthyltransférase → hypométhylation de l'ADN → réactivation des gènes suppresseurs de tumeur → différenciation et apoptose des cellules tumorales.",
+    "half_life": "41 minutes (SC)",
+    "adverse_effects": [
+      "Myélosuppression (neutropénie, thrombopénie, anémie — très fréquent et dose-limitant)",
+      "Réactions au site d'injection (rougeur, douleur, induration)",
+      "Nausées, vomissements",
+      "Fatigue",
+      "Constipation, diarrhée",
+      "Fièvre",
+      "Infections (neutropénie fébrile)",
+      "Pétéchies, ecchymoses (thrombopénie)",
+      "Acidose tubulaire rénale (rare)",
+      "Syndrome de lyse tumorale (rare)"
+    ],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/winduza-100-mg-poudre-pour-suspension-injectable"
+  }
+]
