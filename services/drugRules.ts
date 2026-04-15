@@ -300,6 +300,33 @@ export const drugRulesService = {
                     });
                 }
 
+                if (dbMed.isHeartForbidden && patient.isHeartPatient) {
+                    alerts.push({
+                        severity: 'CRITIQUE',
+                        title: "CONTRE-INDICATION CARDIAQUE",
+                        message: `${item.medicineName} : Ce médicament est contre-indiqué en cas de pathologie cardiaque.`,
+                        type: 'CONTRE_INDICATION'
+                    });
+                }
+
+                if (dbMed.isKidneyForbidden && patient.isKidneyPatient) {
+                    alerts.push({
+                        severity: 'ATTENTION',
+                        title: "PRÉCAUTION RÉNALE",
+                        message: `${item.medicineName} : Attention, ce médicament nécessite une adaptation de dose ou un suivi en cas d'insuffisance rénale.`,
+                        type: 'CONTRE_INDICATION'
+                    });
+                }
+
+                if (dbMed.isLiverForbidden && patient.isLiverPatient) {
+                    alerts.push({
+                        severity: 'ATTENTION',
+                        title: "PRÉCAUTION HÉPATIQUE",
+                        message: `${item.medicineName} : Attention, ce médicament nécessite une surveillance ou est déconseillé en cas d'insuffisance hépatique.`,
+                        type: 'CONTRE_INDICATION'
+                    });
+                }
+
                 if (dbMed.restriction && isChild) {
                     const { minAge, maxAge, reason } = dbMed.restriction;
                     if (minAge && ptAge > 0 && ptAge < minAge) {

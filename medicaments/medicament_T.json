@@ -1,0 +1,6065 @@
+[
+  {
+    "id": "T-TABUNEX",
+    "brand_name": "TABUNEX",
+    "generic_name": "Budésonide (nasal)",
+    "strength": "0.05 µg",
+    "form": "Suspension",
+    "route": "Nasale",
+    "atc_code": "R01AD05",
+    "therapeutic_group": "Corticostéroïdes nasaux",
+    "drug_class": "Corticostéroïde nasal",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 95.4,
+        "packaging": "pour pulvérisation nasale Spray nasal contenant 120 doses",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/tabunex-0-05-g-suspension"
+  },
+  {
+    "id": "T-TADALIS",
+    "brand_name": "TADALIS",
+    "generic_name": "Tadalafil",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BE08",
+    "therapeutic_group": "Urologie / HTAP",
+    "drug_class": "Inhibiteur PDE5",
+    "indications": [
+      "Dysfonction érectile",
+      "HBP",
+      "HTAP"
+    ],
+    "contraindications": [
+      "Dérivés nitrés (CI ABSOLUE)",
+      "Riociguat",
+      "Hypotension sévère",
+      "IDM récent <90j",
+      "AVC récent <6 mois"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Réservé à l'homme (DE/HBP). HTAP femme: cat B.",
+      "breastfeeding": "Non applicable."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-50: début 5 mg. ClCr <30: max 5 mg."
+    },
+    "dosage": {
+      "adult": "DE: 10-20 mg avant activité ou 5 mg/j. HBP: 5 mg/j. HTAP: 40 mg/j.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 60.7,
+        "packaging": "pelliculé Boite de 1",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "DB00820",
+    "adverse_effects": [
+      "Céphalées",
+      "Flush",
+      "Dorsalgies",
+      "Myalgies",
+      "Congestion nasale",
+      "Priapisme (rare, URGENCE)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Trinitrine",
+          "Natispray",
+          "Risordan",
+          "Isosorbide",
+          "Molsidomine"
+        ],
+        "interacting_classes": [
+          "Dérivés nitrés",
+          "Donneurs de NO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère potentiellement fatale",
+        "recommendation": "FORMELLEMENT CI. Délai 48h (demi-vie longue)."
+      },
+      {
+        "interacting_drugs": [
+          "Riociguat",
+          "Adempas"
+        ],
+        "interacting_classes": [
+          "Stimulateurs guanylate cyclase"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Alfuzosine",
+          "Flotral",
+          "Tamsulosine",
+          "Doxazosine"
+        ],
+        "interacting_classes": [
+          "Alpha-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère",
+        "recommendation": "Stabiliser sous alpha-bloquant d'abord."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux tadalafil",
+        "recommendation": "Max 10 mg/72h."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tadalis-20-mg-comprime"
+  },
+  {
+    "id": "T-TAHOR",
+    "brand_name": "TAHOR",
+    "generic_name": "Atorvastatine",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10AA05",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine",
+    "indications": [
+      "Hypercholestérolémie",
+      "Dyslipidémie mixte",
+      "Prévention cardiovasculaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique",
+      "Grossesse",
+      "Allaitement",
+      "Myopathie active"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "≥ 10 ans pour HF.",
+      "dose_rule": "≥ 10 ans: 10-20 mg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "10-80 mg/j.",
+      "children": "10-20 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 115.8,
+        "packaging": "Boîte de 56",
+        "laboratory": "VIATRIS PHARMACEUTICALS"
+      }
+    ],
+    "drugbank_id": "DB01076",
+    "adverse_effects": [
+      "Myalgies",
+      "Rhabdomyolyse (rare)",
+      "Élévation transaminases"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Clarithromycine",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Limiter dose ou éviter."
+      },
+      {
+        "interacting_drugs": [
+          "Acide fusidique",
+          "Fucidine"
+        ],
+        "interacting_classes": [
+          "Antibiotiques stéroïdiens"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "SUSPENDRE statine."
+      },
+      {
+        "interacting_drugs": [
+          "Fibrates",
+          "Gemfibrozil"
+        ],
+        "interacting_classes": [
+          "Fibrates"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Surveiller CPK."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tahor-10-mg-comprime"
+  },
+  {
+    "id": "T-TALZENNA",
+    "brand_name": "TALZENNA",
+    "generic_name": "Talazoparib",
+    "strength": "0.25 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "L01XK04",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur PARP",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 14318.0,
+        "packaging": "en flacon 30 gélules",
+        "laboratory": "PFIZER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/talzenna-0-25-mg-gelule"
+  },
+  {
+    "id": "T-TAMBOCOR",
+    "brand_name": "TAMBOCOR",
+    "generic_name": "Flécaïnide",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C01BC04",
+    "therapeutic_group": "Antiarythmiques",
+    "drug_class": "Antiarythmique classe Ic",
+    "indications": [
+      "TSVP",
+      "FA paroxystique",
+      "Flutter auriculaire",
+      "Arythmies ventriculaires graves"
+    ],
+    "contraindications": [
+      "IC",
+      "IDM récent",
+      "BAV 2e-3e degré",
+      "Bloc de branche",
+      "Syndrome de Brugada",
+      "Cardiopathie ischémique"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Si nécessaire. Passe la barrière placentaire.",
+      "breastfeeding": "Passage dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "2 mg/kg/j en 2-3 prises. Max 200 mg/m²/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <35: max 100 mg/j. Dosage plasmatique."
+    },
+    "dosage": {
+      "adult": "Début 50-100 mg 2x/j. Max 300 mg/j.",
+      "children": "2 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 100.7,
+        "packaging": "sécable Boite de 30",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "DB01195",
+    "adverse_effects": [
+      "Vertiges",
+      "Troubles visuels",
+      "Dyspnée",
+      "Pro-arythmie",
+      "Insuffisance cardiaque"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques III"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux flécaïnide",
+        "recommendation": "Réduire de 50%."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Paroxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP2D6"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation taux → toxicité cardiaque",
+        "recommendation": "Réduire dose. Dosage plasmatique."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation digoxinémie",
+        "recommendation": "Doser digoxine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tambocor-100-mg-comprime"
+  },
+  {
+    "id": "T-TAMOXIFENE",
+    "brand_name": "TAMOXIFENE",
+    "generic_name": "Tamoxifène",
+    "strength": "GT 20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "L02BA01",
+    "therapeutic_group": "Antinéoplasiques hormonaux",
+    "drug_class": "Anti-œstrogène (SERM)",
+    "indications": [
+      "Cancer du sein hormonodépendant"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "Antécédents thromboemboliques"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI. Tératogène. Contraception non hormonale obligatoire.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "20-40 mg/j. Durée: 5-10 ans.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 124.3,
+        "packaging": "Boîte de 30",
+        "laboratory": "ATLAS PHARM"
+      }
+    ],
+    "drugbank_id": "DB00675",
+    "adverse_effects": [
+      "Bouffées de chaleur",
+      "Thromboembolie",
+      "Cancer endomètre",
+      "Rétinopathie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Paroxétine",
+          "Fluoxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP2D6"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Perte efficacité antitumorale",
+        "recommendation": "Utiliser escitalopram ou venlafaxine."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Potentialisation anticoagulant",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Létrozole",
+          "Anastrozole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs aromatase"
+        ],
+        "severity": "DANGER",
+        "effect": "Antagonisme mutuel",
+        "recommendation": "NE PAS associer."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tamoxifene-gt-20-mg-comprime"
+  },
+  {
+    "id": "T-TAMSULOSINE",
+    "brand_name": "TAMSULOSINE",
+    "generic_name": "Tamsulosine",
+    "strength": "MAPHAR LP 0.4 MG",
+    "form": "Gélules",
+    "route": "Orale",
+    "atc_code": "G04CA02",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Alpha-1 bloquant sélectif (prostatique)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 91.6,
+        "packaging": "à libération prolongée Boite de 30",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tamsulosine-maphar-lp-0-4-mg-gelules"
+  },
+  {
+    "id": "T-TANAKAN",
+    "brand_name": "TANAKAN",
+    "generic_name": "Ginkgo biloba",
+    "strength": "40 MG / ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "N06DX02",
+    "therapeutic_group": "Nootropes",
+    "drug_class": "Extrait végétal vasoactif",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 63.4,
+        "packaging": "buvable en gouttes Flacon de 30 ml",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tanakan-40-mg-ml-solution"
+  },
+  {
+    "id": "T-TANGANIL",
+    "brand_name": "TANGANIL",
+    "generic_name": "Acétyl-leucine",
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N07CA04",
+    "therapeutic_group": "Anti-vertigineux",
+    "drug_class": "Acide aminé anti-vertigineux",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 46.8,
+        "packaging": "Boîte de 30",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/tanganil-500-mg-comprime"
+  },
+  {
+    "id": "T-TANZAAR",
+    "brand_name": "TANZAAR",
+    "generic_name": "Losartan",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "ARA2",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 138.1,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "AFRIC-PHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tanzaar-100-mg-comprime"
+  },
+  {
+    "id": "T-TARCEVA",
+    "brand_name": "TARCEVA",
+    "generic_name": "Erlotinib",
+    "strength": "150 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "L01EB02",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur EGFR",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 9451.0,
+        "packaging": "pelliculé Boîte de 30",
+        "laboratory": "ROCHE S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tarceva-150-mg-comprime"
+  },
+  {
+    "id": "T-TARDYFERON",
+    "brand_name": "TARDYFERON",
+    "generic_name": "Fer (sulfate ferreux)",
+    "strength": "80 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B03AA07",
+    "therapeutic_group": "Antianémiques",
+    "drug_class": "Fer oral (sulfate ferreux)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 37.8,
+        "packaging": "pelliculé enrobé Boîte de 30",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/tardyferon-80-mg-comprime"
+  },
+  {
+    "id": "T-TAREG",
+    "brand_name": "TAREG",
+    "generic_name": "Valsartan",
+    "strength": "160 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA03",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "ARA2",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 153.0,
+        "packaging": "pelliculé Boîte de 28",
+        "laboratory": "NOVARTIS PHARMA MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tareg-160-mg-comprime"
+  },
+  {
+    "id": "T-TAU-KIT",
+    "brand_name": "TAU-KIT",
+    "generic_name": "Trimébutine",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A03AA05",
+    "therapeutic_group": "Antispasmodiques",
+    "drug_class": "Antispasmodique musculotrope",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 334.0,
+        "packaging": "Boite de unitaire 4 tubes de verre, 2 pailles et un prospectus",
+        "laboratory": "SOLUDIA MAGHREB"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/tau-kit-100-mg-comprime"
+  },
+  {
+    "id": "T-TAVANIC",
+    "brand_name": "TAVANIC",
+    "generic_name": "Lévofloxacine",
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Orale / IV",
+    "atc_code": "J01MA12",
+    "therapeutic_group": "Fluoroquinolones",
+    "drug_class": "Fluoroquinolone 3e gén.",
+    "indications": [
+      "Pneumonie communautaire",
+      "Infections urinaires compliquées",
+      "Prostatite",
+      "Sinusite"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "Enfant <18 ans",
+      "Tendinopathie sous FQ",
+      "Épilepsie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-49: 250 mg/j. ClCr <20: 250 mg/48h."
+    },
+    "dosage": {
+      "adult": "500-750 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 191.6,
+        "packaging": "pelliculé Boîte de 7",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "DB01137",
+    "adverse_effects": [
+      "Tendinopathie",
+      "Neuropathie périphérique",
+      "Allongement QT",
+      "Photosensibilisation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Antiacides",
+          "Fer",
+          "Calcium",
+          "Zinc"
+        ],
+        "interacting_classes": [
+          "Cations divalents"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution absorption",
+        "recommendation": "Espacer 2h."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Corticostéroïdes"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque tendinopathie/rupture tendineuse",
+        "recommendation": "Éviter association."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "EPILEPSIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tavanic-500-mg-comprime"
+  },
+  {
+    "id": "T-TAVILOX",
+    "brand_name": "TAVILOX",
+    "generic_name": "Lévofloxacine",
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Orale / IV",
+    "atc_code": "J01MA12",
+    "therapeutic_group": "Fluoroquinolones",
+    "drug_class": "Fluoroquinolone 3e gén.",
+    "indications": [
+      "Pneumonie communautaire",
+      "Infections urinaires compliquées",
+      "Prostatite",
+      "Sinusite"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "Enfant <18 ans",
+      "Tendinopathie sous FQ",
+      "Épilepsie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-49: 250 mg/j. ClCr <20: 250 mg/48h."
+    },
+    "dosage": {
+      "adult": "500-750 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 95.6,
+        "packaging": "pelliculé Boite de 7",
+        "laboratory": "RIM PHARMA"
+      }
+    ],
+    "drugbank_id": "DB01137",
+    "adverse_effects": [
+      "Tendinopathie",
+      "Neuropathie périphérique",
+      "Allongement QT",
+      "Photosensibilisation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Antiacides",
+          "Fer",
+          "Calcium",
+          "Zinc"
+        ],
+        "interacting_classes": [
+          "Cations divalents"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution absorption",
+        "recommendation": "Espacer 2h."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Corticostéroïdes"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque tendinopathie/rupture tendineuse",
+        "recommendation": "Éviter association."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "EPILEPSIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tavilox-500-mg-comprime"
+  },
+  {
+    "id": "T-TAZOCILLINE",
+    "brand_name": "TAZOCILLINE",
+    "generic_name": "Pipéracilline + Tazobactam",
+    "strength": "4 G / 500 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "J01CR05",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Uréidopénicilline + inhibiteur bêta-lactamase",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 203.0,
+        "packaging": "pour solution en perfusion 1 flacon",
+        "laboratory": "PFIZER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tazocilline-4-g-500-mg-poudre"
+  },
+  {
+    "id": "T-TECENTRIQ",
+    "brand_name": "TECENTRIQ",
+    "generic_name": "Atézolizumab",
+    "strength": "1200 MG / 20 ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "L01FF05",
+    "therapeutic_group": "Antinéoplasiques - Immunothérapie",
+    "drug_class": "Anti-PD-L1 (checkpoint inhibitor)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 40180.0,
+        "packaging": "à diluer pour perfusion Boite de 20 ML",
+        "laboratory": "ROCHE S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tecentriq-1200-mg-20-ml-solution"
+  },
+  {
+    "id": "T-TECPRIL",
+    "brand_name": "TECPRIL",
+    "generic_name": "Ramipril",
+    "strength": "1.25 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "C09AA05",
+    "therapeutic_group": "Antihypertenseurs - IEC",
+    "drug_class": "IEC",
+    "indications": [
+      "HTA",
+      "IC post-IDM",
+      "Prévention CV",
+      "Néphropathie diabétique"
+    ],
+    "contraindications": [
+      "Grossesse (2e-3e T)",
+      "Sténose bilatérale artères rénales",
+      "Angioedème sous IEC",
+      "Hyperkaliémie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI aux 2e-3e trimestres (fœtotoxique).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-60: début 1.25 mg/j, max 5 mg. ClCr <20: début 1.25 mg, max 2.5 mg."
+    },
+    "dosage": {
+      "adult": "HTA: 2.5-10 mg/j. IC: 1.25-5 mg 2x/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 40.0,
+        "packaging": "Boîte de 30",
+        "laboratory": "AFRIC-PHAR"
+      }
+    ],
+    "drugbank_id": "DB00178",
+    "adverse_effects": [
+      "Toux sèche",
+      "Hyperkaliémie",
+      "Hypotension",
+      "Angioedème (rare, GRAVE)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller PA + créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Éplérénone",
+          "Potassium"
+        ],
+        "interacting_classes": [
+          "Épargneurs K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie",
+        "recommendation": "Surveiller kaliémie."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA",
+        "recommendation": "CI chez diabétique."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tecpril-1-25-mg-gelule"
+  },
+  {
+    "id": "T-TECRAM",
+    "brand_name": "TECRAM",
+    "generic_name": "Ramipril",
+    "strength": "10 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "C09AA05",
+    "therapeutic_group": "Antihypertenseurs - IEC",
+    "drug_class": "IEC",
+    "indications": [
+      "HTA",
+      "IC post-IDM",
+      "Prévention CV",
+      "Néphropathie diabétique"
+    ],
+    "contraindications": [
+      "Grossesse (2e-3e T)",
+      "Sténose bilatérale artères rénales",
+      "Angioedème sous IEC",
+      "Hyperkaliémie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI aux 2e-3e trimestres (fœtotoxique).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-60: début 1.25 mg/j, max 5 mg. ClCr <20: début 1.25 mg, max 2.5 mg."
+    },
+    "dosage": {
+      "adult": "HTA: 2.5-10 mg/j. IC: 1.25-5 mg 2x/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 76.0,
+        "packaging": "Boite de 30",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "DB00178",
+    "adverse_effects": [
+      "Toux sèche",
+      "Hyperkaliémie",
+      "Hypotension",
+      "Angioedème (rare, GRAVE)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller PA + créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Éplérénone",
+          "Potassium"
+        ],
+        "interacting_classes": [
+          "Épargneurs K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie",
+        "recommendation": "Surveiller kaliémie."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA",
+        "recommendation": "CI chez diabétique."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tecram-10-mg-gelule"
+  },
+  {
+    "id": "T-TECVAYLI",
+    "brand_name": "TECVAYLI",
+    "generic_name": "Téclistamab",
+    "strength": "10 MG / ML (30 MG / 3 ML)",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "L01FX27",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Anticorps bispécifique (BCMA x CD3)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 10625.0,
+        "packaging": "injectable Boite d'un flacon de 3 ml de solution",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tecvayli-10-mg-ml-30-mg-3-ml-solution"
+  },
+  {
+    "id": "T-TEFOVIR",
+    "brand_name": "TEFOVIR",
+    "generic_name": "Ténofovir disoproxil",
+    "strength": "PHARMA5 300 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J05AF07",
+    "therapeutic_group": "Antiviraux",
+    "drug_class": "INTI (analogue nucléotidique)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 289.0,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tefovir-pharma5-300-mg-comprime"
+  },
+  {
+    "id": "T-TEGELINE",
+    "brand_name": "TEGELINE",
+    "generic_name": "Immunoglobulines polyvalentes IV",
+    "strength": "50 MG / ML",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "J06BA02",
+    "therapeutic_group": "Immunoglobulines",
+    "drug_class": "Immunoglobulines humaines polyvalentes",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 2851.0,
+        "packaging": "et solvant pour solution pour perfusion Flacon de 5 g de poudre et flacon de 100 ml de solution",
+        "laboratory": "HEMOLAB-PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tegeline-50-mg-ml-poudre"
+  },
+  {
+    "id": "T-TEGOZOL",
+    "brand_name": "TEGOZOL",
+    "generic_name": "Fluconazole",
+    "strength": "250 MG",
+    "form": "Gélule",
+    "route": "Orale / IV",
+    "atc_code": "J02AC01",
+    "therapeutic_group": "Antifongiques",
+    "drug_class": "Triazolé",
+    "indications": [
+      "Candidoses",
+      "Cryptococcose"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association cisapride/terfénadine"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Dose unique 150 mg OK. Prolongé: CI.",
+      "breastfeeding": "Compatible dose unique."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Dès naissance.",
+      "dose_rule": "3-12 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <50: réduire 50%."
+    },
+    "dosage": {
+      "adult": "Candidose vaginale: 150 mg dose unique. Systémique: 200-400 mg/j.",
+      "children": "3-12 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 3395.0,
+        "packaging": "Flacon de 5",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "DB00196",
+    "adverse_effects": [
+      "Nausées",
+      "Céphalées",
+      "Hépatotoxicité",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Glibenclamide",
+          "Gliclazide"
+        ],
+        "interacting_classes": [
+          "Sulfamides"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Statines CYP3A4"
+        ],
+        "interacting_classes": [
+          "Statines"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Suspendre statine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tegozol-250-mg-gelule"
+  },
+  {
+    "id": "T-TEGUMA",
+    "brand_name": "TEGUMA",
+    "generic_name": "Éconazole",
+    "strength": "1 %",
+    "form": "Crème",
+    "route": "Cutanée",
+    "atc_code": "D01AC03",
+    "therapeutic_group": "Antifongiques cutanés",
+    "drug_class": "Imidazolé",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 58.4,
+        "packaging": "Tube de 30 g",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/teguma-1-creme"
+  },
+  {
+    "id": "T-TELMISARTAN",
+    "brand_name": "TELMISARTAN",
+    "generic_name": "Telmisartan",
+    "strength": "MYLAN 40 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA07",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "ARA2",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 109.7,
+        "packaging": "Boite de 30",
+        "laboratory": "VIATRIS PHARMACEUTICALS"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/telmisartan-mylan-40-mg-comprime"
+  },
+  {
+    "id": "T-TEMOZOLOMIDE",
+    "brand_name": "TEMOZOLOMIDE",
+    "generic_name": "Témozolomide",
+    "strength": "ISIO 100 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "L01AX03",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Agent alkylant (imidazotetrazine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 3,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1677.0,
+        "packaging": "Boite de 5",
+        "laboratory": "ISIO LABORATOIRE"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/temozolomide-isio-100-mg-gelule"
+  },
+  {
+    "id": "T-TENEF",
+    "brand_name": "TENEF",
+    "generic_name": "Tamsulosine",
+    "strength": "LP 0.4 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "G04CA02",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Alpha-1 bloquant sélectif (prostatique)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 102.5,
+        "packaging": "à libération prolongée Boite de 30",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tenef-lp-0-4-mg-gelule"
+  },
+  {
+    "id": "T-TENORETIC",
+    "brand_name": "TENORETIC",
+    "generic_name": "Aténolol + Chlortalidone",
+    "strength": "50 MG / 12.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C07BB03",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "BB + diurétique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 65.4,
+        "packaging": "pelliculé sécable Boîte de 28",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tenoretic-50-mg-12-5-mg-comprime"
+  },
+  {
+    "id": "T-TENORMINE",
+    "brand_name": "TENORMINE",
+    "generic_name": "Aténolol",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C07AB03",
+    "therapeutic_group": "Bêta-bloquants",
+    "drug_class": "BB cardiosélectif",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 31.8,
+        "packaging": "pelliculé sécable Boîte de 14",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tenormine-100-mg-comprime"
+  },
+  {
+    "id": "T-TENSIOTEC",
+    "brand_name": "TENSIOTEC",
+    "generic_name": "Ramipril",
+    "strength": "10 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "C09AA05",
+    "therapeutic_group": "Antihypertenseurs - IEC",
+    "drug_class": "IEC",
+    "indications": [
+      "HTA",
+      "IC post-IDM",
+      "Prévention CV",
+      "Néphropathie diabétique"
+    ],
+    "contraindications": [
+      "Grossesse (2e-3e T)",
+      "Sténose bilatérale artères rénales",
+      "Angioedème sous IEC",
+      "Hyperkaliémie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI aux 2e-3e trimestres (fœtotoxique).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-60: début 1.25 mg/j, max 5 mg. ClCr <20: début 1.25 mg, max 2.5 mg."
+    },
+    "dosage": {
+      "adult": "HTA: 2.5-10 mg/j. IC: 1.25-5 mg 2x/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 114.0,
+        "packaging": "Boîte de 30",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "DB00178",
+    "adverse_effects": [
+      "Toux sèche",
+      "Hyperkaliémie",
+      "Hypotension",
+      "Angioedème (rare, GRAVE)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller PA + créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Éplérénone",
+          "Potassium"
+        ],
+        "interacting_classes": [
+          "Épargneurs K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie",
+        "recommendation": "Surveiller kaliémie."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA",
+        "recommendation": "CI chez diabétique."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tensiotec-10-mg-gelule"
+  },
+  {
+    "id": "T-TÉRAZOSINE",
+    "brand_name": "TÉRAZOSINE",
+    "generic_name": "Térazosine",
+    "strength": "NORMON 2 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04CA03",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Alpha-1 bloquant",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 42.3,
+        "packaging": "Boite de 15",
+        "laboratory": "IBERMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/terazosine-normon-2-mg-comprime"
+  },
+  {
+    "id": "T-TERBINAFINE",
+    "brand_name": "TERBINAFINE",
+    "generic_name": "Terbinafine",
+    "strength": "GT 250 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "D01BA02",
+    "therapeutic_group": "Antifongiques",
+    "drug_class": "Allylamine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 70.1,
+        "packaging": "sécable Boîte de 7",
+        "laboratory": "ATLAS PHARM"
+      }
+    ],
+    "drugbank_id": "DB00857",
+    "drug_interactions": [],
+    "adverse_effects": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/terbinafine-gt-250-mg-comprime"
+  },
+  {
+    "id": "T-TERFINE",
+    "brand_name": "TERFINE",
+    "generic_name": "Terbinafine",
+    "strength": "PROMOPHARM 250 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "D01BA02",
+    "therapeutic_group": "Antifongiques",
+    "drug_class": "Allylamine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 186.0,
+        "packaging": "Boite de 28",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/terfine-promopharm-250-mg-comprime"
+  },
+  {
+    "id": "T-TERIX",
+    "brand_name": "TERIX",
+    "generic_name": "Terbinafine (crème)",
+    "strength": "1 %",
+    "form": "Crème",
+    "route": "Cutanée",
+    "atc_code": "D01AE15",
+    "therapeutic_group": "Antifongiques cutanés",
+    "drug_class": "Allylamine topique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 33.2,
+        "packaging": "Tube de 15 g",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/terix-1-creme"
+  },
+  {
+    "id": "T-TERPONE",
+    "brand_name": "TERPONE",
+    "generic_name": "Terpinéol",
+    "strength": "200 MG",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R05CA",
+    "therapeutic_group": "Expectorants",
+    "drug_class": "Terpène expectorant",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2.5,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 22.0,
+        "packaging": "Flacon de 200 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/terpone-200-mg-sirop"
+  },
+  {
+    "id": "T-TETRACYCLINE",
+    "brand_name": "TETRACYCLINE",
+    "generic_name": "Tétracycline",
+    "strength": "250 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01AA07",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Tétracycline",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 8,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 22.2,
+        "packaging": "dragéifié Boîte de 16",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tetracycline-250-mg-comprime"
+  },
+  {
+    "id": "T-TETRALYSAL",
+    "brand_name": "TETRALYSAL",
+    "generic_name": "Lymécycline",
+    "strength": "300 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "J01AA04",
+    "therapeutic_group": "Antibactériens - Tétracyclines",
+    "drug_class": "Tétracycline (acné)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 8,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 64.5,
+        "packaging": "Boite de 16",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tetralysal-300-mg-gelule"
+  },
+  {
+    "id": "T-TETRAMAG",
+    "brand_name": "TETRAMAG",
+    "generic_name": "Magnésium + Vitamine B6",
+    "strength": "30 MG + B6",
+    "form": "Gélules",
+    "route": "Orale",
+    "atc_code": "A11JB",
+    "therapeutic_group": "Suppléments",
+    "drug_class": "Mg + pyridoxine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 95.0,
+        "packaging": "Boite de 30",
+        "laboratory": "NON RENSEIGNÉ"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/tetramag-30-mg-b6-gelules"
+  },
+  {
+    "id": "T-THÉALOSE",
+    "brand_name": "THÉALOSE",
+    "generic_name": "Tréhalose (collyre)",
+    "strength": "3 %",
+    "form": "Solution",
+    "route": "Ophtalmique",
+    "atc_code": "S01XA25",
+    "therapeutic_group": "Larmes artificielles",
+    "drug_class": "Lubrifiant ophtalmique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 98.0,
+        "packaging": "ophtalmique aqueuse Flacon 10 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/thealose-3-solution"
+  },
+  {
+    "id": "T-THEOPHYLINE",
+    "brand_name": "THEOPHYLINE",
+    "generic_name": "Théophylline",
+    "strength": "BRUNEAU AD 350 MG",
+    "form": "Suppositoire",
+    "route": "Rectale",
+    "atc_code": "R03DA04",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "Base xanthique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 15.2,
+        "packaging": "Boîte de 12",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/theophyline-bruneau-ad-350-mg-suppositoire"
+  },
+  {
+    "id": "T-THIAM",
+    "brand_name": "THIAM",
+    "generic_name": "Azithromycine",
+    "strength": "250 MG / 5 ML",
+    "form": "Granulé",
+    "route": "Orale",
+    "atc_code": "J01FA10",
+    "therapeutic_group": "Antibactériens - Macrolides",
+    "drug_class": "Azalide",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 30.8,
+        "packaging": "pour Suspension buvable Flacon de 60 ml",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/thiam-250-mg-5-ml-granule"
+  },
+  {
+    "id": "T-THIOBACTIN",
+    "brand_name": "THIOBACTIN",
+    "generic_name": "Azithromycine",
+    "strength": "250 MG / 5 ML",
+    "form": "Granulé",
+    "route": "Orale",
+    "atc_code": "J01FA10",
+    "therapeutic_group": "Antibactériens - Macrolides",
+    "drug_class": "Azalide",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 43.8,
+        "packaging": "pour suspension buvable Flacon de 60 ml",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/thiobactin-250-mg-5-ml-granule"
+  },
+  {
+    "id": "T-THYMOGLOBULINE",
+    "brand_name": "THYMOGLOBULINE",
+    "generic_name": "Immunoglobuline antithymocyte",
+    "strength": "25 MG / 5 ML",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "L04AA04",
+    "therapeutic_group": "Immunosuppresseurs",
+    "drug_class": "Immunoglobuline anti-lymphocyte T",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1817.0,
+        "packaging": "pour solution à diluer pour perfusion 1 flacon de 5 ml",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/thymoglobuline-25-mg-5-ml-poudre"
+  },
+  {
+    "id": "T-THYROGEN",
+    "brand_name": "THYROGEN",
+    "generic_name": "Thyrotropine alfa",
+    "strength": "0.9 MG",
+    "form": "Poudre",
+    "route": "IM",
+    "atc_code": "V04CJ01",
+    "therapeutic_group": "Agents diagnostiques thyroïdiens",
+    "drug_class": "TSH recombinante",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 9080.0,
+        "packaging": "lyophilisée pour solution injectable IM Boite de 2 flacons de 5 ml",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/thyrogen-0-9-mg-poudre"
+  },
+  {
+    "id": "T-THYROXIZEN",
+    "brand_name": "THYROXIZEN",
+    "generic_name": "Lévothyroxine",
+    "strength": "100 µG / 5 ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "H03AA01",
+    "therapeutic_group": "Hormones thyroïdiennes",
+    "drug_class": "T4 synthétique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 145.7,
+        "packaging": "buvable Flacon de 100 ML avec seringue graduée de 5 ML",
+        "laboratory": "ZENITH PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/thyroxizen-100-g-5-ml-solution"
+  },
+  {
+    "id": "T-THYROZOL",
+    "brand_name": "THYROZOL",
+    "generic_name": "Thiamazole (méthimazole)",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "H03BB02",
+    "therapeutic_group": "Antithyroïdiens",
+    "drug_class": "Antithyroïdien de synthèse (thionamide)",
+    "indications": [
+      "Hyperthyroïdie (maladie de Basedow)",
+      "Préparation à la chirurgie thyroïdienne",
+      "Crise thyréotoxique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Cholestase pré-existante",
+      "Dyscrasie sanguine antérieure sous antithyroïdien"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Tératogène (aplasie du cuir chevelu, atrésie choanale). Préférer le propylthiouracile au 1er trimestre, puis switch au thiamazole au 2e trimestre.",
+      "breastfeeding": "Compatible à faible dose (<20 mg/j). Surveiller thyroïde du nourrisson."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "0.5-1 mg/kg/j en 2-3 prises. Ajuster selon TSH/T4."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "Début 15-40 mg/j en 2-3 prises. Entretien: 5-15 mg/j.",
+      "children": "0.5-1 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 46.8,
+        "packaging": "pelliculé sécable Boite de 30",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "DB00763",
+    "adverse_effects": [
+      "Agranulocytose (GRAVE, 0.1-0.5%)",
+      "Hépatotoxicité",
+      "Rash",
+      "Arthralgies",
+      "Aplasie du cuir chevelu (fœtus)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Modification INR (hyperthyroïdie ↑ métabolisme AVK)",
+        "recommendation": "Surveiller INR pendant équilibrage thyroïdien."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/thyrozol-10-mg-comprime"
+  },
+  {
+    "id": "T-TIADAL",
+    "brand_name": "TIADAL",
+    "generic_name": "Tadalafil",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BE08",
+    "therapeutic_group": "Urologie / HTAP",
+    "drug_class": "Inhibiteur PDE5",
+    "indications": [
+      "Dysfonction érectile",
+      "HBP",
+      "HTAP"
+    ],
+    "contraindications": [
+      "Dérivés nitrés (CI ABSOLUE)",
+      "Riociguat",
+      "Hypotension sévère",
+      "IDM récent <90j",
+      "AVC récent <6 mois"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Réservé à l'homme (DE/HBP). HTAP femme: cat B.",
+      "breastfeeding": "Non applicable."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-50: début 5 mg. ClCr <30: max 5 mg."
+    },
+    "dosage": {
+      "adult": "DE: 10-20 mg avant activité ou 5 mg/j. HBP: 5 mg/j. HTAP: 40 mg/j.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 37.4,
+        "packaging": "enrobé Boite de 1",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "DB00820",
+    "adverse_effects": [
+      "Céphalées",
+      "Flush",
+      "Dorsalgies",
+      "Myalgies",
+      "Congestion nasale",
+      "Priapisme (rare, URGENCE)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Trinitrine",
+          "Natispray",
+          "Risordan",
+          "Isosorbide",
+          "Molsidomine"
+        ],
+        "interacting_classes": [
+          "Dérivés nitrés",
+          "Donneurs de NO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère potentiellement fatale",
+        "recommendation": "FORMELLEMENT CI. Délai 48h (demi-vie longue)."
+      },
+      {
+        "interacting_drugs": [
+          "Riociguat",
+          "Adempas"
+        ],
+        "interacting_classes": [
+          "Stimulateurs guanylate cyclase"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Alfuzosine",
+          "Flotral",
+          "Tamsulosine",
+          "Doxazosine"
+        ],
+        "interacting_classes": [
+          "Alpha-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère",
+        "recommendation": "Stabiliser sous alpha-bloquant d'abord."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux tadalafil",
+        "recommendation": "Max 10 mg/72h."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tiadal-20-mg-comprime"
+  },
+  {
+    "id": "T-TIAGAM",
+    "brand_name": "TIAGAM",
+    "generic_name": "Acide tiaprofénique",
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M01AE11",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé propionique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 25.2,
+        "packaging": "sécable Boîte de 30",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tiagam-100-mg-comprime"
+  },
+  {
+    "id": "T-TIASUREX",
+    "brand_name": "TIASUREX",
+    "generic_name": "Indapamide",
+    "strength": "LP 1.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C03BA11",
+    "therapeutic_group": "Diurétiques",
+    "drug_class": "Thiazidique apparenté",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29.3,
+        "packaging": "Boite de 30",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tiasurex-lp-1-5-mg-comprime"
+  },
+  {
+    "id": "T-TIBERAL",
+    "brand_name": "TIBERAL",
+    "generic_name": "Ornidazole",
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "P01AB03",
+    "therapeutic_group": "Antiparasitaires",
+    "drug_class": "Nitroimidazolé",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 45.4,
+        "packaging": "pelliculé Boîte de 10",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tiberal-500-mg-comprime"
+  },
+  {
+    "id": "T-TIDAZ",
+    "brand_name": "TIDAZ",
+    "generic_name": "Métronidazole",
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Orale / IV",
+    "atc_code": "P01AB01",
+    "therapeutic_group": "Antiparasitaires / Antibactériens",
+    "drug_class": "Nitroimidazolé",
+    "indications": [
+      "Amibiase",
+      "Giardiase",
+      "Trichomonase",
+      "Vaginose",
+      "Infections anaérobies",
+      "C. difficile",
+      "H. pylori"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Consommation d'alcool"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Éviter 1er trimestre. OK 2e-3e.",
+      "breastfeeding": "Éviter ou suspendre 12-24h."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Dès la naissance.",
+      "dose_rule": "20-30 mg/kg/j en 2-3 prises."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: réduire."
+    },
+    "dosage": {
+      "adult": "250-500 mg 2-3x/j.",
+      "children": "20-30 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 38.3,
+        "packaging": "pelliculé Boite de 10",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A"
+      }
+    ],
+    "drugbank_id": "DB00916",
+    "adverse_effects": [
+      "Nausées",
+      "Goût métallique",
+      "Neuropathie (prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Effet antabuse",
+        "recommendation": "INTERDIRE alcool pendant et 48h après."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Disulfirame"
+        ],
+        "interacting_classes": [
+          "Anti-alcool"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Psychose aiguë",
+        "recommendation": "CI."
+      }
+    ],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tidaz-500-mg-comprime"
+  },
+  {
+    "id": "T-TILCOTIL",
+    "brand_name": "TILCOTIL",
+    "generic_name": "Ténoxicam",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M01AC02",
+    "therapeutic_group": "AINS",
+    "drug_class": "Oxicam",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 41.1,
+        "packaging": "pelliculé Boîte de 10",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tilcotil-20-mg-comprime"
+  },
+  {
+    "id": "T-TIMEZOL",
+    "brand_name": "TIMEZOL",
+    "generic_name": "Ésoméprazole",
+    "strength": "40 MG",
+    "form": "Lyophilisat",
+    "route": "IV",
+    "atc_code": "A02BC05",
+    "therapeutic_group": "IPP",
+    "drug_class": "IPP injectable",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 82.1,
+        "packaging": "pour perfusion 1 flacon",
+        "laboratory": "GENPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/timezol-40-mg-lyophilisat"
+  },
+  {
+    "id": "T-TIMO-COMOD",
+    "brand_name": "TIMO-COMOD",
+    "generic_name": "Timolol (collyre)",
+    "strength": "0.50 %",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01ED01",
+    "therapeutic_group": "Antiglaucomateux",
+    "drug_class": "Bêta-bloquant ophtalmique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 96.3,
+        "packaging": "Flacon de 10 ml",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/timo-comod-0-50-collyre"
+  },
+  {
+    "id": "T-TIORFAN",
+    "brand_name": "TIORFAN",
+    "generic_name": "Racécadotril",
+    "strength": "10 MG NOURISSON",
+    "form": "Sachet",
+    "route": "Orale",
+    "atc_code": "A07XA04",
+    "therapeutic_group": "Antidiarrhéiques",
+    "drug_class": "Inhibiteur enképhalinase",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 104.7,
+        "packaging": "buvable Boite de 16",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/tiorfan-10-mg-nourisson-sachet"
+  },
+  {
+    "id": "T-TIOVA",
+    "brand_name": "TIOVA",
+    "generic_name": "Tiotropium",
+    "strength": "18 µG ROTACAPS",
+    "form": "Gélule",
+    "route": "Inhalée",
+    "atc_code": "R03BB04",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "LAMA",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 151.2,
+        "packaging": "Un pillulier de 15 gélules Les gellules doivent être utilisées avec le dispositif Revoliser",
+        "laboratory": "CIPLA MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tiova-18-g-rotacaps-gelule"
+  },
+  {
+    "id": "T-TITANOREINE",
+    "brand_name": "TITANOREINE",
+    "generic_name": "Lidocaïne + Protecteurs (crème rectale)",
+    "strength": "À LA LIDOCAÏNE",
+    "form": "Crème",
+    "route": "Rectale",
+    "atc_code": "C05AD01",
+    "therapeutic_group": "Anti-hémorroïdaires",
+    "drug_class": "Anesthésique local + protecteurs",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 14.9,
+        "packaging": "Tube de 20 g",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/titanoreine-a-la-lidocaine-creme"
+  },
+  {
+    "id": "T-TMS",
+    "brand_name": "TMS",
+    "generic_name": "Triméthoprime + Sulfaméthoxazole",
+    "strength": "500 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01EE01",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Sulfamide + diaminopyrimidine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0.5,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 37.4,
+        "packaging": "Boîte de 2",
+        "laboratory": "IBERMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tms-500-mg-comprime"
+  },
+  {
+    "id": "T-TOBRADEX",
+    "brand_name": "TOBRADEX",
+    "generic_name": "Tobramycine + Dexaméthasone (collyre)",
+    "strength": "0.1 % / 0.3 %",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01CA01",
+    "therapeutic_group": "Anti-infectieux + AI ophtalmiques",
+    "drug_class": "Aminoside + corticoïde ophtalmique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 33.4,
+        "packaging": "Flacon de 5 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tobradex-0-1-0-3-collyre"
+  },
+  {
+    "id": "T-TOBREX",
+    "brand_name": "TOBREX",
+    "generic_name": "Tobramycine (collyre)",
+    "strength": "0.3 %",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01AA12",
+    "therapeutic_group": "Anti-infectieux ophtalmiques",
+    "drug_class": "Aminoside ophtalmique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 24.7,
+        "packaging": "Flacon de 5 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/tobrex-0-3-collyre"
+  },
+  {
+    "id": "T-TOPICORTE",
+    "brand_name": "TOPICORTE",
+    "generic_name": "Désonide (crème)",
+    "strength": "0.25 %",
+    "form": "Crème",
+    "route": "Cutanée",
+    "atc_code": "D07AB08",
+    "therapeutic_group": "Dermocorticoïdes",
+    "drug_class": "Corticostéroïde faible puissance",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 23.0,
+        "packaging": "Flacon de 15 g",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/topicorte-0-25-creme"
+  },
+  {
+    "id": "T-TOPOTECAN",
+    "brand_name": "TOPOTECAN",
+    "generic_name": "Topotécan",
+    "strength": "SUN 4 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "L01CE01",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur topoisomérase I",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1141.0,
+        "packaging": "pour solution pour perfusion Boite de 1 flacon",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/topotecan-sun-4-mg-poudre"
+  },
+  {
+    "id": "T-TOPSYNE",
+    "brand_name": "TOPSYNE",
+    "generic_name": "Fluocinonide",
+    "strength": "0.025 %",
+    "form": "Gel",
+    "route": "Cutanée",
+    "atc_code": "D07AC08",
+    "therapeutic_group": "Dermocorticoïdes",
+    "drug_class": "Corticostéroïde puissant",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 23.8,
+        "packaging": "Tube de 30 g",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/topsyne-0-025-gel"
+  },
+  {
+    "id": "T-TORVA",
+    "brand_name": "TORVA",
+    "generic_name": "Atorvastatine",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10AA05",
+    "therapeutic_group": "Hypolipémiants",
+    "drug_class": "Statine",
+    "indications": [
+      "Hypercholestérolémie",
+      "Dyslipidémie mixte",
+      "Prévention cardiovasculaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique",
+      "Grossesse",
+      "Allaitement",
+      "Myopathie active"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "≥ 10 ans pour HF.",
+      "dose_rule": "≥ 10 ans: 10-20 mg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "10-80 mg/j.",
+      "children": "10-20 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 57.8,
+        "packaging": "enrobé Boîte de 30",
+        "laboratory": "NOVOPHARMA"
+      }
+    ],
+    "drugbank_id": "DB01076",
+    "adverse_effects": [
+      "Myalgies",
+      "Rhabdomyolyse (rare)",
+      "Élévation transaminases"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Clarithromycine",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Limiter dose ou éviter."
+      },
+      {
+        "interacting_drugs": [
+          "Acide fusidique",
+          "Fucidine"
+        ],
+        "interacting_classes": [
+          "Antibiotiques stéroïdiens"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "SUSPENDRE statine."
+      },
+      {
+        "interacting_drugs": [
+          "Fibrates",
+          "Gemfibrozil"
+        ],
+        "interacting_classes": [
+          "Fibrates"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Surveiller CPK."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/torva-10-mg-comprime"
+  },
+  {
+    "id": "T-TOTIFEN",
+    "brand_name": "TOTIFEN",
+    "generic_name": "Kétotifène",
+    "strength": "1 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "R06AX17",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Stabilisateur mastocytaire + anti-H1",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0.5,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 54.4,
+        "packaging": "Boîte de 30",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/totifen-1-mg-gelule"
+  },
+  {
+    "id": "T-TOUCOF",
+    "brand_name": "TOUCOF",
+    "generic_name": "Oxomémazine",
+    "strength": "150 MG / 100 ML",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AD08",
+    "therapeutic_group": "Antitussifs",
+    "drug_class": "Phénothiazine antitussive (sédative)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 32.2,
+        "packaging": "Flacon de 200 ml",
+        "laboratory": "NOVOPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/toucof-150-mg-100-ml-sirop"
+  },
+  {
+    "id": "T-TRACTOCILE",
+    "brand_name": "TRACTOCILE",
+    "generic_name": "Atosiban",
+    "strength": "37.5 MG / 5 ML",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "G02CX01",
+    "therapeutic_group": "Tocolytiques",
+    "drug_class": "Antagoniste ocytocine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 996.0,
+        "packaging": "à diluer pour perfusion Boite de 1 flacon de 5 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tractocile-37-5-mg-5-ml-solution"
+  },
+  {
+    "id": "T-TRAJENTA",
+    "brand_name": "TRAJENTA",
+    "generic_name": "Linagliptine",
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A10BH05",
+    "therapeutic_group": "Antidiabétiques",
+    "drug_class": "Inhibiteur DPP-4 (gliptine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 374.0,
+        "packaging": "pelliculé Boite de 28",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/trajenta-5-mg-comprime"
+  },
+  {
+    "id": "T-TRALGIC",
+    "brand_name": "TRALGIC",
+    "generic_name": "Tramadol + Paracétamol",
+    "strength": "FORT 37.5 MG / 325 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N02AJ13",
+    "therapeutic_group": "Analgésiques palier II",
+    "drug_class": "Opioïde faible + paracétamol",
+    "indications": [
+      "Douleurs modérées"
+    ],
+    "contraindications": [
+      "Enfant <12 ans",
+      "Insuffisance respiratoire sévère",
+      "IMAO",
+      "Épilepsie non contrôlée"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter fin de grossesse.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 12,
+      "warning": "CI < 12 ans.",
+      "dose_rule": "≥ 12 ans: 1-2 cp/6h."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: espacer prises."
+    },
+    "dosage": {
+      "adult": "1-2 cp/6h. Max 8 cp/j.",
+      "children": "≥ 12 ans: 1-2 cp/6h."
+    },
+    "market_data": [
+      {
+        "price": 31.8,
+        "packaging": "effervescent Boite de 20",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Nausées",
+      "Somnolence",
+      "Constipation",
+      "Dépendance",
+      "Dépression respiratoire"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Syndrome sérotoninergique",
+        "recommendation": "CI."
+      },
+      {
+        "interacting_drugs": [
+          "ISRS",
+          "Venlafaxine"
+        ],
+        "interacting_classes": [
+          "Antidépresseurs sérotoninergiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Syndrome sérotoninergique + convulsions",
+        "recommendation": "Éviter."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Benzodiazépines"
+        ],
+        "interacting_classes": [
+          "Dépresseurs SNC"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression respiratoire",
+        "recommendation": "Éviter alcool. Réduire BZD."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL",
+      "EPILEPSIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tralgic-fort-37-5-mg-325-mg-comprime"
+  },
+  {
+    "id": "T-TRANSILAC",
+    "brand_name": "TRANSILAC",
+    "generic_name": "Lactulose",
+    "strength": "50 %",
+    "form": "Sachet",
+    "route": "Orale",
+    "atc_code": "A06AD11",
+    "therapeutic_group": "Laxatifs",
+    "drug_class": "Laxatif osmotique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 66.7,
+        "packaging": "Boîte de 20",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/transilac-50-sachet"
+  },
+  {
+    "id": "T-TRAVATAN",
+    "brand_name": "TRAVATAN",
+    "generic_name": "Travoprost (collyre)",
+    "strength": "40 µg / ML",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01EE04",
+    "therapeutic_group": "Antiglaucomateux",
+    "drug_class": "Analogue PGF2α",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 130.9,
+        "packaging": "Flacon de 2.5 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/travatan-40-g-ml-collyre"
+  },
+  {
+    "id": "T-TRAZUVA",
+    "brand_name": "TRAZUVA",
+    "generic_name": "Trastuzumab",
+    "strength": "150 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "L01FD01",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Anti-HER2 (anticorps monoclonal)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 3317.0,
+        "packaging": "pour solution à diluer pour perfusion 1 flacon",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/trazuva-150-mg-poudre"
+  },
+  {
+    "id": "T-TREMFYA",
+    "brand_name": "TREMFYA",
+    "generic_name": "Guselkumab",
+    "strength": "100 MG",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "L04AC16",
+    "therapeutic_group": "Immunosuppresseurs",
+    "drug_class": "Anti-IL23 (anticorps monoclonal)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 19815.0,
+        "packaging": "injectable en stylo pré rempli Boite d'un stylo",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tremfya-100-mg-solution"
+  },
+  {
+    "id": "T-TRESIBA",
+    "brand_name": "TRESIBA",
+    "generic_name": "Insuline dégludec",
+    "strength": "FlexTouch 100 U/ml",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "A10AE06",
+    "therapeutic_group": "Insulines",
+    "drug_class": "Insuline basale ultra-longue durée",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1040.0,
+        "packaging": "injectable Boite de 5 stylos pré remlpi de 3 ML",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tresiba-flextouch-100-u-ml-solution"
+  },
+  {
+    "id": "T-TREXIMED",
+    "brand_name": "TREXIMED",
+    "generic_name": "Méthotrexate",
+    "strength": "50 MG / 2 ML",
+    "form": "Solution",
+    "route": "SC / IV / IM",
+    "atc_code": "L04AX03",
+    "therapeutic_group": "Immunosuppresseurs",
+    "drug_class": "Antimétabolite antifolique",
+    "indications": [
+      "PR",
+      "Psoriasis sévère",
+      "Leucémies",
+      "Lymphomes",
+      "GEU"
+    ],
+    "contraindications": [
+      "Grossesse (TÉRATOGÈNE)",
+      "Allaitement",
+      "IRC sévère",
+      "IH sévère",
+      "Cytopénies",
+      "Immunodéficience"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "STRICTEMENT CI. Tératogène puissant.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 3,
+      "warning": "≥ 3 ans pour AJI.",
+      "dose_rule": "AJI: 10-15 mg/m²/semaine SC."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-59: réduire 50%. ClCr <30: CI."
+    },
+    "dosage": {
+      "adult": "PR: 7.5-25 mg/SEMAINE (1 prise/sem!). Onco: selon protocole.",
+      "children": "10-15 mg/m²/sem."
+    },
+    "market_data": [
+      {
+        "price": 62.1,
+        "packaging": "à diluer pour perfusion Flacon de 2 ml",
+        "laboratory": "PHARMAPROM"
+      }
+    ],
+    "drugbank_id": "DB00563",
+    "adverse_effects": [
+      "Nausées",
+      "Stomatite",
+      "Hépatotoxicité",
+      "Myélosuppression",
+      "Pneumopathie interstitielle"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Aspirine"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX accrue",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Bactrim",
+          "Triméthoprime"
+        ],
+        "interacting_classes": [
+          "Antifoliques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Pancytopénie fatale",
+        "recommendation": "FORMELLEMENT CI."
+      },
+      {
+        "interacting_drugs": [
+          "IPP",
+          "Oméprazole"
+        ],
+        "interacting_classes": [
+          "IPP"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX",
+        "recommendation": "Prudence haute dose."
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins vivants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Infection disséminée",
+        "recommendation": "CI."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/treximed-50-mg-2-ml-solution"
+  },
+  {
+    "id": "T-TRIATEC",
+    "brand_name": "TRIATEC",
+    "generic_name": "Ramipril",
+    "strength": "2.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09AA05",
+    "therapeutic_group": "Antihypertenseurs - IEC",
+    "drug_class": "IEC",
+    "indications": [
+      "HTA",
+      "IC post-IDM",
+      "Prévention CV",
+      "Néphropathie diabétique"
+    ],
+    "contraindications": [
+      "Grossesse (2e-3e T)",
+      "Sténose bilatérale artères rénales",
+      "Angioedème sous IEC",
+      "Hyperkaliémie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI aux 2e-3e trimestres (fœtotoxique).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-60: début 1.25 mg/j, max 5 mg. ClCr <20: début 1.25 mg, max 2.5 mg."
+    },
+    "dosage": {
+      "adult": "HTA: 2.5-10 mg/j. IC: 1.25-5 mg 2x/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 97.7,
+        "packaging": "Boîte de 30",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "DB00178",
+    "adverse_effects": [
+      "Toux sèche",
+      "Hyperkaliémie",
+      "Hypotension",
+      "Angioedème (rare, GRAVE)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller PA + créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Éplérénone",
+          "Potassium"
+        ],
+        "interacting_classes": [
+          "Épargneurs K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie",
+        "recommendation": "Surveiller kaliémie."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA",
+        "recommendation": "CI chez diabétique."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/triatec-2-5-mg-comprime"
+  },
+  {
+    "id": "T-TRIAXON",
+    "brand_name": "TRIAXON",
+    "generic_name": "Ceftriaxone",
+    "strength": "1 G / 10 ML IV",
+    "form": "Solution",
+    "route": "IV / IM",
+    "atc_code": "J01DD04",
+    "therapeutic_group": "Antibactériens - C3G",
+    "drug_class": "Céphalosporine 3e génération",
+    "indications": [
+      "Infections sévères",
+      "Méningite",
+      "Infections urinaires compliquées",
+      "Septicémie",
+      "Gonorrhée"
+    ],
+    "contraindications": [
+      "Allergie céphalosporines",
+      "Nouveau-né ictérique/prématuré + calcium IV"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Dès la naissance (sauf prématuré).",
+      "dose_rule": "50-100 mg/kg/j. Méningite: 100 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère + IH: max 2 g/j."
+    },
+    "dosage": {
+      "adult": "1-2 g/j IV/IM. Méningite: 4 g/j.",
+      "children": "50-100 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 802.0,
+        "packaging": "Injectable Boîte de 10",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "DB01212",
+    "adverse_effects": [
+      "Diarrhée",
+      "Réactions allergiques",
+      "Lithiase biliaire (enfant, forte dose)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Calcium IV (nouveau-né)"
+        ],
+        "interacting_classes": [
+          "Solutions calciques IV"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Précipitation → embolie (nouveau-né)",
+        "recommendation": "CI chez nouveau-né."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/triaxon-1-g-10-ml-iv-solution"
+  },
+  {
+    "id": "T-TRIBUTINE",
+    "brand_name": "TRIBUTINE",
+    "generic_name": "Trimébutine",
+    "strength": "0.79%",
+    "form": "Suspension",
+    "route": "Orale",
+    "atc_code": "A03AA05",
+    "therapeutic_group": "Antispasmodiques",
+    "drug_class": "Antispasmodique musculotrope",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 22.9,
+        "packaging": "buvable Flacon de 250 ml",
+        "laboratory": "PHARMED"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/tributine-0-79-suspension"
+  },
+  {
+    "id": "T-TRICEF",
+    "brand_name": "TRICEF",
+    "generic_name": "Ceftriaxone",
+    "strength": "1 G / 10 ML IV",
+    "form": "Flacon",
+    "route": "IV / IM",
+    "atc_code": "J01DD04",
+    "therapeutic_group": "Antibactériens - C3G",
+    "drug_class": "Céphalosporine 3e génération",
+    "indications": [
+      "Infections sévères",
+      "Méningite",
+      "Infections urinaires compliquées",
+      "Septicémie",
+      "Gonorrhée"
+    ],
+    "contraindications": [
+      "Allergie céphalosporines",
+      "Nouveau-né ictérique/prématuré + calcium IV"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Dès la naissance (sauf prématuré).",
+      "dose_rule": "50-100 mg/kg/j. Méningite: 100 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère + IH: max 2 g/j."
+    },
+    "dosage": {
+      "adult": "1-2 g/j IV/IM. Méningite: 4 g/j.",
+      "children": "50-100 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 104.7,
+        "packaging": "de poudre + ampoule 1 flacon",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "DB01212",
+    "adverse_effects": [
+      "Diarrhée",
+      "Réactions allergiques",
+      "Lithiase biliaire (enfant, forte dose)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Calcium IV (nouveau-né)"
+        ],
+        "interacting_classes": [
+          "Solutions calciques IV"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Précipitation → embolie (nouveau-né)",
+        "recommendation": "CI chez nouveau-né."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tricef-1-g-10-ml-iv-flacon"
+  },
+  {
+    "id": "T-TRICOVIVAX",
+    "brand_name": "TRICOVIVAX",
+    "generic_name": "Minoxidil (topique)",
+    "strength": "5 G",
+    "form": "Solution",
+    "route": "Cutanée",
+    "atc_code": "D11AX01",
+    "therapeutic_group": "Dermatologiques",
+    "drug_class": "Vasodilatateur topique (alopécie)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 263.0,
+        "packaging": "topique Flacon de 60 ml",
+        "laboratory": "STERIPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tricovivax-5-g-solution"
+  },
+  {
+    "id": "T-TRIFLUCAN",
+    "brand_name": "TRIFLUCAN",
+    "generic_name": "Fluconazole",
+    "strength": "2 MG / ML",
+    "form": "Injectable",
+    "route": "Orale / IV",
+    "atc_code": "J02AC01",
+    "therapeutic_group": "Antifongiques",
+    "drug_class": "Triazolé",
+    "indications": [
+      "Candidoses",
+      "Cryptococcose"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association cisapride/terfénadine"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Dose unique 150 mg OK. Prolongé: CI.",
+      "breastfeeding": "Compatible dose unique."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Dès naissance.",
+      "dose_rule": "3-12 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <50: réduire 50%."
+    },
+    "dosage": {
+      "adult": "Candidose vaginale: 150 mg dose unique. Systémique: 200-400 mg/j.",
+      "children": "3-12 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 62.8,
+        "packaging": "Flacon de 50 ml",
+        "laboratory": "PFIZER MAROC"
+      }
+    ],
+    "drugbank_id": "DB00196",
+    "adverse_effects": [
+      "Nausées",
+      "Céphalées",
+      "Hépatotoxicité",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Glibenclamide",
+          "Gliclazide"
+        ],
+        "interacting_classes": [
+          "Sulfamides"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Statines CYP3A4"
+        ],
+        "interacting_classes": [
+          "Statines"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Suspendre statine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/triflucan-2-mg-ml-injectable"
+  },
+  {
+    "id": "T-TRIMAREL",
+    "brand_name": "TRIMAREL",
+    "generic_name": "Trimébutine",
+    "strength": "20 MG / ML",
+    "form": "Goutte",
+    "route": "Orale",
+    "atc_code": "A03AA05",
+    "therapeutic_group": "Antispasmodiques",
+    "drug_class": "Antispasmodique musculotrope",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 69.3,
+        "packaging": "buvable Flacon de 60 ml",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/trimarel-20-mg-ml-goutte"
+  },
+  {
+    "id": "T-TRIMEDAT",
+    "brand_name": "TRIMEDAT",
+    "generic_name": "Trimébutine",
+    "strength": "150 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A03AA05",
+    "therapeutic_group": "Antispasmodiques",
+    "drug_class": "Antispasmodique musculotrope",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 43.5,
+        "packaging": "Boîte de 20",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/trimedat-150-mg-gelule"
+  },
+  {
+    "id": "T-TRINOMYC",
+    "brand_name": "TRINOMYC",
+    "generic_name": "Gentamicine",
+    "strength": "2 MG / ML",
+    "form": "Solution",
+    "route": "IV / IM",
+    "atc_code": "J01GB03",
+    "therapeutic_group": "Antibactériens - Aminosides",
+    "drug_class": "Aminoside",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 62.8,
+        "packaging": "pour perfusion Flacon de 100 mg/50 ml",
+        "laboratory": "AFRIC-PHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/trinomyc-2-mg-ml-solution"
+  },
+  {
+    "id": "T-TRIPLIXAM",
+    "brand_name": "TRIPLIXAM",
+    "generic_name": "Périndopril + Indapamide + Amlodipine",
+    "strength": "10 MG / 2.5 MG / 10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09BX01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "Triple association IEC + diurétique + IC",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 184.0,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "SERVIER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/triplixam-10-mg-2-5-mg-10-mg-comprime"
+  },
+  {
+    "id": "T-TRIRHUM",
+    "brand_name": "TRIRHUM",
+    "generic_name": "Paracétamol + Acide ascorbique + Chlorphénamine",
+    "strength": "ADULTES SANS SUCRE 500 MG / 200 MG / 25 MG",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "N02BE51",
+    "therapeutic_group": "Analgésiques / Anti-rhume",
+    "drug_class": "Association antalgique + anti-H1 + vitamine C",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 15,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 18.7,
+        "packaging": "pour solution buvable Boite de 8 sachets",
+        "laboratory": "GALENICA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/trirhum-adultes-sans-sucre-500-mg-200-mg-25-mg-poudre"
+  },
+  {
+    "id": "T-TRISIUM",
+    "brand_name": "TRISIUM",
+    "generic_name": "Nystatine + Métronidazole + Néomycine (vaginal)",
+    "strength": "200 MG / 40 MG / 2 MG",
+    "form": "Suspension",
+    "route": "Vaginale",
+    "atc_code": "G01AF20",
+    "therapeutic_group": "Anti-infectieux gynécologiques",
+    "drug_class": "Association antifongique + antibactérien vaginal",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 27.6,
+        "packaging": "buvable Flacon de 120 ml",
+        "laboratory": "COOPER PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/trisium-200-mg-40-mg-2-mg-suspension"
+  },
+  {
+    "id": "T-TRISULFA",
+    "brand_name": "TRISULFA",
+    "generic_name": "Triméthoprime + Sulfaméthoxazole",
+    "strength": "4 /0.8 G",
+    "form": "Suspension",
+    "route": "Orale",
+    "atc_code": "J01EE01",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Sulfamide + diaminopyrimidine",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0.5,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 19.1,
+        "packaging": "Flacon de 100 ml",
+        "laboratory": "GALENICA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/trisulfa-4-0-8-g-suspension"
+  },
+  {
+    "id": "T-TRITAZIDE",
+    "brand_name": "TRITAZIDE",
+    "generic_name": "Ramipril + Hydrochlorothiazide",
+    "strength": "10 MG / 25 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09BA05",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "IEC + diurétique thiazidique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 63.3,
+        "packaging": "sécable Boîte de 28",
+        "laboratory": "SANOFI AVENTIS MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tritazide-10-mg-25-mg-comprime"
+  },
+  {
+    "id": "T-TRIVASTAL",
+    "brand_name": "TRIVASTAL",
+    "generic_name": "Piribédil",
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N04BC08",
+    "therapeutic_group": "Antiparkinsoniens",
+    "drug_class": "Agoniste dopaminergique D2/D3",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 103.3,
+        "packaging": "enrobé à libération prolongée Boîte de 30",
+        "laboratory": "SERVIER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/trivastal-50-mg-comprime"
+  },
+  {
+    "id": "T-TRIVIMAG",
+    "brand_name": "TRIVIMAG",
+    "generic_name": "Magnésium + Vitamines B",
+    "strength": "COMPLEX",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A11JB",
+    "therapeutic_group": "Suppléments",
+    "drug_class": "Magnésium + vitamines B",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 84.9,
+        "packaging": "Boite de 45",
+        "laboratory": "ESNAPHARM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/trivimag-complex-gelule"
+  },
+  {
+    "id": "T-TRIVIRO",
+    "brand_name": "TRIVIRO",
+    "generic_name": "Lamivudine + Zidovudine + Névirapine",
+    "strength": "LNS 30 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J05AR05",
+    "therapeutic_group": "Antirétroviraux",
+    "drug_class": "Triple association INTI + INNTI",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 3,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 132.2,
+        "packaging": "Boîte de 60",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/triviro-lns-30-mg-comprime"
+  },
+  {
+    "id": "T-TRIMBOW",
+    "brand_name": "TRIMBOW",
+    "generic_name": "Béclométasone + Formotérol + Glycopyrronium",
+    "strength": "87 μG / 5 μG / 9 μG",
+    "form": "Solution",
+    "route": "Inhalée",
+    "atc_code": "R03AL09",
+    "therapeutic_group": "Antiasthmatiques / BPCO",
+    "drug_class": "Triple association CSI + LABA + LAMA",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 888.0,
+        "packaging": "pour inhalation en flacon préssurisé Boite de 1 flacon de 120 doses",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/trimbow-87-g-5-g-9-g-solution"
+  },
+  {
+    "id": "T-TUBERCULIN",
+    "brand_name": "TUBERCULIN",
+    "generic_name": "Tuberculine (test PPD)",
+    "strength": "PPD RT 23 SSI 2 UT / 0.1 ML",
+    "form": "Solution",
+    "route": "Intradermique",
+    "atc_code": "V04CF01",
+    "therapeutic_group": "Agents diagnostiques",
+    "drug_class": "Tuberculine (test cutané)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 266.0,
+        "packaging": "injectable Boîte de 1 Flacon de 15 doses",
+        "laboratory": "INSTITUT PASTEUR MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tuberculin-ppd-rt-23-ssi-2-ut-0-1-ml-solution"
+  },
+  {
+    "id": "T-TWYNSTA",
+    "brand_name": "TWYNSTA",
+    "generic_name": "Telmisartan + Amlodipine",
+    "strength": "40 MG / 5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09DB04",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "Association ARA2 + IC",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 214.0,
+        "packaging": "Boite de 28",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/twynsta-40-mg-5-mg-comprime"
+  },
+  {
+    "id": "T-TYARA",
+    "brand_name": "TYARA",
+    "generic_name": "Tadalafil",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BE08",
+    "therapeutic_group": "Urologie / HTAP",
+    "drug_class": "Inhibiteur PDE5",
+    "indications": [
+      "Dysfonction érectile",
+      "HBP",
+      "HTAP"
+    ],
+    "contraindications": [
+      "Dérivés nitrés (CI ABSOLUE)",
+      "Riociguat",
+      "Hypotension sévère",
+      "IDM récent <90j",
+      "AVC récent <6 mois"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Réservé à l'homme (DE/HBP). HTAP femme: cat B.",
+      "breastfeeding": "Non applicable."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-50: début 5 mg. ClCr <30: max 5 mg."
+    },
+    "dosage": {
+      "adult": "DE: 10-20 mg avant activité ou 5 mg/j. HBP: 5 mg/j. HTAP: 40 mg/j.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 276.0,
+        "packaging": "pelliculé Boite de 4",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "DB00820",
+    "adverse_effects": [
+      "Céphalées",
+      "Flush",
+      "Dorsalgies",
+      "Myalgies",
+      "Congestion nasale",
+      "Priapisme (rare, URGENCE)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Trinitrine",
+          "Natispray",
+          "Risordan",
+          "Isosorbide",
+          "Molsidomine"
+        ],
+        "interacting_classes": [
+          "Dérivés nitrés",
+          "Donneurs de NO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère potentiellement fatale",
+        "recommendation": "FORMELLEMENT CI. Délai 48h (demi-vie longue)."
+      },
+      {
+        "interacting_drugs": [
+          "Riociguat",
+          "Adempas"
+        ],
+        "interacting_classes": [
+          "Stimulateurs guanylate cyclase"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Alfuzosine",
+          "Flotral",
+          "Tamsulosine",
+          "Doxazosine"
+        ],
+        "interacting_classes": [
+          "Alpha-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère",
+        "recommendation": "Stabiliser sous alpha-bloquant d'abord."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux tadalafil",
+        "recommendation": "Max 10 mg/72h."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/tyara-20-mg-comprime"
+  },
+  {
+    "id": "T-TYGACIL",
+    "brand_name": "TYGACIL",
+    "generic_name": "Tigécycline",
+    "strength": "50 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "J01AA12",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Glycylcycline",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 8,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 3321.0,
+        "packaging": "pour perfusion 10 flacons de 5 ml",
+        "laboratory": "PFIZER MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tygacil-50-mg-poudre"
+  },
+  {
+    "id": "T-TYKERB",
+    "brand_name": "TYKERB",
+    "generic_name": "Lapatinib",
+    "strength": "250 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "L01EH01",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur double EGFR/HER2",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 11182.0,
+        "packaging": "Boîte de 70",
+        "laboratory": "NOVARTIS PHARMA MAROC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tykerb-250-mg-comprime"
+  },
+  {
+    "id": "T-TYMOKS",
+    "brand_name": "TYMOKS",
+    "generic_name": "Timolol (collyre)",
+    "strength": "0.5 %",
+    "form": "Gouttes",
+    "route": "Ophtalmique",
+    "atc_code": "S01ED01",
+    "therapeutic_group": "Antiglaucomateux",
+    "drug_class": "Bêta-bloquant ophtalmique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 42.5,
+        "packaging": "ophtalmiques Boite de 1 flacon de 5 ml",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tymoks-0-5-gouttes"
+  },
+  {
+    "id": "T-TYSABRI",
+    "brand_name": "TYSABRI",
+    "generic_name": "Natalizumab",
+    "strength": "300 MG",
+    "form": "Solution",
+    "route": "IV",
+    "atc_code": "L04AG03",
+    "therapeutic_group": "Immunosuppresseurs",
+    "drug_class": "Anti-intégrine α4 (anticorps monoclonal, SEP)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 14234.0,
+        "packaging": "à diluer pour perfusion Boîte de 1 Flacon de de 15 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/tysabri-300-mg-solution"
+  }
+]

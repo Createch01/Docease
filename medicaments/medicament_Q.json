@@ -1,0 +1,409 @@
+[
+  {
+    "id": "Q-QUINOLOX",
+    "brand_name": "QUINOLOX",
+    "generic_name": "Ofloxacine",
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01MA01",
+    "therapeutic_group": "Antibactériens - Fluoroquinolones",
+    "drug_class": "Fluoroquinolone de 2e génération",
+    "indications": [
+      "Infections urinaires compliquées et non compliquées",
+      "Prostatite bactérienne chronique",
+      "Infections génitales (urétrite, cervicite gonococcique et non gonococcique, salpingite)",
+      "Infections respiratoires basses (pneumonie, exacerbation BPCO)",
+      "Infections ORL (otite moyenne chronique, sinusite)",
+      "Infections cutanées et des tissus mous",
+      "Infections ostéo-articulaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux fluoroquinolones",
+      "Grossesse et allaitement",
+      "Enfant et adolescent < 18 ans (risque d'arthropathie)",
+      "Antécédents de tendinopathie sous fluoroquinolone",
+      "Épilepsie non contrôlée",
+      "Déficit en G6PD"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiacides (Al, Mg), Fer, Zinc, Calcium",
+        "severity": "modérée",
+        "effect": "Diminution absorption de l'ofloxacine (chélation par cations divalents)"
+      },
+      {
+        "drug": "Théophylline",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de théophylline (inhibition métabolisme)"
+      },
+      {
+        "drug": "Anticoagulants oraux (AVK)",
+        "severity": "modérée",
+        "effect": "Potentialisation de l'effet anticoagulant → risque hémorragique"
+      },
+      {
+        "drug": "AINS (Ibuprofène, Kétoprofène)",
+        "severity": "modérée",
+        "effect": "Risque accru de convulsions"
+      },
+      {
+        "drug": "Corticostéroïdes systémiques",
+        "severity": "modérée",
+        "effect": "Risque accru de tendinopathie et rupture tendineuse"
+      },
+      {
+        "drug": "Méthotrexate",
+        "severity": "modérée",
+        "effect": "Diminution de la clairance rénale du MTX → toxicité accrue"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué pendant la grossesse. Risque d'arthropathie chez le fœtus (toxicité sur le cartilage de croissance démontrée chez l'animal).",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait maternel."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Contre-indiqué chez l'enfant et l'adolescent < 18 ans en raison du risque d'arthropathie (atteinte du cartilage de conjugaison en croissance).",
+      "dose_rule": "Non recommandé < 18 ans."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-50 mL/min: 200 mg/jour (1 prise). ClCr < 20 mL/min: 200 mg/48h. Hémodialyse: 200 mg/48h (pas de dose supplémentaire après dialyse)."
+    },
+    "dosage": {
+      "adult": "Infections urinaires non compliquées: 200 mg 2x/jour x 3 jours. Infections urinaires compliquées: 200 mg 2x/jour x 7-10 jours. Prostatite: 200 mg 2x/jour x 28 jours. IST: 200-400 mg dose unique ou 400 mg/jour x 7 jours. Infections respiratoires/cutanées: 200 mg 2x/jour x 7-14 jours.",
+      "children": "Non recommandé < 18 ans."
+    },
+    "market_data": [
+      {
+        "price": 139.2,
+        "packaging": "pelliculé Boîte de 20",
+        "laboratory": "PHARMA5",
+        "url": "https://www.medicament.ma/medicament/quinolox-200-mg-comprime"
+      }
+    ],
+    "drugbank_id": "DB01165",
+    "mechanism": "Inhibition de l'ADN gyrase (topoisomérase II) et de la topoisomérase IV bactériennes → blocage de la réplication, transcription et réparation de l'ADN bactérien → effet bactéricide.",
+    "half_life": "5-8 heures",
+    "adverse_effects": [
+      "Nausées, diarrhée, douleurs abdominales",
+      "Céphalées, vertiges, insomnie",
+      "Tendinopathie et rupture tendineuse (tendon d'Achille surtout, favorisée par corticothérapie et âge > 60 ans)",
+      "Photosensibilisation",
+      "Neuropathie périphérique (parfois irréversible)",
+      "Allongement du QT (rare)",
+      "Anévrisme aortique (risque accru, usage prolongé)",
+      "Réactions allergiques, rash",
+      "Élévation des transaminases"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Maalox",
+          "Gaviscon",
+          "Hydroxyde d'aluminium",
+          "Fer",
+          "Fermed",
+          "Tardyféron",
+          "Calcium",
+          "Cacit",
+          "Zinc"
+        ],
+        "interacting_classes": [
+          "Antiacides contenant Al/Mg",
+          "Fer oral",
+          "Calcium",
+          "Zinc"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'absorption de l'ofloxacine de 50-90% par chélation avec les cations divalents/trivalents",
+        "recommendation": "Prendre l'ofloxacine AU MOINS 2 HEURES AVANT ou 6 HEURES APRÈS les antiacides, fer, calcium ou zinc."
+      },
+      {
+        "interacting_drugs": [
+          "Théophylline",
+          "Dilatrane",
+          "Euphylline"
+        ],
+        "interacting_classes": [
+          "Bases xanthiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de théophylline → risque de convulsions et arythmies",
+        "recommendation": "Doser la théophyllinémie et ajuster la dose de théophylline."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "Anticoagulants oraux (AVK)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation de l'effet anticoagulant → risque hémorragique",
+        "recommendation": "Surveiller l'INR fréquemment pendant l'antibiothérapie et quelques jours après l'arrêt."
+      },
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Nurodol",
+          "Diclofénac",
+          "Fenac",
+          "Kétoprofène",
+          "Ketoflex"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque accru de convulsions (abaissement du seuil épileptogène)",
+        "recommendation": "Éviter l'association si possible. Surveiller l'apparition de signes neurologiques."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Prednisolone",
+          "Méthylprednisolone",
+          "Dexaméthasone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru de tendinopathie et de rupture tendineuse (tendon d'Achille)",
+        "recommendation": "Éviter l'association. Si indispensable: surveiller tout signe tendineux (douleur, gonflement). Arrêter la fluoroquinolone immédiatement en cas de tendinite."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de la clairance rénale du MTX → toxicité accrue",
+        "recommendation": "Surveiller la toxicité du méthotrexate (NFS, fonction rénale, mucosite)."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "EPILEPSIE"
+    ]
+  },
+  {
+    "id": "Q-QUINUX",
+    "brand_name": "QUINUX",
+    "generic_name": "Méthotrexate",
+    "strength": "10 MG / 0.4 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "L04AX03",
+    "therapeutic_group": "Immunosuppresseurs / Antirhumatismaux",
+    "drug_class": "Antimétabolite antifolique (DMARD)",
+    "indications": [
+      "Polyarthrite rhumatoïde (traitement de fond de référence, 1ère intention)",
+      "Psoriasis sévère en plaques (résistant aux traitements conventionnels)",
+      "Rhumatisme psoriasique",
+      "Maladie de Crohn (hors AMM dans certains pays)",
+      "Lupus (hors AMM)",
+      "Grossesse extra-utérine (dose unique en gynécologie)"
+    ],
+    "contraindications": [
+      "Grossesse (TÉRATOGÈNE PUISSANT) — contraception obligatoire femme: 1 mois après arrêt, homme: 3 mois après arrêt",
+      "Allaitement",
+      "Insuffisance rénale sévère (ClCr < 30 mL/min)",
+      "Insuffisance hépatique sévère ou hépatopathie chronique",
+      "Cytopénies (leucopénie, thrombopénie, anémie sévère)",
+      "Immunodéficience sévère",
+      "Infection active grave",
+      "Ulcère gastroduodénal actif",
+      "Alcoolisme"
+    ],
+    "interactions": [
+      {
+        "drug": "AINS (Ibuprofène, Diclofénac, Naproxène)",
+        "severity": "majeure",
+        "effect": "Augmentation de la toxicité du MTX par diminution de sa clairance rénale → pancytopénie, néphrotoxicité, mucosite"
+      },
+      {
+        "drug": "Triméthoprime / Sulfaméthoxazole (Bactrim)",
+        "severity": "majeure",
+        "effect": "Pancytopénie sévère — effet antifolique additif → aplasie médullaire"
+      },
+      {
+        "drug": "IPP (Oméprazole, Lansoprazole, Ésoméprazole)",
+        "severity": "modérée",
+        "effect": "Diminution de l'élimination rénale du MTX → toxicité à haute dose"
+      },
+      {
+        "drug": "Pénicillines (Amoxicilline)",
+        "severity": "modérée",
+        "effect": "Diminution de la sécrétion tubulaire du MTX → accumulation et toxicité"
+      },
+      {
+        "drug": "Léflunomide",
+        "severity": "majeure",
+        "effect": "Hépatotoxicité et hématotoxicité additives"
+      },
+      {
+        "drug": "Vaccins vivants (BCG, ROR, Fièvre jaune)",
+        "severity": "majeure",
+        "effect": "Risque d'infection disséminée vaccinale sous immunosuppression"
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "STRICTEMENT CONTRE-INDIQUÉ. Le méthotrexate est un tératogène puissant: risque de malformations crâniofaciales, des membres et du SNC (syndrome aminoptérine). Avortement spontané fréquent. Contraception efficace OBLIGATOIRE pendant le traitement et au moins 1 mois après l'arrêt chez la femme, 3 mois chez l'homme.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait maternel."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 3,
+      "warning": "Utilisé en pédiatrie pour l'arthrite juvénile idiopathique (AJI) à partir de 3 ans. Surveillance hépatique et hématologique stricte.",
+      "dose_rule": "AJI: 10-15 mg/m²/semaine en 1 prise SC ou PO. Max: 20 mg/m²/semaine. Associer acide folique 5 mg/semaine (24-48h après MTX)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-59 mL/min: réduire la dose de 50%. ClCr < 30 mL/min: CONTRE-INDIQUÉ. Le méthotrexate est éliminé à 90% par voie rénale — l'insuffisance rénale entraîne une accumulation toxique."
+    },
+    "dosage": {
+      "adult": "PR: 7.5-25 mg UNE FOIS PAR SEMAINE (⚠️ NE JAMAIS donner quotidiennement — risque fatal de surdosage). Voie SC préférée pour meilleure biodisponibilité et tolérance GI. Psoriasis: 7.5-25 mg/semaine. TOUJOURS associer acide folique 5-10 mg/semaine, 24-48h après la dose de MTX.",
+      "children": "AJI: 10-15 mg/m²/semaine SC. Associer acide folique."
+    },
+    "market_data": [
+      {
+        "price": 115.5,
+        "packaging": "injectable en seringue pré remplie Boite unitaire",
+        "laboratory": "IBERMA",
+        "url": "https://www.medicament.ma/medicament/quinux-10-mg-0-4-ml-solution"
+      }
+    ],
+    "drugbank_id": "DB00563",
+    "mechanism": "Inhibition de la dihydrofolate réductase (DHFR) → blocage de la synthèse des purines et pyrimidines → effet antiprolifératif et immunosuppresseur. À faible dose (rhumatologie): effet anti-inflammatoire via libération d'adénosine.",
+    "half_life": "3-10 heures (dose faible). Métabolite polyglutamate: accumulation intracellulaire sur plusieurs semaines.",
+    "adverse_effects": [
+      "Nausées, stomatite (les plus fréquents)",
+      "Hépatotoxicité (élévation transaminases, fibrose hépatique à long terme)",
+      "Myélosuppression (leucopénie, thrombopénie, pancytopénie — potentiellement fatale)",
+      "Pneumopathie interstitielle (pneumopathie d'hypersensibilité — arrêt immédiat)",
+      "Infections opportunistes (immunodépression)",
+      "Néphrotoxicité (haute dose)",
+      "Alopécie",
+      "Photosensibilisation",
+      "Tératogénicité (malformations sévères)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Nurodol",
+          "Diclofénac",
+          "Fenac",
+          "Naproxène",
+          "Kétoprofène",
+          "Ketoflex",
+          "Piroxicam",
+          "Feldene",
+          "Célécoxib",
+          "Aspirine"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure de la toxicité du MTX (pancytopénie, néphrotoxicité, mucosite) par diminution de la clairance rénale du MTX",
+        "recommendation": "CONTRE-INDIQUÉ si MTX ≥ 15 mg/semaine. Si MTX < 15 mg/semaine: possible avec PRUDENCE, surveiller NFS et créatinine. Préférer le paracétamol comme antalgique."
+      },
+      {
+        "interacting_drugs": [
+          "Triméthoprime",
+          "Sulfaméthoxazole",
+          "Bactrim",
+          "Cotrimoxazole"
+        ],
+        "interacting_classes": [
+          "Antifoliques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Pancytopénie sévère potentiellement fatale — effet antifolique additif (double blocage de la synthèse des folates)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Utiliser un antibiotique alternatif."
+      },
+      {
+        "interacting_drugs": [
+          "Oméprazole",
+          "Kalest",
+          "Lansoprazole",
+          "Lanzen",
+          "Ésoméprazole",
+          "Mezor",
+          "Pantoprazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de la pompe à protons (IPP)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'élimination rénale du MTX → augmentation des taux plasmatiques → risque de toxicité, surtout à haute dose",
+        "recommendation": "Envisager l'arrêt de l'IPP pendant les cycles de MTX à haute dose. À dose rhumatologique: surveillance."
+      },
+      {
+        "interacting_drugs": [
+          "Amoxicilline",
+          "Neomox",
+          "Ampicilline"
+        ],
+        "interacting_classes": [
+          "Pénicillines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de la sécrétion tubulaire rénale du MTX → accumulation et toxicité",
+        "recommendation": "Surveiller la NFS et la fonction rénale. Espacer si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Léflunomide",
+          "Arava"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs (DMARD)"
+        ],
+        "severity": "DANGER",
+        "effect": "Hépatotoxicité et hématotoxicité additives sévères",
+        "recommendation": "Association possible mais sous surveillance hépatique et hématologique TRÈS étroite. Réduire doses."
+      },
+      {
+        "interacting_drugs": [
+          "Vaccin BCG",
+          "Vaccin ROR",
+          "Vaccin Fièvre jaune",
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins vivants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque d'infection disséminée vaccinale potentiellement fatale sous immunosuppression par MTX",
+        "recommendation": "CONTRE-INDIQUÉ. Mettre à jour les vaccinations AVANT de débuter le MTX. Vaccins inactivés autorisés."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ]
+  }
+]

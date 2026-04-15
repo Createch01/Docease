@@ -142,6 +142,22 @@ export const dataService = {
     return result;
   },
 
+  getTherapeuticGroups: (): string[] => {
+    const medicines = dataService.getMedicines();
+    const groups = new Set<string>();
+    medicines.forEach(m => {
+      if (m.category) groups.add(m.category);
+    });
+    return Array.from(groups).sort((a, b) => a.localeCompare(b, 'fr'));
+  },
+
+  getMedicinesByCategory: (category: string): Medicine[] => {
+    const medicines = dataService.getMedicines();
+    if (category === 'Tous') return medicines;
+    return medicines.filter(m => m.category === category)
+      .sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+  },
+
   saveMedicine: async (medicine: Medicine) => {
     const storageKey = STORAGE_KEYS.MEDICINES;
     const localMedicines: Medicine[] = cache[storageKey] || [];
@@ -175,6 +191,38 @@ export const dataService = {
     cache[storageKey] = localMedicines;
     await storageService.save(storageKey, localMedicines);
     notifyUpdate(storageKey);
+  },
+
+  clearAllMedicines: async () => {
+    const storageKey = STORAGE_KEYS.MEDICINES;
+    cache[storageKey] = [];
+    await storageService.save(storageKey, []);
+    notifyUpdate(storageKey);
+  },
+
+  cleanPersonalRepertoire: async () => {
+    const storageKey = STORAGE_KEYS.MEDICINES;
+    const localMedicines: Medicine[] = cache[storageKey] || [];
+    const originalCount = localMedicines.length;
+
+    // Filter out:
+    // 1. Medicines flagged as isAdultOnly (Red background)
+    // 2. Medicines with corrupted categories starting with "("
+    const cleanedLocal = localMedicines.filter(m => {
+      const isRed = m.isAdultOnly === true;
+      const isCorruptedCategory = m.category?.trim().startsWith('(');
+      return !isRed && !isCorruptedCategory;
+    });
+
+    const removedCount = originalCount - cleanedLocal.length;
+
+    if (removedCount > 0) {
+      cache[storageKey] = cleanedLocal;
+      await storageService.save(storageKey, cleanedLocal);
+      notifyUpdate(storageKey);
+    }
+
+    return removedCount;
   },
 
   importMedicines: async (newMedicines: Medicine[]) => {

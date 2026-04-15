@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   Pill, Plus, Search, Trash2, FileUp, Download, Filter, Sparkles,
   Loader2, FileText, X, Check, ChevronRight, FileDown, AlertTriangle,
-  Info, Clock, Syringe, Thermometer, ShieldCheck, HeartPulse,
+  Info, Clock, Syringe, Thermometer, ShieldCheck, HeartPulse, BookOpen,
   ClipboardType, UploadCloud, Wand2, ScanSearch, Database, Save, RefreshCw,
   ChevronUp, ChevronDown, ShieldAlert, Baby, Zap
 } from 'lucide-react';
@@ -11,6 +11,7 @@ import { heuristicJsonService } from '../services/heuristicJsonService';
 import { autoImportService } from '../services/autoImportService';
 import { Medicine, MedicineCategory, MealTiming } from '../types';
 import { GoogleGenAI, Type } from "@google/genai";
+import MedicineCatalogue from './MedicineCatalogue';
 
 const MEDICINES_LOCALSTORAGE_KEY = 'docease_meds_memory';
 
@@ -21,6 +22,10 @@ const categoryIcons: Record<string, any> = {
   'Anti-inflammatoire': Thermometer,
   'Sirop': Pill,
   'Autre': Info
+};
+
+const getCategoryIcon = (category: string) => {
+  return categoryIcons[category] || Pill;
 };
 
 // Interface pour le format JSON du template
@@ -46,14 +51,12 @@ const MedicineManager: React.FC = () => {
   const [lastSyncTime, setLastSyncTime] = useState<string>('');
   const [sortBy, setSortBy] = useState<SortField>('name');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-  const [activeTab, setActiveTab] = useState<'list' | 'add' | 'ia' | 'json' | 'template' | 'maintenance'>('list');
+  const [activeTab, setActiveTab] = useState<'list' | 'catalogue' | 'add' | 'ia' | 'json' | 'template' | 'maintenance'>('list');
 
   const aiFileInputRef = useRef<HTMLInputElement>(null);
   const jsonImportRef = useRef<HTMLInputElement>(null);
 
-  const categories: (MedicineCategory | 'Tous')[] = [
-    'Tous', 'Antibiotique', 'Vitamine', 'Antalgique', 'Anti-inflammatoire', 'Sirop', 'Autre'
-  ];
+  const [categories, setCategories] = useState<(MedicineCategory | 'Tous')[]>(['Tous']);
 
   const [loading, setLoading] = useState(false);
   const [newMed, setNewMed] = useState<Partial<Medicine>>({
@@ -72,6 +75,7 @@ const MedicineManager: React.FC = () => {
 
   const refreshMedicines = () => {
     setMedicines(dataService.getMedicines());
+    setCategories(['Tous', ...dataService.getTherapeuticGroups()]);
   };
 
   // Synchronise les médicaments avec localStorage
@@ -463,7 +467,7 @@ const MedicineManager: React.FC = () => {
   };
 
   // RÉGLE IMPORTANTE : On n'affiche rien si la recherche est vide (pour ne pas saturer l'écran avec 4000 lignes)
-  const displayMedicines = searchTerm.length >= 2 ? sortedMedicines : [];
+  const displayMedicines = (searchTerm.length >= 2 || selectedCategory !== 'Tous') ? sortedMedicines : [];
 
   return (
     <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500 pb-20 text-black">
@@ -539,7 +543,8 @@ const MedicineManager: React.FC = () => {
       {/* Mode Tabs */}
       <div className="flex bg-white/50 p-1.5 rounded-[2rem] border border-emerald-100/30 gap-1">
         {[
-          { id: 'list', label: 'Répertoire', icon: Search },
+          { id: 'list', label: 'Mon Répertoire', icon: Search },
+          { id: 'catalogue', label: 'Catalogue Pro', icon: BookOpen },
           { id: 'ia', label: 'Scanner IA', icon: Wand2 },
           { id: 'json', label: 'Import JSON', icon: FileUp },
           { id: 'template', label: 'Template structure', icon: FileText },
@@ -558,6 +563,7 @@ const MedicineManager: React.FC = () => {
 
       {/* RENDER ACTIVE MODE */}
       <div className="space-y-8 min-h-[400px]">
+        {activeTab === 'catalogue' && <MedicineCatalogue />}
         {activeTab === 'ia' && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-in zoom-in-95 duration-500">
             {/* Option 1: File Upload */}
@@ -703,7 +709,7 @@ const MedicineManager: React.FC = () => {
         )}
 
         {activeTab === 'maintenance' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-in zoom-in-95 duration-500">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 animate-in zoom-in-95 duration-500">
             {/* Scan Dossier Action */}
             <div className="bg-white p-10 rounded-[3rem] shadow-soft border border-emerald-100/30 glass-effect flex flex-col items-center text-center space-y-6">
               <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-[2rem] flex items-center justify-center">
@@ -716,7 +722,8 @@ const MedicineManager: React.FC = () => {
               <button
                 onClick={async () => {
                   setLoading(true);
-                  await handleAutoScan();
+                  // @ts-ignore
+                  if (typeof handleAutoScan === 'function') await handleAutoScan();
                   setLoading(false);
                   alert("✅ Scan terminé ! La base de données a été mise à jour.");
                 }}
@@ -743,15 +750,68 @@ const MedicineManager: React.FC = () => {
                   const removed = await dataService.deduplicateMedicines();
                   refreshMedicines();
                   setLoading(false);
-                  alert(removed > 0
-                    ? `✅ Nettoyage terminé : ${removed} médicaments en double ont été supprimés.`
-                    : "✨ Votre base de données est déjà parfaitement propre ! Aucun doublon trouvé.");
+                  alert(`✅ Nettoyage terminé : ${removed} doublons supprimés.`);
                 }}
                 disabled={loading}
-                className="w-full py-4 bg-amber-500 text-white font-black rounded-2xl uppercase text-[10px] tracking-widest shadow-lg shadow-amber-100 hover:bg-amber-600 transition-all active:scale-95 flex items-center justify-center gap-3"
+                className="w-full py-4 bg-amber-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-widest shadow-lg shadow-amber-100 hover:bg-amber-700 transition-all active:scale-95 flex items-center justify-center gap-3"
+              >
+                <Sparkles size={18} />
+                Lancer le Nettoyage
+              </button>
+            </div>
+
+            {/* Repertoire Cleanup Action */}
+            <div className="bg-white p-10 rounded-[3rem] shadow-soft border border-rose-100/30 glass-effect flex flex-col items-center text-center space-y-6">
+              <div className="w-20 h-20 bg-rose-100 text-rose-600 rounded-[2rem] flex items-center justify-center">
+                <Sparkles size={40} />
+              </div>
+              <div>
+                <h3 className="text-xl font-black text-rose-900 uppercase tracking-tight">Nettoyage Expert</h3>
+                <p className="text-[10px] text-rose-600/60 font-black uppercase tracking-widest mt-2">Supprimer les molécules 'Adulte' et corriger les catégories défectueuses</p>
+              </div>
+              <button
+                onClick={async () => {
+                  if (window.confirm("Voulez-vous supprimer les molécules 'Adulte' et les catégories mal formatées de votre répertoire personnel ?")) {
+                    setLoading(true);
+                    // @ts-ignore
+                    const removed = await dataService.cleanPersonalRepertoire();
+                    refreshMedicines();
+                    setLoading(false);
+                    alert(`✅ Nettoyage terminé : ${removed} éléments supprimés de votre répertoire.`);
+                  }
+                }}
+                disabled={loading}
+                className="w-full py-4 bg-rose-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-widest shadow-lg shadow-rose-100 hover:bg-rose-700 transition-all active:scale-95 flex items-center justify-center gap-3"
               >
                 <Trash2 size={18} />
-                Nettoyer la Base
+                Nettoyer Mon Répertoire
+              </button>
+            </div>
+
+            {/* Clear Repertoire Action */}
+            <div className="bg-white p-10 rounded-[3rem] shadow-soft border border-orange-100/30 glass-effect flex flex-col items-center text-center space-y-6">
+              <div className="w-20 h-20 bg-orange-100 text-orange-600 rounded-[2rem] flex items-center justify-center">
+                <AlertTriangle size={40} />
+              </div>
+              <div>
+                <h3 className="text-xl font-black text-orange-900 uppercase tracking-tight">Vider Répertoire</h3>
+                <p className="text-[10px] text-orange-600/60 font-black uppercase tracking-widest mt-2">DÉTRUIRE TOUS les médicaments de votre liste personnelle (Action Irréversible)</p>
+              </div>
+              <button
+                onClick={async () => {
+                  if (window.confirm("Êtes-vous SÛR de vouloir supprimer TOUS les médicaments de votre répertoire personnel ?")) {
+                    setLoading(true);
+                    await dataService.clearAllMedicines();
+                    refreshMedicines();
+                    setLoading(false);
+                    alert("✅ Répertoire personnel réinitialisé.");
+                  }
+                }}
+                disabled={loading}
+                className="w-full py-4 bg-orange-600 text-white font-black rounded-2xl uppercase text-[10px] tracking-widest shadow-lg shadow-orange-100 hover:bg-orange-700 transition-all active:scale-95 flex items-center justify-center gap-3"
+              >
+                <Trash2 size={18} />
+                Vider Mon Répertoire
               </button>
             </div>
           </div>
@@ -933,27 +993,16 @@ const MedicineManager: React.FC = () => {
         {/* SEARCH ENGINE SECTION */}
         <div className="bg-white rounded-[3.5rem] shadow-soft border border-emerald-100/30 overflow-hidden min-h-[500px] flex flex-col glass-effect">
           <div className="p-10 border-b border-emerald-100/20 bg-gradient-emerald-light space-y-8">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-              <div className="relative w-full md:w-1/2">
+            <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+              <div className="relative w-full md:w-2/3">
                 <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-emerald-600" size={24} />
                 <input
                   type="text"
-                  placeholder="Rechercher un médicament (Tapez au moins 2 lettres)..."
+                  placeholder="Rechercher une molécule ou un médicament (Tapez au moins 2 lettres)..."
                   value={searchTerm}
                   onChange={e => setSearchTerm(e.target.value)}
                   className="w-full pl-16 pr-8 py-5 bg-white border border-emerald-200/50 rounded-3xl font-black text-lg outline-none focus:ring-4 focus:ring-emerald-500/20 shadow-soft text-emerald-900 placeholder-emerald-400"
                 />
-              </div>
-              <div className="flex flex-wrap gap-2 justify-center">
-                {categories.map(c => (
-                  <button
-                    key={c}
-                    onClick={() => setSelectedCategory(c)}
-                    className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-smooth border-2 ${selectedCategory === c ? 'gradient-emerald-teal border-emerald-400 text-white shadow-soft' : 'bg-white border-emerald-200/30 text-emerald-700 hover:border-emerald-400'}`}
-                  >
-                    {c}
-                  </button>
-                ))}
               </div>
             </div>
 
@@ -1012,7 +1061,7 @@ const MedicineManager: React.FC = () => {
                 </thead>
                 <tbody className="divide-y divide-emerald-100/20">
                   {displayMedicines.map(m => {
-                    const Icon = categoryIcons[m.category] || Pill;
+                    const Icon = getCategoryIcon(m.category);
                     return (
                       <tr key={m.id} className="hover:bg-emerald-50/30 transition-colors group">
                         <td className="px-10 py-6">

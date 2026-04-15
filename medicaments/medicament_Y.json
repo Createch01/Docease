@@ -1,0 +1,386 @@
+[
+  {
+    "id": "ydralbum_200_g_l_solution_pour_perfusion_20_g",
+    "brand_name": "YDRALBUM",
+    "generic_name": "Albumine humaine",
+    "strength": "200 G / L",
+    "form": "Solution pour perfusion à 20 G",
+    "route": "Intraveineux (perfusion IV)",
+    "atc_code": "B05AA01",
+    "therapeutic_group": "Substituts du plasma et fractions protéiques plasmatiques",
+    "drug_class": "Albumine humaine / colloïde naturel",
+    "indications": [
+      "Restauration et maintien du volume sanguin circulant en cas d hypovolémie avérée",
+      "Hypoalbuminémie sévère (cirrhose hépatique, syndrome néphrotique, malnutrition)",
+      "Échanges plasmatiques thérapeutiques",
+      "Prévention de l hypovolémie lors de paracentèse de grand volume"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l albumine humaine ou à l un des excipients",
+      "Hypervolémie ou hémodilution",
+      "Insuffisance cardiaque sévère non contrôlée",
+      "Hypertension artérielle sévère",
+      "Œdème pulmonaire"
+    ],
+    "interactions": [
+      "Diurétiques : risque d hypervolémie si association non surveillée",
+      "Médicaments fortement liés aux protéines plasmatiques : déplacement possible",
+      "Ne pas mélanger avec du sang total, des culots globulaires ou d autres médicaments dans la même perfusion"
+    ],
+    "pregnancy": {
+      "category": "Non classée",
+      "warning": "L albumine est un constituant naturel du sang humain. Aucune toxicité embryo-fœtale connue. Peut être utilisée si nécessaire pendant la grossesse."
+    },
+    "children": {
+      "allowed": true,
+      "dose_rule": "Utilisable chez l enfant y compris le prématuré. Posologie ajustée selon le poids et l état clinique, sous surveillance médicale stricte."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Surveillance de la volémie et de la fonction rénale recommandée. Ajustement selon la diurèse et les paramètres hémodynamiques."
+    },
+    "dosage": {
+      "adult": "Posologie individualisée selon l indication clinique. Généralement 25–100 g/perfusion, débit adapté à chaque cas. Surveillance hémodynamique continue requise.",
+      "children": "Posologie adaptée au poids corporel et à l état clinique, sous contrôle médical."
+    },
+    "market_data": [
+      {
+        "price": 638.0,
+        "price_ph": null,
+        "packaging": "Flacon de 50 ml",
+        "laboratory": "HEMOLAB-PHARMA"
+      },
+      {
+        "price": 1096.0,
+        "price_ph": 796.11,
+        "packaging": "Flacon de 100 ml",
+        "laboratory": "HEMOLAB-PHARMA"
+      }
+    ]
+  },
+  {
+    "id": "yodocefol_comprim",
+    "brand_name": "YODOCEFOL",
+    "generic_name": "Acide folique + Vitamine B12 + Iode",
+    "strength": "400 µg / 200 µg / 2 µg",
+    "form": "Comprimé",
+    "route": "Oral",
+    "atc_code": "B03BB51",
+    "therapeutic_group": "Vitamines et suppléments nutritionnels / Préparations antianémiques",
+    "drug_class": "Association vitaminique (acide folique + cobalamine + iode)",
+    "indications": [
+      "Supplémentation en acide folique, vitamine B12 et iode en période préconceptionnelle et pendant la grossesse",
+      "Prévention des anomalies du tube neural (spina bifida)",
+      "Prévention de la carence en iode chez la femme enceinte et allaitante",
+      "Traitement des carences combinées en folates, vitamine B12 et iode"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l un des composants",
+      "Hyperthyroïdie non traitée ou adénome thyroïdien autonome",
+      "Anémie de Biermer non traitée par facteur intrinsèque"
+    ],
+    "interactions": [
+      "Métotrexate : antagonise l effet de l acide folique",
+      "Antiépileptiques (phénytoïne, carbamazépine, valproate) : réduisent l absorption des folates",
+      "Antithyroïdiens : interaction potentielle avec la composante iodée",
+      "Antibiotiques néomycine / colchicine : réduction de l absorption de la B12"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Indiqué et recommandé pendant la grossesse. La supplémentation en acide folique (400 µg/j) est essentielle en préconceptionnel et au 1er trimestre pour prévenir les anomalies du tube neural."
+    },
+    "children": {
+      "allowed": false,
+      "dose_rule": "Non indiqué chez l enfant. Formulation destinée à la femme en âge de procréer et à la femme enceinte/allaitante."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Aucun ajustement nécessaire en cas d insuffisance rénale légère à modérée."
+    },
+    "dosage": {
+      "adult": "1 comprimé par jour, de préférence au même moment de la journée. Démarrer 1 mois avant la conception et continuer jusqu à la fin du 1er trimestre au minimum.",
+      "children": "Non recommandé chez l enfant."
+    },
+    "market_data": [
+      {
+        "price": 66.4,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "VERSALYA SA"
+      }
+    ]
+  },
+  {
+    "id": "yofolvit_comprim",
+    "brand_name": "YOFOLVIT",
+    "generic_name": "Acide folique + Vitamine B12 + Iode",
+    "strength": "400 µg / 200 µg / 2 µg",
+    "form": "Comprimé",
+    "route": "Oral",
+    "atc_code": "B03BB51",
+    "therapeutic_group": "Vitamines et suppléments nutritionnels / Préparations antianémiques",
+    "drug_class": "Association vitaminique (acide folique + cobalamine + iode)",
+    "indications": [
+      "Supplémentation en acide folique, vitamine B12 et iode en période préconceptionnelle et pendant la grossesse",
+      "Prévention des anomalies du tube neural (spina bifida)",
+      "Prévention de la carence en iode chez la femme enceinte et allaitante",
+      "Traitement des carences combinées en folates, vitamine B12 et iode"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l un des composants",
+      "Hyperthyroïdie non traitée ou adénome thyroïdien autonome",
+      "Anémie de Biermer non traitée par facteur intrinsèque",
+      "Antécédents de cancer hormono-dépendant (précaution avec l iode)"
+    ],
+    "interactions": [
+      "Métotrexate : antagonisme de l acide folique",
+      "Antiépileptiques (phénytoïne, carbamazépine) : diminution de l absorption des folates",
+      "Antithyroïdiens : interaction potentielle avec la composante iodée",
+      "Néomycine, colchicine : réduction de l absorption de la vitamine B12"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Indiqué pendant la grossesse. Recommandé dès la période préconceptionnelle pour prévenir les anomalies du tube neural. Sécurité établie aux doses préconisées."
+    },
+    "children": {
+      "allowed": false,
+      "dose_rule": "Non indiqué chez l enfant. Réservé à la femme en âge de procréer, enceinte ou allaitante."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Aucun ajustement posologique requis."
+    },
+    "dosage": {
+      "adult": "1 comprimé par jour. Commencer idéalement 1 mois avant la conception et poursuivre pendant toute la grossesse et l allaitement.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 66.4,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "BOTTU S.A."
+      }
+    ]
+  },
+  {
+    "id": "ypeva_100_mg_solution_diluer_pour_perfusion_iv",
+    "brand_name": "YPEVA",
+    "generic_name": "Bévacizumab",
+    "strength": "100 MG",
+    "form": "Solution à diluer pour perfusion IV",
+    "route": "Intraveineux (perfusion IV)",
+    "atc_code": "L01XC07",
+    "therapeutic_group": "Antinéoplasiques et immunomodulateurs / Anticorps monoclonaux anti-angiogéniques",
+    "drug_class": "Anticorps monoclonal anti-VEGF (inhibiteur de l angiogenèse) — biosimilaire de l Avastin®",
+    "indications": [
+      "Cancer colorectal métastatique (1ère et 2ème ligne), en association à une chimiothérapie à base de fluoropyrimidine",
+      "Cancer du sein métastatique (1ère ligne), en association au paclitaxel",
+      "Cancer bronchique non à petites cellules non épidermoïde, en association à la chimiothérapie à base de platine",
+      "Cancer du rein avancé/métastatique (1ère ligne), en association à l interféron alfa-2a",
+      "Cancer de l ovaire, des trompes de Fallope ou péritonéal primitif, en association à la chimiothérapie"
+    ],
+    "contraindications": [
+      "Hypersensibilité au bévacizumab ou à l un des excipients",
+      "Grossesse (tératogène)",
+      "Allaitement",
+      "Métastases non traitées du système nerveux central",
+      "Hémoptysie sévère (> 2,5 ml de sang rouge)",
+      "Chirurgie dans les 28 jours précédant le traitement"
+    ],
+    "interactions": [
+      "Sunitinib : microangiopathie thrombotique si association",
+      "Chimiothérapies à base de platine/taxanes : potentialisation de l efficacité et de la toxicité",
+      "Anticoagulants oraux : surveillance accrue en raison du risque hémorragique",
+      "Antihypertenseurs : nécessaires pour contrôler l HTA induite par le bévacizumab"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué pendant la grossesse. Le bévacizumab inhibe l angiogenèse et présente un potentiel tératogène. Contraception efficace requise pendant le traitement et au moins 6 mois après l arrêt."
+    },
+    "children": {
+      "allowed": false,
+      "dose_rule": "L efficacité et la sécurité chez l enfant et l adolescent n ont pas été établies. Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Aucun ajustement posologique spécifique pour insuffisance rénale légère à modérée. Données limitées pour insuffisance rénale sévère."
+    },
+    "dosage": {
+      "adult": "5 mg/kg ou 10 mg/kg ou 15 mg/kg toutes les 2 à 3 semaines selon l indication, en perfusion IV. Première perfusion en 90 minutes ; si bien tolérée, les suivantes en 60 puis 30 minutes.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 2908.0,
+        "price_ph": null,
+        "packaging": "Boite d un flacon de 4 ML",
+        "laboratory": "SOTHEMA"
+      }
+    ]
+  },
+  {
+    "id": "ypeva_400_mg_solution_diluer_pour_perfusion_iv",
+    "brand_name": "YPEVA",
+    "generic_name": "Bévacizumab",
+    "strength": "400 MG",
+    "form": "Solution à diluer pour perfusion IV",
+    "route": "Intraveineux (perfusion IV)",
+    "atc_code": "L01XC07",
+    "therapeutic_group": "Antinéoplasiques et immunomodulateurs / Anticorps monoclonaux anti-angiogéniques",
+    "drug_class": "Anticorps monoclonal anti-VEGF (inhibiteur de l angiogenèse) — biosimilaire de l Avastin®",
+    "indications": [
+      "Cancer colorectal métastatique (1ère et 2ème ligne), en association à une chimiothérapie à base de fluoropyrimidine",
+      "Cancer du sein métastatique (1ère ligne), en association au paclitaxel",
+      "Cancer bronchique non à petites cellules non épidermoïde, en association à la chimiothérapie à base de platine",
+      "Cancer du rein avancé/métastatique (1ère ligne), en association à l interféron alfa-2a",
+      "Cancer de l ovaire, des trompes de Fallope ou péritonéal primitif, en association à la chimiothérapie"
+    ],
+    "contraindications": [
+      "Hypersensibilité au bévacizumab ou à l un des excipients",
+      "Grossesse (tératogène)",
+      "Allaitement",
+      "Métastases non traitées du système nerveux central",
+      "Hémoptysie sévère (> 2,5 ml de sang rouge)",
+      "Chirurgie dans les 28 jours précédant le traitement"
+    ],
+    "interactions": [
+      "Sunitinib : microangiopathie thrombotique si association",
+      "Chimiothérapies à base de platine/taxanes : potentialisation de l efficacité et de la toxicité",
+      "Anticoagulants oraux : surveillance accrue en raison du risque hémorragique",
+      "Antihypertenseurs : nécessaires pour contrôler l HTA induite par le bévacizumab"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué pendant la grossesse. Le bévacizumab inhibe l angiogenèse et présente un potentiel tératogène. Contraception efficace requise pendant le traitement et au moins 6 mois après l arrêt."
+    },
+    "children": {
+      "allowed": false,
+      "dose_rule": "L efficacité et la sécurité chez l enfant et l adolescent n ont pas été établies. Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Aucun ajustement posologique spécifique pour insuffisance rénale légère à modérée. Données limitées pour insuffisance rénale sévère."
+    },
+    "dosage": {
+      "adult": "5 mg/kg ou 10 mg/kg ou 15 mg/kg toutes les 2 à 3 semaines selon l indication, en perfusion IV. Première perfusion en 90 minutes ; si bien tolérée, les suivantes en 60 puis 30 minutes.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 9510.0,
+        "price_ph": null,
+        "packaging": "Boite d un flacon de 16 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ]
+  },
+  {
+    "id": "yrias_0_50_mg_ml_solution_buvable",
+    "brand_name": "YRIAS",
+    "generic_name": "Desloratadine",
+    "strength": "0.50 MG / ML",
+    "form": "Solution buvable",
+    "route": "Oral",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques à usage systémique",
+    "drug_class": "Antihistaminique H1 de 2ème génération (non sédatif)",
+    "indications": [
+      "Traitement symptomatique de la rhinite allergique saisonnière et perannuelle",
+      "Traitement symptomatique de l urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine, à la loratadine ou à l un des excipients",
+      "Insuffisance rénale sévère (ajustement nécessaire)"
+    ],
+    "interactions": [
+      "Érythromycine, kétoconazole : augmentation des concentrations plasmatiques de desloratadine sans effet clinique significatif",
+      "Alcool : pas de potentialisation démontrée aux doses thérapeutiques",
+      "Inhibiteurs du CYP3A4 : augmentation possible des taux plasmatiques"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données cliniques limitées chez la femme enceinte. Déconseillé pendant la grossesse, surtout au 1er trimestre. Utiliser uniquement si le bénéfice justifie le risque potentiel."
+    },
+    "children": {
+      "allowed": true,
+      "dose_rule": "1–5 ans : 2,5 ml (1,25 mg)/j ; 6–11 ans : 5 ml (2,5 mg)/j ; ≥ 12 ans : 10 ml (5 mg)/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "En cas d insuffisance rénale, réduire la fréquence d administration à 1 prise tous les 2 jours."
+    },
+    "dosage": {
+      "adult": "10 ml (5 mg) une fois par jour.",
+      "children": "1–5 ans : 2,5 ml/j ; 6–11 ans : 5 ml/j ; ≥ 12 ans : 10 ml/j."
+    },
+    "market_data": [
+      {
+        "price": 50.8,
+        "price_ph": null,
+        "packaging": "Flacon de 150 ML",
+        "laboratory": "LAPROPHAN"
+      },
+      {
+        "price": 23.4,
+        "price_ph": null,
+        "packaging": "Flacon de 60 ML",
+        "laboratory": "LAPROPHAN"
+      }
+    ]
+  },
+  {
+    "id": "yrias_5_mg_comprim_pellicul",
+    "brand_name": "YRIAS",
+    "generic_name": "Desloratadine",
+    "strength": "5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Oral",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques à usage systémique",
+    "drug_class": "Antihistaminique H1 de 2ème génération (non sédatif)",
+    "indications": [
+      "Traitement symptomatique de la rhinite allergique saisonnière et perannuelle",
+      "Traitement symptomatique de l urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine, à la loratadine ou à l un des excipients",
+      "Insuffisance rénale sévère (précaution)"
+    ],
+    "interactions": [
+      "Érythromycine, kétoconazole : augmentation légère des concentrations sans pertinence clinique",
+      "Alcool : pas d interaction clinique significative",
+      "Inhibiteurs du CYP3A4 : augmentation possible des taux plasmatiques"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données cliniques limitées. Déconseillé pendant la grossesse, notamment au 1er trimestre. À utiliser uniquement si le bénéfice potentiel est supérieur au risque."
+    },
+    "children": {
+      "allowed": true,
+      "dose_rule": "Comprimé 5 mg réservé à l adulte et l adolescent ≥ 12 ans. Pour les enfants plus jeunes, utiliser la forme solution buvable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Insuffisance rénale : réduire la fréquence d administration à 1 comprimé tous les 2 jours."
+    },
+    "dosage": {
+      "adult": "1 comprimé (5 mg) une fois par jour, avec ou sans aliments.",
+      "children": "Adolescents ≥ 12 ans : 1 comprimé/j. Enfants < 12 ans : utiliser la solution buvable."
+    },
+    "market_data": [
+      {
+        "price": 38.0,
+        "price_ph": null,
+        "packaging": "Boite de 15",
+        "laboratory": "LAPROPHAN"
+      },
+      {
+        "price": 73.5,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "LAPROPHAN"
+      }
+    ]
+  }
+]
