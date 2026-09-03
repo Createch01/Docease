@@ -1,0 +1,4514 @@
+[
+  {
+    "id": "h-para_5_µg_/_ml_solution_injectable_boite_d'1_ampoule_de_1_ml",
+    "brand_name": "H-PARA",
+    "generic_name": "Noradrénaline (Norépinéphrine)",
+    "composition": [
+      {
+        "name": "Noradrénaline (Norépinéphrine)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "5 µG / ML",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "C01CA03",
+    "therapeutic_group": "Cardiovasculaire / Urgences",
+    "drug_class": "Vasopresseur / Catécholamine",
+    "drugbank_id": "DB00368",
+    "mechanism": "Catécholamine endogène agoniste alpha-adrénergique (α1, α2) et bêta-adrénergique (β1). Puissante vasoconstriction artérielle (↑ RVP), augmentation pression artérielle moyenne avec légère augmentation FC.",
+    "half_life": "2-3 min",
+    "indications": [
+      "Choc septique et distributif réfractaire à l'expansion volémique",
+      "Hypotension artérielle sévère en réanimation",
+      "Choc cardiogénique (en association)"
+    ],
+    "contraindications": [
+      "Hypotension par hypovolémie non corrigée",
+      "Thrombose vasculaire mésentérique ou périphérique"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Crise hypertensive sévère — contre-indiqué"
+      },
+      {
+        "drug": "Antidépresseurs tricycliques",
+        "severity": "majeure",
+        "effect": "Potentialisation vasoconstrictive"
+      },
+      {
+        "drug": "Halogènes (anesthésiques)",
+        "severity": "majeure",
+        "effect": "Risque arythmies ventriculaires"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement en urgence vitale. Risque d'ischémie placentaire.",
+      "breastfeeding": "Non applicable (usage hospitalier)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en réanimation pédiatrique sous surveillance stricte",
+      "dose_rule": "0.05-2 µg/kg/min IV en titration"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement spécifique"
+    },
+    "dosage": {
+      "adult": "0.01-3 µg/kg/min IV en perfusion continue. Titrer selon PAM cible (65-70 mmHg).",
+      "children": "0.05-2 µg/kg/min IV"
+    },
+    "adverse_effects": [
+      "Hypertension",
+      "Bradycardie réflexe",
+      "Ischémie périphérique",
+      "Nécrose au point d'injection (extravasation)",
+      "Arythmies"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boite d'1 ampoule de 1 ml",
+        "price_ppv_dhs": 141.4,
+        "price_ph_dhs": null,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00368",
+      "drugs_com": "https://www.drugs.com/noradrénaline.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "h_para_noradrenaline_norepinephrine_5_g_ml"
+  },
+  {
+    "id": "halaven_0.44_mg_/_ml_solution_injectable_boite_de_1_flacon_de_0.5_ml",
+    "brand_name": "HALAVEN",
+    "generic_name": "Éribuline",
+    "composition": [
+      {
+        "name": "Éribuline",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "0.44 MG / ML",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "L01XX41",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Inhibiteur de la dynamique des microtubules",
+    "drugbank_id": "DB08871",
+    "mechanism": "Inhibiteur non taxane de la dynamique des microtubules. Inhibe la phase de croissance des microtubules sans affecter la dépolymérisation. Séquestre la tubuline en agrégats non productifs — blocage en G2/M et apoptose.",
+    "half_life": "40h",
+    "indications": [
+      "Cancer du sein localement avancé ou métastatique (après ≥2 lignes incluant anthracyclines et taxanes)",
+      "Liposarcome dédifférencié irresécable/métastatique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'éribuline",
+      "Grossesse",
+      "Allaitement",
+      "QTc prolongé"
+    ],
+    "interactions": [
+      {
+        "drug": "Médicaments allongeant le QT (amiodarone, halopéridol)",
+        "severity": "majeure",
+        "effect": "Risque torsades de pointes — ECG avant/pendant"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4",
+        "severity": "modérée",
+        "effect": "Augmentation exposition éribuline"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — embryotoxique et tératogène. Contraception efficace requise.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose si DFG 15-49 mL/min (1.1 mg/m² au lieu de 1.4 mg/m²)"
+    },
+    "dosage": {
+      "adult": "1.23 mg/m² IV en 2-5 min, J1 et J8 d'un cycle de 21 jours",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Neutropénie (très fréquente)",
+      "Asthénie",
+      "Alopécie",
+      "Nausées",
+      "Neuropathie périphérique",
+      "Allongement QT"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boite de 1 flacon de 0.5 ml",
+        "price_ppv_dhs": 4088,
+        "price_ph_dhs": null,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB08871",
+      "drugs_com": "https://www.drugs.com/éribuline.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "halaven_eribuline_0_44_mg_ml"
+  },
+  {
+    "id": "hemmotocin_5_ui_/_ml_solution_injectable_en_ampoule_de_1_ml_boite_de_100",
+    "brand_name": "HEMMOTOCIN",
+    "generic_name": "Oxytocine",
+    "composition": [
+      {
+        "name": "Oxytocine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "5 UI / ml",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "H01BB02",
+    "therapeutic_group": "Gynécologie / Obstétrique",
+    "drug_class": "Hormone utérotonique",
+    "drugbank_id": "DB00107",
+    "mechanism": "Hormone peptidique hypothalamique stockée dans la neurohypophyse. Se fixe sur les récepteurs utérins à l'oxytocine, stimulant les contractions utérines. Augmente la fréquence et l'intensité des contractions myométriales.",
+    "half_life": "1-6 min",
+    "indications": [
+      "Déclenchement du travail",
+      "Augmentation des contractions utérines pendant l'accouchement",
+      "Prévention et traitement de l'hémorragie du post-partum",
+      "Aide à l'expulsion placentaire"
+    ],
+    "contraindications": [
+      "Disproportion foeto-pelvienne",
+      "Souffrance fœtale sans accouchement imminent",
+      "Présentation transversale du fœtus",
+      "Hypertonie utérine"
+    ],
+    "interactions": [
+      {
+        "drug": "Prostaglandines",
+        "severity": "majeure",
+        "effect": "Hyperstimulation utérine — ne pas associer"
+      },
+      {
+        "drug": "Sympathomimétiques",
+        "severity": "modérée",
+        "effect": "Augmentation effet presseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Utilisation strictement obstétricale — monitoring fœtal continu obligatoire.",
+      "breastfeeding": "Compatible — hormone naturellement sécrétée pendant l'allaitement."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Usage obstétrical uniquement",
+      "dose_rule": "Non applicable"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Déclenchement: 1-2 mU/min IV, augmentation progressive. Post-partum: 10 UI IM ou 5 UI IV lent.",
+      "children": "Non applicable"
+    },
+    "adverse_effects": [
+      "Hyperstimulation utérine",
+      "Bradycardie fœtale",
+      "Hyponatrémie (rétention hydrique)",
+      "Hypotension (injection rapide IV)",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable en ampoule de 1 ml Boite de 100",
+        "price_ppv_dhs": 403,
+        "price_ph_dhs": null,
+        "laboratory": "PHARMAPROM",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00107",
+      "drugs_com": "https://www.drugs.com/oxytocine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hemmotocin_oxytocine_5_ui_ml"
+  },
+  {
+    "id": "hemopass_duo_75_mg_/_100_mg_gélule_boite_de_30",
+    "brand_name": "HEMOPASS",
+    "generic_name": "Clopidogrel + Aspirine",
+    "composition": [
+      {
+        "name": "Clopidogrel + Aspirine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "DUO 75 MG / 100 MG",
+    "form": "Gélule",
+    "route": "Voir notice",
+    "atc_code": "B01AC30",
+    "therapeutic_group": "Cardiovasculaire",
+    "drug_class": "Antiagrégant plaquettaire double",
+    "drugbank_id": "DB00758",
+    "mechanism": "Double antiagrégation: Clopidogrel (prodrogue, inhibe irréversiblement récepteur ADP P2Y12) + Aspirine (inhibe irréversiblement COX-1, réduit thromboxane A2). Synergie antiplaqueaire complémentaire.",
+    "half_life": "Clopidogrel ~6h (métabolite actif), Aspirine ~15-20 min (acétylsalicylate)",
+    "indications": [
+      "Syndrome coronarien aigu (SCA) avec ou sans sus-décalage ST",
+      "Prévention secondaire après SCA, angioplastie, ou pose de stent"
+    ],
+    "contraindications": [
+      "Saignement actif",
+      "Ulcère gastroduodénal évolutif",
+      "Hypersensibilité à l'aspirine ou au clopidogrel",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants (héparine, warfarine, NACO)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majoré — surveillance étroite"
+      },
+      {
+        "drug": "AINS",
+        "severity": "majeure",
+        "effect": "Risque gastro-intestinal et hémorragique accru"
+      },
+      {
+        "drug": "IPP (oméprazole, ésoméprazole)",
+        "severity": "modérée",
+        "effect": "Réduction effet clopidogrel via CYP2C19 (privilégier pantoprazole)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C/D",
+      "warning": "Éviter — risque hémorragique maternel et fœtal. Aspirine contre-indiquée au 3e trimestre.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution si DFG < 30 mL/min. Surveiller risque hémorragique."
+    },
+    "dosage": {
+      "adult": "Clopidogrel 75 mg + Aspirine 75-100 mg/j. Dose de charge: Clopidogrel 300-600 mg.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Saignements (digestifs, cutanés)",
+      "Ecchymoses",
+      "Dyspepsie",
+      "Ulcère GI",
+      "Thrombopénie thrombotique (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 160,
+        "price_ph_dhs": null,
+        "laboratory": "ATLAS PHARM",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00758",
+      "drugs_com": "https://www.drugs.com/clopidogrel---aspirine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hemopass_clopidogrel_aspirine_duo_75_mg_100_mg"
+  },
+  {
+    "id": "hemopass_duo_75_mg_/_75_mg_gélule_boite_de_30",
+    "brand_name": "HEMOPASS",
+    "generic_name": "Clopidogrel + Aspirine",
+    "composition": [
+      {
+        "name": "Clopidogrel + Aspirine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "DUO 75 MG / 75 MG",
+    "form": "Gélule",
+    "route": "Voir notice",
+    "atc_code": "B01AC30",
+    "therapeutic_group": "Cardiovasculaire",
+    "drug_class": "Antiagrégant plaquettaire double",
+    "drugbank_id": "DB00758",
+    "mechanism": "Double antiagrégation: Clopidogrel (prodrogue, inhibe irréversiblement récepteur ADP P2Y12) + Aspirine (inhibe irréversiblement COX-1, réduit thromboxane A2). Synergie antiplaqueaire complémentaire.",
+    "half_life": "Clopidogrel ~6h (métabolite actif), Aspirine ~15-20 min (acétylsalicylate)",
+    "indications": [
+      "Syndrome coronarien aigu (SCA) avec ou sans sus-décalage ST",
+      "Prévention secondaire après SCA, angioplastie, ou pose de stent"
+    ],
+    "contraindications": [
+      "Saignement actif",
+      "Ulcère gastroduodénal évolutif",
+      "Hypersensibilité à l'aspirine ou au clopidogrel",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants (héparine, warfarine, NACO)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majoré — surveillance étroite"
+      },
+      {
+        "drug": "AINS",
+        "severity": "majeure",
+        "effect": "Risque gastro-intestinal et hémorragique accru"
+      },
+      {
+        "drug": "IPP (oméprazole, ésoméprazole)",
+        "severity": "modérée",
+        "effect": "Réduction effet clopidogrel via CYP2C19 (privilégier pantoprazole)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C/D",
+      "warning": "Éviter — risque hémorragique maternel et fœtal. Aspirine contre-indiquée au 3e trimestre.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution si DFG < 30 mL/min. Surveiller risque hémorragique."
+    },
+    "dosage": {
+      "adult": "Clopidogrel 75 mg + Aspirine 75-100 mg/j. Dose de charge: Clopidogrel 300-600 mg.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Saignements (digestifs, cutanés)",
+      "Ecchymoses",
+      "Dyspepsie",
+      "Ulcère GI",
+      "Thrombopénie thrombotique (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 153.2,
+        "price_ph_dhs": 102.14,
+        "laboratory": "ATLAS PHARM",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00758",
+      "drugs_com": "https://www.drugs.com/clopidogrel---aspirine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hemopass_clopidogrel_aspirine_duo_75_mg_75_mg"
+  },
+  {
+    "id": "heparine_leo_25_000_ui_/_5_ml_solution_injectable_boîte_de_50_flacons_de_100_ml",
+    "brand_name": "HEPARINE",
+    "generic_name": "Héparine sodique",
+    "composition": [
+      {
+        "name": "Héparine sodique",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "LEO 25 000 UI / 5 ML",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "B01AB01",
+    "therapeutic_group": "Hématologie",
+    "drug_class": "Anticoagulant (héparine non fractionnée)",
+    "drugbank_id": "DB01109",
+    "mechanism": "Anticoagulant par potentialisation de l'antithrombine III (AT III). Inhibe la thrombine (IIa) et le facteur Xa. Effet immédiat à l'injection IV. Surveillance par TCA (héparine non fractionnée).",
+    "half_life": "1-2h (dose-dépendant)",
+    "indications": [
+      "Traitement et prévention des thromboses veineuses et embolies pulmonaires",
+      "Anticoagulation en dialyse et CEC (circulation extra-corporelle)",
+      "SCA (en association)"
+    ],
+    "contraindications": [
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Saignement actif non contrôlable",
+      "Endocardite bactérienne",
+      "Hypersensibilité à l'héparine"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiagrégants plaquettaires, NACO, AVK",
+        "severity": "majeure",
+        "effect": "Risque hémorragique augmenté"
+      },
+      {
+        "drug": "AINS, aspirine",
+        "severity": "majeure",
+        "effect": "Potentialisation anticoagulante + risque GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Ne traverse pas la barrière placentaire. Option préférentielle pendant la grossesse si anticoagulation requise.",
+      "breastfeeding": "Compatible — ne passe pas dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie et néonatologie",
+      "dose_rule": "75-100 UI/kg IV bolus, puis 25-30 UI/kg/h selon TCA"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — risque hémorragique augmenté si IR"
+    },
+    "dosage": {
+      "adult": "Curatif: 80 UI/kg IV bolus, puis 18 UI/kg/h. Préventif: 5000 UI SC 2-3x/j.",
+      "children": "75-100 UI/kg bolus"
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie induite par héparine (TIH)",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases",
+      "Hyperkaliémie"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boîte de 50 flacons de 100 ml",
+        "price_ppv_dhs": 1558,
+        "price_ph_dhs": null,
+        "laboratory": "POLYMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01109",
+      "drugs_com": "https://www.drugs.com/héparine-sodique.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "heparine_heparine_sodique_leo_25_000_ui_5_ml"
+  },
+  {
+    "id": "heparine_medis_25_000_ui_solution_injectable_boite_de_10_flacons_de_5_ml",
+    "brand_name": "HEPARINE",
+    "generic_name": "Héparine sodique",
+    "composition": [
+      {
+        "name": "Héparine sodique",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "MEDIS 25 000 UI",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "B01AB01",
+    "therapeutic_group": "Hématologie",
+    "drug_class": "Anticoagulant (héparine non fractionnée)",
+    "drugbank_id": "DB01109",
+    "mechanism": "Anticoagulant par potentialisation de l'antithrombine III (AT III). Inhibe la thrombine (IIa) et le facteur Xa. Effet immédiat à l'injection IV. Surveillance par TCA (héparine non fractionnée).",
+    "half_life": "1-2h (dose-dépendant)",
+    "indications": [
+      "Traitement et prévention des thromboses veineuses et embolies pulmonaires",
+      "Anticoagulation en dialyse et CEC (circulation extra-corporelle)",
+      "SCA (en association)"
+    ],
+    "contraindications": [
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Saignement actif non contrôlable",
+      "Endocardite bactérienne",
+      "Hypersensibilité à l'héparine"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiagrégants plaquettaires, NACO, AVK",
+        "severity": "majeure",
+        "effect": "Risque hémorragique augmenté"
+      },
+      {
+        "drug": "AINS, aspirine",
+        "severity": "majeure",
+        "effect": "Potentialisation anticoagulante + risque GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Ne traverse pas la barrière placentaire. Option préférentielle pendant la grossesse si anticoagulation requise.",
+      "breastfeeding": "Compatible — ne passe pas dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie et néonatologie",
+      "dose_rule": "75-100 UI/kg IV bolus, puis 25-30 UI/kg/h selon TCA"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — risque hémorragique augmenté si IR"
+    },
+    "dosage": {
+      "adult": "Curatif: 80 UI/kg IV bolus, puis 18 UI/kg/h. Préventif: 5000 UI SC 2-3x/j.",
+      "children": "75-100 UI/kg bolus"
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie induite par héparine (TIH)",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases",
+      "Hyperkaliémie"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boite de 10 flacons de 5 ml",
+        "price_ppv_dhs": 762,
+        "price_ph_dhs": null,
+        "laboratory": "HEMOLAB-PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01109",
+      "drugs_com": "https://www.drugs.com/héparine-sodique.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "heparine_heparine_sodique_medis_25_000_ui"
+  },
+  {
+    "id": "heparine_soludia_5000_ui_/_5_ml_solution_injectable_boite_de_1_flacon_de_5_ml",
+    "brand_name": "HEPARINE",
+    "generic_name": "Héparine sodique",
+    "composition": [
+      {
+        "name": "Héparine sodique",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "SOLUDIA 5000 UI / 5 ML",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "B01AB01",
+    "therapeutic_group": "Hématologie",
+    "drug_class": "Anticoagulant (héparine non fractionnée)",
+    "drugbank_id": "DB01109",
+    "mechanism": "Anticoagulant par potentialisation de l'antithrombine III (AT III). Inhibe la thrombine (IIa) et le facteur Xa. Effet immédiat à l'injection IV. Surveillance par TCA (héparine non fractionnée).",
+    "half_life": "1-2h (dose-dépendant)",
+    "indications": [
+      "Traitement et prévention des thromboses veineuses et embolies pulmonaires",
+      "Anticoagulation en dialyse et CEC (circulation extra-corporelle)",
+      "SCA (en association)"
+    ],
+    "contraindications": [
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Saignement actif non contrôlable",
+      "Endocardite bactérienne",
+      "Hypersensibilité à l'héparine"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiagrégants plaquettaires, NACO, AVK",
+        "severity": "majeure",
+        "effect": "Risque hémorragique augmenté"
+      },
+      {
+        "drug": "AINS, aspirine",
+        "severity": "majeure",
+        "effect": "Potentialisation anticoagulante + risque GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Ne traverse pas la barrière placentaire. Option préférentielle pendant la grossesse si anticoagulation requise.",
+      "breastfeeding": "Compatible — ne passe pas dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie et néonatologie",
+      "dose_rule": "75-100 UI/kg IV bolus, puis 25-30 UI/kg/h selon TCA"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — risque hémorragique augmenté si IR"
+    },
+    "dosage": {
+      "adult": "Curatif: 80 UI/kg IV bolus, puis 18 UI/kg/h. Préventif: 5000 UI SC 2-3x/j.",
+      "children": "75-100 UI/kg bolus"
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie induite par héparine (TIH)",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases",
+      "Hyperkaliémie"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boite de 1 flacon de 5 ml",
+        "price_ppv_dhs": 24.5,
+        "price_ph_dhs": null,
+        "laboratory": "SOLUDIA MAGHREB",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01109",
+      "drugs_com": "https://www.drugs.com/héparine-sodique.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "heparine_heparine_sodique_soludia_5000_ui_5_ml"
+  },
+  {
+    "id": "herceptin_150_mg_lyophilisat_pour_perfusion_iv_1_flacon_de_15_ml",
+    "brand_name": "HERCEPTIN",
+    "generic_name": "Trastuzumab",
+    "composition": [
+      {
+        "name": "Trastuzumab",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "150 MG",
+    "form": "Lyophilisat",
+    "route": "Voir notice",
+    "atc_code": "L01XC03",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Anticorps monoclonal anti-HER2",
+    "drugbank_id": "DB00072",
+    "mechanism": "Anticorps monoclonal humanisé anti-HER2 (ErbB2). Se fixe sur le domaine IV extracellulaire de HER2, inhibant la signalisation en aval (PI3K/Akt, MAPK). Induit ADCC (cytotoxicité cellulaire dépendante des anticorps) et inhibe la prolifération des cellules HER2+.",
+    "half_life": "28.5 jours",
+    "indications": [
+      "Cancer du sein HER2+ précoce (adjuvant/néoadjuvant)",
+      "Cancer du sein HER2+ métastatique",
+      "Cancer gastrique/jonction œsogastrique HER2+ avancé"
+    ],
+    "contraindications": [
+      "Hypersensibilité au trastuzumab",
+      "Dyspnée sévère au repos",
+      "FEVG < 55% ou insuffisance cardiaque congestive"
+    ],
+    "interactions": [
+      {
+        "drug": "Anthracyclines (doxorubicine)",
+        "severity": "majeure",
+        "effect": "Cardiotoxicité synergique — ne pas associer en concomitant"
+      },
+      {
+        "drug": "Paclitaxel",
+        "severity": "modérée",
+        "effect": "Association fréquente — trastuzumab augmente exposition paclitaxel"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — oligo/anhydramnios, atteinte rénale fœtale. Contraception efficace requise pendant et 7 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Dose de charge: 8 mg/kg IV. Puis 6 mg/kg IV toutes les 3 semaines (ou 4 mg/kg puis 2 mg/kg hebdo).",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Cardiotoxicité (réduction FEVG)",
+      "Réactions perfusionnelles",
+      "Fièvre",
+      "Frissons",
+      "Pneumopathie interstitielle (rare)",
+      "Fatigue"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour perfusion IV 1 flacon de 15 ml",
+        "price_ppv_dhs": 4261,
+        "price_ph_dhs": 6490,
+        "laboratory": "ROCHE S.A",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00072",
+      "drugs_com": "https://www.drugs.com/trastuzumab.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "herceptin_trastuzumab_150_mg"
+  },
+  {
+    "id": "herceptin_600_mg_solution_injectable_1_flacon_de_5_ml",
+    "brand_name": "HERCEPTIN",
+    "generic_name": "Trastuzumab",
+    "composition": [
+      {
+        "name": "Trastuzumab",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "600 MG",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "L01XC03",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Anticorps monoclonal anti-HER2",
+    "drugbank_id": "DB00072",
+    "mechanism": "Anticorps monoclonal humanisé anti-HER2 (ErbB2). Se fixe sur le domaine IV extracellulaire de HER2, inhibant la signalisation en aval (PI3K/Akt, MAPK). Induit ADCC (cytotoxicité cellulaire dépendante des anticorps) et inhibe la prolifération des cellules HER2+.",
+    "half_life": "28.5 jours",
+    "indications": [
+      "Cancer du sein HER2+ précoce (adjuvant/néoadjuvant)",
+      "Cancer du sein HER2+ métastatique",
+      "Cancer gastrique/jonction œsogastrique HER2+ avancé"
+    ],
+    "contraindications": [
+      "Hypersensibilité au trastuzumab",
+      "Dyspnée sévère au repos",
+      "FEVG < 55% ou insuffisance cardiaque congestive"
+    ],
+    "interactions": [
+      {
+        "drug": "Anthracyclines (doxorubicine)",
+        "severity": "majeure",
+        "effect": "Cardiotoxicité synergique — ne pas associer en concomitant"
+      },
+      {
+        "drug": "Paclitaxel",
+        "severity": "modérée",
+        "effect": "Association fréquente — trastuzumab augmente exposition paclitaxel"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — oligo/anhydramnios, atteinte rénale fœtale. Contraception efficace requise pendant et 7 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Dose de charge: 8 mg/kg IV. Puis 6 mg/kg IV toutes les 3 semaines (ou 4 mg/kg puis 2 mg/kg hebdo).",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Cardiotoxicité (réduction FEVG)",
+      "Réactions perfusionnelles",
+      "Fièvre",
+      "Frissons",
+      "Pneumopathie interstitielle (rare)",
+      "Fatigue"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable 1 flacon de 5 ml",
+        "price_ppv_dhs": 10533,
+        "price_ph_dhs": 16808,
+        "laboratory": "ROCHE S.A",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00072",
+      "drugs_com": "https://www.drugs.com/trastuzumab.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "herceptin_trastuzumab_600_mg"
+  },
+  {
+    "id": "hertraz_150_mg_poudre_et_solvant_pour_solution_à_diluer_boite_de_1_flacon_de_poudre_plus_un_flacon_de_solvant_10_ml",
+    "brand_name": "HERTRAZ",
+    "generic_name": "Trastuzumab",
+    "composition": [
+      {
+        "name": "Trastuzumab",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "150 MG",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "L01XC03",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Anticorps monoclonal anti-HER2 (biosimilaire)",
+    "drugbank_id": "DB00072",
+    "mechanism": "Anticorps monoclonal humanisé anti-HER2 (ErbB2). Se fixe sur le domaine IV extracellulaire de HER2, inhibant la signalisation en aval (PI3K/Akt, MAPK). Induit ADCC (cytotoxicité cellulaire dépendante des anticorps) et inhibe la prolifération des cellules HER2+.",
+    "half_life": "28.5 jours",
+    "indications": [
+      "Cancer du sein HER2+ précoce (adjuvant/néoadjuvant)",
+      "Cancer du sein HER2+ métastatique",
+      "Cancer gastrique/jonction œsogastrique HER2+ avancé"
+    ],
+    "contraindications": [
+      "Hypersensibilité au trastuzumab",
+      "Dyspnée sévère au repos",
+      "FEVG < 55% ou insuffisance cardiaque congestive"
+    ],
+    "interactions": [
+      {
+        "drug": "Anthracyclines (doxorubicine)",
+        "severity": "majeure",
+        "effect": "Cardiotoxicité synergique — ne pas associer en concomitant"
+      },
+      {
+        "drug": "Paclitaxel",
+        "severity": "modérée",
+        "effect": "Association fréquente — trastuzumab augmente exposition paclitaxel"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — oligo/anhydramnios, atteinte rénale fœtale. Contraception efficace requise pendant et 7 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Dose de charge: 8 mg/kg IV. Puis 6 mg/kg IV toutes les 3 semaines (ou 4 mg/kg puis 2 mg/kg hebdo).",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Cardiotoxicité (réduction FEVG)",
+      "Réactions perfusionnelles",
+      "Fièvre",
+      "Frissons",
+      "Pneumopathie interstitielle (rare)",
+      "Fatigue"
+    ],
+    "market_data": [
+      {
+        "packaging": "et solvant pour solution à diluer Boite de 1 flacon de poudre plus un flacon de solvant 10 ml",
+        "price_ppv_dhs": 3317,
+        "price_ph_dhs": 3017,
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00072",
+      "drugs_com": "https://www.drugs.com/trastuzumab.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hertraz_trastuzumab_150_mg"
+  },
+  {
+    "id": "hertraz_440_mg_poudre_et_solvant_pour_solution_à_diluer_boite_de_1_flacon_de_poudre_plus_2_flacons_de_solvant_10_ml",
+    "brand_name": "HERTRAZ",
+    "generic_name": "Trastuzumab",
+    "composition": [
+      {
+        "name": "Trastuzumab",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "440 MG",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "L01XC03",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Anticorps monoclonal anti-HER2 (biosimilaire)",
+    "drugbank_id": "DB00072",
+    "mechanism": "Anticorps monoclonal humanisé anti-HER2 (ErbB2). Se fixe sur le domaine IV extracellulaire de HER2, inhibant la signalisation en aval (PI3K/Akt, MAPK). Induit ADCC (cytotoxicité cellulaire dépendante des anticorps) et inhibe la prolifération des cellules HER2+.",
+    "half_life": "28.5 jours",
+    "indications": [
+      "Cancer du sein HER2+ précoce (adjuvant/néoadjuvant)",
+      "Cancer du sein HER2+ métastatique",
+      "Cancer gastrique/jonction œsogastrique HER2+ avancé"
+    ],
+    "contraindications": [
+      "Hypersensibilité au trastuzumab",
+      "Dyspnée sévère au repos",
+      "FEVG < 55% ou insuffisance cardiaque congestive"
+    ],
+    "interactions": [
+      {
+        "drug": "Anthracyclines (doxorubicine)",
+        "severity": "majeure",
+        "effect": "Cardiotoxicité synergique — ne pas associer en concomitant"
+      },
+      {
+        "drug": "Paclitaxel",
+        "severity": "modérée",
+        "effect": "Association fréquente — trastuzumab augmente exposition paclitaxel"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — oligo/anhydramnios, atteinte rénale fœtale. Contraception efficace requise pendant et 7 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Dose de charge: 8 mg/kg IV. Puis 6 mg/kg IV toutes les 3 semaines (ou 4 mg/kg puis 2 mg/kg hebdo).",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Cardiotoxicité (réduction FEVG)",
+      "Réactions perfusionnelles",
+      "Fièvre",
+      "Frissons",
+      "Pneumopathie interstitielle (rare)",
+      "Fatigue"
+    ],
+    "market_data": [
+      {
+        "packaging": "et solvant pour solution à diluer Boite de 1 flacon de poudre plus 2 flacons de solvant 10 ml",
+        "price_ppv_dhs": 8917,
+        "price_ph_dhs": 6241.9,
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00072",
+      "drugs_com": "https://www.drugs.com/trastuzumab.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hertraz_trastuzumab_440_mg"
+  },
+  {
+    "id": "herzuma_150_mg_poudre_pour_solution_à_diluer_pour_perfusion_boite_d'un_flacon_de_20_ml",
+    "brand_name": "HERZUMA",
+    "generic_name": "Trastuzumab",
+    "composition": [
+      {
+        "name": "Trastuzumab",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "150 MG",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "L01XC03",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Anticorps monoclonal anti-HER2 (biosimilaire)",
+    "drugbank_id": "DB00072",
+    "mechanism": "Anticorps monoclonal humanisé anti-HER2 (ErbB2). Se fixe sur le domaine IV extracellulaire de HER2, inhibant la signalisation en aval (PI3K/Akt, MAPK). Induit ADCC (cytotoxicité cellulaire dépendante des anticorps) et inhibe la prolifération des cellules HER2+.",
+    "half_life": "28.5 jours",
+    "indications": [
+      "Cancer du sein HER2+ précoce (adjuvant/néoadjuvant)",
+      "Cancer du sein HER2+ métastatique",
+      "Cancer gastrique/jonction œsogastrique HER2+ avancé"
+    ],
+    "contraindications": [
+      "Hypersensibilité au trastuzumab",
+      "Dyspnée sévère au repos",
+      "FEVG < 55% ou insuffisance cardiaque congestive"
+    ],
+    "interactions": [
+      {
+        "drug": "Anthracyclines (doxorubicine)",
+        "severity": "majeure",
+        "effect": "Cardiotoxicité synergique — ne pas associer en concomitant"
+      },
+      {
+        "drug": "Paclitaxel",
+        "severity": "modérée",
+        "effect": "Association fréquente — trastuzumab augmente exposition paclitaxel"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — oligo/anhydramnios, atteinte rénale fœtale. Contraception efficace requise pendant et 7 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Dose de charge: 8 mg/kg IV. Puis 6 mg/kg IV toutes les 3 semaines (ou 4 mg/kg puis 2 mg/kg hebdo).",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Cardiotoxicité (réduction FEVG)",
+      "Réactions perfusionnelles",
+      "Fièvre",
+      "Frissons",
+      "Pneumopathie interstitielle (rare)",
+      "Fatigue"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour solution à diluer pour perfusion Boite d'un flacon de 20 ml",
+        "price_ppv_dhs": 1791,
+        "price_ph_dhs": null,
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00072",
+      "drugs_com": "https://www.drugs.com/trastuzumab.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "herzuma_trastuzumab_150_mg"
+  },
+  {
+    "id": "herzuma_440_mg_poudre_pour_solution_à_diluer_pour_perfusion_boite_d'un_flacon_de_50_ml_et_un_flacon_solvant_de_20_ml",
+    "brand_name": "HERZUMA",
+    "generic_name": "Trastuzumab",
+    "composition": [
+      {
+        "name": "Trastuzumab",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "440 MG",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "L01XC03",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Anticorps monoclonal anti-HER2 (biosimilaire)",
+    "drugbank_id": "DB00072",
+    "mechanism": "Anticorps monoclonal humanisé anti-HER2 (ErbB2). Se fixe sur le domaine IV extracellulaire de HER2, inhibant la signalisation en aval (PI3K/Akt, MAPK). Induit ADCC (cytotoxicité cellulaire dépendante des anticorps) et inhibe la prolifération des cellules HER2+.",
+    "half_life": "28.5 jours",
+    "indications": [
+      "Cancer du sein HER2+ précoce (adjuvant/néoadjuvant)",
+      "Cancer du sein HER2+ métastatique",
+      "Cancer gastrique/jonction œsogastrique HER2+ avancé"
+    ],
+    "contraindications": [
+      "Hypersensibilité au trastuzumab",
+      "Dyspnée sévère au repos",
+      "FEVG < 55% ou insuffisance cardiaque congestive"
+    ],
+    "interactions": [
+      {
+        "drug": "Anthracyclines (doxorubicine)",
+        "severity": "majeure",
+        "effect": "Cardiotoxicité synergique — ne pas associer en concomitant"
+      },
+      {
+        "drug": "Paclitaxel",
+        "severity": "modérée",
+        "effect": "Association fréquente — trastuzumab augmente exposition paclitaxel"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — oligo/anhydramnios, atteinte rénale fœtale. Contraception efficace requise pendant et 7 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Dose de charge: 8 mg/kg IV. Puis 6 mg/kg IV toutes les 3 semaines (ou 4 mg/kg puis 2 mg/kg hebdo).",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Cardiotoxicité (réduction FEVG)",
+      "Réactions perfusionnelles",
+      "Fièvre",
+      "Frissons",
+      "Pneumopathie interstitielle (rare)",
+      "Fatigue"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour solution à diluer pour perfusion Boite d'un flacon de 50 ML et un flacon solvant de 20 ML",
+        "price_ppv_dhs": 8917,
+        "price_ph_dhs": null,
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "ADULTE_SEULEMENT",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00072",
+      "drugs_com": "https://www.drugs.com/trastuzumab.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "herzuma_trastuzumab_440_mg"
+  },
+  {
+    "id": "hexomedine_0.1_%_solution_pour_application_locale_flacon_de_45_ml",
+    "brand_name": "HEXOMEDINE",
+    "generic_name": "Hexamidine",
+    "composition": [
+      {
+        "name": "Hexamidine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "0.1 %",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "D08AC01",
+    "therapeutic_group": "Dermatologie / Antiseptique",
+    "drug_class": "Antiseptique local (diamidine)",
+    "drugbank_id": "DB11104",
+    "mechanism": "Antiseptique local de la famille des diamidines aromatiques. Activité bactériostatique et bactéricide contre les bactéries Gram+ et certains champignons par perturbation membranaire.",
+    "half_life": "Non applicable (usage local)",
+    "indications": [
+      "Antisepsie des plaies cutanées superficielles",
+      "Prévention des infections cutanées mineures"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'hexamidine",
+      "Contact avec muqueuses et yeux",
+      "Usage sur plaies profondes"
+    ],
+    "interactions": [
+      "Aucune interaction systémique significative connue (usage local, antiseptique)."
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — usage local limité.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable chez l'enfant",
+      "dose_rule": "Usage local identique à l'adulte"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Non applicable"
+    },
+    "dosage": {
+      "adult": "Appliquer sur la zone à désinfecter 1-2x/j",
+      "children": "Usage local identique"
+    },
+    "adverse_effects": [
+      "Irritation locale",
+      "Allergie de contact (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour application locale Flacon de 45 ml",
+        "price_ppv_dhs": 13.1,
+        "price_ph_dhs": null,
+        "laboratory": "SYNTHEMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB11104",
+      "drugs_com": "https://www.drugs.com/hexamidine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Savons et détergents anioniques",
+        "severity": "Modéré",
+        "effect": "Inactivation de l'hexamidine par les savons ordinaires — rincer abondamment la peau avant application antiseptique."
+      },
+      {
+        "drug": "Autres antiseptiques (chlorhexidine, iode)",
+        "severity": "Faible",
+        "effect": "Pas d'incompatibilité documentée — éviter l'association simultanée sur la même zone par précaution d'inactivation mutuelle."
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hexomedine_hexamidine_0_1"
+  },
+  {
+    "id": "hexomedine_transcutanée_0.15_%_solution_pour_application_locale_flacon_de_60_ml",
+    "brand_name": "HEXOMEDINE",
+    "generic_name": "Hexamidine",
+    "composition": [
+      {
+        "name": "Hexamidine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "TRANSCUTANÉE 0.15 %",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "D08AC01",
+    "therapeutic_group": "Dermatologie / Antiseptique",
+    "drug_class": "Antiseptique local (diamidine)",
+    "drugbank_id": "DB11104",
+    "mechanism": "Antiseptique local de la famille des diamidines aromatiques. Activité bactériostatique et bactéricide contre les bactéries Gram+ et certains champignons par perturbation membranaire.",
+    "half_life": "Non applicable (usage local)",
+    "indications": [
+      "Antisepsie des plaies cutanées superficielles",
+      "Prévention des infections cutanées mineures"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'hexamidine",
+      "Contact avec muqueuses et yeux",
+      "Usage sur plaies profondes"
+    ],
+    "interactions": [
+      "Aucune interaction systémique significative connue (usage local, antiseptique)."
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — usage local limité.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable chez l'enfant",
+      "dose_rule": "Usage local identique à l'adulte"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Non applicable"
+    },
+    "dosage": {
+      "adult": "Appliquer sur la zone à désinfecter 1-2x/j",
+      "children": "Usage local identique"
+    },
+    "adverse_effects": [
+      "Irritation locale",
+      "Allergie de contact (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour application locale Flacon de 60 ml",
+        "price_ppv_dhs": 13.1,
+        "price_ph_dhs": null,
+        "laboratory": "SYNTHEMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB11104",
+      "drugs_com": "https://www.drugs.com/hexamidine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [
+      {
+        "drug": "Savons et détergents anioniques",
+        "severity": "Modéré",
+        "effect": "Inactivation de l'hexamidine par les savons ordinaires — rincer abondamment la peau avant application antiseptique."
+      },
+      {
+        "drug": "Autres antiseptiques (chlorhexidine, iode)",
+        "severity": "Faible",
+        "effect": "Pas d'incompatibilité documentée — éviter l'association simultanée sur la même zone par précaution d'inactivation mutuelle."
+      }
+    ],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hexomedine_hexamidine_transcutanee_0_15"
+  },
+  {
+    "id": "hidroferol_0.266_mg_capsule_molle_boite_de_3",
+    "brand_name": "HIDROFEROL",
+    "generic_name": "Calcifédiol (25-hydroxyvitamine D3)",
+    "composition": [
+      {
+        "name": "Calcifédiol (25-hydroxyvitamine D3)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "0.266 MG",
+    "form": "Capsule",
+    "route": "Voir notice",
+    "atc_code": "A11CC06",
+    "therapeutic_group": "Vitamines / Supplémentation",
+    "drug_class": "Vitamine D3 (forme active préhépatique)",
+    "drugbank_id": "DB01436",
+    "mechanism": "Métabolite intermédiaire de la vitamine D3 (25-hydroxycholécalciférol). Déjà hydroxylé en position 25 — ne nécessite que la 1α-hydroxylation rénale pour devenir calcitriol actif. Régule l'absorption intestinale du calcium et la minéralisation osseuse.",
+    "half_life": "25-30 jours",
+    "indications": [
+      "Déficit en vitamine D",
+      "Ostéomalacie",
+      "Rachitisme",
+      "Ostéoporose (en association)",
+      "Insuffisance rénale chronique (précaution — activation rénale nécessaire)"
+    ],
+    "contraindications": [
+      "Hypercalcémie",
+      "Hypercalciurie",
+      "Lithiase calcique rénale",
+      "Sarcoidose"
+    ],
+    "interactions": [
+      {
+        "drug": "Digitaliques (digoxine)",
+        "severity": "majeure",
+        "effect": "Hypercalcémie potentialise toxicité digitalique"
+      },
+      {
+        "drug": "Diurétiques thiazidiques",
+        "severity": "modérée",
+        "effect": "Risque d'hypercalcémie accru"
+      },
+      {
+        "drug": "Antiépileptiques (phénytoïne, phénobarbital)",
+        "severity": "modérée",
+        "effect": "Accélèrent métabolisme vitamine D — besoin accru"
+      }
+    ],
+    "pregnancy": {
+      "category": "A/C",
+      "warning": "Supplémentation possible aux doses recommandées. Éviter surdosage (tératogène à hautes doses).",
+      "breastfeeding": "Compatible aux doses physiologiques."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable dès la naissance — surveillance calcémie",
+      "dose_rule": "400-1000 UI/j (prévention), selon dosage sérique"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution en IR sévère — risque hypercalcémie (activation altérée)"
+    },
+    "dosage": {
+      "adult": "0.266 mg/mois (1 capsule mensuelle) ou selon dosage 25-OH-D3",
+      "children": "Selon poids et déficit"
+    },
+    "adverse_effects": [
+      "Hypercalcémie (surdosage)",
+      "Hypercalciurie",
+      "Lithiase rénale",
+      "Nausées",
+      "Constipation"
+    ],
+    "market_data": [
+      {
+        "packaging": "molle Boite de 3",
+        "price_ppv_dhs": 46.5,
+        "price_ph_dhs": null,
+        "laboratory": "IBERMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01436",
+      "drugs_com": "https://www.drugs.com/calcifédiol.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hidroferol_calcifediol_25_hydroxyvitamine_d3_0_266_mg"
+  },
+  {
+    "id": "hidroferol_0.266_mg_capsule_molle_boite_de_5",
+    "brand_name": "HIDROFEROL",
+    "generic_name": "Calcifédiol (25-hydroxyvitamine D3)",
+    "composition": [
+      {
+        "name": "Calcifédiol (25-hydroxyvitamine D3)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "0.266 MG",
+    "form": "Capsule",
+    "route": "Voir notice",
+    "atc_code": "A11CC06",
+    "therapeutic_group": "Vitamines / Supplémentation",
+    "drug_class": "Vitamine D3 (forme active préhépatique)",
+    "drugbank_id": "DB01436",
+    "mechanism": "Métabolite intermédiaire de la vitamine D3 (25-hydroxycholécalciférol). Déjà hydroxylé en position 25 — ne nécessite que la 1α-hydroxylation rénale pour devenir calcitriol actif. Régule l'absorption intestinale du calcium et la minéralisation osseuse.",
+    "half_life": "25-30 jours",
+    "indications": [
+      "Déficit en vitamine D",
+      "Ostéomalacie",
+      "Rachitisme",
+      "Ostéoporose (en association)",
+      "Insuffisance rénale chronique (précaution — activation rénale nécessaire)"
+    ],
+    "contraindications": [
+      "Hypercalcémie",
+      "Hypercalciurie",
+      "Lithiase calcique rénale",
+      "Sarcoidose"
+    ],
+    "interactions": [
+      {
+        "drug": "Digitaliques (digoxine)",
+        "severity": "majeure",
+        "effect": "Hypercalcémie potentialise toxicité digitalique"
+      },
+      {
+        "drug": "Diurétiques thiazidiques",
+        "severity": "modérée",
+        "effect": "Risque d'hypercalcémie accru"
+      },
+      {
+        "drug": "Antiépileptiques (phénytoïne, phénobarbital)",
+        "severity": "modérée",
+        "effect": "Accélèrent métabolisme vitamine D — besoin accru"
+      }
+    ],
+    "pregnancy": {
+      "category": "A/C",
+      "warning": "Supplémentation possible aux doses recommandées. Éviter surdosage (tératogène à hautes doses).",
+      "breastfeeding": "Compatible aux doses physiologiques."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable dès la naissance — surveillance calcémie",
+      "dose_rule": "400-1000 UI/j (prévention), selon dosage sérique"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution en IR sévère — risque hypercalcémie (activation altérée)"
+    },
+    "dosage": {
+      "adult": "0.266 mg/mois (1 capsule mensuelle) ou selon dosage 25-OH-D3",
+      "children": "Selon poids et déficit"
+    },
+    "adverse_effects": [
+      "Hypercalcémie (surdosage)",
+      "Hypercalciurie",
+      "Lithiase rénale",
+      "Nausées",
+      "Constipation"
+    ],
+    "market_data": [
+      {
+        "packaging": "molle Boite de 5",
+        "price_ppv_dhs": 77.2,
+        "price_ph_dhs": null,
+        "laboratory": "IBERMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01436",
+      "drugs_com": "https://www.drugs.com/calcifédiol.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hidroferol_calcifediol_25_hydroxyvitamine_d3_0_266_mg_2"
+  },
+  {
+    "id": "hipotensil_25_mg_comprimé_boîte_de_30",
+    "brand_name": "HIPOTENSIL",
+    "generic_name": "Captopril",
+    "composition": [
+      {
+        "name": "Captopril",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "25 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "C09AA01",
+    "therapeutic_group": "Cardiovasculaire",
+    "drug_class": "IEC (Inhibiteur de l'enzyme de conversion)",
+    "drugbank_id": "DB01197",
+    "mechanism": "Premier IEC (inhibiteur de l'enzyme de conversion) commercialisé. Inhibe la conversion angiotensine I → angiotensine II. Réduit vasoconstriction, aldostérone, rétention sodée. Potentialise la bradykinine (vasodilatation, toux).",
+    "half_life": "1.9h (captopril), mais effet prolongé 6-12h",
+    "indications": [
+      "Hypertension artérielle",
+      "Insuffisance cardiaque",
+      "Post-infarctus (protection cardiaque)",
+      "Néphropathie diabétique"
+    ],
+    "contraindications": [
+      "Antécédent d'angiœdème sous IEC",
+      "Grossesse (2e-3e trimestre)",
+      "Sténose bilatérale artères rénales",
+      "Association aliskiren (diabétique)"
+    ],
+    "interactions": [
+      {
+        "drug": "Diurétiques épargneurs K+ / Suppléments K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "AINS / Aspirine forte dose",
+        "severity": "modérée",
+        "effect": "Réduction effet et risque IR aiguë"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation lithiémie toxique"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué aux 2e et 3e trimestres — fœtotoxique (malformations rénales, hypotension fœtale).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie sous surveillance stricte",
+      "dose_rule": "0.1-0.5 mg/kg/j en 2-3 prises"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose et espacer selon DFG. Surveiller kaliémie et créatinine."
+    },
+    "dosage": {
+      "adult": "12.5-50 mg 2-3x/j. Débuter à 6.25-12.5 mg/j.",
+      "children": "0.1-0.5 mg/kg/j"
+    },
+    "adverse_effects": [
+      "Toux sèche (très fréquente)",
+      "Hypotension (1re dose)",
+      "Hyperkaliémie",
+      "Angiœdème",
+      "Insuffisance rénale",
+      "Dysgueusie (goût métallique)",
+      "Eruptions cutanées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 75,
+        "price_ph_dhs": 49.55,
+        "laboratory": "AFRIC-PHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01197",
+      "drugs_com": "https://www.drugs.com/captopril.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hipotensil_captopril_25_mg"
+  },
+  {
+    "id": "hipotensil_50_mg_comprimé_boîte_de_30",
+    "brand_name": "HIPOTENSIL",
+    "generic_name": "Captopril",
+    "composition": [
+      {
+        "name": "Captopril",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "C09AA01",
+    "therapeutic_group": "Cardiovasculaire",
+    "drug_class": "IEC (Inhibiteur de l'enzyme de conversion)",
+    "drugbank_id": "DB01197",
+    "mechanism": "Premier IEC (inhibiteur de l'enzyme de conversion) commercialisé. Inhibe la conversion angiotensine I → angiotensine II. Réduit vasoconstriction, aldostérone, rétention sodée. Potentialise la bradykinine (vasodilatation, toux).",
+    "half_life": "1.9h (captopril), mais effet prolongé 6-12h",
+    "indications": [
+      "Hypertension artérielle",
+      "Insuffisance cardiaque",
+      "Post-infarctus (protection cardiaque)",
+      "Néphropathie diabétique"
+    ],
+    "contraindications": [
+      "Antécédent d'angiœdème sous IEC",
+      "Grossesse (2e-3e trimestre)",
+      "Sténose bilatérale artères rénales",
+      "Association aliskiren (diabétique)"
+    ],
+    "interactions": [
+      {
+        "drug": "Diurétiques épargneurs K+ / Suppléments K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "AINS / Aspirine forte dose",
+        "severity": "modérée",
+        "effect": "Réduction effet et risque IR aiguë"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation lithiémie toxique"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué aux 2e et 3e trimestres — fœtotoxique (malformations rénales, hypotension fœtale).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie sous surveillance stricte",
+      "dose_rule": "0.1-0.5 mg/kg/j en 2-3 prises"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose et espacer selon DFG. Surveiller kaliémie et créatinine."
+    },
+    "dosage": {
+      "adult": "12.5-50 mg 2-3x/j. Débuter à 6.25-12.5 mg/j.",
+      "children": "0.1-0.5 mg/kg/j"
+    },
+    "adverse_effects": [
+      "Toux sèche (très fréquente)",
+      "Hypotension (1re dose)",
+      "Hyperkaliémie",
+      "Angiœdème",
+      "Insuffisance rénale",
+      "Dysgueusie (goût métallique)",
+      "Eruptions cutanées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 140,
+        "price_ph_dhs": 92.5,
+        "laboratory": "AFRIC-PHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01197",
+      "drugs_com": "https://www.drugs.com/captopril.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hipotensil_captopril_50_mg"
+  },
+  {
+    "id": "hirzolid_600_mg_comprimé_pelliculé_boite_de_100",
+    "brand_name": "HIRZOLID",
+    "generic_name": "Linézolide",
+    "composition": [
+      {
+        "name": "Linézolide",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "600 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "J01XX08",
+    "therapeutic_group": "Antibiotique",
+    "drug_class": "Oxazolidinone (antibiotique)",
+    "drugbank_id": "DB00601",
+    "mechanism": "Oxazolidinone antibactérienne. Inhibe la synthèse protéique bactérienne en bloquant la formation du complexe d'initiation ribosomale 70S (fixation sur l'ARNr 23S de la sous-unité 50S). Bactériostatique (bactéricide contre pneumocoques).",
+    "half_life": "5.4h",
+    "indications": [
+      "Infections à SARM (Staphylococcus aureus résistant à la méticilline)",
+      "Pneumonie nosocomiale à SARM",
+      "Infections à entérocoques résistants à la vancomycine (ERV)",
+      "Infections cutanées complexes"
+    ],
+    "contraindications": [
+      "Hypersensibilité au linézolide",
+      "Traitement par IMAO ou dans les 2 semaines suivant leur arrêt",
+      "Hypertension non contrôlée"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO, antidépresseurs sérotoninergiques (ISRS, IRSN)",
+        "severity": "majeure",
+        "effect": "Syndrome sérotoninergique — contre-indiqué"
+      },
+      {
+        "drug": "Sympathomimétiques (pseudoéphédrine, adrénaline)",
+        "severity": "majeure",
+        "effect": "Crise hypertensive"
+      },
+      {
+        "drug": "Aliments riches en tyramine (fromages affinés, charcuterie)",
+        "severity": "modérée",
+        "effect": "Effet IMAO faible — risque hypertensif"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice > risque. Données limitées.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie (données disponibles)",
+      "dose_rule": "10 mg/kg toutes les 8h (nourrisson/enfant <12 ans)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire (métabolites peuvent s'accumuler en IR sévère)"
+    },
+    "dosage": {
+      "adult": "600 mg IV ou PO 2x/j pendant 10-28 jours selon infection",
+      "children": "10 mg/kg toutes les 8h (<12 ans)"
+    },
+    "adverse_effects": [
+      "Thrombopénie (usage prolongé > 2 semaines)",
+      "Anémie",
+      "Nausées",
+      "Diarrhée",
+      "Céphalées",
+      "Neuropathie optique (usage prolongé)",
+      "Acidose lactique (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 100",
+        "price_ppv_dhs": 18454,
+        "price_ph_dhs": null,
+        "laboratory": "PHARMAPROM",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00601",
+      "drugs_com": "https://www.drugs.com/linézolide.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hirzolid_linezolide_600_mg"
+  },
+  {
+    "id": "histanorm_10_mg_comprimé_boîte_de_15",
+    "brand_name": "HISTANORM",
+    "generic_name": "Cétirizine",
+    "composition": [
+      {
+        "name": "Cétirizine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Allergologie",
+    "drug_class": "Antihistaminique H1 (2e génération)",
+    "drugbank_id": "DB00341",
+    "mechanism": "Antagoniste sélectif et puissant des récepteurs H1 périphériques de l'histamine. Métabolite actif de l'hydroxyzine. Faible passage de la barrière hémato-encéphalique — peu sédatif.",
+    "half_life": "7-10h",
+    "indications": [
+      "Rhinite allergique saisonnière et persistante",
+      "Conjonctivite allergique",
+      "Urticaire chronique idiopathique",
+      "Prurit allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cétirizine ou hydroxyzine",
+      "Insuffisance rénale sévère (DFG < 10) sans ajustement"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, sédatifs (benzos, hypnotiques)",
+        "severity": "modérée",
+        "effect": "Potentialisation sédation (bien que faible)"
+      },
+      {
+        "drug": "Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation taux cétirizine"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — données rassurantes. Éviter au 1er trimestre par précaution.",
+      "breastfeeding": "Déconseillé (passage dans le lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans",
+      "dose_rule": "2-6 ans: 5 mg/j. 6-12 ans: 5-10 mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose 50% si DFG 10-30 mL/min. Contre-indiqué si DFG < 10."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le soir (ou 5 mg 2x/j)",
+      "children": "5-10 mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Somnolence (légère)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 15",
+        "price_ppv_dhs": 37.4,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00341",
+      "drugs_com": "https://www.drugs.com/cétirizine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "histanorm_cetirizine_10_mg"
+  },
+  {
+    "id": "histanorm_10_mg_comprimé_boîte_de_30",
+    "brand_name": "HISTANORM",
+    "generic_name": "Cétirizine",
+    "composition": [
+      {
+        "name": "Cétirizine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Allergologie",
+    "drug_class": "Antihistaminique H1 (2e génération)",
+    "drugbank_id": "DB00341",
+    "mechanism": "Antagoniste sélectif et puissant des récepteurs H1 périphériques de l'histamine. Métabolite actif de l'hydroxyzine. Faible passage de la barrière hémato-encéphalique — peu sédatif.",
+    "half_life": "7-10h",
+    "indications": [
+      "Rhinite allergique saisonnière et persistante",
+      "Conjonctivite allergique",
+      "Urticaire chronique idiopathique",
+      "Prurit allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cétirizine ou hydroxyzine",
+      "Insuffisance rénale sévère (DFG < 10) sans ajustement"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, sédatifs (benzos, hypnotiques)",
+        "severity": "modérée",
+        "effect": "Potentialisation sédation (bien que faible)"
+      },
+      {
+        "drug": "Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation taux cétirizine"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — données rassurantes. Éviter au 1er trimestre par précaution.",
+      "breastfeeding": "Déconseillé (passage dans le lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans",
+      "dose_rule": "2-6 ans: 5 mg/j. 6-12 ans: 5-10 mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose 50% si DFG 10-30 mL/min. Contre-indiqué si DFG < 10."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le soir (ou 5 mg 2x/j)",
+      "children": "5-10 mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Somnolence (légère)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 54.2,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00341",
+      "drugs_com": "https://www.drugs.com/cétirizine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "histanorm_cetirizine_10_mg_2"
+  },
+  {
+    "id": "histanorm_5_mg_/_5_ml_sirop_flacon_de_120_ml",
+    "brand_name": "HISTANORM",
+    "generic_name": "Cétirizine",
+    "composition": [
+      {
+        "name": "Cétirizine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "5 MG / 5 ML",
+    "form": "Sirop",
+    "route": "Voir notice",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Allergologie",
+    "drug_class": "Antihistaminique H1 (2e génération)",
+    "drugbank_id": "DB00341",
+    "mechanism": "Antagoniste sélectif et puissant des récepteurs H1 périphériques de l'histamine. Métabolite actif de l'hydroxyzine. Faible passage de la barrière hémato-encéphalique — peu sédatif.",
+    "half_life": "7-10h",
+    "indications": [
+      "Rhinite allergique saisonnière et persistante",
+      "Conjonctivite allergique",
+      "Urticaire chronique idiopathique",
+      "Prurit allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cétirizine ou hydroxyzine",
+      "Insuffisance rénale sévère (DFG < 10) sans ajustement"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, sédatifs (benzos, hypnotiques)",
+        "severity": "modérée",
+        "effect": "Potentialisation sédation (bien que faible)"
+      },
+      {
+        "drug": "Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation taux cétirizine"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — données rassurantes. Éviter au 1er trimestre par précaution.",
+      "breastfeeding": "Déconseillé (passage dans le lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans",
+      "dose_rule": "2-6 ans: 5 mg/j. 6-12 ans: 5-10 mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose 50% si DFG 10-30 mL/min. Contre-indiqué si DFG < 10."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le soir (ou 5 mg 2x/j)",
+      "children": "5-10 mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Somnolence (légère)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 120 ml",
+        "price_ppv_dhs": 44.8,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00341",
+      "drugs_com": "https://www.drugs.com/cétirizine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "histanorm_cetirizine_5_mg_5_ml"
+  },
+  {
+    "id": "histanorm_5_mg_/_5_ml_sirop_flacon_de_60_ml",
+    "brand_name": "HISTANORM",
+    "generic_name": "Cétirizine",
+    "composition": [
+      {
+        "name": "Cétirizine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "5 MG / 5 ML",
+    "form": "Sirop",
+    "route": "Voir notice",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Allergologie",
+    "drug_class": "Antihistaminique H1 (2e génération)",
+    "drugbank_id": "DB00341",
+    "mechanism": "Antagoniste sélectif et puissant des récepteurs H1 périphériques de l'histamine. Métabolite actif de l'hydroxyzine. Faible passage de la barrière hémato-encéphalique — peu sédatif.",
+    "half_life": "7-10h",
+    "indications": [
+      "Rhinite allergique saisonnière et persistante",
+      "Conjonctivite allergique",
+      "Urticaire chronique idiopathique",
+      "Prurit allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cétirizine ou hydroxyzine",
+      "Insuffisance rénale sévère (DFG < 10) sans ajustement"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, sédatifs (benzos, hypnotiques)",
+        "severity": "modérée",
+        "effect": "Potentialisation sédation (bien que faible)"
+      },
+      {
+        "drug": "Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation taux cétirizine"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — données rassurantes. Éviter au 1er trimestre par précaution.",
+      "breastfeeding": "Déconseillé (passage dans le lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans",
+      "dose_rule": "2-6 ans: 5 mg/j. 6-12 ans: 5-10 mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose 50% si DFG 10-30 mL/min. Contre-indiqué si DFG < 10."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le soir (ou 5 mg 2x/j)",
+      "children": "5-10 mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Somnolence (légère)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 60 ml",
+        "price_ppv_dhs": 24.3,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00341",
+      "drugs_com": "https://www.drugs.com/cétirizine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "histanorm_cetirizine_5_mg_5_ml_2"
+  },
+  {
+    "id": "holoxan_1_g_poudre_pour_préparation_injectable_i.v_et_perfusion_boîte_de_1_flacon",
+    "brand_name": "HOLOXAN",
+    "generic_name": "Ifosfamide",
+    "composition": [
+      {
+        "name": "Ifosfamide",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "1 G",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "L01AA06",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Agent alkylant (oxazaphosphorine)",
+    "drugbank_id": "DB01181",
+    "mechanism": "Agent alkylant oxazaphosphorine (analogue cyclophosphamide). Prodrogue activée par CYP3A4/2B6. Les métabolites alkylants forment des liaisons croisées inter et intra-brins d'ADN, bloquant la réplication. L'acroléine (métabolite) est urotoxique — protection par MESNA obligatoire.",
+    "half_life": "7-15h",
+    "indications": [
+      "Sarcome des tissus mous et osseux",
+      "Tumeurs germinales testiculaires",
+      "Carcinome cervical réfractaire",
+      "Lymphomes"
+    ],
+    "contraindications": [
+      "Obstruction des voies urinaires",
+      "Cystite",
+      "Insuffisance rénale sévère",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "MESNA (mercaptoéthane sulfonate)",
+        "severity": "majeure",
+        "effect": "OBLIGATOIRE — protège l'urothélium contre l'acroléine"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "majeure",
+        "effect": "Augmentation INR — surveillance hebdomadaire"
+      },
+      {
+        "drug": "Cisplatine",
+        "severity": "modérée",
+        "effect": "Néphrotoxicité additive"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — tératogène. Contraception efficace pendant et 6 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en oncologie pédiatrique",
+      "dose_rule": "1.2-2.4 g/m²/j x 5j (selon protocole)"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — néphrotoxique. Surveillance créatinine, protéinurie, sédiment urinaire."
+    },
+    "dosage": {
+      "adult": "1.2-2.4 g/m²/j IV x 5 jours (cycles 21-28j). Avec MESNA obligatoire.",
+      "children": "1.2-2.4 g/m²/j selon protocole"
+    },
+    "adverse_effects": [
+      "Encéphalopathie (confusion, convulsions)",
+      "Cystite hémorragique (sans MESNA)",
+      "Myélosuppression",
+      "Nausées/vomissements",
+      "Alopécie",
+      "Néphrotoxicité"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour préparation Injectable I.V et perfusion Boîte de 1 flacon",
+        "price_ppv_dhs": 409,
+        "price_ph_dhs": 287.34,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01181",
+      "drugs_com": "https://www.drugs.com/ifosfamide.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "holoxan_ifosfamide_1_g"
+  },
+  {
+    "id": "holoxan_2_g_poudre_pour_préparation_injectable_i.v_et_perfusion_boîte_de_1_flacon",
+    "brand_name": "HOLOXAN",
+    "generic_name": "Ifosfamide",
+    "composition": [
+      {
+        "name": "Ifosfamide",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "2 G",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "L01AA06",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Agent alkylant (oxazaphosphorine)",
+    "drugbank_id": "DB01181",
+    "mechanism": "Agent alkylant oxazaphosphorine (analogue cyclophosphamide). Prodrogue activée par CYP3A4/2B6. Les métabolites alkylants forment des liaisons croisées inter et intra-brins d'ADN, bloquant la réplication. L'acroléine (métabolite) est urotoxique — protection par MESNA obligatoire.",
+    "half_life": "7-15h",
+    "indications": [
+      "Sarcome des tissus mous et osseux",
+      "Tumeurs germinales testiculaires",
+      "Carcinome cervical réfractaire",
+      "Lymphomes"
+    ],
+    "contraindications": [
+      "Obstruction des voies urinaires",
+      "Cystite",
+      "Insuffisance rénale sévère",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "MESNA (mercaptoéthane sulfonate)",
+        "severity": "majeure",
+        "effect": "OBLIGATOIRE — protège l'urothélium contre l'acroléine"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "majeure",
+        "effect": "Augmentation INR — surveillance hebdomadaire"
+      },
+      {
+        "drug": "Cisplatine",
+        "severity": "modérée",
+        "effect": "Néphrotoxicité additive"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — tératogène. Contraception efficace pendant et 6 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en oncologie pédiatrique",
+      "dose_rule": "1.2-2.4 g/m²/j x 5j (selon protocole)"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — néphrotoxique. Surveillance créatinine, protéinurie, sédiment urinaire."
+    },
+    "dosage": {
+      "adult": "1.2-2.4 g/m²/j IV x 5 jours (cycles 21-28j). Avec MESNA obligatoire.",
+      "children": "1.2-2.4 g/m²/j selon protocole"
+    },
+    "adverse_effects": [
+      "Encéphalopathie (confusion, convulsions)",
+      "Cystite hémorragique (sans MESNA)",
+      "Myélosuppression",
+      "Nausées/vomissements",
+      "Alopécie",
+      "Néphrotoxicité"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour préparation Injectable I.V et perfusion Boîte de 1 flacon",
+        "price_ppv_dhs": 826,
+        "price_ph_dhs": 580.3,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01181",
+      "drugs_com": "https://www.drugs.com/ifosfamide.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "holoxan_ifosfamide_2_g"
+  },
+  {
+    "id": "holoxan_500_mg_poudre_pour_préparation_injectable_i.v_et_perfusion_boîte_de_1_flacon",
+    "brand_name": "HOLOXAN",
+    "generic_name": "Ifosfamide",
+    "composition": [
+      {
+        "name": "Ifosfamide",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "500 MG",
+    "form": "Poudre",
+    "route": "Voir notice",
+    "atc_code": "L01AA06",
+    "therapeutic_group": "Oncologie",
+    "drug_class": "Agent alkylant (oxazaphosphorine)",
+    "drugbank_id": "DB01181",
+    "mechanism": "Agent alkylant oxazaphosphorine (analogue cyclophosphamide). Prodrogue activée par CYP3A4/2B6. Les métabolites alkylants forment des liaisons croisées inter et intra-brins d'ADN, bloquant la réplication. L'acroléine (métabolite) est urotoxique — protection par MESNA obligatoire.",
+    "half_life": "7-15h",
+    "indications": [
+      "Sarcome des tissus mous et osseux",
+      "Tumeurs germinales testiculaires",
+      "Carcinome cervical réfractaire",
+      "Lymphomes"
+    ],
+    "contraindications": [
+      "Obstruction des voies urinaires",
+      "Cystite",
+      "Insuffisance rénale sévère",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "MESNA (mercaptoéthane sulfonate)",
+        "severity": "majeure",
+        "effect": "OBLIGATOIRE — protège l'urothélium contre l'acroléine"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "majeure",
+        "effect": "Augmentation INR — surveillance hebdomadaire"
+      },
+      {
+        "drug": "Cisplatine",
+        "severity": "modérée",
+        "effect": "Néphrotoxicité additive"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — tératogène. Contraception efficace pendant et 6 mois après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en oncologie pédiatrique",
+      "dose_rule": "1.2-2.4 g/m²/j x 5j (selon protocole)"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — néphrotoxique. Surveillance créatinine, protéinurie, sédiment urinaire."
+    },
+    "dosage": {
+      "adult": "1.2-2.4 g/m²/j IV x 5 jours (cycles 21-28j). Avec MESNA obligatoire.",
+      "children": "1.2-2.4 g/m²/j selon protocole"
+    },
+    "adverse_effects": [
+      "Encéphalopathie (confusion, convulsions)",
+      "Cystite hémorragique (sans MESNA)",
+      "Myélosuppression",
+      "Nausées/vomissements",
+      "Alopécie",
+      "Néphrotoxicité"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour préparation Injectable I.V et perfusion Boîte de 1 flacon",
+        "price_ppv_dhs": 258,
+        "price_ph_dhs": 181.25,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01181",
+      "drugs_com": "https://www.drugs.com/ifosfamide.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "holoxan_ifosfamide_500_mg"
+  },
+  {
+    "id": "hostacortin_h_5_mg_comprimé_boîte_de_20",
+    "brand_name": "HOSTACORTIN",
+    "generic_name": "Prednisolone",
+    "composition": [
+      {
+        "name": "Prednisolone",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "H 5 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticothérapie",
+    "drug_class": "Corticostéroïde systémique",
+    "drugbank_id": "DB00860",
+    "mechanism": "Corticostéroïde synthétique actif (contrairement à la prednisone qui nécessite activation hépatique). Se fixe sur les récepteurs glucocorticoïdes intracellulaires, modulant la transcription de nombreux gènes pro/anti-inflammatoires.",
+    "half_life": "2-4h (plasmatique), 18-36h (biologique)",
+    "indications": [
+      "Maladies inflammatoires et auto-immunes (polyarthrite, lupus, vascularites)",
+      "Asthme sévère",
+      "Syndrome néphrotique",
+      "Hémopathies malignes",
+      "Réactions allergiques sévères"
+    ],
+    "contraindications": [
+      "Infections non traitées (virales, bactériennes, fongiques)",
+      "Vaccins vivants atténués",
+      "Psychose non contrôlée"
+    ],
+    "interactions": [
+      {
+        "drug": "AINS",
+        "severity": "majeure",
+        "effect": "Risque ulcère GI et hémorragie augmenté"
+      },
+      {
+        "drug": "Anticoagulants AVK",
+        "severity": "modérée",
+        "effect": "Variabilité INR — surveillance accrue"
+      },
+      {
+        "drug": "Antidiabétiques",
+        "severity": "modérée",
+        "effect": "Hyperglycémie cortisonique — adapter doses"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utilisable si bénéfice > risque. Risque de fente palatine (1er trimestre) et retard de croissance fœtale. Privilégier la dose minimale efficace.",
+      "breastfeeding": "Compatible à faibles doses (<20 mg/j)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable chez l'enfant. Surveiller croissance avec usage prolongé.",
+      "dose_rule": "0.5-2 mg/kg/j selon indication"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-60 mg/j selon indication. Dose unique le matin ou en 2 prises.",
+      "children": "0.5-2 mg/kg/j"
+    },
+    "adverse_effects": [
+      "Hyperglycémie",
+      "HTA",
+      "Ostéoporose",
+      "Prise de poids",
+      "Faciès lunaire",
+      "Infections opportunistes",
+      "Insuffisance surrénale (arrêt brutal)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 20",
+        "price_ppv_dhs": 21.7,
+        "price_ph_dhs": 14.34,
+        "laboratory": "SYNTHEMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "INTERACTION_ALCOOL"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00860",
+      "drugs_com": "https://www.drugs.com/prednisolone.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hostacortin_prednisolone_h_5_mg"
+  },
+  {
+    "id": "humex_0.3_g_/_0.03_g_collutoire_flacon_de_35_ml",
+    "brand_name": "HUMEX",
+    "generic_name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+    "composition": [
+      {
+        "name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "0.3 G / 0.03 G",
+    "form": "Collutoire",
+    "route": "Voir notice",
+    "atc_code": "R05CB06",
+    "therapeutic_group": "ORL / Pneumologie",
+    "drug_class": "Mucolytique / Antiseptique ORL / Décongestionnant",
+    "drugbank_id": "DB06742",
+    "mechanism": "Selon la forme: Ambroxol (mucolytique — stimule sécrétion surfactant, fluidifie mucus) / Chlorhexidine (antiseptique) / Pseudoéphédrine (sympathomimétique — décongestionnant nasal par vasoconstriction alpha).",
+    "half_life": "7-12h (Ambroxol), courte (Pseudoéphédrine: 4-6h)",
+    "indications": [
+      "Toux productive avec encombrement bronchique (Ambroxol)",
+      "Angines, pharyngites, aphtes (Chlorhexidine)",
+      "Congestion nasale (Pseudoéphédrine)",
+      "Maux de gorge (pastilles antiseptiques)"
+    ],
+    "contraindications": [
+      "Pseudoéphédrine: HTA sévère, glaucome, rétention urinaire, IMAO",
+      "Chlorhexidine: contact avec tympan perforé"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (si Pseudoéphédrine)",
+        "severity": "majeure",
+        "effect": "Crise hypertensive — contre-indiqué"
+      },
+      {
+        "drug": "Antihypertenseurs (si Pseudoéphédrine)",
+        "severity": "modérée",
+        "effect": "Antagonisme effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter la Pseudoéphédrine. Ambroxol et Chlorhexidine locaux: utiliser avec précaution.",
+      "breastfeeding": "Déconseillé si contient Pseudoéphédrine."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Selon la forme — certaines formes contre-indiquées <6 ans (Pseudoéphédrine)",
+      "dose_rule": "Demi-dose enfant selon forme"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Selon forme: sirop 5-10 mL 3x/j, pastilles 1 toutes les 2-3h, collutoire 3-6 pulv/j",
+      "children": "Demi-dose ou forme pédiatrique"
+    },
+    "adverse_effects": [
+      "Irritation locale (chlorhexidine)",
+      "Palpitations (pseudoéphédrine)",
+      "HTA (pseudoéphédrine)",
+      "Insomnie",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 35 ml",
+        "price_ppv_dhs": 28,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06742",
+      "drugs_com": "https://www.drugs.com/ambroxol-/-chlorhexidine-/-pseudoéphédrine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "humex_ambroxol_chlorhexidine_pseudoephedrine_selon_forme_0_3_g_0_03_g"
+  },
+  {
+    "id": "humex_expectorant_adulte_5_%_sirop_flacon_de_200_ml",
+    "brand_name": "HUMEX",
+    "generic_name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+    "composition": [
+      {
+        "name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "EXPECTORANT ADULTE 5 %",
+    "form": "Sirop",
+    "route": "Voir notice",
+    "atc_code": "R05CB06",
+    "therapeutic_group": "ORL / Pneumologie",
+    "drug_class": "Mucolytique / Antiseptique ORL / Décongestionnant",
+    "drugbank_id": "DB06742",
+    "mechanism": "Selon la forme: Ambroxol (mucolytique — stimule sécrétion surfactant, fluidifie mucus) / Chlorhexidine (antiseptique) / Pseudoéphédrine (sympathomimétique — décongestionnant nasal par vasoconstriction alpha).",
+    "half_life": "7-12h (Ambroxol), courte (Pseudoéphédrine: 4-6h)",
+    "indications": [
+      "Toux productive avec encombrement bronchique (Ambroxol)",
+      "Angines, pharyngites, aphtes (Chlorhexidine)",
+      "Congestion nasale (Pseudoéphédrine)",
+      "Maux de gorge (pastilles antiseptiques)"
+    ],
+    "contraindications": [
+      "Pseudoéphédrine: HTA sévère, glaucome, rétention urinaire, IMAO",
+      "Chlorhexidine: contact avec tympan perforé"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (si Pseudoéphédrine)",
+        "severity": "majeure",
+        "effect": "Crise hypertensive — contre-indiqué"
+      },
+      {
+        "drug": "Antihypertenseurs (si Pseudoéphédrine)",
+        "severity": "modérée",
+        "effect": "Antagonisme effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter la Pseudoéphédrine. Ambroxol et Chlorhexidine locaux: utiliser avec précaution.",
+      "breastfeeding": "Déconseillé si contient Pseudoéphédrine."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Selon la forme — certaines formes contre-indiquées <6 ans (Pseudoéphédrine)",
+      "dose_rule": "Demi-dose enfant selon forme"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Selon forme: sirop 5-10 mL 3x/j, pastilles 1 toutes les 2-3h, collutoire 3-6 pulv/j",
+      "children": "Demi-dose ou forme pédiatrique"
+    },
+    "adverse_effects": [
+      "Irritation locale (chlorhexidine)",
+      "Palpitations (pseudoéphédrine)",
+      "HTA (pseudoéphédrine)",
+      "Insomnie",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 200 ml",
+        "price_ppv_dhs": 28.5,
+        "price_ph_dhs": null,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06742",
+      "drugs_com": "https://www.drugs.com/ambroxol-/-chlorhexidine-/-pseudoéphédrine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "humex_ambroxol_chlorhexidine_pseudoephedrine_selon_forme_expectorant_adulte_5"
+  },
+  {
+    "id": "humex_mal_de_gorge_menthe_20_mg_pastille_boîte_de_12",
+    "brand_name": "HUMEX",
+    "generic_name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+    "composition": [
+      {
+        "name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "MAL DE GORGE MENTHE 20 MG",
+    "form": "Pastille",
+    "route": "Voir notice",
+    "atc_code": "R05CB06",
+    "therapeutic_group": "ORL / Pneumologie",
+    "drug_class": "Mucolytique / Antiseptique ORL / Décongestionnant",
+    "drugbank_id": "DB06742",
+    "mechanism": "Selon la forme: Ambroxol (mucolytique — stimule sécrétion surfactant, fluidifie mucus) / Chlorhexidine (antiseptique) / Pseudoéphédrine (sympathomimétique — décongestionnant nasal par vasoconstriction alpha).",
+    "half_life": "7-12h (Ambroxol), courte (Pseudoéphédrine: 4-6h)",
+    "indications": [
+      "Toux productive avec encombrement bronchique (Ambroxol)",
+      "Angines, pharyngites, aphtes (Chlorhexidine)",
+      "Congestion nasale (Pseudoéphédrine)",
+      "Maux de gorge (pastilles antiseptiques)"
+    ],
+    "contraindications": [
+      "Pseudoéphédrine: HTA sévère, glaucome, rétention urinaire, IMAO",
+      "Chlorhexidine: contact avec tympan perforé"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (si Pseudoéphédrine)",
+        "severity": "majeure",
+        "effect": "Crise hypertensive — contre-indiqué"
+      },
+      {
+        "drug": "Antihypertenseurs (si Pseudoéphédrine)",
+        "severity": "modérée",
+        "effect": "Antagonisme effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter la Pseudoéphédrine. Ambroxol et Chlorhexidine locaux: utiliser avec précaution.",
+      "breastfeeding": "Déconseillé si contient Pseudoéphédrine."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Selon la forme — certaines formes contre-indiquées <6 ans (Pseudoéphédrine)",
+      "dose_rule": "Demi-dose enfant selon forme"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Selon forme: sirop 5-10 mL 3x/j, pastilles 1 toutes les 2-3h, collutoire 3-6 pulv/j",
+      "children": "Demi-dose ou forme pédiatrique"
+    },
+    "adverse_effects": [
+      "Irritation locale (chlorhexidine)",
+      "Palpitations (pseudoéphédrine)",
+      "HTA (pseudoéphédrine)",
+      "Insomnie",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 12",
+        "price_ppv_dhs": 34,
+        "price_ph_dhs": 22.46,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06742",
+      "drugs_com": "https://www.drugs.com/ambroxol-/-chlorhexidine-/-pseudoéphédrine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "humex_ambroxol_chlorhexidine_pseudoephedrine_selon_forme_mal_de_gorge_menthe_20_mg"
+  },
+  {
+    "id": "humex_mal_de_gorge_miel_citron_20_mg_pastille_boite_de_12",
+    "brand_name": "HUMEX",
+    "generic_name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+    "composition": [
+      {
+        "name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "MAL DE GORGE MIEL CITRON 20 MG",
+    "form": "Pastille",
+    "route": "Voir notice",
+    "atc_code": "R05CB06",
+    "therapeutic_group": "ORL / Pneumologie",
+    "drug_class": "Mucolytique / Antiseptique ORL / Décongestionnant",
+    "drugbank_id": "DB06742",
+    "mechanism": "Selon la forme: Ambroxol (mucolytique — stimule sécrétion surfactant, fluidifie mucus) / Chlorhexidine (antiseptique) / Pseudoéphédrine (sympathomimétique — décongestionnant nasal par vasoconstriction alpha).",
+    "half_life": "7-12h (Ambroxol), courte (Pseudoéphédrine: 4-6h)",
+    "indications": [
+      "Toux productive avec encombrement bronchique (Ambroxol)",
+      "Angines, pharyngites, aphtes (Chlorhexidine)",
+      "Congestion nasale (Pseudoéphédrine)",
+      "Maux de gorge (pastilles antiseptiques)"
+    ],
+    "contraindications": [
+      "Pseudoéphédrine: HTA sévère, glaucome, rétention urinaire, IMAO",
+      "Chlorhexidine: contact avec tympan perforé"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (si Pseudoéphédrine)",
+        "severity": "majeure",
+        "effect": "Crise hypertensive — contre-indiqué"
+      },
+      {
+        "drug": "Antihypertenseurs (si Pseudoéphédrine)",
+        "severity": "modérée",
+        "effect": "Antagonisme effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter la Pseudoéphédrine. Ambroxol et Chlorhexidine locaux: utiliser avec précaution.",
+      "breastfeeding": "Déconseillé si contient Pseudoéphédrine."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Selon la forme — certaines formes contre-indiquées <6 ans (Pseudoéphédrine)",
+      "dose_rule": "Demi-dose enfant selon forme"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Selon forme: sirop 5-10 mL 3x/j, pastilles 1 toutes les 2-3h, collutoire 3-6 pulv/j",
+      "children": "Demi-dose ou forme pédiatrique"
+    },
+    "adverse_effects": [
+      "Irritation locale (chlorhexidine)",
+      "Palpitations (pseudoéphédrine)",
+      "HTA (pseudoéphédrine)",
+      "Insomnie",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 12",
+        "price_ppv_dhs": 31.8,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06742",
+      "drugs_com": "https://www.drugs.com/ambroxol-/-chlorhexidine-/-pseudoéphédrine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "humex_ambroxol_chlorhexidine_pseudoephedrine_selon_forme_mal_de_gorge_miel_citron_20_mg"
+  },
+  {
+    "id": "humex_mal_de_gorge_orange_20_mg_pastille_boîte_de_12",
+    "brand_name": "HUMEX",
+    "generic_name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+    "composition": [
+      {
+        "name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "MAL DE GORGE ORANGE 20 MG",
+    "form": "Pastille",
+    "route": "Voir notice",
+    "atc_code": "R05CB06",
+    "therapeutic_group": "ORL / Pneumologie",
+    "drug_class": "Mucolytique / Antiseptique ORL / Décongestionnant",
+    "drugbank_id": "DB06742",
+    "mechanism": "Selon la forme: Ambroxol (mucolytique — stimule sécrétion surfactant, fluidifie mucus) / Chlorhexidine (antiseptique) / Pseudoéphédrine (sympathomimétique — décongestionnant nasal par vasoconstriction alpha).",
+    "half_life": "7-12h (Ambroxol), courte (Pseudoéphédrine: 4-6h)",
+    "indications": [
+      "Toux productive avec encombrement bronchique (Ambroxol)",
+      "Angines, pharyngites, aphtes (Chlorhexidine)",
+      "Congestion nasale (Pseudoéphédrine)",
+      "Maux de gorge (pastilles antiseptiques)"
+    ],
+    "contraindications": [
+      "Pseudoéphédrine: HTA sévère, glaucome, rétention urinaire, IMAO",
+      "Chlorhexidine: contact avec tympan perforé"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (si Pseudoéphédrine)",
+        "severity": "majeure",
+        "effect": "Crise hypertensive — contre-indiqué"
+      },
+      {
+        "drug": "Antihypertenseurs (si Pseudoéphédrine)",
+        "severity": "modérée",
+        "effect": "Antagonisme effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter la Pseudoéphédrine. Ambroxol et Chlorhexidine locaux: utiliser avec précaution.",
+      "breastfeeding": "Déconseillé si contient Pseudoéphédrine."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Selon la forme — certaines formes contre-indiquées <6 ans (Pseudoéphédrine)",
+      "dose_rule": "Demi-dose enfant selon forme"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Selon forme: sirop 5-10 mL 3x/j, pastilles 1 toutes les 2-3h, collutoire 3-6 pulv/j",
+      "children": "Demi-dose ou forme pédiatrique"
+    },
+    "adverse_effects": [
+      "Irritation locale (chlorhexidine)",
+      "Palpitations (pseudoéphédrine)",
+      "HTA (pseudoéphédrine)",
+      "Insomnie",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 12",
+        "price_ppv_dhs": 31.8,
+        "price_ph_dhs": null,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06742",
+      "drugs_com": "https://www.drugs.com/ambroxol-/-chlorhexidine-/-pseudoéphédrine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "humex_ambroxol_chlorhexidine_pseudoephedrine_selon_forme_mal_de_gorge_orange_20_mg"
+  },
+  {
+    "id": "humex_rhume_0.04_%_solution_pour_pulvérisation_nasale_flacon_de_15_ml",
+    "brand_name": "HUMEX",
+    "generic_name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+    "composition": [
+      {
+        "name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "RHUME 0.04 %",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "R05CB06",
+    "therapeutic_group": "ORL / Pneumologie",
+    "drug_class": "Mucolytique / Antiseptique ORL / Décongestionnant",
+    "drugbank_id": "DB06742",
+    "mechanism": "Selon la forme: Ambroxol (mucolytique — stimule sécrétion surfactant, fluidifie mucus) / Chlorhexidine (antiseptique) / Pseudoéphédrine (sympathomimétique — décongestionnant nasal par vasoconstriction alpha).",
+    "half_life": "7-12h (Ambroxol), courte (Pseudoéphédrine: 4-6h)",
+    "indications": [
+      "Toux productive avec encombrement bronchique (Ambroxol)",
+      "Angines, pharyngites, aphtes (Chlorhexidine)",
+      "Congestion nasale (Pseudoéphédrine)",
+      "Maux de gorge (pastilles antiseptiques)"
+    ],
+    "contraindications": [
+      "Pseudoéphédrine: HTA sévère, glaucome, rétention urinaire, IMAO",
+      "Chlorhexidine: contact avec tympan perforé"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (si Pseudoéphédrine)",
+        "severity": "majeure",
+        "effect": "Crise hypertensive — contre-indiqué"
+      },
+      {
+        "drug": "Antihypertenseurs (si Pseudoéphédrine)",
+        "severity": "modérée",
+        "effect": "Antagonisme effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter la Pseudoéphédrine. Ambroxol et Chlorhexidine locaux: utiliser avec précaution.",
+      "breastfeeding": "Déconseillé si contient Pseudoéphédrine."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Selon la forme — certaines formes contre-indiquées <6 ans (Pseudoéphédrine)",
+      "dose_rule": "Demi-dose enfant selon forme"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Selon forme: sirop 5-10 mL 3x/j, pastilles 1 toutes les 2-3h, collutoire 3-6 pulv/j",
+      "children": "Demi-dose ou forme pédiatrique"
+    },
+    "adverse_effects": [
+      "Irritation locale (chlorhexidine)",
+      "Palpitations (pseudoéphédrine)",
+      "HTA (pseudoéphédrine)",
+      "Insomnie",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "pour pulvérisation nasale Flacon de 15 ml",
+        "price_ppv_dhs": 19.1,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06742",
+      "drugs_com": "https://www.drugs.com/ambroxol-/-chlorhexidine-/-pseudoéphédrine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "humex_ambroxol_chlorhexidine_pseudoephedrine_selon_forme_rhume_0_04"
+  },
+  {
+    "id": "humex_rhume_comprimé_et_gélule_boîte_de_12_comprimés_+_4_gélules",
+    "brand_name": "HUMEX",
+    "generic_name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+    "composition": [
+      {
+        "name": "Ambroxol / Chlorhexidine / Pseudoéphédrine (selon forme)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "RHUME",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "R05CB06",
+    "therapeutic_group": "ORL / Pneumologie",
+    "drug_class": "Mucolytique / Antiseptique ORL / Décongestionnant",
+    "drugbank_id": "DB06742",
+    "mechanism": "Selon la forme: Ambroxol (mucolytique — stimule sécrétion surfactant, fluidifie mucus) / Chlorhexidine (antiseptique) / Pseudoéphédrine (sympathomimétique — décongestionnant nasal par vasoconstriction alpha).",
+    "half_life": "7-12h (Ambroxol), courte (Pseudoéphédrine: 4-6h)",
+    "indications": [
+      "Toux productive avec encombrement bronchique (Ambroxol)",
+      "Angines, pharyngites, aphtes (Chlorhexidine)",
+      "Congestion nasale (Pseudoéphédrine)",
+      "Maux de gorge (pastilles antiseptiques)"
+    ],
+    "contraindications": [
+      "Pseudoéphédrine: HTA sévère, glaucome, rétention urinaire, IMAO",
+      "Chlorhexidine: contact avec tympan perforé"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO (si Pseudoéphédrine)",
+        "severity": "majeure",
+        "effect": "Crise hypertensive — contre-indiqué"
+      },
+      {
+        "drug": "Antihypertenseurs (si Pseudoéphédrine)",
+        "severity": "modérée",
+        "effect": "Antagonisme effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter la Pseudoéphédrine. Ambroxol et Chlorhexidine locaux: utiliser avec précaution.",
+      "breastfeeding": "Déconseillé si contient Pseudoéphédrine."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Selon la forme — certaines formes contre-indiquées <6 ans (Pseudoéphédrine)",
+      "dose_rule": "Demi-dose enfant selon forme"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Selon forme: sirop 5-10 mL 3x/j, pastilles 1 toutes les 2-3h, collutoire 3-6 pulv/j",
+      "children": "Demi-dose ou forme pédiatrique"
+    },
+    "adverse_effects": [
+      "Irritation locale (chlorhexidine)",
+      "Palpitations (pseudoéphédrine)",
+      "HTA (pseudoéphédrine)",
+      "Insomnie",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "et gélule Boîte de 12 comprimés + 4 gélules",
+        "price_ppv_dhs": 21.9,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06742",
+      "drugs_com": "https://www.drugs.com/ambroxol-/-chlorhexidine-/-pseudoéphédrine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "humex_ambroxol_chlorhexidine_pseudoephedrine_selon_forme_rhume"
+  },
+  {
+    "id": "humira_40_mg_/_0.8_ml_solution_injectable_2_seringues_de_0.8_ml",
+    "brand_name": "HUMIRA",
+    "generic_name": "Adalimumab",
+    "composition": [
+      {
+        "name": "Adalimumab",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "40 MG / 0.8 ML",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "L04AB04",
+    "therapeutic_group": "Rhumatologie / Immunologie",
+    "drug_class": "Anticorps monoclonal anti-TNFα",
+    "drugbank_id": "DB00051",
+    "mechanism": "Anticorps monoclonal IgG1 humain anti-TNFα (Tumor Necrosis Factor alpha). Neutralise le TNFα soluble et membranaire, bloquant la cascade inflammatoire médiée par le TNFα.",
+    "half_life": "14 jours",
+    "indications": [
+      "Polyarthrite rhumatoïde modérée à sévère",
+      "Spondylarthrite ankylosante",
+      "Arthrite psoriasique",
+      "Maladie de Crohn",
+      "Rectocolite hémorragique",
+      "Psoriasis en plaques modéré à sévère",
+      "Uvéite non infectieuse"
+    ],
+    "contraindications": [
+      "Infections actives sévères (tuberculose, sepsis)",
+      "Insuffisance cardiaque sévère (NYHA III-IV)",
+      "Hypersensibilité à l'adalimumab"
+    ],
+    "interactions": [
+      {
+        "drug": "Vaccins vivants atténués",
+        "severity": "majeure",
+        "effect": "Contre-indiqués pendant le traitement"
+      },
+      {
+        "drug": "Autres anti-TNF ou abatacept",
+        "severity": "majeure",
+        "effect": "Risque infections accru — ne pas associer"
+      },
+      {
+        "drug": "Méthotrexate",
+        "severity": "modérée",
+        "effect": "Association fréquente et synergique en PR"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Données rassurantes mais insuffisantes. Arrêt recommandé au 3e trimestre (risque immunosuppression néonatale). Éviter vaccins vivants chez le nouveau-né exposé pendant 6 mois.",
+      "breastfeeding": "Faible passage — peut être envisagé sous surveillance."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans selon indication (AR juvénile, maladie de Crohn pédiatrique)",
+      "dose_rule": "20-40 mg SC toutes les 2 semaines selon poids"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "40 mg SC toutes les 2 semaines (avec ou sans MTX). Dose de charge 80 mg J0, 40 mg J14 pour certaines indications.",
+      "children": "20-40 mg SC toutes les 2 semaines selon poids"
+    },
+    "adverse_effects": [
+      "Infections (voies respiratoires, urinaires)",
+      "Réactions au site d'injection",
+      "Réactivation tuberculose",
+      "Lymphomes (rare)",
+      "Insuffisance cardiaque",
+      "Maladies démyélinisantes (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable 2 seringues de 0.8 ml",
+        "price_ppv_dhs": 6290,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE",
+      "ENFANT_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00051",
+      "drugs_com": "https://www.drugs.com/adalimumab.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "humira_adalimumab_40_mg_0_8_ml"
+  },
+  {
+    "id": "hydracort_0.5_%_crème_tube_de_30_g",
+    "brand_name": "HYDRACORT",
+    "generic_name": "Hydrocortisone",
+    "composition": [
+      {
+        "name": "Hydrocortisone",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "0.5 %",
+    "form": "Crème",
+    "route": "Voir notice",
+    "atc_code": "D07AA02",
+    "therapeutic_group": "Dermatologie",
+    "drug_class": "Corticostéroïde topique (classe I — faible)",
+    "drugbank_id": "DB00741",
+    "mechanism": "Corticostéroïde naturel (cortisol synthétique). Activité glucocorticoïde et minéralocorticoïde. Topique: inhibe phospholipase A2, réduisant prostaglandines/leucotriènes — effet anti-inflammatoire, antiprurigineux et vasoconstricteur local.",
+    "half_life": "1.5-2h (plasmatique), 8-12h (biologique)",
+    "indications": [
+      "Topique: eczéma, dermatite atopique, dermatite de contact, psoriasis limité",
+      "Systémique: insuffisance surrénale, choc allergique (en association), crise addisonnienne"
+    ],
+    "contraindications": [
+      "Infections cutanées (virales, bactériennes, fongiques) — usage topique",
+      "Acné, rosacée — usage topique",
+      "Péri-oculaire chez l'enfant (usage topique)"
+    ],
+    "interactions": [
+      {
+        "drug": "AINS (systémique)",
+        "severity": "majeure",
+        "effect": "Risque GI et cardiovasculaire accru"
+      },
+      {
+        "drug": "Antidiabétiques",
+        "severity": "modérée",
+        "effect": "Hyperglycémie — adapter traitement diabète"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Usage topique: compatible en quantités limitées. Usage systémique: précaution — risque retard croissance fœtale.",
+      "breastfeeding": "Usage topique: compatible. Systémique: compatible à faibles doses."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Usage topique limité chez l'enfant (atrophie cutanée, absorption systémique accrue)",
+      "dose_rule": "Topique: appliquer fine couche 1-2x/j, durée limitée"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Topique: couche fine 2-4x/j. Systémique: 20-30 mg/j (insuffisance surrénale).",
+      "children": "Topique: 1x/j, durée limitée"
+    },
+    "adverse_effects": [
+      "Topique: atrophie cutanée, vergetures, télangiectasies, surinfection",
+      "Systémique: hyperglycémie, HTA, ostéoporose, prise de poids"
+    ],
+    "market_data": [
+      {
+        "packaging": "Tube de 30 g",
+        "price_ppv_dhs": 37.7,
+        "price_ph_dhs": null,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00741",
+      "drugs_com": "https://www.drugs.com/hydrocortisone.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hydracort_hydrocortisone_0_5"
+  },
+  {
+    "id": "hydrocortisone_roussel_10_mg_comprimé_sécable_boîte_de_25",
+    "brand_name": "HYDROCORTISONE",
+    "generic_name": "Hydrocortisone",
+    "composition": [
+      {
+        "name": "Hydrocortisone",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "ROUSSEL 10 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "H02AB09",
+    "therapeutic_group": "Corticothérapie",
+    "drug_class": "Corticostéroïde systémique",
+    "drugbank_id": "DB00741",
+    "mechanism": "Corticostéroïde naturel (cortisol synthétique). Activité glucocorticoïde et minéralocorticoïde. Topique: inhibe phospholipase A2, réduisant prostaglandines/leucotriènes — effet anti-inflammatoire, antiprurigineux et vasoconstricteur local.",
+    "half_life": "1.5-2h (plasmatique), 8-12h (biologique)",
+    "indications": [
+      "Topique: eczéma, dermatite atopique, dermatite de contact, psoriasis limité",
+      "Systémique: insuffisance surrénale, choc allergique (en association), crise addisonnienne"
+    ],
+    "contraindications": [
+      "Infections cutanées (virales, bactériennes, fongiques) — usage topique",
+      "Acné, rosacée — usage topique",
+      "Péri-oculaire chez l'enfant (usage topique)"
+    ],
+    "interactions": [
+      {
+        "drug": "AINS (systémique)",
+        "severity": "majeure",
+        "effect": "Risque GI et cardiovasculaire accru"
+      },
+      {
+        "drug": "Antidiabétiques",
+        "severity": "modérée",
+        "effect": "Hyperglycémie — adapter traitement diabète"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Usage topique: compatible en quantités limitées. Usage systémique: précaution — risque retard croissance fœtale.",
+      "breastfeeding": "Usage topique: compatible. Systémique: compatible à faibles doses."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Usage topique limité chez l'enfant (atrophie cutanée, absorption systémique accrue)",
+      "dose_rule": "Topique: appliquer fine couche 1-2x/j, durée limitée"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "Topique: couche fine 2-4x/j. Systémique: 20-30 mg/j (insuffisance surrénale).",
+      "children": "Topique: 1x/j, durée limitée"
+    },
+    "adverse_effects": [
+      "Topique: atrophie cutanée, vergetures, télangiectasies, surinfection",
+      "Systémique: hyperglycémie, HTA, ostéoporose, prise de poids"
+    ],
+    "market_data": [
+      {
+        "packaging": "sécable Boîte de 25",
+        "price_ppv_dhs": 35.1,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00741",
+      "drugs_com": "https://www.drugs.com/hydrocortisone.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hydrocortisone_hydrocortisone_roussel_10_mg"
+  },
+  {
+    "id": "hydroxo_\"5000\"_soluté_injectable_boîte_de_4_ampoules",
+    "brand_name": "HYDROXO",
+    "generic_name": "Hydroxocobalamine (Vitamine B12)",
+    "composition": [
+      {
+        "name": "Hydroxocobalamine (Vitamine B12)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "\"5000\"",
+    "form": "Soluté",
+    "route": "Voir notice",
+    "atc_code": "B03BA03",
+    "therapeutic_group": "Hématologie / Vitamines",
+    "drug_class": "Vitamine B12 (cobalamine)",
+    "drugbank_id": "DB00200",
+    "mechanism": "Forme active de la vitamine B12. Cofacteur essentiel pour la synthèse de méthionine (via méthionine synthase) et le métabolisme de l'acide méthylmalonique. Indispensable à la synthèse d'ADN et à la myélinisation nerveuse. L'hydroxocobalamine a aussi une forte affinité pour le cyanure (antidote).",
+    "half_life": "6 jours",
+    "indications": [
+      "Carence en vitamine B12 (anémie mégaloblastique, neuropathie)",
+      "Anémie pernicieuse (maladie de Biermer)",
+      "Intoxication au cyanure (à fortes doses)"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cobalamine",
+      "Maladie de Leber (neuropathie optique héréditaire)"
+    ],
+    "interactions": [
+      {
+        "drug": "Chloramphénicol",
+        "severity": "modérée",
+        "effect": "Réduit l'effet thérapeutique de l'hydroxocobalamine"
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Supplément recommandé si carence confirmée. Compatible.",
+      "breastfeeding": "Compatible — essentiel pour le nourrisson allaité si mère végétalienne."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable dès la naissance",
+      "dose_rule": "1000 µg IM selon protocole"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "1000 µg IM/j x 7j, puis 1000 µg/semaine x 4, puis 1000 µg/mois (à vie si anémie pernicieuse)",
+      "children": "1000 µg IM selon protocole"
+    },
+    "adverse_effects": [
+      "Douleur au site d'injection",
+      "Diarrhée transitoire",
+      "Prurit",
+      "Coloration rouge des urines (caractéristique)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Injectable Boîte de 4 ampoules",
+        "price_ppv_dhs": 54.7,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00200",
+      "drugs_com": "https://www.drugs.com/hydroxocobalamine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hydroxo_hydroxocobalamine_vitamine_b12_5000"
+  },
+  {
+    "id": "hyperium_1_mg_comprimé_boîte_de_30",
+    "brand_name": "HYPERIUM",
+    "generic_name": "Rilménidine",
+    "composition": [
+      {
+        "name": "Rilménidine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "1 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "C02AC05",
+    "therapeutic_group": "Cardiovasculaire",
+    "drug_class": "Antihypertenseur central (agoniste I1-imidazoline)",
+    "drugbank_id": "DB09269",
+    "mechanism": "Antihypertenseur central à action mixte: agoniste des récepteurs I1-imidazoline (dans le tronc cérébral, réduisant le tonus sympathique) et des récepteurs α2-adrénergiques centraux. Réduit la résistance périphérique sans effet sédatif marqué.",
+    "half_life": "8h",
+    "indications": [
+      "Hypertension artérielle essentielle"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère (DFG < 15 mL/min)",
+      "Dépression sévère",
+      "Bradycardie sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Autres antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation effet hypotenseur"
+      },
+      {
+        "drug": "IMAO",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotensive"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Hypotension accrue"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données insuffisantes — éviter. Utiliser antihypertenseur à données plus établies (labétalol, méthyldopa).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Contre-indiqué si DFG < 15 mL/min. Réduire dose si DFG 15-60."
+    },
+    "dosage": {
+      "adult": "1 mg/j en prise unique le matin. Max 2 mg/j (1 mg matin + 1 mg soir).",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Sécheresse buccale",
+      "Asthénie",
+      "Vertiges",
+      "Palpitations",
+      "Troubles du sommeil"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 113.5,
+        "price_ph_dhs": 74.97,
+        "laboratory": "SERVIER MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB09269",
+      "drugs_com": "https://www.drugs.com/rilménidine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hyperium_rilmenidine_1_mg"
+  },
+  {
+    "id": "hypril_20_mg_/_12.5_mg_comprimé_boîte_de_30",
+    "brand_name": "HYPRIL",
+    "generic_name": "Lisinopril + Hydrochlorothiazide",
+    "composition": [
+      {
+        "name": "Lisinopril + Hydrochlorothiazide",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "20 MG / 12.5 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "C09BA03",
+    "therapeutic_group": "Cardiovasculaire",
+    "drug_class": "IEC + Diurétique thiazidique",
+    "drugbank_id": "DB00722",
+    "mechanism": "Association: Lisinopril (IEC — inhibe conversion angiotensine I→II, vasodilatateur) + Hydrochlorothiazide (diurétique thiazidique — inhibe réabsorption NaCl au tubule distal). Synergie antihypertensive complémentaire.",
+    "half_life": "Lisinopril 12h, HCTZ 5-15h",
+    "indications": [
+      "Hypertension artérielle non contrôlée par monothérapie"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Hypersensibilité IEC ou sulfamides",
+      "Hypokaliémie sévère",
+      "Sténose bilatérale artères rénales",
+      "Angiœdème antérieur"
+    ],
+    "interactions": [
+      {
+        "drug": "Diurétiques épargneurs K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Toxicité lithium augmentée"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Réduction effet antihypertenseur + risque IR aiguë"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — fœtotoxique (IEC aux 2e-3e trimestres, HCTZ peut provoquer thrombopénie néonatale).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé en association fixe",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution si DFG < 30 mL/min. HCTZ peu efficace si DFG < 30."
+    },
+    "dosage": {
+      "adult": "Lisinopril 10-20 mg + HCTZ 12.5-25 mg/j en une prise",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Toux sèche (IEC)",
+      "Hypotension",
+      "Hypokaliémie (HCTZ)",
+      "Hyperkaliémie (IEC)",
+      "Angiœdème",
+      "Photosensibilité (HCTZ)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 71.5,
+        "price_ph_dhs": 47.24,
+        "laboratory": "ATLAS PHARM",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00722",
+      "drugs_com": "https://www.drugs.com/lisinopril---hydrochlorothiazide.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hypril_lisinopril_hydrochlorothiazide_20_mg_12_5_mg"
+  },
+  {
+    "id": "hypuric_120_mg_comprimé_pelliculé_boite_de_28",
+    "brand_name": "HYPURIC",
+    "generic_name": "Fébuxostat",
+    "composition": [
+      {
+        "name": "Fébuxostat",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "120 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "M04AA03",
+    "therapeutic_group": "Rhumatologie",
+    "drug_class": "Inhibiteur xanthine oxydase (non purinique)",
+    "drugbank_id": "DB04854",
+    "mechanism": "Inhibiteur non purinique et sélectif de la xanthine oxydase (forme oxydée et réduite). Réduit la production d'acide urique sans affecter la synthèse de purines ou de pyrimidines. Plus sélectif que l'allopurinol.",
+    "half_life": "5-8h",
+    "indications": [
+      "Hyperuricémie chronique avec dépôts d'urate (goutte)",
+      "Contre-indication ou intolérance à l'allopurinol"
+    ],
+    "contraindications": [
+      "Hypersensibilité au fébuxostat",
+      "Insuffisance hépatique sévère",
+      "Pathologie cardiovasculaire grave (risque MACE)",
+      "Grossesse"
+    ],
+    "interactions": [
+      {
+        "drug": "Azathioprine, mercaptopurine, didanosine",
+        "severity": "majeure",
+        "effect": "Contre-indiqué — accumulation toxique de ces substrats"
+      },
+      {
+        "drug": "Théophylline",
+        "severity": "modérée",
+        "effect": "Augmentation taux théophylline"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données insuffisantes — éviter.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé chez l'enfant",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Pas d'ajustement si DFG > 30 mL/min. Précaution si DFG < 30."
+    },
+    "dosage": {
+      "adult": "80-120 mg/j en 1 prise. Débuter par 80 mg/j. Colchicine prophylactique recommandée au début.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Crise de goutte (début traitement)",
+      "Arthralgies",
+      "Nausées",
+      "Diarrhée",
+      "Élévation transaminases",
+      "Événements cardiovasculaires (risque MACE)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 28",
+        "price_ppv_dhs": 163.7,
+        "price_ph_dhs": null,
+        "laboratory": "PHI",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB04854",
+      "drugs_com": "https://www.drugs.com/fébuxostat.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hypuric_febuxostat_120_mg"
+  },
+  {
+    "id": "hypuric_80_mg_comprimé_pelliculé_boite_de_28",
+    "brand_name": "HYPURIC",
+    "generic_name": "Fébuxostat",
+    "composition": [
+      {
+        "name": "Fébuxostat",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "80 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "M04AA03",
+    "therapeutic_group": "Rhumatologie",
+    "drug_class": "Inhibiteur xanthine oxydase (non purinique)",
+    "drugbank_id": "DB04854",
+    "mechanism": "Inhibiteur non purinique et sélectif de la xanthine oxydase (forme oxydée et réduite). Réduit la production d'acide urique sans affecter la synthèse de purines ou de pyrimidines. Plus sélectif que l'allopurinol.",
+    "half_life": "5-8h",
+    "indications": [
+      "Hyperuricémie chronique avec dépôts d'urate (goutte)",
+      "Contre-indication ou intolérance à l'allopurinol"
+    ],
+    "contraindications": [
+      "Hypersensibilité au fébuxostat",
+      "Insuffisance hépatique sévère",
+      "Pathologie cardiovasculaire grave (risque MACE)",
+      "Grossesse"
+    ],
+    "interactions": [
+      {
+        "drug": "Azathioprine, mercaptopurine, didanosine",
+        "severity": "majeure",
+        "effect": "Contre-indiqué — accumulation toxique de ces substrats"
+      },
+      {
+        "drug": "Théophylline",
+        "severity": "modérée",
+        "effect": "Augmentation taux théophylline"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données insuffisantes — éviter.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé chez l'enfant",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Pas d'ajustement si DFG > 30 mL/min. Précaution si DFG < 30."
+    },
+    "dosage": {
+      "adult": "80-120 mg/j en 1 prise. Débuter par 80 mg/j. Colchicine prophylactique recommandée au début.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Crise de goutte (début traitement)",
+      "Arthralgies",
+      "Nausées",
+      "Diarrhée",
+      "Élévation transaminases",
+      "Événements cardiovasculaires (risque MACE)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 28",
+        "price_ppv_dhs": 158.9,
+        "price_ph_dhs": null,
+        "laboratory": "PHI",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "CARDIAQUE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "ADULTE_SEULEMENT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB04854",
+      "drugs_com": "https://www.drugs.com/fébuxostat.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hypuric_febuxostat_80_mg"
+  },
+  {
+    "id": "hytacand_16_mg_/_12.5_mg_comprimé_boîte_de_30",
+    "brand_name": "HYTACAND",
+    "generic_name": "Candésartan + Hydrochlorothiazide",
+    "composition": [
+      {
+        "name": "Candésartan + Hydrochlorothiazide",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "16 MG / 12.5 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "C09DA06",
+    "therapeutic_group": "Cardiovasculaire",
+    "drug_class": "ARA II + Diurétique thiazidique",
+    "drugbank_id": "DB00796",
+    "mechanism": "Association: Candésartan (ARA II — bloque sélectivement récepteurs AT1 de l'angiotensine II) + Hydrochlorothiazide (diurétique thiazidique). Synergie antihypertensive: vasodilatation + natriurèse.",
+    "half_life": "Candésartan 9h, HCTZ 5-15h",
+    "indications": [
+      "Hypertension artérielle non contrôlée par candésartan ou HCTZ seul"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Insuffisance hépatique sévère",
+      "Hypersensibilité ARA II ou sulfamides",
+      "Hypokaliémie sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Toxicité lithium — surveiller lithiémie"
+      },
+      {
+        "drug": "Diurétiques épargneurs K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Réduction effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — fœtotoxique (ARA II: oligohydramnios, IR fœtale).",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé en association fixe",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution si DFG < 30 mL/min"
+    },
+    "dosage": {
+      "adult": "Candésartan 8-32 mg + HCTZ 12.5-25 mg/j en une prise",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Hypotension",
+      "Hypokaliémie",
+      "Céphalées",
+      "Vertiges",
+      "Insuffisance rénale aiguë (sujets à risque)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 176.2,
+        "price_ph_dhs": 116.42,
+        "laboratory": "SYNTHEMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00796",
+      "drugs_com": "https://www.drugs.com/candésartan---hydrochlorothiazide.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hytacand_candesartan_hydrochlorothiazide_16_mg_12_5_mg"
+  },
+  {
+    "id": "hytacand_8_mg_/_12.5_mg_comprimé_boîte_de_28",
+    "brand_name": "HYTACAND",
+    "generic_name": "Candésartan + Hydrochlorothiazide",
+    "composition": [
+      {
+        "name": "Candésartan + Hydrochlorothiazide",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "strength": "8 MG / 12.5 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "C09DA06",
+    "therapeutic_group": "Cardiovasculaire",
+    "drug_class": "ARA II + Diurétique thiazidique",
+    "drugbank_id": "DB00796",
+    "mechanism": "Association: Candésartan (ARA II — bloque sélectivement récepteurs AT1 de l'angiotensine II) + Hydrochlorothiazide (diurétique thiazidique). Synergie antihypertensive: vasodilatation + natriurèse.",
+    "half_life": "Candésartan 9h, HCTZ 5-15h",
+    "indications": [
+      "Hypertension artérielle non contrôlée par candésartan ou HCTZ seul"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Insuffisance hépatique sévère",
+      "Hypersensibilité ARA II ou sulfamides",
+      "Hypokaliémie sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Toxicité lithium — surveiller lithiémie"
+      },
+      {
+        "drug": "Diurétiques épargneurs K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Réduction effet antihypertenseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — fœtotoxique (ARA II: oligohydramnios, IR fœtale).",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé en association fixe",
+      "dose_rule": "Non établi"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution si DFG < 30 mL/min"
+    },
+    "dosage": {
+      "adult": "Candésartan 8-32 mg + HCTZ 12.5-25 mg/j en une prise",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Hypotension",
+      "Hypokaliémie",
+      "Céphalées",
+      "Vertiges",
+      "Insuffisance rénale aiguë (sujets à risque)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 94.7,
+        "price_ph_dhs": 62.57,
+        "laboratory": "SYNTHEMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00796",
+      "drugs_com": "https://www.drugs.com/candésartan---hydrochlorothiazide.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/",
+    "record_id": "hytacand_candesartan_hydrochlorothiazide_8_mg_12_5_mg"
+  }
+]

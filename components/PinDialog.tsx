@@ -5,13 +5,22 @@ import { AppUser } from '../types';
 
 interface PinDialogProps {
   onAuthenticated: () => void;
+  onKiosk?: () => void;
 }
 
-const PinDialog: React.FC<PinDialogProps> = ({ onAuthenticated }) => {
+const PinDialog: React.FC<PinDialogProps> = ({ onAuthenticated, onKiosk }) => {
   const [selectedUser, setSelectedUser] = useState<AppUser | 'admin' | null>(null);
   const [pin, setPin] = useState('');
   const [showPin, setShowPin] = useState(false);
   const [error, setError] = useState('');
+
+  const handleForgotPin = () => {
+    if (!window.confirm(
+      "Réinitialiser l'accès effacera le mot de passe administrateur et tous les comptes collaborateurs " +
+      "(le verrouillage sera désactivé). Vos données patients ne sont pas touchées. Continuer ?"
+    )) return;
+    dataService.resetIdentificationPins().then(() => onAuthenticated());
+  };
 
   const doctor = dataService.getDoctorInfo();
   const collaborators = dataService.getUsers();
@@ -30,6 +39,16 @@ const PinDialog: React.FC<PinDialogProps> = ({ onAuthenticated }) => {
           name: doctor.nameFr,
           pin: doctor.pin || '',
           role: 'Admin',
+          permissions: [
+            'ACCESS_DASHBOARD',
+            'MANAGE_PATIENTS',
+            'MANAGE_MEDICAL_RECORDS',
+            'CREATE_PRESCRIPTION',
+            'MANAGE_APPOINTMENTS',
+            'VIEW_FINANCES',
+            'MANAGE_SETTINGS',
+            'USE_AI_ASSISTANT'
+          ],
           createdAt: new Date().toISOString()
         };
       }
@@ -44,7 +63,7 @@ const PinDialog: React.FC<PinDialogProps> = ({ onAuthenticated }) => {
       dataService.setActiveUser(authUser);
       onAuthenticated();
     } else {
-      setError('Code PIN incorrect. Veuillez réessayer.');
+      setError('Mot de passe incorrect. Veuillez réessayer.');
       setPin('');
     }
   };
@@ -96,7 +115,24 @@ const PinDialog: React.FC<PinDialogProps> = ({ onAuthenticated }) => {
             ))}
           </div>
 
-          <p className="text-center text-white/20 text-[10px] font-black uppercase tracking-[0.4em] mt-16">
+          <div className="flex items-center justify-center gap-6 mt-10">
+            {onKiosk && (
+              <button
+                onClick={onKiosk}
+                className="text-white/40 hover:text-emerald-400 text-xs font-bold uppercase tracking-widest transition-colors"
+              >
+                Salle d'attente (accès libre)
+              </button>
+            )}
+            <button
+              onClick={handleForgotPin}
+              className="text-white/40 hover:text-red-400 text-xs font-bold uppercase tracking-widest transition-colors"
+            >
+              Mot de passe oublié ?
+            </button>
+          </div>
+
+          <p className="text-center text-white/20 text-[10px] font-black uppercase tracking-[0.4em] mt-8">
             Protection des données de santé © 2026
           </p>
         </div>
@@ -121,17 +157,17 @@ const PinDialog: React.FC<PinDialogProps> = ({ onAuthenticated }) => {
         <h2 className="text-3xl font-black text-gray-900 mb-2 uppercase tracking-tight">
           {selectedUser === 'admin' ? 'Admin' : (selectedUser as AppUser).name}
         </h2>
-        <p className="text-gray-500 mb-10 font-bold">Veuillez saisir votre code PIN</p>
+        <p className="text-gray-500 mb-10 font-bold">Veuillez saisir votre mot de passe</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="relative">
             <input
               type={showPin ? "text" : "password"}
               value={pin}
-              onChange={(e) => setPin(e.target.value.replace(/\D/g, '').slice(0, 6))}
-              placeholder="••••"
-              className="w-full py-6 bg-gray-50 border-2 border-transparent focus:border-emerald-500 rounded-[2rem] font-black text-4xl text-center outline-none transition-all tracking-[0.5em] text-black"
-              maxLength={6}
+              onChange={(e) => setPin(e.target.value)}
+              placeholder="Mot de passe"
+              className="w-full py-6 px-6 bg-gray-50 border-2 border-transparent focus:border-emerald-500 rounded-[2rem] font-bold text-xl text-center outline-none transition-all text-black"
+              maxLength={64}
               autoFocus
             />
             <button
@@ -151,7 +187,7 @@ const PinDialog: React.FC<PinDialogProps> = ({ onAuthenticated }) => {
 
           <button
             type="submit"
-            disabled={pin.length < 4}
+            disabled={!pin}
             className="w-full px-6 py-6 bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-100 disabled:text-gray-400 text-white font-black rounded-3xl text-xl transition-all shadow-xl shadow-emerald-900/10 active:scale-95 uppercase tracking-widest"
           >
             S'identifier

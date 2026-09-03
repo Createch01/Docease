@@ -34,6 +34,8 @@ export default defineConfig(({ mode }) => {
         },
         workbox: {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+          globIgnores: ['**/medicaments_par_classe_v2.json', '**/medicaments/medicament_*.json'],
+          maximumFileSizeToCacheInBytes: 4000000,
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -80,10 +82,11 @@ export default defineConfig(({ mode }) => {
       minify: 'terser',
       rollupOptions: {
         output: {
-          manualChunks: {
-            vendor: ['react', 'react-dom'],
-            lucide: ['lucide-react'],
-            genai: ['@google/genai']
+          manualChunks(id) {
+            if (id.includes('html2pdf.js')) return 'vendor-html2pdf';
+            if (id.includes('node_modules/react') || id.includes('node_modules/react-dom')) return 'vendor';
+            if (id.includes('node_modules/lucide-react')) return 'lucide';
+            if (id.includes('node_modules/@google/genai')) return 'genai';
           }
         }
       }

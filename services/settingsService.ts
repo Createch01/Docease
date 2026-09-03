@@ -16,6 +16,9 @@ const DEFAULT_APPEARANCE: PrescriptionAppearance = {
   contentVerticalPadding: 40,
   enableQrCode: false,
   qrCodeSize: 120,
+  paperSize: 'A4',
+  paperMode: 'blank',
+  selectedTemplate: 'classic_moroccan',
 };
 
 export const settingsService = {

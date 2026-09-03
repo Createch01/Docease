@@ -3,15 +3,19 @@ import React, { useState, Suspense, useEffect } from 'react';
 import { I18nProvider, useI18n } from './i18n';
 import {
   LayoutDashboard, Users, FileText, Settings, BarChart3, PlusCircle,
-  Pill, FolderOpen, CheckSquare, CalendarRange, Activity,
-  ChevronLeft, ChevronRight, Menu, X, Bell, Database, Search
+  FolderOpen, CheckSquare, CalendarRange, Activity,
+  ChevronLeft, ChevronRight, Menu, X, Bell, Database, Search,
+  PanelLeftClose, PanelLeftOpen,
 } from 'lucide-react';
 import LoadingIndicator from './components/LoadingIndicator';
 import WaveBackground from './components/WaveBackground';
 import PinDialog from './components/PinDialog';
+import AppLockScreen from './components/AppLockScreen';
+import WaitingRoomKiosk from './components/WaitingRoomKiosk';
 import ToastContainer from './components/ToastContainer';
 import { dataService } from './services/dataService';
 import { autoImportService } from './services/autoImportService';
+import { securityService } from './services/securityService';
 import { Patient, AppUser, Permission, PrescriptionDraft } from './types';
 import { LogOut, BookOpen } from 'lucide-react';
 
@@ -21,7 +25,6 @@ const PatientManager = React.lazy(() => import('./components/PatientManager'));
 const PrescriptionEditor = React.lazy(() => import('./components/PrescriptionEditor'));
 const SettingsPanel = React.lazy(() => import('./components/SettingsPanel'));
 const Analytics = React.lazy(() => import('./components/Analytics'));
-const MedicineManager = React.lazy(() => import('./components/MedicineManager'));
 const PatientDossier = React.lazy(() => import('./components/PatientDossier'));
 const TaskManager = React.lazy(() => import('./components/TaskManager'));
 const AppointmentManager = React.lazy(() => import('./components/AppointmentManager'));
@@ -29,8 +32,10 @@ const DrugCompatibility = React.lazy(() => import('./components/DrugCompatibilit
 const NotificationCenter = React.lazy(() => import('./components/NotificationCenter'));
 const SmartDocInterface = React.lazy(() => import('./components/SmartDoc/SmartDocInterface'));
 const GlobalSearch = React.lazy(() => import('./components/GlobalSearch'));
+const PharmaDirectory = React.lazy(() => import('./components/PharmaDirectory'));
+const MedicamentManagement = React.lazy(() => import('./components/admin/MedicamentManagement'));
 
-type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'medicines' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc';
+type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc' | 'repertoire' | 'medicament-management';
 
 const App: React.FC = () => {
   return (
@@ -49,20 +54,36 @@ const AppContent: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
+  const [kioskMode, setKioskMode] = useState(false);
   const [prescriptionDraft, setPrescriptionDraft] = useState<PrescriptionDraft | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  // Mandatory master-PIN gate — nothing below can load before this resolves, since
+  // the encrypted store requires the AES key derived from this PIN (see
+  // services/securityService.ts and src-tauri/src/lib.rs).
+  const [securityChecked, setSecurityChecked] = useState(false);
+  const [securityConfigured, setSecurityConfigured] = useState(false);
+  const [securityUnlocked, setSecurityUnlocked] = useState(false);
 
   const activeUser = dataService.getActiveUser();
-  const doctor = dataService.getDoctorInfo();
+  const doctor = securityUnlocked ? dataService.getDoctorInfo() : ({} as any);
 
   useEffect(() => {
+    (async () => {
+      const configured = await securityService.isConfigured();
+      setSecurityConfigured(configured);
+      setSecurityChecked(true);
+    })();
+  }, []);
+
+  const handleUnlocked = () => {
+    setSecurityUnlocked(true);
+  };
+
+  useEffect(() => {
+    if (!securityUnlocked) return;
     const init = async () => {
-      // Automatic JSON Scan & Import on startup
       await autoImportService.runAutoImport();
-
-      // Initialize Professional Data Architecture
       await dataService.initialize();
-
       setAuthenticated(!!dataService.getActiveUser());
       setIsDataLoaded(true);
     };
@@ -70,12 +91,9 @@ const AppContent: React.FC = () => {
     init();
 
     const handleResize = () => {
-      if (window.innerWidth >= 1024) {
-        setIsMobileMenuOpen(false);
-      }
+      if (window.innerWidth >= 1024) setIsMobileMenuOpen(false);
     };
 
-    // Listen for updates from dataService
     const handleUpdate = () => {
       setAuthenticated(!!dataService.getActiveUser());
     };
@@ -86,7 +104,6 @@ const AppContent: React.FC = () => {
         setIsSearchOpen(true);
       }
       if (e.key === '/') {
-        // Only trigger if not in an input/textarea
         if (document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
           e.preventDefault();
           setIsSearchOpen(true);
@@ -97,40 +114,36 @@ const AppContent: React.FC = () => {
     window.addEventListener('resize', handleResize);
     window.addEventListener('meddoc_data_update', handleUpdate);
     window.addEventListener('keydown', handleKeyDown);
-
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('meddoc_data_update', handleUpdate);
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  }, [securityUnlocked]);
 
   const handleStartConsultation = (patient?: Patient) => {
     if (patient) {
       setActivePatient(patient);
-      if (prescriptionDraft?.patient?.id !== patient.id) {
-        setPrescriptionDraft(null);
-      }
+      if (prescriptionDraft?.patient?.id !== patient.id) setPrescriptionDraft(null);
     }
     setActivePrescription(null);
     setCurrentView('new-prescription');
   };
 
   const hasPermission = (permission: string) => {
-    if (!activeUser) return true; // Doctor (admin) has all permissions
+    if (!activeUser) return true;
     if (activeUser.role === 'Admin') return true;
     return activeUser.permissions?.includes(permission as Permission);
   };
 
   const renderView = () => {
-    // Permission Guards
     if (currentView === 'patients' && !hasPermission('MANAGE_PATIENTS')) return <AccessDenied />;
-    if (currentView === 'dossier' && !hasPermission('MANAGE_PATIENTS')) return <AccessDenied />;
+    if (currentView === 'dossier' && !hasPermission('MANAGE_MEDICAL_RECORDS')) return <AccessDenied />;
     if (currentView === 'appointments' && !hasPermission('MANAGE_APPOINTMENTS')) return <AccessDenied />;
     if (currentView === 'new-prescription' && !hasPermission('CREATE_PRESCRIPTION')) return <AccessDenied />;
-    if (currentView === 'medicines' && !hasPermission('CREATE_PRESCRIPTION')) return <AccessDenied />;
     if (currentView === 'analytics' && !hasPermission('VIEW_FINANCES')) return <AccessDenied />;
     if (currentView === 'settings' && !hasPermission('MANAGE_SETTINGS')) return <AccessDenied />;
+    if (currentView === 'medicament-management' && !hasPermission('MANAGE_SETTINGS')) return <AccessDenied />;
 
     switch (currentView) {
       case 'dashboard': return (
@@ -152,9 +165,7 @@ const AppContent: React.FC = () => {
           setActivePrescription(data.prescription);
           setCurrentView('new-prescription');
         }
-        if (view === 'new-prescription') {
-          handleStartConsultation(data?.patient);
-        }
+        if (view === 'new-prescription') handleStartConsultation(data?.patient);
       }} />;
       case 'new-prescription': return (
         <PrescriptionEditor
@@ -165,12 +176,11 @@ const AppContent: React.FC = () => {
           onFinish={() => {
             setActivePatient(null);
             setActivePrescription(null);
-            setPrescriptionDraft(null); // Clear draft on finish
+            setPrescriptionDraft(null);
             setCurrentView('dashboard');
           }}
         />
       );
-      case 'medicines': return <MedicineManager />;
       case 'compatibility': return <DrugCompatibility />;
       case 'analytics': return <Analytics />;
       case 'tasks': return <TaskManager />;
@@ -184,17 +194,23 @@ const AppContent: React.FC = () => {
         setCurrentView(view as View);
       }} />;
       case 'smart-doc': return <SmartDocInterface />;
+      case 'repertoire': return <PharmaDirectory />;
+      case 'medical-directory': return <PharmaDirectory />;
+      case 'medicament-management': return <MedicamentManagement />;
       default: return <Dashboard onNewPrescription={handleStartConsultation} />;
     }
   };
 
   const AccessDenied = () => (
-    <div className="flex flex-col items-center justify-center h-full text-center p-10 opacity-50">
-      <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-        <LogOut size={32} className="text-gray-400" />
+    <div className="flex flex-col items-center justify-center h-full text-center p-10" style={{ opacity: 0.5 }}>
+      <div
+        className="w-16 h-16 rounded-xl flex items-center justify-center mb-4"
+        style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-faint)' }}
+      >
+        <LogOut size={28} />
       </div>
-      <h3 className="text-xl font-black text-gray-900 uppercase">{t('access_denied')}</h3>
-      <p className="text-sm font-bold text-gray-400 mt-2">{t('access_denied_desc')}</p>
+      <h3 className="text-[18px] font-semibold mb-1" style={{ color: 'var(--color-text)' }}>{t('access_denied')}</h3>
+      <p className="text-[13px]" style={{ color: 'var(--color-text-subtle)' }}>{t('access_denied_desc')}</p>
     </div>
   );
 
@@ -204,195 +220,407 @@ const AppContent: React.FC = () => {
     { id: 'appointments', label: t('appointments'), icon: CalendarRange, requiredPermission: 'MANAGE_APPOINTMENTS' },
     { id: 'tasks', label: t('tasks'), icon: CheckSquare, requiredPermission: 'ACCESS_DASHBOARD' },
     { id: 'new-prescription', label: t('new_consultation'), icon: PlusCircle, requiredPermission: 'CREATE_PRESCRIPTION' },
-    { id: 'dossier', label: t('patients'), icon: FolderOpen, requiredPermission: 'MANAGE_PATIENTS' },
+    { id: 'dossier', label: t('patients'), icon: FolderOpen, requiredPermission: 'MANAGE_MEDICAL_RECORDS' },
     { id: 'smart-doc', label: t('smart_doc'), icon: FileText, highlight: true, requiredPermission: 'USE_AI_ASSISTANT' },
-    { id: 'medicines', label: t('medical_management') || 'Gestion Médicale Pro', icon: Database, highlight: true, requiredPermission: 'CREATE_PRESCRIPTION' },
-    { id: 'compatibility', label: t('interactions') || 'Interactions', icon: Activity, requiredPermission: 'CREATE_PRESCRIPTION' },
-    { id: 'analytics', label: t('accounting') || t('analytics'), icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
+    // Clinical, daily-use tools
+    { id: 'medical-directory', label: 'Médicaments', icon: BookOpen, requiredPermission: 'ACCESS_DASHBOARD' },
+    { id: 'compatibility', label: 'Vérifier interactions', icon: Activity, requiredPermission: 'CREATE_PRESCRIPTION' },
+    // Administrative, occasional-use tools
+    { id: 'medicament-management', label: 'Gestion des médicaments', icon: Database, requiredPermission: 'MANAGE_SETTINGS' },
+    { id: 'analytics', label: 'Comptabilité', icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
     { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'ACCESS_DASHBOARD' },
     { id: 'settings', label: t('settings'), icon: Settings, requiredPermission: 'MANAGE_SETTINGS' },
   ].filter(item => !item.requiredPermission || hasPermission(item.requiredPermission));
 
-  if (!isDataLoaded) {
+  // ─── Loading & Auth gates ───
+  if (!securityChecked) {
     return (
-      <div className="flex h-screen items-center justify-center bg-emerald-50">
+      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--color-bg)' }}>
         <LoadingIndicator />
       </div>
     );
   }
 
-  if (doctor.pinEnabled && !authenticated) {
-    return <PinDialog onAuthenticated={() => setAuthenticated(true)} />;
+  // Mandatory master PIN — gates the encryption key itself, so no patient data can
+  // load (dataService.initialize) until this resolves.
+  if (!securityUnlocked) {
+    return <AppLockScreen mode={securityConfigured ? 'unlock' : 'setup'} onUnlocked={handleUnlocked} />;
   }
 
-  return (
-    <div className={`flex h-screen overflow-hidden font-sans text-gray-900 relative ${lang === 'ar' ? 'font-arabic' : ''}`} dir={dir}>
-      {/* Wave Background */}
-      <WaveBackground />
-
-      {/* Mobile Header */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 h-16 glass-effect z-40 flex items-center justify-between px-6 border-b border-emerald-100/20">
-        <div className="flex items-center gap-3">
-          <img src="/docease-logo.svg" className="w-8 h-8 object-contain" alt="DocEase Logo" />
-          <span className="font-bold text-emerald-900">DocEase</span>
-        </div>
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-2 hover:bg-emerald-100/30 rounded-xl text-emerald-700 transition-smooth"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+  if (!isDataLoaded) {
+    return (
+      <div className="flex h-screen items-center justify-center" style={{ background: 'var(--color-bg)' }}>
+        <LoadingIndicator />
       </div>
+    );
+  }
 
-      {/* Sidebar Overlay for Mobile */}
+  // Read-only queue display, reachable without identifying as any user — it shows
+  // patient names/order only, never medical data, so gating it behind a PIN is
+  // pure friction for reception staff glancing at who's waiting.
+  if (kioskMode) {
+    return <WaitingRoomKiosk onExit={() => setKioskMode(false)} />;
+  }
+
+  // Secondary, optional step: identify WHICH collaborator is using the app now
+  // (multi-user permission context) — no longer the encryption gate, that's above.
+  if (doctor.pinEnabled && !authenticated) {
+    return <PinDialog onAuthenticated={() => setAuthenticated(true)} onKiosk={() => setKioskMode(true)} />;
+  }
+
+  const userInitials = (activeUser?.name || doctor.nameFr || 'D').substring(0, 2).toUpperCase();
+  const sidebarWidth = isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)';
+
+  return (
+    <div
+      className={`flex h-screen overflow-hidden ${lang === 'ar' ? 'font-arabic' : ''}`}
+      dir={dir}
+      style={{ background: 'var(--color-bg)', color: 'var(--color-text)', fontFamily: 'var(--font-sans)' }}
+    >
+      {/* ─── Mobile overlay ─── */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 z-40 lg:hidden"
+          style={{ background: 'rgba(15, 23, 42, 0.45)', backdropFilter: 'blur(2px)' }}
           onClick={() => setIsMobileMenuOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
-      <aside className={`
-        ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-        ${isCollapsed ? 'w-20' : 'w-64'}
-        fixed lg:relative top-0 left-0 bottom-0
-        glass-dark border-r border-emerald-200/30 flex flex-col z-50
-        transition-smooth
-      `}>
-        {/* Toggle Button (Desktop Only) */}
-        <button
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="hidden lg:flex absolute -right-3 top-20 w-6 h-6 gradient-emerald-teal text-white rounded-full items-center justify-center border-2 border-white shadow-soft-lg hover:shadow-soft-lg transition-all active:scale-95 z-50"
+      {/* ═══════════════ SIDEBAR ═══════════════ */}
+      <aside
+        className={`
+          ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          fixed lg:relative top-0 left-0 bottom-0 flex flex-col
+          transition-all duration-300
+        `}
+        style={{
+          width: sidebarWidth,
+          background: 'var(--color-surface)',
+          borderRight: '1px solid var(--color-border)',
+          height: '100vh',
+          zIndex: 'var(--z-sidebar)' as any,
+          flexShrink: 0,
+        }}
+      >
+        {/* ─── Logo block ─── */}
+        <div
+          className="flex items-center justify-center shrink-0"
+          style={{
+            padding: isCollapsed ? '16px 8px' : '20px',
+            borderBottom: '1px solid var(--color-border)',
+            overflow: 'hidden',
+          }}
         >
-          {isCollapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}
-        </button>
-
-        <div className={`p-6 flex items-center gap-3 border-b border-emerald-200/20 ${isCollapsed ? 'justify-center' : ''}`}>
-          <div className={`
-            gradient-emerald-light rounded-2xl flex items-center justify-center 
-            border border-emerald-200/50 shadow-soft overflow-hidden p-2 
-            transition-smooth group
-            ${isCollapsed ? 'w-10 h-10' : 'w-14 h-14 hover:scale-110 hover:shadow-soft-md'}`}>
-            <img src="/docease-logo.svg" className="w-full h-full object-contain" alt="DocEase Logo" />
-          </div>
-          {!isCollapsed && (
-            <div className="animate-in fade-in slide-in-from-left-2 duration-300">
-              <h1 className="text-xl font-bold text-emerald-900 tracking-tight">DocEase</h1>
-              <p className="text-[10px] bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent font-black uppercase tracking-widest">Pro Edition</p>
-            </div>
-          )}
+          <img
+            src="/logo.png"
+            alt="DocEase"
+            className={isCollapsed ? 'w-16 h-16 shrink-0' : 'w-20 h-20 shrink-0'}
+            style={{ objectFit: 'contain' }}
+          />
         </div>
 
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto scrollbar-hide">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              title={isCollapsed ? item.label : ''}
-              onClick={() => {
-                if (item.id !== 'new-prescription') setActivePatient(null);
-                setCurrentView(item.id as View);
-                setIsMobileMenuOpen(false);
-              }}
-              className={`
-                w-full flex items-center transition-smooth border rounded-xl font-medium text-sm
-                ${isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-3'}
-                ${currentView === item.id
-                  ? 'gradient-emerald-light text-emerald-700 shadow-soft border-emerald-400/50'
-                  : 'text-emerald-700/60 hover:bg-white/40 hover:text-emerald-700 border-transparent'
-                }
-              `}
+        {/* ─── Doctor block ─── */}
+        {!isCollapsed && (
+          <div
+            className="px-3 py-4 shrink-0"
+            style={{ borderBottom: '1px solid var(--color-border)' }}
+          >
+            <div
+              className="flex items-center gap-3 p-2 rounded-lg"
+              style={{ background: 'var(--color-surface-alt)' }}
             >
-              <item.icon size={20} className={currentView === item.id ? 'text-emerald-600' : 'text-emerald-600/60'} />
-              {!isCollapsed && <span className="truncate">{item.label}</span>}
-              {item.highlight && !isCollapsed && (
-                <div className="ml-auto w-2.5 h-2.5 rounded-full gradient-emerald-teal shadow-soft-md"></div>
-              )}
-            </button>
-          ))}
+              <div
+                className="w-9 h-9 rounded-full flex items-center justify-center text-white font-medium shrink-0 text-[13px]"
+                style={{ background: 'var(--color-primary)' }}
+              >
+                {userInitials}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="text-[13px] font-medium truncate" style={{ color: 'var(--color-text)' }}>
+                  {activeUser?.name || doctor.nameFr}
+                </div>
+                <div className="text-[11px] truncate flex items-center gap-1" style={{ color: 'var(--color-text-subtle)' }}>
+                  <span className="w-1.5 h-1.5 rounded-full dot-pulse" style={{ background: 'var(--color-secondary)' }} />
+                  {doctor.specialtyFr || t('doctor')}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
 
+        {/* ─── Navigation ─── */}
+        <nav className="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto scrollbar-hide">
+          {!isCollapsed && (
+            <div
+              className="text-[10px] font-semibold uppercase tracking-wider px-3 mb-2"
+              style={{ color: 'var(--color-text-faint)', letterSpacing: '0.08em' }}
+            >
+              Workspace
+            </div>
+          )}
+
+          {navItems.map((item) => {
+            const isActive = currentView === item.id;
+            return (
+              <button
+                key={item.id}
+                title={isCollapsed ? item.label : undefined}
+                onClick={() => {
+                  if (item.id !== 'new-prescription') setActivePatient(null);
+                  setCurrentView(item.id as View);
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`relative w-full flex items-center rounded-lg text-left transition-all`}
+                style={{
+                  gap: isCollapsed ? 0 : '10px',
+                  padding: isCollapsed ? '10px' : '10px 12px',
+                  justifyContent: isCollapsed ? 'center' : 'flex-start',
+                  background: isActive ? 'var(--color-primary-50)' : 'transparent',
+                  color: isActive ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                  fontWeight: isActive ? 600 : 500,
+                  fontSize: '14px',
+                  transition: 'all var(--transition-base)',
+                }}
+                onMouseEnter={e => {
+                  if (!isActive) (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
+                }}
+                onMouseLeave={e => {
+                  if (!isActive) (e.currentTarget as HTMLElement).style.background = 'transparent';
+                }}
+              >
+                {isActive && (
+                  <span
+                    className="absolute left-0 rounded-r"
+                    style={{ top: '8px', bottom: '8px', width: '3px', background: 'var(--color-primary)', borderRadius: '0 3px 3px 0' }}
+                  />
+                )}
+                <item.icon size={18} strokeWidth={isActive ? 2.25 : 2} className="shrink-0" />
+                {!isCollapsed && <span className="truncate flex-1">{item.label}</span>}
+                {item.highlight && !isCollapsed && (
+                  <span
+                    className="ml-auto w-1.5 h-1.5 rounded-full"
+                    style={{ background: 'var(--color-secondary)' }}
+                  />
+                )}
+              </button>
+            );
+          })}
+
+          {/* Search shortcut */}
           <button
             onClick={() => setIsSearchOpen(true)}
-            className={`
-              w-full flex items-center transition-smooth border rounded-xl font-black text-xs uppercase tracking-widest mt-6
-              ${isCollapsed ? 'justify-center p-3' : 'gap-3 px-4 py-3'}
-              bg-white/40 text-emerald-700 border-emerald-200/50 hover:bg-emerald-100 hover:border-emerald-300 shadow-sm
-            `}
+            title={isCollapsed ? t('search_patient') : undefined}
+            className="w-full flex items-center rounded-lg transition-all mt-4"
+            style={{
+              gap: isCollapsed ? 0 : '10px',
+              padding: isCollapsed ? '10px' : '10px 12px',
+              justifyContent: isCollapsed ? 'center' : 'flex-start',
+              background: 'var(--color-surface-alt)',
+              color: 'var(--color-text-muted)',
+              border: '1px solid var(--color-border)',
+              fontSize: '13px',
+              transition: 'all var(--transition-base)',
+            }}
           >
-            <Search size={20} className="text-emerald-700" />
+            <Search size={16} className="shrink-0" />
             {!isCollapsed && (
-              <div className="flex justify-between items-center flex-1">
-                <span>{t('search_patient')}</span>
-                <span className="text-[10px] text-emerald-400 border border-emerald-100 px-1 rounded">/</span>
-              </div>
+              <>
+                <span className="flex-1 text-left">{t('search_patient')}</span>
+                <kbd
+                  className="text-[10px] px-1.5 py-0.5 rounded border"
+                  style={{ color: 'var(--color-text-faint)', borderColor: 'var(--color-border)', background: 'var(--color-surface)', fontFamily: 'var(--font-mono)' }}
+                >
+                  ⌘K
+                </kbd>
+              </>
             )}
           </button>
         </nav>
 
-        {!isCollapsed && (
-          <div className="p-4 border-t border-emerald-200/20 space-y-3">
-            <div className="bg-emerald-900/40 backdrop-blur-md rounded-2xl p-4 text-white border border-emerald-500/20">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-xs uppercase">
-                  {activeUser?.name.charAt(0) || 'D'}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-[10px] opacity-70 font-bold uppercase tracking-widest truncate">{t('user') || 'Utilisateur'}</p>
-                  <p className="text-xs font-bold truncate">{activeUser?.name || doctor.nameFr}</p>
-                </div>
-              </div>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => {
-                    dataService.setActiveUser(undefined);
-                    setAuthenticated(false);
-                  }}
-                  className="w-full py-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-[10px] font-black uppercase tracking-widest rounded-xl transition-all border border-emerald-500/20 flex items-center justify-center gap-2"
-                >
-                  <LogOut size={12} /> {t('logout') || 'Quitter la Session'}
-                </button>
-              </div>
-            </div>
+        {/* ─── Collapse toggle + logout ─── */}
+        <div
+          className="shrink-0 p-3"
+          style={{ borderTop: '1px solid var(--color-border)' }}
+        >
+          {!isCollapsed && activeUser && (
+            <button
+              onClick={() => { dataService.setActiveUser(undefined); setAuthenticated(false); }}
+              className="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all mb-2 text-[13px]"
+              style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+            >
+              <LogOut size={16} />
+              <span>{t('logout') || 'Déconnexion'}</span>
+            </button>
+          )}
 
-            <div className="gradient-emerald-teal rounded-2xl p-4 text-white shadow-soft-lg">
-              <p className="text-[10px] font-semibold flex items-center gap-2">
-                <span className="w-2 h-2 bg-emerald-200 rounded-full animate-pulse"></span>
-                {t('offline_mode') || 'Mode Hors-ligne'}
-              </p>
-            </div>
-          </div>
-        )}
+          <button
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="hidden lg:flex w-full items-center gap-2 px-3 py-2 rounded-lg transition-all text-[13px]"
+            style={{
+              color: 'var(--color-text-subtle)',
+              justifyContent: isCollapsed ? 'center' : 'flex-start',
+              transition: 'all var(--transition-base)',
+            }}
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+          >
+            {isCollapsed ? <PanelLeftOpen size={16} /> : <PanelLeftClose size={16} />}
+            {!isCollapsed && <span>Réduire</span>}
+          </button>
+        </div>
       </aside>
 
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col overflow-auto bg-transparent p-4 lg:p-8 mt-16 lg:mt-0 z-10 relative scrollbar-hide">
-        <Suspense fallback={
-          <div className="flex-1 flex items-center justify-center">
-            <LoadingIndicator />
-          </div>
-        }>
-          {renderView()}
-        </Suspense>
+      {/* ═══════════════ MAIN COLUMN ═══════════════ */}
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
 
-        {isSearchOpen && (
-          <Suspense fallback={null}>
-            <GlobalSearch
-              onClose={() => setIsSearchOpen(false)}
-              onSelectPatient={(p) => {
-                setActivePatient(p);
-                setCurrentView('dossier');
-                setIsSearchOpen(false);
-              }}
-              onConsult={(p) => {
-                handleStartConsultation(p);
-                setIsSearchOpen(false);
+        {/* ─── TOPBAR ─── */}
+        <header
+          className="shrink-0 flex items-center px-6 gap-4"
+          style={{
+            height: 'var(--topbar-height)',
+            background: 'var(--color-surface)',
+            borderBottom: '1px solid var(--color-border)',
+            position: 'sticky',
+            top: 0,
+            zIndex: 'var(--z-topbar)' as any,
+          }}
+        >
+          {/* Mobile menu toggle */}
+          <button
+            className="lg:hidden w-10 h-10 rounded-lg flex items-center justify-center transition-all"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
+            onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
+            onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+          >
+            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+
+          {/* Search bar */}
+          <div className="relative flex-1 max-w-[420px]">
+            <Search
+              size={15}
+              className="absolute left-3 top-1/2 -translate-y-1/2"
+              style={{ color: 'var(--color-text-faint)' }}
+            />
+            <input
+              type="text"
+              readOnly
+              onClick={() => setIsSearchOpen(true)}
+              placeholder="Rechercher un patient, médicament, ordonnance…"
+              className="w-full h-10 pl-9 pr-14 rounded-lg border text-[14px] cursor-pointer transition-all"
+              style={{
+                borderColor: 'var(--color-border)',
+                background: 'var(--color-surface-alt)',
+                color: 'var(--color-text-muted)',
               }}
             />
-          </Suspense>
-        )}
+            <kbd
+              className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[11px] rounded border"
+              style={{ color: 'var(--color-text-subtle)', borderColor: 'var(--color-border)', background: 'var(--color-surface)', fontFamily: 'var(--font-mono)' }}
+            >
+              ⌘K
+            </kbd>
+          </div>
 
-        <ToastContainer />
-      </main>
+          <div className="ml-auto flex items-center gap-2">
+            {/* End-of-day */}
+            <button
+              onClick={async () => {
+                if (window.confirm("Voulez-vous effectuer la sauvegarde et archiver la journée ?")) {
+                  const passphrase = window.prompt("Mot de passe pour protéger cette sauvegarde :");
+                  if (!passphrase) return;
+                  await dataService.exportFullBackup(passphrase);
+                  dataService.archiveDay();
+                }
+              }}
+              className="hidden md:flex h-10 px-4 rounded-lg text-[13px] font-medium items-center gap-2 border transition-all"
+              style={{
+                borderColor: 'var(--color-border)',
+                color: 'var(--color-text-muted)',
+                background: 'transparent',
+                transition: 'all var(--transition-base)',
+              }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+            >
+              <Database size={15} />
+              {t('end_of_day')}
+            </button>
+
+            {/* Notifications */}
+            <button
+              onClick={() => setCurrentView('notifications')}
+              className="relative w-10 h-10 rounded-lg flex items-center justify-center transition-all"
+              style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+            >
+              <Bell size={18} />
+              <span
+                className="absolute top-2 right-2 w-2 h-2 rounded-full"
+                style={{ background: 'var(--color-danger)' }}
+              />
+            </button>
+
+            <div className="w-px h-6 mx-1" style={{ background: 'var(--color-border)' }} />
+
+            {/* User avatar */}
+            <button
+              onClick={() => setCurrentView('settings')}
+              className="flex items-center gap-2 h-10 px-2 rounded-lg transition-all"
+              style={{ transition: 'all var(--transition-base)' }}
+              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
+              onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+            >
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center text-white text-[12px] font-semibold"
+                style={{ background: 'var(--color-primary)' }}
+              >
+                {userInitials}
+              </div>
+              <ChevronRight size={14} style={{ color: 'var(--color-text-subtle)' }} />
+            </button>
+          </div>
+        </header>
+
+        {/* ─── CONTENT AREA ─── */}
+        <main
+          className="flex-1 overflow-y-auto scrollbar-hide"
+          style={{ padding: '24px 28px' }}
+        >
+          <div style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto' }}>
+            <Suspense fallback={
+              <div className="flex items-center justify-center py-20">
+                <LoadingIndicator />
+              </div>
+            }>
+              {renderView()}
+            </Suspense>
+          </div>
+
+          {isSearchOpen && (
+            <Suspense fallback={null}>
+              <GlobalSearch
+                onClose={() => setIsSearchOpen(false)}
+                onSelectPatient={(p) => {
+                  setActivePatient(p);
+                  setCurrentView('dossier');
+                  setIsSearchOpen(false);
+                }}
+                onConsult={(p) => {
+                  handleStartConsultation(p);
+                  setIsSearchOpen(false);
+                }}
+              />
+            </Suspense>
+          )}
+
+          <ToastContainer />
+        </main>
+      </div>
     </div>
   );
 };

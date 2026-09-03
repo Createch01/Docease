@@ -1,0 +1,4371 @@
+[
+  {
+    "id": "alyse_75_mg",
+    "brand_name": "ALYSE",
+    "generic_name": "Levonorgestrel + Ethinylestradiol",
+    "composition": [
+      "Prégabaline"
+    ],
+    "strength": "75 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "N03AX16",
+    "therapeutic_group": "Antiepileptique",
+    "drug_class": "Antiépileptique — Ligand α2δ des canaux calciques voltage-dépendants (analogue GABA)",
+    "drugbank_id": null,
+    "mechanism": "Liaison à la sous-unité α2δ des canaux calciques voltage-dépendants, réduisant l'influx Ca²⁺ et la libération de neurotransmetteurs excitateurs (glutamate, noradrénaline, substance P).",
+    "half_life": "6 h",
+    "indications": [
+      "Contraception orale combinée"
+    ],
+    "contraindications": [
+      "Thromboembolie veineuse/artérielle",
+      "Migraine avec aura",
+      "Cancer du sein",
+      "Insuffisance hépatique sévère",
+      "HTA sévère non contrôlée",
+      "Tabagisme >35 ans"
+    ],
+    "interactions": [
+      {
+        "drug": "Dépresseurs SNC, opioïdes, alcool",
+        "severity": "majeure",
+        "effect": "Majoration sédation, risque dépression respiratoire"
+      },
+      {
+        "drug": "Thiazolidinediones (pioglitazone)",
+        "severity": "modérée",
+        "effect": "Majoration œdèmes et prise de poids"
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué.",
+      "breastfeeding": "Déconseillé (diminution lactation)."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "À partir de la puberté.",
+      "dose_rule": "1 cp/j pendant 21j, arrêt 7j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "1 comprimé/jour pendant 21 jours, pause de 7 jours.",
+      "children": "Non applicable."
+    },
+    "adverse_effects": [
+      "Somnolence, vertiges",
+      "Prise de poids",
+      "Œdèmes périphériques",
+      "Ataxie, tremblements",
+      "Troubles visuels",
+      "Risque de dépendance/abus"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 56",
+        "price_ppv_dhs": 234,
+        "price_ph_dhs": 146.4,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alyse-75-mg-gelule/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "HEPATIQUE_PRUDENCE",
+      "TABLEAU_A",
+      "PSYCHOACTIF",
+      "DEPENDANCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alyse-75-mg-gelule/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/levonorgestrel.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution efficacité contraceptive",
+        "recommendation": "Contraception alternative ou complémentaire."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "risk_dep": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Prégabaline')"
+    ],
+    "verification_corrections": [
+      "composition: ['Levonorgestrel', 'Ethinylestradiol'] -> ['Prégabaline']",
+      "therapeutic_group: None -> 'Antiepileptique'",
+      "atc_code: None -> 'N03AX16'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Prégabaline"
+    ]
+  },
+  {
+    "id": "alzim_lp_200_mg",
+    "brand_name": "ALZIM LP",
+    "generic_name": "Zolpidem",
+    "composition": [
+      "Carbamazepine"
+    ],
+    "strength": "200 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "N03AF01",
+    "therapeutic_group": "Antiépileptique, dérivé du carboxamide",
+    "drug_class": "Antiépileptique — Iminostilbène (anticonvulsivant et stabilisateur de l'humeur)",
+    "drugbank_id": null,
+    "mechanism": "Blocage des canaux sodiques voltage-dépendants en conformation inactive, réduction de la propagation neuronale épileptogène.",
+    "half_life": "24-36 h (initial), 10-20 h (à l'équilibre, auto-induction)",
+    "indications": [
+      "Insomnie (traitement de courte durée)"
+    ],
+    "contraindications": [
+      "Insuffisance respiratoire sévère",
+      "SAS",
+      "Myasthénie",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Inducteurs/inhibiteurs CYP3A4 (multiples)",
+        "severity": "majeure",
+        "effect": "Inhibiteurs : toxicité carbamazépine. Carbamazépine induit : réduction contraceptifs, warfarine, anticancéreux"
+      },
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Contre-indiqué"
+      },
+      {
+        "drug": "Clozapine",
+        "severity": "majeure",
+        "effect": "Agranulocytose majorée"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "modérée",
+        "effect": "Neurotoxicité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter. Risque de dépression néonatale et sevrage.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement mais prudence en IRC."
+    },
+    "dosage": {
+      "adult": "10 mg au coucher. Sujet âgé: 5 mg. Max durée: 4 semaines.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Sédation, vertiges, ataxie",
+      "Diplopie",
+      "Leucopénie, anémie aplasique (rare)",
+      "Syndrome Stevens-Johnson/Lyell",
+      "Hyponatrémie (SIADH)",
+      "Hépatotoxicité",
+      "Auto-induction enzymatique"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 50",
+        "price_ppv_dhs": 56.1,
+        "price_ph_dhs": 35,
+        "laboratory": "PHARMA5",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alzim-lp-200-mg-comprime-pellicule-p/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "TABLEAU_C",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alzim-lp-200-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/zolpidem.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Benzodiazépines",
+          "Opioïdes"
+        ],
+        "interacting_classes": [
+          "Dépresseurs SNC"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression respiratoire + sédation excessive",
+        "recommendation": "Éviter association."
+      }
+    ],
+    "tableau_maroc": "C",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] nat inferred as Médicament (source page lacks Nature du Produit field)",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Carbamazepine')"
+    ],
+    "verification_corrections": [
+      "composition: ['Zolpidem'] -> ['Carbamazepine']",
+      "therapeutic_group: None -> 'Antiépileptique, dérivé du carboxamide'",
+      "atc_code: None -> 'N03AF01'",
+      "tableau_maroc: 'A' -> 'C'",
+      "nature_produit: None -> 'Médicament' (inferred)",
+      "form: 'Comprimé' -> 'Comprimé pelliculé'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Carbamazepine"
+    ]
+  },
+  {
+    "id": "alzim_lp_400_mg",
+    "brand_name": "ALZIM LP",
+    "generic_name": "Zolpidem",
+    "composition": [
+      "Carbamazépine"
+    ],
+    "strength": "400 MG",
+    "form": "Comprimé sécable",
+    "route": "Orale",
+    "atc_code": "N03AF01",
+    "therapeutic_group": "Antiépileptique, dérivé du carboxamide",
+    "drug_class": "Antiépileptique, stabilisateur de l'humeur",
+    "drugbank_id": null,
+    "mechanism": "Blocage canaux sodiques, augmentation GABA, inhibition NMDA.",
+    "half_life": "9-16h",
+    "indications": [
+      "Insomnie (traitement de courte durée)"
+    ],
+    "contraindications": [
+      "Insuffisance respiratoire sévère",
+      "SAS",
+      "Myasthénie",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Lamotrigine",
+        "severity": "majeure",
+        "effect": "Doublement concentration lamotrigine (risque rash sévère). Réduire dose lamotrigine."
+      },
+      {
+        "drug": "Aspirine",
+        "severity": "modérée",
+        "effect": "Augmentation taux valproate (déplacement liaison protéique)"
+      },
+      {
+        "drug": "Carbamazépine",
+        "severity": "modérée",
+        "effect": "Réduction valproate + augmentation époxyde carbamazépine toxique"
+      },
+      {
+        "drug": "Phénobarbital",
+        "severity": "modérée",
+        "effect": "Augmentation phénobarbital, possible somnolence"
+      },
+      {
+        "drug": "Phénytoïne",
+        "severity": "modérée",
+        "effect": "Interactions complexes bidirectionnelles"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter. Risque de dépression néonatale et sevrage.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement mais prudence en IRC."
+    },
+    "dosage": {
+      "adult": "10 mg au coucher. Sujet âgé: 5 mg. Max durée: 4 semaines.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Hépatotoxicité (risque fatal <3 ans)",
+      "Hyperammoniémie",
+      "Tremblement",
+      "Prise de poids",
+      "Alopécie",
+      "Thrombocytopénie",
+      "Syndrome de Fanconi",
+      "Polykystose ovarienne"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 60.6,
+        "price_ph_dhs": 37.9,
+        "laboratory": "PHARMA5",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alzim-lp-400-mg-comprime-pellicule-p/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "TABLEAU_C",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alzim-lp-400-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/zolpidem.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Benzodiazépines",
+          "Opioïdes"
+        ],
+        "interacting_classes": [
+          "Dépresseurs SNC"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression respiratoire + sédation excessive",
+        "recommendation": "Éviter association."
+      }
+    ],
+    "tableau_maroc": "C",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] nat inferred as Médicament (source page lacks Nature du Produit field)",
+      "[2026-04-19] sister-fill from alepsia_200_mg (same ingredient 'carbamazépine'): mechanism, half_life, drug_class, interactions, adverse_effects",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Zolpidem'] -> ['Carbamazépine']",
+      "therapeutic_group: None -> 'Antiépileptique, dérivé du carboxamide'",
+      "atc_code: None -> 'N03AF01'",
+      "tableau_maroc: 'A' -> 'C'",
+      "nature_produit: None -> 'Médicament' (inferred)",
+      "form: 'Comprimé' -> 'Comprimé sécable'"
+    ]
+  },
+  {
+    "id": "alzole_20_mg",
+    "brand_name": "ALZOLE",
+    "generic_name": "Albendazole",
+    "composition": [
+      "Oméprazole"
+    ],
+    "strength": "20 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A02BC01",
+    "therapeutic_group": "Antiulcéreux, inhibiteur de la pompe à protons (IPP)",
+    "drug_class": "Antiulcéreux — Inhibiteur de la pompe à protons (IPP)",
+    "drugbank_id": null,
+    "mechanism": "Inhibition irréversible de la H+/K+-ATPase (pompe à protons) des cellules pariétales gastriques.",
+    "half_life": "0,5-1 h (effet biologique prolongé 24-72 h)",
+    "indications": [
+      "Oxyurose",
+      "Ascaridiase",
+      "Ankylostomose",
+      "Hydatidose",
+      "Neurocysticercose"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Clopidogrel",
+        "severity": "modérée",
+        "effect": "Réduction activation clopidogrel (CYP2C19) — préférer pantoprazole"
+      },
+      {
+        "drug": "Kétoconazole, itraconazole, atazanavir",
+        "severity": "majeure",
+        "effect": "Réduction absorption (pH gastrique)"
+      },
+      {
+        "drug": "Méthotrexate à haute dose",
+        "severity": "modérée",
+        "effect": "Augmentation concentrations MTX"
+      },
+      {
+        "drug": "Warfarine, phénytoïne, diazépam",
+        "severity": "modérée",
+        "effect": "Augmentation concentrations (inhibition CYP2C19)"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué. Tératogène.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an.",
+      "dose_rule": "Oxyurose: 400 mg dose unique. Hydatidose: 7.5 mg/kg 2x/jour (max 400 mg/dose)."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Oxyurose: 400 mg dose unique, répéter à J14. Hydatidose: 400 mg 2x/jour x 28 jours.",
+      "children": "≥ 1 an: mêmes doses."
+    },
+    "adverse_effects": [
+      "Céphalées, troubles digestifs",
+      "Carence B12/Mg/Ca au long cours",
+      "Ostéoporose, fractures",
+      "Colite microscopique",
+      "Infections digestives (C. difficile)",
+      "Néphrite interstitielle"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 7",
+        "price_ppv_dhs": 23.4,
+        "price_ph_dhs": 14.6,
+        "laboratory": "PHI",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alzole-20-mg-gelule/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TABLEAU_C"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alzole-20-mg-gelule/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/albendazole.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "C",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Oméprazole')",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Albendazole'] -> ['Oméprazole']",
+      "therapeutic_group: None -> 'Antiulcéreux, inhibiteur de la pompe à protons (IPP)'",
+      "atc_code: None -> 'A02BC01'",
+      "tableau_maroc: 'A' -> 'C'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Oméprazole"
+    ]
+  },
+  {
+    "id": "am-10_10_mg",
+    "brand_name": "AM-10",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 20",
+        "price_ppv_dhs": 52.4,
+        "price_ph_dhs": 32.8,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/am-10-10-mg-comprime-2/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/am-10-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "am-5_5_mg",
+    "brand_name": "AM-5",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 43.7,
+        "price_ph_dhs": 27.3,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/am-5-5-mg-comprime-2/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/am-5-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "amarel_1_mg",
+    "brand_name": "AMAREL",
+    "generic_name": "Glimepiride",
+    "composition": [
+      "Glimépiride"
+    ],
+    "strength": "1 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A10BB12",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Antidiabétique oral — Sulfonylurée de 3e génération",
+    "drugbank_id": null,
+    "mechanism": "Stimulation de la sécrétion d'insuline par les cellules β pancréatiques via blocage des canaux KATP.",
+    "half_life": "5-8 h (demi-vie terminale)",
+    "indications": [
+      "Diabète de type 2 (en association avec régime +/- metformine)"
+    ],
+    "contraindications": [
+      "DT1",
+      "Acidocétose",
+      "Insuffisance hépatique/rénale sévère",
+      "Grossesse"
+    ],
+    "interactions": [
+      {
+        "drug": "Bêta-bloquants",
+        "severity": "modérée",
+        "effect": "Masquent les symptômes d'hypoglycémie"
+      },
+      {
+        "drug": "AINS, sulfamides antibactériens, IEC",
+        "severity": "modérée",
+        "effect": "Majoration de l'effet hypoglycémiant"
+      },
+      {
+        "drug": "Rifampicine, phénytoïne, corticoïdes",
+        "severity": "modérée",
+        "effect": "Diminution de l'effet hypoglycémiant"
+      },
+      {
+        "drug": "Miconazole (systémique ou oral)",
+        "severity": "majeure",
+        "effect": "Risque d'hypoglycémie sévère — contre-indiqué"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Effet antabuse et variations glycémiques imprévisibles"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué. Passer à l'insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "Début 1 mg/j. Max: 6 mg/j.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Hypoglycémie (fréquente)",
+      "Prise de poids",
+      "Troubles gastro-intestinaux",
+      "Réactions cutanées allergiques",
+      "Hépatite cholestatique (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 51.1,
+        "price_ph_dhs": 31.9,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amarel-1-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amarel-1-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/glimepiride.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluconazole",
+          "Miconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie sévère",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Glimépiride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Glimepiride'] -> ['Glimépiride']",
+      "therapeutic_group: None -> 'Antidiabétique'",
+      "atc_code: None -> 'A10BB12'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Glimépiride"
+    ]
+  },
+  {
+    "id": "amarel_2_mg",
+    "brand_name": "AMAREL",
+    "generic_name": "Glimepiride",
+    "composition": [
+      "Glimépiride"
+    ],
+    "strength": "2 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A10BB12",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Antidiabétique oral — Sulfonylurée de 3e génération",
+    "drugbank_id": null,
+    "mechanism": "Stimulation de la sécrétion d'insuline par les cellules β pancréatiques via blocage des canaux KATP.",
+    "half_life": "5-8 h (demi-vie terminale)",
+    "indications": [
+      "Diabète de type 2 (en association avec régime +/- metformine)"
+    ],
+    "contraindications": [
+      "DT1",
+      "Acidocétose",
+      "Insuffisance hépatique/rénale sévère",
+      "Grossesse"
+    ],
+    "interactions": [
+      {
+        "drug": "Bêta-bloquants",
+        "severity": "modérée",
+        "effect": "Masquent les symptômes d'hypoglycémie"
+      },
+      {
+        "drug": "AINS, sulfamides antibactériens, IEC",
+        "severity": "modérée",
+        "effect": "Majoration de l'effet hypoglycémiant"
+      },
+      {
+        "drug": "Rifampicine, phénytoïne, corticoïdes",
+        "severity": "modérée",
+        "effect": "Diminution de l'effet hypoglycémiant"
+      },
+      {
+        "drug": "Miconazole (systémique ou oral)",
+        "severity": "majeure",
+        "effect": "Risque d'hypoglycémie sévère — contre-indiqué"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Effet antabuse et variations glycémiques imprévisibles"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué. Passer à l'insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "Début 1 mg/j. Max: 6 mg/j.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Hypoglycémie (fréquente)",
+      "Prise de poids",
+      "Troubles gastro-intestinaux",
+      "Réactions cutanées allergiques",
+      "Hépatite cholestatique (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 60.4,
+        "price_ph_dhs": 37.8,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amarel-2-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amarel-2-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/glimepiride.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluconazole",
+          "Miconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie sévère",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Glimépiride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Glimepiride'] -> ['Glimépiride']",
+      "therapeutic_group: None -> 'Antidiabétique'",
+      "atc_code: None -> 'A10BB12'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Glimépiride"
+    ]
+  },
+  {
+    "id": "amarel_3_mg",
+    "brand_name": "AMAREL",
+    "generic_name": "Glimepiride",
+    "composition": [
+      "Glimépiride"
+    ],
+    "strength": "3 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A10BB12",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Antidiabétique oral — Sulfonylurée de 3e génération",
+    "drugbank_id": null,
+    "mechanism": "Stimulation de la sécrétion d'insuline par les cellules β pancréatiques via blocage des canaux KATP.",
+    "half_life": "5-8 h (demi-vie terminale)",
+    "indications": [
+      "Diabète de type 2 (en association avec régime +/- metformine)"
+    ],
+    "contraindications": [
+      "DT1",
+      "Acidocétose",
+      "Insuffisance hépatique/rénale sévère",
+      "Grossesse"
+    ],
+    "interactions": [
+      {
+        "drug": "Bêta-bloquants",
+        "severity": "modérée",
+        "effect": "Masquent les symptômes d'hypoglycémie"
+      },
+      {
+        "drug": "AINS, sulfamides antibactériens, IEC",
+        "severity": "modérée",
+        "effect": "Majoration de l'effet hypoglycémiant"
+      },
+      {
+        "drug": "Rifampicine, phénytoïne, corticoïdes",
+        "severity": "modérée",
+        "effect": "Diminution de l'effet hypoglycémiant"
+      },
+      {
+        "drug": "Miconazole (systémique ou oral)",
+        "severity": "majeure",
+        "effect": "Risque d'hypoglycémie sévère — contre-indiqué"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Effet antabuse et variations glycémiques imprévisibles"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué. Passer à l'insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "Début 1 mg/j. Max: 6 mg/j.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Hypoglycémie (fréquente)",
+      "Prise de poids",
+      "Troubles gastro-intestinaux",
+      "Réactions cutanées allergiques",
+      "Hépatite cholestatique (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 92.1,
+        "price_ph_dhs": 57.6,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amarel-3-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amarel-3-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/glimepiride.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluconazole",
+          "Miconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie sévère",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Glimépiride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Glimepiride'] -> ['Glimépiride']",
+      "therapeutic_group: None -> 'Antidiabétique'",
+      "atc_code: None -> 'A10BB12'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Glimépiride"
+    ]
+  },
+  {
+    "id": "amarel_4_mg",
+    "brand_name": "AMAREL",
+    "generic_name": "Glimepiride",
+    "composition": [
+      "Glimépiride"
+    ],
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A10BB12",
+    "therapeutic_group": "Antidiabétique",
+    "drug_class": "Antidiabétique oral — Sulfonylurée de 3e génération",
+    "drugbank_id": null,
+    "mechanism": "Stimulation de la sécrétion d'insuline par les cellules β pancréatiques via blocage des canaux KATP.",
+    "half_life": "5-8 h (demi-vie terminale)",
+    "indications": [
+      "Diabète de type 2 (en association avec régime +/- metformine)"
+    ],
+    "contraindications": [
+      "DT1",
+      "Acidocétose",
+      "Insuffisance hépatique/rénale sévère",
+      "Grossesse"
+    ],
+    "interactions": [
+      {
+        "drug": "Bêta-bloquants",
+        "severity": "modérée",
+        "effect": "Masquent les symptômes d'hypoglycémie"
+      },
+      {
+        "drug": "AINS, sulfamides antibactériens, IEC",
+        "severity": "modérée",
+        "effect": "Majoration de l'effet hypoglycémiant"
+      },
+      {
+        "drug": "Rifampicine, phénytoïne, corticoïdes",
+        "severity": "modérée",
+        "effect": "Diminution de l'effet hypoglycémiant"
+      },
+      {
+        "drug": "Miconazole (systémique ou oral)",
+        "severity": "majeure",
+        "effect": "Risque d'hypoglycémie sévère — contre-indiqué"
+      },
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Effet antabuse et variations glycémiques imprévisibles"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué. Passer à l'insuline.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "Début 1 mg/j. Max: 6 mg/j.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Hypoglycémie (fréquente)",
+      "Prise de poids",
+      "Troubles gastro-intestinaux",
+      "Réactions cutanées allergiques",
+      "Hépatite cholestatique (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 68.8,
+        "price_ph_dhs": 43,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amarel-4-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amarel-4-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/glimepiride.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluconazole",
+          "Miconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie sévère",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypoglycémie",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Glimépiride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Glimepiride'] -> ['Glimépiride']",
+      "therapeutic_group: None -> 'Antidiabétique'",
+      "atc_code: None -> 'A10BB12'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Glimépiride"
+    ]
+  },
+  {
+    "id": "ambisome_50_mg",
+    "brand_name": "AMBISOME",
+    "generic_name": "Amphotericine B liposomale",
+    "composition": [
+      "Amphotéricine B"
+    ],
+    "strength": "50 MG",
+    "form": "Pour pour dispersion à diluer pour perfusion",
+    "route": "IV",
+    "atc_code": "J02AA01",
+    "therapeutic_group": "ANTIMYCOSIQUE A USAGE SYSTEMIQU",
+    "drug_class": "Antifongique polyénique — Systémique large spectre",
+    "drugbank_id": null,
+    "mechanism": "Liaison à l'ergostérol de la membrane fongique, formation de pores → fuite ions et mort cellulaire. Formulations liposomales réduisent toxicité rénale.",
+    "half_life": "15 jours (forme conventionnelle), 100-150 h (liposomale)",
+    "indications": [
+      "Mycoses systémiques sévères (candidose invasive, aspergillose, cryptococcose, mucormycose, histoplasmose)",
+      "Leishmaniose viscérale"
+    ],
+    "contraindications": [
+      "Hypersensibilité (sauf indication vitale)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aminosides, ciclosporine, tacrolimus, cisplatine",
+        "severity": "majeure",
+        "effect": "Néphrotoxicité majorée"
+      },
+      {
+        "drug": "Diurétiques",
+        "severity": "majeure",
+        "effect": "Hypokaliémie sévère"
+      },
+      {
+        "drug": "Digoxine",
+        "severity": "majeure",
+        "effect": "Toxicité digoxine (hypokaliémie)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisable si infection menaçant le pronostic vital.",
+      "breastfeeding": "Données limitées — éviter si possible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "3-5 mg/kg/jour IV."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Néphrotoxicité dose-limitante",
+      "Hypokaliémie, hypomagnésémie",
+      "Anémie normochrome",
+      "Syndrome frisson-fièvre post-perfusion",
+      "Phlébite",
+      "Élévation transaminases",
+      "Neurotoxicité (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 10 flacons unidoses d'une contenance de 20 ml avec 10 filtres stériles",
+        "price_ppv_dhs": 11236,
+        "price_ph_dhs": 11029,
+        "laboratory": "AFRIC-PHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/ambisome-50-mg-pour-pour-dispersion-a-diluer-pour-perfusion/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/ambisome-50-mg-pour/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/amphotericine-b-liposomale.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] nat inferred as Médicament (source page lacks Nature du Produit field)",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Amphotéricine B')"
+    ],
+    "verification_corrections": [
+      "composition: ['Amphotericine B liposomale'] -> ['Amphotéricine B']",
+      "therapeutic_group: None -> 'ANTIMYCOSIQUE A USAGE SYSTEMIQU'",
+      "atc_code: None -> 'J02AA01'",
+      "nature_produit: None -> 'Médicament' (inferred)",
+      "form: 'Pour' -> 'Pour pour dispersion à diluer pour perfusion'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Amphotéricine B"
+    ]
+  },
+  {
+    "id": "amcard_10_mg",
+    "brand_name": "AMCARD",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 7",
+        "price_ppv_dhs": 20.8,
+        "price_ph_dhs": 13,
+        "laboratory": "GENPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amcard-10-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amcard-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "amcard_5_mg",
+    "brand_name": "AMCARD",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 7",
+        "price_ppv_dhs": 14.2,
+        "price_ph_dhs": 8.9,
+        "laboratory": "GENPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amcard-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amcard-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "amep_10_mg",
+    "brand_name": "AMEP",
+    "generic_name": "Amoxicilline",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Pénicilline à large spectre (aminopénicilline)",
+    "drugbank_id": "DB01060",
+    "mechanism": "Inhibition de la synthèse de la paroi bactérienne par liaison aux PBP (Penicillin Binding Proteins).",
+    "half_life": "1-1.5h",
+    "indications": [
+      "Infections respiratoires (pneumonie, bronchite, sinusite, OMA)",
+      "Infections urinaires",
+      "Infections cutanées et des tissus mous",
+      "Éradication H. pylori (en association)",
+      "Prophylaxie endocardite infectieuse"
+    ],
+    "contraindications": [
+      "Allergie aux pénicillines",
+      "Hypersensibilité aux céphalosporines (allergie croisée possible)",
+      "Mononucléose infectieuse (rash)"
+    ],
+    "interactions": [
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation toxicité MTX par compétition sur élimination tubulaire"
+      },
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "modérée",
+        "effect": "Possible potentialisation effet anticoagulant"
+      },
+      {
+        "drug": "Allopurinol",
+        "severity": "mineure",
+        "effect": "Augmentation incidence du rash cutané"
+      },
+      {
+        "drug": "Contraceptifs oraux",
+        "severity": "mineure",
+        "effect": "Possible réduction efficacité contraceptive (rare)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisable pendant la grossesse. Pas de tératogénicité démontrée.",
+      "breastfeeding": "Compatible. Passe en faibles quantités dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable dès la naissance. Adapter la dose au poids.",
+      "dose_rule": "25-50 mg/kg/j en 2-3 prises selon l'indication"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire la dose si DFG<30 ml/min. Allonger les intervalles."
+    },
+    "dosage": {
+      "adult": "500mg à 1g toutes les 8h ou 1g toutes les 12h selon la sévérité",
+      "children": "25-50mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Diarrhée",
+      "Nausées",
+      "Rash cutané (fréquent)",
+      "Réactions allergiques (urticaire, anaphylaxie)",
+      "Colite à Clostridium difficile",
+      "Candidose"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 36.7,
+        "price_ph_dhs": 22.9,
+        "laboratory": "COOPER PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amep-10mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amep-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01060",
+      "drugs_com": "https://www.drugs.com/amoxicilline.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Amoxicilline'] -> ['Amlodipine']",
+      "therapeutic_group: 'Antibiotique' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "atc_code: 'J01CA04' -> 'C08CA01'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "amep_5_mg",
+    "brand_name": "AMEP",
+    "generic_name": "Amoxicilline",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Pénicilline à large spectre (aminopénicilline)",
+    "drugbank_id": "DB01060",
+    "mechanism": "Inhibition de la synthèse de la paroi bactérienne par liaison aux PBP (Penicillin Binding Proteins).",
+    "half_life": "1-1.5h",
+    "indications": [
+      "Infections respiratoires (pneumonie, bronchite, sinusite, OMA)",
+      "Infections urinaires",
+      "Infections cutanées et des tissus mous",
+      "Éradication H. pylori (en association)",
+      "Prophylaxie endocardite infectieuse"
+    ],
+    "contraindications": [
+      "Allergie aux pénicillines",
+      "Hypersensibilité aux céphalosporines (allergie croisée possible)",
+      "Mononucléose infectieuse (rash)"
+    ],
+    "interactions": [
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation toxicité MTX par compétition sur élimination tubulaire"
+      },
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "modérée",
+        "effect": "Possible potentialisation effet anticoagulant"
+      },
+      {
+        "drug": "Allopurinol",
+        "severity": "mineure",
+        "effect": "Augmentation incidence du rash cutané"
+      },
+      {
+        "drug": "Contraceptifs oraux",
+        "severity": "mineure",
+        "effect": "Possible réduction efficacité contraceptive (rare)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisable pendant la grossesse. Pas de tératogénicité démontrée.",
+      "breastfeeding": "Compatible. Passe en faibles quantités dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable dès la naissance. Adapter la dose au poids.",
+      "dose_rule": "25-50 mg/kg/j en 2-3 prises selon l'indication"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire la dose si DFG<30 ml/min. Allonger les intervalles."
+    },
+    "dosage": {
+      "adult": "500mg à 1g toutes les 8h ou 1g toutes les 12h selon la sévérité",
+      "children": "25-50mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Diarrhée",
+      "Nausées",
+      "Rash cutané (fréquent)",
+      "Réactions allergiques (urticaire, anaphylaxie)",
+      "Colite à Clostridium difficile",
+      "Candidose"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 25,
+        "price_ph_dhs": 15.6,
+        "laboratory": "COOPER PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amep-5mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amep-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01060",
+      "drugs_com": "https://www.drugs.com/amoxicilline.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Amoxicilline'] -> ['Amlodipine']",
+      "therapeutic_group: 'Antibiotique' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "atc_code: 'J01CA04' -> 'C08CA01'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "amian_100_mg",
+    "brand_name": "AMIAN",
+    "generic_name": "Amiodarone",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptique atypique",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Fibrillation auriculaire",
+      "Flutter",
+      "TV/FV",
+      "Syndrome de WPW"
+    ],
+    "contraindications": [
+      "Dysthyroïdies",
+      "BAV 2e-3e degré",
+      "Bradycardie",
+      "Hypersensibilité à l'iode",
+      "Grossesse",
+      "Allaitement",
+      "Association médicaments allongeant QT"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué sauf urgence vitale.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Usage spécialisé.",
+      "dose_rule": "Charge: 10-15 mg/kg/j x 7-14j. Entretien: 5 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement (élimination hépatique)."
+    },
+    "dosage": {
+      "adult": "Charge: 600-800 mg/j x 1-3 sem. Entretien: 100-400 mg/j.",
+      "children": "10-15 mg/kg/j charge, 5 mg/kg/j entretien."
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 84.8,
+        "price_ph_dhs": 53,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amian-100-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "CARDIAQUE_PRUDENCE",
+      "TABLEAU_A",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amian-100-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/amiodarone.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Sotalol",
+          "Quinidine",
+          "Dofétilide"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques allongeant QT"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Allongement QT → torsade de pointes",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine",
+          "Atorvastatine"
+        ],
+        "interacting_classes": [
+          "Statines CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Limiter simvastatine à 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation digoxinémie",
+        "recommendation": "Réduire digoxine de 50%."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Réduire AVK de 30-50%."
+      },
+      {
+        "interacting_drugs": [
+          "Sofosbuvir",
+          "Epclusa"
+        ],
+        "interacting_classes": [
+          "Antiviraux VHC"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Bradycardie sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Amiodarone'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptique atypique'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "amian_200_mg",
+    "brand_name": "AMIAN",
+    "generic_name": "Amiodarone",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptique atypique",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Fibrillation auriculaire",
+      "Flutter",
+      "TV/FV",
+      "Syndrome de WPW"
+    ],
+    "contraindications": [
+      "Dysthyroïdies",
+      "BAV 2e-3e degré",
+      "Bradycardie",
+      "Hypersensibilité à l'iode",
+      "Grossesse",
+      "Allaitement",
+      "Association médicaments allongeant QT"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué sauf urgence vitale.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Usage spécialisé.",
+      "dose_rule": "Charge: 10-15 mg/kg/j x 7-14j. Entretien: 5 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement (élimination hépatique)."
+    },
+    "dosage": {
+      "adult": "Charge: 600-800 mg/j x 1-3 sem. Entretien: 100-400 mg/j.",
+      "children": "10-15 mg/kg/j charge, 5 mg/kg/j entretien."
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 191,
+        "price_ph_dhs": 119.4,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amian-200-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "CARDIAQUE_PRUDENCE",
+      "TABLEAU_A",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amian-200-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/amiodarone.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Sotalol",
+          "Quinidine",
+          "Dofétilide"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques allongeant QT"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Allongement QT → torsade de pointes",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine",
+          "Atorvastatine"
+        ],
+        "interacting_classes": [
+          "Statines CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Limiter simvastatine à 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation digoxinémie",
+        "recommendation": "Réduire digoxine de 50%."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Réduire AVK de 30-50%."
+      },
+      {
+        "interacting_drugs": [
+          "Sofosbuvir",
+          "Epclusa"
+        ],
+        "interacting_classes": [
+          "Antiviraux VHC"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Bradycardie sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Amiodarone'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptique atypique'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "amian_400_mg",
+    "brand_name": "AMIAN",
+    "generic_name": "Amiodarone",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "400",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptique atypique",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Fibrillation auriculaire",
+      "Flutter",
+      "TV/FV",
+      "Syndrome de WPW"
+    ],
+    "contraindications": [
+      "Dysthyroïdies",
+      "BAV 2e-3e degré",
+      "Bradycardie",
+      "Hypersensibilité à l'iode",
+      "Grossesse",
+      "Allaitement",
+      "Association médicaments allongeant QT"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué sauf urgence vitale.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Usage spécialisé.",
+      "dose_rule": "Charge: 10-15 mg/kg/j x 7-14j. Entretien: 5 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement (élimination hépatique)."
+    },
+    "dosage": {
+      "adult": "Charge: 600-800 mg/j x 1-3 sem. Entretien: 100-400 mg/j.",
+      "children": "10-15 mg/kg/j charge, 5 mg/kg/j entretien."
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 276,
+        "price_ph_dhs": 172.7,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amian-400-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "CARDIAQUE_PRUDENCE",
+      "TABLEAU_A",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amian-400-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/amiodarone.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Sotalol",
+          "Quinidine",
+          "Dofétilide"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques allongeant QT"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Allongement QT → torsade de pointes",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine",
+          "Atorvastatine"
+        ],
+        "interacting_classes": [
+          "Statines CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Limiter simvastatine à 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation digoxinémie",
+        "recommendation": "Réduire digoxine de 50%."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Réduire AVK de 30-50%."
+      },
+      {
+        "interacting_drugs": [
+          "Sofosbuvir",
+          "Epclusa"
+        ],
+        "interacting_classes": [
+          "Antiviraux VHC"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Bradycardie sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Amiodarone'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptique atypique'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "strength: '400 MG' -> '400'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "amian_50_mg",
+    "brand_name": "AMIAN",
+    "generic_name": "Amiodarone",
+    "composition": [
+      "Amisulpiride"
+    ],
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptique atypique",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Fibrillation auriculaire",
+      "Flutter",
+      "TV/FV",
+      "Syndrome de WPW"
+    ],
+    "contraindications": [
+      "Dysthyroïdies",
+      "BAV 2e-3e degré",
+      "Bradycardie",
+      "Hypersensibilité à l'iode",
+      "Grossesse",
+      "Allaitement",
+      "Association médicaments allongeant QT"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué sauf urgence vitale.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Usage spécialisé.",
+      "dose_rule": "Charge: 10-15 mg/kg/j x 7-14j. Entretien: 5 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement (élimination hépatique)."
+    },
+    "dosage": {
+      "adult": "Charge: 600-800 mg/j x 1-3 sem. Entretien: 100-400 mg/j.",
+      "children": "10-15 mg/kg/j charge, 5 mg/kg/j entretien."
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 55.6,
+        "price_ph_dhs": 34.8,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amian-50-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "CARDIAQUE_PRUDENCE",
+      "TABLEAU_A",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amian-50-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/amiodarone.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Sotalol",
+          "Quinidine",
+          "Dofétilide"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques allongeant QT"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Allongement QT → torsade de pointes",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine",
+          "Atorvastatine"
+        ],
+        "interacting_classes": [
+          "Statines CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Limiter simvastatine à 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation digoxinémie",
+        "recommendation": "Réduire digoxine de 50%."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR",
+        "recommendation": "Réduire AVK de 30-50%."
+      },
+      {
+        "interacting_drugs": [
+          "Sofosbuvir",
+          "Epclusa"
+        ],
+        "interacting_classes": [
+          "Antiviraux VHC"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Bradycardie sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amisulpiride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Amiodarone'] -> ['Amisulpiride']",
+      "therapeutic_group: None -> 'Neuroleptique atypique'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amisulpiride"
+    ]
+  },
+  {
+    "id": "amiflox_2_mg",
+    "brand_name": "AMIFLOX",
+    "generic_name": "Ofloxacine",
+    "composition": [
+      "Ciprofloxacine"
+    ],
+    "strength": "2 MG",
+    "form": "Solution pour perfusion",
+    "route": "Orale",
+    "atc_code": "J01MA02",
+    "therapeutic_group": "Antibiotique de la famille des fluoroquinolones",
+    "drug_class": "Antibiotique — Fluoroquinolone de 2e génération",
+    "drugbank_id": null,
+    "mechanism": "Inhibition de l'ADN gyrase (topoisomérase II) et de la topoisomérase IV bactériennes, bloquant la réplication de l'ADN.",
+    "half_life": "3-5 h",
+    "indications": [
+      "Infections urinaires",
+      "Prostatite",
+      "Infections génitales",
+      "Infections respiratoires"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "Enfant <18 ans",
+      "Épilepsie",
+      "Tendinopathie sous FQ"
+    ],
+    "interactions": [
+      {
+        "drug": "Théophylline",
+        "severity": "majeure",
+        "effect": "Augmentation concentration théophylline, risque de toxicité"
+      },
+      {
+        "drug": "Antiacides, fer, calcium, zinc",
+        "severity": "modérée",
+        "effect": "Chélation, réduction absorption — espacer de 2h"
+      },
+      {
+        "drug": "Warfarine",
+        "severity": "majeure",
+        "effect": "Majoration effet anticoagulant"
+      },
+      {
+        "drug": "Corticoïdes",
+        "severity": "modérée",
+        "effect": "Majoration risque tendinopathie"
+      },
+      {
+        "drug": "Tizanidine",
+        "severity": "majeure",
+        "effect": "Hypotension sévère — contre-indiqué"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-50: 200 mg/j. ClCr <20: 200 mg/48h."
+    },
+    "dosage": {
+      "adult": "200-400 mg 2x/jour.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Tendinopathies (rupture du tendon d'Achille)",
+      "Allongement QT",
+      "Troubles digestifs",
+      "Photosensibilité",
+      "Troubles neuropsychiatriques (confusion, convulsions)",
+      "Colite à Clostridium difficile",
+      "Hypoglycémie (surtout diabétiques)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Poche de 100 ml",
+        "price_ppv_dhs": 133.6,
+        "price_ph_dhs": 83.5,
+        "laboratory": "AMANYS PHARMA (Ex SAHAM PHARMA)",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amiflox-2-mg-solution-pour-perfusion/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amiflox-2-mg-solution/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/ofloxacine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Antiacides",
+          "Fer",
+          "Calcium"
+        ],
+        "interacting_classes": [
+          "Cations divalents"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution absorption",
+        "recommendation": "Espacer 2h."
+      },
+      {
+        "interacting_drugs": [
+          "Théophylline"
+        ],
+        "interacting_classes": [
+          "Bases xanthiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation théophyllinémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] nat inferred as Médicament (source page lacks Nature du Produit field)",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Ciprofloxacine')"
+    ],
+    "verification_corrections": [
+      "composition: ['Ofloxacine'] -> ['Ciprofloxacine']",
+      "therapeutic_group: None -> 'Antibiotique de la famille des fluoroquinolones'",
+      "atc_code: None -> 'J01MA02'",
+      "nature_produit: None -> 'Médicament' (inferred)",
+      "form: 'Solution' -> 'Solution pour perfusion'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Ciprofloxacine"
+    ]
+  },
+  {
+    "id": "amikacine_mylan_250_mg",
+    "brand_name": "AMIKACINE MYLAN",
+    "generic_name": "Amikacine",
+    "composition": [
+      "Amikacine"
+    ],
+    "strength": "250 MG",
+    "form": "Poudre solvant pour solution injectable",
+    "route": "IV / IM",
+    "atc_code": "J01GB06",
+    "therapeutic_group": "Antibiotiques, aminoside",
+    "drug_class": "Antibiotique — Aminoglycoside (semi-synthétique)",
+    "drugbank_id": null,
+    "mechanism": "Liaison à la sous-unité ribosomale 30S, inhibition de la synthèse protéique bactérienne → bactéricidie concentration-dépendante.",
+    "half_life": "2-3 h (adulte)",
+    "indications": [
+      "Infections sévères à BGN (septicémie, pyélonéphrite, endocardite)",
+      "Infections nosocomiales"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux aminosides",
+      "Myasthénie"
+    ],
+    "interactions": [
+      {
+        "drug": "Diurétiques de l'anse (furosémide)",
+        "severity": "majeure",
+        "effect": "Oto/néphrotoxicité majorées"
+      },
+      {
+        "drug": "Vancomycine, amphotéricine B",
+        "severity": "majeure",
+        "effect": "Néphrotoxicité"
+      },
+      {
+        "drug": "Curares",
+        "severity": "majeure",
+        "effect": "Blocage neuromusculaire prolongé"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Ototoxicité fœtale. Utiliser uniquement si vital.",
+      "breastfeeding": "Compatible avec prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé dès la naissance.",
+      "dose_rule": "15-20 mg/kg/jour en 1-2 injections IV/IM."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Adapter selon ClCr. Dosage des pics et vallées obligatoire."
+    },
+    "dosage": {
+      "adult": "15-20 mg/kg/jour IV/IM en 1-2 injections. Durée: 3-7 jours.",
+      "children": "15-20 mg/kg/jour."
+    },
+    "adverse_effects": [
+      "Néphrotoxicité (tubulaire, réversible)",
+      "Ototoxicité (cochléaire et vestibulaire, potentiellement irréversible)",
+      "Blocage neuromusculaire (forte dose)",
+      "Éruption cutanée"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 20 flacons de 2 ML",
+        "price_ppv_dhs": 562,
+        "price_ph_dhs": 373,
+        "laboratory": "SYNTHEMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amikacine-merck-250-mg-poudre-solvant-pour-solution-injectable-2/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amikacine-mylan-250-mg-poudre/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/amikacine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Furosémide",
+          "Lasilix"
+        ],
+        "interacting_classes": [
+          "Diurétiques de l'anse"
+        ],
+        "severity": "DANGER",
+        "effect": "Ototoxicité et néphrotoxicité cumulatives",
+        "recommendation": "Éviter. Surveillance audiogramme + créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Vancomycine"
+        ],
+        "interacting_classes": [
+          "Glycopeptides"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Néphrotoxicité additive",
+        "recommendation": "Surveiller créatinine."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amikacine')"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: None -> 'Antibiotiques, aminoside'",
+      "atc_code: None -> 'J01GB06'",
+      "nature_produit: None -> 'Médicament'",
+      "form: 'Poudre' -> 'Poudre solvant pour solution injectable'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amikacine"
+    ]
+  },
+  {
+    "id": "amiprim_100_mg",
+    "brand_name": "AMIPRIM",
+    "generic_name": "Trimethoprime + Sulfamethoxazole",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "100 MG",
+    "form": "Comprimé sécable",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Schizophrénie aiguë et chronique",
+      "Épisode dépressif majeur (faible dose)"
+    ],
+    "contraindications": [
+      "Phéochromocytome",
+      "Tumeurs prolactino-dépendantes (adénome hypophysaire à prolactine, cancer du sein)",
+      "Association à la lévodopa",
+      "Allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser seulement si bénéfice>risque. Risque de syndrome extrapyramidal et de sevrage chez le nouveau-né en cas d'exposition au 3e trimestre.",
+      "breastfeeding": "Passe dans le lait maternel. Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 84.8,
+        "price_ph_dhs": 53,
+        "laboratory": "RIM PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amiprim-100-mg-comprime-secable/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amiprim-100-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/trimethoprime.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Trimethoprime', 'Sulfamethoxazole'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptiques atypiques'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "form: 'Comprimé' -> 'Comprimé sécable'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "amiprim_200_mg",
+    "brand_name": "AMIPRIM",
+    "generic_name": "Trimethoprime + Sulfamethoxazole",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "200 MG",
+    "form": "Comprimé sécable",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Schizophrénie aiguë et chronique",
+      "Épisode dépressif majeur (faible dose)"
+    ],
+    "contraindications": [
+      "Phéochromocytome",
+      "Tumeurs prolactino-dépendantes (adénome hypophysaire à prolactine, cancer du sein)",
+      "Association à la lévodopa",
+      "Allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser seulement si bénéfice>risque. Risque de syndrome extrapyramidal et de sevrage chez le nouveau-né en cas d'exposition au 3e trimestre.",
+      "breastfeeding": "Passe dans le lait maternel. Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 190.7,
+        "price_ph_dhs": 119.2,
+        "laboratory": "RIM PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amiprim-200-mg-comprime-secable/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amiprim-200-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/trimethoprime.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Trimethoprime', 'Sulfamethoxazole'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptiques atypiques'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "form: 'Comprimé' -> 'Comprimé sécable'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "amiprim_50_mg",
+    "brand_name": "AMIPRIM",
+    "generic_name": "Trimethoprime + Sulfamethoxazole",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Schizophrénie aiguë et chronique",
+      "Épisode dépressif majeur (faible dose)"
+    ],
+    "contraindications": [
+      "Phéochromocytome",
+      "Tumeurs prolactino-dépendantes (adénome hypophysaire à prolactine, cancer du sein)",
+      "Association à la lévodopa",
+      "Allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser seulement si bénéfice>risque. Risque de syndrome extrapyramidal et de sevrage chez le nouveau-né en cas d'exposition au 3e trimestre.",
+      "breastfeeding": "Passe dans le lait maternel. Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 55.6,
+        "price_ph_dhs": 34.7,
+        "laboratory": "RIM PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amiprim-50-mg-comprime-secable/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A",
+      "PSYCHOACTIF"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amiprim-50-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/trimethoprime.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "psychoactive": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Trimethoprime', 'Sulfamethoxazole'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptiques atypiques'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "amlodipine_gt_10_mg",
+    "brand_name": "AMLODIPINE GT",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé sécable",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 28",
+        "price_ppv_dhs": 76,
+        "price_ph_dhs": 47.5,
+        "laboratory": "ATLAS PHARM",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amlodipine-gt-10mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amlodipine-gt-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'",
+      "form: 'Comprimé' -> 'Comprimé sécable'"
+    ]
+  },
+  {
+    "id": "amlodipine_gt_5_mg",
+    "brand_name": "AMLODIPINE GT",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé sécable",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 43,
+        "price_ph_dhs": 26.9,
+        "laboratory": "ATLAS PHARM",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amlodipine-gt-5mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amlodipine-gt-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'",
+      "form: 'Comprimé' -> 'Comprimé sécable'"
+    ]
+  },
+  {
+    "id": "amlodipine_maphar_10_mg",
+    "brand_name": "AMLODIPINE MAPHAR",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 28",
+        "price_ppv_dhs": 64,
+        "price_ph_dhs": 40,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amlodipine-win-10mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amlodipine-maphar-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "amlodipine_maphar_5_mg",
+    "brand_name": "AMLODIPINE MAPHAR",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé sécable",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Antiangoreux et Antihypertenseur (Inhibiteur calcique)",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 28",
+        "price_ppv_dhs": 36.2,
+        "price_ph_dhs": 22.6,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amlodipine-win-5mg-comprimes/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amlodipine-maphar-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Antiangoreux et Antihypertenseur (Inhibiteur calcique)'",
+      "nature_produit: None -> 'Médicament'",
+      "form: 'Comprimé' -> 'Comprimé sécable'"
+    ]
+  },
+  {
+    "id": "amlor_10_mg",
+    "brand_name": "AMLOR",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 98.9,
+        "price_ph_dhs": 61.8,
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amlor-10-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amlor-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'"
+    ]
+  },
+  {
+    "id": "amlor_5_mg",
+    "brand_name": "AMLOR",
+    "generic_name": "Amlodipine",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 56",
+        "price_ppv_dhs": 136.6,
+        "price_ph_dhs": 85.4,
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amlor-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amlor-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'"
+    ]
+  },
+  {
+    "id": "amlor_plus_10_mg___10_mg",
+    "brand_name": "AMLOR PLUS",
+    "generic_name": "Amlodipine + Atorvastatine",
+    "composition": [
+      "Amlodipine",
+      "Atrovastatine"
+    ],
+    "strength": "10 MG | 10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C10BX03",
+    "therapeutic_group": "Association d'un inhibiteur calcique et d'un hypolipémiant",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": "DB00381",
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Autorisé dès 6 ans pour l'HTA. Dose adaptée au poids.",
+      "dose_rule": "0.05-0.1mg/kg/j en 1 prise (max 5mg/j)"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire"
+    },
+    "dosage": {
+      "adult": "5-10mg/j en 1 prise",
+      "children": "2.5-5mg/j (6-17 ans)"
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 246,
+        "price_ph_dhs": 154.1,
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amlor-plus-10mg10mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amlor-plus-10-mg-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00381",
+      "drugs_com": "https://www.drugs.com/amlodipine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard"
+    ],
+    "verification_corrections": [
+      "composition: ['Amlodipine', 'Atorvastatine'] -> ['Amlodipine', 'Atrovastatine']",
+      "therapeutic_group: 'Antihypertenseur, Antiangineux' -> \"Association d'un inhibiteur calcique et d'un hypolipémiant\"",
+      "atc_code: 'C08CA01' -> 'C10BX03'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "strength: '10 MG / 10 MG' -> '10 MG | 10 MG'"
+    ]
+  },
+  {
+    "id": "amovas_10_mg",
+    "brand_name": "AMOVAS",
+    "generic_name": "Amoxicilline",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Pénicilline à large spectre (aminopénicilline)",
+    "drugbank_id": "DB01060",
+    "mechanism": "Inhibition de la synthèse de la paroi bactérienne par liaison aux PBP (Penicillin Binding Proteins).",
+    "half_life": "1-1.5h",
+    "indications": [
+      "Infections respiratoires (pneumonie, bronchite, sinusite, OMA)",
+      "Infections urinaires",
+      "Infections cutanées et des tissus mous",
+      "Éradication H. pylori (en association)",
+      "Prophylaxie endocardite infectieuse"
+    ],
+    "contraindications": [
+      "Allergie aux pénicillines",
+      "Hypersensibilité aux céphalosporines (allergie croisée possible)",
+      "Mononucléose infectieuse (rash)"
+    ],
+    "interactions": [
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation toxicité MTX par compétition sur élimination tubulaire"
+      },
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "modérée",
+        "effect": "Possible potentialisation effet anticoagulant"
+      },
+      {
+        "drug": "Allopurinol",
+        "severity": "mineure",
+        "effect": "Augmentation incidence du rash cutané"
+      },
+      {
+        "drug": "Contraceptifs oraux",
+        "severity": "mineure",
+        "effect": "Possible réduction efficacité contraceptive (rare)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisable pendant la grossesse. Pas de tératogénicité démontrée.",
+      "breastfeeding": "Compatible. Passe en faibles quantités dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable dès la naissance. Adapter la dose au poids.",
+      "dose_rule": "25-50 mg/kg/j en 2-3 prises selon l'indication"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire la dose si DFG<30 ml/min. Allonger les intervalles."
+    },
+    "dosage": {
+      "adult": "500mg à 1g toutes les 8h ou 1g toutes les 12h selon la sévérité",
+      "children": "25-50mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Diarrhée",
+      "Nausées",
+      "Rash cutané (fréquent)",
+      "Réactions allergiques (urticaire, anaphylaxie)",
+      "Colite à Clostridium difficile",
+      "Candidose"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 10",
+        "price_ppv_dhs": 29.8,
+        "price_ph_dhs": 18.6,
+        "laboratory": "POLYMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amovas-10-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amovas-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01060",
+      "drugs_com": "https://www.drugs.com/amoxicilline.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Amoxicilline'] -> ['Amlodipine']",
+      "therapeutic_group: 'Antibiotique' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "atc_code: 'J01CA04' -> 'C08CA01'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "amovas_5_mg",
+    "brand_name": "AMOVAS",
+    "generic_name": "Amoxicilline",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Pénicilline à large spectre (aminopénicilline)",
+    "drugbank_id": "DB01060",
+    "mechanism": "Inhibition de la synthèse de la paroi bactérienne par liaison aux PBP (Penicillin Binding Proteins).",
+    "half_life": "1-1.5h",
+    "indications": [
+      "Infections respiratoires (pneumonie, bronchite, sinusite, OMA)",
+      "Infections urinaires",
+      "Infections cutanées et des tissus mous",
+      "Éradication H. pylori (en association)",
+      "Prophylaxie endocardite infectieuse"
+    ],
+    "contraindications": [
+      "Allergie aux pénicillines",
+      "Hypersensibilité aux céphalosporines (allergie croisée possible)",
+      "Mononucléose infectieuse (rash)"
+    ],
+    "interactions": [
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation toxicité MTX par compétition sur élimination tubulaire"
+      },
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "modérée",
+        "effect": "Possible potentialisation effet anticoagulant"
+      },
+      {
+        "drug": "Allopurinol",
+        "severity": "mineure",
+        "effect": "Augmentation incidence du rash cutané"
+      },
+      {
+        "drug": "Contraceptifs oraux",
+        "severity": "mineure",
+        "effect": "Possible réduction efficacité contraceptive (rare)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisable pendant la grossesse. Pas de tératogénicité démontrée.",
+      "breastfeeding": "Compatible. Passe en faibles quantités dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable dès la naissance. Adapter la dose au poids.",
+      "dose_rule": "25-50 mg/kg/j en 2-3 prises selon l'indication"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire la dose si DFG<30 ml/min. Allonger les intervalles."
+    },
+    "dosage": {
+      "adult": "500mg à 1g toutes les 8h ou 1g toutes les 12h selon la sévérité",
+      "children": "25-50mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Diarrhée",
+      "Nausées",
+      "Rash cutané (fréquent)",
+      "Réactions allergiques (urticaire, anaphylaxie)",
+      "Colite à Clostridium difficile",
+      "Candidose"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 25,
+        "price_ph_dhs": 15.6,
+        "laboratory": "POLYMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/amovas-comprime-5-mg/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/amovas-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01060",
+      "drugs_com": "https://www.drugs.com/amoxicilline.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Amoxicilline'] -> ['Amlodipine']",
+      "therapeutic_group: 'Antibiotique' -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "atc_code: 'J01CA04' -> 'C08CA01'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  }
+]

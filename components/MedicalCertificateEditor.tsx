@@ -7,7 +7,6 @@ import { settingsService } from '../services/settingsService';
 import { toastService } from '../services/toastService';
 import MedicalCertificateTemplate from './MedicalCertificateTemplate';
 // @ts-ignore
-import html2pdf from 'html2pdf.js';
 
 interface MedicalCertificateEditorProps {
     patient: Patient;
@@ -77,7 +76,7 @@ const MedicalCertificateEditor: React.FC<MedicalCertificateEditorProps> = ({ pat
         window.print();
     };
 
-    const handleExportPDF = () => {
+    const handleExportPDF = async () => {
         const element = document.getElementById('cert-pdf-export');
         if (!element) return;
 
@@ -91,6 +90,7 @@ const MedicalCertificateEditor: React.FC<MedicalCertificateEditorProps> = ({ pat
         };
 
         toastService.info("Génération du certificat PDF...");
+        const html2pdf = (await import('html2pdf.js')).default;
         html2pdf()
             .set(opt)
             .from(element)

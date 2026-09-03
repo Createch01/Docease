@@ -29,11 +29,66 @@ import {
   Edit2,
   Activity,
   BrainCircuit,
-  Loader2
+  Loader2,
+  List,
+  LayoutGrid,
+  Stethoscope,
+  CheckCircle
 } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { toastService } from '../services/toastService';
-import { Appointment, AppointmentPriority, AppointmentStatus, Patient } from '../types';
+import { Appointment, AppointmentPriority, AppointmentStatus, AppointmentType, Patient } from '../types';
+
+type CalendarViewMode = 'week' | 'day' | 'list';
+
+const TIME_SLOTS_WEEK: string[] = (() => {
+  const slots: string[] = [];
+  for (let h = 8; h < 19; h++) {
+    slots.push(`${String(h).padStart(2, '0')}:00`);
+    slots.push(`${String(h).padStart(2, '0')}:30`);
+  }
+  slots.push('19:00');
+  return slots;
+})();
+
+const TIME_SLOTS_DAY: string[] = (() => {
+  const slots: string[] = [];
+  for (let h = 8; h < 19; h++) {
+    for (let m = 0; m < 60; m += 15) slots.push(`${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`);
+  }
+  slots.push('19:00');
+  return slots;
+})();
+
+const AGENDA_START_MIN = 8 * 60;
+const AGENDA_END_MIN = 19 * 60;
+const SLOT_PX = 24; // pixels per 15-minute unit
+
+const timeToMinutes = (t: string) => {
+  const [h, m] = t.split(':').map(Number);
+  return h * 60 + m;
+};
+
+const getMonday = (dateStr: string): Date => {
+  const d = new Date(dateStr + 'T00:00:00');
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return d;
+};
+
+const toDateStr = (d: Date) => d.toISOString().split('T')[0];
+
+const STATUS_META: Record<AppointmentStatus, { label: string; color: string; bg: string; border: string }> = {
+  PENDING: { label: 'En attente', color: '#ea580c', bg: '#fff7ed', border: '#fdba74' },
+  CONFIRMED: { label: 'Planifié', color: '#2563eb', bg: '#eff6ff', border: '#93c5fd' },
+  ARRIVED: { label: 'Patient arrivé', color: '#059669', bg: '#ecfdf5', border: '#6ee7b7' },
+  IN_CONSULTATION: { label: 'En consultation', color: '#d97706', bg: '#fffbeb', border: '#fcd34d' },
+  DONE: { label: 'Terminé', color: '#6b7280', bg: '#f3f4f6', border: '#d1d5db' },
+  REJECTED: { label: 'Annulé', color: '#dc2626', bg: '#fef2f2', border: '#fca5a5' },
+};
+
+const CONSULTATION_TYPES: AppointmentType[] = ['Consultation', 'Contrôle', 'Urgence', 'Vaccination', 'Autre'];
 
 const AppointmentManager: React.FC = () => {
   const todayStr = new Date().toISOString().split('T')[0];
@@ -43,9 +98,15 @@ const AppointmentManager: React.FC = () => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isClassifying, setIsClassifying] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<CalendarViewMode>('week');
+  const [detailAppointment, setDetailAppointment] = useState<Appointment | null>(null);
 
   // State for appointment form
-  const [newApp, setNewApp] = useState({ patientName: '', phone: '', note: '', bookedByDoctor: true });
+  const [newApp, setNewApp] = useState({
+    patientId: undefined as string | undefined,
+    patientName: '', phone: '', note: '', bookedByDoctor: true,
+    date: todayStr, time: '', duration: 30, consultationType: 'Consultation' as AppointmentType,
+  });
   const [patientSearch, setPatientSearch] = useState('');
   const [patientSuggestions, setPatientSuggestions] = useState<Patient[]>([]);
 
@@ -109,35 +170,58 @@ const AppointmentManager: React.FC = () => {
   };
 
   const selectPatient = (p: Patient) => {
-    setNewApp({
+    setNewApp(prev => ({
+      ...prev,
+      patientId: p.id,
       patientName: p.name,
       phone: p.phone || '',
-      note: '',
-      bookedByDoctor: true
-    });
+    }));
     setPatientSearch(p.name);
     setPatientSuggestions([]);
+  };
+
+  const resetForm = (date = selectedDate) => setNewApp({
+    patientId: undefined, patientName: '', phone: '', note: '', bookedByDoctor: true,
+    date, time: '', duration: 30, consultationType: 'Consultation',
+  });
+
+  const openCreateModal = (date: string, time?: string) => {
+    setEditingId(null);
+    resetForm(date);
+    if (time) setNewApp(prev => ({ ...prev, time }));
+    setPatientSearch('');
+    setIsAdding(true);
   };
 
   const startEdit = (app: Appointment) => {
     setEditingId(app.id);
     setNewApp({
+      patientId: app.patientId,
       patientName: app.patientName,
       phone: app.phone,
       note: app.note,
-      bookedByDoctor: app.bookedByDoctor || false
+      bookedByDoctor: app.bookedByDoctor || false,
+      date: app.date,
+      time: app.time || '',
+      duration: app.duration || 30,
+      consultationType: app.consultationType || 'Consultation',
     });
     setPatientSearch(app.patientName);
+    setDetailAppointment(null);
     setIsAdding(true);
   };
 
-  // Only count PENDING and CONFIRMED appointments for the quota
+  // Only count non-cancelled appointments for the quota
   const activeCount = useMemo(() => {
     return appointments.filter(a => a.status !== 'REJECTED').length;
   }, [appointments]);
 
   const handleSaveAppointment = async () => {
-    if (!editingId && activeCount >= dailyLimit) {
+    const targetDate = newApp.date || selectedDate;
+    const existingForDate = editingId ? appointments : dataService.getAppointmentsByDate(targetDate);
+    const activeForDate = existingForDate.filter(a => a.status !== 'REJECTED' && a.id !== editingId).length;
+    const limitForDate = dataService.getDailyCapacity(targetDate);
+    if (!editingId && activeForDate >= limitForDate) {
       toastService.warning("Quota atteint ! Augmentez la capacité ou annulez un rendez-vous.");
       return;
     }
@@ -152,9 +236,13 @@ const AppointmentManager: React.FC = () => {
 
     const appointment: Appointment = {
       id: editingId || Date.now().toString(),
+      patientId: newApp.patientId,
       patientName: newApp.patientName,
       phone: newApp.phone,
-      date: selectedDate,
+      date: targetDate,
+      time: newApp.time || undefined,
+      duration: newApp.duration,
+      consultationType: newApp.consultationType,
       note: newApp.note,
       priority: classification.priority,
       status: (editingId ? appointments.find(a => a.id === editingId)?.status : (newApp.bookedByDoctor ? 'CONFIRMED' : 'PENDING')) || 'PENDING',
@@ -168,7 +256,7 @@ const AppointmentManager: React.FC = () => {
     setIsClassifying(false);
     setIsAdding(false);
     setEditingId(null);
-    setNewApp({ patientName: '', phone: '', note: '', bookedByDoctor: true });
+    resetForm();
     setPatientSearch('');
   };
 
@@ -182,6 +270,7 @@ const AppointmentManager: React.FC = () => {
       patient = allPatients.find(p => p.name.toUpperCase() === app.patientName.toUpperCase()) || null;
     }
 
+    let patientId = patient?.id;
     if (!patient) {
       // 2. Create new patient if doesn't exist
       const newPatient: Patient = {
@@ -194,6 +283,7 @@ const AppointmentManager: React.FC = () => {
         registeredDate: new Date().toISOString()
       };
       await dataService.registerPatient(newPatient);
+      patientId = newPatient.id;
       toastService.success(`Nouveau dossier créé pour ${app.patientName}`);
     } else {
       // 3. Just add to queue if exists
@@ -201,8 +291,15 @@ const AppointmentManager: React.FC = () => {
       toastService.success(`${app.patientName} ajouté à la salle d'attente`);
     }
 
-    // 4. Update appointment status to reflect arrival (optional but good)
-    updateStatus(app.id, 'CONFIRMED');
+    // 4. Update appointment status to reflect arrival, link the patient record
+    const apps = dataService.getAppointments();
+    const target = apps.find(a => a.id === app.id);
+    if (target) {
+      target.status = 'ARRIVED';
+      target.patientId = patientId;
+      dataService.saveAppointment(target);
+    }
+    setDetailAppointment(null);
   };
 
   const updateStatus = (id: string, status: AppointmentStatus) => {
@@ -211,9 +308,9 @@ const AppointmentManager: React.FC = () => {
     if (app) {
       app.status = status;
       dataService.saveAppointment(app);
-      const statusLabel = status === 'CONFIRMED' ? 'confirmé' : status === 'REJECTED' ? 'annulé' : 'mis en attente';
-      toastService.info(`Rendez-vous ${statusLabel}`);
+      toastService.info(`Rendez-vous : ${STATUS_META[status].label.toLowerCase()}`);
     }
+    setDetailAppointment(null);
   };
 
   const handleDelete = (id: string) => {
@@ -269,6 +366,44 @@ const AppointmentManager: React.FC = () => {
 
   const isSelectedDatePast = selectedDate < todayStr;
   const isSelectedDateFull = activeCount >= dailyLimit;
+
+  // --- Vue Semaine / Jour : grille horaire 08h-19h ---
+  const weekDays = useMemo(() => {
+    const monday = getMonday(selectedDate);
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(monday);
+      d.setDate(monday.getDate() + i);
+      return d;
+    });
+  }, [selectedDate]);
+
+  const daysForGrid = viewMode === 'day' ? [new Date(selectedDate + 'T00:00:00')] : weekDays;
+  const gridTimeSlots = viewMode === 'day' ? TIME_SLOTS_DAY : TIME_SLOTS_WEEK;
+
+  const shiftDate = (dateStr: string, days: number) => {
+    const d = new Date(dateStr + 'T00:00:00');
+    d.setDate(d.getDate() + days);
+    return toDateStr(d);
+  };
+
+  const goToToday = () => setSelectedDate(todayStr);
+  const navigateGrid = (offset: number) => {
+    setSelectedDate(shiftDate(selectedDate, viewMode === 'day' ? offset : offset * 7));
+  };
+
+  const isArrivingSoon = (app: Appointment) => {
+    if (!app.time || app.date !== todayStr) return false;
+    if (app.status === 'DONE' || app.status === 'REJECTED') return false;
+    const start = timeToMinutes(app.time);
+    const now = new Date().getHours() * 60 + new Date().getMinutes();
+    return start >= now && start - now <= 30;
+  };
+
+  const appointmentsByDay = useMemo(() => {
+    const map: Record<string, Appointment[]> = {};
+    daysForGrid.forEach(d => { map[toDateStr(d)] = allAppointments.filter(a => a.date === toDateStr(d)); });
+    return map;
+  }, [allAppointments, daysForGrid]);
 
   return (
     <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 animate-in fade-in slide-in-from-bottom-4 duration-500 pb-20 text-black">
@@ -398,13 +533,39 @@ const AppointmentManager: React.FC = () => {
 
         {/* Action Bar */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="relative flex-1 w-full">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-            <input type="text" placeholder="Rechercher nom ou note..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-white border border-gray-100 rounded-2xl text-sm font-bold text-black outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm" />
+          <div className="flex items-center gap-2 bg-white p-1.5 rounded-2xl border border-gray-100 shadow-sm">
+            {([
+              { id: 'week', label: 'Semaine', icon: LayoutGrid },
+              { id: 'day', label: 'Jour', icon: CalendarIcon },
+              { id: 'list', label: 'Liste', icon: List },
+            ] as { id: CalendarViewMode; label: string; icon: any }[]).map(v => (
+              <button
+                key={v.id}
+                onClick={() => setViewMode(v.id)}
+                className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${viewMode === v.id ? 'bg-emerald-600 text-white shadow-md' : 'text-gray-400 hover:bg-gray-50'}`}
+              >
+                <v.icon size={14} /> {v.label}
+              </button>
+            ))}
           </div>
 
+          {(viewMode === 'week' || viewMode === 'day') && (
+            <div className="flex items-center gap-2 bg-white p-1.5 rounded-2xl border border-gray-100 shadow-sm">
+              <button onClick={() => navigateGrid(-1)} className="p-2 hover:bg-gray-100 rounded-xl transition-colors text-black"><ChevronLeft size={18} /></button>
+              <button onClick={goToToday} className="px-3 py-1.5 text-xs font-black uppercase tracking-widest text-emerald-600 hover:bg-emerald-50 rounded-xl transition-colors">Aujourd'hui</button>
+              <button onClick={() => navigateGrid(1)} className="p-2 hover:bg-gray-100 rounded-xl transition-colors text-black"><ChevronRight size={18} /></button>
+            </div>
+          )}
+
+          {viewMode === 'list' && (
+            <div className="relative flex-1 w-full">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
+              <input type="text" placeholder="Rechercher nom ou note..." value={searchTerm} onChange={e => setSearchTerm(e.target.value)} className="w-full pl-12 pr-4 py-3 bg-white border border-gray-100 rounded-2xl text-sm font-bold text-black outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm" />
+            </div>
+          )}
+
           <button
-            onClick={() => { setEditingId(null); setIsAdding(true); setNewApp({ patientName: '', phone: '', note: '', bookedByDoctor: true }); setPatientSearch(''); }}
+            onClick={() => openCreateModal(selectedDate)}
             disabled={isSelectedDatePast || isSelectedDateFull}
             className={`w-full sm:w-auto px-6 py-3 font-black rounded-2xl shadow-xl uppercase text-xs tracking-widest flex items-center justify-center gap-2 transition-all active:scale-95 ${isSelectedDatePast || isSelectedDateFull ? 'bg-gray-100 text-gray-400 cursor-not-allowed opacity-60' : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-100'}`}
           >
@@ -412,7 +573,115 @@ const AppointmentManager: React.FC = () => {
           </button>
         </div>
 
+        {/* Vue Semaine / Jour : grille horaire */}
+        {(viewMode === 'week' || viewMode === 'day') && (
+          <div className="bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <div style={{ minWidth: viewMode === 'week' ? '900px' : '260px' }}>
+                {/* En-têtes des jours */}
+                <div className="flex border-b border-gray-100 sticky top-0 bg-white z-10">
+                  <div className="w-16 shrink-0" />
+                  {daysForGrid.map(d => {
+                    const dStr = toDateStr(d);
+                    const isToday = dStr === todayStr;
+                    return (
+                      <div key={dStr} className={`flex-1 text-center py-3 border-l border-gray-100 ${isToday ? 'bg-emerald-50' : ''}`}>
+                        <p className="text-[9px] font-black text-gray-400 uppercase tracking-widest">{d.toLocaleDateString('fr-FR', { weekday: 'short' })}</p>
+                        <p className={`text-sm font-black ${isToday ? 'text-emerald-600' : 'text-gray-800'}`}>{d.getDate()}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* RDV sans horaire */}
+                {daysForGrid.some(d => (appointmentsByDay[toDateStr(d)] || []).some(a => !a.time)) && (
+                  <div className="flex border-b border-gray-100 bg-gray-50/50">
+                    <div className="w-16 shrink-0 flex items-center justify-center text-[8px] font-black text-gray-300 uppercase">Sans<br />horaire</div>
+                    {daysForGrid.map(d => {
+                      const dStr = toDateStr(d);
+                      const untimed = (appointmentsByDay[dStr] || []).filter(a => !a.time);
+                      return (
+                        <div key={dStr} className="flex-1 border-l border-gray-100 p-1.5 flex flex-wrap gap-1">
+                          {untimed.map(a => (
+                            <button
+                              key={a.id}
+                              onClick={() => setDetailAppointment(a)}
+                              className="px-2 py-0.5 rounded-md text-[9px] font-bold truncate max-w-full"
+                              style={{ background: STATUS_META[a.status].bg, color: STATUS_META[a.status].color, border: `1px solid ${STATUS_META[a.status].border}` }}
+                            >
+                              {a.patientName}
+                            </button>
+                          ))}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+
+                {/* Grille horaire */}
+                <div className="flex relative" style={{ height: ((AGENDA_END_MIN - AGENDA_START_MIN) / 15) * SLOT_PX }}>
+                  {/* Gouttière des heures */}
+                  <div className="w-16 shrink-0 relative">
+                    {gridTimeSlots.filter(t => t.endsWith(':00')).map(t => (
+                      <div
+                        key={t}
+                        className="absolute left-0 right-0 text-[9px] font-black text-gray-300 -translate-y-1/2 pr-2 text-right"
+                        style={{ top: ((timeToMinutes(t) - AGENDA_START_MIN) / 15) * SLOT_PX }}
+                      >
+                        {t}
+                      </div>
+                    ))}
+                  </div>
+
+                  {daysForGrid.map(d => {
+                    const dStr = toDateStr(d);
+                    const dayApps = (appointmentsByDay[dStr] || []).filter(a => a.time);
+                    const isPastDay = dStr < todayStr;
+                    return (
+                      <div key={dStr} className="flex-1 border-l border-gray-100 relative">
+                        {/* Lignes horaires cliquables */}
+                        {gridTimeSlots.map(t => (
+                          <button
+                            key={t}
+                            onClick={() => !isPastDay && openCreateModal(dStr, t)}
+                            disabled={isPastDay}
+                            className={`absolute left-0 right-0 border-t border-gray-50 hover:bg-emerald-50/40 transition-colors ${t.endsWith(':00') ? 'border-t-gray-100' : ''}`}
+                            style={{ top: ((timeToMinutes(t) - AGENDA_START_MIN) / 15) * SLOT_PX, height: SLOT_PX }}
+                          />
+                        ))}
+
+                        {/* RDV positionnés */}
+                        {dayApps.map(a => {
+                          const start = timeToMinutes(a.time!);
+                          const dur = a.duration || 30;
+                          const top = ((start - AGENDA_START_MIN) / 15) * SLOT_PX;
+                          const height = Math.max((dur / 15) * SLOT_PX - 2, SLOT_PX - 2);
+                          const soon = isArrivingSoon(a);
+                          return (
+                            <button
+                              key={a.id}
+                              onClick={() => setDetailAppointment(a)}
+                              className={`absolute left-1 right-1 rounded-lg px-2 py-1 text-left overflow-hidden shadow-sm transition-all hover:shadow-md z-[1] ${soon ? 'ring-2 ring-yellow-400 animate-pulse' : ''} ${a.status === 'REJECTED' ? 'opacity-50' : ''}`}
+                              style={{ top, height, background: soon ? '#fef9c3' : STATUS_META[a.status].bg, borderLeft: `3px solid ${STATUS_META[a.status].color}` }}
+                            >
+                              <p className={`text-[9px] font-black truncate ${a.status === 'REJECTED' ? 'line-through' : ''}`} style={{ color: STATUS_META[a.status].color }}>
+                                {a.time} · {a.patientName}
+                              </p>
+                              {height > 28 && <p className="text-[8px] text-gray-500 truncate">{a.consultationType || a.note}</p>}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Liste des Rendez-vous */}
+        {viewMode === 'list' && (
         <div className="grid grid-cols-1 gap-4">
           {filteredAppointments.length === 0 ? (
             <div className="bg-white py-20 rounded-[3rem] border-2 border-dashed border-gray-100 text-center">
@@ -444,11 +713,15 @@ const AppointmentManager: React.FC = () => {
                           <UserCheck size={10} /> Par Cabinet
                         </span>
                       )}
-                      <span className={`px-2 py-0.5 rounded-lg text-[8px] font-black uppercase ${app.status === 'CONFIRMED' ? 'bg-emerald-100 text-emerald-700' :
-                        app.status === 'REJECTED' ? 'bg-red-100 text-red-700' : 'bg-orange-100 text-orange-700'
-                        }`}>
-                        {app.status === 'CONFIRMED' ? 'Confirmé' : app.status === 'REJECTED' ? 'ANNULÉ' : 'En attente'}
+                      <span
+                        className="px-2 py-0.5 rounded-lg text-[8px] font-black uppercase"
+                        style={{ background: STATUS_META[app.status].bg, color: STATUS_META[app.status].color }}
+                      >
+                        {STATUS_META[app.status].label}
                       </span>
+                      {app.time && (
+                        <span className="text-[10px] font-black text-gray-400">{app.time}</span>
+                      )}
                     </div>
                     <div className="space-y-2">
                       <p className="text-xs text-gray-500 font-bold italic line-clamp-1">"{app.note}"</p>
@@ -495,8 +768,8 @@ const AppointmentManager: React.FC = () => {
                       </button>
                     )}
 
-                    {/* VALIDER / ARRIVÉ (Si en attente ou confirmé) */}
-                    {!isSelectedDatePast && app.status !== 'REJECTED' && (
+                    {/* VALIDER / ARRIVÉ (Si planifié) */}
+                    {!isSelectedDatePast && (app.status === 'PENDING' || app.status === 'CONFIRMED') && (
                       <button
                         onClick={() => handleMarkAsArrived(app)}
                         className="w-10 h-10 bg-emerald-600 text-white rounded-xl flex items-center justify-center hover:bg-emerald-700 transition-all shadow-lg shadow-emerald-100"
@@ -506,8 +779,30 @@ const AppointmentManager: React.FC = () => {
                       </button>
                     )}
 
+                    {/* EN CONSULTATION (Si arrivé) */}
+                    {app.status === 'ARRIVED' && (
+                      <button
+                        onClick={() => updateStatus(app.id, 'IN_CONSULTATION')}
+                        className="w-10 h-10 bg-amber-500 text-white rounded-xl flex items-center justify-center hover:bg-amber-600 transition-all shadow-lg shadow-amber-100"
+                        title="Marquer en consultation"
+                      >
+                        <Stethoscope size={18} />
+                      </button>
+                    )}
+
+                    {/* TERMINÉ (Si en consultation) */}
+                    {app.status === 'IN_CONSULTATION' && (
+                      <button
+                        onClick={() => updateStatus(app.id, 'DONE')}
+                        className="w-10 h-10 bg-gray-500 text-white rounded-xl flex items-center justify-center hover:bg-gray-600 transition-all shadow-lg shadow-gray-100"
+                        title="Marquer terminé"
+                      >
+                        <CheckCircle size={18} />
+                      </button>
+                    )}
+
                     {/* ANNULER (Ne compte plus dans le quota) */}
-                    {app.status !== 'REJECTED' && !isSelectedDatePast && (
+                    {app.status !== 'REJECTED' && app.status !== 'DONE' && !isSelectedDatePast && (
                       <button
                         onClick={() => updateStatus(app.id, 'REJECTED')}
                         className="w-10 h-10 bg-white border border-orange-200 text-orange-500 rounded-xl flex items-center justify-center hover:bg-orange-50 transition-all shadow-sm"
@@ -531,12 +826,13 @@ const AppointmentManager: React.FC = () => {
             ))
           )}
         </div>
+        )}
       </div>
 
       {/* --- MODAL ADD / EDIT --- */}
       {isAdding && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl p-8 animate-in zoom-in-95 duration-200">
+          <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl p-8 animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
             <div className="flex justify-between items-center mb-8">
               <div>
                 <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight">
@@ -546,7 +842,7 @@ const AppointmentManager: React.FC = () => {
                   {editingId ? 'Correction des informations' : 'Analyse automatique par IA activée'}
                 </p>
               </div>
-              <button onClick={() => { setIsAdding(false); setEditingId(null); setPatientSuggestions([]); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors text-black"><X size={20} /></button>
+              <button onClick={() => { setIsAdding(false); setEditingId(null); setPatientSuggestions([]); resetForm(); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors text-black"><X size={20} /></button>
             </div>
 
             <div className="space-y-6">
@@ -594,6 +890,50 @@ const AppointmentManager: React.FC = () => {
                 />
               </div>
 
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Date</label>
+                  <input
+                    type="date"
+                    value={newApp.date}
+                    onChange={e => setNewApp({ ...newApp, date: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Heure</label>
+                  <input
+                    type="time"
+                    value={newApp.time}
+                    onChange={e => setNewApp({ ...newApp, time: e.target.value })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Durée</label>
+                  <select
+                    value={newApp.duration}
+                    onChange={e => setNewApp({ ...newApp, duration: parseInt(e.target.value, 10) })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                  >
+                    {[15, 30, 45, 60].map(d => <option key={d} value={d}>{d} min</option>)}
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Type</label>
+                  <select
+                    value={newApp.consultationType}
+                    onChange={e => setNewApp({ ...newApp, consultationType: e.target.value as AppointmentType })}
+                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black text-sm outline-none focus:ring-2 focus:ring-emerald-500"
+                  >
+                    {CONSULTATION_TYPES.map(ct => <option key={ct} value={ct}>{ct}</option>)}
+                  </select>
+                </div>
+              </div>
+
               <div className="space-y-2">
                 <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center justify-between">
                   <span>Raison / Note</span>
@@ -621,6 +961,90 @@ const AppointmentManager: React.FC = () => {
           </div>
         </div>
       )}
+      {/* --- DETAIL PANEL (clic sur un RDV dans la grille) --- */}
+      {detailAppointment && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
+          <div className="bg-white w-full max-w-sm rounded-[2.5rem] shadow-2xl p-8 animate-in zoom-in-95 duration-200">
+            <div className="flex justify-between items-start mb-6">
+              <div>
+                <span
+                  className="inline-block px-2 py-0.5 rounded-lg text-[9px] font-black uppercase mb-2"
+                  style={{ background: STATUS_META[detailAppointment.status].bg, color: STATUS_META[detailAppointment.status].color }}
+                >
+                  {STATUS_META[detailAppointment.status].label}
+                </span>
+                <h3 className="text-lg font-black text-gray-900 uppercase tracking-tight">{detailAppointment.patientName}</h3>
+                <p className="text-[11px] font-bold text-gray-400 mt-0.5">
+                  {new Date(detailAppointment.date).toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
+                  {detailAppointment.time ? ` · ${detailAppointment.time}` : ''}
+                  {detailAppointment.duration ? ` (${detailAppointment.duration} min)` : ''}
+                </p>
+              </div>
+              <button onClick={() => setDetailAppointment(null)} className="p-2 hover:bg-gray-100 rounded-xl transition-colors text-black"><X size={18} /></button>
+            </div>
+
+            <div className="space-y-3 mb-6">
+              {detailAppointment.consultationType && (
+                <p className="text-xs font-bold text-gray-600 flex items-center gap-2"><Stethoscope size={13} className="text-gray-300" />{detailAppointment.consultationType}</p>
+              )}
+              {detailAppointment.phone && (
+                <p className="text-xs font-bold text-gray-600 flex items-center gap-2"><Phone size={13} className="text-gray-300" />{detailAppointment.phone}</p>
+              )}
+              <p className="text-xs text-gray-500 italic">"{detailAppointment.note}"</p>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              {detailAppointment.status !== 'REJECTED' && (
+                <button
+                  onClick={() => startEdit(detailAppointment)}
+                  className="py-3 bg-white border border-gray-200 text-blue-600 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-50 transition-all flex items-center justify-center gap-1.5"
+                >
+                  <Edit2 size={14} /> Modifier
+                </button>
+              )}
+              {(detailAppointment.status === 'PENDING' || detailAppointment.status === 'CONFIRMED') && (
+                <button
+                  onClick={() => handleMarkAsArrived(detailAppointment)}
+                  className="py-3 bg-emerald-600 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-emerald-700 transition-all flex items-center justify-center gap-1.5"
+                >
+                  <UserCheck size={14} /> Arrivé
+                </button>
+              )}
+              {detailAppointment.status === 'ARRIVED' && (
+                <button
+                  onClick={() => updateStatus(detailAppointment.id, 'IN_CONSULTATION')}
+                  className="py-3 bg-amber-500 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-amber-600 transition-all flex items-center justify-center gap-1.5"
+                >
+                  <Stethoscope size={14} /> En consultation
+                </button>
+              )}
+              {detailAppointment.status === 'IN_CONSULTATION' && (
+                <button
+                  onClick={() => updateStatus(detailAppointment.id, 'DONE')}
+                  className="py-3 bg-gray-500 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-gray-600 transition-all flex items-center justify-center gap-1.5"
+                >
+                  <CheckCircle size={14} /> Terminé
+                </button>
+              )}
+              {detailAppointment.status !== 'REJECTED' && detailAppointment.status !== 'DONE' && (
+                <button
+                  onClick={() => updateStatus(detailAppointment.id, 'REJECTED')}
+                  className="py-3 bg-white border border-orange-200 text-orange-500 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-orange-50 transition-all flex items-center justify-center gap-1.5"
+                >
+                  <Ban size={14} /> Annuler
+                </button>
+              )}
+              <button
+                onClick={() => { handleDelete(detailAppointment.id); setDetailAppointment(null); }}
+                className="py-3 bg-white border border-red-200 text-red-500 rounded-xl text-xs font-black uppercase tracking-widest hover:bg-red-50 transition-all flex items-center justify-center gap-1.5 col-span-2"
+              >
+                <Trash2 size={14} /> Supprimer
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* --- DELETE CONFIRMATION MODAL --- */}
       {deleteId && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[200] flex items-center justify-center p-4">

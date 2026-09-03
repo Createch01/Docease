@@ -1,0 +1,5056 @@
+[
+  {
+    "id": "R-RACIPER",
+    "brand_name": "RACIPER",
+    "generic_name": "Ésoméprazole",
+    "composition": [
+      {
+        "name": "Ésoméprazole",
+        "inn": "",
+        "dose": "20 mg"
+      },
+      {
+        "name": "Ésoméprazole",
+        "inn": "",
+        "dose": "40 mg"
+      }
+    ],
+    "atc_code": "A02BC05",
+    "therapeutic_group": "Antiulcéreux - IPP",
+    "drug_class": "Inhibiteur de la pompe à protons",
+    "form": "Comprimé MUPS",
+    "route": "Orale",
+    "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+    "presentations": [
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 7",
+        "price_ppv_dhs": 43.0
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 76.7
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 135.1
+      },
+      {
+        "strength": "40 MG",
+        "packaging": "Boîte de 7",
+        "price_ppv_dhs": 65.2
+      },
+      {
+        "strength": "40 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 114.8
+      },
+      {
+        "strength": "40 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 201.0
+      }
+    ],
+    "price_ppv_dhs": 135.1,
+    "indications": [
+      "RGO",
+      "Œsophagite érosive",
+      "Ulcère gastroduodénal",
+      "Éradication H. pylori",
+      "Prévention AINS",
+      "Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité benzimidazolés",
+      "Nelfinavir/Atazanavir"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution activation clopidogrel",
+        "recommendation": "Préférer pantoprazole."
+      },
+      {
+        "interacting_drugs": [
+          "Nelfinavir",
+          "Atazanavir"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Diminution majeure des antiviraux",
+        "recommendation": "CI absolue."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX haute dose",
+        "recommendation": "Envisager arrêt IPP."
+      },
+      {
+        "interacting_drugs": [
+          "Citalopram",
+          "Escitalopram"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux ISRS (CYP2C19)",
+        "recommendation": "Max citalopram 20 mg/j."
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisable si nécessaire.",
+      "breastfeeding": "Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "20-40 mg/j. H. pylori: 20 mg 2x/j + ATB x 7j.",
+      "children": "1-11 ans: 10 mg/j. ≥12 ans: 20-40 mg/j."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "INTERACTION_CLOPIDOGREL",
+      "HYPOMAGNESEMIE_PROLONGE"
+    ],
+    "market_data": [
+      {
+        "price": 43.0,
+        "price_ppv_dhs": 43.0,
+        "packaging": "20 MG — Boîte de 7",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/raciper-40-mg-comprime"
+      },
+      {
+        "price": 76.7,
+        "price_ppv_dhs": 76.7,
+        "packaging": "20 MG — Boîte de 14",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/raciper-40-mg-comprime"
+      },
+      {
+        "price": 135.1,
+        "price_ppv_dhs": 135.1,
+        "packaging": "20 MG — Boîte de 28",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/raciper-40-mg-comprime"
+      },
+      {
+        "price": 65.2,
+        "price_ppv_dhs": 65.2,
+        "packaging": "40 MG — Boîte de 7",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/raciper-40-mg-comprime"
+      },
+      {
+        "price": 114.8,
+        "price_ppv_dhs": 114.8,
+        "packaging": "40 MG — Boîte de 14",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/raciper-40-mg-comprime"
+      },
+      {
+        "price": 201.0,
+        "price_ppv_dhs": 201.0,
+        "packaging": "40 MG — Boîte de 28",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/raciper-40-mg-comprime"
+      }
+    ],
+    "record_id": "raciper_esomeprazole_comprime_mups",
+    "mechanism": "IPP.",
+    "half_life": "1-1.5 heures",
+    "interactions": [
+      "Clopidogrel"
+    ],
+    "adverse_effects": [
+      "Céphalées"
+    ]
+  },
+  {
+    "id": "R-RAMIPRIL-WIN",
+    "brand_name": "RAMIPRIL WIN",
+    "generic_name": "Ramipril",
+    "composition": [
+      {
+        "name": "Ramipril",
+        "inn": "",
+        "dose": "5 mg"
+      },
+      {
+        "name": "Ramipril",
+        "inn": "",
+        "dose": "10 mg"
+      }
+    ],
+    "atc_code": "C09AA05",
+    "therapeutic_group": "Antihypertenseurs - IEC",
+    "drug_class": "Inhibiteur de l'enzyme de conversion",
+    "form": "Comprimé",
+    "route": "Orale",
+    "laboratory": "MAPHAR",
+    "presentations": [
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 54.0
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 108.0
+      }
+    ],
+    "price_ppv_dhs": 108.0,
+    "indications": [
+      "HTA",
+      "Insuffisance cardiaque post-IDM",
+      "Prévention CV haut risque",
+      "Néphropathie diabétique",
+      "Dysfonction VG post-IDM"
+    ],
+    "contraindications": [
+      "Grossesse 2e-3e trim.",
+      "Sténose bilatérale artères rénales",
+      "ATCD angioedème sous IEC",
+      "Hyperkaliémie >5.5",
+      "Aliskiren chez diabétique"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ effet antihypertenseur + IRA + hyperkaliémie",
+        "recommendation": "Surveiller PA, créatinine, kaliémie."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithémie → toxicité",
+        "recommendation": "Doser lithémie fréquemment."
+      },
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Éplérénone",
+          "Amiloride"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie sévère",
+        "recommendation": "Surveiller K+. CI si K+>5."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren",
+          "Rasilez"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA → IRA, hyperkaliémie",
+        "recommendation": "CI chez diabétique et insuffisant rénal."
+      },
+      {
+        "interacting_drugs": [
+          "Potassium",
+          "Kalieff"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie",
+        "recommendation": "Éviter sauf hypokaliémie documentée."
+      },
+      {
+        "interacting_drugs": [
+          "Furosémide",
+          "Hydrochlorothiazide"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension 1ère dose",
+        "recommendation": "Arrêter diurétique 2-3j avant ou dose IEC minimale."
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI aux 2e-3e trim. (fœtotoxicité). Éviter au 1er trim.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-60: max 5 mg/j. ClCr<20: max 2.5 mg/j."
+    },
+    "dosage": {
+      "adult": "HTA: 2.5-10 mg/j. IC post-IDM: 1.25 mg 2x/j → 5 mg 2x/j.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "RISQUE_ANGIOOEDEME"
+    ],
+    "market_data": [
+      {
+        "price": 54.0,
+        "price_ppv_dhs": 54.0,
+        "packaging": "5 MG — Boîte de 30",
+        "laboratory": "MAPHAR",
+        "url": "https://www.medicament.ma/medicament/ramipril-win-10-mg-comprime"
+      },
+      {
+        "price": 108.0,
+        "price_ppv_dhs": 108.0,
+        "packaging": "10 MG — Boîte de 30",
+        "laboratory": "MAPHAR",
+        "url": "https://www.medicament.ma/medicament/ramipril-win-10-mg-comprime"
+      }
+    ],
+    "record_id": "ramipril_win_ramipril_comprime",
+    "mechanism": "IEC.",
+    "half_life": "13-17 heures",
+    "interactions": [
+      "Diurétiques épargneurs de potassium"
+    ],
+    "adverse_effects": [
+      "Toux sèche"
+    ]
+  },
+  {
+    "id": "R-RANCIPHEX",
+    "brand_name": "RANCIPHEX",
+    "generic_name": "Rabéprazole",
+    "composition": [
+      {
+        "name": "Rabéprazole",
+        "inn": "",
+        "dose": "10 mg"
+      },
+      {
+        "name": "Rabéprazole",
+        "inn": "",
+        "dose": "20 mg"
+      }
+    ],
+    "atc_code": "A02BC04",
+    "therapeutic_group": "Antiulcéreux - IPP",
+    "drug_class": "Inhibiteur de la pompe à protons",
+    "form": "Comprimé gastrorésistant",
+    "route": "Orale",
+    "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+    "presentations": [
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 46.6
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 77.4
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 60.3
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 106.3
+      }
+    ],
+    "price_ppv_dhs": 77.4,
+    "indications": [
+      "RGO",
+      "Ulcère gastroduodénal",
+      "Éradication H. pylori",
+      "Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité benzimidazolés"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ activation clopidogrel (moindre qu'ésoméprazole)",
+        "recommendation": "Préférer pantoprazole."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ élimination MTX haute dose",
+        "recommendation": "Surveiller."
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "10-20 mg/j. H. pylori: 20 mg 2x/j + ATB.",
+      "children": "≥12 ans: 20 mg/j."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "INTERACTION_CLOPIDOGREL"
+    ],
+    "market_data": [
+      {
+        "price": 46.6,
+        "price_ppv_dhs": 46.6,
+        "packaging": "10 MG — Boîte de 14",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranciphex-10-mg-comprime"
+      },
+      {
+        "price": 77.4,
+        "price_ppv_dhs": 77.4,
+        "packaging": "10 MG — Boîte de 28",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranciphex-10-mg-comprime"
+      },
+      {
+        "price": 60.3,
+        "price_ppv_dhs": 60.3,
+        "packaging": "20 MG — Boîte de 14",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranciphex-10-mg-comprime"
+      },
+      {
+        "price": 106.3,
+        "price_ppv_dhs": 106.3,
+        "packaging": "20 MG — Boîte de 28",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranciphex-10-mg-comprime"
+      }
+    ],
+    "record_id": "ranciphex_rabeprazole_comprime_gastroresistant",
+    "mechanism": "Inhibiteur de la pompe à protons.",
+    "half_life": "1-2 heures",
+    "interactions": [
+      "Clopidogrel"
+    ],
+    "adverse_effects": [
+      "Céphalées"
+    ]
+  },
+  {
+    "id": "R-RANCLAST",
+    "brand_name": "RANCLAST",
+    "generic_name": "Acide zolédronique",
+    "composition": [
+      {
+        "name": "Acide zolédronique",
+        "inn": "",
+        "dose": "4 mg / 5 mL"
+      }
+    ],
+    "atc_code": "M05BA08",
+    "therapeutic_group": "Médicaments de l'os - Bisphosphonates",
+    "drug_class": "Bisphosphonate injectable",
+    "form": "Solution à diluer pour perfusion IV",
+    "route": "IV",
+    "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+    "presentations": [
+      {
+        "strength": "4 MG / 5 ML",
+        "packaging": "Flacon de 5 mL",
+        "price_ppv_dhs": 1255.0
+      }
+    ],
+    "price_ppv_dhs": 1255.0,
+    "indications": [
+      "Ostéoporose post-ménopausique (1x/an)",
+      "Métastases osseuses",
+      "Hypercalcémie maligne",
+      "Maladie de Paget"
+    ],
+    "contraindications": [
+      "Hypocalcémie non corrigée",
+      "Grossesse",
+      "ClCr <35 mL/min (ostéoporose)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aminosides",
+          "Gentamicine",
+          "Amikacine"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypocalcémie additive + néphrotoxicité",
+        "recommendation": "Surveiller calcémie et créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Furosémide"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypocalcémie",
+        "recommendation": "Surveiller calcémie."
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI. Toxicité osseuse fœtale.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Ostéoporose: ClCr<35 CI. Métastases: ClCr<30 CI. Hydrater avant perfusion."
+    },
+    "dosage": {
+      "adult": "Ostéoporose: 5 mg IV 1x/an. Métastases: 4 mg IV/3-4 sem. Paget: 5 mg dose unique. Hypercalcémie: 4 mg dose unique.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "ALLAITEMENT_INTERDIT",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "OSTEONCROSE_MACHOIRE_RISQUE"
+    ],
+    "market_data": [
+      {
+        "price": 1255.0,
+        "price_ppv_dhs": 1255.0,
+        "packaging": "4 MG / 5 ML — Flacon de 5 mL",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranclast-4-mg-5-ml-solution"
+      }
+    ],
+    "record_id": "ranclast_acide_zoledronique_solution_a_diluer_pour_perfusion_iv",
+    "mechanism": "Bisphosphonate de 3e génération : inhibition puissante de la résorption osseuse ostéoclastique.",
+    "half_life": "fixation osseuse très prolongée",
+    "interactions": [
+      "Aminosides (hypocalcémie additive)"
+    ],
+    "adverse_effects": [
+      "Syndrome pseudo-grippal (1re perfusion)",
+      "Ostéonécrose de la mâchoire (rare)",
+      "Hypocalcémie"
+    ]
+  },
+  {
+    "id": "R-RANCLEER",
+    "brand_name": "RANCLEER",
+    "generic_name": "Pazopanib",
+    "composition": [
+      {
+        "name": "Pazopanib",
+        "inn": "",
+        "dose": "62.5 mg"
+      },
+      {
+        "name": "Pazopanib",
+        "inn": "",
+        "dose": "125 mg"
+      }
+    ],
+    "atc_code": "L01EX03",
+    "therapeutic_group": "Antinéoplasiques - Inhibiteurs de kinases",
+    "drug_class": "Inhibiteur multikinase (VEGFR, PDGFR, c-Kit)",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+    "presentations": [
+      {
+        "strength": "62.5 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 2714.0
+      },
+      {
+        "strength": "125 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 2786.0
+      }
+    ],
+    "price_ppv_dhs": 2786.0,
+    "indications": [
+      "Cancer du rein avancé (1ère ligne)",
+      "Sarcome des tissus mous avancé (2e ligne)"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Ritonavir",
+          "Itraconazole"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ taux pazopanib → toxicité",
+        "recommendation": "Éviter. Si indispensable: réduire à 400 mg."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ taux pazopanib → inefficacité",
+        "recommendation": "Éviter."
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine",
+          "Atorvastatine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux statine → rhabdomyolyse",
+        "recommendation": "Surveiller CPK."
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI. Embryotoxique. Contraception obligatoire.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si ClCr>30. Données limitées <30."
+    },
+    "dosage": {
+      "adult": "800 mg/j à jeun (1h avant ou 2h après repas).",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "INSUFFISANCE_HEPATIQUE",
+      "ALLONGEMENT_QT",
+      "CYTOTOXIQUE"
+    ],
+    "market_data": [
+      {
+        "price": 2714.0,
+        "price_ppv_dhs": 2714.0,
+        "packaging": "62.5 MG — Boîte de 30",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+        "url": "https://www.medicament.ma/medicament/rancleer-125-mg-comprime"
+      },
+      {
+        "price": 2786.0,
+        "price_ppv_dhs": 2786.0,
+        "packaging": "125 MG — Boîte de 30",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+        "url": "https://www.medicament.ma/medicament/rancleer-125-mg-comprime"
+      }
+    ],
+    "record_id": "rancleer_pazopanib_comprime_pellicule",
+    "mechanism": "Inhibiteur multikinase (VEGFR, PDGFR, KIT) : inhibition de l'angiogenèse et de la prolifération tumorale.",
+    "half_life": "31 heures",
+    "interactions": [
+      "Inhibiteurs/inducteurs du CYP3A4"
+    ],
+    "adverse_effects": [
+      "Hypertension",
+      "Hépatotoxicité",
+      "Diarrhée",
+      "Syndrome main-pied"
+    ]
+  },
+  {
+    "id": "R-RANOZYP",
+    "brand_name": "RANOZYP OD",
+    "generic_name": "Olanzapine",
+    "composition": [
+      {
+        "name": "Olanzapine",
+        "inn": "",
+        "dose": "5 mg"
+      },
+      {
+        "name": "Olanzapine",
+        "inn": "",
+        "dose": "10 mg"
+      }
+    ],
+    "atc_code": "N05AH03",
+    "therapeutic_group": "Antipsychotiques - Neuroleptiques atypiques",
+    "drug_class": "Antagoniste D2/5-HT2A (thiènobenzodiazépine)",
+    "form": "Comprimé orodispersible",
+    "route": "Orale",
+    "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+    "presentations": [
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 75.6
+      },
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 146.0
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 131.5
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 254.0
+      }
+    ],
+    "price_ppv_dhs": 254.0,
+    "indications": [
+      "Schizophrénie",
+      "Épisodes maniaques modérés à sévères (trouble bipolaire)",
+      "Prévention rechutes bipolaires"
+    ],
+    "contraindications": [
+      "Glaucome à angle fermé",
+      "Hypersensibilité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Benzodiazépines"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression SNC majorée, dépression respiratoire",
+        "recommendation": "Éviter association. Prudence surtout IV."
+      },
+      {
+        "interacting_drugs": [
+          "Carbamazépine",
+          "Tégrétol"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ 50% des taux d'olanzapine",
+        "recommendation": "Augmenter dose olanzapine."
+      },
+      {
+        "interacting_drugs": [
+          "Fluvoxamine",
+          "Ciprofloxacine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux olanzapine (CYP1A2)",
+        "recommendation": "Réduire dose olanzapine."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter si possible. Syndrome extrapyramidal/sevrage néonatal si exposition fin de grossesse.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "Schizo: 10 mg/j (5-20 mg/j). Manie: 15 mg/j (5-20 mg/j).",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "SYNDROME_METABOLIQUE",
+      "ALLONGEMENT_QT",
+      "HYPERPROLACTINEMIE"
+    ],
+    "market_data": [
+      {
+        "price": 75.6,
+        "price_ppv_dhs": 75.6,
+        "packaging": "5 MG — Boîte de 14",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranozyp-od"
+      },
+      {
+        "price": 146.0,
+        "price_ppv_dhs": 146.0,
+        "packaging": "5 MG — Boîte de 28",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranozyp-od"
+      },
+      {
+        "price": 131.5,
+        "price_ppv_dhs": 131.5,
+        "packaging": "10 MG — Boîte de 14",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranozyp-od"
+      },
+      {
+        "price": 254.0,
+        "price_ppv_dhs": 254.0,
+        "packaging": "10 MG — Boîte de 28",
+        "laboratory": "SUN PHARMACEUTICALS MOROCCO LLC",
+        "url": "https://www.medicament.ma/medicament/ranozyp-od"
+      }
+    ],
+    "record_id": "ranozyp_od_olanzapine_comprime_orodispersible",
+    "mechanism": "Antipsychotique atypique.",
+    "half_life": "30-38 heures",
+    "interactions": [
+      "Autres dépresseurs du SNC"
+    ],
+    "adverse_effects": [
+      "Prise de poids"
+    ]
+  },
+  {
+    "id": "R-RANPIROLE",
+    "brand_name": "RANPIROLE",
+    "generic_name": "Ropinirole",
+    "composition": [
+      {
+        "name": "Ropinirole",
+        "inn": "",
+        "dose": "0.25 mg"
+      },
+      {
+        "name": "Ropinirole",
+        "inn": "",
+        "dose": "0.5 mg"
+      },
+      {
+        "name": "Ropinirole",
+        "inn": "",
+        "dose": "1 mg"
+      }
+    ],
+    "atc_code": "N04BC04",
+    "therapeutic_group": "Antiparkinsoniens - Agonistes dopaminergiques",
+    "drug_class": "Agoniste sélectif des récepteurs dopaminergiques D2/D3",
+    "form": "Comprimé",
+    "route": "Orale",
+    "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+    "presentations": [
+      {
+        "strength": "0.25 MG",
+        "packaging": "Boîte de 126",
+        "price_ppv_dhs": 157.0
+      },
+      {
+        "strength": "0.5 MG",
+        "packaging": "Boîte de 84",
+        "price_ppv_dhs": 125.9
+      },
+      {
+        "strength": "1 MG",
+        "packaging": "Boîte de 21",
+        "price_ppv_dhs": 62.4
+      }
+    ],
+    "price_ppv_dhs": 157.0,
+    "indications": [
+      "Maladie de Parkinson (en monothérapie ou association lévodopa)",
+      "Syndrome des jambes sans repos (SJSR)"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère",
+      "Insuffisance rénale sévère (SJSR)",
+      "Hypersensibilité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluvoxamine",
+          "Ciprofloxacine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux ropinirole (CYP1A2) → nausées, hypotension",
+        "recommendation": "Réduire dose ropinirole."
+      },
+      {
+        "interacting_drugs": [
+          "Antipsychotiques",
+          "Métoclopramide"
+        ],
+        "severity": "DANGER",
+        "effect": "Antagonisme dopaminergique → perte d'efficacité",
+        "recommendation": "Éviter médicaments bloquant DA."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation sédation",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé. Arrêter si grossesse.",
+      "breastfeeding": "CI. Inhibe lactation."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr<30: CI pour SJSR. Parkinson: prudence."
+    },
+    "dosage": {
+      "adult": "Parkinson: début 0.25 mg 3x/j, titration progressive, cible 3-9 mg/j. SJSR: 0.25-4 mg/j au coucher.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ACCES_COMPORTEMENT_COMPULSIF",
+      "HYPOTENSION_ORTHOSTATIQUE"
+    ],
+    "market_data": [
+      {
+        "price": 157.0,
+        "price_ppv_dhs": 157.0,
+        "packaging": "0.25 MG — Boîte de 126",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+        "url": "https://www.medicament.ma/medicament/ranpirole"
+      },
+      {
+        "price": 125.9,
+        "price_ppv_dhs": 125.9,
+        "packaging": "0.5 MG — Boîte de 84",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+        "url": "https://www.medicament.ma/medicament/ranpirole"
+      },
+      {
+        "price": 62.4,
+        "price_ppv_dhs": 62.4,
+        "packaging": "1 MG — Boîte de 21",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+        "url": "https://www.medicament.ma/medicament/ranpirole"
+      }
+    ],
+    "record_id": "ranpirole_ropinirole_comprime",
+    "mechanism": "Agoniste dopaminergique non ergoté.",
+    "half_life": "6 heures",
+    "interactions": [
+      "Ciprofloxacine"
+    ],
+    "adverse_effects": [
+      "Somnolence"
+    ]
+  },
+  {
+    "id": "R-RANSIMVA",
+    "brand_name": "RANSIMVA",
+    "generic_name": "Simvastatine",
+    "composition": [
+      {
+        "name": "Simvastatine",
+        "inn": "",
+        "dose": "20 mg"
+      }
+    ],
+    "atc_code": "C10AA01",
+    "therapeutic_group": "Hypolipémiants - Statines",
+    "drug_class": "Inhibiteur HMG-CoA réductase",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+    "presentations": [
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 94.3
+      }
+    ],
+    "price_ppv_dhs": 94.3,
+    "indications": [
+      "Hypercholestérolémie primaire",
+      "Dyslipidémie mixte",
+      "Prévention cardiovasculaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique",
+      "Grossesse",
+      "Myopathie active",
+      "Association inhibiteurs CYP3A4 puissants"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Gemfibrozil"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "CI absolue."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Clarithromycine",
+          "Érythromycine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ taux simva → rhabdomyolyse",
+        "recommendation": "Suspendre simva."
+      },
+      {
+        "interacting_drugs": [
+          "Acide fusidique",
+          "Fucidine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Suspendre simva pendant Fucidine."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Cordarone"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ taux simva",
+        "recommendation": "Max 20 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Amlodipine",
+          "Diltiazem",
+          "Vérapamil"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ taux simva",
+        "recommendation": "Max 20 mg/j (Diltiazem/Vérapamil: max 10 mg/j)."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI. Tératogène.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr<30: débuter 5 mg/j, max 10 mg/j."
+    },
+    "dosage": {
+      "adult": "10-40 mg/j le soir. Max 80 mg (si déjà sous 80 mg sans problème musculaire).",
+      "children": "≥10 ans: 10-40 mg/j."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE",
+      "RISQUE_RHABDOMYOLYSE"
+    ],
+    "market_data": [
+      {
+        "price": 94.3,
+        "price_ppv_dhs": 94.3,
+        "packaging": "20 MG — Boîte de 30",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+        "url": "https://www.medicament.ma/medicament/ransimva-20-mg-comprime"
+      }
+    ],
+    "record_id": "ransimva_simvastatine_comprime_pellicule",
+    "mechanism": "Statine.",
+    "half_life": "2-3 heures (métabolite actif plus long)",
+    "interactions": [
+      "Inhibiteurs du CYP3A4"
+    ],
+    "adverse_effects": [
+      "Myalgies"
+    ]
+  },
+  {
+    "id": "R-RAPIFEN",
+    "brand_name": "RAPIFEN",
+    "generic_name": "Alfentanil",
+    "composition": [
+      {
+        "name": "Alfentanil",
+        "inn": "",
+        "dose": "5 mg / 10 mL"
+      }
+    ],
+    "atc_code": "N01AH02",
+    "therapeutic_group": "Anesthésiques généraux - Opioïdes",
+    "drug_class": "Opioïde agoniste µ à action rapide et courte (anesthésie)",
+    "form": "Solution injectable",
+    "route": "IV",
+    "laboratory": "MAPHAR",
+    "presentations": [
+      {
+        "strength": "5 MG / 10 ML",
+        "packaging": "Boîte de 10 ampoules de 10 mL",
+        "price_ppv_dhs": 451.0
+      }
+    ],
+    "price_ppv_dhs": 451.0,
+    "indications": [
+      "Analgésie en anesthésie générale (induction + entretien)",
+      "Sédation analgésie procédurale"
+    ],
+    "contraindications": [
+      "Dépression respiratoire sévère",
+      "Hypertension intracrânienne",
+      "Hypersensibilité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4 (Kétoconazole, Érythromycine, Ritonavir)"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ durée et intensité alfentanil → apnée",
+        "recommendation": "Réduire dose alfentanil."
+      },
+      {
+        "interacting_drugs": [
+          "Benzodiazépines",
+          "Propofol",
+          "Thiopental"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Synergie dépresseur SNC",
+        "recommendation": "Réduire doses mutuelles."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Usage réservé salle opération sous surveillance anesthésiste.",
+      "breastfeeding": "Déconseillé 24h après."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "dose_rule": "Calculé selon poids et procédure par anesthésiste."
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "Induction: 8-100 µg/kg selon technique. Entretien: 0.5-1 µg/kg/min IVSE.",
+      "children": "Selon poids sous contrôle anesthésiste."
+    },
+    "tableau_maroc": "SS",
+    "smart_flags": [
+      "STUPEFIANTS",
+      "USAGE_HOSPITALIER_UNIQUEMENT",
+      "DEPRESSION_RESPIRATOIRE"
+    ],
+    "market_data": [
+      {
+        "price": 451.0,
+        "price_ppv_dhs": 451.0,
+        "packaging": "5 MG / 10 ML — Boîte de 10 ampoules de 10 mL",
+        "laboratory": "MAPHAR",
+        "url": "https://www.medicament.ma/medicament/rapifen"
+      }
+    ],
+    "record_id": "rapifen_alfentanil_solution_injectable",
+    "mechanism": "Opioïde de synthèse à action rapide et courte, agoniste mu : analgésie peropératoire.",
+    "half_life": "1.5-2 heures",
+    "interactions": [
+      "Autres dépresseurs du SNC"
+    ],
+    "adverse_effects": [
+      "Dépression respiratoire",
+      "Rigidité musculaire",
+      "Bradycardie"
+    ]
+  },
+  {
+    "id": "R-RASTINE",
+    "brand_name": "RASTINE",
+    "generic_name": "Rosuvastatine",
+    "composition": [
+      {
+        "name": "Rosuvastatine",
+        "inn": "",
+        "dose": "5 mg"
+      },
+      {
+        "name": "Rosuvastatine",
+        "inn": "",
+        "dose": "10 mg"
+      },
+      {
+        "name": "Rosuvastatine",
+        "inn": "",
+        "dose": "20 mg"
+      }
+    ],
+    "atc_code": "C10AA07",
+    "therapeutic_group": "Hypolipémiants - Statines",
+    "drug_class": "Statine (inhibiteur HMG-CoA réductase) — la plus puissante",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "laboratory": "AXESS PHARMA (EX HAYDELENA)",
+    "presentations": [
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 106.5
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 154.1
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 249.0
+      }
+    ],
+    "price_ppv_dhs": 154.1,
+    "indications": [
+      "Hypercholestérolémie",
+      "Dyslipidémie mixte",
+      "Hypercholestérolémie familiale",
+      "Prévention cardiovasculaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique",
+      "Grossesse",
+      "Myopathie",
+      "Ciclosporine",
+      "ClCr<30 si dose >10 mg"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Néoral"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ ×7 taux rosuva → rhabdomyolyse",
+        "recommendation": "CI absolue."
+      },
+      {
+        "interacting_drugs": [
+          "Acide fusidique",
+          "Fucidine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Suspendre statine."
+      },
+      {
+        "interacting_drugs": [
+          "Gemfibrozil"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ ×2 taux rosuva",
+        "recommendation": "Préférer fénofibrate. Max 10 mg/j."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ INR",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI. Tératogène potentiel.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-60: max 20 mg/j. ClCr<30: max 10 mg/j."
+    },
+    "dosage": {
+      "adult": "5-40 mg/j en 1 prise (à tout moment). Débuter 5-10 mg/j.",
+      "children": "6-17 ans: 5-20 mg/j."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "TERATOGENE",
+      "RISQUE_RHABDOMYOLYSE",
+      "INSUFFISANCE_HEPATIQUE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_data": [
+      {
+        "price": 106.5,
+        "price_ppv_dhs": 106.5,
+        "packaging": "5 MG — Boîte de 30",
+        "laboratory": "AXESS PHARMA (EX HAYDELENA)",
+        "url": "https://www.medicament.ma/medicament/rastine-10-mg-comprime"
+      },
+      {
+        "price": 154.1,
+        "price_ppv_dhs": 154.1,
+        "packaging": "10 MG — Boîte de 30",
+        "laboratory": "AXESS PHARMA (EX HAYDELENA)",
+        "url": "https://www.medicament.ma/medicament/rastine-10-mg-comprime"
+      },
+      {
+        "price": 249.0,
+        "price_ppv_dhs": 249.0,
+        "packaging": "20 MG — Boîte de 30",
+        "laboratory": "AXESS PHARMA (EX HAYDELENA)",
+        "url": "https://www.medicament.ma/medicament/rastine-10-mg-comprime"
+      }
+    ],
+    "record_id": "rastine_rosuvastatine_comprime_pellicule",
+    "mechanism": "Statine.",
+    "half_life": "19 heures",
+    "interactions": [
+      "Ciclosporine"
+    ],
+    "adverse_effects": [
+      "Myalgies"
+    ]
+  },
+  {
+    "id": "R-RAVIVA",
+    "brand_name": "RAVIVA",
+    "generic_name": "Méloxicam",
+    "composition": [
+      {
+        "name": "Méloxicam",
+        "inn": "",
+        "dose": "7.5 mg"
+      },
+      {
+        "name": "Méloxicam",
+        "inn": "",
+        "dose": "15 mg"
+      }
+    ],
+    "atc_code": "M01AC06",
+    "therapeutic_group": "Anti-inflammatoires non stéroïdiens (AINS)",
+    "drug_class": "Oxicam - inhibiteur préférentiel COX-2",
+    "form": "Comprimé sécable",
+    "route": "Orale",
+    "laboratory": "ERGO MAROC",
+    "presentations": [
+      {
+        "strength": "7.5 MG",
+        "packaging": "Boîte de 10",
+        "price_ppv_dhs": 27.1
+      },
+      {
+        "strength": "7.5 MG",
+        "packaging": "Boîte de 20",
+        "price_ppv_dhs": 49.7
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 10",
+        "price_ppv_dhs": 36.4
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 20",
+        "price_ppv_dhs": 72.6
+      }
+    ],
+    "price_ppv_dhs": 72.6,
+    "indications": [
+      "Arthrose (symptomatique)",
+      "Polyarthrite rhumatoïde",
+      "Spondylarthrite ankylosante"
+    ],
+    "contraindications": [
+      "Ulcère GD actif",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre grossesse",
+      "Allergie AINS/aspirine"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AVK",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithémie → toxicité",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ effet antihypertenseur + risque rénal",
+        "recommendation": "Surveiller PA et créatinine."
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trim. (fermeture canal artériel). Déconseillé aux 1er-2e trim.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 16
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr<25: CI. Prudence si IRC modérée."
+    },
+    "dosage": {
+      "adult": "Arthrose: 7.5 mg/j. PR/SPA: 15 mg/j. Max 15 mg/j.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "RISQUE_DIGESTIF"
+    ],
+    "market_data": [
+      {
+        "price": 27.1,
+        "price_ppv_dhs": 27.1,
+        "packaging": "7.5 MG — Boîte de 10",
+        "laboratory": "ERGO MAROC",
+        "url": "https://www.medicament.ma/medicament/raviva-15-mg-comprime"
+      },
+      {
+        "price": 49.7,
+        "price_ppv_dhs": 49.7,
+        "packaging": "7.5 MG — Boîte de 20",
+        "laboratory": "ERGO MAROC",
+        "url": "https://www.medicament.ma/medicament/raviva-15-mg-comprime"
+      },
+      {
+        "price": 36.4,
+        "price_ppv_dhs": 36.4,
+        "packaging": "15 MG — Boîte de 10",
+        "laboratory": "ERGO MAROC",
+        "url": "https://www.medicament.ma/medicament/raviva-15-mg-comprime"
+      },
+      {
+        "price": 72.6,
+        "price_ppv_dhs": 72.6,
+        "packaging": "15 MG — Boîte de 20",
+        "laboratory": "ERGO MAROC",
+        "url": "https://www.medicament.ma/medicament/raviva-15-mg-comprime"
+      }
+    ],
+    "record_id": "raviva_meloxicam_comprime_secable",
+    "mechanism": "AINS oxicam à sélectivité préférentielle COX-2.",
+    "half_life": "20 heures",
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "adverse_effects": [
+      "Troubles digestifs"
+    ]
+  },
+  {
+    "id": "R-RAZON",
+    "brand_name": "RAZON",
+    "generic_name": "Ésoméprazole",
+    "composition": [
+      {
+        "name": "Ésoméprazole",
+        "inn": "",
+        "dose": "40 mg"
+      }
+    ],
+    "atc_code": "A02BC05",
+    "therapeutic_group": "Antiulcéreux - IPP",
+    "drug_class": "Inhibiteur de la pompe à protons",
+    "form": "Comprimé enrobé gastrorésistant",
+    "route": "Orale",
+    "laboratory": "NOVOPHARMA",
+    "presentations": [
+      {
+        "strength": "40 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 93.4
+      },
+      {
+        "strength": "40 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 168.2
+      }
+    ],
+    "price_ppv_dhs": 93.4,
+    "indications": [
+      "RGO",
+      "Ulcère gastroduodénal",
+      "Éradication H. pylori",
+      "Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité benzimidazolés",
+      "Nelfinavir/Atazanavir"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ activation clopidogrel",
+        "recommendation": "Préférer pantoprazole."
+      },
+      {
+        "interacting_drugs": [
+          "Nelfinavir",
+          "Atazanavir"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↓ taux antiviral",
+        "recommendation": "CI."
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisable si nécessaire.",
+      "breastfeeding": "Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "20-40 mg/j.",
+      "children": "1-11 ans: 10 mg/j. ≥12 ans: 20-40 mg/j."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "INTERACTION_CLOPIDOGREL",
+      "HYPOMAGNESEMIE_PROLONGE"
+    ],
+    "market_data": [
+      {
+        "price": 93.4,
+        "price_ppv_dhs": 93.4,
+        "packaging": "40 MG — Boîte de 14",
+        "laboratory": "NOVOPHARMA",
+        "url": "https://www.medicament.ma/medicament/razon-40-mg-comprime"
+      },
+      {
+        "price": 168.2,
+        "price_ppv_dhs": 168.2,
+        "packaging": "40 MG — Boîte de 28",
+        "laboratory": "NOVOPHARMA",
+        "url": "https://www.medicament.ma/medicament/razon-40-mg-comprime"
+      }
+    ],
+    "record_id": "razon_esomeprazole_comprime_enrobe_gastroresistant",
+    "mechanism": "IPP.",
+    "half_life": "1-1.5 heures",
+    "interactions": [
+      "Clopidogrel"
+    ],
+    "adverse_effects": [
+      "Céphalées"
+    ]
+  },
+  {
+    "id": "R-REAGILA",
+    "brand_name": "REAGILA",
+    "generic_name": "Cariprazine",
+    "composition": [
+      {
+        "name": "Cariprazine",
+        "inn": "",
+        "dose": "1.5 mg"
+      },
+      {
+        "name": "Cariprazine",
+        "inn": "",
+        "dose": "3 mg"
+      },
+      {
+        "name": "Cariprazine",
+        "inn": "",
+        "dose": "4.5 mg"
+      },
+      {
+        "name": "Cariprazine",
+        "inn": "",
+        "dose": "6 mg"
+      }
+    ],
+    "atc_code": "N05AX15",
+    "therapeutic_group": "Antipsychotiques - Neuroleptiques atypiques (3e génération)",
+    "drug_class": "Agoniste partiel D3/D2 et antagoniste 5-HT2A",
+    "form": "Gélule",
+    "route": "Orale",
+    "laboratory": "PROMOPHARM (HIKMA)",
+    "presentations": [
+      {
+        "strength": "1.5 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 765.0
+      },
+      {
+        "strength": "3 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 765.0
+      },
+      {
+        "strength": "4.5 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 765.0
+      },
+      {
+        "strength": "6 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 765.0
+      }
+    ],
+    "price_ppv_dhs": 765.0,
+    "indications": [
+      "Schizophrénie",
+      "Épisodes maniaques ou mixtes du trouble bipolaire I"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Inhibiteurs CYP3A4 puissants"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Clarithromycine",
+          "Ritonavir"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ majeure taux cariprazine (longue demi-vie)",
+        "recommendation": "CI."
+      },
+      {
+        "interacting_drugs": [
+          "Carbamazépine",
+          "Rifampicine",
+          "Phénytoïne"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↓ majeure taux cariprazine → inefficacité",
+        "recommendation": "CI."
+      },
+      {
+        "interacting_drugs": [
+          "Médicaments allongeant QT"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Allongement QT additif",
+        "recommendation": "ECG de surveillance."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter. Données limitées. Syndrome extrapyramidal néonatal si exposition en fin de grossesse.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si IRC légère à modérée. Données limitées IRC sévère."
+    },
+    "dosage": {
+      "adult": "Schizo: 1.5 mg/j, titration sur 1-2 sem, cible 1.5-6 mg/j. Manie: 3-6 mg/j.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLONGEMENT_QT",
+      "SYNDROME_EXTRAPYRAMIDAL"
+    ],
+    "market_data": [
+      {
+        "price": 765.0,
+        "price_ppv_dhs": 765.0,
+        "packaging": "1.5 MG — Boîte de 28",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/reagila"
+      },
+      {
+        "price": 765.0,
+        "price_ppv_dhs": 765.0,
+        "packaging": "3 MG — Boîte de 28",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/reagila"
+      },
+      {
+        "price": 765.0,
+        "price_ppv_dhs": 765.0,
+        "packaging": "4.5 MG — Boîte de 28",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/reagila"
+      },
+      {
+        "price": 765.0,
+        "price_ppv_dhs": 765.0,
+        "packaging": "6 MG — Boîte de 28",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/reagila"
+      }
+    ],
+    "record_id": "reagila_cariprazine_gelule",
+    "mechanism": "Antipsychotique atypique : agoniste partiel D2/D3 et 5-HT1A.",
+    "half_life": "2-5 jours (métabolites actifs jusqu'à 1-3 semaines)",
+    "interactions": [
+      "Inhibiteurs/inducteurs du CYP3A4"
+    ],
+    "adverse_effects": [
+      "Akathisie",
+      "Insomnie"
+    ]
+  },
+  {
+    "id": "R-REBIF",
+    "brand_name": "REBIF",
+    "generic_name": "Interféron bêta-1a",
+    "composition": [
+      {
+        "name": "Interféron bêta-1a",
+        "inn": "",
+        "dose": "44 µg / 0.5 mL"
+      }
+    ],
+    "atc_code": "L03AB07",
+    "therapeutic_group": "Immunomodulateurs - Traitement de fond SEP",
+    "drug_class": "Interféron bêta recombinant",
+    "form": "Solution injectable SC",
+    "route": "SC",
+    "laboratory": "PROMOPHARM (HIKMA)",
+    "presentations": [
+      {
+        "strength": "44 µg / 0.5 ML",
+        "packaging": "Boîte de 12 seringues",
+        "price_ppv_dhs": 8187.0
+      }
+    ],
+    "price_ppv_dhs": 8187.0,
+    "indications": [
+      "SEP récurrente-rémittente",
+      "1er événement démyélinisant à haut risque de SEP"
+    ],
+    "contraindications": [
+      "Dépression sévère/idéation suicidaire",
+      "Épilepsie non contrôlée",
+      "Insuffisance hépatique sévère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Hépatotoxiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hépatotoxicité additive",
+        "recommendation": "Surveiller transaminases."
+      },
+      {
+        "interacting_drugs": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque infectieux majoré",
+        "recommendation": "Prudence en cas d'association."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé. Risque avortement spontané. Arrêter si grossesse planifiée.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "44 µg SC 3x/semaine. Titration: 8.8 µg sem1-2, 22 µg sem3-4, puis 44 µg.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "INSUFFISANCE_HEPATIQUE",
+      "EPILEPSIE",
+      "DEPRESSION_RISQUE"
+    ],
+    "market_data": [
+      {
+        "price": 8187.0,
+        "price_ppv_dhs": 8187.0,
+        "packaging": "44 µg / 0.5 ML — Boîte de 12 seringues",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/rebif-44-mcg-injectable"
+      }
+    ],
+    "record_id": "rebif_interferon_beta_1a_solution_injectable_sc",
+    "mechanism": "Cytokine immunomodulatrice recombinante : réduction de l'activité inflammatoire et de la démyélinisation dans le SNC (sclérose en plaques).",
+    "half_life": "10 heures",
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "adverse_effects": [
+      "Syndrome pseudo-grippal",
+      "Réactions au site d'injection",
+      "Dépression"
+    ]
+  },
+  {
+    "id": "R-RECONNECT",
+    "brand_name": "RECONNECT",
+    "generic_name": "Mélatonine + Ashwagandha + Vitamines B",
+    "composition": [
+      {
+        "name": "Mélatonine",
+        "inn": "",
+        "dose": "1.9 mg"
+      }
+    ],
+    "atc_code": "N05CH01",
+    "therapeutic_group": "Compléments alimentaires - Sommeil",
+    "drug_class": "Association mélatonine + adaptogènes",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "laboratory": "IBERMA",
+    "presentations": [
+      {
+        "strength": "—",
+        "packaging": "Boîte de 15",
+        "price_ppv_dhs": 119.0
+      },
+      {
+        "strength": "—",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 209.0
+      }
+    ],
+    "price_ppv_dhs": 119.0,
+    "indications": [
+      "Troubles du sommeil légers",
+      "Décalage horaire (jet-lag)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AVK",
+          "Warfarine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Mélatonine peut modifier INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Anxiolytiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation sédation",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé par précaution.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "1-2 comprimés au coucher.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "FAIBLE_RISQUE_INTERACTIONS"
+    ],
+    "market_data": [
+      {
+        "price": 119.0,
+        "price_ppv_dhs": 119.0,
+        "packaging": "Boîte de 15",
+        "laboratory": "IBERMA",
+        "url": "https://www.medicament.ma/medicament/reconnect"
+      },
+      {
+        "price": 209.0,
+        "price_ppv_dhs": 209.0,
+        "packaging": "Boîte de 30",
+        "laboratory": "IBERMA",
+        "url": "https://www.medicament.ma/medicament/reconnect"
+      }
+    ],
+    "record_id": "reconnect_melatonine_ashwagandha_vitamines_b_comprime_pellicule",
+    "mechanism": "Mélatonine : synchronisation veille-sommeil. Ashwagandha : adaptogène présumé. Vitamines B : soutien métabolique.",
+    "half_life": "mélatonine ~40 minutes",
+    "interactions": [
+      "Sédatifs"
+    ],
+    "adverse_effects": [
+      "Somnolence diurne légère"
+    ]
+  },
+  {
+    "id": "R-RECORMON",
+    "brand_name": "RECORMON",
+    "generic_name": "Époétine bêta",
+    "composition": [
+      {
+        "name": "Époétine bêta",
+        "inn": "",
+        "dose": "2000 UI / 0.3 mL"
+      },
+      {
+        "name": "Époétine bêta",
+        "inn": "",
+        "dose": "3000 UI / 0.3 mL"
+      },
+      {
+        "name": "Époétine bêta",
+        "inn": "",
+        "dose": "5000 UI / 0.3 mL"
+      },
+      {
+        "name": "Époétine bêta",
+        "inn": "",
+        "dose": "30000 UI / 0.6 mL"
+      }
+    ],
+    "atc_code": "B03XA01",
+    "therapeutic_group": "Facteurs de croissance hématopoïétiques",
+    "drug_class": "Érythropoïétine recombinante (ASE)",
+    "form": "Solution injectable",
+    "route": "SC / IV",
+    "laboratory": "ROCHE S.A",
+    "presentations": [
+      {
+        "strength": "2000 UI / 0.3 ML",
+        "packaging": "Boîte de 6 seringues pré-remplies",
+        "price_ppv_dhs": 1156.0
+      },
+      {
+        "strength": "3000 UI / 0.3 ML",
+        "packaging": "6 seringues pré-remplies",
+        "price_ppv_dhs": 1585.0
+      },
+      {
+        "strength": "5000 UI / 0.3 ML",
+        "packaging": "6 seringues pré-remplies",
+        "price_ppv_dhs": 2542.0
+      },
+      {
+        "strength": "30000 UI / 0.6 ML",
+        "packaging": "4 seringues pré-remplies",
+        "price_ppv_dhs": 8968.0
+      },
+      {
+        "strength": "30000 UI / 0.6 ML",
+        "packaging": "1 seringue pré-remplie",
+        "price_ppv_dhs": 2242.0
+      }
+    ],
+    "price_ppv_dhs": 2242.0,
+    "indications": [
+      "Anémie de l'IRC (dialysé ou non)",
+      "Anémie chimio-induite",
+      "Pré-don de sang autologue",
+      "Prévention anémie du prématuré"
+    ],
+    "contraindications": [
+      "HTA non contrôlée",
+      "PRCA sous EPO",
+      "Risque thromboembolique élevé non contrôlé"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ hématocrite peut modifier PK ciclosporine",
+        "recommendation": "Surveiller taux ciclosporine."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Données limitées.",
+      "breastfeeding": "Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Ajuster selon Hb cible (10-12 g/dL). Médicament conçu pour IRC."
+    },
+    "dosage": {
+      "adult": "IRC: 20-60 UI/kg 3x/sem SC ou IV. Chimio: 30000 UI/sem SC. Cible Hb: 10-12 g/dL.",
+      "children": "20-50 UI/kg 3x/sem."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "HTA_RISQUE",
+      "THROMBOSE_RISQUE"
+    ],
+    "market_data": [
+      {
+        "price": 1156.0,
+        "price_ppv_dhs": 1156.0,
+        "packaging": "2000 UI / 0.3 ML — Boîte de 6 seringues pré-remplies",
+        "laboratory": "ROCHE S.A",
+        "url": "https://www.medicament.ma/medicament/recormon-30000-ui-0-6-ml-injectable"
+      },
+      {
+        "price": 1585.0,
+        "price_ppv_dhs": 1585.0,
+        "packaging": "3000 UI / 0.3 ML — 6 seringues pré-remplies",
+        "laboratory": "ROCHE S.A",
+        "url": "https://www.medicament.ma/medicament/recormon-30000-ui-0-6-ml-injectable"
+      },
+      {
+        "price": 2542.0,
+        "price_ppv_dhs": 2542.0,
+        "packaging": "5000 UI / 0.3 ML — 6 seringues pré-remplies",
+        "laboratory": "ROCHE S.A",
+        "url": "https://www.medicament.ma/medicament/recormon-30000-ui-0-6-ml-injectable"
+      },
+      {
+        "price": 8968.0,
+        "price_ppv_dhs": 8968.0,
+        "packaging": "30000 UI / 0.6 ML — 4 seringues pré-remplies",
+        "laboratory": "ROCHE S.A",
+        "url": "https://www.medicament.ma/medicament/recormon-30000-ui-0-6-ml-injectable"
+      },
+      {
+        "price": 2242.0,
+        "price_ppv_dhs": 2242.0,
+        "packaging": "30000 UI / 0.6 ML — 1 seringue pré-remplie",
+        "laboratory": "ROCHE S.A",
+        "url": "https://www.medicament.ma/medicament/recormon-30000-ui-0-6-ml-injectable"
+      }
+    ],
+    "record_id": "recormon_epoetine_beta_solution_injectable",
+    "mechanism": "Érythropoïétine recombinante : stimulation de l'érythropoïèse par liaison au récepteur de l'EPO sur les progéniteurs érythroïdes (anémie de l'insuffisance rénale chronique, chimio-induite).",
+    "half_life": "13-28 heures",
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "adverse_effects": [
+      "Hypertension artérielle",
+      "Risque thromboembolique",
+      "Érythroblastopénie (rare)"
+    ]
+  },
+  {
+    "id": "R-RECTIS",
+    "brand_name": "RECTIS",
+    "generic_name": "Tadalafil",
+    "composition": [
+      {
+        "name": "Tadalafil",
+        "inn": "",
+        "dose": "5 mg"
+      },
+      {
+        "name": "Tadalafil",
+        "inn": "",
+        "dose": "20 mg"
+      }
+    ],
+    "atc_code": "G04BE08",
+    "therapeutic_group": "Médicaments dysfonction érectile / HTAP",
+    "drug_class": "Inhibiteur PDE5",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "laboratory": "AFRIC-PHAR",
+    "presentations": [
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 10",
+        "price_ppv_dhs": 210.0
+      },
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 457.0
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte unitaire",
+        "price_ppv_dhs": 60.7
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 2",
+        "price_ppv_dhs": 102.8
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 4",
+        "price_ppv_dhs": 205.0
+      }
+    ],
+    "price_ppv_dhs": 205.0,
+    "indications": [
+      "Dysfonction érectile",
+      "HBP",
+      "HTAP"
+    ],
+    "contraindications": [
+      "Dérivés nitrés (CI absolue)",
+      "Riociguat",
+      "Hypotension sévère <90/50",
+      "IDM/AVC récent",
+      "Insuffisance hépatique sévère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Trinitrine",
+          "Isosorbide",
+          "Molsidomine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère potentiellement fatale",
+        "recommendation": "CI ABSOLUE. Délai 48h."
+      },
+      {
+        "interacting_drugs": [
+          "Riociguat",
+          "Adempas"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère",
+        "recommendation": "CI."
+      },
+      {
+        "interacting_drugs": [
+          "Alfuzosine",
+          "Tamsulosine",
+          "Doxazosine"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère",
+        "recommendation": "Stabiliser sous alpha-bloquant d'abord."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Ritonavir",
+          "Itraconazole"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux tadalafil",
+        "recommendation": "Max 10 mg/72h (DE)."
+      }
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Non applicable (homme). HTAP femme: catégorie B.",
+      "breastfeeding": "Non applicable."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-50: début 5 mg (DE). ClCr<30: max 5 mg/j."
+    },
+    "dosage": {
+      "adult": "DE: 10-20 mg avant activité (max 1x/j) ou 5 mg/j. HBP: 5 mg/j. HTAP: 40 mg/j.",
+      "children": "Non applicable."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "NITRES_CONTRE_INDIQUE"
+    ],
+    "market_data": [
+      {
+        "price": 210.0,
+        "price_ppv_dhs": 210.0,
+        "packaging": "5 MG — Boîte de 10",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rectis-20-mg-comprime"
+      },
+      {
+        "price": 457.0,
+        "price_ppv_dhs": 457.0,
+        "packaging": "5 MG — Boîte de 30",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rectis-20-mg-comprime"
+      },
+      {
+        "price": 60.7,
+        "price_ppv_dhs": 60.7,
+        "packaging": "20 MG — Boîte unitaire",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rectis-20-mg-comprime"
+      },
+      {
+        "price": 102.8,
+        "price_ppv_dhs": 102.8,
+        "packaging": "20 MG — Boîte de 2",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rectis-20-mg-comprime"
+      },
+      {
+        "price": 205.0,
+        "price_ppv_dhs": 205.0,
+        "packaging": "20 MG — Boîte de 4",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rectis-20-mg-comprime"
+      }
+    ],
+    "record_id": "rectis_tadalafil_comprime_pellicule",
+    "mechanism": "Inhibiteur de la PDE5 à longue durée d'action.",
+    "half_life": "17.5 heures",
+    "interactions": [
+      "Dérivés nitrés (CI)"
+    ],
+    "adverse_effects": [
+      "Céphalées"
+    ]
+  },
+  {
+    "id": "R-REDLIP",
+    "brand_name": "REDLIP",
+    "generic_name": "Atorvastatine",
+    "composition": [
+      {
+        "name": "Atorvastatine",
+        "inn": "",
+        "dose": "20 mg"
+      },
+      {
+        "name": "Atorvastatine",
+        "inn": "",
+        "dose": "40 mg"
+      }
+    ],
+    "atc_code": "C10AA05",
+    "therapeutic_group": "Hypolipémiants - Statines",
+    "drug_class": "Statine (inhibiteur HMG-CoA réductase)",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "laboratory": "ATLAS PHARM",
+    "presentations": [
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 97.6
+      },
+      {
+        "strength": "40 MG",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 138.0
+      }
+    ],
+    "price_ppv_dhs": 97.6,
+    "indications": [
+      "Hypercholestérolémie",
+      "Dyslipidémie mixte",
+      "Prévention cardiovasculaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique",
+      "Grossesse",
+      "Myopathie active"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Clarithromycine",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ taux atorva → rhabdomyolyse",
+        "recommendation": "Limiter dose ou éviter."
+      },
+      {
+        "interacting_drugs": [
+          "Acide fusidique",
+          "Fucidine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Suspendre statine."
+      },
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Fibrates"
+        ],
+        "severity": "DANGER",
+        "effect": "Rhabdomyolyse",
+        "recommendation": "Préférer fénofibrate."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI. Tératogène.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "10-80 mg/j en 1 prise (à tout moment).",
+      "children": "≥10 ans: 10-20 mg/j."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE",
+      "RISQUE_RHABDOMYOLYSE"
+    ],
+    "market_data": [
+      {
+        "price": 97.6,
+        "price_ppv_dhs": 97.6,
+        "packaging": "20 MG — Boîte de 30",
+        "laboratory": "ATLAS PHARM",
+        "url": "https://www.medicament.ma/medicament/redlip-20-mg-comprime"
+      },
+      {
+        "price": 138.0,
+        "price_ppv_dhs": 138.0,
+        "packaging": "40 MG — Boîte de 30",
+        "laboratory": "ATLAS PHARM",
+        "url": "https://www.medicament.ma/medicament/redlip-20-mg-comprime"
+      }
+    ],
+    "record_id": "redlip_atorvastatine_comprime_pellicule",
+    "mechanism": "Statine : inhibition de l'HMG-CoA réductase.",
+    "half_life": "14 heures",
+    "interactions": [
+      "Inhibiteurs du CYP3A4"
+    ],
+    "adverse_effects": [
+      "Myalgies",
+      "Élévation transaminases"
+    ]
+  },
+  {
+    "id": "R-REFACTO",
+    "brand_name": "REFACTO AF",
+    "generic_name": "Moroctocog alfa (Facteur VIII recombinant)",
+    "composition": [
+      {
+        "name": "Moroctocog alfa",
+        "inn": "",
+        "dose": "1000 UI"
+      }
+    ],
+    "atc_code": "B02BD02",
+    "therapeutic_group": "Hémostatiques - Facteurs de coagulation",
+    "drug_class": "Facteur VIII antihémophilique recombinant (domaine B délété)",
+    "form": "Poudre pour solution injectable",
+    "route": "IV",
+    "laboratory": "PFIZER MAROC",
+    "presentations": [
+      {
+        "strength": "1000 UI",
+        "packaging": "Boîte de 1 flacon",
+        "price_ppv_dhs": 6377.0
+      }
+    ],
+    "price_ppv_dhs": 6377.0,
+    "indications": [
+      "Hémophilie A (traitement et prévention)",
+      "Prophylaxie au long cours",
+      "Couverture chirurgicale"
+    ],
+    "contraindications": [
+      "Hypersensibilité moroctocog alfa ou protéines de hamster"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inhibiteurs du facteur VIII (anticorps)"
+        ],
+        "interacting_classes": [
+          "Anticorps anti-FVIII"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Développement d'inhibiteurs neutralisants → perte d'efficacité, saignements incontrôlables",
+        "recommendation": "Titrer les inhibiteurs (Bethesda) chez patients précédemment non traités (PUPs). Si inhibiteur >5 UB: contacter centre hémophilie."
+      },
+      {
+        "interacting_drugs": [
+          "Autres concentrés FVIII (produits dérivés du plasma)"
+        ],
+        "interacting_classes": [
+          "Facteurs VIII plasmatiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Pas d'études de compatibilité spécifique entre FVIII recombinants et plasmatiques.",
+        "recommendation": "Ne pas mélanger dans la même seringue ou voie IV."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "Prophylaxie: 25-40 UI/kg 3x/sem. Curatif: poids(kg) × augmentation(%) × 0.5.",
+      "children": "Même calcul."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RISQUE_INHIBITEURS_FVIII"
+    ],
+    "market_data": [
+      {
+        "price": 6377.0,
+        "price_ppv_dhs": 6377.0,
+        "packaging": "1000 UI — Boîte de 1 flacon",
+        "laboratory": "PFIZER MAROC",
+        "url": "https://www.medicament.ma/medicament/refacto-af-1000-ui-injectable"
+      }
+    ],
+    "record_id": "refacto_af_moroctocog_alfa_facteur_viii_recombinant_poudre_pour_solution_injectable",
+    "mechanism": "Facteur VIII de coagulation recombinant : substitue le facteur VIII déficient (hémophilie A).",
+    "half_life": "11-14 heures",
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "adverse_effects": [
+      "Formation d'inhibiteurs",
+      "Réactions d'hypersensibilité"
+    ]
+  },
+  {
+    "id": "R-REFLUXAID",
+    "brand_name": "REFLUXAID",
+    "generic_name": "Alginate de sodium + Bicarbonate de sodium",
+    "composition": [
+      {
+        "name": "Alginate de sodium",
+        "inn": "",
+        "dose": "500 mg"
+      }
+    ],
+    "atc_code": "A02BX13",
+    "therapeutic_group": "Antiulcéreux - Antiacides / Alginates",
+    "drug_class": "Alginate (barrière mécanique anti-reflux)",
+    "form": "Sirop",
+    "route": "Orale",
+    "laboratory": "PROMOPLUS PHARMA",
+    "presentations": [
+      {
+        "strength": "—",
+        "packaging": "Flacon de 250 mL",
+        "price_ppv_dhs": 65.0
+      }
+    ],
+    "price_ppv_dhs": 65.0,
+    "indications": [
+      "RGO symptomatique",
+      "Pyrosis post-prandial",
+      "Régurgitations acides"
+    ],
+    "contraindications": [
+      "Phénylcétonurie (si contient aspartame)",
+      "Insuffisance rénale sévère (charge sodique)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tétracyclines",
+          "Fluoroquinolones",
+          "Bisphosphonates",
+          "Lévothyroxine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ absorption des médicaments (chélation)",
+        "recommendation": "Espacer de 2h minimum."
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Compatible. Médicament de choix du RGO gravidique.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Prudence si IRC sévère (charge sodique)."
+    },
+    "dosage": {
+      "adult": "10-20 mL après les repas et au coucher. Max 4x/j.",
+      "children": "5-10 mL après repas."
+    },
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "FAIBLE_RISQUE_INTERACTIONS"
+    ],
+    "market_data": [
+      {
+        "price": 65.0,
+        "price_ppv_dhs": 65.0,
+        "packaging": "Flacon de 250 mL",
+        "laboratory": "PROMOPLUS PHARMA",
+        "url": "https://www.medicament.ma/medicament/refluxaid"
+      }
+    ],
+    "record_id": "refluxaid_alginate_de_sodium_bicarbonate_de_sodium_sirop",
+    "mechanism": "Formation d'un gel visqueux flottant sur le contenu gastrique (barrière anti-reflux).",
+    "half_life": "action locale, non absorbé",
+    "interactions": [
+      "Peut réduire l'absorption d'autres médicaments (espacer)"
+    ],
+    "adverse_effects": [
+      "Bonne tolérance générale"
+    ]
+  },
+  {
+    "id": "R-REGAXIDIL",
+    "brand_name": "REGAXIDIL",
+    "generic_name": "Minoxidil (solution cutanée)",
+    "composition": [
+      {
+        "name": "Minoxidil",
+        "inn": "",
+        "dose": "5 %"
+      }
+    ],
+    "atc_code": "D11AX01",
+    "therapeutic_group": "Dermatologiques - Traitement alopécie",
+    "drug_class": "Vasodilatateur topique (ouvreur canaux potassiques)",
+    "form": "Solution pour application cutanée",
+    "route": "Cutanée",
+    "laboratory": "RIM PHARMA",
+    "presentations": [
+      {
+        "strength": "5 %",
+        "packaging": "Flacon de 60 mL",
+        "price_ppv_dhs": 242.0
+      }
+    ],
+    "price_ppv_dhs": 242.0,
+    "indications": [
+      "Alopécie androgénétique masculine (calvitie)"
+    ],
+    "contraindications": [
+      "Femme (5% réservé homme)",
+      "Hypertension pulmonaire",
+      "Phéochromocytome",
+      "Peau lésée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Antihypertenseurs",
+          "Diurétiques",
+          "Bêtabloquants",
+          "IEC",
+          "ARA2"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Bien que l'absorption topique soit faible (≤1-2%), une hypotension additive est possible chez les patients déjà sous antihypertenseurs, surtout si application sur grande surface cutanée ou peau lésée.",
+        "recommendation": "Surveiller la PA. Signaler au prescripteur si vertiges ou hypotension orthostatique."
+      },
+      {
+        "interacting_drugs": [
+          "Rétinoïdes topiques (trétinoïne)",
+          "Corticoïdes topiques",
+          "Acide salicylique"
+        ],
+        "interacting_classes": [
+          "Promoteurs d'absorption cutanée"
+        ],
+        "severity": "FAIBLE",
+        "effect": "Co-application de promoteurs d'absorption peut augmenter le passage systémique du minoxidil.",
+        "recommendation": "Utiliser séparément (espacer les applications). Ne pas appliquer sur peau irritée."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI chez la femme (5%). Tératogène systémique.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "1 mL (20 gouttes ou 7 pulvérisations) sur cuir chevelu sec 2x/j. Effet visible après 2-4 mois.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_data": [
+      {
+        "price": 242.0,
+        "price_ppv_dhs": 242.0,
+        "packaging": "5 % — Flacon de 60 mL",
+        "laboratory": "RIM PHARMA",
+        "url": "https://www.medicament.ma/medicament/regaxidil-5-solution-cutanee"
+      }
+    ],
+    "record_id": "regaxidil_minoxidil_solution_cutanee_solution_pour_application_cutanee",
+    "mechanism": "Vasodilatateur topique.",
+    "half_life": "action locale",
+    "interactions": [
+      "Aucune interaction systémique significative"
+    ],
+    "adverse_effects": [
+      "Irritation du cuir chevelu"
+    ]
+  },
+  {
+    "id": "R-RELAXIUM",
+    "brand_name": "RELAXIUM B6",
+    "generic_name": "Magnésium + Vitamine B6 (Pyridoxine)",
+    "composition": [
+      {
+        "name": "Magnésium",
+        "inn": "",
+        "dose": "150 mg"
+      },
+      {
+        "name": "Magnésium",
+        "inn": "",
+        "dose": "300 mg"
+      },
+      {
+        "name": "Magnésium",
+        "inn": "",
+        "dose": "375 mg"
+      }
+    ],
+    "atc_code": "A11JB",
+    "therapeutic_group": "Suppléments minéraux",
+    "drug_class": "Association magnésium + pyridoxine",
+    "form": "Gélule",
+    "route": "Orale",
+    "laboratory": "DEVA PHARMACEUTIQUE",
+    "presentations": [
+      {
+        "strength": "150 MG Mg",
+        "packaging": "Boîte de 60",
+        "price_ppv_dhs": 87.0
+      },
+      {
+        "strength": "300 MG Mg",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 87.0
+      },
+      {
+        "strength": "375 MG Mg",
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 99.0
+      },
+      {
+        "strength": "375 MG Mg",
+        "packaging": "Boîte de 60",
+        "price_ppv_dhs": 139.0
+      }
+    ],
+    "price_ppv_dhs": 87.0,
+    "indications": [
+      "Carence en magnésium",
+      "Nervosité, irritabilité, fatigue",
+      "Crampes musculaires",
+      "Spasmophilie"
+    ],
+    "contraindications": [
+      "IRC sévère (hypermagnésémie)",
+      "Hypersensibilité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tétracyclines",
+          "Fluoroquinolones"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ absorption antibiotique (chélation)",
+        "recommendation": "Antibiotique 2h AVANT magnésium."
+      },
+      {
+        "interacting_drugs": [
+          "Bisphosphonates",
+          "Alendronate"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ absorption bisphosphonate",
+        "recommendation": "Bisphosphonate à jeun, espacer de 2h."
+      },
+      {
+        "interacting_drugs": [
+          "Lévothyroxine",
+          "Levothyrox"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ absorption lévothyroxine",
+        "recommendation": "Espacer de 4h minimum."
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Compatible. Souvent recommandé pour crampes de grossesse.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI (risque hypermagnésémie)."
+    },
+    "dosage": {
+      "adult": "2-3 gélules/j pendant les repas. Cure 1-3 mois.",
+      "children": "1-2 gélules/j."
+    },
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE"
+    ],
+    "market_data": [
+      {
+        "price": 87.0,
+        "price_ppv_dhs": 87.0,
+        "packaging": "150 MG Mg — Boîte de 60",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "url": "https://www.medicament.ma/medicament/relaxium-b6-150-mg-gelule"
+      },
+      {
+        "price": 87.0,
+        "price_ppv_dhs": 87.0,
+        "packaging": "300 MG Mg — Boîte de 30",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "url": "https://www.medicament.ma/medicament/relaxium-b6-150-mg-gelule"
+      },
+      {
+        "price": 99.0,
+        "price_ppv_dhs": 99.0,
+        "packaging": "375 MG Mg — Boîte de 30",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "url": "https://www.medicament.ma/medicament/relaxium-b6-150-mg-gelule"
+      },
+      {
+        "price": 139.0,
+        "price_ppv_dhs": 139.0,
+        "packaging": "375 MG Mg — Boîte de 60",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "url": "https://www.medicament.ma/medicament/relaxium-b6-150-mg-gelule"
+      }
+    ],
+    "record_id": "relaxium_b6_magnesium_vitamine_b6_pyridoxine_gelule",
+    "mechanism": "Cofacteurs enzymatiques neuromusculaires.",
+    "half_life": "non pertinent",
+    "interactions": [
+      "Tétracyclines"
+    ],
+    "adverse_effects": [
+      "Diarrhée légère"
+    ]
+  },
+  {
+    "id": "R-RELAXOL",
+    "brand_name": "RELAXOL",
+    "generic_name": "Paracétamol + Méphénésine",
+    "composition": [
+      {
+        "name": "Paracétamol",
+        "inn": "",
+        "dose": "500 mg"
+      }
+    ],
+    "atc_code": "M03BA52",
+    "therapeutic_group": "Antalgiques - Myorelaxants",
+    "drug_class": "Association antalgique + myorelaxant central",
+    "form": "Comprimé",
+    "route": "Orale",
+    "laboratory": "COOPER PHARMA",
+    "presentations": [
+      {
+        "strength": "500 MG / 2 MG",
+        "packaging": "Boîte de 20",
+        "price_ppv_dhs": 49.6
+      }
+    ],
+    "price_ppv_dhs": 49.6,
+    "indications": [
+      "Contractures et douleurs musculaires",
+      "Lombalgies",
+      "Torticolis"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère",
+      "Hypersensibilité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AVK",
+          "Warfarine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Paracétamol à forte dose peut ↑ INR",
+        "recommendation": "Max 3 g/j paracétamol. Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "severity": "DANGER",
+        "effect": "Hépatotoxicité paracétamol majorée",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Paracétamol compatible. Méphénésine: données limitées, utiliser avec précaution.",
+      "breastfeeding": "Paracétamol compatible."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "1-2 comprimés 3-4x/j (max 8 comprimés/j = 4g paracétamol). Durée limitée.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "INSUFFISANCE_HEPATIQUE",
+      "DOSE_PARACETAMOL_SURVEILLER"
+    ],
+    "market_data": [
+      {
+        "price": 49.6,
+        "price_ppv_dhs": 49.6,
+        "packaging": "500 MG / 2 MG — Boîte de 20",
+        "laboratory": "COOPER PHARMA",
+        "url": "https://www.medicament.ma/medicament/relaxol"
+      }
+    ],
+    "record_id": "relaxol_paracetamol_mephenesine_comprime",
+    "mechanism": "Analgésique + myorelaxant central.",
+    "half_life": "paracétamol ~2-3h, méphénésine ~1-3h",
+    "interactions": [
+      "Autres dépresseurs du SNC"
+    ],
+    "adverse_effects": [
+      "Somnolence"
+    ]
+  },
+  {
+    "id": "R-RELIDOMIDE",
+    "brand_name": "RELIDOMIDE",
+    "generic_name": "Lénalidomide",
+    "composition": [
+      {
+        "name": "Lénalidomide",
+        "inn": "",
+        "dose": "5 mg"
+      },
+      {
+        "name": "Lénalidomide",
+        "inn": "",
+        "dose": "10 mg"
+      },
+      {
+        "name": "Lénalidomide",
+        "inn": "",
+        "dose": "15 mg"
+      },
+      {
+        "name": "Lénalidomide",
+        "inn": "",
+        "dose": "25 mg"
+      }
+    ],
+    "atc_code": "L04AX04",
+    "therapeutic_group": "Antinéoplasiques - Immunomodulateurs",
+    "drug_class": "Analogue de la thalidomide (IMiD)",
+    "form": "Gélule",
+    "route": "Orale",
+    "laboratory": "PHARMIS",
+    "presentations": [
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 21",
+        "price_ppv_dhs": 15473.0
+      },
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 42",
+        "price_ppv_dhs": 28362.0
+      },
+      {
+        "strength": "5 MG",
+        "packaging": "Boîte de 63",
+        "price_ppv_dhs": 41389.0
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 7",
+        "price_ppv_dhs": 6258.0
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 21",
+        "price_ppv_dhs": 16215.0
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 42",
+        "price_ppv_dhs": 29737.0
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 63",
+        "price_ppv_dhs": 43405.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 7",
+        "price_ppv_dhs": 6584.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 21",
+        "price_ppv_dhs": 17955.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 63",
+        "price_ppv_dhs": 45692.0
+      },
+      {
+        "strength": "25 MG",
+        "packaging": "Boîte de 7",
+        "price_ppv_dhs": 7227.0
+      },
+      {
+        "strength": "25 MG",
+        "packaging": "Boîte de 21",
+        "price_ppv_dhs": 18725.0
+      },
+      {
+        "strength": "25 MG",
+        "packaging": "Boîte de 42",
+        "price_ppv_dhs": 34388.0
+      },
+      {
+        "strength": "25 MG",
+        "packaging": "Boîte de 63",
+        "price_ppv_dhs": 50224.0
+      }
+    ],
+    "price_ppv_dhs": 16215.0,
+    "indications": [
+      "Myélome multiple (avec dexaméthasone)",
+      "Syndromes myélodysplasiques del(5q)",
+      "Lymphome du manteau (entretien)"
+    ],
+    "contraindications": [
+      "Grossesse (ABSOLUMENT CI — programme de prévention grossesse obligatoire)",
+      "Allaitement",
+      "Femmes en âge de procréer sans contraception efficace"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Érythropoïétines",
+          "EPO"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ risque thromboembolique veineux",
+        "recommendation": "Éviter EPO si Hb>10 g/dL."
+      },
+      {
+        "interacting_drugs": [
+          "Dexaméthasone"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ risque TVP/EP (synergie)",
+        "recommendation": "Thromboprophylaxie systématique."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux digoxine",
+        "recommendation": "Surveiller digoxinémie."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "TÉRATOGÈNE MAJEUR (analogue thalidomide). Programme grossesse obligatoire. Tests grossesse réguliers.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-60: 10 mg/j (ajuster). ClCr<30: 7.5 mg/j. Dialyse: 5 mg/j (3x/sem après dialyse)."
+    },
+    "dosage": {
+      "adult": "25 mg/j J1-J21 sur cycle de 28j (avec dexaméthasone). Ajuster selon indication.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE_ABSOLU",
+      "TERATOGENE_MAJEUR",
+      "PROGRAMME_PREVENTION_GROSSESSE",
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "THROMBOSE_RISQUE",
+      "CYTOTOXIQUE"
+    ],
+    "market_data": [
+      {
+        "price": 15473.0,
+        "price_ppv_dhs": 15473.0,
+        "packaging": "5 MG — Boîte de 21",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 28362.0,
+        "price_ppv_dhs": 28362.0,
+        "packaging": "5 MG — Boîte de 42",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 41389.0,
+        "price_ppv_dhs": 41389.0,
+        "packaging": "5 MG — Boîte de 63",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 6258.0,
+        "price_ppv_dhs": 6258.0,
+        "packaging": "10 MG — Boîte de 7",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 16215.0,
+        "price_ppv_dhs": 16215.0,
+        "packaging": "10 MG — Boîte de 21",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 29737.0,
+        "price_ppv_dhs": 29737.0,
+        "packaging": "10 MG — Boîte de 42",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 43405.0,
+        "price_ppv_dhs": 43405.0,
+        "packaging": "10 MG — Boîte de 63",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 6584.0,
+        "price_ppv_dhs": 6584.0,
+        "packaging": "15 MG — Boîte de 7",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 17955.0,
+        "price_ppv_dhs": 17955.0,
+        "packaging": "15 MG — Boîte de 21",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 45692.0,
+        "price_ppv_dhs": 45692.0,
+        "packaging": "15 MG — Boîte de 63",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 7227.0,
+        "price_ppv_dhs": 7227.0,
+        "packaging": "25 MG — Boîte de 7",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 18725.0,
+        "price_ppv_dhs": 18725.0,
+        "packaging": "25 MG — Boîte de 21",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 34388.0,
+        "price_ppv_dhs": 34388.0,
+        "packaging": "25 MG — Boîte de 42",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      },
+      {
+        "price": 50224.0,
+        "price_ppv_dhs": 50224.0,
+        "packaging": "25 MG — Boîte de 63",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relidomide"
+      }
+    ],
+    "record_id": "relidomide_lenalidomide_gelule",
+    "mechanism": "Immunomodulateur (analogue thalidomide) : effets antiangiogéniques, immunomodulateurs et antinéoplasiques directs (myélome multiple, syndromes myélodysplasiques).",
+    "half_life": "3 heures",
+    "interactions": [
+      "Digoxine (augmentation concentration)"
+    ],
+    "adverse_effects": [
+      "Myélosuppression",
+      "Risque thromboembolique",
+      "Tératogénicité"
+    ]
+  },
+  {
+    "id": "R-RELITREXED",
+    "brand_name": "RELITREXED",
+    "generic_name": "Raltitrexed",
+    "composition": [
+      {
+        "name": "Raltitrexed",
+        "inn": "",
+        "dose": "100 mg / 10 mL"
+      }
+    ],
+    "atc_code": "L01BA03",
+    "therapeutic_group": "Antinéoplasiques - Antimétabolites",
+    "drug_class": "Inhibiteur de la thymidylate synthase (antifolate)",
+    "form": "Poudre pour solution à diluer pour perfusion",
+    "route": "IV",
+    "laboratory": "PHARMIS",
+    "presentations": [
+      {
+        "strength": "100 MG",
+        "packaging": "1 flacon de 10 mL",
+        "price_ppv_dhs": 1586.0
+      }
+    ],
+    "price_ppv_dhs": 1586.0,
+    "indications": [
+      "Cancer colorectal avancé (en cas de CI aux protocoles à base de 5-FU)"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Allaitement",
+      "IRC sévère (ClCr<25)",
+      "IH sévère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Acide folique",
+          "Acide folinique"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Antagonisme direct → perte d'efficacité",
+        "recommendation": "Ne pas administrer en même temps."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ toxicité raltitrexed (compétition rénale)",
+        "recommendation": "Surveiller."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI. Tératogène (antifolate).",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 25-65: réduire dose 25%. ClCr<25: CI."
+    },
+    "dosage": {
+      "adult": "3 mg/m² IV sur 15 min toutes les 3 semaines.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "CYTOTOXIQUE",
+      "USAGE_HOSPITALIER_UNIQUEMENT"
+    ],
+    "market_data": [
+      {
+        "price": 1586.0,
+        "price_ppv_dhs": 1586.0,
+        "packaging": "100 MG — 1 flacon de 10 mL",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/relitrexed"
+      }
+    ],
+    "record_id": "relitrexed_raltitrexed_poudre_pour_solution_a_diluer_pour_perfusion",
+    "mechanism": "Antifolate : inhibition spécifique de la thymidylate synthase → blocage de la synthèse d'ADN (cancer colorectal).",
+    "half_life": "198 heures (fraction intracellulaire)",
+    "interactions": [
+      "Acide folique/folinique (peut réduire l'efficacité)"
+    ],
+    "adverse_effects": [
+      "Myélosuppression",
+      "Troubles digestifs",
+      "Asthénie"
+    ]
+  },
+  {
+    "id": "R-RELPAX",
+    "brand_name": "RELPAX",
+    "generic_name": "Électriptan",
+    "composition": [
+      {
+        "name": "Électriptan",
+        "inn": "",
+        "dose": "40 mg"
+      }
+    ],
+    "atc_code": "N02CC06",
+    "therapeutic_group": "Antimigraineux - Triptans",
+    "drug_class": "Agoniste sélectif des récepteurs 5-HT1B/1D",
+    "form": "Comprimé",
+    "route": "Orale",
+    "laboratory": "VIATRIS PHARMACEUTICALS",
+    "presentations": [
+      {
+        "strength": "40 MG",
+        "packaging": "Boîte de 2",
+        "price_ppv_dhs": 90.4
+      },
+      {
+        "strength": "40 MG",
+        "packaging": "Boîte de 6",
+        "price_ppv_dhs": 251.0
+      }
+    ],
+    "price_ppv_dhs": 90.4,
+    "indications": [
+      "Migraine (avec ou sans aura) — traitement de la crise"
+    ],
+    "contraindications": [
+      "IDM récent",
+      "Angor instable",
+      "AVC/AIT",
+      "HTA sévère non contrôlée",
+      "Insuffisance hépatique sévère",
+      "Ergotamine (CI absolue dans les 24h)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ergotamine",
+          "Ergotamine tartrate",
+          "Méthysergide"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Spasme vasculaire prolongé",
+        "recommendation": "CI. Délai de 24h."
+      },
+      {
+        "interacting_drugs": [
+          "Autres triptans"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ risque vasospasme",
+        "recommendation": "Ne pas associer."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Ritonavir",
+          "Clarithromycine"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ ×3-4 taux électriptan (CYP3A4)",
+        "recommendation": "Max 40 mg. Éviter."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données limitées. Utiliser avec précaution si bénéfice>risque.",
+      "breastfeeding": "Éviter dans les 24h post-dose."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "40 mg au début de la crise. Si rechute: répéter après 2h. Max 80 mg/24h.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "CARDIOVASCULAIRE_RISQUE",
+      "ERGOTAMINE_CONTRE_INDIQUE"
+    ],
+    "market_data": [
+      {
+        "price": 90.4,
+        "price_ppv_dhs": 90.4,
+        "packaging": "40 MG — Boîte de 2",
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "url": "https://www.medicament.ma/medicament/relpax"
+      },
+      {
+        "price": 251.0,
+        "price_ppv_dhs": 251.0,
+        "packaging": "40 MG — Boîte de 6",
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "url": "https://www.medicament.ma/medicament/relpax"
+      }
+    ],
+    "record_id": "relpax_electriptan_comprime",
+    "mechanism": "Agoniste sélectif des récepteurs 5-HT1B/1D.",
+    "half_life": "4 heures",
+    "interactions": [
+      "Inhibiteurs du CYP3A4"
+    ],
+    "adverse_effects": [
+      "Sensation de vertige"
+    ]
+  },
+  {
+    "id": "R-REMICADE",
+    "brand_name": "REMICADE",
+    "generic_name": "Infliximab",
+    "composition": [
+      {
+        "name": "Infliximab",
+        "inn": "",
+        "dose": "100 mg"
+      }
+    ],
+    "atc_code": "L04AB02",
+    "therapeutic_group": "Immunosuppresseurs - Anti-TNFα",
+    "drug_class": "Anticorps monoclonal chimérique anti-TNFα",
+    "form": "Poudre pour solution à diluer pour perfusion",
+    "route": "IV",
+    "laboratory": "MAPHAR",
+    "presentations": [
+      {
+        "strength": "100 MG",
+        "packaging": "Flacon de 20 mL",
+        "price_ppv_dhs": 4576.0
+      }
+    ],
+    "price_ppv_dhs": 4576.0,
+    "indications": [
+      "Polyarthrite rhumatoïde (avec MTX)",
+      "Maladie de Crohn modérée à sévère",
+      "RCH",
+      "Spondylarthrite ankylosante",
+      "Rhumatisme psoriasique",
+      "Psoriasis en plaques sévère"
+    ],
+    "contraindications": [
+      "Tuberculose active ou latente non traitée",
+      "Sepsis grave",
+      "IC sévère (NYHA III-IV)",
+      "Hypersensibilité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Abatacept",
+          "Anakinra",
+          "Autres anti-TNF"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ risque infectieux et hématologique majeur",
+        "recommendation": "Ne pas associer."
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque d'infections disséminées",
+        "recommendation": "CI. Vacciner avant initiation."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ immunogénicité infliximab (effet recherché) + risque infectieux",
+        "recommendation": "Association recommandée mais surveiller infections."
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Éviter au 3e trim. (passage placentaire — nourrisson exposé: ne pas vacciner avec vaccins vivants pendant 6 mois).",
+      "breastfeeding": "Compatible (faible passage lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "dose_rule": "Crohn pédiatrique: 5 mg/kg IV."
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "5 mg/kg IV à S0, S2, S6 puis toutes les 8 sem (PR, Crohn). Adapter selon indication.",
+      "children": "5 mg/kg selon protocole."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "TUBERCULOSE_DEPISTAGE_OBLIGATOIRE",
+      "RISQUE_INFECTIEUX_MAJEUR",
+      "USAGE_HOSPITALIER_UNIQUEMENT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_data": [
+      {
+        "price": 4576.0,
+        "price_ppv_dhs": 4576.0,
+        "packaging": "100 MG — Flacon de 20 mL",
+        "laboratory": "MAPHAR",
+        "url": "https://www.medicament.ma/medicament/remicade"
+      }
+    ],
+    "record_id": "remicade_infliximab_poudre_pour_solution_a_diluer_pour_perfusion",
+    "mechanism": "Anticorps monoclonal chimérique anti-TNF-alpha : neutralisation du TNF-alpha circulant et membranaire.",
+    "half_life": "8-10 jours",
+    "interactions": [
+      "Vaccins vivants (éviter)"
+    ],
+    "adverse_effects": [
+      "Risque infectieux accru",
+      "Réactions à la perfusion",
+      "Réactivation tuberculose"
+    ]
+  },
+  {
+    "id": "R-REMOX",
+    "brand_name": "RÉMOX",
+    "generic_name": "Piroxicam",
+    "composition": [
+      {
+        "name": "Piroxicam",
+        "inn": "",
+        "dose": "20 mg"
+      }
+    ],
+    "atc_code": "M01AC01",
+    "therapeutic_group": "AINS - Oxicams",
+    "drug_class": "Inhibiteur non sélectif COX-1/COX-2 (demi-vie longue)",
+    "form": "Comprimé dispersible / Gélule / Suppositoire",
+    "route": "Orale / Rectale",
+    "laboratory": "AFRIC-PHAR",
+    "presentations": [
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 10",
+        "price_ppv_dhs": 39.0,
+        "form": "Comprimé dispersible"
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 10",
+        "price_ppv_dhs": 39.0,
+        "form": "Gélule"
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 12",
+        "price_ppv_dhs": 42.0,
+        "form": "Suppositoire"
+      }
+    ],
+    "price_ppv_dhs": 39.0,
+    "indications": [
+      "Arthrose (poussées)",
+      "Polyarthrite rhumatoïde",
+      "Spondylarthrite ankylosante",
+      "Accès goutteux"
+    ],
+    "contraindications": [
+      "Ulcère GD actif",
+      "Hémorragie GI",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trim. grossesse",
+      "Allergie AINS/aspirine",
+      "Antécédent cutané grave (DRESS, Lyell) sous AINS"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AVK",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithémie",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ toxicité MTX haute dose",
+        "recommendation": "CI si MTX≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2",
+          "Diurétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "IRA (triple whammy)",
+        "recommendation": "Surveiller créatinine."
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trim. Déconseillé aux 1er-2e trim.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "20 mg/j en 1 prise (demi-vie 50h). Usage à court terme recommandé.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "RISQUE_DIGESTIF",
+      "RISQUE_CUTANE_GRAVE"
+    ],
+    "market_data": [
+      {
+        "price": 39.0,
+        "price_ppv_dhs": 39.0,
+        "packaging": "20 MG — Boîte de 10",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rémox"
+      },
+      {
+        "price": 39.0,
+        "price_ppv_dhs": 39.0,
+        "packaging": "20 MG — Boîte de 10",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rémox"
+      },
+      {
+        "price": 42.0,
+        "price_ppv_dhs": 42.0,
+        "packaging": "20 MG — Boîte de 12",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rémox"
+      }
+    ],
+    "record_id": "remox_piroxicam_comprime_dispersible_gelule_suppositoire",
+    "mechanism": "AINS oxicam.",
+    "half_life": "50 heures",
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "adverse_effects": [
+      "Troubles digestifs"
+    ]
+  },
+  {
+    "id": "R-REMSIMA",
+    "brand_name": "REMSIMA",
+    "generic_name": "Infliximab (biosimilaire)",
+    "composition": [
+      {
+        "name": "Infliximab",
+        "inn": "",
+        "dose": "100 mg"
+      },
+      {
+        "name": "Infliximab",
+        "inn": "",
+        "dose": "120 mg"
+      }
+    ],
+    "atc_code": "L04AB02",
+    "therapeutic_group": "Immunosuppresseurs - Anti-TNFα (biosimilaire)",
+    "drug_class": "Anticorps monoclonal anti-TNFα (biosimilaire Remicade)",
+    "form": "Poudre pour perfusion IV / Solution injectable SC",
+    "route": "IV / SC",
+    "laboratory": "PROMOPHARM (HIKMA)",
+    "presentations": [
+      {
+        "strength": "100 MG",
+        "packaging": "1 flacon IV",
+        "price_ppv_dhs": 4267.0
+      },
+      {
+        "strength": "120 MG / ML",
+        "packaging": "Boîte de 2 seringues pré-remplies SC",
+        "price_ppv_dhs": 4067.0
+      }
+    ],
+    "price_ppv_dhs": 4067.0,
+    "indications": [
+      "Polyarthrite rhumatoïde",
+      "Crohn modéré à sévère",
+      "RCH",
+      "Spondylarthrite ankylosante",
+      "Rhumatisme psoriasique",
+      "Psoriasis"
+    ],
+    "contraindications": [
+      "Tuberculose active/latente non traitée",
+      "Sepsis",
+      "IC sévère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Abatacept",
+          "Anakinra",
+          "Autres bio-DMARD"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ risque infectieux majeur",
+        "recommendation": "Ne pas associer."
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Infections disséminées",
+        "recommendation": "CI."
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Éviter 3e trim. (passage placentaire). Ne pas vacciner nourrisson avec vaccins vivants 6 mois après exposition.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "IV: 5 mg/kg à S0, S2, S6 puis /8 sem. SC: 120 mg/2 sem (après 2 doses IV d'induction).",
+      "children": "5 mg/kg IV."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "TUBERCULOSE_DEPISTAGE_OBLIGATOIRE",
+      "RISQUE_INFECTIEUX_MAJEUR",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_data": [
+      {
+        "price": 4267.0,
+        "price_ppv_dhs": 4267.0,
+        "packaging": "100 MG — 1 flacon IV",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/remsima"
+      },
+      {
+        "price": 4067.0,
+        "price_ppv_dhs": 4067.0,
+        "packaging": "120 MG / ML — Boîte de 2 seringues pré-remplies SC",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/remsima"
+      }
+    ],
+    "record_id": "remsima_infliximab_biosimilaire_poudre_pour_perfusion_iv_solution_injectable_sc",
+    "mechanism": "Anticorps monoclonal chimérique anti-TNF-alpha, biosimilaire de l'infliximab princeps.",
+    "half_life": "8-10 jours",
+    "interactions": [
+      "Vaccins vivants (éviter)"
+    ],
+    "adverse_effects": [
+      "Risque infectieux accru",
+      "Réactions à la perfusion"
+    ]
+  },
+  {
+    "id": "R-REPATHA",
+    "brand_name": "REPATHA",
+    "generic_name": "Évolocumab",
+    "composition": [
+      {
+        "name": "Évolocumab",
+        "inn": "",
+        "dose": "140 mg"
+      }
+    ],
+    "atc_code": "C10AX13",
+    "therapeutic_group": "Hypolipémiants - Inhibiteurs PCSK9",
+    "drug_class": "Anticorps monoclonal anti-PCSK9",
+    "form": "Solution injectable SC",
+    "route": "SC",
+    "laboratory": "AMANYS PHARMA (Ex SAHAM PHARMA)",
+    "presentations": [
+      {
+        "strength": "140 MG",
+        "packaging": "Boîte de 2 stylos pré-remplis de 1 mL",
+        "price_ppv_dhs": 4874.0
+      }
+    ],
+    "price_ppv_dhs": 4874.0,
+    "indications": [
+      "Hypercholestérolémie primaire ou dyslipidémie mixte (en plus statine ou en monothérapie si intolérance)",
+      "Hypercholestérolémie familiale homozygote",
+      "Prévention cardiovasculaire secondaire"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Atorvastatine",
+          "Rosuvastatine",
+          "Simvastatine",
+          "Pravastatine",
+          "Fluvastatine"
+        ],
+        "interacting_classes": [
+          "Statines (inhibiteurs HMG-CoA réductase)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Association bénéfique complémentaire sur réduction LDL. Pas d'interaction pharmacocinétique. Les statines augmentent PCSK9 → l'évolocumab contrebalance cet effet.",
+        "recommendation": "Association recommandée (effficacité additive). Surveiller CPK si myalgies."
+      },
+      {
+        "interacting_drugs": [
+          "Ézétimibe",
+          "Ezetrol"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'absorption du cholestérol"
+        ],
+        "severity": "FAIBLE",
+        "effect": "Triple mécanisme complémentaire d'abaissement du LDL (statine + ézétimibe + inhibition PCSK9). Pas d'interaction pharmacocinétique documentée.",
+        "recommendation": "Association bénéfique pour patients à haut risque CV. Aucun ajustement posologique nécessaire."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données limitées. Éviter si possible. Arrêter si grossesse.",
+      "breastfeeding": "Déconseillé (données insuffisantes)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "dose_rule": "HFHo: 420 mg/mois SC."
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "140 mg SC tous les 15 jours OU 420 mg SC 1x/mois. Résultats en 2-4 semaines.",
+      "children": "≥12 ans HFHo: 420 mg/mois."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "COUT_ELEVE"
+    ],
+    "market_data": [
+      {
+        "price": 4874.0,
+        "price_ppv_dhs": 4874.0,
+        "packaging": "140 MG — Boîte de 2 stylos pré-remplis de 1 mL",
+        "laboratory": "AMANYS PHARMA (Ex SAHAM PHARMA)",
+        "url": "https://www.medicament.ma/medicament/repatha"
+      }
+    ],
+    "record_id": "repatha_evolocumab_solution_injectable_sc",
+    "mechanism": "Anticorps monoclonal anti-PCSK9 : inhibition de la dégradation des récepteurs LDL hépatiques → augmentation de la clairance du LDL-cholestérol.",
+    "half_life": "11-17 jours",
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "adverse_effects": [
+      "Réactions au site d'injection",
+      "Rhinopharyngite",
+      "Myalgies (rare)"
+    ]
+  },
+  {
+    "id": "R-RESINCAL",
+    "brand_name": "RESINCAL",
+    "generic_name": "Polystyrène sulfonate de calcium",
+    "composition": [
+      {
+        "name": "Polystyrène sulfonate de calcium",
+        "inn": "",
+        "dose": "99.75 %"
+      }
+    ],
+    "atc_code": "V03AE01",
+    "therapeutic_group": "Chélateurs du potassium",
+    "drug_class": "Résine échangeuse d'ions (Ca²⁺/K⁺)",
+    "form": "Poudre pour suspension buvable",
+    "route": "Orale / Rectale",
+    "laboratory": "SOLUDIA MAGHREB",
+    "presentations": [
+      {
+        "strength": "99.75 %",
+        "packaging": "Flacon multidoses de 400 g",
+        "price_ppv_dhs": 298.0
+      }
+    ],
+    "price_ppv_dhs": 298.0,
+    "indications": [
+      "Hyperkaliémie modérée (traitement d'urgence ou entretien)"
+    ],
+    "contraindications": [
+      "Hypokaliémie",
+      "Hypercalcémie",
+      "Occlusion intestinale",
+      "Constipation sévère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypokaliémie → toxicité digitalique",
+        "recommendation": "Surveiller kaliémie et signes digitaliques."
+      },
+      {
+        "interacting_drugs": [
+          "Sorbitol"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Nécrose colique (surtout en post-op)",
+        "recommendation": "Ne pas associer sorbitol."
+      },
+      {
+        "interacting_drugs": [
+          "Antiacides contenant Al/Mg"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Alcalose métabolique",
+        "recommendation": "Espacer."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si bénéfice>risque. Surveillance électrolytes.",
+      "breastfeeding": "Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Conçu pour l'IRC. Surveillance électrolytes renforcée."
+    },
+    "dosage": {
+      "adult": "15 g 1-4x/j mélangé dans de l'eau (PO) ou 30-50 g en lavement de rétention.",
+      "children": "Calculé selon poids."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "HYPOKALIEMIE_RISQUE",
+      "NECROSE_COLIQUE_SORBITOL"
+    ],
+    "market_data": [
+      {
+        "price": 298.0,
+        "price_ppv_dhs": 298.0,
+        "packaging": "99.75 % — Flacon multidoses de 400 g",
+        "laboratory": "SOLUDIA MAGHREB",
+        "url": "https://www.medicament.ma/medicament/resincal"
+      }
+    ],
+    "record_id": "resincal_polystyrene_sulfonate_de_calcium_poudre_pour_suspension_buvable",
+    "mechanism": "Résine échangeuse d'ions (calcium contre potassium).",
+    "half_life": "non absorbé",
+    "interactions": [
+      "Antiacides"
+    ],
+    "adverse_effects": [
+      "Constipation"
+    ]
+  },
+  {
+    "id": "R-RESINSOD",
+    "brand_name": "RESINSOD",
+    "generic_name": "Polystyrène sulfonate de sodium",
+    "composition": [
+      {
+        "name": "Polystyrène sulfonate de sodium",
+        "inn": "",
+        "dose": "voir présentation"
+      }
+    ],
+    "atc_code": "V03AE01",
+    "therapeutic_group": "Chélateurs du potassium",
+    "drug_class": "Résine échangeuse d'ions (Na⁺/K⁺)",
+    "form": "Suspension buvable",
+    "route": "Orale / Rectale",
+    "laboratory": "SOLUDIA MAGHREB",
+    "presentations": [
+      {
+        "strength": "—",
+        "packaging": "Flacon de 400 g",
+        "price_ppv_dhs": 298.0
+      }
+    ],
+    "price_ppv_dhs": 298.0,
+    "indications": [
+      "Hyperkaliémie modérée"
+    ],
+    "contraindications": [
+      "Hypokaliémie",
+      "Surcharge sodée (IC, HTA, cirrhose)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypokaliémie → toxicité digitalique",
+        "recommendation": "Surveiller kaliémie."
+      },
+      {
+        "interacting_drugs": [
+          "Sorbitol"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Nécrose colique",
+        "recommendation": "Ne pas associer."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Charge sodique à surveiller.",
+      "breastfeeding": "Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "15 g 1-4x/j (PO) ou 30-50 g en lavement.",
+      "children": "Calculé selon poids."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "HYPOKALIEMIE_RISQUE",
+      "SURCHARGE_SODEE_RISQUE"
+    ],
+    "market_data": [
+      {
+        "price": 298.0,
+        "price_ppv_dhs": 298.0,
+        "packaging": "Flacon de 400 g",
+        "laboratory": "SOLUDIA MAGHREB",
+        "url": "https://www.medicament.ma/medicament/resinsod"
+      }
+    ],
+    "record_id": "resinsod_polystyrene_sulfonate_de_sodium_suspension_buvable",
+    "mechanism": "Résine échangeuse d'ions (sodium contre potassium).",
+    "half_life": "non absorbé",
+    "interactions": [
+      "Antiacides"
+    ],
+    "adverse_effects": [
+      "Constipation"
+    ]
+  },
+  {
+    "id": "R-RETACNYL",
+    "brand_name": "RETACNYL",
+    "generic_name": "Trétinoïne (acide rétinoïque)",
+    "composition": [
+      {
+        "name": "Trétinoïne",
+        "inn": "",
+        "dose": "0.025 %"
+      },
+      {
+        "name": "Trétinoïne",
+        "inn": "",
+        "dose": "0.05 %"
+      }
+    ],
+    "atc_code": "D10AD01",
+    "therapeutic_group": "Dermatologiques - Anti-acnéiques topiques",
+    "drug_class": "Rétinoïde topique",
+    "form": "Crème",
+    "route": "Cutanée",
+    "laboratory": "SOTHEMA",
+    "presentations": [
+      {
+        "strength": "0.025 %",
+        "packaging": "Tube de 30 g",
+        "price_ppv_dhs": 74.3
+      },
+      {
+        "strength": "0.05 %",
+        "packaging": "Tube de 30 g",
+        "price_ppv_dhs": 77.7
+      }
+    ],
+    "price_ppv_dhs": 74.3,
+    "indications": [
+      "Acné vulgaire (comédons, papules, pustules)",
+      "Photovieillissement cutané"
+    ],
+    "contraindications": [
+      "Grossesse (CI absolue)",
+      "Eczéma",
+      "Exposition solaire excessive",
+      "Peau irritée ou lésée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Autres rétinoïdes topiques/oraux"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypervitaminose A et irritation sévère",
+        "recommendation": "Ne pas associer."
+      },
+      {
+        "interacting_drugs": [
+          "Produits irritants kératolytiques (peroxyde benzoyle, acide salicylique)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Irritation cutanée majorée",
+        "recommendation": "Alterner ou espacer les applications."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI ABSOLUE (tératogène par voie systémique, bien que absorption topique faible). Précaution maximale.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 12
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "Appliquer le soir sur peau propre et sèche (couche mince). Commencer par 0.025%. Protection solaire obligatoire.",
+      "children": "Non recommandé <12 ans."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "PHOTOSENSIBLISATION"
+    ],
+    "market_data": [
+      {
+        "price": 74.3,
+        "price_ppv_dhs": 74.3,
+        "packaging": "0.025 % — Tube de 30 g",
+        "laboratory": "SOTHEMA",
+        "url": "https://www.medicament.ma/medicament/retacnyl"
+      },
+      {
+        "price": 77.7,
+        "price_ppv_dhs": 77.7,
+        "packaging": "0.05 % — Tube de 30 g",
+        "laboratory": "SOTHEMA",
+        "url": "https://www.medicament.ma/medicament/retacnyl"
+      }
+    ],
+    "record_id": "retacnyl_tretinoine_acide_retinoique_creme",
+    "mechanism": "Rétinoïde topique.",
+    "half_life": "action locale",
+    "interactions": [
+      "Autres kératolytiques"
+    ],
+    "adverse_effects": [
+      "Irritation cutanée"
+    ]
+  },
+  {
+    "id": "R-REVATIO",
+    "brand_name": "REVATIO",
+    "generic_name": "Sildénafil",
+    "composition": [
+      {
+        "name": "Sildénafil",
+        "inn": "",
+        "dose": "20 mg"
+      }
+    ],
+    "atc_code": "G04BE03",
+    "therapeutic_group": "Médicaments HTAP - Inhibiteur PDE5",
+    "drug_class": "Inhibiteur sélectif PDE5 (usage HTAP)",
+    "form": "Gélule",
+    "route": "Orale",
+    "laboratory": "VIATRIS PHARMACEUTICALS",
+    "presentations": [
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 90",
+        "price_ppv_dhs": 4167.0
+      }
+    ],
+    "price_ppv_dhs": 4167.0,
+    "indications": [
+      "Hypertension artérielle pulmonaire (HTAP) — classe II-III OMS"
+    ],
+    "contraindications": [
+      "Dérivés nitrés (CI absolue)",
+      "Riociguat",
+      "Insuffisance hépatique sévère",
+      "Hypotension sévère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Dérivés nitrés",
+          "Trinitrine",
+          "Isosorbide"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère potentiellement fatale",
+        "recommendation": "CI ABSOLUE."
+      },
+      {
+        "interacting_drugs": [
+          "Ritonavir",
+          "Saquinavir"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ ×10 taux sildénafil",
+        "recommendation": "CI."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Érythromycine"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ taux sildénafil",
+        "recommendation": "Max 20 mg 2x/j."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ taux sildénafil (inducteur CYP3A4)",
+        "recommendation": "Surveiller efficacité HTAP."
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Données limitées. Utiliser si bénéfice>risque (HTAP est maladie grave).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "dose_rule": "1-17 ans: 10 mg 3x/j (<20 kg) ou 20 mg 3x/j (≥20 kg)."
+    },
+    "renal_adjustment": {
+      "required": false
+    },
+    "dosage": {
+      "adult": "20 mg 3x/j (toutes les 8h). Ne pas augmenter la dose (pas d'efficacité supplémentaire démontrée en HTAP).",
+      "children": "Selon poids."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "NITRES_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_data": [
+      {
+        "price": 4167.0,
+        "price_ppv_dhs": 4167.0,
+        "packaging": "20 MG — Boîte de 90",
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "url": "https://www.medicament.ma/medicament/revatio"
+      }
+    ],
+    "record_id": "revatio_sildenafil_gelule",
+    "mechanism": "Inhibiteur de la PDE5.",
+    "half_life": "4 heures",
+    "interactions": [
+      "Dérivés nitrés (CI)"
+    ],
+    "adverse_effects": [
+      "Céphalées"
+    ]
+  },
+  {
+    "id": "R-REVLIMID",
+    "brand_name": "REVLIMID",
+    "generic_name": "Lénalidomide",
+    "composition": [
+      {
+        "name": "Lénalidomide",
+        "inn": "",
+        "dose": "25 mg"
+      }
+    ],
+    "atc_code": "L04AX04",
+    "therapeutic_group": "Antinéoplasiques - Immunomodulateurs",
+    "drug_class": "Analogue de la thalidomide (IMiD)",
+    "form": "Gélule",
+    "route": "Orale",
+    "laboratory": "MAPHAR",
+    "presentations": [
+      {
+        "strength": "25 MG",
+        "packaging": "Boîte de 21",
+        "price_ppv_dhs": 19711.0
+      }
+    ],
+    "price_ppv_dhs": 19711.0,
+    "indications": [
+      "Myélome multiple (avec dexaméthasone)",
+      "Syndromes myélodysplasiques del(5q)",
+      "Lymphome du manteau"
+    ],
+    "contraindications": [
+      "Grossesse (programme de prévention grossesse obligatoire)",
+      "Allaitement"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Érythropoïétines",
+          "EPO"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ risque thromboembolique",
+        "recommendation": "Éviter EPO si Hb>10."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux digoxine",
+        "recommendation": "Surveiller digoxinémie."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "TÉRATOGÈNE MAJEUR. Programme grossesse obligatoire.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-60: 10 mg/j. ClCr<30: 7.5 mg/j. Dialyse: 5 mg/j après séance."
+    },
+    "dosage": {
+      "adult": "25 mg/j J1-J21 / 28j avec dexaméthasone.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE_ABSOLU",
+      "TERATOGENE_MAJEUR",
+      "PROGRAMME_PREVENTION_GROSSESSE",
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "THROMBOSE_RISQUE",
+      "CYTOTOXIQUE"
+    ],
+    "market_data": [
+      {
+        "price": 19711.0,
+        "price_ppv_dhs": 19711.0,
+        "packaging": "25 MG — Boîte de 21",
+        "laboratory": "MAPHAR",
+        "url": "https://www.medicament.ma/medicament/revlimid"
+      }
+    ],
+    "record_id": "revlimid_lenalidomide_gelule",
+    "mechanism": "Immunomodulateur (analogue thalidomide) : effets antiangiogéniques, immunomodulateurs et antinéoplasiques directs (myélome multiple, syndromes myélodysplasiques).",
+    "half_life": "3 heures",
+    "interactions": [
+      "Digoxine (augmentation concentration)"
+    ],
+    "adverse_effects": [
+      "Myélosuppression",
+      "Risque thromboembolique",
+      "Tératogénicité"
+    ]
+  },
+  {
+    "id": "R-REVOCIR",
+    "brand_name": "REVOCIR",
+    "generic_name": "Aciclovir",
+    "composition": [
+      {
+        "name": "Aciclovir",
+        "inn": "",
+        "dose": "5 %"
+      },
+      {
+        "name": "Aciclovir",
+        "inn": "",
+        "dose": "800 mg"
+      }
+    ],
+    "atc_code": "J05AB01",
+    "therapeutic_group": "Antiviraux - Anti-herpétiques",
+    "drug_class": "Analogue nucléosidique (inhibiteur ADN polymérase herpétique)",
+    "form": "Crème / Comprimé",
+    "route": "Cutanée / Orale",
+    "laboratory": "PROMOPHARM (HIKMA)",
+    "presentations": [
+      {
+        "strength": "5 %",
+        "packaging": "Tube de 5 g",
+        "price_ppv_dhs": 22.1
+      },
+      {
+        "strength": "800 MG",
+        "packaging": "Boîte de 7",
+        "price_ppv_dhs": 133.1
+      },
+      {
+        "strength": "800 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 257.0
+      },
+      {
+        "strength": "800 MG",
+        "packaging": "Boîte de 35",
+        "price_ppv_dhs": 539.0
+      }
+    ],
+    "price_ppv_dhs": 133.1,
+    "indications": [
+      "Herpès labial (crème)",
+      "Zona (400-800 mg PO)",
+      "Herpès génital",
+      "Prévention récidives herpétiques"
+    ],
+    "contraindications": [
+      "Hypersensibilité aciclovir/valaciclovir"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Probénécide",
+          "Cimétidine"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux aciclovir (↓ élimination rénale)",
+        "recommendation": "Surveiller si IRC."
+      },
+      {
+        "interacting_drugs": [
+          "Mycophénolate mofétil"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux des 2 médicaments (compétition rénale)",
+        "recommendation": "Surveiller."
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Données rassurantes. Peut être utilisé si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC: adapter l'intervalle selon ClCr. Hydrater correctement."
+    },
+    "dosage": {
+      "adult": "Zona: 800 mg 5x/j x 7-10j. Herpès génital: 400 mg 3x/j x 5-10j. Prévention: 400 mg 2x/j.",
+      "children": "Selon poids et indication."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_data": [
+      {
+        "price": 22.1,
+        "price_ppv_dhs": 22.1,
+        "packaging": "5 % — Tube de 5 g",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/revocir"
+      },
+      {
+        "price": 133.1,
+        "price_ppv_dhs": 133.1,
+        "packaging": "800 MG — Boîte de 7",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/revocir"
+      },
+      {
+        "price": 257.0,
+        "price_ppv_dhs": 257.0,
+        "packaging": "800 MG — Boîte de 14",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/revocir"
+      },
+      {
+        "price": 539.0,
+        "price_ppv_dhs": 539.0,
+        "packaging": "800 MG — Boîte de 35",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "url": "https://www.medicament.ma/medicament/revocir"
+      }
+    ],
+    "record_id": "revocir_aciclovir_creme_comprime",
+    "mechanism": "Antiviral : analogue nucléosidique, phosphorylé par la thymidine kinase virale, inhibe l'ADN polymérase virale (herpès, varicelle-zona).",
+    "half_life": "2.5-3.3 heures",
+    "interactions": [
+      "Probénécide (augmentation concentration)"
+    ],
+    "adverse_effects": [
+      "Néphrotoxicité (hydratation nécessaire)",
+      "Céphalées",
+      "Troubles digestifs"
+    ]
+  },
+  {
+    "id": "R-REXABAN",
+    "brand_name": "REXABAN",
+    "generic_name": "Rivaroxaban",
+    "composition": [
+      {
+        "name": "Rivaroxaban",
+        "inn": "",
+        "dose": "10 mg"
+      },
+      {
+        "name": "Rivaroxaban",
+        "inn": "",
+        "dose": "15 mg"
+      },
+      {
+        "name": "Rivaroxaban",
+        "inn": "",
+        "dose": "20 mg"
+      }
+    ],
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants - AOD",
+    "drug_class": "Inhibiteur direct du facteur Xa",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "laboratory": "AFRIC-PHAR",
+    "presentations": [
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 5",
+        "price_ppv_dhs": 70.0
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 10",
+        "price_ppv_dhs": 129.2
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 35",
+        "price_ppv_dhs": 386.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 210.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 350.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 42",
+        "price_ppv_dhs": 498.0
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 210.0
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 370.0
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 56",
+        "price_ppv_dhs": 649.0
+      }
+    ],
+    "price_ppv_dhs": 370.0,
+    "indications": [
+      "Prévention AVC en FA non valvulaire",
+      "Traitement/prévention TVP et EP",
+      "Prévention TVP post-chirurgie orthopédique",
+      "SCA (avec aspirine ± clopidogrel)",
+      "Maladie coronarienne/artérielle périphérique"
+    ],
+    "contraindications": [
+      "Saignement actif",
+      "Grossesse",
+      "Insuffisance hépatique avec coagulopathie (Child B/C)",
+      "Azolés systémiques + IP VIH"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ ×2-4 taux rivaroxaban → hémorragie majeure",
+        "recommendation": "CI."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↓ ×2 taux rivaroxaban → thrombose",
+        "recommendation": "CI. Utiliser HBPM ou AVK."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ risque hémorragique GI",
+        "recommendation": "Éviter. Si nécessaire: IPP + surveillance."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Clopidogrel",
+          "Ticagrelor"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ risque hémorragique additif",
+        "recommendation": "Triple thérapie durée minimale."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI. Pas d'antidote disponible. Risque hémorragique fœtal.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49→15 mg/j. ClCr<15: CI. TVP/EP: prudence si ClCr 15-29."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner. TVP/EP: 15 mg ×2/j ×3 sem puis 20 mg/j. Ortho: 10 mg/j.",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "RISQUE_HEMORRAGIQUE_MAJEUR",
+      "PAS_ANTIDOTE_DISPONIBLE_MAROC"
+    ],
+    "market_data": [
+      {
+        "price": 70.0,
+        "price_ppv_dhs": 70.0,
+        "packaging": "10 MG — Boîte de 5",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      },
+      {
+        "price": 129.2,
+        "price_ppv_dhs": 129.2,
+        "packaging": "10 MG — Boîte de 10",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      },
+      {
+        "price": 386.0,
+        "price_ppv_dhs": 386.0,
+        "packaging": "10 MG — Boîte de 35",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      },
+      {
+        "price": 210.0,
+        "price_ppv_dhs": 210.0,
+        "packaging": "15 MG — Boîte de 14",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      },
+      {
+        "price": 350.0,
+        "price_ppv_dhs": 350.0,
+        "packaging": "15 MG — Boîte de 28",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      },
+      {
+        "price": 498.0,
+        "price_ppv_dhs": 498.0,
+        "packaging": "15 MG — Boîte de 42",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      },
+      {
+        "price": 210.0,
+        "price_ppv_dhs": 210.0,
+        "packaging": "20 MG — Boîte de 14",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      },
+      {
+        "price": 370.0,
+        "price_ppv_dhs": 370.0,
+        "packaging": "20 MG — Boîte de 28",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      },
+      {
+        "price": 649.0,
+        "price_ppv_dhs": 649.0,
+        "packaging": "20 MG — Boîte de 56",
+        "laboratory": "AFRIC-PHAR",
+        "url": "https://www.medicament.ma/medicament/rexaban"
+      }
+    ],
+    "record_id": "rexaban_rivaroxaban_comprime_pellicule",
+    "mechanism": "Anticoagulant oral direct : inhibiteur du facteur Xa.",
+    "half_life": "5-13 heures",
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4"
+    ],
+    "adverse_effects": [
+      "Risque hémorragique"
+    ]
+  },
+  {
+    "id": "R-RIVALTO",
+    "brand_name": "RIVALTO",
+    "generic_name": "Rivaroxaban",
+    "composition": [
+      {
+        "name": "Rivaroxaban",
+        "inn": "",
+        "dose": "10 mg"
+      },
+      {
+        "name": "Rivaroxaban",
+        "inn": "",
+        "dose": "15 mg"
+      },
+      {
+        "name": "Rivaroxaban",
+        "inn": "",
+        "dose": "20 mg"
+      }
+    ],
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants - AOD",
+    "drug_class": "Inhibiteur direct du facteur Xa",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "laboratory": "PHARMIS",
+    "presentations": [
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 5",
+        "price_ppv_dhs": 49.0
+      },
+      {
+        "strength": "10 MG",
+        "packaging": "Boîte de 35",
+        "price_ppv_dhs": 298.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 147.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 274.0
+      },
+      {
+        "strength": "15 MG",
+        "packaging": "Boîte de 42",
+        "price_ppv_dhs": 398.0
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 14",
+        "price_ppv_dhs": 147.0
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 274.0
+      },
+      {
+        "strength": "20 MG",
+        "packaging": "Boîte de 56",
+        "price_ppv_dhs": 549.0
+      }
+    ],
+    "price_ppv_dhs": 274.0,
+    "indications": [
+      "Prévention AVC en FA",
+      "TVP/EP traitement et prévention",
+      "Ortho",
+      "SCA",
+      "Maladie coronarienne/artérielle"
+    ],
+    "contraindications": [
+      "Voir REXABAN (même molécule)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Ritonavir",
+          "Itraconazole",
+          "Lopinavir"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↑ ×2-4 taux rivaroxaban",
+        "recommendation": "CI."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "↓ taux rivaroxaban → thrombose",
+        "recommendation": "CI."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ hémorragie GI",
+        "recommendation": "Éviter + IPP."
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CI. Pas d'antidote.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Voir REXABAN."
+    },
+    "dosage": {
+      "adult": "Idem REXABAN (même molécule, autre laboratoire).",
+      "children": "Non recommandé."
+    },
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "RISQUE_HEMORRAGIQUE_MAJEUR",
+      "PAS_ANTIDOTE_DISPONIBLE_MAROC"
+    ],
+    "market_data": [
+      {
+        "price": 49.0,
+        "price_ppv_dhs": 49.0,
+        "packaging": "10 MG — Boîte de 5",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/rivalto"
+      },
+      {
+        "price": 298.0,
+        "price_ppv_dhs": 298.0,
+        "packaging": "10 MG — Boîte de 35",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/rivalto"
+      },
+      {
+        "price": 147.0,
+        "price_ppv_dhs": 147.0,
+        "packaging": "15 MG — Boîte de 14",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/rivalto"
+      },
+      {
+        "price": 274.0,
+        "price_ppv_dhs": 274.0,
+        "packaging": "15 MG — Boîte de 28",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/rivalto"
+      },
+      {
+        "price": 398.0,
+        "price_ppv_dhs": 398.0,
+        "packaging": "15 MG — Boîte de 42",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/rivalto"
+      },
+      {
+        "price": 147.0,
+        "price_ppv_dhs": 147.0,
+        "packaging": "20 MG — Boîte de 14",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/rivalto"
+      },
+      {
+        "price": 274.0,
+        "price_ppv_dhs": 274.0,
+        "packaging": "20 MG — Boîte de 28",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/rivalto"
+      },
+      {
+        "price": 549.0,
+        "price_ppv_dhs": 549.0,
+        "packaging": "20 MG — Boîte de 56",
+        "laboratory": "PHARMIS",
+        "url": "https://www.medicament.ma/medicament/rivalto"
+      }
+    ],
+    "record_id": "rivalto_rivaroxaban_comprime_pellicule",
+    "mechanism": "Anticoagulant oral direct : inhibiteur du facteur Xa.",
+    "half_life": "5-13 heures",
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4"
+    ],
+    "adverse_effects": [
+      "Risque hémorragique"
+    ]
+  }
+]

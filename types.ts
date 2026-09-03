@@ -4,17 +4,28 @@ import { Video } from '@google/genai';
 export type MedicineCategory = string;
 export type MealTiming = 'Avant repas' | 'Pendant repas' | 'Après repas' | 'Indifférent';
 export type PatientType = 'Adult' | 'Child' | 'Woman';
-export type UserRole = 'Admin' | 'User';
+export type UserRole = 'Admin' | 'Medecin' | 'Assistant' | 'User';
 export type Permission =
   | 'ACCESS_DASHBOARD'
-  | 'MANAGE_PATIENTS'
+  | 'MANAGE_PATIENTS' // Salle d'attente + informations administratives (rôle Assistant/Accueil)
+  | 'MANAGE_MEDICAL_RECORDS' // Dossier médical : pathologies, allergies, historique (rôle Médecin)
   | 'CREATE_PRESCRIPTION'
   | 'MANAGE_APPOINTMENTS'
   | 'VIEW_FINANCES'
   | 'MANAGE_SETTINGS'
   | 'USE_AI_ASSISTANT';
 
+// Permissions par défaut proposées selon le rôle choisi à la création d'un collaborateur
+// (§9 du cahier des charges : séparation Assistant/Accueil vs Médecin).
+export const ROLE_DEFAULT_PERMISSIONS: Record<UserRole, Permission[]> = {
+  Admin: ['ACCESS_DASHBOARD', 'MANAGE_PATIENTS', 'MANAGE_MEDICAL_RECORDS', 'CREATE_PRESCRIPTION', 'MANAGE_APPOINTMENTS', 'VIEW_FINANCES', 'MANAGE_SETTINGS', 'USE_AI_ASSISTANT'],
+  Medecin: ['ACCESS_DASHBOARD', 'MANAGE_PATIENTS', 'MANAGE_MEDICAL_RECORDS', 'CREATE_PRESCRIPTION', 'MANAGE_APPOINTMENTS', 'VIEW_FINANCES', 'USE_AI_ASSISTANT'],
+  Assistant: ['ACCESS_DASHBOARD', 'MANAGE_PATIENTS', 'MANAGE_APPOINTMENTS'],
+  User: [],
+};
+
 export type LabRequestStatus = 'DRAFT' | 'REQUESTED' | 'RECEIVED' | 'INTERPRETED' | 'CLOSED';
+export type MedicalResultType = 'biologie' | 'imagerie' | 'autre';
 
 export interface AppUser {
   id: string;
@@ -46,6 +57,14 @@ export interface MedicineContraindication {
   maxWeeks?: number;
 }
 
+export interface MedicinePresentation {
+  id: string;
+  packaging?: string | null;
+  laboratory?: string | null;
+  route?: string;
+  pricePpvDhs?: number | null;
+}
+
 export interface Medicine {
   id: string;
   name: string;
@@ -53,6 +72,9 @@ export interface Medicine {
   form?: string;
   strength?: string;
   active_ingredient?: string; // New: for exact matching
+  route?: string;
+  packaging?: string | null; // Selected/default présentation-conditionnement (e.g. "Boîte de 8")
+  presentations?: MedicinePresentation[]; // All distinct présentations available for this médicament (same DCI/dosage/forme)
   defaultDosage: string;
   defaultTiming: MealTiming;
   isAdultOnly?: boolean;
@@ -62,11 +84,17 @@ export interface Medicine {
   isKidneyForbidden?: boolean;
   isLiverForbidden?: boolean;
   interactionGroup?: string;
+  atcCode?: string;
+  nature?: string;
+  clinicalFlags?: string[];
   restriction?: MedicineRestriction;
   incompatibleWith?: string[]; // Liste des noms de médicaments ou groupes incompatibles
   contraindications?: MedicineContraindication[]; // New
+  contraindicationNotes?: string[]; // Raw free-text contraindications from the catalog, used for allergy keyword matching and display
   majorInteractions?: MedicineInteraction[]; // New
   pregnancyLactation?: any; // New
+  isHospitalOnly?: boolean; // smart_flags includes RESERVE_HOPITAL / USAGE_HOSPITALIER(_UNIQUEMENT)
+  pediatricDoseRule?: string; // children.dose_rule, e.g. "25-50 mg/kg/j en 2-3 prises"
 }
 
 export interface DoctorInfo {
@@ -105,17 +133,17 @@ export interface DoctorInfo {
   inpe?: string;
   ice?: string;
   taxId?: string;
+  ordreNumber?: string;
+
+  // Cabinet
+  hours?: string;
+  mapsUrl?: string;
+  standardConsultationFee?: number;
 
   // Multi-user
   users?: AppUser[];
   activeUser?: AppUser;
 
-  // New Dossier Storage Keys (Internal to dataService but tracked here)
-  consultations?: ClinicalConsultation[];
-  labRequests?: LabRequest[];
-  medicalResults?: MedicalResult[];
-  invoices?: PatientInvoice[];
-  medicalCertificates?: MedicalCertificate[];
 }
 
 export type CertificateType = 'REPOS' | 'APTITUDE' | 'PROLONGATION' | 'CUSTOM';
@@ -159,7 +187,7 @@ export interface LabRequest {
 export interface MedicalResultAttachment {
   name: string;
   type: string;
-  url: string;
+  url: string; // data: URL (base64) of the file
 }
 
 export interface MedicalResult {
@@ -169,6 +197,8 @@ export interface MedicalResult {
   title: string;
   interpretation: string;
   doctorNotes?: string;
+  resultType: MedicalResultType;
+  prescriberName?: string;
   analysisId?: string; // Link to LabRequest
   attachments: MedicalResultAttachment[];
   patientId: string;
@@ -193,25 +223,17 @@ export interface HonoraryNote {
   patientPhone?: string;
   patientCin?: string;
   visitId?: string;
+  prescriptionId?: string; // Link to the Prescription that generated this invoice
   date: string;
   invoiceNumber: string;
   services: HonoraryService[];
   totalAmount: number;
   totalInWords: string;
-  status: 'PAID' | 'UNPAID';
+  status: 'PAID' | 'UNPAID' | 'PARTIAL';
+  amountPaid?: number; // Only meaningful when status === 'PARTIAL'
   paymentMode: 'CASH' | 'CARD' | 'TRANSFER';
   includeCin?: string;
   includePhone?: string;
-}
-
-export interface PatientInvoice {
-  id: string;
-  date: string;
-  items: { description: string; price: number }[];
-  total: number;
-  paid: number;
-  balance: number;
-  patientId: string;
 }
 
 export type FontSizeOption = 'small' | 'medium' | 'large';
@@ -239,14 +261,22 @@ export interface PrescriptionAppearance {
   layoutPreset?: 'classic' | 'modern' | 'elegant';
   showSignature?: boolean;
   signatureLabel?: string;
+  paperSize?: 'A4' | 'A5';
+  paperMode?: 'blank' | 'letterhead';
+  signatureImageUrl?: string;
+  stampImageUrl?: string;
+  selectedTemplate?: 'classic_moroccan' | 'modern_wave' | 'minimal_clean' | 'cardio_pro';
 }
 
 export interface PrescriptionItem {
   id: string;
   medicineName: string;
+  genericName?: string;
   category?: string;
   form?: string;
   strength?: string;
+  route?: string;
+  packaging?: string | null; // Présentation/conditionnement retenu pour cette prescription
   dosage: string;
   referenceDosage?: string;
   timing: MealTiming;
@@ -262,12 +292,19 @@ export interface Patient {
   id: string;
   name: string;
   age: number;
+  dateOfBirth?: string;
+  cin?: string;
   sex: 'M' | 'F';
   type: PatientType;
   phone?: string;
+  address?: string;
   weight?: string;
   allergies?: string;
   pathologies?: string;
+  pathologyTags?: string[];
+  pathologiesOtherTags?: string[];
+  allergyTags?: string[];
+  allergiesOtherTags?: string[];
   chronicDiseases?: string[];
   consultationFee?: number;
   registeredDate?: string;
@@ -278,16 +315,48 @@ export interface Patient {
   isHeartPatient?: boolean;
   isKidneyPatient?: boolean;
   isLiverPatient?: boolean;
+  currentMedications?: PrescriptionItem[];
+  // Antécédents (onglet dossier patient)
+  bloodType?: string;
+  familyHistory?: string;
+  surgicalHistory?: string;
+  pregnanciesCount?: number;
+  deliveriesCount?: number;
+  miscarriagesCount?: number;
+  smokingStatus?: 'Non' | 'Oui' | 'Ancien';
+  smokingDetail?: string;
+  alcoholUse?: 'Non' | 'Oui' | 'Occasionnel';
+  physicalActivity?: string;
+  profession?: string;
+  vitalSigns?: VitalSign[];
+}
+
+export interface VitalSign {
+  date: string; // ISO datetime, set automatically at entry time
+  weight?: number; // kg
+  height?: number; // cm
+  systolic?: number; // mmHg
+  diastolic?: number; // mmHg
+  heartRate?: number; // bpm
+  spO2?: number; // %
+  temperature?: number; // °C
 }
 
 export type AppointmentPriority = 'URGENT' | 'INITIAL' | 'ROUTINE';
-export type AppointmentStatus = 'PENDING' | 'CONFIRMED' | 'REJECTED';
+// PENDING/CONFIRMED = planifié (en attente ou confirmé par le cabinet) — statuts d'origine, conservés pour compat.
+// ARRIVED/IN_CONSULTATION/DONE = cycle de vie salle d'attente ajouté pour l'agenda. REJECTED = annulé.
+export type AppointmentStatus = 'PENDING' | 'CONFIRMED' | 'ARRIVED' | 'IN_CONSULTATION' | 'DONE' | 'REJECTED';
+export type AppointmentType = 'Consultation' | 'Contrôle' | 'Urgence' | 'Vaccination' | 'Autre';
 
 export interface Appointment {
   id: string;
+  patientId?: string; // Lien optionnel vers un dossier patient existant
   patientName: string;
   phone: string;
   date: string; // YYYY-MM-DD
+  time?: string; // HH:mm — optionnel pour compat avec les RDV existants sans heure
+  duration?: number; // minutes (15/30/45/60), défaut 30
+  consultationType?: AppointmentType;
   note: string; // Reason for visit
   priority: AppointmentPriority;
   status: AppointmentStatus;
@@ -318,12 +387,29 @@ export interface PrescriptionDraft {
   selectedTests: string[];
 }
 
+export const EXPENSE_CATEGORIES = [
+  'Loyer & charges du local',
+  'Salaires & charges sociales (CNSS)',
+  'Fournitures médicales & consommables',
+  'Équipement médical & amortissement',
+  'Assurance professionnelle (RC médicale)',
+  'Taxe professionnelle (patente)',
+  'Frais comptable/juridique',
+  'Formation continue',
+  'Électricité/eau/téléphone/internet',
+  'Autre',
+] as const;
+export type ExpenseCategory = typeof EXPENSE_CATEGORIES[number];
+
 export interface Expense {
   id: string;
   date: string;
-  category: string;
+  category: ExpenseCategory;
+  categoryDetail?: string; // Required when category === 'Autre'
   label: string;
   amount: number;
+  receiptDataUrl?: string; // Base64 photo/scan of the justificatif
+  noReceiptConfirmed?: boolean; // Explicit "sans justificatif" acknowledgement
 }
 
 export type ResourceType = 'JSON' | 'PDF' | 'Word' | 'Manuel';

@@ -26,5 +26,12 @@
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "Design_extracted",
+    "src-tauri",
+    "dist",
+    "docease-app"
+  ]
 }

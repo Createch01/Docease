@@ -1,0 +1,3049 @@
+[
+  {
+    "id": "aerius_5_mg",
+    "brand_name": "AERIUS",
+    "generic_name": "Desloratadine",
+    "composition": [
+      "Desloratadine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antiallergique",
+    "drug_class": "Antihistaminique H1 (2ème génération, non sédatif)",
+    "drugbank_id": "DB00334",
+    "mechanism": "Antagoniste sélectif et de longue durée des récepteurs H1 de l'histamine. Peu de pénétration SNC.",
+    "half_life": "27h",
+    "indications": [
+      "Rhinite allergique (saisonnière et pérenne)",
+      "Urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine ou loratadine"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs CYP3A4, CYP2D6 (kétoconazole, érythromycine)",
+        "severity": "mineure",
+        "effect": "Légère augmentation de l'exposition mais sans signification clinique démontrée"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données insuffisantes. Éviter si possible. Préférer loratadine (plus de données).",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "Autorisé dès 1 an (sirop). Comprimés dès 12 ans.",
+      "dose_rule": "1-5 ans: 1.25mg/j. 6-11 ans: 2.5mg/j. ≥12 ans: 5mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire fréquence (1 prise tous les 2 jours) si IR sévère"
+    },
+    "dosage": {
+      "adult": "5mg/j en 1 prise",
+      "children": "1.25-5mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Somnolence (rare)",
+      "Tachycardie (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boîte de 7",
+        "price_ppv_dhs": 25,
+        "price_ph_dhs": null,
+        "laboratory": "PHI",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aerius-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aerius-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00334",
+      "drugs_com": "https://www.drugs.com/desloratadine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "cariban_10_mg_/_10_mg",
+    "brand_name": "CARIBAN",
+    "generic_name": "Doxylamine + Pyridoxine",
+    "composition": [
+      "Doxylamine",
+      "Pyridoxine"
+    ],
+    "strength": "10 MG / 10 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "R06AA59",
+    "therapeutic_group": "Anti-émétique de la grossesse",
+    "drug_class": "Antihistaminique antiémétique",
+    "drugbank_id": "DB06700",
+    "mechanism": "Doxylamine (H1 + anticholinergique): antiémétique central. Pyridoxine (B6): réduction nausées (mécanisme exact inconnu).",
+    "half_life": "12h (doxylamine)",
+    "indications": [
+      "Nausées et vomissements de la grossesse (1ère intention selon recommandations)"
+    ],
+    "contraindications": [
+      "Allergie à l'un des composants",
+      "Association IMAO"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, dépresseurs SNC",
+        "severity": "modérée",
+        "effect": "Sédation additive"
+      },
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Potentialisation anticholinergique"
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Sûr et recommandé pour les nausées gravidiques selon méta-analyses. Données rassurantes sur 200 000+ femmes.",
+      "breastfeeding": "Déconseillé (antihistaminique passe dans lait)."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non indiqué",
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement"
+    },
+    "dosage": {
+      "adult": "10mg/10mg au coucher. Si insuffisant: ajouter 1cp le matin ou midi.",
+      "children": "Non indiqué"
+    },
+    "adverse_effects": [
+      "Somnolence (fréquente)",
+      "Sécheresse buccale",
+      "Constipation",
+      "Vision floue"
+    ],
+    "market_data": [
+      {
+        "packaging": "à libération modifiée Boite de 24",
+        "price_ppv_dhs": 233,
+        "price_ph_dhs": 149.9,
+        "laboratory": "VERSALYA SA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/cariban-10-mg-10-mg-gelule/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "INTERACTION_ALCOOL"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/cariban-10-mg-10-mg-gelule/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06700",
+      "drugs_com": "https://www.drugs.com/doxylamine.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/cariban-10-mg-10-mg-gelule/",
+    "drug_interactions": [],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "cariban_10_mg",
+    "brand_name": "CARIBAN",
+    "generic_name": "Doxylamine + Pyridoxine",
+    "composition": [
+      "Doxylamine",
+      "Pyridoxine"
+    ],
+    "strength": "10 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "R06AA59",
+    "therapeutic_group": "Anti-émétique de la grossesse",
+    "drug_class": "Antihistaminique antiémétique",
+    "drugbank_id": "DB06700",
+    "mechanism": "Doxylamine (H1 + anticholinergique): antiémétique central. Pyridoxine (B6): réduction nausées (mécanisme exact inconnu).",
+    "half_life": "12h (doxylamine)",
+    "indications": [
+      "Nausées et vomissements de la grossesse (1ère intention selon recommandations)"
+    ],
+    "contraindications": [
+      "Allergie à l'un des composants",
+      "Association IMAO"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, dépresseurs SNC",
+        "severity": "modérée",
+        "effect": "Sédation additive"
+      },
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Potentialisation anticholinergique"
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Sûr et recommandé pour les nausées gravidiques selon méta-analyses. Données rassurantes sur 200 000+ femmes.",
+      "breastfeeding": "Déconseillé (antihistaminique passe dans lait)."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non indiqué",
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement"
+    },
+    "dosage": {
+      "adult": "10mg/10mg au coucher. Si insuffisant: ajouter 1cp le matin ou midi.",
+      "children": "Non indiqué"
+    },
+    "adverse_effects": [
+      "Somnolence (fréquente)",
+      "Sécheresse buccale",
+      "Constipation",
+      "Vision floue"
+    ],
+    "market_data": [
+      {
+        "packaging": "à libération prolongée Boite de 24",
+        "price_ppv_dhs": 350,
+        "price_ph_dhs": 149.9,
+        "laboratory": "VERSALYA SA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/cariban-10-mg-gelule/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "INTERACTION_ALCOOL"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/cariban-10-mg-gelule/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06700",
+      "drugs_com": "https://www.drugs.com/doxylamine.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/cariban-10-mg-gelule/",
+    "drug_interactions": [],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "cetiral_1_mg_/_ml",
+    "brand_name": "CETIRAL",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "1 MG / ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antiallergique antihistaminique",
+    "drug_class": "Antihistaminique H1 non sédatif",
+    "drugbank_id": null,
+    "mechanism": null,
+    "half_life": null,
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Insuffisance rénale sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/jour. 6-12 ans: 5 mg 2x/jour. ≥ 12 ans: 10 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/jour. ClCr 10-29: 5 mg/48h. ClCr <10: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "10 mg/jour en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "adverse_effects": [],
+    "market_data": [
+      {
+        "packaging": "buvable Flacon de 60 ml",
+        "price_ppv_dhs": 25.6,
+        "price_ph_dhs": null,
+        "laboratory": "AFRIC-PHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/cetiral-1-mg-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/cetiral-1-mg-ml-solution/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/cetirizine.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/cetiral-1-mg-ml-solution/",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé"
+  },
+  {
+    "id": "cetiral_10_mg",
+    "brand_name": "CETIRAL",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antiallergique antihistaminique",
+    "drug_class": "Antihistaminique H1 non sédatif",
+    "drugbank_id": null,
+    "mechanism": null,
+    "half_life": null,
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Insuffisance rénale sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/jour. 6-12 ans: 5 mg 2x/jour. ≥ 12 ans: 10 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/jour. ClCr 10-29: 5 mg/48h. ClCr <10: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "10 mg/jour en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "adverse_effects": [],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boîte de 15",
+        "price_ppv_dhs": 42.8,
+        "price_ph_dhs": null,
+        "laboratory": "AFRIC-PHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/cetiral-10-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/cetiral-10-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/cetirizine.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/cetiral-10-mg-comprime/",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé"
+  },
+  {
+    "id": "cetolerg_10_mg",
+    "brand_name": "CETOLERG",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antiallergique antihistaminique",
+    "drug_class": "Antihistaminique H1 non sédatif",
+    "drugbank_id": null,
+    "mechanism": null,
+    "half_life": null,
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Insuffisance rénale sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/jour. 6-12 ans: 5 mg 2x/jour. ≥ 12 ans: 10 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/jour. ClCr 10-29: 5 mg/48h. ClCr <10: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "10 mg/jour en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "adverse_effects": [],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boîte de 15",
+        "price_ppv_dhs": 42,
+        "price_ph_dhs": null,
+        "laboratory": "NOVOPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/cetolerg-10-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/cetolerg-10-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/cetirizine.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/cetolerg-10-mg-comprime/",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé"
+  },
+  {
+    "id": "cetra_37.5_mg_/_325_mg",
+    "brand_name": "CETRA",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "37.5 MG / 325 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antiallergique antihistaminique",
+    "drug_class": "Antihistaminique H1 non sédatif",
+    "drugbank_id": null,
+    "mechanism": null,
+    "half_life": null,
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Insuffisance rénale sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/jour. 6-12 ans: 5 mg 2x/jour. ≥ 12 ans: 10 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/jour. ClCr 10-29: 5 mg/48h. ClCr <10: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "10 mg/jour en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "adverse_effects": [],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 20",
+        "price_ppv_dhs": 27.6,
+        "price_ph_dhs": null,
+        "laboratory": "SPIMACO",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/cetra-37-5-mg-325-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/cetra-37-5-mg-325-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/cetirizine.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/cetra-37-5-mg-325-mg-comprime/",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé"
+  },
+  {
+    "id": "cinet_1_mg_/_ml",
+    "brand_name": "CINET",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "1 MG / ML",
+    "form": "Suspension",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antiallergique antihistaminique",
+    "drug_class": "Antihistaminique H1",
+    "drugbank_id": null,
+    "mechanism": null,
+    "half_life": null,
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Insuffisance rénale sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/jour. 6-12 ans: 5 mg 2x/jour. ≥ 12 ans: 10 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/jour. ClCr 10-29: 5 mg/48h. ClCr <10: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "10 mg/jour en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "adverse_effects": [],
+    "market_data": [
+      {
+        "packaging": "buvable Flacon de 200 ml",
+        "price_ppv_dhs": 28,
+        "price_ph_dhs": null,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/cinet-1-mg-ml-suspension/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/cinet-1-mg-ml-suspension/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/meclozine.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/cinet-1-mg-ml-suspension/",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé"
+  },
+  {
+    "id": "cinet_10_mg",
+    "brand_name": "CINET",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antiallergique antihistaminique",
+    "drug_class": "Antihistaminique H1",
+    "drugbank_id": null,
+    "mechanism": null,
+    "half_life": null,
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Insuffisance rénale sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/jour. 6-12 ans: 5 mg 2x/jour. ≥ 12 ans: 10 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/jour. ClCr 10-29: 5 mg/48h. ClCr <10: contre-indiqué."
+    },
+    "dosage": {
+      "adult": "10 mg/jour en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "adverse_effects": [],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 33.4,
+        "price_ph_dhs": null,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/cinet-10-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/cinet-10-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/meclozine.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/cinet-10-mg-comprime/",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé"
+  },
+  {
+    "id": "histanorm_10_mg_comprimé_boîte_de_15",
+    "brand_name": "HISTANORM",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Allergologie",
+    "drug_class": "Antihistaminique H1 (2e génération)",
+    "drugbank_id": "DB00341",
+    "mechanism": "Antagoniste sélectif et puissant des récepteurs H1 périphériques de l'histamine. Métabolite actif de l'hydroxyzine. Faible passage de la barrière hémato-encéphalique — peu sédatif.",
+    "half_life": "7-10h",
+    "indications": [
+      "Rhinite allergique saisonnière et persistante",
+      "Conjonctivite allergique",
+      "Urticaire chronique idiopathique",
+      "Prurit allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cétirizine ou hydroxyzine",
+      "Insuffisance rénale sévère (DFG < 10) sans ajustement"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, sédatifs (benzos, hypnotiques)",
+        "severity": "modérée",
+        "effect": "Potentialisation sédation (bien que faible)"
+      },
+      {
+        "drug": "Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation taux cétirizine"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — données rassurantes. Éviter au 1er trimestre par précaution.",
+      "breastfeeding": "Déconseillé (passage dans le lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans",
+      "dose_rule": "2-6 ans: 5 mg/j. 6-12 ans: 5-10 mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose 50% si DFG 10-30 mL/min. Contre-indiqué si DFG < 10."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le soir (ou 5 mg 2x/j)",
+      "children": "5-10 mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Somnolence (légère)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 15",
+        "price_ppv_dhs": 37.4,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00341",
+      "drugs_com": "https://www.drugs.com/cétirizine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "histanorm_10_mg_comprimé_boîte_de_30",
+    "brand_name": "HISTANORM",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Allergologie",
+    "drug_class": "Antihistaminique H1 (2e génération)",
+    "drugbank_id": "DB00341",
+    "mechanism": "Antagoniste sélectif et puissant des récepteurs H1 périphériques de l'histamine. Métabolite actif de l'hydroxyzine. Faible passage de la barrière hémato-encéphalique — peu sédatif.",
+    "half_life": "7-10h",
+    "indications": [
+      "Rhinite allergique saisonnière et persistante",
+      "Conjonctivite allergique",
+      "Urticaire chronique idiopathique",
+      "Prurit allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cétirizine ou hydroxyzine",
+      "Insuffisance rénale sévère (DFG < 10) sans ajustement"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, sédatifs (benzos, hypnotiques)",
+        "severity": "modérée",
+        "effect": "Potentialisation sédation (bien que faible)"
+      },
+      {
+        "drug": "Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation taux cétirizine"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — données rassurantes. Éviter au 1er trimestre par précaution.",
+      "breastfeeding": "Déconseillé (passage dans le lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans",
+      "dose_rule": "2-6 ans: 5 mg/j. 6-12 ans: 5-10 mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose 50% si DFG 10-30 mL/min. Contre-indiqué si DFG < 10."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le soir (ou 5 mg 2x/j)",
+      "children": "5-10 mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Somnolence (légère)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 54.2,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00341",
+      "drugs_com": "https://www.drugs.com/cétirizine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "histanorm_5_mg_/_5_ml_sirop_flacon_de_120_ml",
+    "brand_name": "HISTANORM",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "5 MG / 5 ML",
+    "form": "Sirop",
+    "route": "Voir notice",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Allergologie",
+    "drug_class": "Antihistaminique H1 (2e génération)",
+    "drugbank_id": "DB00341",
+    "mechanism": "Antagoniste sélectif et puissant des récepteurs H1 périphériques de l'histamine. Métabolite actif de l'hydroxyzine. Faible passage de la barrière hémato-encéphalique — peu sédatif.",
+    "half_life": "7-10h",
+    "indications": [
+      "Rhinite allergique saisonnière et persistante",
+      "Conjonctivite allergique",
+      "Urticaire chronique idiopathique",
+      "Prurit allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cétirizine ou hydroxyzine",
+      "Insuffisance rénale sévère (DFG < 10) sans ajustement"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, sédatifs (benzos, hypnotiques)",
+        "severity": "modérée",
+        "effect": "Potentialisation sédation (bien que faible)"
+      },
+      {
+        "drug": "Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation taux cétirizine"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — données rassurantes. Éviter au 1er trimestre par précaution.",
+      "breastfeeding": "Déconseillé (passage dans le lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans",
+      "dose_rule": "2-6 ans: 5 mg/j. 6-12 ans: 5-10 mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose 50% si DFG 10-30 mL/min. Contre-indiqué si DFG < 10."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le soir (ou 5 mg 2x/j)",
+      "children": "5-10 mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Somnolence (légère)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 120 ml",
+        "price_ppv_dhs": 44.8,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00341",
+      "drugs_com": "https://www.drugs.com/cétirizine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "histanorm_5_mg_/_5_ml_sirop_flacon_de_60_ml",
+    "brand_name": "HISTANORM",
+    "generic_name": "Cétirizine",
+    "composition": [
+      "Cétirizine"
+    ],
+    "strength": "5 MG / 5 ML",
+    "form": "Sirop",
+    "route": "Voir notice",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Allergologie",
+    "drug_class": "Antihistaminique H1 (2e génération)",
+    "drugbank_id": "DB00341",
+    "mechanism": "Antagoniste sélectif et puissant des récepteurs H1 périphériques de l'histamine. Métabolite actif de l'hydroxyzine. Faible passage de la barrière hémato-encéphalique — peu sédatif.",
+    "half_life": "7-10h",
+    "indications": [
+      "Rhinite allergique saisonnière et persistante",
+      "Conjonctivite allergique",
+      "Urticaire chronique idiopathique",
+      "Prurit allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la cétirizine ou hydroxyzine",
+      "Insuffisance rénale sévère (DFG < 10) sans ajustement"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, sédatifs (benzos, hypnotiques)",
+        "severity": "modérée",
+        "effect": "Potentialisation sédation (bien que faible)"
+      },
+      {
+        "drug": "Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation taux cétirizine"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Compatible — données rassurantes. Éviter au 1er trimestre par précaution.",
+      "breastfeeding": "Déconseillé (passage dans le lait)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "Autorisé dès 2 ans",
+      "dose_rule": "2-6 ans: 5 mg/j. 6-12 ans: 5-10 mg/j"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire dose 50% si DFG 10-30 mL/min. Contre-indiqué si DFG < 10."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise le soir (ou 5 mg 2x/j)",
+      "children": "5-10 mg/j selon âge"
+    },
+    "adverse_effects": [
+      "Somnolence (légère)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 60 ml",
+        "price_ppv_dhs": 24.3,
+        "price_ph_dhs": null,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00341",
+      "drugs_com": "https://www.drugs.com/cétirizine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "labixten_20_mg",
+    "brand_name": "LABIXTEN",
+    "generic_name": "Bilastine",
+    "composition": [
+      "Bilastine"
+    ],
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX29",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 non sédatif (2e génération)",
+    "drugbank_id": "DB11591",
+    "mechanism": "Antagoniste sélectif et compétitif des récepteurs H1 de l'histamine périphérique. Pas de pénétration significative dans le SNC → non sédatif.",
+    "half_life": "14.5h",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Kétoconazole / érythromycine",
+        "severity": "modérée",
+        "effect": "Augmentation exposition bilastine (x2) — éviter association"
+      },
+      {
+        "drug": "Diltiazem",
+        "severity": "modérée",
+        "effect": "Augmentation exposition bilastine"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Réduction absorption — prendre à jeun"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Déconseillé (données limitées)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "≥ 6 ans.",
+      "dose_rule": "≥ 6 ans et ≥ 20 kg: 10 mg/j. ≥ 12 ans: 20 mg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "20 mg/jour à jeun.",
+      "children": "≥ 12 ans: 20 mg/j."
+    },
+    "adverse_effects": [
+      "Somnolence (rare)",
+      "Céphalées",
+      "Vertiges"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 93.1,
+        "price_ph_dhs": null,
+        "laboratory": "IBERMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/labixten-20-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/labixten-20-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB11591",
+      "drugs_com": "https://www.drugs.com/bilastine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [],
+    "tableau_maroc": "HTC"
+  },
+  {
+    "id": "loreus_0.5_mg_/_ml",
+    "brand_name": "LOREUS",
+    "generic_name": "Desloratadine",
+    "composition": [
+      "Desloratadine"
+    ],
+    "strength": "0.5 MG / ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 non sédatif (2e génération)",
+    "drugbank_id": "DB00310",
+    "mechanism": "Métabolite actif de la loratadine. Antagoniste sélectif des récepteurs H1 périphériques. Non sédatif car ne franchit pas la BHE.",
+    "half_life": "27h",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine ou loratadine"
+    ],
+    "interactions": [
+      {
+        "drug": "Kétoconazole / érythromycine",
+        "severity": "faible",
+        "effect": "Légère augmentation des taux sans effet clinique significatif"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Somnolence (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "buvable Flacon de 60 ml",
+        "price_ppv_dhs": 22.9,
+        "price_ph_dhs": null,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/loreus-0-5-mg-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/loreus-0-5-mg-ml-solution/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00310",
+      "drugs_com": "https://www.drugs.com/desloratadine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [],
+    "tableau_maroc": "HTC"
+  },
+  {
+    "id": "loreus_5_mg",
+    "brand_name": "LOREUS",
+    "generic_name": "Desloratadine",
+    "composition": [
+      "Desloratadine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 non sédatif (2e génération)",
+    "drugbank_id": "DB00310",
+    "mechanism": "Métabolite actif de la loratadine. Antagoniste sélectif des récepteurs H1 périphériques. Non sédatif car ne franchit pas la BHE.",
+    "half_life": "27h",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine ou loratadine"
+    ],
+    "interactions": [
+      {
+        "drug": "Kétoconazole / érythromycine",
+        "severity": "faible",
+        "effect": "Légère augmentation des taux sans effet clinique significatif"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Somnolence (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 15",
+        "price_ppv_dhs": 38,
+        "price_ph_dhs": null,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/loreus-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/loreus-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00310",
+      "drugs_com": "https://www.drugs.com/desloratadine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [],
+    "tableau_maroc": "HTC"
+  },
+  {
+    "id": "lorodes_0.5_mg_/_ml",
+    "brand_name": "LORODES",
+    "generic_name": "Desloratadine",
+    "composition": [
+      "Desloratadine"
+    ],
+    "strength": "0.5 MG / ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 non sédatif (2e génération)",
+    "drugbank_id": "DB00310",
+    "mechanism": "Métabolite actif de la loratadine. Antagoniste sélectif des récepteurs H1 périphériques. Non sédatif car ne franchit pas la BHE.",
+    "half_life": "27h",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine ou loratadine"
+    ],
+    "interactions": [
+      {
+        "drug": "Kétoconazole / érythromycine",
+        "severity": "faible",
+        "effect": "Légère augmentation des taux sans effet clinique significatif"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Somnolence (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "buvable Flacon de 60 ml",
+        "price_ppv_dhs": 23.4,
+        "price_ph_dhs": null,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lorodes-0-5-mg-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lorodes-0-5-mg-ml-solution/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00310",
+      "drugs_com": "https://www.drugs.com/desloratadine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [],
+    "tableau_maroc": "HTC"
+  },
+  {
+    "id": "lorodes_5_mg",
+    "brand_name": "LORODES",
+    "generic_name": "Desloratadine",
+    "composition": [
+      "Desloratadine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 non sédatif (2e génération)",
+    "drugbank_id": "DB00310",
+    "mechanism": "Métabolite actif de la loratadine. Antagoniste sélectif des récepteurs H1 périphériques. Non sédatif car ne franchit pas la BHE.",
+    "half_life": "27h",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine ou loratadine"
+    ],
+    "interactions": [
+      {
+        "drug": "Kétoconazole / érythromycine",
+        "severity": "faible",
+        "effect": "Légère augmentation des taux sans effet clinique significatif"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Somnolence (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 10",
+        "price_ppv_dhs": 28.8,
+        "price_ph_dhs": null,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lorodes-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lorodes-5-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00310",
+      "drugs_com": "https://www.drugs.com/desloratadine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [],
+    "tableau_maroc": "HTC"
+  },
+  {
+    "id": "lorix_10_mg",
+    "brand_name": "LORIX",
+    "generic_name": "Loratadine",
+    "composition": [
+      "Loratadine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX13",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 non sédatif",
+    "drugbank_id": "DB00455",
+    "mechanism": "Antagoniste sélectif des récepteurs H1 périphériques. Traverse peu la BHE → effet non sédatif. Métabolisé en desloratadine active.",
+    "half_life": "8-12h (loratadine), 27h (desloratadine)",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Kétoconazole / érythromycine / cimétidine",
+        "severity": "faible",
+        "effect": "Augmentation légère taux loratadine — sans effet clinique majeur"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Somnolence (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 15",
+        "price_ppv_dhs": 37.4,
+        "price_ph_dhs": null,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lorix-10-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lorix-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00455",
+      "drugs_com": "https://www.drugs.com/loratadine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [],
+    "tableau_maroc": "HTC"
+  },
+  {
+    "id": "naureus_0.5_mg_/_ml",
+    "brand_name": "NAUREUS",
+    "generic_name": "Desloratadine",
+    "strength": "0.5 MG / ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 non sédatif",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "5 mg/j.",
+      "children": "1-5 ans: 1.25 mg/j. 6-11: 2.5 mg/j. ≥ 12: 5 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 23.4,
+        "packaging": "buvable Flacon de 60 ml",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées",
+      "Fatigue"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/naureus-0-5-mg-ml-solution"
+  },
+  {
+    "id": "naureus_5_mg",
+    "brand_name": "NAUREUS",
+    "generic_name": "Desloratadine",
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 non sédatif",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire chronique"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "5 mg/j.",
+      "children": "1-5 ans: 1.25 mg/j. 6-11: 2.5 mg/j. ≥ 12: 5 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 70,
+        "packaging": "pelliculé Boite de 30",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées",
+      "Fatigue"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/naureus-5-mg-comprime"
+  },
+  {
+    "id": "nautamine_90_mg",
+    "brand_name": "NAUTAMINE",
+    "generic_name": "Diphénhydramine",
+    "strength": "90 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AA02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 sédatif",
+    "indications": [
+      "Mal des transports",
+      "Insomnie occasionnelle",
+      "Allergies"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "50-100 mg au coucher (insomnie). Mal des transports: 50 mg 30 min avant.",
+      "children": "≥ 2 ans: 1 mg/kg."
+    },
+    "market_data": [
+      {
+        "price": 15.2,
+        "packaging": "Boîte de 20",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence marquée",
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/nautamine-90-mg-comprime"
+  },
+  {
+    "id": "nurabol_2_mg_/_5_ml",
+    "brand_name": "NURABOL",
+    "generic_name": "Dexchlorphéniramine",
+    "strength": "2 MG / 5 ML",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AB02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 sédatif",
+    "indications": [
+      "Allergies",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 mg/j en 2-3 prises.",
+      "children": "≥ 2 ans: 0.5-1 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 9.1,
+        "packaging": "Flacon de 125 ml",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence",
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/nurabol-2-mg-5-ml-sirop"
+  },
+  {
+    "id": "nurabol_4_mg_/_5_ml",
+    "brand_name": "NURABOL",
+    "generic_name": "Dexchlorphéniramine",
+    "strength": "4 MG / 5 ML",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AB02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 sédatif",
+    "indications": [
+      "Allergies",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 mg/j en 2-3 prises.",
+      "children": "≥ 2 ans: 0.5-1 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 11.3,
+        "packaging": "Flacon de 125 ml",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence",
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/nurabol-4-mg-5-ml-sirop"
+  },
+  {
+    "id": "nurabol_4_mg",
+    "brand_name": "NURABOL",
+    "generic_name": "Dexchlorphéniramine",
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AB02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Antihistaminique H1 sédatif",
+    "indications": [
+      "Allergies",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 mg/j en 2-3 prises.",
+      "children": "≥ 2 ans: 0.5-1 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 14.2,
+        "packaging": "Boîte de 30",
+        "laboratory": "PHARMA5"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence",
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/nurabol-4-mg-comprime"
+  },
+  {
+    "id": "P-PERIACTINE",
+    "brand_name": "PERIACTINE",
+    "generic_name": "Cyproheptadine",
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 sédatif + orexigène",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire",
+      "Stimulation appétit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire",
+      "Nourrisson"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "4 mg 3x/j.",
+      "children": "≥ 2 ans: 2-4 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 16.1,
+        "packaging": "pelliculé Boîte de 30",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/periactine-4-mg-comprime"
+  },
+  {
+    "id": "P-PERNABOL",
+    "brand_name": "PERNABOL",
+    "generic_name": "Dexchlorphéniramine",
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AB02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 sédatif",
+    "indications": [
+      "Allergies",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 mg/j.",
+      "children": "≥ 2 ans: 0.5-1 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 15.7,
+        "packaging": "Boîte de 30",
+        "laboratory": "GALENICA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/pernabol-4-mg-comprime"
+  },
+  {
+    "id": "P-POLAMINOFEN",
+    "brand_name": "POLAMINOFEN",
+    "generic_name": "Dexchlorphéniramine",
+    "strength": "10 MG / ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "R06AB02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 sédatif",
+    "indications": [
+      "Allergies",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Glaucome",
+      "Rétention urinaire"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "2-6 mg/j.",
+      "children": "≥ 2 ans: 0.5-1 mg 2-3x/j."
+    },
+    "market_data": [
+      {
+        "price": 28.2,
+        "packaging": "pour perfusion I.V Boite d'une poche de 100 ML de solution",
+        "laboratory": "PHARMAPROM"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [],
+    "market_url": "https://www.medicament.ma/medicament/polaminofen-10-mg-ml-solution"
+  },
+  {
+    "id": "P-PHENERGAN",
+    "brand_name": "PHENERGAN",
+    "generic_name": "Prométhazine",
+    "strength": "0.1 %",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AD02",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Phénothiazine antihistaminique sédative",
+    "indications": [
+      "Allergies",
+      "Insomnie",
+      "Nausées/vomissements",
+      "Prémédication"
+    ],
+    "contraindications": [
+      "Glaucome à angle fermé",
+      "Rétention urinaire",
+      "Enfant <2 ans"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "25-75 mg/j.",
+      "children": "≥ 2 ans: 1 mg/kg/j en 2-3 prises."
+    },
+    "market_data": [
+      {
+        "price": 12.4,
+        "packaging": "Flacon de 125 ml",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence",
+      "Sécheresse buccale",
+      "Photosensibilisation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Opioïdes",
+          "BZD"
+        ],
+        "interacting_classes": [
+          "Dépresseurs SNC"
+        ],
+        "severity": "DANGER",
+        "effect": "Sédation excessive",
+        "recommendation": "Éviter alcool."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/phenergan-0-1-sirop"
+  },
+  {
+    "id": "P-PRIMALAN",
+    "brand_name": "PRIMALAN",
+    "generic_name": "Méquitazine",
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AD07",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Phénothiazine anti-H1",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire",
+      "Prurit"
+    ],
+    "contraindications": [
+      "Allongement QT",
+      "Bradycardie"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "10 mg/j.",
+      "children": "≥ 2 ans: 1.25-5 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 44.8,
+        "packaging": "sécable Boîte de 14",
+        "laboratory": "MAPHAR"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "ALLONGEMENT_QT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/primalan-10-mg-comprime"
+  },
+  {
+    "id": "S-SUPRALER",
+    "brand_name": "SUPRALER",
+    "generic_name": "Desloratadine",
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 21,
+        "packaging": "enrobé Boîte de 7",
+        "laboratory": "GENPHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/supraler-5-mg-comprime"
+  },
+  {
+    "id": "vantec_10_mg_comprim_enrob",
+    "brand_name": "VANTEC",
+    "generic_name": "Cétirizine",
+    "strength": "10 MG",
+    "form": "Comprimé enrobé",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 35.2,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "RIM PHARMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/vantec-10-mg-comprime-enrobe"
+  },
+  {
+    "id": "T-TOTIFEN",
+    "brand_name": "TOTIFEN",
+    "generic_name": "Kétotifène",
+    "strength": "1 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "R06AX17",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Stabilisateur mastocytaire + anti-H1",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0.5,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 54.4,
+        "packaging": "Boîte de 30",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/totifen-1-mg-gelule"
+  },
+  {
+    "id": "xycet_0_5_mg_ml_sirop",
+    "brand_name": "XYCET",
+    "generic_name": "Lévocétirizine",
+    "strength": "0.5 MG / ML",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (énantiomère actif cétirizine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 33.7,
+        "price_ph": null,
+        "packaging": "Flacon de 120 ml",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      },
+      {
+        "price": 22.6,
+        "price_ph": null,
+        "packaging": "Flacon de 60 ml",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xycet-0-5-mg-ml-sirop"
+  },
+  {
+    "id": "xycet_5_mg_comprim_enrob",
+    "brand_name": "XYCET",
+    "generic_name": "Lévocétirizine",
+    "strength": "5 MG",
+    "form": "Comprimé enrobé",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (énantiomère actif cétirizine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 70.6,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      },
+      {
+        "price": 40.1,
+        "price_ph": null,
+        "packaging": "Boite de 15",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xycet-5-mg-comprime-enrobe"
+  },
+  {
+    "id": "xycet_5_mg_comprim_s_enrob_s",
+    "brand_name": "XYCET",
+    "generic_name": "Lévocétirizine",
+    "strength": "5 MG",
+    "form": "Comprimés enrobés",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (énantiomère actif cétirizine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 136.4,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "PROMOPHARM (HIKMA)"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xycet-5-mg-comprimes-enrobes"
+  },
+  {
+    "id": "xyzall_5_mg_comprim_pellicul",
+    "brand_name": "XYZALL",
+    "generic_name": "Lévocétirizine",
+    "strength": "5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (énantiomère actif cétirizine)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 74.9,
+        "price_ph": null,
+        "packaging": "Boîte de 28",
+        "laboratory": "SOTHEMA"
+      },
+      {
+        "price": 37.4,
+        "price_ph": null,
+        "packaging": "Boîte de 14",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xyzall-5-mg-comprime-pellicule"
+  },
+  {
+    "id": "zadryl_1_mg_ml_solution_buvable",
+    "brand_name": "ZADRYL",
+    "generic_name": "Cétirizine",
+    "strength": "1 MG / ML",
+    "form": "Solution buvable",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (2e génération)",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "IRC sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/j. 6-12 ans: 5 mg 2x/j. ≥ 12 ans: 10 mg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/j. ClCr <30: 5 mg/48h."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 25.6,
+        "price_ph": null,
+        "packaging": "Flacon de 60 ml",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "DB00341",
+    "adverse_effects": [
+      "Somnolence (rare)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/zadryl-1-mg-ml-solution-buvable"
+  },
+  {
+    "id": "zadryl_10_mg_comprim_s_cable",
+    "brand_name": "ZADRYL",
+    "generic_name": "Cétirizine",
+    "strength": "10 MG",
+    "form": "Comprimé sécable",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (2e génération)",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "IRC sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/j. 6-12 ans: 5 mg 2x/j. ≥ 12 ans: 10 mg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/j. ClCr <30: 5 mg/48h."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 42.8,
+        "price_ph": null,
+        "packaging": "Boîte de 15",
+        "laboratory": "POLYMEDIC"
+      },
+      {
+        "price": 82.7,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "POLYMEDIC"
+      }
+    ],
+    "drugbank_id": "DB00341",
+    "adverse_effects": [
+      "Somnolence (rare)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/zadryl-10-mg-comprime-secable"
+  },
+  {
+    "id": "zyrtec_1_mg_ml_solution_buvable",
+    "brand_name": "ZYRTEC",
+    "generic_name": "Cétirizine",
+    "strength": "1 MG / ML",
+    "form": "Solution buvable",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (2e génération)",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "IRC sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/j. 6-12 ans: 5 mg 2x/j. ≥ 12 ans: 10 mg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/j. ClCr <30: 5 mg/48h."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 25.6,
+        "price_ph": null,
+        "packaging": "Flacon de 60 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "DB00341",
+    "adverse_effects": [
+      "Somnolence (rare)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/zyrtec-1-mg-ml-solution-buvable"
+  },
+  {
+    "id": "zyrtec_10_mg_ml_goutte_buvable",
+    "brand_name": "ZYRTEC",
+    "generic_name": "Cétirizine",
+    "strength": "10 MG / ML",
+    "form": "Goutte buvable",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (2e génération)",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "IRC sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/j. 6-12 ans: 5 mg 2x/j. ≥ 12 ans: 10 mg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/j. ClCr <30: 5 mg/48h."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 46.4,
+        "price_ph": null,
+        "packaging": "Flacon de 15 ml",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "DB00341",
+    "adverse_effects": [
+      "Somnolence (rare)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/zyrtec-10-mg-ml-goutte-buvable"
+  },
+  {
+    "id": "zyrtec_10_mg_comprim_pellicul_s_cable",
+    "brand_name": "ZYRTEC",
+    "generic_name": "Cétirizine",
+    "strength": "10 MG",
+    "form": "Comprimé pelliculé sécable",
+    "route": "Orale",
+    "atc_code": "R06AE07",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (2e génération)",
+    "indications": [
+      "Rhinite allergique saisonnière et perannuelle",
+      "Urticaire chronique",
+      "Conjonctivite allergique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "IRC sévère (enfant)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2.5 mg 2x/j. 6-12 ans: 5 mg 2x/j. ≥ 12 ans: 10 mg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-49: 5 mg/j. ClCr <30: 5 mg/48h."
+    },
+    "dosage": {
+      "adult": "10 mg/j en 1 prise.",
+      "children": "2-6 ans: 5 mg/j. ≥ 6 ans: 10 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 59.1,
+        "price_ph": null,
+        "packaging": "Boîte de 15",
+        "laboratory": "SOTHEMA"
+      }
+    ],
+    "drugbank_id": "DB00341",
+    "adverse_effects": [
+      "Somnolence (rare)",
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/zyrtec-10-mg-comprime-pellicule-secable"
+  },
+  {
+    "id": "O-OPATANOL",
+    "brand_name": "OPATANOL",
+    "generic_name": "Olopatadine (collyre)",
+    "composition": [
+      "Olopatadine (collyre)"
+    ],
+    "strength": "1 MG / ML",
+    "form": "Collyre",
+    "route": "Voir notice",
+    "atc_code": "S01GX09",
+    "therapeutic_group": "Ophtalmologie / Allergologie",
+    "drug_class": "Antihistaminique H1 ophtalmique",
+    "drugbank_id": "DB00768",
+    "mechanism": "Antihistaminique H1 sélectif ophtalmique avec effet stabilisateur des mastocytes. Bloque les récepteurs H1 oculaires et inhibe la dégranulation des mastocytes, réduisant la libération d'histamine et autres médiateurs allergiques.",
+    "half_life": "3h (absorption oculaire)",
+    "indications": [
+      "Conjonctivite allergique saisonnière et pérenne",
+      "Prurit et hyperhémie oculaires allergiques"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'olopatadine"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données insuffisantes — utiliser avec précaution.",
+      "breastfeeding": "Précaution."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 3,
+      "warning": "Autorisé dès 3 ans",
+      "dose_rule": "1 goutte 2x/j dans chaque œil"
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Non applicable (usage local)"
+    },
+    "dosage": {
+      "adult": "1 goutte 2x/j (matin et soir) dans chaque œil affecté.",
+      "children": "Identique (dès 3 ans)"
+    },
+    "adverse_effects": [
+      "Céphalées légères",
+      "Sensation de brûlure oculaire (transitoire)",
+      "Sécheresse oculaire"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 5 ml",
+        "price_ppv_dhs": 84.8,
+        "price_ph_dhs": null,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00768",
+      "drugs_com": "https://www.drugs.com/olopatadine.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-10",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "S-SYSTRAL",
+    "brand_name": "SYSTRAL",
+    "generic_name": "Chlorphénoxamine (topique)",
+    "strength": "15 MG / G",
+    "form": "Pommade",
+    "route": "Cutanée",
+    "atc_code": "D04AA13",
+    "therapeutic_group": "Antiprurigineux",
+    "drug_class": "Antihistaminique topique",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 15.5,
+        "packaging": "Tube de 20 g",
+        "laboratory": "LAPROPHAN"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "market_url": "https://www.medicament.ma/medicament/systral-15-mg-g-pommade"
+  },
+  {
+    "id": "yrias_0_50_mg_ml_solution_buvable",
+    "brand_name": "YRIAS",
+    "generic_name": "Desloratadine",
+    "strength": "0.50 MG / ML",
+    "form": "Solution buvable",
+    "route": "Oral",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques à usage systémique",
+    "drug_class": "Antihistaminique H1 de 2ème génération (non sédatif)",
+    "indications": [
+      "Traitement symptomatique de la rhinite allergique saisonnière et perannuelle",
+      "Traitement symptomatique de l urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine, à la loratadine ou à l un des excipients",
+      "Insuffisance rénale sévère (ajustement nécessaire)"
+    ],
+    "interactions": [
+      "Érythromycine, kétoconazole : augmentation des concentrations plasmatiques de desloratadine sans effet clinique significatif",
+      "Alcool : pas de potentialisation démontrée aux doses thérapeutiques",
+      "Inhibiteurs du CYP3A4 : augmentation possible des taux plasmatiques"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données cliniques limitées chez la femme enceinte. Déconseillé pendant la grossesse, surtout au 1er trimestre. Utiliser uniquement si le bénéfice justifie le risque potentiel."
+    },
+    "children": {
+      "allowed": true,
+      "dose_rule": "1–5 ans : 2,5 ml (1,25 mg)/j ; 6–11 ans : 5 ml (2,5 mg)/j ; ≥ 12 ans : 10 ml (5 mg)/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "En cas d insuffisance rénale, réduire la fréquence d administration à 1 prise tous les 2 jours."
+    },
+    "dosage": {
+      "adult": "10 ml (5 mg) une fois par jour.",
+      "children": "1–5 ans : 2,5 ml/j ; 6–11 ans : 5 ml/j ; ≥ 12 ans : 10 ml/j."
+    },
+    "market_data": [
+      {
+        "price": 50.8,
+        "price_ph": null,
+        "packaging": "Flacon de 150 ML",
+        "laboratory": "LAPROPHAN"
+      },
+      {
+        "price": 23.4,
+        "price_ph": null,
+        "packaging": "Flacon de 60 ML",
+        "laboratory": "LAPROPHAN"
+      }
+    ]
+  },
+  {
+    "id": "yrias_5_mg_comprim_pellicul",
+    "brand_name": "YRIAS",
+    "generic_name": "Desloratadine",
+    "strength": "5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Oral",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminiques à usage systémique",
+    "drug_class": "Antihistaminique H1 de 2ème génération (non sédatif)",
+    "indications": [
+      "Traitement symptomatique de la rhinite allergique saisonnière et perannuelle",
+      "Traitement symptomatique de l urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine, à la loratadine ou à l un des excipients",
+      "Insuffisance rénale sévère (précaution)"
+    ],
+    "interactions": [
+      "Érythromycine, kétoconazole : augmentation légère des concentrations sans pertinence clinique",
+      "Alcool : pas d interaction clinique significative",
+      "Inhibiteurs du CYP3A4 : augmentation possible des taux plasmatiques"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données cliniques limitées. Déconseillé pendant la grossesse, notamment au 1er trimestre. À utiliser uniquement si le bénéfice potentiel est supérieur au risque."
+    },
+    "children": {
+      "allowed": true,
+      "dose_rule": "Comprimé 5 mg réservé à l adulte et l adolescent ≥ 12 ans. Pour les enfants plus jeunes, utiliser la forme solution buvable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Insuffisance rénale : réduire la fréquence d administration à 1 comprimé tous les 2 jours."
+    },
+    "dosage": {
+      "adult": "1 comprimé (5 mg) une fois par jour, avec ou sans aliments.",
+      "children": "Adolescents ≥ 12 ans : 1 comprimé/j. Enfants < 12 ans : utiliser la solution buvable."
+    },
+    "market_data": [
+      {
+        "price": 38,
+        "price_ph": null,
+        "packaging": "Boite de 15",
+        "laboratory": "LAPROPHAN"
+      },
+      {
+        "price": 73.5,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "LAPROPHAN"
+      }
+    ]
+  }
+]

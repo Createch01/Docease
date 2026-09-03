@@ -6,7 +6,6 @@ import { HonoraryNote, HonoraryService, Patient, DoctorInfo, HonoraryMasterServi
 import { formatCurrencyToWords } from '../utils/numberToWords';
 import HonoraryNoteTemplate from './HonoraryNoteTemplate';
 // @ts-ignore
-import html2pdf from 'html2pdf.js';
 import { toastService } from '../services/toastService';
 import { settingsService } from '../services/settingsService';
 
@@ -113,7 +112,7 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
         window.dispatchEvent(new Event('meddoc_data_update'));
     };
 
-    const handleExportPDF = () => {
+    const handleExportPDF = async () => {
         if (!savedNote) return;
         const element = document.getElementById('note-pdf-export');
         if (!element) return;
@@ -128,6 +127,7 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
         };
 
         toastService.info("Génération de la note PDF...");
+        const html2pdf = (await import('html2pdf.js')).default;
         html2pdf()
             .set(opt)
             .from(element)

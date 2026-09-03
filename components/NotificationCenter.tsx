@@ -37,16 +37,6 @@ const NotificationCenter: React.FC<NotificationCenterProps> = ({ onNavigate }) =
                 });
             });
 
-            // 2. Add System Notifications (Mock for now, can be real later)
-            newNotifications.push({
-                id: 'sys-1',
-                type: 'info',
-                title: 'Mise à jour système',
-                message: 'DocEase v1.0 est prêt.',
-                time: 'Il y a 5 min',
-                isRead: true
-            });
-
             setNotifications(newNotifications);
         };
 

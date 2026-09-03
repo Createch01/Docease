@@ -1,7 +1,7 @@
-
-import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, PatientInvoice, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
+import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
 import { GoogleGenAI, Type } from "@google/genai";
 import { storageService } from './storageService';
+import { cryptoService } from './cryptoService';
 
 const STORAGE_KEYS = {
   DOCTOR_INFO: 'meddoc_doctor_info',
@@ -19,7 +19,6 @@ const STORAGE_KEYS = {
   CONSULTATIONS: 'meddoc_consultations',
   LAB_REQUESTS: 'meddoc_lab_requests',
   MEDICAL_RESULTS: 'meddoc_medical_results',
-  INVOICES: 'meddoc_invoices',
   HONORARY_NOTES: 'meddoc_honorary_notes',
   HONORARY_MASTER_SERVICES: 'meddoc_honorary_master_services',
   MEDICAL_CERTIFICATES: 'meddoc_medical_certificates'
@@ -35,12 +34,47 @@ const DEFAULT_HONORARY_SERVICES: HonoraryMasterService[] = [
   { id: 'h-7', name: 'Petite chirurgie', price: 500 }
 ];
 
-const DEFAULT_MEDICINES: Medicine[] = [
-  { id: 'm-doli-1', name: 'DOLIPRANE 500 mg cp', category: 'Antalgique', defaultDosage: '1 à 2 cp x 3/j', defaultTiming: 'Indifférent' },
-  { id: 'm-doli-2', name: 'DOLIPRANE 1000 mg cp', category: 'Antalgique', defaultDosage: '1 cp x 3/j', defaultTiming: 'Après repas' },
-  { id: 'm-aclav-500', name: 'ACLAV 500/62.5 mg SA', category: 'Antibiotique', defaultDosage: '1 SA x 2/j', defaultTiming: 'Pendant repas', interactionGroup: 'amoxicilline' },
-  { id: 'm-aclav-1g', name: 'ACLAV 1 g/125 mg SA', category: 'Antibiotique', defaultDosage: '1 SA x 2/j', defaultTiming: 'Pendant repas', interactionGroup: 'amoxicilline' },
-];
+// Single source of truth for a brand-new install's doctor/security record. Used
+// both by initialize() (populates the in-memory cache on first load) and by
+// getDoctorInfo()'s fallback. Previously these were two different, divergent
+// objects — initialize()'s version omitted `pin`/`users` entirely, so once it
+// populated the cache (which always runs), getDoctorInfo()'s richer fallback
+// below became dead code and `doctor.pin` stayed `undefined` forever until a
+// PIN was explicitly saved. Any read that landed on the default (e.g. a failed
+// load of the encrypted store) therefore made every PIN comparison fail — the
+// exact "PIN incorrect" symptom reported after a rebuild.
+const DEFAULT_DOCTOR_INFO: DoctorInfo = {
+  nameAr: 'الدكتور مولاي رشيد البلغيتي',
+  specialtyAr: 'اختصاصي في أمراض القلب والشرايين',
+  diplomasAr: 'رئيس سابق بقسم أمراض القلب بمستشفى أكادير وتارودانت\nدبلوم الفحص بالصدى بوردو فرنسا',
+  nameFr: 'Docteur My Rachid El BELGHITI',
+  specialtyFr: 'Cardiologie Adulte - Pédiatrique, maladies Vasculaire et Hypertension Artérielle',
+  diplomasFr: 'Ex. Chef de service de Cardiologie de l\'hôpital d\'Agadir\nDiplôme universitaire d\'échographie (Bordeaux)',
+  addressAr: 'شارع محمد الشيخ السعدي عمارة سارور شقة رقم 6 الطابق 1 تالبرجت الجديدة - أكادير',
+  addressFr: 'Av. Mohammed Cheikh Saâdi, Imm. Sarour, N° 6, 1er étage Nouveau Talborjt - Agadir',
+  phone: '05 28 82 82 29 / Gsm: 06 66 40 72 68',
+  email: 'dr.elbelghiticardio@gmail.com',
+  logoUrl: '/logo.png',
+  logoOpacity: 0.1,
+  logoScale: 120,
+  logoPosition: 'center',
+  footerColor: '#10b981',
+  currency: 'DH',
+  showBarcode: true,
+  barcodeContent: 'DocEase-SECURE-ID',
+  barcodePosition: 'bottom-left',
+  barcodeSize: 80,
+  pinEnabled: false,
+  pin: '',
+  qrCodeContent: 'https://docease.pro',
+  qrCodePosition: 'top-right',
+  showQRCode: true,
+  ordreNumber: '',
+  hours: '',
+  mapsUrl: '',
+  users: [],
+  activeUser: undefined
+};
 
 const notifyUpdate = (key: string) => {
   window.dispatchEvent(new CustomEvent('meddoc_data_update', { detail: { key } }));
@@ -54,8 +88,6 @@ export const CATEGORY_POSOLOGY: Record<MedicineCategory, { dosage: string; timin
   'Sirop': { dosage: '1 càs x 3/j', timing: 'Indifférent' },
   'Autre': { dosage: '', timing: 'Indifférent' }
 };
-
-import { loadMoroccanDrugs } from './drugLoader';
 
 // IN-MEMORY CACHE
 let cache: Record<string, any> = {};
@@ -75,7 +107,7 @@ export const dataService = {
         const defaultValue = key === 'PATIENTS' ? [] :
           key === 'PRESCRIPTIONS' ? [] :
             key === 'QUEUE' ? [] :
-              key === 'DOCTOR_INFO' ? { nameFr: 'Dr. Docteur', specialtyFr: 'Spécialité', addressFr: '', phone: '', email: '', pinEnabled: false } :
+              key === 'DOCTOR_INFO' ? DEFAULT_DOCTOR_INFO :
                 [];
         cache[storageKey] = await storageService.load(storageKey, defaultValue);
       });
@@ -115,25 +147,15 @@ export const dataService = {
   getMedicines: (): Medicine[] => {
     const storageKey = STORAGE_KEYS.MEDICINES;
     const localMedicines: Medicine[] = cache[storageKey] || [];
-    const staticMedicines = loadMoroccanDrugs();
 
-    // Deduplicate by name, prioritizing local overrides
+    // Deduplicate by name
     const seen = new Set<string>();
     const result: Medicine[] = [];
 
-    // 1. Add local medicines first
+    // 1. Add local medicines
     localMedicines.forEach(m => {
-      const normalized = m.name.trim().toLowerCase();
-      if (!seen.has(normalized)) {
-        seen.add(normalized);
-        result.push(m);
-      }
-    });
-
-    // 2. Add static medicines only if not already present in local
-    staticMedicines.forEach(m => {
-      const normalized = m.name.trim().toLowerCase();
-      if (!seen.has(normalized)) {
+      const normalized = m.name?.trim().toLowerCase();
+      if (normalized && !seen.has(normalized)) {
         seen.add(normalized);
         result.push(m);
       }
@@ -228,7 +250,6 @@ export const dataService = {
   importMedicines: async (newMedicines: Medicine[]) => {
     const storageKey = STORAGE_KEYS.MEDICINES;
     const localMedicines: Medicine[] = cache[storageKey] || [];
-    const staticMedicines = loadMoroccanDrugs();
 
     const updatedLocal = [...localMedicines];
     let addedCount = 0;
@@ -238,11 +259,10 @@ export const dataService = {
 
       const normalizedName = nm.name.trim().toLowerCase();
 
-      // Check if already in local or static
-      const alreadyInLocal = updatedLocal.some(m => m.name.trim().toLowerCase() === normalizedName);
-      const alreadyInStatic = staticMedicines.some(m => m.name.trim().toLowerCase() === normalizedName);
+      // Check if already in local
+      const alreadyInLocal = updatedLocal.some(m => m.name?.trim().toLowerCase() === normalizedName);
 
-      if (!alreadyInLocal && !alreadyInStatic) {
+      if (!alreadyInLocal) {
         updatedLocal.push({
           ...nm,
           id: nm.id || `C-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`
@@ -298,8 +318,11 @@ export const dataService = {
     };
   },
 
-  exportFullBackup: async () => {
-    // Collect all data from cache (source of truth for both file and localStorage backend)
+  // Exported backups contain full medical/financial records, so the file itself is
+  // encrypted (AES-GCM, passphrase-derived) rather than dropped as plaintext JSON —
+  // it will typically land in Downloads or on a USB key, outside the app's own
+  // encrypted storage. The same passphrase is required to re-import it.
+  exportFullBackup: async (passphrase: string) => {
     const backup: Record<string, any> = {};
     Object.keys(STORAGE_KEYS).forEach(key => {
       const storageKey = STORAGE_KEYS[key as keyof typeof STORAGE_KEYS];
@@ -307,8 +330,9 @@ export const dataService = {
       if (data) backup[storageKey] = data;
     });
 
+    const envelope = await cryptoService.encryptJSON(backup, passphrase);
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+    const blob = new Blob([envelope], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
@@ -316,54 +340,25 @@ export const dataService = {
     link.click();
 
     await storageService.save(STORAGE_KEYS.LAST_BACKUP, new Date().toISOString());
-    localStorage.setItem(STORAGE_KEYS.LAST_BACKUP, new Date().toISOString());
   },
 
-  importFullBackup: (jsonData: string) => {
+  importFullBackup: async (encryptedText: string, passphrase: string): Promise<boolean> => {
     try {
-      const backup = JSON.parse(jsonData);
+      const backup = await cryptoService.decryptJSON(encryptedText, passphrase);
       Object.keys(backup).forEach(key => {
         localStorage.setItem(key, JSON.stringify(backup[key]));
-        // Also set the doc_ease_ version for compatibility
-        localStorage.setItem(`doc_ease_${key}`, JSON.stringify(backup[key]));
       });
       notifyUpdate('all');
       return true;
-    } catch (e) { return false; }
+    } catch (e) {
+      console.error('Backup import failed:', e);
+      return false;
+    }
   },
 
   getDoctorInfo: (): DoctorInfo => {
     const storageKey = STORAGE_KEYS.DOCTOR_INFO;
-    const defaultLogo = "/logo.png";
-    return cache[storageKey] || {
-      nameAr: 'الدكتور مولاي رشيد البلغيتي',
-      specialtyAr: 'اختصاصي في أمراض القلب والشرايين',
-      diplomasAr: 'رئيس سابق بقسم أمراض القلب بمستشفى أكادير وتارودانت\nدبلوم الفحص بالصدى بوردو فرنسا',
-      nameFr: 'Docteur My Rachid El BELGHITI',
-      specialtyFr: 'Cardiologie Adulte - Pédiatrique, maladies Vasculaire et Hypertension Artérielle',
-      diplomasFr: 'Ex. Chef de service de Cardiologie de l\'hôpital d\'Agadir\nDiplôme universitaire d\'échographie (Bordeaux)',
-      addressAr: 'شارع محمد الشيخ السعدي عمارة سارور شقة رقم 6 الطابق 1 تالبرجت الجديدة - أكادير',
-      addressFr: 'Av. Mohammed Cheikh Saâdi, Imm. Sarour, N° 6, 1er étage Nouveau Talborjt - Agadir',
-      phone: '05 28 82 82 29 / Gsm: 06 66 40 72 68',
-      email: 'dr.elbelghiticardio@gmail.com',
-      logoUrl: defaultLogo,
-      logoOpacity: 0.1,
-      logoScale: 120,
-      logoPosition: 'center',
-      footerColor: '#10b981',
-      currency: 'DH',
-      showBarcode: true,
-      barcodeContent: 'DocEase-SECURE-ID',
-      barcodePosition: 'bottom-left',
-      barcodeSize: 80,
-      pinEnabled: false,
-      pin: '',
-      qrCodeContent: 'https://docease.pro',
-      qrCodePosition: 'top-right',
-      showQRCode: true,
-      users: [],
-      activeUser: undefined
-    };
+    return cache[storageKey] || DEFAULT_DOCTOR_INFO;
   },
 
   saveDoctorInfo: async (info: DoctorInfo) => {
@@ -404,6 +399,43 @@ export const dataService = {
   setActiveUser: async (user: AppUser | undefined) => {
     const info = dataService.getDoctorInfo();
     await dataService.saveDoctorInfo({ ...info, activeUser: user });
+  },
+
+  // Clears the identification PIN layer (admin PIN + all collaborator accounts)
+  // without touching the master encryption PIN or any patient data. Used as the
+  // "forgot PIN" recovery path from the lock screen — safe because it only ever
+  // removes an access gate, never data, and re-enabling it requires setting a
+  // fresh PIN from Settings again.
+  resetIdentificationPins: async () => {
+    const info = dataService.getDoctorInfo();
+    await dataService.saveDoctorInfo({ ...info, pinEnabled: false, pin: '', users: [], activeUser: undefined });
+  },
+
+  // Self-service: change the currently signed-in user's own PIN. Works for the
+  // admin (stored on DoctorInfo.pin) as well as any collaborator (stored on their
+  // AppUser record). Requires the correct current PIN.
+  changeOwnPin: async (currentPin: string, newPin: string): Promise<boolean> => {
+    const info = dataService.getDoctorInfo();
+    const active = info.activeUser;
+    if (!active || active.id === 'admin') {
+      if (info.pin && currentPin !== info.pin) return false;
+      await dataService.saveDoctorInfo({ ...info, pin: newPin });
+      return true;
+    }
+    const users = info.users || [];
+    const target = users.find(u => u.id === active.id);
+    if (!target || target.pin !== currentPin) return false;
+    await dataService.saveUser({ ...target, pin: newPin });
+    if (info.activeUser) await dataService.setActiveUser({ ...info.activeUser, pin: newPin });
+    return true;
+  },
+
+  // Admin-only: reset another collaborator's PIN without knowing their old one.
+  resetUserPin: async (userId: string, newPin: string) => {
+    const info = dataService.getDoctorInfo();
+    const target = (info.users || []).find(u => u.id === userId);
+    if (!target) return;
+    await dataService.saveUser({ ...target, pin: newPin });
   },
 
   searchPatients: (term: string): Patient[] => {
@@ -600,6 +632,14 @@ export const dataService = {
     notifyUpdate(storageKey);
   },
 
+  deleteMedicalResource: async (id: string) => {
+    const storageKey = STORAGE_KEYS.MEDICAL_RESOURCES;
+    const all = dataService.getMedicalResources().filter(r => r.id !== id);
+    cache[storageKey] = all;
+    await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
   // --- NEW DOSSIER ENTITIES ---
   getConsultations: (patientId?: string): ClinicalConsultation[] => {
     const storageKey = STORAGE_KEYS.CONSULTATIONS;
@@ -645,24 +685,6 @@ export const dataService = {
     const all = dataService.getMedicalResults();
     const index = all.findIndex(r => r.id === result.id);
     if (index !== -1) all[index] = result; else all.push(result);
-
-    cache[storageKey] = all;
-    await storageService.save(storageKey, all);
-    notifyUpdate(storageKey);
-  },
-
-  getInvoices: (patientId?: string): PatientInvoice[] => {
-    const storageKey = STORAGE_KEYS.INVOICES;
-    const all: PatientInvoice[] = cache[storageKey] || [];
-    return patientId ? all.filter(i => i.patientId === patientId) : all;
-  },
-
-  saveInvoice: async (invoice: PatientInvoice) => {
-    const storageKey = STORAGE_KEYS.INVOICES;
-    const all = dataService.getInvoices();
-    const index = all.findIndex(i => i.id === invoice.id);
-    if (index !== -1) all[index] = invoice;
-    else all.push(invoice);
 
     cache[storageKey] = all;
     await storageService.save(storageKey, all);

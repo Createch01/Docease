@@ -1,0 +1,3063 @@
+[
+  {
+    "id": "agrel_75_mg",
+    "brand_name": "AGREL",
+    "generic_name": "Clopidogrel",
+    "composition": [
+      "Clopidogrel"
+    ],
+    "strength": "75 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AC04",
+    "therapeutic_group": "Antithrombotique",
+    "drug_class": "Antiplaquettaire thiénopyridine",
+    "drugbank_id": "DB00758",
+    "mechanism": "Inhibition irréversible du récepteur ADP P2Y12 plaquettaire, réduisant l'agrégation plaquettaire.",
+    "half_life": "Actif 30min; récepteur bloqué irréversiblement (7-10 jours)",
+    "indications": [
+      "Prévention secondaire AVC, AIT",
+      "Prévention secondaire IDM",
+      "Syndrome coronarien aigu",
+      "Stenting coronaire (double antiplaquettaire)",
+      "AOMI symptomatique"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Hémorragie active (ulcère, hémorragie intracrânienne)",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "IPP (oméprazole, ésoméprazole)",
+        "severity": "majeure",
+        "effect": "Réduction activation clopidogrel (CYP2C19). Préférer pantoprazole/rabeprazole."
+      },
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "majeure",
+        "effect": "Majoration risque hémorragique"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Majoration risque hémorragie GI"
+      },
+      {
+        "drug": "Aspirine",
+        "severity": "modérée",
+        "effect": "Association indiquée dans certains SCA mais majore le risque hémorragique"
+      },
+      {
+        "drug": "Fluoxétine, fluvoxamine (CYP2C19)",
+        "severity": "modérée",
+        "effect": "Réduction activation clopidogrel"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Données limitées. Éviter si possible surtout au T3 (risque hémorragique peri-partum).",
+      "breastfeeding": "Déconseillé. Données insuffisantes."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé chez l'enfant (données insuffisantes)",
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement. Prudence si IR sévère."
+    },
+    "dosage": {
+      "adult": "75mg/j en 1 prise. Dose de charge: 300-600mg si SCA.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Saignements (GI, cutanés, intracrâniens)",
+      "Hématomes",
+      "Thrombopénie thrombotique thrombocytopenique (TTP) rare",
+      "Rash"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 28",
+        "price_ppv_dhs": 189.8,
+        "price_ph_dhs": null,
+        "laboratory": "PHARMA5",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/agrel-75-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/agrel-75-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00758",
+      "drugs_com": "https://www.drugs.com/clopidogrel.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "brilique_90_mg",
+    "brand_name": "BRILIQUE",
+    "generic_name": "Ticagrelor",
+    "composition": [
+      "Ticagrelor"
+    ],
+    "strength": "90 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AC24",
+    "therapeutic_group": "Antithrombotique",
+    "drug_class": "Antiplaquettaire (antagoniste P2Y12 reversible)",
+    "drugbank_id": "DB08977",
+    "mechanism": "Antagoniste direct et reversible du recepteur P2Y12 plaquettaire (a la difference du clopidogrel: pas de prodrogue, effet plus rapide et previsible).",
+    "half_life": "7-9h",
+    "indications": [
+      "Syndrome coronarien aigu (SCA: STEMI, NSTEMI, angor instable)",
+      "Prevention thrombose intra-stent",
+      "Association avec aspirine en double antiplaquettaire"
+    ],
+    "contraindications": [
+      "Hemorragie active",
+      "ATCD AVC hemorragique",
+      "Insuffisance hepatique moderee a severe",
+      "Association avec anticoagulants (hors heparine bridging)"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "majeure",
+        "effect": "Majoration risque hemorragique"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 puissants (ketoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation exposition ticagrelor x8 → toxicite"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine)",
+        "severity": "majeure",
+        "effect": "Reduction efficacite de 86%"
+      },
+      {
+        "drug": "Digoxine",
+        "severity": "modérée",
+        "effect": "Augmentation Cmax digoxine de 75%"
+      },
+      {
+        "drug": "Simvastatine (>40mg)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition simvastatine"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Eviter. Donnees insuffisantes. Risque hemorragique peripartum.",
+      "breastfeeding": "Contre-indique."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d ajustement si IR"
+    },
+    "dosage": {
+      "adult": "Dose charge 180mg puis 90mg 2x/j (SCA). 60mg 2x/j (prevention secondaire a long terme). Avec aspirine 75-100mg/j.",
+      "children": "Non recommande"
+    },
+    "adverse_effects": [
+      "Saignements (risque principal)",
+      "Dyspnee (frequente, generalement benigne)",
+      "Bradycardie",
+      "Hyperuricemie",
+      "Elevation creatinine"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 60",
+        "price_ppv_dhs": 918,
+        "price_ph_dhs": null,
+        "laboratory": "MAPHAR",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/brilique-90-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "HEPATIQUE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/brilique-90-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB08977",
+      "drugs_com": "https://www.drugs.com/ticagrelor.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux → hémorragie",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution efficacité",
+        "recommendation": "Éviter."
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine",
+          "Lovastatine"
+        ],
+        "interacting_classes": [
+          "Statines CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux statine",
+        "recommendation": "Max simvastatine 40 mg/jour."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation digoxinémie (inhibition P-gp)",
+        "recommendation": "Doser digoxine."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine >300 mg/jour"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution efficacité du ticagrelol à forte dose d'aspirine",
+        "recommendation": "Maintenir aspirine ≤100 mg/jour."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "caplor_75_mg",
+    "brand_name": "CAPLOR",
+    "generic_name": "Clopidogrel",
+    "composition": [
+      "Clopidogrel"
+    ],
+    "strength": "75 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AC04",
+    "therapeutic_group": "Antithrombotique antiagrégant",
+    "drug_class": "Antiagrégant plaquettaire",
+    "drugbank_id": "DB00758",
+    "mechanism": "Inhibiteur sélectif et irréversible du récepteur P2Y12 à l'ADP sur les plaquettes, bloquant l'activation du complexe GPIIb/IIIa → inhibition de l'agrégation plaquettaire.",
+    "half_life": "Irréversible (durée de vie des plaquettes, 7-10 jours) ; métabolite actif à demi-vie courte.",
+    "indications": [
+      "Prévention des événements athérothrombotiques (infarctus du myocarde, AVC, artériopathie périphérique établie)",
+      "Syndrome coronarien aigu (associé à l'aspirine), y compris après pose de stent"
+    ],
+    "contraindications": [
+      "Hémorragie active (ulcère peptique, hémorragie intracrânienne)",
+      "Insuffisance hépatique sévère",
+      "Hypersensibilité au clopidogrel"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "majeure",
+        "effect": "Majoration du risque hémorragique"
+      },
+      {
+        "drug": "IPP (oméprazole, ésoméprazole)",
+        "severity": "modérée",
+        "effect": "Réduction de l'activation du clopidogrel par inhibition du CYP2C19 ; préférer le pantoprazole"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Majoration du risque hémorragique digestif"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "À éviter sauf nécessité absolue ; données limitées.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé chez l'enfant",
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si insuffisance rénale légère à modérée."
+    },
+    "dosage": {
+      "adult": "75 mg une fois par jour, seul ou associé à l'aspirine. Dose de charge possible : 300-600 mg en syndrome coronarien aigu.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Saignements (digestifs, cutanés, plus rarement intracrâniens)",
+      "Ecchymoses",
+      "Purpura thrombotique thrombocytopénique (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 30",
+        "price_ppv_dhs": 171.4,
+        "price_ph_dhs": 107.1,
+        "laboratory": "STERIPHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/caplor-75-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ALLAITEMENT_CONTRE_INDIQUE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/caplor-75-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00758",
+      "drugs_com": "https://www.drugs.com/mtm/clopidogrel.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/caplor-75-mg-comprime/",
+    "drug_interactions": [],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "clopicard_75_mg",
+    "brand_name": "CLOPICARD",
+    "generic_name": "Clopidogrel",
+    "composition": [
+      "Clopidogrel"
+    ],
+    "strength": "75 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AC04",
+    "therapeutic_group": "Antithrombotique antiagrégant",
+    "drug_class": "Antiagrégant plaquettaire",
+    "drugbank_id": null,
+    "mechanism": "Clopidogrel: blocage P2Y12 (ADP). Aspirine: blocage COX-1 (TXA2). Synergie antiplaquettaire puissante.",
+    "half_life": "Clopidogrel: irréversible (7-10j plaquettes). Aspirine: 15-20min (effet plaquettaire: 7-10j)",
+    "indications": [
+      "SCA après stenting coronaire (DAPT obligatoire)",
+      "SCA (STEMI, NSTEMI, angor instable)",
+      "Prévention récidive IDM et AVC",
+      "Artériopathie périphérique symptomatique"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Ulcère gastroduodénal actif",
+      "IH sévère",
+      "Allergie à l'un des composants"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "majeure",
+        "effect": "Majoration risque hémorragique sévère"
+      },
+      {
+        "drug": "IPP (oméprazole)",
+        "severity": "modérée",
+        "effect": "Oméprazole réduit activation clopidogrel (CYP2C19). Préférer pantoprazole."
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Majoration risque hémorragique GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter. Risque hémorragique péripartum.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé <18 ans",
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si IR légère/modérée"
+    },
+    "dosage": {
+      "adult": "Clopidogrel 75mg + Aspirine 75-100mg/j. Charge SCA: Clopidogrel 300-600mg + Aspirine 300mg.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Saignements (risque MAJEUR: GI, intracrânien, cutané)",
+      "Ecchymoses",
+      "TTP (thrombocytopénie thrombotique thrombocytopenique - rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 30",
+        "price_ppv_dhs": 170,
+        "price_ph_dhs": null,
+        "laboratory": "PHI",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/clopicard-75-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/clopicard-75-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/clopidogrel.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/clopicard-75-mg-comprime/",
+    "drug_interactions": [],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "clopidogrel_gt_75_mg",
+    "brand_name": "CLOPIDOGREL",
+    "generic_name": "Clopidogrel",
+    "composition": [
+      "Clopidogrel"
+    ],
+    "strength": "GT 75 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AC04",
+    "therapeutic_group": "Antithrombotique antiagrégant",
+    "drug_class": "Antiagrégant plaquettaire",
+    "drugbank_id": null,
+    "mechanism": "Clopidogrel: blocage P2Y12 (ADP). Aspirine: blocage COX-1 (TXA2). Synergie antiplaquettaire puissante.",
+    "half_life": "Clopidogrel: irréversible (7-10j plaquettes). Aspirine: 15-20min (effet plaquettaire: 7-10j)",
+    "indications": [
+      "SCA après stenting coronaire (DAPT obligatoire)",
+      "SCA (STEMI, NSTEMI, angor instable)",
+      "Prévention récidive IDM et AVC",
+      "Artériopathie périphérique symptomatique"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Ulcère gastroduodénal actif",
+      "IH sévère",
+      "Allergie à l'un des composants"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "majeure",
+        "effect": "Majoration risque hémorragique sévère"
+      },
+      {
+        "drug": "IPP (oméprazole)",
+        "severity": "modérée",
+        "effect": "Oméprazole réduit activation clopidogrel (CYP2C19). Préférer pantoprazole."
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Majoration risque hémorragique GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter. Risque hémorragique péripartum.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé <18 ans",
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si IR légère/modérée"
+    },
+    "dosage": {
+      "adult": "Clopidogrel 75mg + Aspirine 75-100mg/j. Charge SCA: Clopidogrel 300-600mg + Aspirine 300mg.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Saignements (risque MAJEUR: GI, intracrânien, cutané)",
+      "Ecchymoses",
+      "TTP (thrombocytopénie thrombotique thrombocytopenique - rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 60",
+        "price_ppv_dhs": 447,
+        "price_ph_dhs": null,
+        "laboratory": "ATLAS PHARM",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/clopidogrel-gt-75-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/clopidogrel-gt-75-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/clopidogrel.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/clopidogrel-gt-75-mg-comprime/",
+    "drug_interactions": [],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "coplavix_75_mg_/_100_mg",
+    "brand_name": "COPLAVIX",
+    "generic_name": "Clopidogrel + Acide acétylsalicylique",
+    "composition": [
+      "Clopidogrel",
+      "Acide acétylsalicylique"
+    ],
+    "strength": "75 MG / 100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AC30",
+    "therapeutic_group": "Antithrombotique DAPT",
+    "drug_class": "Double antiplaquettaire",
+    "drugbank_id": null,
+    "mechanism": "Clopidogrel: blocage P2Y12 (ADP). Aspirine: blocage COX-1 (TXA2). Synergie antiplaquettaire puissante.",
+    "half_life": "Clopidogrel: irréversible (7-10j plaquettes). Aspirine: 15-20min (effet plaquettaire: 7-10j)",
+    "indications": [
+      "SCA après stenting coronaire (DAPT obligatoire)",
+      "SCA (STEMI, NSTEMI, angor instable)",
+      "Prévention récidive IDM et AVC",
+      "Artériopathie périphérique symptomatique"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Ulcère gastroduodénal actif",
+      "IH sévère",
+      "Allergie à l'un des composants"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "majeure",
+        "effect": "Majoration risque hémorragique sévère"
+      },
+      {
+        "drug": "IPP (oméprazole)",
+        "severity": "modérée",
+        "effect": "Oméprazole réduit activation clopidogrel (CYP2C19). Préférer pantoprazole."
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Majoration risque hémorragique GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter. Risque hémorragique péripartum.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé <18 ans",
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si IR légère/modérée"
+    },
+    "dosage": {
+      "adult": "Clopidogrel 75mg + Aspirine 75-100mg/j. Charge SCA: Clopidogrel 300-600mg + Aspirine 300mg.",
+      "children": "Non recommandé"
+    },
+    "adverse_effects": [
+      "Saignements (risque MAJEUR: GI, intracrânien, cutané)",
+      "Ecchymoses",
+      "TTP (thrombocytopénie thrombotique thrombocytopenique - rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 30",
+        "price_ppv_dhs": 270,
+        "price_ph_dhs": null,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/coplavix-75-mg-100-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/coplavix-75-mg-100-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/clopidogrel.html",
+      "knowledge_base": "Claude Medical KB v1.0"
+    },
+    "last_updated": "2026-03-29",
+    "source_url_ma": "https://medicament.ma/medicament/coplavix-75-mg-100-mg-comprime/",
+    "drug_interactions": [],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "eliquis_2.5_mg",
+    "brand_name": "ELIQUIS",
+    "generic_name": "Apixaban",
+    "composition": [
+      "Apixaban"
+    ],
+    "strength": "2.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AF02",
+    "therapeutic_group": "Anticoagulant",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur facteur Xa",
+    "drugbank_id": "DB07828",
+    "mechanism": "Inhibition directe sélective facteur Xa → ↓ thrombine → ↓ coagulation. Pas de besoin de monitoring INR.",
+    "half_life": "12h",
+    "indications": [
+      "Prévention AVC et embolie systémique dans FA non valvulaire",
+      "Traitement TVP et EP",
+      "Prévention TVP/EP post-chirurgie orthopédique",
+      "Prévention secondaire TVP et EP"
+    ],
+    "contraindications": [
+      "Hémorragie active cliniquement significative",
+      "Lésions à risque hémorragique majeur",
+      "Association antifongiques azolés systémiques + inhibiteurs P-gp (kétoconazole, itraconazole)",
+      "IH sévère",
+      "Grossesse et allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Kétoconazole, itraconazole (CYP3A4 + P-gp)",
+        "severity": "majeure",
+        "effect": "↑ exposition apixaban × 2 — éviter ou CI"
+      },
+      {
+        "drug": "Rifampicine, carbamazépine (CYP3A4 + P-gp)",
+        "severity": "majeure",
+        "effect": "↓ apixaban → perte efficacité"
+      },
+      {
+        "drug": "Aspirine, AINS, autres anticoagulants",
+        "severity": "majeure",
+        "effect": "↑ risque hémorragique"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CONTRE-INDIQUÉ. HBPM préférée en grossesse.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Données pédiatriques insuffisantes.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire à 2.5 mg 2×/j si ≥2 critères: créat ≥1.5 mg/dL, âge ≥80 ans, poids ≤60 kg. CI si DFG<15."
+    },
+    "dosage": {
+      "adult": "FA: 5 mg 2×/j (ou 2.5 mg si réduction). TVP traitement: 10 mg 2×/j × 7j puis 5 mg 2×/j.",
+      "children": "Non établi"
+    },
+    "adverse_effects": [
+      "Hémorragies (principale — GI, cérébrales, cutanées)",
+      "Anémie",
+      "Nausées",
+      "Hématomes",
+      "↑ transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 20",
+        "price_ppv_dhs": 152,
+        "price_ph_dhs": null,
+        "laboratory": "PFIZER MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/eliquis-2-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE"
+    ],
+    "last_updated": "2026-04-04",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux d'apixaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux d'apixaban → inefficacité",
+        "recommendation": "Éviter l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants plaquettaires"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Triple thérapie limitée en durée. Surveillance saignements."
+      },
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Diclofénac",
+          "Piroxicam"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Enoxaparine",
+          "Lovenox"
+        ],
+        "interacting_classes": [
+          "Anticoagulants parentéraux"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Ne pas associer deux anticoagulants."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "eliquis_5_mg",
+    "brand_name": "ELIQUIS",
+    "generic_name": "Apixaban",
+    "composition": [
+      "Apixaban"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AF02",
+    "therapeutic_group": "Anticoagulant",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur facteur Xa",
+    "drugbank_id": "DB07828",
+    "mechanism": "Inhibition directe sélective facteur Xa → ↓ thrombine → ↓ coagulation. Pas de besoin de monitoring INR.",
+    "half_life": "12h",
+    "indications": [
+      "Prévention AVC et embolie systémique dans FA non valvulaire",
+      "Traitement TVP et EP",
+      "Prévention TVP/EP post-chirurgie orthopédique",
+      "Prévention secondaire TVP et EP"
+    ],
+    "contraindications": [
+      "Hémorragie active cliniquement significative",
+      "Lésions à risque hémorragique majeur",
+      "Association antifongiques azolés systémiques + inhibiteurs P-gp (kétoconazole, itraconazole)",
+      "IH sévère",
+      "Grossesse et allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Kétoconazole, itraconazole (CYP3A4 + P-gp)",
+        "severity": "majeure",
+        "effect": "↑ exposition apixaban × 2 — éviter ou CI"
+      },
+      {
+        "drug": "Rifampicine, carbamazépine (CYP3A4 + P-gp)",
+        "severity": "majeure",
+        "effect": "↓ apixaban → perte efficacité"
+      },
+      {
+        "drug": "Aspirine, AINS, autres anticoagulants",
+        "severity": "majeure",
+        "effect": "↑ risque hémorragique"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CONTRE-INDIQUÉ. HBPM préférée en grossesse.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Données pédiatriques insuffisantes.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire à 2.5 mg 2×/j si ≥2 critères: créat ≥1.5 mg/dL, âge ≥80 ans, poids ≤60 kg. CI si DFG<15."
+    },
+    "dosage": {
+      "adult": "FA: 5 mg 2×/j (ou 2.5 mg si réduction). TVP traitement: 10 mg 2×/j × 7j puis 5 mg 2×/j.",
+      "children": "Non établi"
+    },
+    "adverse_effects": [
+      "Hémorragies (principale — GI, cérébrales, cutanées)",
+      "Anémie",
+      "Nausées",
+      "Hématomes",
+      "↑ transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "pelliculé Boite de 60",
+        "price_ppv_dhs": 349,
+        "price_ph_dhs": null,
+        "laboratory": "PFIZER MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/eliquis-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE"
+    ],
+    "last_updated": "2026-04-04",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux d'apixaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux d'apixaban → inefficacité",
+        "recommendation": "Éviter l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants plaquettaires"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Triple thérapie limitée en durée. Surveillance saignements."
+      },
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Diclofénac",
+          "Piroxicam"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Enoxaparine",
+          "Lovenox"
+        ],
+        "interacting_classes": [
+          "Anticoagulants parentéraux"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Ne pas associer deux anticoagulants."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "heparine_leo_25_000_ui_/_5_ml_solution_injectable_boîte_de_50_flacons_de_100_ml",
+    "brand_name": "HEPARINE",
+    "generic_name": "Héparine sodique",
+    "composition": [
+      "Héparine sodique"
+    ],
+    "strength": "LEO 25 000 UI / 5 ML",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "B01AB01",
+    "therapeutic_group": "Hématologie",
+    "drug_class": "Anticoagulant (héparine non fractionnée)",
+    "drugbank_id": "DB01109",
+    "mechanism": "Anticoagulant par potentialisation de l'antithrombine III (AT III). Inhibe la thrombine (IIa) et le facteur Xa. Effet immédiat à l'injection IV. Surveillance par TCA (héparine non fractionnée).",
+    "half_life": "1-2h (dose-dépendant)",
+    "indications": [
+      "Traitement et prévention des thromboses veineuses et embolies pulmonaires",
+      "Anticoagulation en dialyse et CEC (circulation extra-corporelle)",
+      "SCA (en association)"
+    ],
+    "contraindications": [
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Saignement actif non contrôlable",
+      "Endocardite bactérienne",
+      "Hypersensibilité à l'héparine"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiagrégants plaquettaires, NACO, AVK",
+        "severity": "majeure",
+        "effect": "Risque hémorragique augmenté"
+      },
+      {
+        "drug": "AINS, aspirine",
+        "severity": "majeure",
+        "effect": "Potentialisation anticoagulante + risque GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Ne traverse pas la barrière placentaire. Option préférentielle pendant la grossesse si anticoagulation requise.",
+      "breastfeeding": "Compatible — ne passe pas dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie et néonatologie",
+      "dose_rule": "75-100 UI/kg IV bolus, puis 25-30 UI/kg/h selon TCA"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — risque hémorragique augmenté si IR"
+    },
+    "dosage": {
+      "adult": "Curatif: 80 UI/kg IV bolus, puis 18 UI/kg/h. Préventif: 5000 UI SC 2-3x/j.",
+      "children": "75-100 UI/kg bolus"
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie induite par héparine (TIH)",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases",
+      "Hyperkaliémie"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boîte de 50 flacons de 100 ml",
+        "price_ppv_dhs": 1558,
+        "price_ph_dhs": null,
+        "laboratory": "POLYMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01109",
+      "drugs_com": "https://www.drugs.com/héparine-sodique.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "heparine_medis_25_000_ui_solution_injectable_boite_de_10_flacons_de_5_ml",
+    "brand_name": "HEPARINE",
+    "generic_name": "Héparine sodique",
+    "composition": [
+      "Héparine sodique"
+    ],
+    "strength": "MEDIS 25 000 UI",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "B01AB01",
+    "therapeutic_group": "Hématologie",
+    "drug_class": "Anticoagulant (héparine non fractionnée)",
+    "drugbank_id": "DB01109",
+    "mechanism": "Anticoagulant par potentialisation de l'antithrombine III (AT III). Inhibe la thrombine (IIa) et le facteur Xa. Effet immédiat à l'injection IV. Surveillance par TCA (héparine non fractionnée).",
+    "half_life": "1-2h (dose-dépendant)",
+    "indications": [
+      "Traitement et prévention des thromboses veineuses et embolies pulmonaires",
+      "Anticoagulation en dialyse et CEC (circulation extra-corporelle)",
+      "SCA (en association)"
+    ],
+    "contraindications": [
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Saignement actif non contrôlable",
+      "Endocardite bactérienne",
+      "Hypersensibilité à l'héparine"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiagrégants plaquettaires, NACO, AVK",
+        "severity": "majeure",
+        "effect": "Risque hémorragique augmenté"
+      },
+      {
+        "drug": "AINS, aspirine",
+        "severity": "majeure",
+        "effect": "Potentialisation anticoagulante + risque GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Ne traverse pas la barrière placentaire. Option préférentielle pendant la grossesse si anticoagulation requise.",
+      "breastfeeding": "Compatible — ne passe pas dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie et néonatologie",
+      "dose_rule": "75-100 UI/kg IV bolus, puis 25-30 UI/kg/h selon TCA"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — risque hémorragique augmenté si IR"
+    },
+    "dosage": {
+      "adult": "Curatif: 80 UI/kg IV bolus, puis 18 UI/kg/h. Préventif: 5000 UI SC 2-3x/j.",
+      "children": "75-100 UI/kg bolus"
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie induite par héparine (TIH)",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases",
+      "Hyperkaliémie"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boite de 10 flacons de 5 ml",
+        "price_ppv_dhs": 762,
+        "price_ph_dhs": null,
+        "laboratory": "HEMOLAB-PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01109",
+      "drugs_com": "https://www.drugs.com/héparine-sodique.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "heparine_soludia_5000_ui_/_5_ml_solution_injectable_boite_de_1_flacon_de_5_ml",
+    "brand_name": "HEPARINE",
+    "generic_name": "Héparine sodique",
+    "composition": [
+      "Héparine sodique"
+    ],
+    "strength": "SOLUDIA 5000 UI / 5 ML",
+    "form": "Solution",
+    "route": "Voir notice",
+    "atc_code": "B01AB01",
+    "therapeutic_group": "Hématologie",
+    "drug_class": "Anticoagulant (héparine non fractionnée)",
+    "drugbank_id": "DB01109",
+    "mechanism": "Anticoagulant par potentialisation de l'antithrombine III (AT III). Inhibe la thrombine (IIa) et le facteur Xa. Effet immédiat à l'injection IV. Surveillance par TCA (héparine non fractionnée).",
+    "half_life": "1-2h (dose-dépendant)",
+    "indications": [
+      "Traitement et prévention des thromboses veineuses et embolies pulmonaires",
+      "Anticoagulation en dialyse et CEC (circulation extra-corporelle)",
+      "SCA (en association)"
+    ],
+    "contraindications": [
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Saignement actif non contrôlable",
+      "Endocardite bactérienne",
+      "Hypersensibilité à l'héparine"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiagrégants plaquettaires, NACO, AVK",
+        "severity": "majeure",
+        "effect": "Risque hémorragique augmenté"
+      },
+      {
+        "drug": "AINS, aspirine",
+        "severity": "majeure",
+        "effect": "Potentialisation anticoagulante + risque GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Ne traverse pas la barrière placentaire. Option préférentielle pendant la grossesse si anticoagulation requise.",
+      "breastfeeding": "Compatible — ne passe pas dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable en pédiatrie et néonatologie",
+      "dose_rule": "75-100 UI/kg IV bolus, puis 25-30 UI/kg/h selon TCA"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Précaution — risque hémorragique augmenté si IR"
+    },
+    "dosage": {
+      "adult": "Curatif: 80 UI/kg IV bolus, puis 18 UI/kg/h. Préventif: 5000 UI SC 2-3x/j.",
+      "children": "75-100 UI/kg bolus"
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie induite par héparine (TIH)",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases",
+      "Hyperkaliémie"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boite de 1 flacon de 5 ml",
+        "price_ppv_dhs": 24.5,
+        "price_ph_dhs": null,
+        "laboratory": "SOLUDIA MAGHREB",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01109",
+      "drugs_com": "https://www.drugs.com/héparine-sodique.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "ixalio_5_mg_comprimé_pélliculé_boite_de_30",
+    "brand_name": "IXALIO",
+    "generic_name": "Rivaroxaban",
+    "composition": [
+      "Rivaroxaban"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Voir notice",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Cardiovasculaire / Hématologie",
+    "drug_class": "Anticoagulant oral direct (inhibiteur facteur Xa)",
+    "drugbank_id": "DB06228",
+    "mechanism": "Anticoagulant oral direct (AOD). Inhibiteur direct, sélectif et réversible du facteur Xa. Bloque la conversion de la prothrombine en thrombine, inhibant la formation du thrombus.",
+    "half_life": "5-9h (jeunes), 11-13h (âgés)",
+    "indications": [
+      "Prévention AVC et embolie systémique dans FA non valvulaire",
+      "Traitement TVP et EP",
+      "Prévention récidive TVP/EP",
+      "Prévention complications thromboemboliques après chirurgie orthopédique"
+    ],
+    "contraindications": [
+      "Saignement actif",
+      "Lésion à risque hémorragique cliniquement significatif",
+      "Insuffisance hépatique avec coagulopathie",
+      "DFG < 15 mL/min"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 et P-gp (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation rivaroxaban — contre-indiqué"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine)",
+        "severity": "majeure",
+        "effect": "Réduction efficacité"
+      },
+      {
+        "drug": "AINS, aspirine",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué — risque hémorragique fœtal. Utiliser HBPM si nécessaire.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Autorisé dès la naissance pour certaines indications pédiatriques",
+      "dose_rule": "Selon poids et indication"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire fréquence si DFG 15-50 mL/min selon indication. Contre-indiqué si DFG < 15."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j avec repas. TVP/EP: 15 mg 2x/j x 21j, puis 20 mg/j. Ortho: 10 mg/j.",
+      "children": "Selon poids"
+    },
+    "adverse_effects": [
+      "Saignements",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Prurit"
+    ],
+    "market_data": [
+      {
+        "packaging": "pélliculé Boite de 30",
+        "price_ppv_dhs": 74.8,
+        "price_ph_dhs": 43.5,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_CONTRE_INDIQUE",
+      "RENAL_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/",
+      "drugbank": "https://go.drugbank.com/drugs/DB06228",
+      "drugs_com": "https://www.drugs.com/rivaroxaban.html",
+      "knowledge_base": "Claude Medical KB v2.0 — enrichi automatiquement"
+    },
+    "last_updated": "2026-04-08",
+    "drug_interactions": [],
+    "tableau_maroc": "Non classé",
+    "source_url_ma": "https://medicament.ma/"
+  },
+  {
+    "id": "lovenox_2000_ui_antixa_/_0.2_ml",
+    "brand_name": "LOVENOX",
+    "generic_name": "Énoxaparine",
+    "composition": [
+      "Énoxaparine"
+    ],
+    "strength": "2000 UI antiXa / 0.2 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "B01AB05",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Héparine de bas poids moléculaire (HBPM)",
+    "drugbank_id": "DB01225",
+    "mechanism": "HBPM (Héparine de Bas Poids Moléculaire). Liaison à l'antithrombine III → inhibition préférentielle facteur Xa (anti-Xa) > thrombine (anti-IIa) → anticoagulation prévisible. Rapport anti-Xa/anti-IIa ≈ 3.5.",
+    "half_life": "4.5h (activité anti-Xa)",
+    "indications": [
+      "Thrombose veineuse profonde (traitement et prévention)",
+      "Embolie pulmonaire",
+      "SCA (angor instable, IDM ST-)",
+      "Prophylaxie chirurgicale"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Endocardite infectieuse",
+      "Insuffisance rénale sévère (ClCr <15, dose curative)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aspirine, AINS",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Autres anticoagulants",
+        "severity": "majeure",
+        "effect": "Hémorragie"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Anticoagulant de choix pendant la grossesse (ne passe pas la barrière placentaire).",
+      "breastfeeding": "Compatible (non absorbé per os par le nourrisson)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "Curatif: 1.5 mg/kg/j SC en 1-2 injections. Préventif: selon poids."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 15-30: réduire dose curative à 1 mg/kg/j. ClCr <15: CI à dose curative."
+    },
+    "dosage": {
+      "adult": "Préventif: 4000 UI/j SC. Curatif TVP/EP: 100 UI/kg 2x/j ou 150 UI/kg 1x/j. SCA: 100 UI/kg 2x/j SC.",
+      "children": "1-1.5 mg/kg 2x/j SC."
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie (TIH type II)",
+      "Hématome au site d'injection",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boîte de 6 seringues",
+        "price_ppv_dhs": 180,
+        "price_ph_dhs": null,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lovenox-2000-ui-antixa-0-2-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "AJUSTEMENT_RENAL",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lovenox-2000-ui-antixa-0-2-ml-solution/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01225",
+      "drugs_com": "https://www.drugs.com/enoxaparine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en SCA mais surveillance étroite."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Apixaban",
+          "Rivaroxaban"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie",
+        "recommendation": "Ne pas associer sauf relais thérapeutique contrôlé."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "lovenox_30000_ui_antixa_/_3_ml",
+    "brand_name": "LOVENOX",
+    "generic_name": "Énoxaparine",
+    "composition": [
+      "Énoxaparine"
+    ],
+    "strength": "30000 UI antiXa / 3 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "B01AB05",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Héparine de bas poids moléculaire (HBPM)",
+    "drugbank_id": "DB01225",
+    "mechanism": "HBPM (Héparine de Bas Poids Moléculaire). Liaison à l'antithrombine III → inhibition préférentielle facteur Xa (anti-Xa) > thrombine (anti-IIa) → anticoagulation prévisible. Rapport anti-Xa/anti-IIa ≈ 3.5.",
+    "half_life": "4.5h (activité anti-Xa)",
+    "indications": [
+      "Thrombose veineuse profonde (traitement et prévention)",
+      "Embolie pulmonaire",
+      "SCA (angor instable, IDM ST-)",
+      "Prophylaxie chirurgicale"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Endocardite infectieuse",
+      "Insuffisance rénale sévère (ClCr <15, dose curative)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aspirine, AINS",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Autres anticoagulants",
+        "severity": "majeure",
+        "effect": "Hémorragie"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Anticoagulant de choix pendant la grossesse (ne passe pas la barrière placentaire).",
+      "breastfeeding": "Compatible (non absorbé per os par le nourrisson)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "Curatif: 1.5 mg/kg/j SC en 1-2 injections. Préventif: selon poids."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 15-30: réduire dose curative à 1 mg/kg/j. ClCr <15: CI à dose curative."
+    },
+    "dosage": {
+      "adult": "Préventif: 4000 UI/j SC. Curatif TVP/EP: 100 UI/kg 2x/j ou 150 UI/kg 1x/j. SCA: 100 UI/kg 2x/j SC.",
+      "children": "1-1.5 mg/kg 2x/j SC."
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie (TIH type II)",
+      "Hématome au site d'injection",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boîte d'un flacon",
+        "price_ppv_dhs": 425,
+        "price_ph_dhs": null,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lovenox-30000-ui-antixa-3-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "AJUSTEMENT_RENAL",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lovenox-30000-ui-antixa-3-ml-solution/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01225",
+      "drugs_com": "https://www.drugs.com/enoxaparine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en SCA mais surveillance étroite."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Apixaban",
+          "Rivaroxaban"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie",
+        "recommendation": "Ne pas associer sauf relais thérapeutique contrôlé."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "lovenox_4000_ui_antixa_/_0.4_ml",
+    "brand_name": "LOVENOX",
+    "generic_name": "Énoxaparine",
+    "composition": [
+      "Énoxaparine"
+    ],
+    "strength": "4000 UI antiXa / 0.4 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "B01AB05",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Héparine de bas poids moléculaire (HBPM)",
+    "drugbank_id": "DB01225",
+    "mechanism": "HBPM (Héparine de Bas Poids Moléculaire). Liaison à l'antithrombine III → inhibition préférentielle facteur Xa (anti-Xa) > thrombine (anti-IIa) → anticoagulation prévisible. Rapport anti-Xa/anti-IIa ≈ 3.5.",
+    "half_life": "4.5h (activité anti-Xa)",
+    "indications": [
+      "Thrombose veineuse profonde (traitement et prévention)",
+      "Embolie pulmonaire",
+      "SCA (angor instable, IDM ST-)",
+      "Prophylaxie chirurgicale"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Endocardite infectieuse",
+      "Insuffisance rénale sévère (ClCr <15, dose curative)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aspirine, AINS",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Autres anticoagulants",
+        "severity": "majeure",
+        "effect": "Hémorragie"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Anticoagulant de choix pendant la grossesse (ne passe pas la barrière placentaire).",
+      "breastfeeding": "Compatible (non absorbé per os par le nourrisson)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "Curatif: 1.5 mg/kg/j SC en 1-2 injections. Préventif: selon poids."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 15-30: réduire dose curative à 1 mg/kg/j. ClCr <15: CI à dose curative."
+    },
+    "dosage": {
+      "adult": "Préventif: 4000 UI/j SC. Curatif TVP/EP: 100 UI/kg 2x/j ou 150 UI/kg 1x/j. SCA: 100 UI/kg 2x/j SC.",
+      "children": "1-1.5 mg/kg 2x/j SC."
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie (TIH type II)",
+      "Hématome au site d'injection",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boîte de 6 seringues de 0,4 ml",
+        "price_ppv_dhs": 349,
+        "price_ph_dhs": null,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lovenox-4000-ui-antixa-0-4-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "AJUSTEMENT_RENAL",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lovenox-4000-ui-antixa-0-4-ml-solution/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01225",
+      "drugs_com": "https://www.drugs.com/enoxaparine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en SCA mais surveillance étroite."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Apixaban",
+          "Rivaroxaban"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie",
+        "recommendation": "Ne pas associer sauf relais thérapeutique contrôlé."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "lovenox_4000ui_antixa_/_0.4_ml",
+    "brand_name": "LOVENOX",
+    "generic_name": "Énoxaparine",
+    "composition": [
+      "Énoxaparine"
+    ],
+    "strength": "4000UI antiXa / 0.4 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "B01AB05",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Héparine de bas poids moléculaire (HBPM)",
+    "drugbank_id": "DB01225",
+    "mechanism": "HBPM (Héparine de Bas Poids Moléculaire). Liaison à l'antithrombine III → inhibition préférentielle facteur Xa (anti-Xa) > thrombine (anti-IIa) → anticoagulation prévisible. Rapport anti-Xa/anti-IIa ≈ 3.5.",
+    "half_life": "4.5h (activité anti-Xa)",
+    "indications": [
+      "Thrombose veineuse profonde (traitement et prévention)",
+      "Embolie pulmonaire",
+      "SCA (angor instable, IDM ST-)",
+      "Prophylaxie chirurgicale"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Endocardite infectieuse",
+      "Insuffisance rénale sévère (ClCr <15, dose curative)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aspirine, AINS",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Autres anticoagulants",
+        "severity": "majeure",
+        "effect": "Hémorragie"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Anticoagulant de choix pendant la grossesse (ne passe pas la barrière placentaire).",
+      "breastfeeding": "Compatible (non absorbé per os par le nourrisson)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "Curatif: 1.5 mg/kg/j SC en 1-2 injections. Préventif: selon poids."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 15-30: réduire dose curative à 1 mg/kg/j. ClCr <15: CI à dose curative."
+    },
+    "dosage": {
+      "adult": "Préventif: 4000 UI/j SC. Curatif TVP/EP: 100 UI/kg 2x/j ou 150 UI/kg 1x/j. SCA: 100 UI/kg 2x/j SC.",
+      "children": "1-1.5 mg/kg 2x/j SC."
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie (TIH type II)",
+      "Hématome au site d'injection",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boîte de 2 seringues",
+        "price_ppv_dhs": 138.1,
+        "price_ph_dhs": null,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lovenox-4000ui-antixa-0-4-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "AJUSTEMENT_RENAL",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lovenox-4000ui-antixa-0-4-ml-solution/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01225",
+      "drugs_com": "https://www.drugs.com/enoxaparine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en SCA mais surveillance étroite."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Apixaban",
+          "Rivaroxaban"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie",
+        "recommendation": "Ne pas associer sauf relais thérapeutique contrôlé."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "lovenox_6000_ui_antixa_/_0.6_ml",
+    "brand_name": "LOVENOX",
+    "generic_name": "Énoxaparine",
+    "composition": [
+      "Énoxaparine"
+    ],
+    "strength": "6000 UI antiXa / 0.6 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "B01AB05",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Héparine de bas poids moléculaire (HBPM)",
+    "drugbank_id": "DB01225",
+    "mechanism": "HBPM (Héparine de Bas Poids Moléculaire). Liaison à l'antithrombine III → inhibition préférentielle facteur Xa (anti-Xa) > thrombine (anti-IIa) → anticoagulation prévisible. Rapport anti-Xa/anti-IIa ≈ 3.5.",
+    "half_life": "4.5h (activité anti-Xa)",
+    "indications": [
+      "Thrombose veineuse profonde (traitement et prévention)",
+      "Embolie pulmonaire",
+      "SCA (angor instable, IDM ST-)",
+      "Prophylaxie chirurgicale"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Endocardite infectieuse",
+      "Insuffisance rénale sévère (ClCr <15, dose curative)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aspirine, AINS",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Autres anticoagulants",
+        "severity": "majeure",
+        "effect": "Hémorragie"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Anticoagulant de choix pendant la grossesse (ne passe pas la barrière placentaire).",
+      "breastfeeding": "Compatible (non absorbé per os par le nourrisson)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "Curatif: 1.5 mg/kg/j SC en 1-2 injections. Préventif: selon poids."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 15-30: réduire dose curative à 1 mg/kg/j. ClCr <15: CI à dose curative."
+    },
+    "dosage": {
+      "adult": "Préventif: 4000 UI/j SC. Curatif TVP/EP: 100 UI/kg 2x/j ou 150 UI/kg 1x/j. SCA: 100 UI/kg 2x/j SC.",
+      "children": "1-1.5 mg/kg 2x/j SC."
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie (TIH type II)",
+      "Hématome au site d'injection",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boîte de 2 seringues",
+        "price_ppv_dhs": 164,
+        "price_ph_dhs": null,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lovenox-6000-ui-antixa-0-6-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "AJUSTEMENT_RENAL",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lovenox-6000-ui-antixa-0-6-ml-solution/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01225",
+      "drugs_com": "https://www.drugs.com/enoxaparine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en SCA mais surveillance étroite."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Apixaban",
+          "Rivaroxaban"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie",
+        "recommendation": "Ne pas associer sauf relais thérapeutique contrôlé."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "lovenox_8000_ui_antixa_/_0.8_ml",
+    "brand_name": "LOVENOX",
+    "generic_name": "Énoxaparine",
+    "composition": [
+      "Énoxaparine"
+    ],
+    "strength": "8000 UI antiXa / 0.8 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "B01AB05",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Héparine de bas poids moléculaire (HBPM)",
+    "drugbank_id": "DB01225",
+    "mechanism": "HBPM (Héparine de Bas Poids Moléculaire). Liaison à l'antithrombine III → inhibition préférentielle facteur Xa (anti-Xa) > thrombine (anti-IIa) → anticoagulation prévisible. Rapport anti-Xa/anti-IIa ≈ 3.5.",
+    "half_life": "4.5h (activité anti-Xa)",
+    "indications": [
+      "Thrombose veineuse profonde (traitement et prévention)",
+      "Embolie pulmonaire",
+      "SCA (angor instable, IDM ST-)",
+      "Prophylaxie chirurgicale"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Thrombopénie induite par l'héparine (TIH)",
+      "Endocardite infectieuse",
+      "Insuffisance rénale sévère (ClCr <15, dose curative)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aspirine, AINS",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Autres anticoagulants",
+        "severity": "majeure",
+        "effect": "Hémorragie"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Anticoagulant de choix pendant la grossesse (ne passe pas la barrière placentaire).",
+      "breastfeeding": "Compatible (non absorbé per os par le nourrisson)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "Curatif: 1.5 mg/kg/j SC en 1-2 injections. Préventif: selon poids."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 15-30: réduire dose curative à 1 mg/kg/j. ClCr <15: CI à dose curative."
+    },
+    "dosage": {
+      "adult": "Préventif: 4000 UI/j SC. Curatif TVP/EP: 100 UI/kg 2x/j ou 150 UI/kg 1x/j. SCA: 100 UI/kg 2x/j SC.",
+      "children": "1-1.5 mg/kg 2x/j SC."
+    },
+    "adverse_effects": [
+      "Hémorragie",
+      "Thrombopénie (TIH type II)",
+      "Hématome au site d'injection",
+      "Ostéoporose (usage prolongé)",
+      "Élévation transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "injectable Boîte de 2 seringues",
+        "price_ppv_dhs": 182.9,
+        "price_ph_dhs": null,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/lovenox-8000-ui-antixa-0-8-ml-solution/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "AJUSTEMENT_RENAL",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/lovenox-8000-ui-antixa-0-8-ml-solution/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01225",
+      "drugs_com": "https://www.drugs.com/enoxaparine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-28",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en SCA mais surveillance étroite."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Apixaban",
+          "Rivaroxaban"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie",
+        "recommendation": "Ne pas associer sauf relais thérapeutique contrôlé."
+      }
+    ],
+    "tableau_maroc": "A"
+  },
+  {
+    "id": "P-PRADAXA",
+    "brand_name": "PRADAXA",
+    "generic_name": "Dabigatran",
+    "strength": "110 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "B01AE07",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct de la thrombine",
+    "indications": [
+      "Prévention AVC dans la FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Prothèse valvulaire mécanique",
+      "ClCr <30 (en Europe, <15 aux USA)",
+      "Insuffisance hépatique sévère",
+      "Association avec kétoconazole, ciclosporine, itraconazole, dronédarone systémiques"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Non recommandé.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-50: 110 mg 2x/j (FA). ClCr <30: contre-indiqué (Europe). Antidote: idarucizumab (Praxbind)."
+    },
+    "dosage": {
+      "adult": "FA: 150 mg 2x/j (ou 110 mg 2x/j si ≥80 ans ou risque hémorragique). TVP/EP: 150 mg 2x/j après 5j d'héparine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 365,
+        "packaging": "Boite de 30",
+        "laboratory": "BOTTU S.A."
+      }
+    ],
+    "drugbank_id": "DB06695",
+    "adverse_effects": [
+      "Hémorragie",
+      "Dyspepsie",
+      "Gastrite",
+      "Hémorragie GI (plus fréquente qu'AVK)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ciclosporine",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp puissants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux → hémorragie",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp modérés"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation taux dabigatran",
+        "recommendation": "Réduire dabigatran à 110 mg 2x/j. Prendre simultanément."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux dabigatran de 12-60%",
+        "recommendation": "Surveiller. Pas d'ajustement de dose systématique."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "Éviter association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "AINS",
+          "Clopidogrel"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de bithérapie/trithérapie."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/pradaxa-110-mg-gelule"
+  },
+  {
+    "id": "S-SINTROM",
+    "brand_name": "SINTROM",
+    "generic_name": "Acénocoumarol",
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AA07",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Antivitamine K (AVK, coumarine)",
+    "indications": [
+      "Thrombose veineuse profonde",
+      "Embolie pulmonaire",
+      "Fibrillation auriculaire",
+      "Prothèse valvulaire mécanique",
+      "Prévention thromboembolique"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Ulcère GD évolutif",
+      "AVC hémorragique récent",
+      "HTA maligne",
+      "Insuffisance hépatique sévère",
+      "Grossesse (1er et 3e trimestres)"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "CONTRE-INDIQUÉ au 1er trimestre (embryopathie warfarinique: hypoplasie nasale, chondrodysplasie ponctuée) et au 3e trimestre (hémorragie fœtale). Au 2e trimestre: possible si héparine impossible.",
+      "breastfeeding": "Compatible (ne passe pas dans le lait en quantité significative)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie sous surveillance INR stricte.",
+      "dose_rule": "0.1-0.2 mg/kg/j. Ajuster selon INR cible (2-3)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Prudence en IRC. Surveillance INR renforcée."
+    },
+    "dosage": {
+      "adult": "Dose initiale: 4 mg/j. Ajuster selon INR (cible 2-3, ou 2.5-3.5 pour valve mécanique). INR à J3, puis 2-3x/sem, puis 1x/mois.",
+      "children": "0.1-0.2 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 20,
+        "packaging": "sécable Boîte de 10",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "DB01418",
+    "adverse_effects": [
+      "Hémorragies (PRINCIPAL RISQUE)",
+      "Nécrose cutanée (rare, début traitement)",
+      "Alopécie",
+      "Troubles digestifs"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS",
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Éviter AINS. Aspirine: seulement si indication cardio stricte sous surveillance."
+      },
+      {
+        "interacting_drugs": [
+          "Fluconazole",
+          "Miconazole",
+          "Voriconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure INR → hémorragie",
+        "recommendation": "Surveiller INR tous les 2 jours. Réduire dose AVK."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Cordarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation INR (inhibition CYP2C9)",
+        "recommendation": "Réduire AVK de 30-50%. Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Métronidazole",
+          "Flagyl",
+          "Nidazol"
+        ],
+        "interacting_classes": [
+          "Nitroimidazolés"
+        ],
+        "severity": "DANGER",
+        "effect": "Potentialisation AVK → hémorragie",
+        "recommendation": "Surveiller INR fréquemment."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution INR → perte d'efficacité → risque thrombotique",
+        "recommendation": "Surveiller INR. Augmenter dose AVK."
+      },
+      {
+        "interacting_drugs": [
+          "Vitamine K",
+          "Konakion"
+        ],
+        "interacting_classes": [
+          "Vitamine K"
+        ],
+        "severity": "INFO",
+        "effect": "ANTIDOTE — diminue l'INR",
+        "recommendation": "Usage thérapeutique pour corriger un surdosage."
+      },
+      {
+        "interacting_drugs": [
+          "Paracétamol (>2g/j pendant >3j)"
+        ],
+        "interacting_classes": [
+          "Analgésiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée de l'INR",
+        "recommendation": "Surveiller INR si paracétamol > 2g/j > 3 jours."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/sintrom-4-mg-comprime"
+  },
+  {
+    "id": "xarelto_10_mg_comprim_pellicul",
+    "brand_name": "XARELTO",
+    "generic_name": "Rivaroxaban",
+    "strength": "10 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct du facteur Xa",
+    "indications": [
+      "Prévention AVC dans FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique",
+      "Prévention événements athérothrombotiques post-SCA (2.5 mg)"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à risque hémorragique significatif",
+      "Insuffisance hépatique avec coagulopathie (Child-Pugh B/C avec coagulopathie)",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Risque hémorragique fœtal. Tératogène chez l'animal.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49: 15 mg/j (au lieu de 20 mg). ClCr <15: non recommandé. TVP/EP: ClCr 15-29: prudence. ClCr <15: non recommandé."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner (15 mg si ClCr 15-49). TVP/EP: 15 mg 2x/j x 21j puis 20 mg/j. Prévention ortho: 10 mg/j. Post-SCA: 2.5 mg 2x/j + aspirine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 140.5,
+        "price_ph": null,
+        "packaging": "Boîte de 10",
+        "laboratory": "BAYER S.A"
+      }
+    ],
+    "drugbank_id": "DB06228",
+    "adverse_effects": [
+      "Hémorragie",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Ecchymoses"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux de rivaroxaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "ÉVITER l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix",
+          "AINS"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de co-prescription. Surveiller signes hémorragiques."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Énoxaparine",
+          "Lovenox",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie majeure",
+        "recommendation": "NE PAS associer (sauf relais thérapeutique contrôlé)."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Amiodarone",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux de rivaroxaban",
+        "recommendation": "Prudence chez l'IRC. Pas d'ajustement systématique chez le normo-rénal."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xarelto-10-mg-comprime-pellicule"
+  },
+  {
+    "id": "xarelto_15_mg_comprim_pellicul",
+    "brand_name": "XARELTO",
+    "generic_name": "Rivaroxaban",
+    "strength": "15 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct du facteur Xa",
+    "indications": [
+      "Prévention AVC dans FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique",
+      "Prévention événements athérothrombotiques post-SCA (2.5 mg)"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à risque hémorragique significatif",
+      "Insuffisance hépatique avec coagulopathie (Child-Pugh B/C avec coagulopathie)",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Risque hémorragique fœtal. Tératogène chez l'animal.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49: 15 mg/j (au lieu de 20 mg). ClCr <15: non recommandé. TVP/EP: ClCr 15-29: prudence. ClCr <15: non recommandé."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner (15 mg si ClCr 15-49). TVP/EP: 15 mg 2x/j x 21j puis 20 mg/j. Prévention ortho: 10 mg/j. Post-SCA: 2.5 mg 2x/j + aspirine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 555,
+        "price_ph": null,
+        "packaging": "Boite de 42",
+        "laboratory": "BAYER S.A"
+      },
+      {
+        "price": 215,
+        "price_ph": null,
+        "packaging": "Boite de 14",
+        "laboratory": "BAYER S.A"
+      }
+    ],
+    "drugbank_id": "DB06228",
+    "adverse_effects": [
+      "Hémorragie",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Ecchymoses"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux de rivaroxaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "ÉVITER l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix",
+          "AINS"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de co-prescription. Surveiller signes hémorragiques."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Énoxaparine",
+          "Lovenox",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie majeure",
+        "recommendation": "NE PAS associer (sauf relais thérapeutique contrôlé)."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Amiodarone",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux de rivaroxaban",
+        "recommendation": "Prudence chez l'IRC. Pas d'ajustement systématique chez le normo-rénal."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xarelto-15-mg-comprime-pellicule"
+  },
+  {
+    "id": "xarelto_2_5_mg_comprim_pellicul",
+    "brand_name": "XARELTO",
+    "generic_name": "Rivaroxaban",
+    "strength": "2.5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct du facteur Xa",
+    "indications": [
+      "Prévention AVC dans FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique",
+      "Prévention événements athérothrombotiques post-SCA (2.5 mg)"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à risque hémorragique significatif",
+      "Insuffisance hépatique avec coagulopathie (Child-Pugh B/C avec coagulopathie)",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Risque hémorragique fœtal. Tératogène chez l'animal.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49: 15 mg/j (au lieu de 20 mg). ClCr <15: non recommandé. TVP/EP: ClCr 15-29: prudence. ClCr <15: non recommandé."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner (15 mg si ClCr 15-49). TVP/EP: 15 mg 2x/j x 21j puis 20 mg/j. Prévention ortho: 10 mg/j. Post-SCA: 2.5 mg 2x/j + aspirine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 283,
+        "price_ph": null,
+        "packaging": "Boite de 14",
+        "laboratory": "BAYER S.A"
+      }
+    ],
+    "drugbank_id": "DB06228",
+    "adverse_effects": [
+      "Hémorragie",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Ecchymoses"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux de rivaroxaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "ÉVITER l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix",
+          "AINS"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de co-prescription. Surveiller signes hémorragiques."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Énoxaparine",
+          "Lovenox",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie majeure",
+        "recommendation": "NE PAS associer (sauf relais thérapeutique contrôlé)."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Amiodarone",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux de rivaroxaban",
+        "recommendation": "Prudence chez l'IRC. Pas d'ajustement systématique chez le normo-rénal."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xarelto-2-5-mg-comprime-pellicule"
+  },
+  {
+    "id": "xarelto_20_mg_comprim_pellicul",
+    "brand_name": "XARELTO",
+    "generic_name": "Rivaroxaban",
+    "strength": "20 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct du facteur Xa",
+    "indications": [
+      "Prévention AVC dans FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique",
+      "Prévention événements athérothrombotiques post-SCA (2.5 mg)"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à risque hémorragique significatif",
+      "Insuffisance hépatique avec coagulopathie (Child-Pugh B/C avec coagulopathie)",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Risque hémorragique fœtal. Tératogène chez l'animal.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49: 15 mg/j (au lieu de 20 mg). ClCr <15: non recommandé. TVP/EP: ClCr 15-29: prudence. ClCr <15: non recommandé."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner (15 mg si ClCr 15-49). TVP/EP: 15 mg 2x/j x 21j puis 20 mg/j. Prévention ortho: 10 mg/j. Post-SCA: 2.5 mg 2x/j + aspirine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 375,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "BAYER S.A"
+      },
+      {
+        "price": 215,
+        "price_ph": null,
+        "packaging": "Boite de 14",
+        "laboratory": "BAYER S.A"
+      }
+    ],
+    "drugbank_id": "DB06228",
+    "adverse_effects": [
+      "Hémorragie",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Ecchymoses"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux de rivaroxaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "ÉVITER l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix",
+          "AINS"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de co-prescription. Surveiller signes hémorragiques."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Énoxaparine",
+          "Lovenox",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie majeure",
+        "recommendation": "NE PAS associer (sauf relais thérapeutique contrôlé)."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Amiodarone",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux de rivaroxaban",
+        "recommendation": "Prudence chez l'IRC. Pas d'ajustement systématique chez le normo-rénal."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xarelto-20-mg-comprime-pellicule"
+  },
+  {
+    "id": "vessel_due_f_250_lsu_capsule",
+    "brand_name": "VESSEL DUE F",
+    "generic_name": "Sulodexide",
+    "strength": "250 LSU",
+    "form": "Capsule",
+    "route": "Orale / IM",
+    "atc_code": "B01AB11",
+    "therapeutic_group": "Antithrombotiques",
+    "drug_class": "GAG (héparine + dermatane sulfate)",
+    "indications": [],
+    "contraindications": [],
+    "interactions": [],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 284,
+        "price_ph": null,
+        "packaging": "Boite de 50",
+        "laboratory": "SYNTHEMEDIC"
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [],
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/vessel-due-f-250-lsu-capsule"
+  }
+]
