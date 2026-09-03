@@ -1,4 +1,10 @@
-import { Patient, ClinicalConsultation, Prescription, MedicalResult, AppUser, VaccinationRecord } from '../types';
+import { Patient, ClinicalConsultation, Prescription, MedicalResult, VaccinationRecord } from '../types';
+import { vaccinationService } from './vaccinationService';
+import { getActiveTreatment } from '../utils/activeTreatment';
+import { calculateIMC } from '../utils/formatters';
+
+const NR = '<span class="empty">Non renseigné</span>';
+const esc = (v: any) => (v === undefined || v === null || v === '') ? null : String(v);
 
 export const printService = {
   printPatientDossier: (
@@ -12,7 +18,31 @@ export const printService = {
     const printWindow = window.open('', '_blank');
     if (!printWindow) return;
 
-    const formatDate = (date: string) => new Date(date).toLocaleDateString();
+    const formatDate = (date: string) => new Date(date).toLocaleDateString('fr-FR');
+
+    const consultationsDesc = [...consultations].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
+    const prescriptionsDesc = [...prescriptions].sort((a, b) => b.date.localeCompare(a.date));
+    const activeTreatment = getActiveTreatment(prescriptionsDesc);
+    const vitalHistory = [...(patient.vitalSigns || [])].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 8);
+    const vaccineStatus = vaccinationService.getVaccinationStatus(patient);
+    const vaccineStatusLabel: Record<string, string> = { DONE: 'Fait', OVERDUE: 'En retard', DUE: 'À faire', UPCOMING: 'À venir' };
+
+    const allergiesList = (patient.allergies || '').split(',').map(a => a.trim()).filter(Boolean);
+    const chronicList = patient.chronicDiseases || [];
+    const habits: string[] = [];
+    if (patient.smokingStatus) habits.push(`Tabac: ${patient.smokingStatus}${patient.smokingDetail ? ` (${patient.smokingDetail})` : ''}`);
+    if (patient.alcoholUse) habits.push(`Alcool: ${patient.alcoholUse}`);
+    if (patient.physicalActivity) habits.push(`Activité physique: ${patient.physicalActivity}`);
+    if (patient.profession) habits.push(`Profession: ${patient.profession}`);
+
+    const gynecoRows: string[] = [];
+    if (patient.sex === 'F') {
+      if (patient.pregnanciesCount !== undefined) gynecoRows.push(`Grossesses: ${patient.pregnanciesCount}`);
+      if (patient.deliveriesCount !== undefined) gynecoRows.push(`Accouchements: ${patient.deliveriesCount}`);
+      if (patient.miscarriagesCount !== undefined) gynecoRows.push(`Fausses couches: ${patient.miscarriagesCount}`);
+      if (patient.isPregnant) gynecoRows.push(`Enceinte${patient.pregnancyWeeks ? ` (${patient.pregnancyWeeks} SA)` : ''}`);
+      if (patient.isBreastfeeding) gynecoRows.push('Allaitement en cours');
+    }
 
     const htmlContent = `
       <!DOCTYPE html>
@@ -21,75 +51,85 @@ export const printService = {
         <title>Dossier Médical - ${patient.name}</title>
         <style>
           @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
-          @page { size: A4; margin: 15mm; }
-          body { 
-            font-family: 'Inter', sans-serif; 
-            padding: 0; 
-            margin: 0; 
-            color: #1f2937; 
+          @page { size: A4 portrait; margin: 15mm; }
+          body {
+            font-family: 'Inter', sans-serif;
+            padding: 0;
+            margin: 0;
+            color: #111827;
             line-height: 1.5;
             background: white;
+            font-size: 11pt;
           }
-          .header { 
-            text-align: center; 
-            margin-bottom: 30px; 
-            border-bottom: 4px solid #059669; 
-            padding-bottom: 20px; 
+          .empty { color: #6b7280; font-style: italic; font-weight: 500; }
+          .header {
+            text-align: center;
+            margin-bottom: 24px;
+            border-bottom: 3px solid #111827;
+            padding-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
           }
-          .doctor-name { font-size: 28px; font-weight: 900; color: #059669; text-transform: uppercase; margin: 0; }
-          .doctor-info { font-size: 14px; color: #6b7280; font-weight: 700; margin-top: 5px; }
-          
-          .patient-section { 
-            background: #f9fafb; 
-            padding: 25px; 
-            border-radius: 16px; 
-            margin-bottom: 30px; 
-            border: 2px solid #e5e7eb; 
+          .header img.logo { max-height: 60px; max-width: 120px; object-fit: contain; }
+          .doctor-name { font-size: 18pt; font-weight: 900; color: #111827; text-transform: uppercase; margin: 0; }
+          .doctor-info { font-size: 11pt; color: #374151; font-weight: 700; margin-top: 4px; }
+
+          .patient-section {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 24px;
+            border: 1px solid #d1d5db;
             display: flex;
             flex-direction: column;
             gap: 10px;
           }
-          .patient-name { font-size: 24px; font-weight: 900; color: #111827; text-transform: uppercase; margin: 0; }
-          .patient-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px; font-weight: 700; color: #4b5563; }
+          .patient-name { font-size: 16pt; font-weight: 900; color: #111827; text-transform: uppercase; margin: 0; }
+          .patient-meta { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px 16px; font-size: 11pt; font-weight: 700; color: #374151; }
           .meta-item { display: flex; gap: 5px; }
-          .meta-label { color: #9ca3af; text-transform: uppercase; width: 60px; }
-          
-          h2 { 
-            font-size: 14px; 
-            font-weight: 900; 
-            color: #059669; 
-            text-transform: uppercase; 
-            border-bottom: 2px solid #f3f4f6; 
-            padding-bottom: 8px; 
-            margin-top: 40px; 
-            letter-spacing: 0.1em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+          .meta-label { color: #6b7280; text-transform: uppercase; font-size: 9pt; min-width: 60px; }
+
+          h2 {
+            font-size: 14pt;
+            font-weight: 900;
+            color: #111827;
+            text-transform: uppercase;
+            border-bottom: 2px solid #111827;
+            padding-bottom: 6px;
+            margin-top: 28px;
+            margin-bottom: 12px;
+            letter-spacing: 0.05em;
           }
-          h2::after { content: ''; flex: 1; height: 1px; background: #f3f4f6; }
-          
-          .item { margin-bottom: 20px; page-break-inside: avoid; border-left: 3px solid #05966920; padding-left: 15px; }
-          .item-header { display: flex; justify-content: space-between; margin-bottom: 6px; align-items: baseline; }
-          .item-date { font-size: 11px; font-weight: 900; color: #9ca3af; text-transform: uppercase; }
-          .item-title { font-size: 15px; font-weight: 800; color: #111827; }
-          .item-detail { font-size: 13px; color: #4b5563; margin: 4px 0; }
-          .item-label { font-weight: 700; color: #374151; margin-right: 5px; }
-          
-          table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; }
-          th { text-align: left; color: #9ca3af; font-weight: 900; text-transform: uppercase; font-size: 10px; padding: 12px 0; border-bottom: 2px solid #f3f4f6; }
-          td { padding: 12px 0; border-bottom: 1px solid #f9fafb; color: #374151; font-weight: 500; }
-          
-          .print-footer { 
-            margin-top: 50px;
-            padding-top: 20px;
-            border-top: 1px solid #f3f4f6;
-            text-align: center; 
-            font-size: 11px; 
-            color: #9ca3af; 
-            font-weight: 700; 
+
+          .critical-box { border: 2px solid #111827; border-radius: 10px; padding: 16px; margin-top: 10px; }
+          .critical-row { margin-bottom: 8px; font-size: 11pt; }
+          .critical-row:last-child { margin-bottom: 0; }
+          .critical-label { font-weight: 900; text-transform: uppercase; font-size: 9pt; color: #374151; display: block; margin-bottom: 2px; }
+          .tag { display: inline-block; border: 1px solid #6b7280; border-radius: 999px; padding: 2px 10px; margin: 2px 4px 2px 0; font-size: 10pt; font-weight: 700; }
+
+          .item { margin-bottom: 16px; page-break-inside: avoid; border-left: 3px solid #d1d5db; padding-left: 14px; }
+          .item-header { display: flex; justify-content: space-between; margin-bottom: 4px; align-items: baseline; }
+          .item-date { font-size: 9pt; font-weight: 900; color: #6b7280; text-transform: uppercase; }
+          .item-title { font-size: 12pt; font-weight: 800; color: #111827; }
+          .item-detail { font-size: 11pt; color: #374151; margin: 3px 0; }
+
+          table { width: 100%; border-collapse: collapse; font-size: 11pt; margin-top: 8px; }
+          th { text-align: left; color: #374151; font-weight: 900; text-transform: uppercase; font-size: 9pt; padding: 10px 6px; border-bottom: 2px solid #111827; }
+          td { padding: 10px 6px; border-bottom: 1px solid #e5e7eb; color: #1f2937; font-weight: 500; }
+
+          .print-footer {
+            margin-top: 40px;
+            padding-top: 16px;
+            border-top: 1px solid #d1d5db;
+            text-align: center;
+            font-size: 9pt;
+            color: #374151;
+            font-weight: 700;
           }
-          
+          .print-footer .confidential { text-transform: uppercase; letter-spacing: 0.05em; margin-top: 4px; }
+
           @media print {
             body { padding: 0; }
             .no-print { display: none; }
@@ -99,22 +139,104 @@ export const printService = {
       </head>
       <body>
         <div class="header">
-          <h1 class="doctor-name">Dr. ${doctor.nameFr}</h1>
-          <div class="doctor-info">${doctor.specialty} - ${doctor.phone}</div>
+          ${doctor?.logoUrl ? `<img class="logo" src="${doctor.logoUrl}" />` : ''}
+          <div>
+            <h1 class="doctor-name">Dr. ${esc(doctor?.nameFr) || ''}</h1>
+            <div class="doctor-info">${[esc(doctor?.specialtyFr), esc(doctor?.phone), esc(doctor?.addressFr)].filter(Boolean).join(' — ')}</div>
+          </div>
         </div>
 
         <div class="patient-section">
           <h1 class="patient-name">${patient.name}</h1>
           <div class="patient-meta">
             <div class="meta-item"><span class="meta-label">Âge:</span> ${patient.age} ans</div>
-            <div class="meta-item"><span class="meta-label">Tél:</span> ${patient.phone || 'N/A'}</div>
+            <div class="meta-item"><span class="meta-label">Naissance:</span> ${patient.dateOfBirth ? formatDate(patient.dateOfBirth) : NR}</div>
+            <div class="meta-item"><span class="meta-label">Sexe:</span> ${patient.sex === 'F' ? 'Féminin' : 'Masculin'}</div>
+            <div class="meta-item"><span class="meta-label">Tél:</span> ${esc(patient.phone) || NR}</div>
+            <div class="meta-item"><span class="meta-label">Adresse:</span> ${esc(patient.address) || NR}</div>
+            <div class="meta-item"><span class="meta-label">Groupe sanguin:</span> ${esc(patient.bloodType) || NR}</div>
+            <div class="meta-item"><span class="meta-label">CIN:</span> ${esc(patient.cin) || NR}</div>
             <div class="meta-item"><span class="meta-label">Réf:</span> #${patient.id.slice(-6)}</div>
             <div class="meta-item"><span class="meta-label">Date:</span> ${new Date().toLocaleDateString('fr-FR')}</div>
           </div>
         </div>
 
-        <h2>Historique des Consultations</h2>
-        ${consultations.length > 0 ? consultations.map(c => `
+        <h2>Zone Critique</h2>
+        <div class="critical-box">
+          <div class="critical-row">
+            <span class="critical-label">Allergies</span>
+            ${allergiesList.length > 0 ? allergiesList.map(a => `<span class="tag">${a}</span>`).join('') : NR}
+          </div>
+          <div class="critical-row">
+            <span class="critical-label">Maladies chroniques</span>
+            ${chronicList.length > 0 ? chronicList.map(c => `<span class="tag">${c}</span>`).join('') : NR}
+          </div>
+          <div class="critical-row">
+            <span class="critical-label">Traitements actuels</span>
+            ${activeTreatment && activeTreatment.items.length > 0 ? activeTreatment.items.map(i => `<span class="tag">${i.medicineName}${i.dosage ? ` · ${i.dosage}` : ''}</span>`).join('') : NR}
+          </div>
+        </div>
+
+        <h2>Antécédents</h2>
+        <div class="critical-box">
+          <div class="critical-row">
+            <span class="critical-label">Personnels (médicaux)</span>
+            ${esc(patient.pathologies) || (patient.pathologyTags && patient.pathologyTags.length > 0 ? patient.pathologyTags.join(', ') : NR)}
+          </div>
+          <div class="critical-row">
+            <span class="critical-label">Chirurgicaux</span>
+            ${esc(patient.surgicalHistory) || NR}
+          </div>
+          <div class="critical-row">
+            <span class="critical-label">Familiaux</span>
+            ${esc(patient.familyHistory) || NR}
+          </div>
+          ${patient.sex === 'F' ? `
+          <div class="critical-row">
+            <span class="critical-label">Gynéco-obstétricaux</span>
+            ${gynecoRows.length > 0 ? gynecoRows.join(' · ') : NR}
+          </div>` : ''}
+          <div class="critical-row">
+            <span class="critical-label">Habitudes de vie</span>
+            ${habits.length > 0 ? habits.join(' · ') : NR}
+          </div>
+        </div>
+
+        <h2>Dernières Constantes Vitales</h2>
+        ${vitalHistory.length > 0 ? `
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Poids</th>
+              <th>Taille</th>
+              <th>Tension</th>
+              <th>FC</th>
+              <th>SpO2</th>
+              <th>Temp.</th>
+              <th>IMC</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${vitalHistory.map(v => {
+              const imc = calculateIMC(v.weight, v.height);
+              return `
+              <tr>
+                <td>${formatDate(v.date)}</td>
+                <td>${v.weight !== undefined ? `${v.weight} kg` : '—'}</td>
+                <td>${v.height !== undefined ? `${v.height} cm` : '—'}</td>
+                <td>${v.systolic !== undefined || v.diastolic !== undefined ? `${v.systolic ?? '—'}/${v.diastolic ?? '—'}` : '—'}</td>
+                <td>${v.heartRate !== undefined ? `${v.heartRate} bpm` : '—'}</td>
+                <td>${v.spO2 !== undefined ? `${v.spO2} %` : '—'}</td>
+                <td>${v.temperature !== undefined ? `${v.temperature} °C` : '—'}</td>
+                <td>${imc ? `${imc.value} (${imc.interpretation})` : '—'}</td>
+              </tr>
+            `; }).join('')}
+          </tbody>
+        </table>` : `<p class="item-detail">${NR}</p>`}
+
+        <h2>Historique des Consultations (5 dernières)</h2>
+        ${consultationsDesc.length > 0 ? consultationsDesc.map(c => `
           <div class="item">
             <div class="item-header">
               <span class="item-title">${c.motif || 'Consultation Standard'}</span>
@@ -123,25 +245,26 @@ export const printService = {
             ${c.diagnostic ? `<div class="item-detail"><strong>Diagnostic:</strong> ${c.diagnostic}</div>` : ''}
             ${c.treatmentPlan ? `<div class="item-detail"><strong>Traitement:</strong> ${c.treatmentPlan}</div>` : ''}
           </div>
-        `).join('') : '<p class="item-detail">Aucune consultation enregistrée.</p>'}
+        `).join('') : `<p class="item-detail">${NR}</p>`}
 
-        <h2>Ordonnances Prescrites</h2>
+        <h2>Ordonnances Actives</h2>
+        ${activeTreatment && activeTreatment.items.length > 0 ? `
         <table>
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Médicaments</th>
+              <th>Médicament</th>
+              <th>Dosage</th>
             </tr>
           </thead>
           <tbody>
-            ${prescriptions.length > 0 ? prescriptions.map(p => `
+            ${activeTreatment.items.map(i => `
               <tr>
-                <td width="100">${formatDate(p.date)}</td>
-                <td>${p.items.map(i => i.medicineName).join(', ')}</td>
+                <td>${i.medicineName}</td>
+                <td>${i.dosage || '—'}</td>
               </tr>
-            `).join('') : '<tr><td colspan="2">Aucune ordonnance.</td></tr>'}
+            `).join('')}
           </tbody>
-        </table>
+        </table>` : `<p class="item-detail">${NR}</p>`}
 
         <h2>Résultats d'Analyses</h2>
         <table>
@@ -159,7 +282,7 @@ export const printService = {
                 <td>${r.title}</td>
                 <td>${r.interpretation || 'Voir pièce jointe'}</td>
               </tr>
-            `).join('') : '<tr><td colspan="3">Aucun résultat.</td></tr>'}
+            `).join('') : `<tr><td colspan="3">${NR}</td></tr>`}
           </tbody>
         </table>
 
@@ -174,19 +297,20 @@ export const printService = {
             </tr>
           </thead>
           <tbody>
-            ${vaccinations.length > 0 ? vaccinations.map(v => `
+            ${vaccineStatus.length > 0 ? vaccineStatus.map(v => `
               <tr>
-                <td>${v.vaccineId.toUpperCase()}</td>
-                <td>${formatDate(v.dateAdministered)}</td>
-                <td>${v.batchNumber || '-'}</td>
-                <td>${v.status}</td>
+                <td>${v.vaccine.name}</td>
+                <td>${v.record ? formatDate(v.record.dateAdministered) : '—'}</td>
+                <td>${v.record?.batchNumber || '—'}</td>
+                <td>${vaccineStatusLabel[v.status] || v.status}</td>
               </tr>
-            `).join('') : '<tr><td colspan="4">Aucun vaccin enregistré.</td></tr>'}
+            `).join('') : `<tr><td colspan="4">${NR}</td></tr>`}
           </tbody>
         </table>
 
         <div class="print-footer">
-          Document généré par DocEase Pro le ${new Date().toLocaleString()}
+          Document généré par DocEase le ${new Date().toLocaleString('fr-FR')}
+          <div class="confidential">Document confidentiel — Usage médical uniquement</div>
         </div>
 
         <script>

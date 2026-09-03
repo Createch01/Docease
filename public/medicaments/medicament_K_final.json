@@ -1,0 +1,5597 @@
+[
+  {
+    "id": "kalest_20_mg_gélule_en_microgranule_boîte_de_14",
+    "brand_name": "KALEST",
+    "generic_name": "Oméprazole",
+    "strength": "20 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A02BC01",
+    "therapeutic_group": "Antiulcéreux - Inhibiteurs de la pompe à protons (IPP)",
+    "drug_class": "Inhibiteur de la pompe à protons (benzimidazolé)",
+    "indications": [
+      "Reflux gastro-œsophagien (RGO)",
+      "Ulcère gastroduodénal",
+      "Éradication de Helicobacter pylori (en trithérapie)",
+      "Syndrome de Zollinger-Ellison",
+      "Prévention des lésions gastriques sous AINS",
+      "Œsophagite érosive"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'oméprazole ou aux benzimidazolés",
+      "Association avec le nelfinavir"
+    ],
+    "interactions": [
+      {
+        "drug": "Clopidogrel (Plavix)",
+        "severity": "majeure",
+        "effect": "Diminution de l'activation du clopidogrel (inhibition CYP2C19) → perte d'efficacité antiagrégante"
+      },
+      {
+        "drug": "Méthotrexate (haute dose)",
+        "severity": "modérée",
+        "effect": "Diminution de l'élimination rénale du MTX → toxicité accrue"
+      },
+      {
+        "drug": "Citalopram, Escitalopram",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de ISRS (inhibition CYP2C19)"
+      },
+      {
+        "drug": "Phénytoïne",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de phénytoïne"
+      },
+      {
+        "drug": "Fer oral, Vitamine B12",
+        "severity": "mineure",
+        "effect": "Diminution de l'absorption (pH gastrique élevé)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Données rassurantes mais limitées à grande échelle.",
+      "breastfeeding": "Passage dans le lait. Utiliser avec prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (10 kg). Formes pédiatriques disponibles.",
+      "dose_rule": "1-2 mg/kg/jour (max 20 mg chez <20 kg, 40 mg chez >20 kg)."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "RGO/Ulcère: 20 mg/jour pendant 4-8 semaines. H. pylori: 20 mg 2x/jour + antibiotiques. Zollinger-Ellison: 60-120 mg/jour.",
+      "children": "1-2 mg/kg/jour en 1 prise."
+    },
+    "market_data": [
+      {
+        "price": 39.2,
+        "packaging": "en microgranule Boîte de 14",
+        "laboratory": "MC PHARMA",
+        "url": "https://www.medicament.ma/medicament/kalest-20-mg-gelule",
+        "price_ppv_dhs": 39.2
+      }
+    ],
+    "drugbank_id": "DB00338",
+    "mechanism": "Inhibition irréversible de la H+/K+-ATPase (pompe à protons) des cellules pariétales gastriques, réduisant la sécrétion d'acide chlorhydrique.",
+    "half_life": "0.5-1 heure (mais effet dure 24h car liaison irréversible)",
+    "adverse_effects": [
+      "Céphalées",
+      "Nausées",
+      "Diarrhée",
+      "Douleurs abdominales",
+      "Flatulences",
+      "Hypomagnésémie (usage prolongé)",
+      "Fractures ostéoporotiques (usage prolongé)",
+      "Colite microscopique (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants (thiénopyridines)"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution de l'activation du clopidogrel → perte d'efficacité",
+        "recommendation": "Préférer le pantoprazole si IPP nécessaire sous clopidogrel."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX → toxicité à haute dose",
+        "recommendation": "Envisager arrêt IPP pendant chimiothérapie haute dose MTX."
+      },
+      {
+        "interacting_drugs": [
+          "Nelfinavir"
+        ],
+        "interacting_classes": [
+          "Antiviraux VIH (inhibiteurs de protéase)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Diminution majeure des taux de nelfinavir",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Citalopram",
+          "Escitalopram",
+          "Esciplex"
+        ],
+        "interacting_classes": [
+          "ISRS (substrats CYP2C19)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux d'ISRS",
+        "recommendation": "Limiter citalopram à 20 mg/jour si co-prescription."
+      },
+      {
+        "interacting_drugs": [
+          "Phénytoïne",
+          "Di-Hydan"
+        ],
+        "interacting_classes": [
+          "Antiépileptiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de phénytoïne",
+        "recommendation": "Doser phénytoïne."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Oméprazole",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kalest_omeprazole_20_mg"
+  },
+  {
+    "id": "kalest_20_mg_gélule_en_microgranule_boîte_de_28",
+    "brand_name": "KALEST",
+    "generic_name": "Oméprazole",
+    "strength": "20 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A02BC01",
+    "therapeutic_group": "Antiulcéreux - Inhibiteurs de la pompe à protons (IPP)",
+    "drug_class": "Inhibiteur de la pompe à protons (benzimidazolé)",
+    "indications": [
+      "Reflux gastro-œsophagien (RGO)",
+      "Ulcère gastroduodénal",
+      "Éradication de Helicobacter pylori (en trithérapie)",
+      "Syndrome de Zollinger-Ellison",
+      "Prévention des lésions gastriques sous AINS",
+      "Œsophagite érosive"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'oméprazole ou aux benzimidazolés",
+      "Association avec le nelfinavir"
+    ],
+    "interactions": [
+      {
+        "drug": "Clopidogrel (Plavix)",
+        "severity": "majeure",
+        "effect": "Diminution de l'activation du clopidogrel (inhibition CYP2C19) → perte d'efficacité antiagrégante"
+      },
+      {
+        "drug": "Méthotrexate (haute dose)",
+        "severity": "modérée",
+        "effect": "Diminution de l'élimination rénale du MTX → toxicité accrue"
+      },
+      {
+        "drug": "Citalopram, Escitalopram",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de ISRS (inhibition CYP2C19)"
+      },
+      {
+        "drug": "Phénytoïne",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de phénytoïne"
+      },
+      {
+        "drug": "Fer oral, Vitamine B12",
+        "severity": "mineure",
+        "effect": "Diminution de l'absorption (pH gastrique élevé)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Données rassurantes mais limitées à grande échelle.",
+      "breastfeeding": "Passage dans le lait. Utiliser avec prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (10 kg). Formes pédiatriques disponibles.",
+      "dose_rule": "1-2 mg/kg/jour (max 20 mg chez <20 kg, 40 mg chez >20 kg)."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "RGO/Ulcère: 20 mg/jour pendant 4-8 semaines. H. pylori: 20 mg 2x/jour + antibiotiques. Zollinger-Ellison: 60-120 mg/jour.",
+      "children": "1-2 mg/kg/jour en 1 prise."
+    },
+    "market_data": [
+      {
+        "price": 70.1,
+        "packaging": "en microgranule Boîte de 28",
+        "laboratory": "MC PHARMA",
+        "url": "https://www.medicament.ma/medicament/kalest-20-mg-gelule",
+        "price_ppv_dhs": 70.1
+      }
+    ],
+    "drugbank_id": "DB00338",
+    "mechanism": "Inhibition irréversible de la H+/K+-ATPase (pompe à protons) des cellules pariétales gastriques, réduisant la sécrétion d'acide chlorhydrique.",
+    "half_life": "0.5-1 heure (mais effet dure 24h car liaison irréversible)",
+    "adverse_effects": [
+      "Céphalées",
+      "Nausées",
+      "Diarrhée",
+      "Douleurs abdominales",
+      "Flatulences",
+      "Hypomagnésémie (usage prolongé)",
+      "Fractures ostéoporotiques (usage prolongé)",
+      "Colite microscopique (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants (thiénopyridines)"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution de l'activation du clopidogrel → perte d'efficacité",
+        "recommendation": "Préférer le pantoprazole si IPP nécessaire sous clopidogrel."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX → toxicité à haute dose",
+        "recommendation": "Envisager arrêt IPP pendant chimiothérapie haute dose MTX."
+      },
+      {
+        "interacting_drugs": [
+          "Nelfinavir"
+        ],
+        "interacting_classes": [
+          "Antiviraux VIH (inhibiteurs de protéase)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Diminution majeure des taux de nelfinavir",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Citalopram",
+          "Escitalopram",
+          "Esciplex"
+        ],
+        "interacting_classes": [
+          "ISRS (substrats CYP2C19)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux d'ISRS",
+        "recommendation": "Limiter citalopram à 20 mg/jour si co-prescription."
+      },
+      {
+        "interacting_drugs": [
+          "Phénytoïne",
+          "Di-Hydan"
+        ],
+        "interacting_classes": [
+          "Antiépileptiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de phénytoïne",
+        "recommendation": "Doser phénytoïne."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Oméprazole",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kalest_omeprazole_20_mg_2"
+  },
+  {
+    "id": "kalest_20_mg_gélule_en_microgranule_boîte_de_7",
+    "brand_name": "KALEST",
+    "generic_name": "Oméprazole",
+    "strength": "20 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A02BC01",
+    "therapeutic_group": "Antiulcéreux - Inhibiteurs de la pompe à protons (IPP)",
+    "drug_class": "Inhibiteur de la pompe à protons (benzimidazolé)",
+    "indications": [
+      "Reflux gastro-œsophagien (RGO)",
+      "Ulcère gastroduodénal",
+      "Éradication de Helicobacter pylori (en trithérapie)",
+      "Syndrome de Zollinger-Ellison",
+      "Prévention des lésions gastriques sous AINS",
+      "Œsophagite érosive"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'oméprazole ou aux benzimidazolés",
+      "Association avec le nelfinavir"
+    ],
+    "interactions": [
+      {
+        "drug": "Clopidogrel (Plavix)",
+        "severity": "majeure",
+        "effect": "Diminution de l'activation du clopidogrel (inhibition CYP2C19) → perte d'efficacité antiagrégante"
+      },
+      {
+        "drug": "Méthotrexate (haute dose)",
+        "severity": "modérée",
+        "effect": "Diminution de l'élimination rénale du MTX → toxicité accrue"
+      },
+      {
+        "drug": "Citalopram, Escitalopram",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de ISRS (inhibition CYP2C19)"
+      },
+      {
+        "drug": "Phénytoïne",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de phénytoïne"
+      },
+      {
+        "drug": "Fer oral, Vitamine B12",
+        "severity": "mineure",
+        "effect": "Diminution de l'absorption (pH gastrique élevé)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Données rassurantes mais limitées à grande échelle.",
+      "breastfeeding": "Passage dans le lait. Utiliser avec prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (10 kg). Formes pédiatriques disponibles.",
+      "dose_rule": "1-2 mg/kg/jour (max 20 mg chez <20 kg, 40 mg chez >20 kg)."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "RGO/Ulcère: 20 mg/jour pendant 4-8 semaines. H. pylori: 20 mg 2x/jour + antibiotiques. Zollinger-Ellison: 60-120 mg/jour.",
+      "children": "1-2 mg/kg/jour en 1 prise."
+    },
+    "market_data": [
+      {
+        "price": 28,
+        "packaging": "en microgranule Boîte de 7",
+        "laboratory": "MC PHARMA",
+        "url": "https://www.medicament.ma/medicament/kalest-20-mg-gelule",
+        "price_ppv_dhs": 28.0
+      }
+    ],
+    "drugbank_id": "DB00338",
+    "mechanism": "Inhibition irréversible de la H+/K+-ATPase (pompe à protons) des cellules pariétales gastriques, réduisant la sécrétion d'acide chlorhydrique.",
+    "half_life": "0.5-1 heure (mais effet dure 24h car liaison irréversible)",
+    "adverse_effects": [
+      "Céphalées",
+      "Nausées",
+      "Diarrhée",
+      "Douleurs abdominales",
+      "Flatulences",
+      "Hypomagnésémie (usage prolongé)",
+      "Fractures ostéoporotiques (usage prolongé)",
+      "Colite microscopique (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix"
+        ],
+        "interacting_classes": [
+          "Antiagrégants (thiénopyridines)"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution de l'activation du clopidogrel → perte d'efficacité",
+        "recommendation": "Préférer le pantoprazole si IPP nécessaire sous clopidogrel."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution élimination MTX → toxicité à haute dose",
+        "recommendation": "Envisager arrêt IPP pendant chimiothérapie haute dose MTX."
+      },
+      {
+        "interacting_drugs": [
+          "Nelfinavir"
+        ],
+        "interacting_classes": [
+          "Antiviraux VIH (inhibiteurs de protéase)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Diminution majeure des taux de nelfinavir",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Citalopram",
+          "Escitalopram",
+          "Esciplex"
+        ],
+        "interacting_classes": [
+          "ISRS (substrats CYP2C19)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux d'ISRS",
+        "recommendation": "Limiter citalopram à 20 mg/jour si co-prescription."
+      },
+      {
+        "interacting_drugs": [
+          "Phénytoïne",
+          "Di-Hydan"
+        ],
+        "interacting_classes": [
+          "Antiépileptiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de phénytoïne",
+        "recommendation": "Doser phénytoïne."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Oméprazole",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kalest_omeprazole_20_mg_3"
+  },
+  {
+    "id": "kaletra_200_mg_/_50_mg",
+    "brand_name": "KALETRA",
+    "generic_name": "Lopinavir 200 mg + Ritonavir 50 mg",
+    "strength": "200 MG / 50 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Oral",
+    "atc_code": "J05AR10",
+    "tableau_maroc": "A",
+    "therapeutic_group": "Infectiologie / Antirétroviral — Inhibiteur de Protéase",
+    "drug_class": "Inhibiteur de protéase VIH (lopinavir) + Inhibiteur pharmacocinétique (ritonavir booster CYP3A4)",
+    "mechanism": "Lopinavir : inhibition de la protéase VIH-1 et VIH-2 → blocage clivage des précurseurs polyprotéiques Gag-Pol → production de virions immatures non infectieux. Ritonavir (sous-dose) : inhibition puissante CYP3A4 intestinal et hépatique → augmentation biodisponibilité et demi-vie du lopinavir (effet booster pharmacocinétique).",
+    "indications": [
+      "Infection VIH-1 et VIH-2 en association avec d'autres antirétroviraux (adulte et enfant ≥ 14 jours)",
+      "Prévention de la Transmission Mère-Enfant (PTME)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au lopinavir ou au ritonavir",
+      "Insuffisance hépatique sévère (Child-Pugh C)",
+      "Association avec simvastatine, lovastatine (rhabdomyolyse)",
+      "Association avec rifampicine (perte d'efficacité)",
+      "Association avec antiarythmiques de classe Ia/III (amiodarone, quinidine)",
+      "Association avec alfuzosine, pimozide, lurasidone, sildénafil (HTAP haute dose)"
+    ],
+    "dosage": {
+      "adult": "400/100 mg (2 comprimés) 2x/j au cours des repas",
+      "adult_naive": "800/200 mg (4 comprimés) 1x/j possible en primo-infection sans mutation de résistance",
+      "children_2_17ans": "Selon poids — 15-25 kg : 200/50 mg 2x/j. 25-35 kg : 300/75 mg 2x/j. > 35 kg : 400/100 mg 2x/j",
+      "renal": "Pas d'ajustement nécessaire",
+      "hepatic": "Insuffisance légère/modérée : prudence, surveiller transaminases. Sévère : contre-indiqué"
+    },
+    "adverse_effects": [
+      "Diarrhée, nausées, vomissements (très fréquents)",
+      "Dyslipidémie (hypertriglycéridémie, hypercholestérolémie)",
+      "Hyperglycémie / Diabète (redistribution graisseuse)",
+      "Lipodystrophie (redistribution des graisses)",
+      "Allongement QTc et PR (surveillance ECG si facteurs de risque)",
+      "Hépatotoxicité (transaminases — surveiller régulièrement)",
+      "Asthénie, céphalées",
+      "Syndrome de restauration immunitaire (IRIS)"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Statines métabolisées CYP3A4 (simvastatine, lovastatine)",
+        "severity": "Majeur",
+        "effect": "Ritonavir inhibiteur CYP3A4 ultra-puissant → augmentation massive AUC statines → RHABDOMYOLYSE — CONTRE-INDIQUÉ. Utiliser pravastatine (max 40 mg) ou rosuvastatine (max 10 mg)."
+      },
+      {
+        "drug": "Rifampicine",
+        "severity": "Majeur",
+        "effect": "Inducteur CYP3A4/P-gp → réduction AUC lopinavir > 75% → perte d'efficacité antivirale — CONTRE-INDIQUÉ. Utiliser rifabutine (dose réduite) si nécessaire."
+      },
+      {
+        "drug": "Sildénafil / Tadalafil / Vardénafil",
+        "severity": "Majeur",
+        "effect": "Inhibition CYP3A4 → accumulation IPDE5 → hypotension sévère, priapisme. Sildénafil (HTAP) : max 12.5 mg/48h. Usage érectile : CONTRE-INDIQUÉ avec sildénafil et vardénafil."
+      },
+      {
+        "drug": "Anticoagulants oraux (warfarine, acenocoumarol)",
+        "severity": "Majeur",
+        "effect": "Inhibition CYP2C9 (ritonavir) → augmentation INR imprévisible → surveiller INR très étroitement au début et à chaque modification."
+      },
+      {
+        "drug": "Antiarythmiques (amiodarone, flécaïnide, propafénone, quinidine)",
+        "severity": "Majeur",
+        "effect": "Inhibition CYP3A4/2D6 → accumulation antiarythmique → arythmies graves, arrêt cardiaque — CONTRE-INDIQUÉS."
+      },
+      {
+        "drug": "Corticoïdes inhalés / nasaux (fluticasone, budésonide)",
+        "severity": "Majeur",
+        "effect": "Inhibition CYP3A4 → accumulation corticoïde → syndrome de Cushing iatrogène, insuffisance surrénalienne — éviter. Utiliser béclométasone (moins métabolisée par CYP3A4) si indispensable."
+      },
+      {
+        "drug": "Metformine",
+        "severity": "Modéré",
+        "effect": "Lopinavir peut augmenter légèrement la metforminémie (inhibition OCT2) → surveiller glycémie et tolérance digestive."
+      },
+      {
+        "drug": "Médicaments prolongeant QT (antipsychotiques, antimalariens)",
+        "severity": "Modéré",
+        "effect": "Kaletra lui-même prolonge le QTc — risque additif avec autres allongeurs QT. ECG de surveillance recommandé."
+      }
+    ],
+    "interactions": [
+      "Nombreux substrats du CYP3A4 (interactions multiples, vérifier systématiquement)"
+    ],
+    "half_life": "Lopinavir : 5-6h (sans ritonavir : < 2h). Le ritonavir prolonge la demi-vie effective à 5-6h par inhibition CYP3A4.",
+    "pregnancy": {
+      "category": "C",
+      "notes": "Utilisé pendant la grossesse dans le cadre de la PTME (Prévention Transmission Mère-Enfant). Les données de grossesse sont relativement nombreuses pour cette indication. Lopinavir/ritonavir recommandé dans certains protocoles PTME marocains. Formulation solution buvable contient alcool — éviter si possible. Surveiller glycémie gestationnelle (hyperglycémie sous IP). Nouveau-né : surveiller toxicité.",
+      "breastfeeding": "L'allaitement est contre-indiqué chez les mères VIH+ au Maroc (risque transmission virale)."
+    },
+    "children": {
+      "safe": true,
+      "min_age": "14 jours (solution) / 2 ans (comprimés)",
+      "dose_adjustment": "Selon poids et surface corporelle. Comprimés : 15-25 kg : 200/50 mg 2x/j. > 35 kg : 400/100 mg 2x/j",
+      "notes": "AMM pédiatrique dès 14 jours (solution buvable). Comprimés à partir de 2 ans. Posologie selon poids — utiliser calculateur pédiatrique."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "notes": "Pas d'ajustement rénal nécessaire. Lopinavir et ritonavir non dialysables."
+    },
+    "market_data": [
+      {
+        "price": 980.0,
+        "price_ppv_dhs": 980.0,
+        "packaging": "Comprimé pelliculé Boîte de 120 (60 jours de traitement)",
+        "laboratory": "ABBVIE MAROC",
+        "url": "https://medicament.ma/medicament/kaletra-200-mg-50-mg-comprime/"
+      }
+    ],
+    "smart_flags": [
+      "⚠️ Inhibiteur CYP3A4 ULTRA-PUISSANT — interactions majeures avec >200 médicaments",
+      "💊 Simvastatine/Lovastatine : CONTRE-INDIQUÉ absolu",
+      "🫀 Allongement QTc — ECG obligatoire si facteurs de risque",
+      "🔬 Charge virale + CD4 à surveiller régulièrement",
+      "💊 Tableau A — prescription restreinte (infectiologue)"
+    ],
+    "composition": [
+      {
+        "name": "Lopinavir 200 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Ritonavir 50 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kaletra_lopinavir_200_mg_ritonavir_50_mg_200_mg_50_mg"
+  },
+  {
+    "id": "kalieff_1.4_g_comprimé_effervescent_boîte_de_18",
+    "brand_name": "KALIEFF",
+    "generic_name": "Potassium (gluconate de potassium)",
+    "strength": "1.4 G",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A12BA",
+    "therapeutic_group": "Suppléments minéraux",
+    "drug_class": "Supplément potassique",
+    "indications": [
+      "Hypokaliémie",
+      "Prévention de l'hypokaliémie sous diurétiques thiazidiques ou de l'anse",
+      "Compensation des pertes potassiques (diarrhée, vomissements)"
+    ],
+    "contraindications": [
+      "Hyperkaliémie",
+      "Insuffisance rénale sévère (anurie, oligurie)",
+      "Maladie d'Addison non traitée",
+      "Déshydratation aiguë sévère",
+      "Association avec les diurétiques épargneurs de potassium (risque d'hyperkaliémie)"
+    ],
+    "interactions": [
+      {
+        "drug": "Spironolactone, Éplérénone, Amiloride",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie potentiellement mortelle"
+      },
+      {
+        "drug": "IEC (Énalapril, Ramipril), ARA2 (Losartan, Valsartan)",
+        "severity": "modérée",
+        "effect": "Risque d'hyperkaliémie"
+      },
+      {
+        "drug": "Ciclosporine, Tacrolimus",
+        "severity": "modérée",
+        "effect": "Risque d'hyperkaliémie"
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Compatible. Compenser les carences si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie sous surveillance.",
+      "dose_rule": "1-3 mEq/kg/jour en doses fractionnées. Surveillance kaliémie."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Contre-indiqué en insuffisance rénale sévère (anurie). IRC modérée: surveillance kaliémie stricte, dose réduite."
+    },
+    "dosage": {
+      "adult": "1-3 comprimés effervescents/jour (soit 1.4-4.2 g de gluconate de K+). Adapter selon kaliémie.",
+      "children": "1-3 mEq/kg/jour."
+    },
+    "market_data": [
+      {
+        "price": 28.4,
+        "packaging": "effervescent Boîte de 18",
+        "laboratory": "PH: 18.76 dhs - LAPROPHAN",
+        "url": "https://www.medicament.ma/medicament/kalieff-1-4-g-comprime",
+        "price_ppv_dhs": 28.4
+      }
+    ],
+    "drugbank_id": "DB14500",
+    "mechanism": "Apport exogène de potassium pour corriger ou prévenir l'hypokaliémie.",
+    "half_life": "N/A (ion physiologique éliminé par voie rénale)",
+    "adverse_effects": [
+      "Nausées",
+      "Vomissements",
+      "Douleurs abdominales",
+      "Diarrhée",
+      "Hyperkaliémie (surdosage)",
+      "Ulcérations digestives (formes solides non effervescentes)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Aldactone",
+          "Éplérénone",
+          "Inspra",
+          "Amiloride"
+        ],
+        "interacting_classes": [
+          "Diurétiques épargneurs de potassium"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hyperkaliémie potentiellement mortelle",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE sauf cas exceptionnel avec surveillance K+ étroite."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Renitec",
+          "Ramipril",
+          "Triatec",
+          "Périndopril",
+          "Coversyl"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque d'hyperkaliémie",
+        "recommendation": "Surveiller kaliémie. Éviter si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Losartan",
+          "Cozaar",
+          "Valsartan",
+          "Tareg",
+          "Irbésartan"
+        ],
+        "interacting_classes": [
+          "ARA2 (sartans)"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque d'hyperkaliémie",
+        "recommendation": "Surveiller kaliémie."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine",
+          "Tacrolimus"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie",
+        "recommendation": "Surveiller kaliémie."
+      }
+    ],
+    "smart_flags": [
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE"
+    ],
+    "tableau_maroc": "HTC",
+    "composition": [
+      {
+        "name": "Potassium (gluconate de potassium)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kalieff_potassium_gluconate_de_potassium_1_4_g"
+  },
+  {
+    "id": "kamagra_50_mg_comprimé_boite_de_1",
+    "brand_name": "KAMAGRA",
+    "generic_name": "Sildénafil",
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BE03",
+    "therapeutic_group": "Médicaments de la dysfonction érectile",
+    "drug_class": "Inhibiteur de la phosphodiestérase de type 5 (IPDE5)",
+    "indications": [
+      "Dysfonction érectile"
+    ],
+    "contraindications": [
+      "Association avec les dérivés nitrés (trinitrine, isosorbide) — CONTRE-INDICATION ABSOLUE",
+      "Association avec les donneurs de NO (molsidomine)",
+      "Hypotension sévère (<90/50 mmHg)",
+      "AVC ou IDM récent (<6 mois)",
+      "Rétinite pigmentaire",
+      "Insuffisance hépatique sévère",
+      "Association avec le riociguat"
+    ],
+    "interactions": [
+      {
+        "drug": "Dérivés nitrés (Trinitrine, Natispray, Risordan)",
+        "severity": "majeure",
+        "effect": "Hypotension sévère potentiellement fatale"
+      },
+      {
+        "drug": "Alpha-bloquants (Alfuzosine, Tamsulosine)",
+        "severity": "majeure",
+        "effect": "Hypotension sévère"
+      },
+      {
+        "drug": "Kétoconazole, Itraconazole, Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de sildénafil (CYP3A4)"
+      },
+      {
+        "drug": "Érythromycine, Clarithromycine",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de sildénafil"
+      }
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Réservé à l'homme adulte. Non applicable à la femme.",
+      "breastfeeding": "Non applicable."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans pour la dysfonction érectile.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30 mL/min: débuter à 25 mg."
+    },
+    "dosage": {
+      "adult": "50 mg environ 1h avant l'activité sexuelle. Peut ajuster 25-100 mg. Max: 1 dose/jour.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 25.2,
+        "packaging": "Boite de 1",
+        "laboratory": "ZENITH PHARMA",
+        "url": "https://www.medicament.ma/medicament/kamagra-50-mg-comprime",
+        "price_ppv_dhs": 25.2
+      }
+    ],
+    "drugbank_id": "DB00203",
+    "mechanism": "Inhibition sélective de la PDE5, augmentant les taux de GMPc dans le corps caverneux → relaxation des muscles lisses et vasodilatation pénienne.",
+    "half_life": "3-5 heures",
+    "adverse_effects": [
+      "Céphalées",
+      "Flush facial",
+      "Dyspepsie",
+      "Congestion nasale",
+      "Troubles visuels (vision bleutée)",
+      "Vertiges",
+      "Priapisme (rare mais urgence)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Trinitrine",
+          "Natispray",
+          "Risordan",
+          "Isosorbide",
+          "Molsidomine",
+          "Corvasal"
+        ],
+        "interacting_classes": [
+          "Dérivés nitrés",
+          "Donneurs de NO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère potentiellement fatale",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Respecter un délai de 24h."
+      },
+      {
+        "interacting_drugs": [
+          "Riociguat",
+          "Adempas"
+        ],
+        "interacting_classes": [
+          "Stimulateurs de la guanylate cyclase"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Alfuzosine",
+          "Flotral",
+          "Tamsulosine",
+          "Omix"
+        ],
+        "interacting_classes": [
+          "Alpha-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère",
+        "recommendation": "Stabiliser sous alpha-bloquant d'abord. Débuter sildénafil à 25 mg."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation des taux de sildénafil",
+        "recommendation": "Réduire dose à 25 mg max."
+      },
+      {
+        "interacting_drugs": [
+          "Érythromycine",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Macrolides (inhibiteurs CYP3A4)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux",
+        "recommendation": "Débuter à dose faible."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Sildénafil",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kamagra_sildenafil_50_mg"
+  },
+  {
+    "id": "kamagra_50_mg_comprimé_boite_de_2",
+    "brand_name": "KAMAGRA",
+    "generic_name": "Sildénafil",
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BE03",
+    "therapeutic_group": "Médicaments de la dysfonction érectile",
+    "drug_class": "Inhibiteur de la phosphodiestérase de type 5 (IPDE5)",
+    "indications": [
+      "Dysfonction érectile"
+    ],
+    "contraindications": [
+      "Association avec les dérivés nitrés (trinitrine, isosorbide) — CONTRE-INDICATION ABSOLUE",
+      "Association avec les donneurs de NO (molsidomine)",
+      "Hypotension sévère (<90/50 mmHg)",
+      "AVC ou IDM récent (<6 mois)",
+      "Rétinite pigmentaire",
+      "Insuffisance hépatique sévère",
+      "Association avec le riociguat"
+    ],
+    "interactions": [
+      {
+        "drug": "Dérivés nitrés (Trinitrine, Natispray, Risordan)",
+        "severity": "majeure",
+        "effect": "Hypotension sévère potentiellement fatale"
+      },
+      {
+        "drug": "Alpha-bloquants (Alfuzosine, Tamsulosine)",
+        "severity": "majeure",
+        "effect": "Hypotension sévère"
+      },
+      {
+        "drug": "Kétoconazole, Itraconazole, Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de sildénafil (CYP3A4)"
+      },
+      {
+        "drug": "Érythromycine, Clarithromycine",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de sildénafil"
+      }
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Réservé à l'homme adulte. Non applicable à la femme.",
+      "breastfeeding": "Non applicable."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans pour la dysfonction érectile.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30 mL/min: débuter à 25 mg."
+    },
+    "dosage": {
+      "adult": "50 mg environ 1h avant l'activité sexuelle. Peut ajuster 25-100 mg. Max: 1 dose/jour.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 44.4,
+        "packaging": "Boite de 2",
+        "laboratory": "ZENITH PHARMA",
+        "url": "https://www.medicament.ma/medicament/kamagra-50-mg-comprime",
+        "price_ppv_dhs": 44.4
+      }
+    ],
+    "drugbank_id": "DB00203",
+    "mechanism": "Inhibition sélective de la PDE5, augmentant les taux de GMPc dans le corps caverneux → relaxation des muscles lisses et vasodilatation pénienne.",
+    "half_life": "3-5 heures",
+    "adverse_effects": [
+      "Céphalées",
+      "Flush facial",
+      "Dyspepsie",
+      "Congestion nasale",
+      "Troubles visuels (vision bleutée)",
+      "Vertiges",
+      "Priapisme (rare mais urgence)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Trinitrine",
+          "Natispray",
+          "Risordan",
+          "Isosorbide",
+          "Molsidomine",
+          "Corvasal"
+        ],
+        "interacting_classes": [
+          "Dérivés nitrés",
+          "Donneurs de NO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère potentiellement fatale",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Respecter un délai de 24h."
+      },
+      {
+        "interacting_drugs": [
+          "Riociguat",
+          "Adempas"
+        ],
+        "interacting_classes": [
+          "Stimulateurs de la guanylate cyclase"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Alfuzosine",
+          "Flotral",
+          "Tamsulosine",
+          "Omix"
+        ],
+        "interacting_classes": [
+          "Alpha-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère",
+        "recommendation": "Stabiliser sous alpha-bloquant d'abord. Débuter sildénafil à 25 mg."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation des taux de sildénafil",
+        "recommendation": "Réduire dose à 25 mg max."
+      },
+      {
+        "interacting_drugs": [
+          "Érythromycine",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Macrolides (inhibiteurs CYP3A4)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux",
+        "recommendation": "Débuter à dose faible."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Sildénafil",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kamagra_sildenafil_50_mg_2"
+  },
+  {
+    "id": "kamagra_50_mg_comprimé_boite_de_4",
+    "brand_name": "KAMAGRA",
+    "generic_name": "Sildénafil",
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BE03",
+    "therapeutic_group": "Médicaments de la dysfonction érectile",
+    "drug_class": "Inhibiteur de la phosphodiestérase de type 5 (IPDE5)",
+    "indications": [
+      "Dysfonction érectile"
+    ],
+    "contraindications": [
+      "Association avec les dérivés nitrés (trinitrine, isosorbide) — CONTRE-INDICATION ABSOLUE",
+      "Association avec les donneurs de NO (molsidomine)",
+      "Hypotension sévère (<90/50 mmHg)",
+      "AVC ou IDM récent (<6 mois)",
+      "Rétinite pigmentaire",
+      "Insuffisance hépatique sévère",
+      "Association avec le riociguat"
+    ],
+    "interactions": [
+      {
+        "drug": "Dérivés nitrés (Trinitrine, Natispray, Risordan)",
+        "severity": "majeure",
+        "effect": "Hypotension sévère potentiellement fatale"
+      },
+      {
+        "drug": "Alpha-bloquants (Alfuzosine, Tamsulosine)",
+        "severity": "majeure",
+        "effect": "Hypotension sévère"
+      },
+      {
+        "drug": "Kétoconazole, Itraconazole, Ritonavir",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de sildénafil (CYP3A4)"
+      },
+      {
+        "drug": "Érythromycine, Clarithromycine",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de sildénafil"
+      }
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Réservé à l'homme adulte. Non applicable à la femme.",
+      "breastfeeding": "Non applicable."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans pour la dysfonction érectile.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30 mL/min: débuter à 25 mg."
+    },
+    "dosage": {
+      "adult": "50 mg environ 1h avant l'activité sexuelle. Peut ajuster 25-100 mg. Max: 1 dose/jour.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 78.1,
+        "packaging": "Boite de 4",
+        "laboratory": "ZENITH PHARMA",
+        "url": "https://www.medicament.ma/medicament/kamagra-50-mg-comprime",
+        "price_ppv_dhs": 78.1
+      }
+    ],
+    "drugbank_id": "DB00203",
+    "mechanism": "Inhibition sélective de la PDE5, augmentant les taux de GMPc dans le corps caverneux → relaxation des muscles lisses et vasodilatation pénienne.",
+    "half_life": "3-5 heures",
+    "adverse_effects": [
+      "Céphalées",
+      "Flush facial",
+      "Dyspepsie",
+      "Congestion nasale",
+      "Troubles visuels (vision bleutée)",
+      "Vertiges",
+      "Priapisme (rare mais urgence)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Trinitrine",
+          "Natispray",
+          "Risordan",
+          "Isosorbide",
+          "Molsidomine",
+          "Corvasal"
+        ],
+        "interacting_classes": [
+          "Dérivés nitrés",
+          "Donneurs de NO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère potentiellement fatale",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Respecter un délai de 24h."
+      },
+      {
+        "interacting_drugs": [
+          "Riociguat",
+          "Adempas"
+        ],
+        "interacting_classes": [
+          "Stimulateurs de la guanylate cyclase"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Alfuzosine",
+          "Flotral",
+          "Tamsulosine",
+          "Omix"
+        ],
+        "interacting_classes": [
+          "Alpha-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère",
+        "recommendation": "Stabiliser sous alpha-bloquant d'abord. Débuter sildénafil à 25 mg."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation des taux de sildénafil",
+        "recommendation": "Réduire dose à 25 mg max."
+      },
+      {
+        "interacting_drugs": [
+          "Érythromycine",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Macrolides (inhibiteurs CYP3A4)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux",
+        "recommendation": "Débuter à dose faible."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Sildénafil",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kamagra_sildenafil_50_mg_3"
+  },
+  {
+    "id": "kardegic_160_mg_poudre_en_sachet_boîte_de_30",
+    "brand_name": "KARDEGIC",
+    "generic_name": "Acétylsalicylate de lysine (Aspirine)",
+    "strength": "160 MG",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "B01AC06",
+    "therapeutic_group": "Antiagrégant plaquettaire",
+    "drug_class": "Inhibiteur irréversible de la cyclo-oxygénase plaquettaire (COX-1)",
+    "indications": [
+      "Prévention secondaire des événements cardiovasculaires (IDM, AVC, AOMI)",
+      "Syndrome coronarien aigu",
+      "Post-angioplastie et pose de stent (en association avec clopidogrel ou ticagrelor)",
+      "Prévention de la pré-éclampsie (à faible dose)"
+    ],
+    "contraindications": [
+      "Ulcère gastroduodénal actif ou antécédent",
+      "Hémorragie active",
+      "Allergie à l'aspirine ou aux AINS",
+      "Insuffisance hépatique sévère",
+      "Insuffisance rénale sévère",
+      "3e trimestre de grossesse (≥24 SA: fermeture du canal artériel)",
+      "Hémophilie ou troubles de la coagulation",
+      "Méthotrexate à dose ≥15 mg/semaine",
+      "Enfant < 16 ans avec syndrome viral (risque de syndrome de Reye)"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants (Warfarine, Héparine, AOD)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Méthotrexate ≥15 mg/sem",
+        "severity": "majeure",
+        "effect": "Toxicité hématologique du MTX (diminution clairance rénale)"
+      },
+      {
+        "drug": "AINS (Ibuprofène, Diclofénac)",
+        "severity": "majeure",
+        "effect": "L'ibuprofène peut annuler l'effet antiagrégant de l'aspirine"
+      },
+      {
+        "drug": "ISRS (Fluoxétine, Paroxétine)",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru (effet antiplaquettaire des ISRS)"
+      },
+      {
+        "drug": "Corticostéroïdes",
+        "severity": "modérée",
+        "effect": "Risque accru d'hémorragie GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre (≥24 SA). Faibles doses (75-160 mg) utilisées pour prévention pré-éclampsie (12-36 SA).",
+      "breastfeeding": "Compatible à faible dose antiagrégante."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 16,
+      "warning": "Contre-indiqué < 16 ans en cas d'infection virale (syndrome de Reye).",
+      "dose_rule": "Non recommandé < 16 ans sauf indication rhumatologique spécifique (maladie de Kawasaki: 80-100 mg/kg/jour)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: éviter. ClCr 30-60: prudence, dose minimale efficace."
+    },
+    "dosage": {
+      "adult": "Antiagrégant: 75-160 mg/jour. SCA: dose de charge 300 mg puis 75-100 mg/jour. Pré-éclampsie: 100-160 mg/jour dès 12 SA.",
+      "children": "Kawasaki: 80-100 mg/kg/jour en phase aiguë, puis 3-5 mg/kg/jour."
+    },
+    "market_data": [
+      {
+        "price": 35.7,
+        "packaging": "en sachet Boîte de 30",
+        "laboratory": "PH: 23.59 dhs - SANOFI AVENTIS MAROC",
+        "url": "https://www.medicament.ma/medicament/kardegic-160-mg-poudre",
+        "price_ppv_dhs": 35.7
+      }
+    ],
+    "drugbank_id": "DB00945",
+    "mechanism": "Inhibition irréversible de la COX-1 plaquettaire → blocage de la synthèse de thromboxane A2 → inhibition de l'agrégation plaquettaire pendant toute la durée de vie de la plaquette (7-10 jours).",
+    "half_life": "15-20 minutes (aspirine), mais effet antiagrégant dure 7-10 jours",
+    "adverse_effects": [
+      "Hémorragies digestives",
+      "Épigastralgies",
+      "Ulcère gastrique",
+      "Acouphènes (surdosage)",
+      "Syndrome de Reye (enfant)",
+      "Bronchospasme (allergie)",
+      "Purpura"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Apixaban",
+          "Eliquis",
+          "Rivaroxaban",
+          "Xarelto",
+          "Héparine",
+          "Enoxaparine",
+          "Lovenox"
+        ],
+        "interacting_classes": [
+          "Anticoagulants (AVK, AOD, héparines)"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en cardiologie mais sous surveillance. Durée de bithérapie la plus courte possible."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Toxicité hématologique sévère du MTX si dose ≥15 mg/sem",
+        "recommendation": "CONTRE-INDIQUÉ si MTX ≥15 mg/sem. Prudence si <15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Advil",
+          "Nurofen"
+        ],
+        "interacting_classes": [
+          "AINS (ibuprofène spécifiquement)"
+        ],
+        "severity": "DANGER",
+        "effect": "L'ibuprofène bloque l'accès de l'aspirine à la COX-1 → annulation de l'effet antiagrégant",
+        "recommendation": "Prendre aspirine 30 min AVANT l'ibuprofène. Préférer paracétamol comme antalgique."
+      },
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix",
+          "Ticagrelor",
+          "Brilique"
+        ],
+        "interacting_classes": [
+          "Antiagrégants plaquettaires"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (bithérapie voulue post-SCA/stent)",
+        "recommendation": "Association standard post-SCA. IPP recommandé en protection. Durée selon indication (6-12 mois)."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Sertraline",
+          "Paroxétine",
+          "Citalopram"
+        ],
+        "interacting_classes": [
+          "ISRS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Surveiller signes de saignement. IPP si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Prednisolone",
+          "Méthylprednisolone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque accru d'hémorragie GI",
+        "recommendation": "Protection gastrique par IPP."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "ALLERGIE_AINS",
+      "SYNDROME_REYE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Acétylsalicylate de lysine (Aspirine)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kardegic_acetylsalicylate_de_lysine_aspirine_160_mg"
+  },
+  {
+    "id": "kardegic_300_mg_poudre_en_sachet_boîte_de_30",
+    "brand_name": "KARDEGIC",
+    "generic_name": "Acétylsalicylate de lysine (Aspirine)",
+    "strength": "300 MG",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "B01AC06",
+    "therapeutic_group": "Antiagrégant plaquettaire",
+    "drug_class": "Inhibiteur irréversible de la cyclo-oxygénase plaquettaire (COX-1)",
+    "indications": [
+      "Prévention secondaire des événements cardiovasculaires (IDM, AVC, AOMI)",
+      "Syndrome coronarien aigu",
+      "Post-angioplastie et pose de stent (en association avec clopidogrel ou ticagrelor)",
+      "Prévention de la pré-éclampsie (à faible dose)"
+    ],
+    "contraindications": [
+      "Ulcère gastroduodénal actif ou antécédent",
+      "Hémorragie active",
+      "Allergie à l'aspirine ou aux AINS",
+      "Insuffisance hépatique sévère",
+      "Insuffisance rénale sévère",
+      "3e trimestre de grossesse (≥24 SA: fermeture du canal artériel)",
+      "Hémophilie ou troubles de la coagulation",
+      "Méthotrexate à dose ≥15 mg/semaine",
+      "Enfant < 16 ans avec syndrome viral (risque de syndrome de Reye)"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants (Warfarine, Héparine, AOD)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Méthotrexate ≥15 mg/sem",
+        "severity": "majeure",
+        "effect": "Toxicité hématologique du MTX (diminution clairance rénale)"
+      },
+      {
+        "drug": "AINS (Ibuprofène, Diclofénac)",
+        "severity": "majeure",
+        "effect": "L'ibuprofène peut annuler l'effet antiagrégant de l'aspirine"
+      },
+      {
+        "drug": "ISRS (Fluoxétine, Paroxétine)",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru (effet antiplaquettaire des ISRS)"
+      },
+      {
+        "drug": "Corticostéroïdes",
+        "severity": "modérée",
+        "effect": "Risque accru d'hémorragie GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre (≥24 SA). Faibles doses (75-160 mg) utilisées pour prévention pré-éclampsie (12-36 SA).",
+      "breastfeeding": "Compatible à faible dose antiagrégante."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 16,
+      "warning": "Contre-indiqué < 16 ans en cas d'infection virale (syndrome de Reye).",
+      "dose_rule": "Non recommandé < 16 ans sauf indication rhumatologique spécifique (maladie de Kawasaki: 80-100 mg/kg/jour)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: éviter. ClCr 30-60: prudence, dose minimale efficace."
+    },
+    "dosage": {
+      "adult": "Antiagrégant: 75-160 mg/jour. SCA: dose de charge 300 mg puis 75-100 mg/jour. Pré-éclampsie: 100-160 mg/jour dès 12 SA.",
+      "children": "Kawasaki: 80-100 mg/kg/jour en phase aiguë, puis 3-5 mg/kg/jour."
+    },
+    "market_data": [
+      {
+        "price": 30.7,
+        "packaging": "en sachet Boîte de 30",
+        "laboratory": "PH: 20.28 dhs - SANOFI AVENTIS MAROC",
+        "url": "https://www.medicament.ma/medicament/kardegic-300-mg-poudre",
+        "price_ppv_dhs": 30.7
+      }
+    ],
+    "drugbank_id": "DB00945",
+    "mechanism": "Inhibition irréversible de la COX-1 plaquettaire → blocage de la synthèse de thromboxane A2 → inhibition de l'agrégation plaquettaire pendant toute la durée de vie de la plaquette (7-10 jours).",
+    "half_life": "15-20 minutes (aspirine), mais effet antiagrégant dure 7-10 jours",
+    "adverse_effects": [
+      "Hémorragies digestives",
+      "Épigastralgies",
+      "Ulcère gastrique",
+      "Acouphènes (surdosage)",
+      "Syndrome de Reye (enfant)",
+      "Bronchospasme (allergie)",
+      "Purpura"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Apixaban",
+          "Eliquis",
+          "Rivaroxaban",
+          "Xarelto",
+          "Héparine",
+          "Enoxaparine",
+          "Lovenox"
+        ],
+        "interacting_classes": [
+          "Anticoagulants (AVK, AOD, héparines)"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en cardiologie mais sous surveillance. Durée de bithérapie la plus courte possible."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Toxicité hématologique sévère du MTX si dose ≥15 mg/sem",
+        "recommendation": "CONTRE-INDIQUÉ si MTX ≥15 mg/sem. Prudence si <15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Advil",
+          "Nurofen"
+        ],
+        "interacting_classes": [
+          "AINS (ibuprofène spécifiquement)"
+        ],
+        "severity": "DANGER",
+        "effect": "L'ibuprofène bloque l'accès de l'aspirine à la COX-1 → annulation de l'effet antiagrégant",
+        "recommendation": "Prendre aspirine 30 min AVANT l'ibuprofène. Préférer paracétamol comme antalgique."
+      },
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix",
+          "Ticagrelor",
+          "Brilique"
+        ],
+        "interacting_classes": [
+          "Antiagrégants plaquettaires"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (bithérapie voulue post-SCA/stent)",
+        "recommendation": "Association standard post-SCA. IPP recommandé en protection. Durée selon indication (6-12 mois)."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Sertraline",
+          "Paroxétine",
+          "Citalopram"
+        ],
+        "interacting_classes": [
+          "ISRS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Surveiller signes de saignement. IPP si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Prednisolone",
+          "Méthylprednisolone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque accru d'hémorragie GI",
+        "recommendation": "Protection gastrique par IPP."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "ALLERGIE_AINS",
+      "SYNDROME_REYE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Acétylsalicylate de lysine (Aspirine)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kardegic_acetylsalicylate_de_lysine_aspirine_300_mg"
+  },
+  {
+    "id": "kardegic_75_mg_poudre_en_sachet_boîte_de_30",
+    "brand_name": "KARDEGIC",
+    "generic_name": "Acétylsalicylate de lysine (Aspirine)",
+    "strength": "75 MG",
+    "form": "Poudre",
+    "route": "Orale",
+    "atc_code": "B01AC06",
+    "therapeutic_group": "Antiagrégant plaquettaire",
+    "drug_class": "Inhibiteur irréversible de la cyclo-oxygénase plaquettaire (COX-1)",
+    "indications": [
+      "Prévention secondaire des événements cardiovasculaires (IDM, AVC, AOMI)",
+      "Syndrome coronarien aigu",
+      "Post-angioplastie et pose de stent (en association avec clopidogrel ou ticagrelor)",
+      "Prévention de la pré-éclampsie (à faible dose)"
+    ],
+    "contraindications": [
+      "Ulcère gastroduodénal actif ou antécédent",
+      "Hémorragie active",
+      "Allergie à l'aspirine ou aux AINS",
+      "Insuffisance hépatique sévère",
+      "Insuffisance rénale sévère",
+      "3e trimestre de grossesse (≥24 SA: fermeture du canal artériel)",
+      "Hémophilie ou troubles de la coagulation",
+      "Méthotrexate à dose ≥15 mg/semaine",
+      "Enfant < 16 ans avec syndrome viral (risque de syndrome de Reye)"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants (Warfarine, Héparine, AOD)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique majeur"
+      },
+      {
+        "drug": "Méthotrexate ≥15 mg/sem",
+        "severity": "majeure",
+        "effect": "Toxicité hématologique du MTX (diminution clairance rénale)"
+      },
+      {
+        "drug": "AINS (Ibuprofène, Diclofénac)",
+        "severity": "majeure",
+        "effect": "L'ibuprofène peut annuler l'effet antiagrégant de l'aspirine"
+      },
+      {
+        "drug": "ISRS (Fluoxétine, Paroxétine)",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru (effet antiplaquettaire des ISRS)"
+      },
+      {
+        "drug": "Corticostéroïdes",
+        "severity": "modérée",
+        "effect": "Risque accru d'hémorragie GI"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre (≥24 SA). Faibles doses (75-160 mg) utilisées pour prévention pré-éclampsie (12-36 SA).",
+      "breastfeeding": "Compatible à faible dose antiagrégante."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 16,
+      "warning": "Contre-indiqué < 16 ans en cas d'infection virale (syndrome de Reye).",
+      "dose_rule": "Non recommandé < 16 ans sauf indication rhumatologique spécifique (maladie de Kawasaki: 80-100 mg/kg/jour)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: éviter. ClCr 30-60: prudence, dose minimale efficace."
+    },
+    "dosage": {
+      "adult": "Antiagrégant: 75-160 mg/jour. SCA: dose de charge 300 mg puis 75-100 mg/jour. Pré-éclampsie: 100-160 mg/jour dès 12 SA.",
+      "children": "Kawasaki: 80-100 mg/kg/jour en phase aiguë, puis 3-5 mg/kg/jour."
+    },
+    "market_data": [
+      {
+        "price": 30.7,
+        "packaging": "en sachet Boîte de 30",
+        "laboratory": "PH: 20.28 dhs - SANOFI AVENTIS MAROC",
+        "url": "https://www.medicament.ma/medicament/kardegic-75-mg-poudre",
+        "price_ppv_dhs": 30.7
+      }
+    ],
+    "drugbank_id": "DB00945",
+    "mechanism": "Inhibition irréversible de la COX-1 plaquettaire → blocage de la synthèse de thromboxane A2 → inhibition de l'agrégation plaquettaire pendant toute la durée de vie de la plaquette (7-10 jours).",
+    "half_life": "15-20 minutes (aspirine), mais effet antiagrégant dure 7-10 jours",
+    "adverse_effects": [
+      "Hémorragies digestives",
+      "Épigastralgies",
+      "Ulcère gastrique",
+      "Acouphènes (surdosage)",
+      "Syndrome de Reye (enfant)",
+      "Bronchospasme (allergie)",
+      "Purpura"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Apixaban",
+          "Eliquis",
+          "Rivaroxaban",
+          "Xarelto",
+          "Héparine",
+          "Enoxaparine",
+          "Lovenox"
+        ],
+        "interacting_classes": [
+          "Anticoagulants (AVK, AOD, héparines)"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Association fréquente en cardiologie mais sous surveillance. Durée de bithérapie la plus courte possible."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Toxicité hématologique sévère du MTX si dose ≥15 mg/sem",
+        "recommendation": "CONTRE-INDIQUÉ si MTX ≥15 mg/sem. Prudence si <15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Advil",
+          "Nurofen"
+        ],
+        "interacting_classes": [
+          "AINS (ibuprofène spécifiquement)"
+        ],
+        "severity": "DANGER",
+        "effect": "L'ibuprofène bloque l'accès de l'aspirine à la COX-1 → annulation de l'effet antiagrégant",
+        "recommendation": "Prendre aspirine 30 min AVANT l'ibuprofène. Préférer paracétamol comme antalgique."
+      },
+      {
+        "interacting_drugs": [
+          "Clopidogrel",
+          "Plavix",
+          "Ticagrelor",
+          "Brilique"
+        ],
+        "interacting_classes": [
+          "Antiagrégants plaquettaires"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (bithérapie voulue post-SCA/stent)",
+        "recommendation": "Association standard post-SCA. IPP recommandé en protection. Durée selon indication (6-12 mois)."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Sertraline",
+          "Paroxétine",
+          "Citalopram"
+        ],
+        "interacting_classes": [
+          "ISRS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Surveiller signes de saignement. IPP si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Prednisolone",
+          "Méthylprednisolone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque accru d'hémorragie GI",
+        "recommendation": "Protection gastrique par IPP."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "ALLERGIE_AINS",
+      "SYNDROME_REYE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Acétylsalicylate de lysine (Aspirine)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kardegic_acetylsalicylate_de_lysine_aspirine_75_mg"
+  },
+  {
+    "id": "kayexalate_454_g_poudre_pour_suspension_orale_et_rectale_flacon_de_454_g",
+    "brand_name": "KAYEXALATE",
+    "generic_name": "Polystyrène sulfonate de sodium",
+    "strength": "454 G",
+    "form": "Poudre",
+    "route": "Orale / Rectale",
+    "atc_code": "V03AE01",
+    "therapeutic_group": "Chélateurs du potassium",
+    "drug_class": "Résine échangeuse d'ions (échange Na+ contre K+)",
+    "indications": [
+      "Hyperkaliémie"
+    ],
+    "contraindications": [
+      "Hypokaliémie",
+      "Obstruction intestinale",
+      "Nouveau-né (risque de nécrose intestinale)",
+      "Hypernatrémie"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiacides contenant aluminium/magnésium",
+        "severity": "majeure",
+        "effect": "Risque d'obstruction intestinale (alcalose métabolique)"
+      },
+      {
+        "drug": "Sorbitol",
+        "severity": "majeure",
+        "effect": "Risque de nécrose colique (surtout en lavement)"
+      },
+      {
+        "drug": "Lévothyroxine, Lithium",
+        "severity": "modérée",
+        "effect": "Diminution de l'absorption"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Risque de surcharge sodée.",
+      "breastfeeding": "Compatible (non absorbé)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie mais CI chez le nouveau-né. Surveillance étroite.",
+      "dose_rule": "1 g/kg/jour en doses fractionnées. Surveillance kaliémie et natrémie."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement (non absorbé). Utilisé spécifiquement chez l'IRC."
+    },
+    "dosage": {
+      "adult": "Oral: 15-60 g/jour en 1-4 prises (dans eau sucrée ou sorbitol). Lavement: 30-50 g dans 150 mL de solution.",
+      "children": "1 g/kg/jour."
+    },
+    "market_data": [
+      {
+        "price": 300,
+        "packaging": "pour suspension orale et rectale Flacon de 454 g",
+        "laboratory": "MAPHAR",
+        "url": "https://www.medicament.ma/medicament/kayexalate-454-g-poudre",
+        "price_ppv_dhs": 300.0
+      }
+    ],
+    "drugbank_id": "DB09536",
+    "mechanism": "Résine échangeuse de cations: échange le sodium contre le potassium dans la lumière intestinale, augmentant l'excrétion fécale de potassium.",
+    "half_life": "N/A (non absorbé)",
+    "adverse_effects": [
+      "Hypokaliémie (surdosage)",
+      "Hypernatrémie",
+      "Constipation",
+      "Nausées",
+      "Nécrose intestinale (rare, surtout avec sorbitol en lavement)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Maalox",
+          "Gaviscon",
+          "Hydroxyde d'aluminium"
+        ],
+        "interacting_classes": [
+          "Antiacides contenant Al/Mg"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque d'alcalose métabolique et d'obstruction intestinale",
+        "recommendation": "NE PAS associer."
+      },
+      {
+        "interacting_drugs": [
+          "Sorbitol"
+        ],
+        "interacting_classes": [
+          "Laxatifs osmotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque de nécrose colique",
+        "recommendation": "Éviter l'association, surtout en lavement."
+      },
+      {
+        "interacting_drugs": [
+          "Lévothyroxine",
+          "Lithium",
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Médicaments à marge thérapeutique étroite"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'absorption",
+        "recommendation": "Espacer les prises d'au moins 3 heures."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Polystyrène sulfonate de sodium",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kayexalate_polystyrene_sulfonate_de_sodium_454_g"
+  },
+  {
+    "id": "keflin_1_g_poudre_pour_usage_parenteral_boîte_de_1_flacon",
+    "brand_name": "KEFLIN",
+    "generic_name": "Céfalotine",
+    "strength": "1 G",
+    "form": "Poudre",
+    "route": "IV / IM",
+    "atc_code": "J01DB03",
+    "therapeutic_group": "Antibactériens - Céphalosporines",
+    "drug_class": "Céphalosporine de 1ère génération (injectable)",
+    "indications": [
+      "Prophylaxie chirurgicale antibiotique",
+      "Infections à staphylocoques et streptocoques sensibles",
+      "Infections urinaires",
+      "Infections respiratoires",
+      "Endocardite (en association)"
+    ],
+    "contraindications": [
+      "Allergie aux céphalosporines",
+      "Antécédent d'allergie sévère aux pénicillines (réaction croisée possible ~5-10%)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aminosides (Gentamicine, Amikacine)",
+        "severity": "modérée",
+        "effect": "Néphrotoxicité additive (mais synergie antibactérienne)"
+      },
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "modérée",
+        "effect": "Possible augmentation de l'INR"
+      },
+      {
+        "drug": "Probénécide",
+        "severity": "mineure",
+        "effect": "Augmentation des taux de céfalotine (diminution sécrétion tubulaire)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé pendant la grossesse.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé dès la naissance.",
+      "dose_rule": "75-125 mg/kg/jour en 4-6 injections IV/IM."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-50: réduire dose ou espacer. ClCr <20: dose réduite."
+    },
+    "dosage": {
+      "adult": "Prophylaxie: 1-2 g IV à l'induction. Curatif: 2-12 g/jour en 4-6 injections.",
+      "children": "75-125 mg/kg/jour."
+    },
+    "market_data": [
+      {
+        "price": 28,
+        "packaging": "pour usage parenteral Boîte de 1 flacon",
+        "laboratory": "PH: 19.82 dhs - SOTHEMA",
+        "url": "https://www.medicament.ma/medicament/keflin-1-g-poudre",
+        "price_ppv_dhs": 28.0
+      }
+    ],
+    "drugbank_id": "DB00456",
+    "mechanism": "Inhibition de la synthèse de la paroi bactérienne par liaison aux PBP (protéines de liaison à la pénicilline).",
+    "half_life": "0.5-1 heure",
+    "adverse_effects": [
+      "Douleur au point d'injection",
+      "Réactions allergiques",
+      "Diarrhée",
+      "Néphrotoxicité (doses élevées)",
+      "Éosinophilie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gentamicine",
+          "Amikacine",
+          "Tobramycine"
+        ],
+        "interacting_classes": [
+          "Aminosides"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Néphrotoxicité additive",
+        "recommendation": "Surveiller créatinine. Ne pas mélanger dans la même seringue."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Possible augmentation INR",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL",
+      "ALLERGIE_PENICILLINES"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Céfalotine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "keflin_cefalotine_1_g"
+  },
+  {
+    "id": "kefzol_1_g_poudre_pour_usage_parenteral_boîte_de_1",
+    "brand_name": "KEFZOL",
+    "generic_name": "Céfazoline",
+    "strength": "1 G",
+    "form": "Poudre",
+    "route": "IV / IM",
+    "atc_code": "J01DB04",
+    "therapeutic_group": "Antibactériens - Céphalosporines",
+    "drug_class": "Céphalosporine de 1ère génération (injectable)",
+    "indications": [
+      "Prophylaxie chirurgicale antibiotique (référence en chirurgie propre)",
+      "Infections cutanées et des tissus mous",
+      "Infections urinaires",
+      "Endocardite (staphylocoque sensible)",
+      "Infections ostéo-articulaires"
+    ],
+    "contraindications": [
+      "Allergie aux céphalosporines",
+      "Antécédent d'allergie sévère aux pénicillines"
+    ],
+    "interactions": [
+      {
+        "drug": "Aminosides",
+        "severity": "modérée",
+        "effect": "Néphrotoxicité additive"
+      },
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "modérée",
+        "effect": "Possible augmentation INR"
+      },
+      {
+        "drug": "Probénécide",
+        "severity": "mineure",
+        "effect": "Augmentation des taux de céfazoline"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé. Souvent utilisé en prophylaxie de la césarienne.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé dès la naissance.",
+      "dose_rule": "25-100 mg/kg/jour en 3-4 injections."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 35-54: dose normale toutes les 8h. ClCr 11-34: 50% dose toutes les 12h. ClCr <10: 50% dose toutes les 18-24h."
+    },
+    "dosage": {
+      "adult": "Prophylaxie chirurgicale: 2 g IV 30-60 min avant incision (redose si >4h). Curatif: 2-6 g/jour en 3 injections.",
+      "children": "25-100 mg/kg/jour en 3-4 injections."
+    },
+    "market_data": [
+      {
+        "price": 28,
+        "packaging": "pour usage parenteral Boîte de 1",
+        "laboratory": "SOTHEMA",
+        "url": "https://www.medicament.ma/medicament/kefzol-1-g-poudre",
+        "price_ppv_dhs": 28.0
+      }
+    ],
+    "drugbank_id": "DB01327",
+    "mechanism": "Inhibition de la synthèse de la paroi bactérienne par liaison aux PBP.",
+    "half_life": "1.8 heures",
+    "adverse_effects": [
+      "Douleur au point d'injection",
+      "Réactions allergiques",
+      "Diarrhée",
+      "Élévation transitoire des transaminases"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gentamicine",
+          "Amikacine"
+        ],
+        "interacting_classes": [
+          "Aminosides"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Néphrotoxicité additive",
+        "recommendation": "Surveiller créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Possible augmentation INR",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "smart_flags": [
+      "AJUSTEMENT_RENAL",
+      "ALLERGIE_PENICILLINES"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Céfazoline",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kefzol_cefazoline_1_g"
+  },
+  {
+    "id": "keppra_1000_mg",
+    "brand_name": "KEPPRA",
+    "generic_name": "Lévétiracétam 1000 mg",
+    "strength": "1000 MG",
+    "form": "comprimé pelliculé",
+    "route": "Oral",
+    "atc_code": "N03AX14",
+    "tableau_maroc": "A",
+    "therapeutic_group": "Neurologie / Antiépileptique",
+    "drug_class": "Antiépileptique — modulateur SV2A (protéine vésicule synaptique 2A)",
+    "mechanism": "Liaison sélective à la protéine de vésicule synaptique SV2A → modulation de la libération de neurotransmetteurs (glutamate, GABA) sans blocage direct des canaux ioniques. Mécanisme unique parmi les antiépileptiques.",
+    "indications": [
+      "Épilepsie partielle avec ou sans généralisation secondaire (monothérapie ≥ 16 ans, association ≥ 1 mois)",
+      "Crises myocloniques (épilepsie myoclonique juvénile, ≥ 12 ans)",
+      "Crises tonico-cloniques généralisées (épilepsie idiopathique généralisée, ≥ 12 ans)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au lévétiracétam ou aux dérivés pyrrolidone",
+      "Insuffisance rénale sévère sans ajustement (nécessite adaptation posologique)"
+    ],
+    "dosage": {
+      "adult": "500 mg 2x/j en initiation → augmentation par paliers de 500 mg/2 semaines → dose optimale 1000-3000 mg/j en 2 prises",
+      "elderly": "Pas d'ajustement si fonction rénale normale — adapter selon DFG",
+      "renal": "DFG 50-80 : max 2000 mg/j. DFG 30-50 : max 1500 mg/j. DFG < 30 : max 1000 mg/j",
+      "hepatic": "Pas d'ajustement en insuffisance hépatique légère/modérée"
+    },
+    "adverse_effects": [
+      "Somnolence, asthénie (très fréquent)",
+      "Céphalées, vertiges",
+      "Irritabilité, agressivité, agitation, dépression (psychiatriques — surveillance)",
+      "Idées suicidaires (rare — comme tous les antiépileptiques)",
+      "Anorexie, nausées",
+      "Thrombocytopénie (rare)",
+      "Rash cutané (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Phénytoïne / Carbamazépine / Phénobarbital (inducteurs enzymatiques)",
+        "severity": "Modéré",
+        "effect": "Ces antiépileptiques inducteurs CYP n'affectent pas la pharmacocinétique du lévétiracétam (non métabolisé par CYP) mais peuvent en être affectés. Surveiller les taux plasmatiques lors d'associations."
+      },
+      {
+        "drug": "Probénécide",
+        "severity": "Modéré",
+        "effect": "Inhibition de la sécrétion tubulaire du métabolite inactif ucb L057 → accumulation théorique sans impact clinique démontré."
+      },
+      {
+        "drug": "Alcool / Dépresseurs SNC (benzodiazépines, morphiniques)",
+        "severity": "Modéré",
+        "effect": "Potentialisation de la sédation et des vertiges — déconseillé, surtout en début de traitement."
+      },
+      {
+        "drug": "Médicaments abaissant le seuil épileptogène (tramadol, fluoroquinolones, clozapine)",
+        "severity": "Modéré",
+        "effect": "Risque de réduction de l'efficacité antiépileptique ou de levée d'inhibition — surveiller."
+      }
+    ],
+    "interactions": [
+      "Aucune interaction pharmacocinétique majeure connue"
+    ],
+    "half_life": "6-8h (adulte). 5-6h (enfant). Pas de métabolisme CYP hépatique significatif — éliminé à 66% sous forme inchangée par voie rénale.",
+    "pregnancy": {
+      "category": "C",
+      "notes": "Données insuffisantes chez la femme enceinte. Registres épilepsie-grossesse : pas de signal tératogène majeur isolé, mais données limitées. Utiliser si bénéfice > risque. Supplémentation acide folique recommandée. Surveiller nouveau-né (syndrome de sevrage possible). Ne pas arrêter brutalement (risque de crises rebond).",
+      "breastfeeding": "Passe dans le lait maternel. Utiliser avec précaution — surveiller sédation du nourrisson."
+    },
+    "children": {
+      "safe": true,
+      "min_age": "1 mois",
+      "dose_adjustment": "1 mois-6 mois : 7 mg/kg 2x/j → max 21 mg/kg 2x/j. 6 mois-18 ans : 10 mg/kg 2x/j → max 30 mg/kg 2x/j",
+      "notes": "AMM pédiatrique dès 1 mois pour crises partielles. Solution buvable 100mg/ml disponible pour nourrissons."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "notes": "DFG 50-80 : max 1000 mg 2x/j. DFG 30-50 : max 750 mg 2x/j. DFG <30 : max 500 mg 2x/j. Hémodialyse : dose supplémentaire 50% post-dialyse. Ajustement OBLIGATOIRE."
+    },
+    "market_data": [
+      {
+        "price": 350.0,
+        "price_ppv_dhs": 350.0,
+        "packaging": "comprimé pelliculé Boîte de 30",
+        "laboratory": "UCB PHARMA MAROC",
+        "url": "https://medicament.ma/medicament/keppra-1000-mg-comprime/"
+      }
+    ],
+    "smart_flags": [
+      "⚡ Arrêt progressif obligatoire — ne jamais stopper brutalement (risque status epilepticus)",
+      "🧠 AMM pédiatrique dès 1 mois",
+      "🫘 Ajustement rénal OBLIGATOIRE (DFG < 80 ml/min)",
+      "💊 Tableau A — ordonnance obligatoire"
+    ],
+    "composition": [
+      {
+        "name": "Lévétiracétam 1000 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "keppra_levetiracetam_1000_mg_1000_mg"
+  },
+  {
+    "id": "keppra_100_mg_/_ml_solution_buvable",
+    "brand_name": "KEPPRA",
+    "generic_name": "Lévétiracétam 100 mg/ml",
+    "strength": "100 MG/ML",
+    "form": "Solution buvable",
+    "route": "Oral",
+    "atc_code": "N03AX14",
+    "tableau_maroc": "A",
+    "therapeutic_group": "Neurologie / Antiépileptique",
+    "drug_class": "Antiépileptique — modulateur SV2A",
+    "mechanism": "Liaison sélective à la protéine SV2A → modulation libération neurotransmetteurs. Forme liquide pour nourrissons et patients ne pouvant avaler les comprimés.",
+    "indications": [
+      "Épilepsie partielle chez l'enfant dès 1 mois et adulte (association ou monothérapie)",
+      "Crises myocloniques et tonico-cloniques ≥ 12 ans"
+    ],
+    "contraindications": [
+      "Hypersensibilité au lévétiracétam",
+      "Intolérance au maltitol (excipient)"
+    ],
+    "dosage": {
+      "infant_1_6months": "7 mg/kg 2x/j → max 21 mg/kg 2x/j",
+      "child_6months_18years": "10 mg/kg 2x/j → max 30 mg/kg 2x/j",
+      "adult": "500 mg 2x/j → max 1500 mg 2x/j (en ml selon concentration)"
+    },
+    "adverse_effects": [
+      "Somnolence",
+      "Irritabilité",
+      "Agitation (nourrisson)",
+      "Céphalées",
+      "Anorexie"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Phénytoïne / Carbamazépine / Phénobarbital (inducteurs enzymatiques)",
+        "severity": "Modéré",
+        "effect": "Ces antiépileptiques inducteurs CYP n'affectent pas la pharmacocinétique du lévétiracétam (non métabolisé par CYP) mais peuvent en être affectés. Surveiller les taux plasmatiques lors d'associations."
+      },
+      {
+        "drug": "Probénécide",
+        "severity": "Modéré",
+        "effect": "Inhibition de la sécrétion tubulaire du métabolite inactif ucb L057 → accumulation théorique sans impact clinique démontré."
+      },
+      {
+        "drug": "Alcool / Dépresseurs SNC (benzodiazépines, morphiniques)",
+        "severity": "Modéré",
+        "effect": "Potentialisation de la sédation et des vertiges — déconseillé, surtout en début de traitement."
+      },
+      {
+        "drug": "Médicaments abaissant le seuil épileptogène (tramadol, fluoroquinolones, clozapine)",
+        "severity": "Modéré",
+        "effect": "Risque de réduction de l'efficacité antiépileptique ou de levée d'inhibition — surveiller."
+      }
+    ],
+    "interactions": [
+      "Aucune interaction pharmacocinétique majeure connue"
+    ],
+    "half_life": "5-6h (enfant) / 6-8h (adulte)",
+    "pregnancy": {
+      "category": "C",
+      "notes": "Données insuffisantes chez la femme enceinte. Registres épilepsie-grossesse : pas de signal tératogène majeur isolé, mais données limitées. Utiliser si bénéfice > risque. Supplémentation acide folique recommandée. Surveiller nouveau-né (syndrome de sevrage possible). Ne pas arrêter brutalement (risque de crises rebond).",
+      "breastfeeding": "Passe dans le lait maternel. Utiliser avec précaution — surveiller sédation du nourrisson."
+    },
+    "children": {
+      "safe": true,
+      "min_age": "1 mois",
+      "dose_adjustment": "1 mois-6 mois : 7 mg/kg 2x/j → max 21 mg/kg 2x/j. 6 mois-18 ans : 10 mg/kg 2x/j → max 30 mg/kg 2x/j",
+      "notes": "AMM pédiatrique dès 1 mois pour crises partielles. Solution buvable 100mg/ml disponible pour nourrissons."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "notes": "DFG 50-80 : max 1000 mg 2x/j. DFG 30-50 : max 750 mg 2x/j. DFG <30 : max 500 mg 2x/j. Hémodialyse : dose supplémentaire 50% post-dialyse. Ajustement OBLIGATOIRE."
+    },
+    "market_data": [
+      {
+        "price": 125.0,
+        "price_ppv_dhs": 125.0,
+        "packaging": "Solution buvable Flacon de 150 ml + seringue doseuse",
+        "laboratory": "UCB PHARMA MAROC",
+        "url": "https://medicament.ma/medicament/keppra-100-mg-ml-solution-buvable/"
+      }
+    ],
+    "smart_flags": [
+      "⚡ Arrêt progressif obligatoire — ne jamais stopper brutalement (risque status epilepticus)",
+      "🧠 AMM pédiatrique dès 1 mois",
+      "🫘 Ajustement rénal OBLIGATOIRE (DFG < 80 ml/min)",
+      "💊 Tableau A — ordonnance obligatoire"
+    ],
+    "composition": [
+      {
+        "name": "Lévétiracétam 100 mg/ml",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "keppra_levetiracetam_100_mg_ml_100_mg_ml"
+  },
+  {
+    "id": "keppra_250_mg",
+    "brand_name": "KEPPRA",
+    "generic_name": "Lévétiracétam 250 mg",
+    "strength": "250 MG",
+    "form": "comprimé pelliculé",
+    "route": "Oral",
+    "atc_code": "N03AX14",
+    "tableau_maroc": "A",
+    "therapeutic_group": "Neurologie / Antiépileptique",
+    "drug_class": "Antiépileptique — modulateur SV2A (protéine vésicule synaptique 2A)",
+    "mechanism": "Liaison sélective à la protéine de vésicule synaptique SV2A → modulation de la libération de neurotransmetteurs (glutamate, GABA) sans blocage direct des canaux ioniques. Mécanisme unique parmi les antiépileptiques.",
+    "indications": [
+      "Épilepsie partielle avec ou sans généralisation secondaire (monothérapie ≥ 16 ans, association ≥ 1 mois)",
+      "Crises myocloniques (épilepsie myoclonique juvénile, ≥ 12 ans)",
+      "Crises tonico-cloniques généralisées (épilepsie idiopathique généralisée, ≥ 12 ans)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au lévétiracétam ou aux dérivés pyrrolidone",
+      "Insuffisance rénale sévère sans ajustement (nécessite adaptation posologique)"
+    ],
+    "dosage": {
+      "adult": "500 mg 2x/j en initiation → augmentation par paliers de 500 mg/2 semaines → dose optimale 1000-3000 mg/j en 2 prises",
+      "elderly": "Pas d'ajustement si fonction rénale normale — adapter selon DFG",
+      "renal": "DFG 50-80 : max 2000 mg/j. DFG 30-50 : max 1500 mg/j. DFG < 30 : max 1000 mg/j",
+      "hepatic": "Pas d'ajustement en insuffisance hépatique légère/modérée"
+    },
+    "adverse_effects": [
+      "Somnolence, asthénie (très fréquent)",
+      "Céphalées, vertiges",
+      "Irritabilité, agressivité, agitation, dépression (psychiatriques — surveillance)",
+      "Idées suicidaires (rare — comme tous les antiépileptiques)",
+      "Anorexie, nausées",
+      "Thrombocytopénie (rare)",
+      "Rash cutané (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Phénytoïne / Carbamazépine / Phénobarbital (inducteurs enzymatiques)",
+        "severity": "Modéré",
+        "effect": "Ces antiépileptiques inducteurs CYP n'affectent pas la pharmacocinétique du lévétiracétam (non métabolisé par CYP) mais peuvent en être affectés. Surveiller les taux plasmatiques lors d'associations."
+      },
+      {
+        "drug": "Probénécide",
+        "severity": "Modéré",
+        "effect": "Inhibition de la sécrétion tubulaire du métabolite inactif ucb L057 → accumulation théorique sans impact clinique démontré."
+      },
+      {
+        "drug": "Alcool / Dépresseurs SNC (benzodiazépines, morphiniques)",
+        "severity": "Modéré",
+        "effect": "Potentialisation de la sédation et des vertiges — déconseillé, surtout en début de traitement."
+      },
+      {
+        "drug": "Médicaments abaissant le seuil épileptogène (tramadol, fluoroquinolones, clozapine)",
+        "severity": "Modéré",
+        "effect": "Risque de réduction de l'efficacité antiépileptique ou de levée d'inhibition — surveiller."
+      }
+    ],
+    "interactions": [
+      "Aucune interaction pharmacocinétique majeure connue"
+    ],
+    "half_life": "6-8h (adulte). 5-6h (enfant). Pas de métabolisme CYP hépatique significatif — éliminé à 66% sous forme inchangée par voie rénale.",
+    "pregnancy": {
+      "category": "C",
+      "notes": "Données insuffisantes chez la femme enceinte. Registres épilepsie-grossesse : pas de signal tératogène majeur isolé, mais données limitées. Utiliser si bénéfice > risque. Supplémentation acide folique recommandée. Surveiller nouveau-né (syndrome de sevrage possible). Ne pas arrêter brutalement (risque de crises rebond).",
+      "breastfeeding": "Passe dans le lait maternel. Utiliser avec précaution — surveiller sédation du nourrisson."
+    },
+    "children": {
+      "safe": true,
+      "min_age": "1 mois",
+      "dose_adjustment": "1 mois-6 mois : 7 mg/kg 2x/j → max 21 mg/kg 2x/j. 6 mois-18 ans : 10 mg/kg 2x/j → max 30 mg/kg 2x/j",
+      "notes": "AMM pédiatrique dès 1 mois pour crises partielles. Solution buvable 100mg/ml disponible pour nourrissons."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "notes": "DFG 50-80 : max 1000 mg 2x/j. DFG 30-50 : max 750 mg 2x/j. DFG <30 : max 500 mg 2x/j. Hémodialyse : dose supplémentaire 50% post-dialyse. Ajustement OBLIGATOIRE."
+    },
+    "market_data": [
+      {
+        "price": 98.5,
+        "price_ppv_dhs": 98.5,
+        "packaging": "comprimé pelliculé Boîte de 30",
+        "laboratory": "UCB PHARMA MAROC",
+        "url": "https://medicament.ma/medicament/keppra-250-mg-comprime/"
+      }
+    ],
+    "smart_flags": [
+      "⚡ Arrêt progressif obligatoire — ne jamais stopper brutalement (risque status epilepticus)",
+      "🧠 AMM pédiatrique dès 1 mois",
+      "🫘 Ajustement rénal OBLIGATOIRE (DFG < 80 ml/min)",
+      "💊 Tableau A — ordonnance obligatoire"
+    ],
+    "composition": [
+      {
+        "name": "Lévétiracétam 250 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "keppra_levetiracetam_250_mg_250_mg"
+  },
+  {
+    "id": "keppra_500_mg",
+    "brand_name": "KEPPRA",
+    "generic_name": "Lévétiracétam 500 mg",
+    "strength": "500 MG",
+    "form": "comprimé pelliculé",
+    "route": "Oral",
+    "atc_code": "N03AX14",
+    "tableau_maroc": "A",
+    "therapeutic_group": "Neurologie / Antiépileptique",
+    "drug_class": "Antiépileptique — modulateur SV2A (protéine vésicule synaptique 2A)",
+    "mechanism": "Liaison sélective à la protéine de vésicule synaptique SV2A → modulation de la libération de neurotransmetteurs (glutamate, GABA) sans blocage direct des canaux ioniques. Mécanisme unique parmi les antiépileptiques.",
+    "indications": [
+      "Épilepsie partielle avec ou sans généralisation secondaire (monothérapie ≥ 16 ans, association ≥ 1 mois)",
+      "Crises myocloniques (épilepsie myoclonique juvénile, ≥ 12 ans)",
+      "Crises tonico-cloniques généralisées (épilepsie idiopathique généralisée, ≥ 12 ans)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au lévétiracétam ou aux dérivés pyrrolidone",
+      "Insuffisance rénale sévère sans ajustement (nécessite adaptation posologique)"
+    ],
+    "dosage": {
+      "adult": "500 mg 2x/j en initiation → augmentation par paliers de 500 mg/2 semaines → dose optimale 1000-3000 mg/j en 2 prises",
+      "elderly": "Pas d'ajustement si fonction rénale normale — adapter selon DFG",
+      "renal": "DFG 50-80 : max 2000 mg/j. DFG 30-50 : max 1500 mg/j. DFG < 30 : max 1000 mg/j",
+      "hepatic": "Pas d'ajustement en insuffisance hépatique légère/modérée"
+    },
+    "adverse_effects": [
+      "Somnolence, asthénie (très fréquent)",
+      "Céphalées, vertiges",
+      "Irritabilité, agressivité, agitation, dépression (psychiatriques — surveillance)",
+      "Idées suicidaires (rare — comme tous les antiépileptiques)",
+      "Anorexie, nausées",
+      "Thrombocytopénie (rare)",
+      "Rash cutané (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Phénytoïne / Carbamazépine / Phénobarbital (inducteurs enzymatiques)",
+        "severity": "Modéré",
+        "effect": "Ces antiépileptiques inducteurs CYP n'affectent pas la pharmacocinétique du lévétiracétam (non métabolisé par CYP) mais peuvent en être affectés. Surveiller les taux plasmatiques lors d'associations."
+      },
+      {
+        "drug": "Probénécide",
+        "severity": "Modéré",
+        "effect": "Inhibition de la sécrétion tubulaire du métabolite inactif ucb L057 → accumulation théorique sans impact clinique démontré."
+      },
+      {
+        "drug": "Alcool / Dépresseurs SNC (benzodiazépines, morphiniques)",
+        "severity": "Modéré",
+        "effect": "Potentialisation de la sédation et des vertiges — déconseillé, surtout en début de traitement."
+      },
+      {
+        "drug": "Médicaments abaissant le seuil épileptogène (tramadol, fluoroquinolones, clozapine)",
+        "severity": "Modéré",
+        "effect": "Risque de réduction de l'efficacité antiépileptique ou de levée d'inhibition — surveiller."
+      }
+    ],
+    "interactions": [
+      "Aucune interaction pharmacocinétique majeure connue"
+    ],
+    "half_life": "6-8h (adulte). 5-6h (enfant). Pas de métabolisme CYP hépatique significatif — éliminé à 66% sous forme inchangée par voie rénale.",
+    "pregnancy": {
+      "category": "C",
+      "notes": "Données insuffisantes chez la femme enceinte. Registres épilepsie-grossesse : pas de signal tératogène majeur isolé, mais données limitées. Utiliser si bénéfice > risque. Supplémentation acide folique recommandée. Surveiller nouveau-né (syndrome de sevrage possible). Ne pas arrêter brutalement (risque de crises rebond).",
+      "breastfeeding": "Passe dans le lait maternel. Utiliser avec précaution — surveiller sédation du nourrisson."
+    },
+    "children": {
+      "safe": true,
+      "min_age": "1 mois",
+      "dose_adjustment": "1 mois-6 mois : 7 mg/kg 2x/j → max 21 mg/kg 2x/j. 6 mois-18 ans : 10 mg/kg 2x/j → max 30 mg/kg 2x/j",
+      "notes": "AMM pédiatrique dès 1 mois pour crises partielles. Solution buvable 100mg/ml disponible pour nourrissons."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "notes": "DFG 50-80 : max 1000 mg 2x/j. DFG 30-50 : max 750 mg 2x/j. DFG <30 : max 500 mg 2x/j. Hémodialyse : dose supplémentaire 50% post-dialyse. Ajustement OBLIGATOIRE."
+    },
+    "market_data": [
+      {
+        "price": 185.0,
+        "price_ppv_dhs": 185.0,
+        "packaging": "comprimé pelliculé Boîte de 30",
+        "laboratory": "UCB PHARMA MAROC",
+        "url": "https://medicament.ma/medicament/keppra-500-mg-comprime/"
+      }
+    ],
+    "smart_flags": [
+      "⚡ Arrêt progressif obligatoire — ne jamais stopper brutalement (risque status epilepticus)",
+      "🧠 AMM pédiatrique dès 1 mois",
+      "🫘 Ajustement rénal OBLIGATOIRE (DFG < 80 ml/min)",
+      "💊 Tableau A — ordonnance obligatoire"
+    ],
+    "composition": [
+      {
+        "name": "Lévétiracétam 500 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "keppra_levetiracetam_500_mg_500_mg"
+  },
+  {
+    "id": "kerlone_20_mg_comprimé_pelliculé_sécable_boîte_de_28",
+    "brand_name": "KERLONE",
+    "generic_name": "Bétaxolol",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C07AB05",
+    "therapeutic_group": "Bêta-bloquants",
+    "drug_class": "Bêta-bloquant cardiosélectif (bêta-1 sélectif)",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable (prophylaxie des crises)"
+    ],
+    "contraindications": [
+      "Asthme ou BPCO sévère",
+      "BAV 2e-3e degré (sans pacemaker)",
+      "Bradycardie sévère (<45 bpm)",
+      "Insuffisance cardiaque décompensée",
+      "Hypotension sévère",
+      "Phéochromocytome non traité",
+      "Syndrome de Raynaud sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Vérapamil, Diltiazem",
+        "severity": "majeure",
+        "effect": "Bradycardie sévère, BAV, insuffisance cardiaque"
+      },
+      {
+        "drug": "Amiodarone",
+        "severity": "majeure",
+        "effect": "Bradycardie, troubles de conduction"
+      },
+      {
+        "drug": "Insuline, Sulfamides hypoglycémiants",
+        "severity": "modérée",
+        "effect": "Masquage des signes d'hypoglycémie (tachycardie)"
+      },
+      {
+        "drug": "Flécaïnide",
+        "severity": "modérée",
+        "effect": "Effet dépresseur cardiaque additif"
+      },
+      {
+        "drug": "Clonidine",
+        "severity": "modérée",
+        "effect": "Rebond hypertensif si arrêt simultané"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé. Risque de bradycardie, hypoglycémie néonatale, RCIU.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans (forme orale).",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: débuter à 5 mg/jour. Hémodialyse: pas de dose supplémentaire."
+    },
+    "dosage": {
+      "adult": "Début: 10 mg/jour. Dose habituelle: 20 mg/jour en 1 prise. Max: 40 mg/jour.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 97.9,
+        "packaging": "pelliculé sécable Boîte de 28",
+        "laboratory": "PH: 64.70 dhs - BOTTU S.A.",
+        "url": "https://www.medicament.ma/medicament/kerlone-20-mg-comprime",
+        "price_ppv_dhs": 97.9
+      }
+    ],
+    "drugbank_id": "DB00195",
+    "mechanism": "Blocage sélectif des récepteurs bêta-1 adrénergiques cardiaques → diminution de la fréquence cardiaque, de la contractilité et de la PA.",
+    "half_life": "14-22 heures",
+    "adverse_effects": [
+      "Bradycardie",
+      "Asthénie",
+      "Extrémités froides",
+      "Hypotension",
+      "Troubles digestifs",
+      "Insomnie",
+      "Cauchemars",
+      "Bronchospasme (rare, cardiosélectif)",
+      "Impuissance"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Isoptine",
+          "Diltiazem",
+          "Fibrocard"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs calciques bradycardisants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie sévère, BAV, insuffisance cardiaque",
+        "recommendation": "Association déconseillée. Si indispensable: surveillance ECG étroite."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Cordarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques classe III"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie, troubles de conduction",
+        "recommendation": "Surveillance ECG."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Glibenclamide",
+          "Gliclazide",
+          "Diamicron"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage des signes d'hypoglycémie (tachycardie)",
+        "recommendation": "Surveiller glycémie. Éducation du patient."
+      },
+      {
+        "interacting_drugs": [
+          "Clonidine",
+          "Catapressan"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs centraux"
+        ],
+        "severity": "DANGER",
+        "effect": "Rebond hypertensif si arrêt simultané",
+        "recommendation": "Arrêter le bêta-bloquant PLUSIEURS JOURS AVANT la clonidine."
+      },
+      {
+        "interacting_drugs": [
+          "Flécaïnide",
+          "Propafénone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques classe Ic"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Effet dépresseur cardiaque additif",
+        "recommendation": "Surveillance ECG."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Bétaxolol",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kerlone_betaxolol_20_mg"
+  },
+  {
+    "id": "ketoderm_2_%_crème_tube_de_15_g",
+    "brand_name": "KETODERM",
+    "generic_name": "Kétoconazole",
+    "strength": "2 %",
+    "form": "Crème",
+    "route": "Cutanée",
+    "atc_code": "D01AC08",
+    "therapeutic_group": "Antifongiques dermatologiques",
+    "drug_class": "Imidazolé antifongique (topique)",
+    "indications": [
+      "Dermite séborrhéique",
+      "Pityriasis versicolor",
+      "Candidoses cutanées",
+      "Dermatophytoses"
+    ],
+    "contraindications": [
+      "Hypersensibilité au kétoconazole ou aux imidazolés"
+    ],
+    "interactions": [
+      {
+        "drug": "Pas d'interactions systémiques significatives (usage cutané)",
+        "severity": "mineure",
+        "effect": "Absorption systémique négligeable"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé en usage cutané. Absorption systémique négligeable.",
+      "breastfeeding": "Compatible (ne pas appliquer sur les seins)."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Peut être utilisé chez le nourrisson et l'enfant.",
+      "dose_rule": "1-2 applications/jour pendant 2-4 semaines."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire (usage topique)."
+    },
+    "dosage": {
+      "adult": "Crème 2%: 1-2 applications/jour pendant 2-4 semaines. Dermite séborrhéique: 2 applications/jour x 2-4 semaines.",
+      "children": "1-2 applications/jour."
+    },
+    "market_data": [
+      {
+        "price": 19.6,
+        "packaging": "Tube de 15 g",
+        "laboratory": "MAPHAR",
+        "url": "https://www.medicament.ma/medicament/ketoderm-2-creme",
+        "price_ppv_dhs": 19.6
+      }
+    ],
+    "drugbank_id": "DB01026",
+    "mechanism": "Inhibition de la synthèse de l'ergostérol (composant de la membrane fongique) via inhibition du CYP51 fongique → altération de la membrane cellulaire fongique.",
+    "half_life": "N/A (usage topique, absorption systémique négligeable)",
+    "adverse_effects": [
+      "Irritation locale",
+      "Prurit",
+      "Sensation de brûlure",
+      "Sécheresse cutanée"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Kétoconazole",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ketoderm_ketoconazole_2"
+  },
+  {
+    "id": "ketoflex_100_mg_/_2_ml_solution_injectable_en_ampoule_boite_de_2",
+    "brand_name": "KETOFLEX",
+    "generic_name": "Kétoprofène",
+    "strength": "100 MG / 2 ML",
+    "form": "Solution",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AE03",
+    "therapeutic_group": "Anti-inflammatoires non stéroïdiens (AINS)",
+    "drug_class": "Dérivé de l'acide propionique (AINS)",
+    "indications": [
+      "Rhumatismes inflammatoires chroniques (PR, SPA)",
+      "Arthrose douloureuse",
+      "Douleurs post-opératoires et post-traumatiques",
+      "Dysménorrhée",
+      "Crises de goutte aiguë",
+      "Colique néphrétique (injectable)",
+      "Douleurs musculosquelettiques (gel)"
+    ],
+    "contraindications": [
+      "Ulcère gastroduodénal actif ou antécédent",
+      "Insuffisance rénale ou hépatique sévère",
+      "Insuffisance cardiaque sévère (NYHA III-IV)",
+      "3e trimestre de grossesse",
+      "Allergie aux AINS ou à l'aspirine",
+      "Hémorragie active (digestive, cérébrale)",
+      "Exposition au soleil (risque de photosensibilisation avec le gel)"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux (Warfarine, AVK)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique accru"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation de la lithémie → toxicité"
+      },
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation de la toxicité hématologique du MTX"
+      },
+      {
+        "drug": "IEC, ARA2, Diurétiques",
+        "severity": "modérée",
+        "effect": "Diminution de l'effet antihypertenseur + risque rénal"
+      },
+      {
+        "drug": "Corticostéroïdes",
+        "severity": "modérée",
+        "effect": "Risque accru d'ulcère GI"
+      },
+      {
+        "drug": "ISRS",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué au 3e trimestre (fermeture prématurée du canal artériel). Déconseillé aux 1er et 2e trimestres.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "Non recommandé < 15 ans pour les formes orales et injectable. Gel: ≥ 15 ans.",
+      "dose_rule": "≥ 15 ans: doses adultes."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Contre-indiqué si insuffisance rénale sévère. Prudence si modérée: dose minimale, durée courte."
+    },
+    "dosage": {
+      "adult": "Oral: 100-200 mg/jour en 2-3 prises pendant les repas. Injectable IM: 100 mg/injection, max 2 injections/jour x 3 jours. Suppositoire: 100 mg 1-2x/jour. Gel 2.5%: 3-4 applications/jour.",
+      "children": "≥ 15 ans: doses adultes."
+    },
+    "market_data": [
+      {
+        "price": 15.2,
+        "packaging": "injectable en ampoule Boite de 2",
+        "laboratory": "PHARMED",
+        "url": "https://www.medicament.ma/medicament/ketoflex-100-mg-2-ml-solution",
+        "price_ppv_dhs": 15.2
+      }
+    ],
+    "drugbank_id": "DB01009",
+    "mechanism": "Inhibition non sélective des cyclo-oxygénases (COX-1 et COX-2) → diminution de la synthèse des prostaglandines → effets anti-inflammatoire, antalgique et antipyrétique.",
+    "half_life": "1.5-2.5 heures",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Nausées",
+      "Ulcère gastroduodénal",
+      "Hémorragie digestive",
+      "Insuffisance rénale",
+      "Réactions allergiques",
+      "Photosensibilisation (gel)",
+      "Rétention hydrosodée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majoré",
+        "recommendation": "Éviter. Si indispensable: surveiller INR + signes de saignement."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation de la lithémie → toxicité (vomissements, tremblements, confusion)",
+        "recommendation": "Doser lithémie et ajuster dose."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité hématologique du MTX accrue",
+        "recommendation": "Contre-indiqué si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Losartan",
+          "Valsartan",
+          "Irbésartan"
+        ],
+        "interacting_classes": [
+          "IEC",
+          "ARA2 (sartans)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'effet antihypertenseur + risque d'insuffisance rénale aiguë",
+        "recommendation": "Surveiller PA + créatinine. Hydrater le patient."
+      },
+      {
+        "interacting_drugs": [
+          "Furosémide",
+          "Lasilix",
+          "Furilan",
+          "Hydrochlorothiazide",
+          "Esidrex"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'efficacité diurétique + risque rénal",
+        "recommendation": "Surveiller diurèse et créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "Autres AINS",
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique additif + ulcère GI",
+        "recommendation": "NE JAMAIS associer 2 AINS. IPP si antiagrégant nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Sertraline",
+          "Paroxétine",
+          "Citalopram"
+        ],
+        "interacting_classes": [
+          "ISRS (antidépresseurs)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (effet antiplaquettaire des ISRS)",
+        "recommendation": "Surveiller signes de saignement."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "CARDIOPATHIE",
+      "ALLERGIE_AINS"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Kétoprofène",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ketoflex_ketoprofene_100_mg_2_ml"
+  },
+  {
+    "id": "ketoflex_100_mg_/_2_ml_solution_injectable_en_ampoule_boite_de_6",
+    "brand_name": "KETOFLEX",
+    "generic_name": "Kétoprofène",
+    "strength": "100 MG / 2 ML",
+    "form": "Solution",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AE03",
+    "therapeutic_group": "Anti-inflammatoires non stéroïdiens (AINS)",
+    "drug_class": "Dérivé de l'acide propionique (AINS)",
+    "indications": [
+      "Rhumatismes inflammatoires chroniques (PR, SPA)",
+      "Arthrose douloureuse",
+      "Douleurs post-opératoires et post-traumatiques",
+      "Dysménorrhée",
+      "Crises de goutte aiguë",
+      "Colique néphrétique (injectable)",
+      "Douleurs musculosquelettiques (gel)"
+    ],
+    "contraindications": [
+      "Ulcère gastroduodénal actif ou antécédent",
+      "Insuffisance rénale ou hépatique sévère",
+      "Insuffisance cardiaque sévère (NYHA III-IV)",
+      "3e trimestre de grossesse",
+      "Allergie aux AINS ou à l'aspirine",
+      "Hémorragie active (digestive, cérébrale)",
+      "Exposition au soleil (risque de photosensibilisation avec le gel)"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux (Warfarine, AVK)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique accru"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation de la lithémie → toxicité"
+      },
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation de la toxicité hématologique du MTX"
+      },
+      {
+        "drug": "IEC, ARA2, Diurétiques",
+        "severity": "modérée",
+        "effect": "Diminution de l'effet antihypertenseur + risque rénal"
+      },
+      {
+        "drug": "Corticostéroïdes",
+        "severity": "modérée",
+        "effect": "Risque accru d'ulcère GI"
+      },
+      {
+        "drug": "ISRS",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué au 3e trimestre (fermeture prématurée du canal artériel). Déconseillé aux 1er et 2e trimestres.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "Non recommandé < 15 ans pour les formes orales et injectable. Gel: ≥ 15 ans.",
+      "dose_rule": "≥ 15 ans: doses adultes."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Contre-indiqué si insuffisance rénale sévère. Prudence si modérée: dose minimale, durée courte."
+    },
+    "dosage": {
+      "adult": "Oral: 100-200 mg/jour en 2-3 prises pendant les repas. Injectable IM: 100 mg/injection, max 2 injections/jour x 3 jours. Suppositoire: 100 mg 1-2x/jour. Gel 2.5%: 3-4 applications/jour.",
+      "children": "≥ 15 ans: doses adultes."
+    },
+    "market_data": [
+      {
+        "price": 38.1,
+        "packaging": "injectable en ampoule Boite de 6",
+        "laboratory": "PHARMED",
+        "url": "https://www.medicament.ma/medicament/ketoflex-100-mg-2-ml-solution",
+        "price_ppv_dhs": 38.1
+      }
+    ],
+    "drugbank_id": "DB01009",
+    "mechanism": "Inhibition non sélective des cyclo-oxygénases (COX-1 et COX-2) → diminution de la synthèse des prostaglandines → effets anti-inflammatoire, antalgique et antipyrétique.",
+    "half_life": "1.5-2.5 heures",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Nausées",
+      "Ulcère gastroduodénal",
+      "Hémorragie digestive",
+      "Insuffisance rénale",
+      "Réactions allergiques",
+      "Photosensibilisation (gel)",
+      "Rétention hydrosodée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majoré",
+        "recommendation": "Éviter. Si indispensable: surveiller INR + signes de saignement."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation de la lithémie → toxicité (vomissements, tremblements, confusion)",
+        "recommendation": "Doser lithémie et ajuster dose."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité hématologique du MTX accrue",
+        "recommendation": "Contre-indiqué si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Losartan",
+          "Valsartan",
+          "Irbésartan"
+        ],
+        "interacting_classes": [
+          "IEC",
+          "ARA2 (sartans)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'effet antihypertenseur + risque d'insuffisance rénale aiguë",
+        "recommendation": "Surveiller PA + créatinine. Hydrater le patient."
+      },
+      {
+        "interacting_drugs": [
+          "Furosémide",
+          "Lasilix",
+          "Furilan",
+          "Hydrochlorothiazide",
+          "Esidrex"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'efficacité diurétique + risque rénal",
+        "recommendation": "Surveiller diurèse et créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "Autres AINS",
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique additif + ulcère GI",
+        "recommendation": "NE JAMAIS associer 2 AINS. IPP si antiagrégant nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Sertraline",
+          "Paroxétine",
+          "Citalopram"
+        ],
+        "interacting_classes": [
+          "ISRS (antidépresseurs)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (effet antiplaquettaire des ISRS)",
+        "recommendation": "Surveiller signes de saignement."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "CARDIOPATHIE",
+      "ALLERGIE_AINS"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Kétoprofène",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ketoflex_ketoprofene_100_mg_2_ml_2"
+  },
+  {
+    "id": "ketoflex_100_mg_suppositoire_boîte_de_10",
+    "brand_name": "KETOFLEX",
+    "generic_name": "Kétoprofène",
+    "strength": "100 MG",
+    "form": "Suppositoire",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AE03",
+    "therapeutic_group": "Anti-inflammatoires non stéroïdiens (AINS)",
+    "drug_class": "Dérivé de l'acide propionique (AINS)",
+    "indications": [
+      "Rhumatismes inflammatoires chroniques (PR, SPA)",
+      "Arthrose douloureuse",
+      "Douleurs post-opératoires et post-traumatiques",
+      "Dysménorrhée",
+      "Crises de goutte aiguë",
+      "Colique néphrétique (injectable)",
+      "Douleurs musculosquelettiques (gel)"
+    ],
+    "contraindications": [
+      "Ulcère gastroduodénal actif ou antécédent",
+      "Insuffisance rénale ou hépatique sévère",
+      "Insuffisance cardiaque sévère (NYHA III-IV)",
+      "3e trimestre de grossesse",
+      "Allergie aux AINS ou à l'aspirine",
+      "Hémorragie active (digestive, cérébrale)",
+      "Exposition au soleil (risque de photosensibilisation avec le gel)"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux (Warfarine, AVK)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique accru"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation de la lithémie → toxicité"
+      },
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation de la toxicité hématologique du MTX"
+      },
+      {
+        "drug": "IEC, ARA2, Diurétiques",
+        "severity": "modérée",
+        "effect": "Diminution de l'effet antihypertenseur + risque rénal"
+      },
+      {
+        "drug": "Corticostéroïdes",
+        "severity": "modérée",
+        "effect": "Risque accru d'ulcère GI"
+      },
+      {
+        "drug": "ISRS",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué au 3e trimestre (fermeture prématurée du canal artériel). Déconseillé aux 1er et 2e trimestres.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "Non recommandé < 15 ans pour les formes orales et injectable. Gel: ≥ 15 ans.",
+      "dose_rule": "≥ 15 ans: doses adultes."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Contre-indiqué si insuffisance rénale sévère. Prudence si modérée: dose minimale, durée courte."
+    },
+    "dosage": {
+      "adult": "Oral: 100-200 mg/jour en 2-3 prises pendant les repas. Injectable IM: 100 mg/injection, max 2 injections/jour x 3 jours. Suppositoire: 100 mg 1-2x/jour. Gel 2.5%: 3-4 applications/jour.",
+      "children": "≥ 15 ans: doses adultes."
+    },
+    "market_data": [
+      {
+        "price": 22.9,
+        "packaging": "Boîte de 10",
+        "laboratory": "PHARMED",
+        "url": "https://www.medicament.ma/medicament/ketoflex-100-mg-suppositoire",
+        "price_ppv_dhs": 22.9
+      }
+    ],
+    "drugbank_id": "DB01009",
+    "mechanism": "Inhibition non sélective des cyclo-oxygénases (COX-1 et COX-2) → diminution de la synthèse des prostaglandines → effets anti-inflammatoire, antalgique et antipyrétique.",
+    "half_life": "1.5-2.5 heures",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Nausées",
+      "Ulcère gastroduodénal",
+      "Hémorragie digestive",
+      "Insuffisance rénale",
+      "Réactions allergiques",
+      "Photosensibilisation (gel)",
+      "Rétention hydrosodée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majoré",
+        "recommendation": "Éviter. Si indispensable: surveiller INR + signes de saignement."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation de la lithémie → toxicité (vomissements, tremblements, confusion)",
+        "recommendation": "Doser lithémie et ajuster dose."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité hématologique du MTX accrue",
+        "recommendation": "Contre-indiqué si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Losartan",
+          "Valsartan",
+          "Irbésartan"
+        ],
+        "interacting_classes": [
+          "IEC",
+          "ARA2 (sartans)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'effet antihypertenseur + risque d'insuffisance rénale aiguë",
+        "recommendation": "Surveiller PA + créatinine. Hydrater le patient."
+      },
+      {
+        "interacting_drugs": [
+          "Furosémide",
+          "Lasilix",
+          "Furilan",
+          "Hydrochlorothiazide",
+          "Esidrex"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'efficacité diurétique + risque rénal",
+        "recommendation": "Surveiller diurèse et créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "Autres AINS",
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique additif + ulcère GI",
+        "recommendation": "NE JAMAIS associer 2 AINS. IPP si antiagrégant nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Sertraline",
+          "Paroxétine",
+          "Citalopram"
+        ],
+        "interacting_classes": [
+          "ISRS (antidépresseurs)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (effet antiplaquettaire des ISRS)",
+        "recommendation": "Surveiller signes de saignement."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "CARDIOPATHIE",
+      "ALLERGIE_AINS"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Kétoprofène",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ketoflex_ketoprofene_100_mg"
+  },
+  {
+    "id": "ketoflex_2.5_%_gel_tube_de_20_g",
+    "brand_name": "KETOFLEX",
+    "generic_name": "Kétoprofène",
+    "strength": "2.5 %",
+    "form": "Gel",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AE03",
+    "therapeutic_group": "Anti-inflammatoires non stéroïdiens (AINS)",
+    "drug_class": "Dérivé de l'acide propionique (AINS)",
+    "indications": [
+      "Rhumatismes inflammatoires chroniques (PR, SPA)",
+      "Arthrose douloureuse",
+      "Douleurs post-opératoires et post-traumatiques",
+      "Dysménorrhée",
+      "Crises de goutte aiguë",
+      "Colique néphrétique (injectable)",
+      "Douleurs musculosquelettiques (gel)"
+    ],
+    "contraindications": [
+      "Ulcère gastroduodénal actif ou antécédent",
+      "Insuffisance rénale ou hépatique sévère",
+      "Insuffisance cardiaque sévère (NYHA III-IV)",
+      "3e trimestre de grossesse",
+      "Allergie aux AINS ou à l'aspirine",
+      "Hémorragie active (digestive, cérébrale)",
+      "Exposition au soleil (risque de photosensibilisation avec le gel)"
+    ],
+    "interactions": [
+      "Anticoagulants",
+      "Autres AINS",
+      "IEC/ARA2"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué au 3e trimestre (fermeture prématurée du canal artériel). Déconseillé aux 1er et 2e trimestres.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "Non recommandé < 15 ans pour les formes orales et injectable. Gel: ≥ 15 ans.",
+      "dose_rule": "≥ 15 ans: doses adultes."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Contre-indiqué si insuffisance rénale sévère. Prudence si modérée: dose minimale, durée courte."
+    },
+    "dosage": {
+      "adult": "Oral: 100-200 mg/jour en 2-3 prises pendant les repas. Injectable IM: 100 mg/injection, max 2 injections/jour x 3 jours. Suppositoire: 100 mg 1-2x/jour. Gel 2.5%: 3-4 applications/jour.",
+      "children": "≥ 15 ans: doses adultes."
+    },
+    "market_data": [
+      {
+        "price": 16.2,
+        "packaging": "Tube de 20 g",
+        "laboratory": "PHARMED",
+        "url": "https://www.medicament.ma/medicament/ketoflex-2-5-gel",
+        "price_ppv_dhs": 16.2
+      }
+    ],
+    "drugbank_id": "DB01009",
+    "mechanism": "Inhibition non sélective des cyclo-oxygénases (COX-1 et COX-2) → diminution de la synthèse des prostaglandines → effets anti-inflammatoire, antalgique et antipyrétique.",
+    "half_life": "1.5-2.5 heures",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Nausées",
+      "Ulcère gastroduodénal",
+      "Hémorragie digestive",
+      "Insuffisance rénale",
+      "Réactions allergiques",
+      "Photosensibilisation (gel)",
+      "Rétention hydrosodée"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Exposition solaire / UV (lampes, cabines bronzantes)",
+        "severity": "Majeur",
+        "effect": "PHOTOALLERGIES GRAVES — le kétoprofène topique est photosensibilisant puissant. Réactions phototoxiques et photoallergiques (eczéma bulleux, érythème) possibles pendant le traitement et jusqu'à 2 semaines après arrêt. Couvrir la zone traitée, éviter toute exposition solaire et UV. CONTRE-INDIQUÉ en cas d'exposition solaire inévitable."
+      },
+      {
+        "drug": "Anticoagulants oraux (warfarine, AVK, AOD)",
+        "severity": "Majeur",
+        "effect": "Absorption cutanée kétoprofène (5-15%) : inhibition COX plaquettaire + potentialisation anticoagulante → risque hémorragique majoré — surveiller INR si usage prolongé sur grande surface."
+      },
+      {
+        "drug": "Lithium",
+        "severity": "Majeur",
+        "effect": "Réduction élimination rénale du lithium → accumulation → toxicité (tremblements, confusion, vomissements) — surveiller lithiémie."
+      },
+      {
+        "drug": "Méthotrexate (doses > 15 mg/semaine)",
+        "severity": "Majeur",
+        "effect": "Réduction élimination rénale du méthotrexate → hématotoxicité sévère — contre-indiqué aux fortes doses."
+      },
+      {
+        "drug": "IEC / ARA2 / Diurétiques",
+        "severity": "Modéré",
+        "effect": "Réduction effet antihypertenseur + risque IRA — surveiller PA et créatinine si application étendue."
+      },
+      {
+        "drug": "AINS systémiques / Aspirine",
+        "severity": "Modéré",
+        "effect": "Risque hémorragique digestif et rénal additif — éviter l'association."
+      },
+      {
+        "drug": "ISRS (fluoxétine, paroxétine, escitalopram)",
+        "severity": "Modéré",
+        "effect": "Risque hémorragique accru (effet antiplaquettaire des ISRS + AINS) — surveiller."
+      }
+    ],
+    "smart_flags": [
+      "☀️ PHOTOSENSIBILISATION MAJEURE — couvrir la zone, éviter soleil/UV pendant 2 semaines après arrêt",
+      "⚠️ Ne pas appliquer sous pansement occlusif",
+      "🚫 CONTRE-INDIQUÉ < 15 ans, grossesse 3e trimestre, peau lésée/eczémateuse",
+      "💊 Tableau A — usage court (max 7 jours)"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Kétoprofène",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ketoflex_ketoprofene_2_5"
+  },
+  {
+    "id": "ketoflex_50_mg_gélule_boîte_de_24",
+    "brand_name": "KETOFLEX",
+    "generic_name": "Kétoprofène",
+    "strength": "50 MG",
+    "form": "Gélule",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AE03",
+    "therapeutic_group": "Anti-inflammatoires non stéroïdiens (AINS)",
+    "drug_class": "Dérivé de l'acide propionique (AINS)",
+    "indications": [
+      "Rhumatismes inflammatoires chroniques (PR, SPA)",
+      "Arthrose douloureuse",
+      "Douleurs post-opératoires et post-traumatiques",
+      "Dysménorrhée",
+      "Crises de goutte aiguë",
+      "Colique néphrétique (injectable)",
+      "Douleurs musculosquelettiques (gel)"
+    ],
+    "contraindications": [
+      "Ulcère gastroduodénal actif ou antécédent",
+      "Insuffisance rénale ou hépatique sévère",
+      "Insuffisance cardiaque sévère (NYHA III-IV)",
+      "3e trimestre de grossesse",
+      "Allergie aux AINS ou à l'aspirine",
+      "Hémorragie active (digestive, cérébrale)",
+      "Exposition au soleil (risque de photosensibilisation avec le gel)"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux (Warfarine, AVK)",
+        "severity": "majeure",
+        "effect": "Risque hémorragique accru"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation de la lithémie → toxicité"
+      },
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation de la toxicité hématologique du MTX"
+      },
+      {
+        "drug": "IEC, ARA2, Diurétiques",
+        "severity": "modérée",
+        "effect": "Diminution de l'effet antihypertenseur + risque rénal"
+      },
+      {
+        "drug": "Corticostéroïdes",
+        "severity": "modérée",
+        "effect": "Risque accru d'ulcère GI"
+      },
+      {
+        "drug": "ISRS",
+        "severity": "modérée",
+        "effect": "Risque hémorragique accru"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué au 3e trimestre (fermeture prématurée du canal artériel). Déconseillé aux 1er et 2e trimestres.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "Non recommandé < 15 ans pour les formes orales et injectable. Gel: ≥ 15 ans.",
+      "dose_rule": "≥ 15 ans: doses adultes."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Contre-indiqué si insuffisance rénale sévère. Prudence si modérée: dose minimale, durée courte."
+    },
+    "dosage": {
+      "adult": "Oral: 100-200 mg/jour en 2-3 prises pendant les repas. Injectable IM: 100 mg/injection, max 2 injections/jour x 3 jours. Suppositoire: 100 mg 1-2x/jour. Gel 2.5%: 3-4 applications/jour.",
+      "children": "≥ 15 ans: doses adultes."
+    },
+    "market_data": [
+      {
+        "price": 22.9,
+        "packaging": "Boîte de 24",
+        "laboratory": "PHARMED",
+        "url": "https://www.medicament.ma/medicament/ketoflex-50-mg-gelule",
+        "price_ppv_dhs": 22.9
+      }
+    ],
+    "drugbank_id": "DB01009",
+    "mechanism": "Inhibition non sélective des cyclo-oxygénases (COX-1 et COX-2) → diminution de la synthèse des prostaglandines → effets anti-inflammatoire, antalgique et antipyrétique.",
+    "half_life": "1.5-2.5 heures",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Nausées",
+      "Ulcère gastroduodénal",
+      "Hémorragie digestive",
+      "Insuffisance rénale",
+      "Réactions allergiques",
+      "Photosensibilisation (gel)",
+      "Rétention hydrosodée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majoré",
+        "recommendation": "Éviter. Si indispensable: surveiller INR + signes de saignement."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation de la lithémie → toxicité (vomissements, tremblements, confusion)",
+        "recommendation": "Doser lithémie et ajuster dose."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité hématologique du MTX accrue",
+        "recommendation": "Contre-indiqué si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Losartan",
+          "Valsartan",
+          "Irbésartan"
+        ],
+        "interacting_classes": [
+          "IEC",
+          "ARA2 (sartans)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'effet antihypertenseur + risque d'insuffisance rénale aiguë",
+        "recommendation": "Surveiller PA + créatinine. Hydrater le patient."
+      },
+      {
+        "interacting_drugs": [
+          "Furosémide",
+          "Lasilix",
+          "Furilan",
+          "Hydrochlorothiazide",
+          "Esidrex"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'efficacité diurétique + risque rénal",
+        "recommendation": "Surveiller diurèse et créatinine."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "Autres AINS",
+          "Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique additif + ulcère GI",
+        "recommendation": "NE JAMAIS associer 2 AINS. IPP si antiagrégant nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Sertraline",
+          "Paroxétine",
+          "Citalopram"
+        ],
+        "interacting_classes": [
+          "ISRS (antidépresseurs)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru (effet antiplaquettaire des ISRS)",
+        "recommendation": "Surveiller signes de saignement."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "CARDIOPATHIE",
+      "ALLERGIE_AINS"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Kétoprofène",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ketoflex_ketoprofene_50_mg"
+  },
+  {
+    "id": "ketum_2.5_%_gel_pour_application_locale_tube_doseur_de_120_g_(120_doses)",
+    "brand_name": "KETUM",
+    "generic_name": "Kétoprofène",
+    "strength": "2.5 %",
+    "form": "Gel",
+    "route": "Cutanée",
+    "atc_code": "M02AA10",
+    "therapeutic_group": "Anti-inflammatoires topiques",
+    "drug_class": "AINS topique (dérivé de l'acide propionique)",
+    "indications": [
+      "Tendinites",
+      "Entorses",
+      "Contusions",
+      "Douleurs musculosquelettiques localisées",
+      "Arthrose des petites articulations"
+    ],
+    "contraindications": [
+      "Allergie aux AINS ou à l'aspirine",
+      "Exposition au soleil (même indirect) pendant et 2 semaines après le traitement (PHOTOSENSIBILISATION)",
+      "Peau lésée, eczéma, dermatite",
+      "3e trimestre de grossesse"
+    ],
+    "interactions": [
+      "Anticoagulants",
+      "Autres AINS",
+      "IEC/ARA2"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué au 3e trimestre. Déconseillé aux 1er et 2e trimestres.",
+      "breastfeeding": "Ne pas appliquer sur les seins. Prudence."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "Non recommandé < 15 ans.",
+      "dose_rule": "≥ 15 ans: 2-3 applications/jour."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement (usage cutané, absorption systémique faible)."
+    },
+    "dosage": {
+      "adult": "2-3 applications/jour en couche fine sur la zone douloureuse. Max: 15 jours. NE PAS EXPOSER AU SOLEIL.",
+      "children": "≥ 15 ans: idem adulte."
+    },
+    "market_data": [
+      {
+        "price": 93.4,
+        "packaging": "pour application locale Tube doseur de 120 G (120 doses)",
+        "laboratory": "PHI",
+        "url": "https://www.medicament.ma/medicament/ketum-2-5-gel",
+        "price_ppv_dhs": 93.4
+      }
+    ],
+    "drugbank_id": "DB01009",
+    "mechanism": "Inhibition locale des COX → effet anti-inflammatoire et antalgique par voie percutanée.",
+    "half_life": "N/A (absorption systémique faible ~5%)",
+    "adverse_effects": [
+      "Photosensibilisation (PRINCIPAL RISQUE)",
+      "Irritation locale",
+      "Eczéma de contact",
+      "Prurit",
+      "Érythème"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Exposition solaire / UV (lampes, cabines bronzantes)",
+        "severity": "Majeur",
+        "effect": "PHOTOALLERGIES GRAVES — kétoprofène topique photosensibilisant puissant. Érythème bulleux, photodermatite possible pendant traitement et jusqu'à 2 semaines après arrêt. Couvrir la zone traitée. CONTRE-INDIQUÉ si exposition solaire inévitable."
+      },
+      {
+        "drug": "Anticoagulants oraux (warfarine, AVK)",
+        "severity": "Modéré",
+        "effect": "Absorption systémique kétoprofène gel non nulle (5-15%) : risque hémorragique potentialisé si application sur grande surface — surveiller INR en cas de traitement prolongé."
+      },
+      {
+        "drug": "AINS systémiques / Aspirine",
+        "severity": "Modéré",
+        "effect": "Risque ulcéro-hémorragique digestif additif — éviter association."
+      },
+      {
+        "drug": "IEC / ARA2 / Diurétiques",
+        "severity": "Faible",
+        "effect": "Aux doses topiques usuelles, impact hémodynamique minime — surveiller si application étendue et prolongée."
+      }
+    ],
+    "smart_flags": [
+      "☀️ PHOTOSENSIBILISATION MAJEURE — couvrir la zone, éviter soleil/UV pendant 2 semaines après arrêt",
+      "⚠️ Ne pas appliquer sur plaies ouvertes, muqueuses ou peau lésée",
+      "🚫 Éviter contact oculaire — rincer abondamment si contact accidentel",
+      "💊 Tableau Aucun (en vente libre) — usage court max 7 jours"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Kétoprofène",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ketum_ketoprofene_2_5"
+  },
+  {
+    "id": "ketum_2.5_%_gel_tube_de_30_g",
+    "brand_name": "KETUM",
+    "generic_name": "Kétoprofène",
+    "strength": "2.5 %",
+    "form": "Gel",
+    "route": "Cutanée",
+    "atc_code": "M02AA10",
+    "therapeutic_group": "Anti-inflammatoires topiques",
+    "drug_class": "AINS topique (dérivé de l'acide propionique)",
+    "indications": [
+      "Tendinites",
+      "Entorses",
+      "Contusions",
+      "Douleurs musculosquelettiques localisées",
+      "Arthrose des petites articulations"
+    ],
+    "contraindications": [
+      "Allergie aux AINS ou à l'aspirine",
+      "Exposition au soleil (même indirect) pendant et 2 semaines après le traitement (PHOTOSENSIBILISATION)",
+      "Peau lésée, eczéma, dermatite",
+      "3e trimestre de grossesse"
+    ],
+    "interactions": [
+      "Anticoagulants",
+      "Autres AINS",
+      "IEC/ARA2"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué au 3e trimestre. Déconseillé aux 1er et 2e trimestres.",
+      "breastfeeding": "Ne pas appliquer sur les seins. Prudence."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 15,
+      "warning": "Non recommandé < 15 ans.",
+      "dose_rule": "≥ 15 ans: 2-3 applications/jour."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement (usage cutané, absorption systémique faible)."
+    },
+    "dosage": {
+      "adult": "2-3 applications/jour en couche fine sur la zone douloureuse. Max: 15 jours. NE PAS EXPOSER AU SOLEIL.",
+      "children": "≥ 15 ans: idem adulte."
+    },
+    "market_data": [
+      {
+        "price": 28.6,
+        "packaging": "Tube de 30 g",
+        "laboratory": "PHI",
+        "url": "https://www.medicament.ma/medicament/ketum-2-5-gel",
+        "price_ppv_dhs": 28.6
+      }
+    ],
+    "drugbank_id": "DB01009",
+    "mechanism": "Inhibition locale des COX → effet anti-inflammatoire et antalgique par voie percutanée.",
+    "half_life": "N/A (absorption systémique faible ~5%)",
+    "adverse_effects": [
+      "Photosensibilisation (PRINCIPAL RISQUE)",
+      "Irritation locale",
+      "Eczéma de contact",
+      "Prurit",
+      "Érythème"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Exposition solaire / UV (lampes, cabines bronzantes)",
+        "severity": "Majeur",
+        "effect": "PHOTOALLERGIES GRAVES — kétoprofène topique photosensibilisant puissant. Érythème bulleux, photodermatite possible pendant traitement et jusqu'à 2 semaines après arrêt. Couvrir la zone traitée. CONTRE-INDIQUÉ si exposition solaire inévitable."
+      },
+      {
+        "drug": "Anticoagulants oraux (warfarine, AVK)",
+        "severity": "Modéré",
+        "effect": "Absorption systémique kétoprofène gel non nulle (5-15%) : risque hémorragique potentialisé si application sur grande surface — surveiller INR en cas de traitement prolongé."
+      },
+      {
+        "drug": "AINS systémiques / Aspirine",
+        "severity": "Modéré",
+        "effect": "Risque ulcéro-hémorragique digestif additif — éviter association."
+      },
+      {
+        "drug": "IEC / ARA2 / Diurétiques",
+        "severity": "Faible",
+        "effect": "Aux doses topiques usuelles, impact hémodynamique minime — surveiller si application étendue et prolongée."
+      }
+    ],
+    "smart_flags": [
+      "☀️ PHOTOSENSIBILISATION MAJEURE — couvrir la zone, éviter soleil/UV pendant 2 semaines après arrêt",
+      "⚠️ Ne pas appliquer sur plaies ouvertes, muqueuses ou peau lésée",
+      "🚫 Éviter contact oculaire — rincer abondamment si contact accidentel",
+      "💊 Tableau Aucun (en vente libre) — usage court max 7 jours"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Kétoprofène",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ketum_ketoprofene_2_5_2"
+  },
+  {
+    "id": "kisqali_200_mg_comprimé_pelliculé_boite_de_63",
+    "brand_name": "KISQALI",
+    "generic_name": "Ribociclib",
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "L01EF02",
+    "therapeutic_group": "Antinéoplasiques - Inhibiteurs de kinases",
+    "drug_class": "Inhibiteur sélectif des CDK4/6 (cyclin-dependent kinases)",
+    "indications": [
+      "Cancer du sein avancé/métastatique HR+/HER2− en association avec un inhibiteur de l'aromatase ou le fulvestrant",
+      "1ère et 2e ligne du cancer du sein hormonodépendant"
+    ],
+    "contraindications": [
+      "Hypersensibilité au ribociclib",
+      "Allongement du QTc >480 ms",
+      "Insuffisance hépatique sévère (Child-Pugh C)"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4 (Kétoconazole, Itraconazole, Ritonavir, Clarithromycine)",
+        "severity": "majeure",
+        "effect": "Augmentation majeure des taux de ribociclib → toxicité + allongement QT"
+      },
+      {
+        "drug": "Inducteurs puissants CYP3A4 (Rifampicine, Carbamazépine, Phénytoïne)",
+        "severity": "majeure",
+        "effect": "Diminution des taux de ribociclib → perte d'efficacité"
+      },
+      {
+        "drug": "Médicaments allongeant le QT (Amiodarone, Sotalol, Haloperidol)",
+        "severity": "majeure",
+        "effect": "Risque accru de torsade de pointes"
+      },
+      {
+        "drug": "Tamoxifène",
+        "severity": "modérée",
+        "effect": "Allongement QT additif"
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Embryotoxique et fœtotoxique. Contraception obligatoire pendant le traitement et 21 jours après.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si ClCr ≥15 mL/min. Données limitées si <15."
+    },
+    "dosage": {
+      "adult": "600 mg/jour (3 comprimés de 200 mg) en 1 prise pendant 21 jours, suivi de 7 jours de pause (cycle de 28 jours). En association avec un IA ou fulvestrant.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 23384,
+        "packaging": "pelliculé Boite de 63",
+        "laboratory": "NOVARTIS PHARMA MAROC",
+        "url": "https://www.medicament.ma/medicament/kisqali-200-mg-comprime",
+        "price_ppv_dhs": 23384.0
+      }
+    ],
+    "drugbank_id": "DB12001",
+    "mechanism": "Inhibition sélective des kinases CDK4 et CDK6 → blocage de la phosphorylation de Rb → arrêt du cycle cellulaire en phase G1 → inhibition de la prolifération tumorale.",
+    "half_life": "32 heures",
+    "adverse_effects": [
+      "Neutropénie (très fréquent)",
+      "Allongement du QTc",
+      "Hépatotoxicité (élévation transaminases)",
+      "Nausées",
+      "Fatigue",
+      "Diarrhée",
+      "Alopécie",
+      "Infections"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux → toxicité + allongement QT",
+        "recommendation": "ÉVITER. Si indispensable: réduire ribociclib à 400 mg/jour."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Diminution majeure efficacité → échec thérapeutique",
+        "recommendation": "ÉVITER. Pas d'alternative de dose."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Sotalol",
+          "Halopéridol",
+          "Ondansétron"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QT"
+        ],
+        "severity": "DANGER",
+        "effect": "Allongement QTc additif → torsade de pointes",
+        "recommendation": "Éviter. ECG avant et pendant le traitement."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "ALLONGEMENT_QT",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Ribociclib",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kisqali_ribociclib_200_mg"
+  },
+  {
+    "id": "klacid_250_mg",
+    "brand_name": "KLACID",
+    "generic_name": "Clarithromycine 250 mg",
+    "strength": "250 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Oral",
+    "atc_code": "J01FA09",
+    "tableau_maroc": "A",
+    "therapeutic_group": "Infectiologie / Antibiotique macrolide",
+    "drug_class": "Macrolide de 2e génération — inhibiteur synthèse protéique bactérienne (sous-unité 50S)",
+    "mechanism": "Liaison réversible à la sous-unité 50S du ribosome bactérien (site 23S rRNA) → blocage de la translocation peptidique → inhibition bactériostatique (bactéricide aux fortes concentrations). Spectre élargi vs érythromycine (activité sur Haemophilus, mycobactéries, Helicobacter pylori).",
+    "indications": [
+      "Infections respiratoires hautes et basses (pneumonie à germes atypiques — Mycoplasma, Chlamydophila, Legionella)",
+      "Infections ORL (sinusite, otite, angine — en alternative pénicillines)",
+      "Infections cutanées à germes sensibles",
+      "Éradication Helicobacter pylori (trithérapie avec IPP + amoxicilline)",
+      "Prévention et traitement infections à Mycobacterium avium (VIH)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Association avec cisapride, pimozide, terfénadine, astémizole (risque QT)",
+      "Association avec simvastatine ou lovastatine (rhabdomyolyse)",
+      "Association avec colchicine en insuffisance rénale/hépatique",
+      "Insuffisance hépatique sévère sans insuffisance rénale"
+    ],
+    "dosage": {
+      "adult": "250-500 mg 2x/j pendant 7-14 jours selon infection. Max 2 g/j (infections sévères).",
+      "children": "7.5 mg/kg 2x/j (suspension 125 ou 250 mg/5 ml)",
+      "h_pylori": "500 mg 2x/j + IPP + amoxicilline 1g 2x/j pendant 7-14 jours",
+      "renal": "DFG < 30 ml/min : 250 mg 1x/j ou 250-500 mg 2x/j avec durée réduite"
+    },
+    "adverse_effects": [
+      "Troubles digestifs (nausées, diarrhée, douleurs abdominales — fréquents)",
+      "Altération du goût (dysgueusie — caractéristique des macrolides)",
+      "Céphalées",
+      "Élévation transaminases (hépatotoxicité — rare)",
+      "Allongement QTc (surtout doses élevées)",
+      "Colite pseudomembraneuse (C. difficile)"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Statines métabolisées par CYP3A4 (simvastatine, lovastatine, atorvastatine)",
+        "severity": "Majeur",
+        "effect": "Inhibition puissante CYP3A4 → augmentation majeure AUC statines → RHABDOMYOLYSE (douleurs musculaires, élévation CPK, insuffisance rénale aiguë). Simvastatine/lovastatine : CONTRE-INDIQUÉS. Atorvastatine : max 20 mg/j. Préférer pravastatine ou rosuvastatine (faible métabolisme CYP3A4)."
+      },
+      {
+        "drug": "Colchicine",
+        "severity": "Majeur",
+        "effect": "Inhibition P-gp et CYP3A4 → accumulation colchicine → toxicité grave (myopathie, pancytopénie, défaillance multi-organe). CONTRE-INDIQUÉ en insuffisance rénale/hépatique. Réduire dose colchicine en fonction normale."
+      },
+      {
+        "drug": "Warfarine / AVK",
+        "severity": "Majeur",
+        "effect": "Inhibition CYP2C9 + réduction flore intestinale → potentialisation anticoagulation → hémorragie grave — surveiller INR étroitement."
+      },
+      {
+        "drug": "Cisapride / Pimozide / Terfénadine / Astémizole / Érythromycine IV",
+        "severity": "Majeur",
+        "effect": "Allongement QTc → torsades de pointes — CONTRE-INDIQUÉS ABSOLUS."
+      },
+      {
+        "drug": "Digoxine",
+        "severity": "Majeur",
+        "effect": "Inhibition P-gp intestinale → augmentation absorption digoxine + réduction flore métabolisante → toxicité digitalique (bradycardie, BAV, nausées). Surveiller digoxinémie."
+      },
+      {
+        "drug": "Ciclosporine / Tacrolimus / Sirolimus",
+        "severity": "Majeur",
+        "effect": "Inhibition CYP3A4 → accumulation immunosuppresseur → néphrotoxicité, toxicité neurologique — surveiller taux et créatinine."
+      },
+      {
+        "drug": "Rifampicine / Rifabutine / Rifapentine",
+        "severity": "Majeur",
+        "effect": "Inducteurs CYP3A4 → réduction AUC clarithromycine 75% → perte efficacité antibactérienne — éviter association."
+      },
+      {
+        "drug": "Benzodiazépines (midazolam, triazolam)",
+        "severity": "Modéré",
+        "effect": "Inhibition CYP3A4 → accumulation benzodiazépine → sédation excessive — réduire dose benzodiazépine."
+      }
+    ],
+    "interactions": [
+      "Statines",
+      "Ergotamine",
+      "Colchicine"
+    ],
+    "half_life": "3-4h (clarithromycine) / 5-6h (métabolite actif 14-OH-clarithromycine). Demi-vie effective prolongée par métabolite actif.",
+    "pregnancy": {
+      "category": "C",
+      "notes": "Données insuffisantes chez la femme enceinte. Études animales : embryotoxicité à fortes doses. Éviter sauf si pas d'alternative. Les macrolides de référence en grossesse sont l'azithromycine et la spiramycine. Déconseillé au 1er trimestre.",
+      "breastfeeding": "Passe dans le lait maternel. À éviter pendant l'allaitement."
+    },
+    "children": {
+      "safe": true,
+      "min_age": "6 mois",
+      "dose_adjustment": "7.5 mg/kg 2x/j (max 500 mg 2x/j) — suspension pédiatrique disponible",
+      "notes": "AMM pédiatrique ≥ 6 mois. Suspension buvable 125mg/5ml et 250mg/5ml disponibles."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "notes": "DFG < 30 ml/min : réduire dose de 50% ou doubler l'intervalle. Insuffisance hépatique sévère : contre-indiqué sans insuffisance rénale associée."
+    },
+    "market_data": [
+      {
+        "price": 85.0,
+        "price_ppv_dhs": 85.0,
+        "packaging": "Comprimé pelliculé Boîte de 14",
+        "laboratory": "ABBOTT MAROC / MYLAN MAROC",
+        "url": "https://medicament.ma/medicament/klacid-250-mg-comprime/"
+      }
+    ],
+    "smart_flags": [
+      "⚠️ Inhibiteur CYP3A4 PUISSANT — vérifier toutes les associations",
+      "💊 Statines CYP3A4 (simvastatine/lovastatine) : CONTRE-INDIQUÉ — risque rhabdomyolyse",
+      "🫀 Allongement QTc — ECG si facteurs de risque",
+      "🫘 Ajustement si DFG < 30 ml/min",
+      "💊 Tableau A"
+    ],
+    "composition": [
+      {
+        "name": "Clarithromycine 250 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "klacid_clarithromycine_250_mg_250_mg"
+  },
+  {
+    "id": "klacid_500_mg",
+    "brand_name": "KLACID",
+    "generic_name": "Clarithromycine 500 mg",
+    "strength": "500 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Oral",
+    "atc_code": "J01FA09",
+    "tableau_maroc": "A",
+    "therapeutic_group": "Infectiologie / Antibiotique macrolide",
+    "drug_class": "Macrolide de 2e génération — inhibiteur synthèse protéique bactérienne (sous-unité 50S)",
+    "mechanism": "Liaison réversible à la sous-unité 50S du ribosome bactérien (site 23S rRNA) → blocage de la translocation peptidique → inhibition bactériostatique (bactéricide aux fortes concentrations). Spectre élargi vs érythromycine (activité sur Haemophilus, mycobactéries, Helicobacter pylori).",
+    "indications": [
+      "Infections respiratoires hautes et basses (pneumonie à germes atypiques — Mycoplasma, Chlamydophila, Legionella)",
+      "Infections ORL (sinusite, otite, angine — en alternative pénicillines)",
+      "Infections cutanées à germes sensibles",
+      "Éradication Helicobacter pylori (trithérapie avec IPP + amoxicilline)",
+      "Prévention et traitement infections à Mycobacterium avium (VIH)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Association avec cisapride, pimozide, terfénadine, astémizole (risque QT)",
+      "Association avec simvastatine ou lovastatine (rhabdomyolyse)",
+      "Association avec colchicine en insuffisance rénale/hépatique",
+      "Insuffisance hépatique sévère sans insuffisance rénale"
+    ],
+    "dosage": {
+      "adult": "250-500 mg 2x/j pendant 7-14 jours selon infection. Max 2 g/j (infections sévères).",
+      "children": "7.5 mg/kg 2x/j (suspension 125 ou 250 mg/5 ml)",
+      "h_pylori": "500 mg 2x/j + IPP + amoxicilline 1g 2x/j pendant 7-14 jours",
+      "renal": "DFG < 30 ml/min : 250 mg 1x/j ou 250-500 mg 2x/j avec durée réduite"
+    },
+    "adverse_effects": [
+      "Troubles digestifs (nausées, diarrhée, douleurs abdominales — fréquents)",
+      "Altération du goût (dysgueusie — caractéristique des macrolides)",
+      "Céphalées",
+      "Élévation transaminases (hépatotoxicité — rare)",
+      "Allongement QTc (surtout doses élevées)",
+      "Colite pseudomembraneuse (C. difficile)"
+    ],
+    "drug_interactions": [
+      {
+        "drug": "Statines métabolisées par CYP3A4 (simvastatine, lovastatine, atorvastatine)",
+        "severity": "Majeur",
+        "effect": "Inhibition puissante CYP3A4 → augmentation majeure AUC statines → RHABDOMYOLYSE (douleurs musculaires, élévation CPK, insuffisance rénale aiguë). Simvastatine/lovastatine : CONTRE-INDIQUÉS. Atorvastatine : max 20 mg/j. Préférer pravastatine ou rosuvastatine (faible métabolisme CYP3A4)."
+      },
+      {
+        "drug": "Colchicine",
+        "severity": "Majeur",
+        "effect": "Inhibition P-gp et CYP3A4 → accumulation colchicine → toxicité grave (myopathie, pancytopénie, défaillance multi-organe). CONTRE-INDIQUÉ en insuffisance rénale/hépatique. Réduire dose colchicine en fonction normale."
+      },
+      {
+        "drug": "Warfarine / AVK",
+        "severity": "Majeur",
+        "effect": "Inhibition CYP2C9 + réduction flore intestinale → potentialisation anticoagulation → hémorragie grave — surveiller INR étroitement."
+      },
+      {
+        "drug": "Cisapride / Pimozide / Terfénadine / Astémizole / Érythromycine IV",
+        "severity": "Majeur",
+        "effect": "Allongement QTc → torsades de pointes — CONTRE-INDIQUÉS ABSOLUS."
+      },
+      {
+        "drug": "Digoxine",
+        "severity": "Majeur",
+        "effect": "Inhibition P-gp intestinale → augmentation absorption digoxine + réduction flore métabolisante → toxicité digitalique (bradycardie, BAV, nausées). Surveiller digoxinémie."
+      },
+      {
+        "drug": "Ciclosporine / Tacrolimus / Sirolimus",
+        "severity": "Majeur",
+        "effect": "Inhibition CYP3A4 → accumulation immunosuppresseur → néphrotoxicité, toxicité neurologique — surveiller taux et créatinine."
+      },
+      {
+        "drug": "Rifampicine / Rifabutine / Rifapentine",
+        "severity": "Majeur",
+        "effect": "Inducteurs CYP3A4 → réduction AUC clarithromycine 75% → perte efficacité antibactérienne — éviter association."
+      },
+      {
+        "drug": "Benzodiazépines (midazolam, triazolam)",
+        "severity": "Modéré",
+        "effect": "Inhibition CYP3A4 → accumulation benzodiazépine → sédation excessive — réduire dose benzodiazépine."
+      }
+    ],
+    "interactions": [
+      "Statines",
+      "Ergotamine",
+      "Colchicine"
+    ],
+    "half_life": "3-4h (clarithromycine) / 5-6h (métabolite actif 14-OH-clarithromycine). Demi-vie effective prolongée par métabolite actif.",
+    "pregnancy": {
+      "category": "C",
+      "notes": "Données insuffisantes chez la femme enceinte. Études animales : embryotoxicité à fortes doses. Éviter sauf si pas d'alternative. Les macrolides de référence en grossesse sont l'azithromycine et la spiramycine. Déconseillé au 1er trimestre.",
+      "breastfeeding": "Passe dans le lait maternel. À éviter pendant l'allaitement."
+    },
+    "children": {
+      "safe": true,
+      "min_age": "6 mois",
+      "dose_adjustment": "7.5 mg/kg 2x/j (max 500 mg 2x/j) — suspension pédiatrique disponible",
+      "notes": "AMM pédiatrique ≥ 6 mois. Suspension buvable 125mg/5ml et 250mg/5ml disponibles."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "notes": "DFG < 30 ml/min : réduire dose de 50% ou doubler l'intervalle. Insuffisance hépatique sévère : contre-indiqué sans insuffisance rénale associée."
+    },
+    "market_data": [
+      {
+        "price": 152.0,
+        "price_ppv_dhs": 152.0,
+        "packaging": "Comprimé pelliculé Boîte de 14",
+        "laboratory": "ABBOTT MAROC / MYLAN MAROC",
+        "url": "https://medicament.ma/medicament/klacid-500-mg-comprime/"
+      }
+    ],
+    "smart_flags": [
+      "⚠️ Inhibiteur CYP3A4 PUISSANT — vérifier toutes les associations",
+      "💊 Statines CYP3A4 (simvastatine/lovastatine) : CONTRE-INDIQUÉ — risque rhabdomyolyse",
+      "🫀 Allongement QTc — ECG si facteurs de risque",
+      "🫘 Ajustement si DFG < 30 ml/min",
+      "💊 Tableau A"
+    ],
+    "composition": [
+      {
+        "name": "Clarithromycine 500 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "klacid_clarithromycine_500_mg_500_mg"
+  },
+  {
+    "id": "klipal_codeine_300_mg_/_25_mg_comprimé_boite_de_10",
+    "brand_name": "KLIPAL",
+    "generic_name": "Paracétamol + Codéine",
+    "strength": "CODEINE 300 MG / 25 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N02BE51",
+    "therapeutic_group": "Analgésiques - Palier II",
+    "drug_class": "Association paracétamol + opioïde faible",
+    "indications": [
+      "Douleurs modérées non soulagées par paracétamol seul ou AINS"
+    ],
+    "contraindications": [
+      "Enfant < 12 ans",
+      "Insuffisance respiratoire sévère",
+      "Asthme aigu",
+      "Métaboliseurs ultra-rapides CYP2D6",
+      "Allaitement",
+      "IMAO"
+    ],
+    "interactions": [
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Syndrome sérotoninergique"
+      },
+      {
+        "drug": "Benzodiazépines, Alcool",
+        "severity": "majeure",
+        "effect": "Dépression respiratoire"
+      },
+      {
+        "drug": "AVK",
+        "severity": "modérée",
+        "effect": "Augmentation INR (paracétamol prolongé)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter fin de grossesse. Paracétamol seul préféré.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 12,
+      "warning": "CONTRE-INDIQUÉ < 12 ans.",
+      "dose_rule": "≥ 12 ans: 1 cp 1-3x/jour. Max 6 cp/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC modérée: espacer prises. IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "1-2 cp toutes les 4-6h. Max 6 cp/jour.",
+      "children": "≥ 12 ans: 1 cp/6h."
+    },
+    "market_data": [
+      {
+        "price": 13.1,
+        "packaging": "Boite de 10",
+        "laboratory": "MAPHAR",
+        "url": "https://www.medicament.ma/medicament/klipal-codeine-300-mg-25-mg-comprime",
+        "price_ppv_dhs": 13.1
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Moclobémide",
+          "Sélégiline"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Syndrome sérotoninergique",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression respiratoire + hépatotoxicité",
+        "recommendation": "INTERDIRE l'alcool."
+      },
+      {
+        "interacting_drugs": [
+          "Diazépam",
+          "Alprazolam",
+          "Zolpidem"
+        ],
+        "interacting_classes": [
+          "BZD/Hypnotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression respiratoire",
+        "recommendation": "Réduire doses."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation INR",
+        "recommendation": "Surveiller INR."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INTERACTION_ALCOOL"
+    ],
+    "tableau_maroc": "A",
+    "drugbank_id": "DB00318",
+    "mechanism": "Paracétamol: inhibition centrale COX. Codéine: pro-drogue → morphine (CYP2D6) → agoniste µ.",
+    "half_life": "Paracétamol: 1-4h. Codéine: 2.5-3h.",
+    "adverse_effects": [
+      "Constipation",
+      "Nausées",
+      "Somnolence",
+      "Dépendance",
+      "Hépatotoxicité (surdosage paracétamol)"
+    ],
+    "composition": [
+      {
+        "name": "Paracétamol",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Codéine",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "klipal_paracetamol_codeine_codeine_300_mg_25_mg"
+  },
+  {
+    "id": "koate-dvi_1000_ui_/_10_ml_poudre_et_solvant_pour_solution_injectable_intraveineuse_boite_d'un_flacon_de_poudre_et_un_flacon_de_5_ml_de_solvant",
+    "brand_name": "KOATE-DVI",
+    "generic_name": "Facteur VIII de coagulation (humain)",
+    "strength": "1000 UI / 10 ML",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "B02BD02",
+    "therapeutic_group": "Hémostatiques - Facteurs de coagulation",
+    "drug_class": "Facteur VIII antihémophilique d'origine plasmatique",
+    "indications": [
+      "Hémophilie A (déficit en facteur VIII)",
+      "Traitement et prévention des épisodes hémorragiques",
+      "Prophylaxie avant chirurgie chez l'hémophile A"
+    ],
+    "contraindications": [
+      "Hypersensibilité au facteur VIII ou aux protéines murines",
+      "CIVD active (sauf hémorragie menaçante)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aucune interaction médicamenteuse significative connue",
+        "severity": "mineure",
+        "effect": "N/A"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé dès la naissance chez l'hémophile.",
+      "dose_rule": "Dose selon taux cible de facteur VIII et poids. UI = poids (kg) × augmentation souhaitée (%) × 0.5."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Dose individualisée. Hémorragie mineure: 10-20 UI/kg. Hémorragie majeure/chirurgie: 25-50 UI/kg.",
+      "children": "Même calcul que l'adulte."
+    },
+    "market_data": [
+      {
+        "price": 3577,
+        "packaging": "et solvant pour solution injectable intraveineuse Boite d'un flacon de poudre et un flacon de 5 ml de solvant",
+        "laboratory": "ZENITH PHARMA",
+        "url": "https://www.medicament.ma/medicament/koate-dvi-1000-ui-10-ml-poudre",
+        "price_ppv_dhs": 3577.0
+      }
+    ],
+    "drugbank_id": "DB13999",
+    "mechanism": "Apport exogène de facteur VIII → correction du déficit en facteur VIII → restauration de la cascade de coagulation intrinsèque.",
+    "half_life": "8-12 heures",
+    "adverse_effects": [
+      "Réactions allergiques",
+      "Formation d'inhibiteurs anti-facteur VIII",
+      "Fièvre",
+      "Frissons",
+      "Hémolyse (rare)"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Facteur VIII de coagulation (humain)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "koate_dvi_facteur_viii_de_coagulation_humain_1000_ui_10_ml"
+  },
+  {
+    "id": "koate-dvi_250_ui_/_5_ml_poudre_et_solvant_pour_solution_injectable_intraveineuse_boite_d'un_flacon_de_poudre_et_un_flacon_de_5_ml_de_solvant",
+    "brand_name": "KOATE-DVI",
+    "generic_name": "Facteur VIII de coagulation (humain)",
+    "strength": "250 UI / 5 ML",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "B02BD02",
+    "therapeutic_group": "Hémostatiques - Facteurs de coagulation",
+    "drug_class": "Facteur VIII antihémophilique d'origine plasmatique",
+    "indications": [
+      "Hémophilie A (déficit en facteur VIII)",
+      "Traitement et prévention des épisodes hémorragiques",
+      "Prophylaxie avant chirurgie chez l'hémophile A"
+    ],
+    "contraindications": [
+      "Hypersensibilité au facteur VIII ou aux protéines murines",
+      "CIVD active (sauf hémorragie menaçante)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aucune interaction médicamenteuse significative connue",
+        "severity": "mineure",
+        "effect": "N/A"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé dès la naissance chez l'hémophile.",
+      "dose_rule": "Dose selon taux cible de facteur VIII et poids. UI = poids (kg) × augmentation souhaitée (%) × 0.5."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Dose individualisée. Hémorragie mineure: 10-20 UI/kg. Hémorragie majeure/chirurgie: 25-50 UI/kg.",
+      "children": "Même calcul que l'adulte."
+    },
+    "market_data": [
+      {
+        "price": 1071,
+        "packaging": "et solvant pour solution injectable intraveineuse Boite d'un flacon de poudre et un flacon de 5 ml de solvant",
+        "laboratory": "ZENITH PHARMA",
+        "url": "https://www.medicament.ma/medicament/koate-dvi-250-ui-5-ml-poudre",
+        "price_ppv_dhs": 1071.0
+      }
+    ],
+    "drugbank_id": "DB13999",
+    "mechanism": "Apport exogène de facteur VIII → correction du déficit en facteur VIII → restauration de la cascade de coagulation intrinsèque.",
+    "half_life": "8-12 heures",
+    "adverse_effects": [
+      "Réactions allergiques",
+      "Formation d'inhibiteurs anti-facteur VIII",
+      "Fièvre",
+      "Frissons",
+      "Hémolyse (rare)"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Facteur VIII de coagulation (humain)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "koate_dvi_facteur_viii_de_coagulation_humain_250_ui_5_ml"
+  },
+  {
+    "id": "koate-dvi_500_ui_/_5_ml_poudre_et_solvant_pour_solution_injectable_intraveineuse_flacon_de_poudre_et_un_flacon_de_5_ml_de_solvant",
+    "brand_name": "KOATE-DVI",
+    "generic_name": "Facteur VIII de coagulation (humain)",
+    "strength": "500 UI / 5 ML",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "B02BD02",
+    "therapeutic_group": "Hémostatiques - Facteurs de coagulation",
+    "drug_class": "Facteur VIII antihémophilique d'origine plasmatique",
+    "indications": [
+      "Hémophilie A (déficit en facteur VIII)",
+      "Traitement et prévention des épisodes hémorragiques",
+      "Prophylaxie avant chirurgie chez l'hémophile A"
+    ],
+    "contraindications": [
+      "Hypersensibilité au facteur VIII ou aux protéines murines",
+      "CIVD active (sauf hémorragie menaçante)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aucune interaction médicamenteuse significative connue",
+        "severity": "mineure",
+        "effect": "N/A"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé dès la naissance chez l'hémophile.",
+      "dose_rule": "Dose selon taux cible de facteur VIII et poids. UI = poids (kg) × augmentation souhaitée (%) × 0.5."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Dose individualisée. Hémorragie mineure: 10-20 UI/kg. Hémorragie majeure/chirurgie: 25-50 UI/kg.",
+      "children": "Même calcul que l'adulte."
+    },
+    "market_data": [
+      {
+        "price": 1752,
+        "packaging": "et solvant pour solution injectable intraveineuse Flacon de poudre et un flacon de 5 ml de solvant",
+        "laboratory": "ZENITH PHARMA",
+        "url": "https://www.medicament.ma/medicament/koate-dvi-500-ui-5-ml-poudre",
+        "price_ppv_dhs": 1752.0
+      }
+    ],
+    "drugbank_id": "DB13999",
+    "mechanism": "Apport exogène de facteur VIII → correction du déficit en facteur VIII → restauration de la cascade de coagulation intrinsèque.",
+    "half_life": "8-12 heures",
+    "adverse_effects": [
+      "Réactions allergiques",
+      "Formation d'inhibiteurs anti-facteur VIII",
+      "Fièvre",
+      "Frissons",
+      "Hémolyse (rare)"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Facteur VIII de coagulation (humain)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "koate_dvi_facteur_viii_de_coagulation_humain_500_ui_5_ml"
+  },
+  {
+    "id": "kogenate_fs_bayer_1000_ui_poudre_pour_préparation_injectable_poudre_et_solvant_pour_solution_injectable_/_1_kit_1000_ui",
+    "brand_name": "KOGENATE",
+    "generic_name": "Octocog alfa (Facteur VIII recombinant)",
+    "strength": "FS BAYER 1000 UI",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "B02BD02",
+    "therapeutic_group": "Hémostatiques - Facteurs de coagulation",
+    "drug_class": "Facteur VIII antihémophilique recombinant",
+    "indications": [
+      "Hémophilie A",
+      "Traitement/prévention des hémorragies",
+      "Prophylaxie au long cours",
+      "Couverture chirurgicale"
+    ],
+    "contraindications": [
+      "Hypersensibilité à l'octocog alfa ou aux protéines de hamster"
+    ],
+    "interactions": [
+      {
+        "drug": "Aucune interaction significative",
+        "severity": "mineure",
+        "effect": "N/A"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé dès la naissance.",
+      "dose_rule": "Prophylaxie: 25-50 UI/kg 3x/semaine."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "Prophylaxie: 20-40 UI/kg 3x/sem. Curatif: selon taux cible.",
+      "children": "25-50 UI/kg 3x/sem."
+    },
+    "market_data": [
+      {
+        "price": 6936,
+        "packaging": "pour préparation injectable Poudre et solvant pour solution injectable / 1 KIT 1000 UI",
+        "laboratory": "BAYER S.A",
+        "url": "https://www.medicament.ma/medicament/kogenate-fs-bayer-1000-ui-poudre",
+        "price_ppv_dhs": 6936.0
+      }
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "drugbank_id": "DB09310",
+    "mechanism": "Facteur VIII recombinant → restauration de la cascade de coagulation intrinsèque.",
+    "half_life": "10-14 heures",
+    "adverse_effects": [
+      "Réactions allergiques",
+      "Formation d'inhibiteurs",
+      "Réactions au site d'injection"
+    ],
+    "composition": [
+      {
+        "name": "Octocog alfa (Facteur VIII recombinant)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kogenate_octocog_alfa_facteur_viii_recombinant_fs_bayer_1000_ui"
+  },
+  {
+    "id": "konakion_mm_10_mg_/_ml_solution_de_micelles_mixtes_pour_injection_ou_voie_orale_5_ampoules_de_1_ml",
+    "brand_name": "KONAKION",
+    "generic_name": "Phytoménadione (Vitamine K1)",
+    "strength": "MM 10 MG / ML",
+    "form": "Solution",
+    "route": "Orale / IV / IM",
+    "atc_code": "B02BA01",
+    "therapeutic_group": "Antihémorragiques - Vitamine K",
+    "drug_class": "Vitamine K1",
+    "indications": [
+      "Prévention maladie hémorragique du nouveau-né",
+      "Surdosage AVK (antidote)",
+      "Hypoprothrombinémie",
+      "Déficit en vitamine K"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "AVK (Warfarine, Sintrom)",
+        "severity": "majeure",
+        "effect": "ANTIDOTE — antagonise l'effet des AVK"
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Compatible.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Indispensable chez le nouveau-né.",
+      "dose_rule": "Nouveau-né: 2 mg PO à la naissance, J4-7, M1."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "Surdosage AVK: 1-10 mg PO/IV selon INR. Hémorragie sous AVK: 10 mg IV lente.",
+      "children": "Nouveau-né: 2 mg PO."
+    },
+    "market_data": [
+      {
+        "price": 62,
+        "packaging": "de micelles mixtes pour injection ou voie orale 5 ampoules de 1 ml",
+        "laboratory": "BOTTU S.A.",
+        "url": "https://www.medicament.ma/medicament/konakion-mm-10-mg-ml-solution",
+        "price_ppv_dhs": 62.0
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "INFO",
+        "effect": "ANTIDOTE — normalise l'INR",
+        "recommendation": "Usage thérapeutique volontaire."
+      }
+    ],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "drugbank_id": "DB01022",
+    "mechanism": "Cofacteur de la gamma-glutamyl carboxylase → activation des facteurs II, VII, IX, X.",
+    "half_life": "1.5-3 heures",
+    "adverse_effects": [
+      "Réactions anaphylactoïdes (IV rapide, rare)",
+      "Douleur au point d'injection"
+    ],
+    "composition": [
+      {
+        "name": "Phytoménadione (Vitamine K1)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "konakion_phytomenadione_vitamine_k1_mm_10_mg_ml"
+  },
+  {
+    "id": "konakion_mm_2_mg_/_0.2_ml_solution_pédiatrique_pour_usage_oral_ou_parentéral_(im/iv)_boîte_de_5_ampoules_de_0.2_ml",
+    "brand_name": "KONAKION",
+    "generic_name": "Phytoménadione (Vitamine K1)",
+    "strength": "MM 2 MG / 0.2 ML",
+    "form": "Solution",
+    "route": "Orale / IV / IM",
+    "atc_code": "B02BA01",
+    "therapeutic_group": "Antihémorragiques - Vitamine K",
+    "drug_class": "Vitamine K1",
+    "indications": [
+      "Prévention maladie hémorragique du nouveau-né",
+      "Surdosage AVK (antidote)",
+      "Hypoprothrombinémie",
+      "Déficit en vitamine K"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "AVK (Warfarine, Sintrom)",
+        "severity": "majeure",
+        "effect": "ANTIDOTE — antagonise l'effet des AVK"
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Compatible.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Indispensable chez le nouveau-né.",
+      "dose_rule": "Nouveau-né: 2 mg PO à la naissance, J4-7, M1."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "Surdosage AVK: 1-10 mg PO/IV selon INR. Hémorragie sous AVK: 10 mg IV lente.",
+      "children": "Nouveau-né: 2 mg PO."
+    },
+    "market_data": [
+      {
+        "price": 115.9,
+        "packaging": "pédiatrique pour usage oral ou parentéral (IM/IV) Boîte de 5 ampoules de 0.2 ml",
+        "laboratory": "BOTTU S.A.",
+        "url": "https://www.medicament.ma/medicament/konakion-mm-2-mg-0-2-ml-solution",
+        "price_ppv_dhs": 115.9
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "INFO",
+        "effect": "ANTIDOTE — normalise l'INR",
+        "recommendation": "Usage thérapeutique volontaire."
+      }
+    ],
+    "smart_flags": [],
+    "tableau_maroc": "HTC",
+    "drugbank_id": "DB01022",
+    "mechanism": "Cofacteur de la gamma-glutamyl carboxylase → activation des facteurs II, VII, IX, X.",
+    "half_life": "1.5-3 heures",
+    "adverse_effects": [
+      "Réactions anaphylactoïdes (IV rapide, rare)",
+      "Douleur au point d'injection"
+    ],
+    "composition": [
+      {
+        "name": "Phytoménadione (Vitamine K1)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "konakion_phytomenadione_vitamine_k1_mm_2_mg_0_2_ml"
+  },
+  {
+    "id": "kopred_20_mg_comprimé_effervescent_boite_de_20",
+    "brand_name": "KOPRED",
+    "generic_name": "Prednisolone",
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticostéroïdes systémiques",
+    "drug_class": "Glucocorticoïde de synthèse",
+    "indications": [
+      "Maladies inflammatoires (PR, Crohn, RCH)",
+      "Maladies auto-immunes (LED, vascularites)",
+      "Asthme aigu sévère",
+      "Réactions allergiques sévères",
+      "Insuffisance surrénalienne",
+      "Néphropathie (syndrome néphrotique)",
+      "Croup chez l'enfant",
+      "Hémopathies malignes (en association)"
+    ],
+    "contraindications": [
+      "Infection systémique non contrôlée (sauf si traitement spécifique)",
+      "Vaccins vivants (si dose immunosuppressive)",
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "AINS (Ibuprofène, Diclofénac)",
+        "severity": "majeure",
+        "effect": "Risque accru d'ulcère gastroduodénal et d'hémorragie digestive"
+      },
+      {
+        "drug": "Insuline, Antidiabétiques oraux",
+        "severity": "modérée",
+        "effect": "Hyperglycémie (effet diabétogène des corticostéroïdes)"
+      },
+      {
+        "drug": "Anticoagulants oraux (AVK)",
+        "severity": "modérée",
+        "effect": "Modification imprévisible de l'INR"
+      },
+      {
+        "drug": "Diurétiques hypokaliémiants",
+        "severity": "modérée",
+        "effect": "Hypokaliémie accrue"
+      },
+      {
+        "drug": "Phénytoïne, Rifampicine, Phénobarbital",
+        "severity": "modérée",
+        "effect": "Diminution de l'efficacité du corticoïde (inducteurs enzymatiques)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Dose minimale efficace. Risque de RCIU et insuffisance surrénalienne néonatale à forte dose.",
+      "breastfeeding": "Compatible à faible dose (<20 mg/jour). Espacer allaitement si forte dose."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie. Surveiller la croissance en traitement prolongé.",
+      "dose_rule": "Asthme aigu: 1-2 mg/kg/jour x 3-5 jours. Syndrome néphrotique: 2 mg/kg/jour (max 60 mg). Anti-inflammatoire: 0.5-2 mg/kg/jour."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Attaque: 0.5-2 mg/kg/jour selon indication. Entretien: dose minimale efficace, dégression progressive. NE JAMAIS ARRÊTER BRUTALEMENT si durée > 10 jours.",
+      "children": "Asthme: 1-2 mg/kg/j x 3-5j. Néphrotique: 2 mg/kg/j (max 60 mg)."
+    },
+    "market_data": [
+      {
+        "price": 36.4,
+        "packaging": "effervescent Boite de 20",
+        "laboratory": "PH: 24.05 dhs - PHARMA5",
+        "url": "https://www.medicament.ma/medicament/kopred-20-mg-comprime",
+        "price_ppv_dhs": 36.4
+      }
+    ],
+    "drugbank_id": "DB00860",
+    "mechanism": "Liaison aux récepteurs intracellulaires des glucocorticoïdes → modulation de la transcription génique → effets anti-inflammatoire puissant, immunosuppresseur et antiallergique.",
+    "half_life": "2-4 heures (mais durée d'action biologique 12-36h)",
+    "adverse_effects": [
+      "Prise de poids",
+      "Faciès cushingoïde",
+      "Diabète cortico-induit",
+      "Ostéoporose",
+      "Retard de croissance (enfant)",
+      "Immunodépression",
+      "HTA",
+      "Troubles psychiatriques",
+      "Insuffisance surrénalienne (sevrage brutal)",
+      "Ulcère gastrique",
+      "Cataracte",
+      "Glaucome"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Diclofénac",
+          "Kétoprofène",
+          "Piroxicam",
+          "Fenac",
+          "Feldene",
+          "Ketoflex"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru d'ulcère gastroduodénal et d'hémorragie GI",
+        "recommendation": "Associer un IPP si AINS indispensable."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Metformine",
+          "Glibenclamide",
+          "Gliclazide",
+          "Diamicron"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hyperglycémie (effet diabétogène des corticoïdes)",
+        "recommendation": "Surveiller glycémie. Ajuster antidiabétiques."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Modification imprévisible de l'INR",
+        "recommendation": "Surveiller INR à l'initiation et à l'arrêt du corticoïde."
+      },
+      {
+        "interacting_drugs": [
+          "Furosémide",
+          "Hydrochlorothiazide",
+          "Indapamide"
+        ],
+        "interacting_classes": [
+          "Diurétiques hypokaliémiants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypokaliémie accrue",
+        "recommendation": "Surveiller kaliémie. Supplémentation K+ si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Phénytoïne",
+          "Phénobarbital",
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'efficacité du corticoïde",
+        "recommendation": "Augmenter dose de prednisolone si nécessaire."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Prednisolone",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kopred_prednisolone_20_mg"
+  },
+  {
+    "id": "kopred_5_mg_comprimé_effervescent_boite_de_30",
+    "brand_name": "KOPRED",
+    "generic_name": "Prednisolone",
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticostéroïdes systémiques",
+    "drug_class": "Glucocorticoïde de synthèse",
+    "indications": [
+      "Maladies inflammatoires (PR, Crohn, RCH)",
+      "Maladies auto-immunes (LED, vascularites)",
+      "Asthme aigu sévère",
+      "Réactions allergiques sévères",
+      "Insuffisance surrénalienne",
+      "Néphropathie (syndrome néphrotique)",
+      "Croup chez l'enfant",
+      "Hémopathies malignes (en association)"
+    ],
+    "contraindications": [
+      "Infection systémique non contrôlée (sauf si traitement spécifique)",
+      "Vaccins vivants (si dose immunosuppressive)",
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "AINS (Ibuprofène, Diclofénac)",
+        "severity": "majeure",
+        "effect": "Risque accru d'ulcère gastroduodénal et d'hémorragie digestive"
+      },
+      {
+        "drug": "Insuline, Antidiabétiques oraux",
+        "severity": "modérée",
+        "effect": "Hyperglycémie (effet diabétogène des corticostéroïdes)"
+      },
+      {
+        "drug": "Anticoagulants oraux (AVK)",
+        "severity": "modérée",
+        "effect": "Modification imprévisible de l'INR"
+      },
+      {
+        "drug": "Diurétiques hypokaliémiants",
+        "severity": "modérée",
+        "effect": "Hypokaliémie accrue"
+      },
+      {
+        "drug": "Phénytoïne, Rifampicine, Phénobarbital",
+        "severity": "modérée",
+        "effect": "Diminution de l'efficacité du corticoïde (inducteurs enzymatiques)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Dose minimale efficace. Risque de RCIU et insuffisance surrénalienne néonatale à forte dose.",
+      "breastfeeding": "Compatible à faible dose (<20 mg/jour). Espacer allaitement si forte dose."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie. Surveiller la croissance en traitement prolongé.",
+      "dose_rule": "Asthme aigu: 1-2 mg/kg/jour x 3-5 jours. Syndrome néphrotique: 2 mg/kg/jour (max 60 mg). Anti-inflammatoire: 0.5-2 mg/kg/jour."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Attaque: 0.5-2 mg/kg/jour selon indication. Entretien: dose minimale efficace, dégression progressive. NE JAMAIS ARRÊTER BRUTALEMENT si durée > 10 jours.",
+      "children": "Asthme: 1-2 mg/kg/j x 3-5j. Néphrotique: 2 mg/kg/j (max 60 mg)."
+    },
+    "market_data": [
+      {
+        "price": 23,
+        "packaging": "effervescent Boite de 30",
+        "laboratory": "PH: 15.20 dhs - PHARMA5",
+        "url": "https://www.medicament.ma/medicament/kopred-5-mg-comprime",
+        "price_ppv_dhs": 23.0
+      }
+    ],
+    "drugbank_id": "DB00860",
+    "mechanism": "Liaison aux récepteurs intracellulaires des glucocorticoïdes → modulation de la transcription génique → effets anti-inflammatoire puissant, immunosuppresseur et antiallergique.",
+    "half_life": "2-4 heures (mais durée d'action biologique 12-36h)",
+    "adverse_effects": [
+      "Prise de poids",
+      "Faciès cushingoïde",
+      "Diabète cortico-induit",
+      "Ostéoporose",
+      "Retard de croissance (enfant)",
+      "Immunodépression",
+      "HTA",
+      "Troubles psychiatriques",
+      "Insuffisance surrénalienne (sevrage brutal)",
+      "Ulcère gastrique",
+      "Cataracte",
+      "Glaucome"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Diclofénac",
+          "Kétoprofène",
+          "Piroxicam",
+          "Fenac",
+          "Feldene",
+          "Ketoflex"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru d'ulcère gastroduodénal et d'hémorragie GI",
+        "recommendation": "Associer un IPP si AINS indispensable."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Metformine",
+          "Glibenclamide",
+          "Gliclazide",
+          "Diamicron"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hyperglycémie (effet diabétogène des corticoïdes)",
+        "recommendation": "Surveiller glycémie. Ajuster antidiabétiques."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Modification imprévisible de l'INR",
+        "recommendation": "Surveiller INR à l'initiation et à l'arrêt du corticoïde."
+      },
+      {
+        "interacting_drugs": [
+          "Furosémide",
+          "Hydrochlorothiazide",
+          "Indapamide"
+        ],
+        "interacting_classes": [
+          "Diurétiques hypokaliémiants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypokaliémie accrue",
+        "recommendation": "Surveiller kaliémie. Supplémentation K+ si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Phénytoïne",
+          "Phénobarbital",
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'efficacité du corticoïde",
+        "recommendation": "Augmenter dose de prednisolone si nécessaire."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Prednisolone",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kopred_prednisolone_5_mg"
+  },
+  {
+    "id": "kyprolis_60_mg_poudre_pour_solution_injectable_boite_de_1_flacon",
+    "brand_name": "KYPROLIS",
+    "generic_name": "Carfilzomib",
+    "strength": "60 MG",
+    "form": "Poudre",
+    "route": "IV",
+    "atc_code": "L01XG02",
+    "therapeutic_group": "Antinéoplasiques - Inhibiteurs du protéasome",
+    "drug_class": "Inhibiteur irréversible du protéasome (époxycétone)",
+    "indications": [
+      "Myélome multiple en rechute ou réfractaire (en association avec lénalidomide + dexaméthasone ou dexaméthasone seule)"
+    ],
+    "contraindications": [
+      "Hypersensibilité au carfilzomib",
+      "Grossesse et allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Pas d'interactions CYP significatives (le carfilzomib est métabolisé principalement par peptidastes et époxyde hydrolase)",
+        "severity": "mineure",
+        "effect": "Faible potentiel d'interactions médicamenteuses"
+      },
+      {
+        "drug": "Dexaméthasone forte dose",
+        "severity": "modérée",
+        "effect": "Association thérapeutique standard mais risque infectieux accru"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué. Embryotoxique. Contraception obligatoire pendant et 30 jours (femme) / 90 jours (homme) après le traitement.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Sécurité non établie.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si ClCr ≥15 mL/min. Non étudié en dialyse."
+    },
+    "dosage": {
+      "adult": "Cycle 1: 20 mg/m² J1,2 puis 27 mg/m² à partir de J8. Cycles suivants: 27 mg/m² J1,2,8,9,15,16 (cycle 28j). Perfusion IV de 10-30 min. Hydratation obligatoire.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 12836,
+        "packaging": "pour solution injectable Boite de 1 flacon",
+        "laboratory": "AMANYS PHARMA (Ex SAHAM PHARMA)",
+        "url": "https://www.medicament.ma/medicament/kyprolis-60-mg-poudre",
+        "price_ppv_dhs": 12836.0
+      }
+    ],
+    "drugbank_id": "DB08889",
+    "mechanism": "Inhibition irréversible de l'activité chymotrypsine-like du protéasome 20S → accumulation de protéines mal repliées → stress du réticulum endoplasmique → apoptose des cellules myélomateuses.",
+    "half_life": "≤1 heure (mais inhibition du protéasome dure ≥48h)",
+    "adverse_effects": [
+      "Thrombocytopénie",
+      "Anémie",
+      "Fatigue",
+      "Nausées/Diarrhée",
+      "Dyspnée",
+      "Hypertension",
+      "Insuffisance cardiaque",
+      "Syndrome de lyse tumorale",
+      "Insuffisance rénale aiguë",
+      "Neuropathie périphérique"
+    ],
+    "drug_interactions": [],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "ALLAITEMENT_INTERDIT",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "tableau_maroc": "A",
+    "composition": [
+      {
+        "name": "Carfilzomib",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "kyprolis_carfilzomib_60_mg"
+  }
+]

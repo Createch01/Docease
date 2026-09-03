@@ -1,0 +1,11 @@
+﻿components/MedicalDirectory.tsx(54,25): error TS2551: Property 'deleteMedicalResource' does not exist on type '{ initialize: () => Promise<void>; getMedicines: () => Medicine[]; getTherapeuticGroups: () => string[]; getMedicinesByCategory: (category: string) => Medicine[]; ... 62 more ...; classifyAppointmentPriority: (note: string) => Promise<...>; }'. Did you mean 'getMedicalResources'?
+components/MedicamentsBrowser.tsx(507,28): error TS2322: Type '{ key: any; med: any; query: any; }' is not assignable to type 'MedCardProps'.
+  Property 'key' does not exist on type 'MedCardProps'.
+components/MedicamentsBrowser.tsx(556,21): error TS2322: Type '{ key: any; med: any; query: any; categoryAccent: string; categoryTextColor: string; }' is not assignable to type 'MedCardProps'.
+  Property 'key' does not exist on type 'MedCardProps'.
+components/PharmaDirectory.tsx(176,47): error TS2322: Type '{ key: any; form: any; }' is not assignable to type '{ form: string; }'.
+  Property 'key' does not exist on type '{ form: string; }'.
+components/PharmaDirectory.tsx(774,25): error TS2322: Type '{ key: any; group: any; query: any; onClick: () => any; }' is not assignable to type 'DrugGroupCardProps'.
+  Property 'key' does not exist on type 'DrugGroupCardProps'.
+components/prescription/MedicationList.tsx(107,123): error TS2339: Property 'length' does not exist on type 'unknown'.
+components/prescription/MedicationList.tsx(110,35): error TS2339: Property 'map' does not exist on type 'unknown'.

@@ -1,0 +1,6119 @@
+[
+  {
+    "id": "ubiprox_250_mg_comprim_pellicul",
+    "brand_name": "UBIPROX",
+    "generic_name": "Ciprofloxacine",
+    "strength": "250 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "J01MA02",
+    "therapeutic_group": "Antibactériens - Fluoroquinolones",
+    "drug_class": "Fluoroquinolone 2e génération",
+    "indications": [
+      "Infections urinaires",
+      "Prostatite",
+      "Infections gastro-intestinales",
+      "Infections respiratoires basses",
+      "Infections ostéo-articulaires",
+      "Anthrax"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux fluoroquinolones",
+      "Grossesse et allaitement",
+      "Enfant <18 ans (sauf exceptions)",
+      "Tendinopathie sous FQ",
+      "Association tizanidine"
+    ],
+    "interactions": [
+      "Antiacides",
+      "AINS"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué. Risque d'arthropathie.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI <18 ans (risque articulaire). Exceptions: anthrax, mucoviscidose.",
+      "dose_rule": "Si indiqué: 10-20 mg/kg/j en 2 prises (max 750 mg/dose)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-60: max 1000 mg/j. ClCr <30: max 500 mg/j."
+    },
+    "dosage": {
+      "adult": "250-750 mg 2x/j selon indication. Durée: 3-14 jours.",
+      "children": "Si indiqué: 10-20 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 32.7,
+        "price_ph": 21.6,
+        "packaging": "Boite de 10",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "price_ppv_dhs": 32.7
+      },
+      {
+        "price": 64.5,
+        "price_ph": 43,
+        "packaging": "Boite de 20",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "price_ppv_dhs": 64.5
+      },
+      {
+        "price": 92.5,
+        "price_ph": 61.67,
+        "packaging": "Boite de 30",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "price_ppv_dhs": 92.5
+      }
+    ],
+    "drugbank_id": "DB00537",
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Tendinopathie/rupture tendineuse",
+      "Neuropathie périphérique",
+      "Photosensibilisation",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tizanidine",
+          "Sirdalud"
+        ],
+        "interacting_classes": [
+          "Myorelaxants (agonistes alpha-2)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation massive des taux de tizanidine → hypotension, sédation",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Théophylline",
+          "Dilatrane"
+        ],
+        "interacting_classes": [
+          "Bases xanthiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation théophyllinémie → convulsions, arythmies",
+        "recommendation": "Doser théophylline et réduire dose."
+      },
+      {
+        "interacting_drugs": [
+          "Maalox",
+          "Gaviscon",
+          "Fer",
+          "Fermed",
+          "Calcium",
+          "Zinc"
+        ],
+        "interacting_classes": [
+          "Antiacides",
+          "Cations divalents"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution absorption ciprofloxacine",
+        "recommendation": "Prendre cipro 2h AVANT ou 6h APRÈS."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation anticoagulant",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution clairance MTX",
+        "recommendation": "Surveiller toxicité MTX."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation créatinine",
+        "recommendation": "Surveiller fonction rénale."
+      },
+      {
+        "interacting_drugs": [
+          "Corticostéroïdes"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru tendinopathie/rupture tendineuse",
+        "recommendation": "Éviter association. Arrêter FQ au moindre signe tendineux."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/ubiprox-250-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Ciprofloxacine",
+        "inn": "",
+        "dose": "250 MG"
+      }
+    ],
+    "record_id": "ubiprox_ciprofloxacine_250_mg",
+    "mechanism": "Fluoroquinolone : inhibition ADN gyrase.",
+    "half_life": "3-5 heures"
+  },
+  {
+    "id": "ubiprox_500_mg_comprim_pellicul",
+    "brand_name": "UBIPROX",
+    "generic_name": "Ciprofloxacine",
+    "strength": "500 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "J01MA02",
+    "therapeutic_group": "Antibactériens - Fluoroquinolones",
+    "drug_class": "Fluoroquinolone 2e génération",
+    "indications": [
+      "Infections urinaires",
+      "Prostatite",
+      "Infections gastro-intestinales",
+      "Infections respiratoires basses",
+      "Infections ostéo-articulaires",
+      "Anthrax"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux fluoroquinolones",
+      "Grossesse et allaitement",
+      "Enfant <18 ans (sauf exceptions)",
+      "Tendinopathie sous FQ",
+      "Association tizanidine"
+    ],
+    "interactions": [
+      "Antiacides",
+      "AINS"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué. Risque d'arthropathie.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI <18 ans (risque articulaire). Exceptions: anthrax, mucoviscidose.",
+      "dose_rule": "Si indiqué: 10-20 mg/kg/j en 2 prises (max 750 mg/dose)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-60: max 1000 mg/j. ClCr <30: max 500 mg/j."
+    },
+    "dosage": {
+      "adult": "250-750 mg 2x/j selon indication. Durée: 3-14 jours.",
+      "children": "Si indiqué: 10-20 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 92.5,
+        "price_ph": 61.11,
+        "packaging": "Boite de 20",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "price_ppv_dhs": 92.5
+      },
+      {
+        "price": 129.9,
+        "price_ph": 86.6,
+        "packaging": "Boite de 30",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "price_ppv_dhs": 129.9
+      },
+      {
+        "price": 52.8,
+        "price_ph": 34.88,
+        "packaging": "Boite de 10",
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "price_ppv_dhs": 52.8
+      }
+    ],
+    "drugbank_id": "DB00537",
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Tendinopathie/rupture tendineuse",
+      "Neuropathie périphérique",
+      "Photosensibilisation",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tizanidine",
+          "Sirdalud"
+        ],
+        "interacting_classes": [
+          "Myorelaxants (agonistes alpha-2)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation massive des taux de tizanidine → hypotension, sédation",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Théophylline",
+          "Dilatrane"
+        ],
+        "interacting_classes": [
+          "Bases xanthiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation théophyllinémie → convulsions, arythmies",
+        "recommendation": "Doser théophylline et réduire dose."
+      },
+      {
+        "interacting_drugs": [
+          "Maalox",
+          "Gaviscon",
+          "Fer",
+          "Fermed",
+          "Calcium",
+          "Zinc"
+        ],
+        "interacting_classes": [
+          "Antiacides",
+          "Cations divalents"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution absorption ciprofloxacine",
+        "recommendation": "Prendre cipro 2h AVANT ou 6h APRÈS."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation anticoagulant",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution clairance MTX",
+        "recommendation": "Surveiller toxicité MTX."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation créatinine",
+        "recommendation": "Surveiller fonction rénale."
+      },
+      {
+        "interacting_drugs": [
+          "Corticostéroïdes"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru tendinopathie/rupture tendineuse",
+        "recommendation": "Éviter association. Arrêter FQ au moindre signe tendineux."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/ubiprox-500-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Ciprofloxacine",
+        "inn": "",
+        "dose": "500 MG"
+      }
+    ],
+    "record_id": "ubiprox_ciprofloxacine_500_mg",
+    "mechanism": "Fluoroquinolone : inhibition ADN gyrase.",
+    "half_life": "3-5 heures"
+  },
+  {
+    "id": "ulcestop_400_mg_comprim",
+    "brand_name": "ULCESTOP",
+    "generic_name": "Famotidine",
+    "strength": "400 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A02BA03",
+    "therapeutic_group": "Antiulcéreux - Anti-H2",
+    "drug_class": "Antagoniste des récepteurs H2",
+    "indications": [
+      "RGO, ulcère gastroduodénal"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 123,
+        "price_ph": null,
+        "packaging": "Boîte de 60",
+        "laboratory": "PHARMA5",
+        "price_ppv_dhs": 123
+      },
+      {
+        "price": 55.6,
+        "price_ph": null,
+        "packaging": "Boîte de 20",
+        "laboratory": "PHARMA5",
+        "price_ppv_dhs": 55.6
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Fluconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés (absorption pH-dépendante)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "La famotidine élève le pH gastrique → diminution absorption des azolés",
+        "recommendation": "Administrer l'azolé 2h AVANT la famotidine. Préférer fluconazole (moins pH-dépendant)."
+      },
+      {
+        "interacting_drugs": [
+          "Atazanavir",
+          "Reyataz"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de protéase (absorption pH-dépendante)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution des concentrations d'atazanavir",
+        "recommendation": "Administrer atazanavir + ritonavir en même temps ou 10h après la famotidine."
+      },
+      {
+        "interacting_drugs": [
+          "Probénécide"
+        ],
+        "interacting_classes": [
+          "Uricosuriques"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Réduction de la clairance rénale de la famotidine → accumulation",
+        "recommendation": "Surveiller effets indésirables. Réduire dose si nécessaire."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL_SI_DFG_LT_50",
+      "PRISE_AVANT_REPAS_OU_AU_COUCHER",
+      "EVITER_ANTIACIDES_SIMULTANEMENT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/ulcestop-400-mg-comprime",
+    "composition": [
+      {
+        "name": "Famotidine",
+        "inn": "",
+        "dose": "400 MG"
+      }
+    ],
+    "record_id": "ulcestop_famotidine_400_mg",
+    "mechanism": "Antihistaminique H2 : réduction de la sécrétion acide gastrique.",
+    "half_life": "2.5-4 heures"
+  },
+  {
+    "id": "uloric_40_mg_comprim_pellicul",
+    "brand_name": "ULORIC",
+    "generic_name": "Fébuxostat",
+    "strength": "40 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "M04AA03",
+    "therapeutic_group": "Antigoutteux",
+    "drug_class": "Inhibiteur sélectif de la xanthine oxydase",
+    "indications": [
+      "Hyperuricémie chronique avec dépôts d'urate (goutte)"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association avec azathioprine ou mercaptopurine"
+    ],
+    "interactions": [
+      "Azathioprine (CI)"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Non recommandé.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si ClCr ≥ 30. Données limitées si < 30."
+    },
+    "dosage": {
+      "adult": "Début 40 mg/j. Si uricémie > 6 mg/dL après 2-4 sem: augmenter à 80 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 103.5,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "SPIMACO",
+        "price_ppv_dhs": 103.5
+      }
+    ],
+    "drugbank_id": "DB04854",
+    "adverse_effects": [
+      "Crises de goutte à l'initiation",
+      "Élévation transaminases",
+      "Nausées",
+      "Arthralgies",
+      "Rash"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Azathioprine",
+          "Imurel"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs (thiopurines)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure de la toxicité de l'azathioprine (défaut de métabolisme par XO)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Mercaptopurine",
+          "Purinéthol"
+        ],
+        "interacting_classes": [
+          "Antimétabolites (thiopurines)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Toxicité hématologique sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Théophylline",
+          "Dilatrane"
+        ],
+        "interacting_classes": [
+          "Bases xanthiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation possible des taux de théophylline",
+        "recommendation": "Doser théophyllinémie."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/uloric-40-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Fébuxostat",
+        "inn": "",
+        "dose": "40 MG"
+      }
+    ],
+    "record_id": "uloric_febuxostat_40_mg",
+    "mechanism": "Inhibiteur sélectif non-purinique de la xanthine oxydase.",
+    "half_life": "5-8 heures"
+  },
+  {
+    "id": "uloric_80_mg_comprim_pellicul",
+    "brand_name": "ULORIC",
+    "generic_name": "Fébuxostat",
+    "strength": "80 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "M04AA03",
+    "therapeutic_group": "Antigoutteux",
+    "drug_class": "Inhibiteur sélectif de la xanthine oxydase",
+    "indications": [
+      "Hyperuricémie chronique avec dépôts d'urate (goutte)"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association avec azathioprine ou mercaptopurine"
+    ],
+    "interactions": [
+      "Azathioprine (CI)"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Non recommandé.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement si ClCr ≥ 30. Données limitées si < 30."
+    },
+    "dosage": {
+      "adult": "Début 40 mg/j. Si uricémie > 6 mg/dL après 2-4 sem: augmenter à 80 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 175.4,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "SPIMACO",
+        "price_ppv_dhs": 175.4
+      }
+    ],
+    "drugbank_id": "DB04854",
+    "adverse_effects": [
+      "Crises de goutte à l'initiation",
+      "Élévation transaminases",
+      "Nausées",
+      "Arthralgies",
+      "Rash"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Azathioprine",
+          "Imurel"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs (thiopurines)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure de la toxicité de l'azathioprine (défaut de métabolisme par XO)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Mercaptopurine",
+          "Purinéthol"
+        ],
+        "interacting_classes": [
+          "Antimétabolites (thiopurines)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Toxicité hématologique sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Théophylline",
+          "Dilatrane"
+        ],
+        "interacting_classes": [
+          "Bases xanthiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation possible des taux de théophylline",
+        "recommendation": "Doser théophyllinémie."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/uloric-80-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Fébuxostat",
+        "inn": "",
+        "dose": "80 MG"
+      }
+    ],
+    "record_id": "uloric_febuxostat_80_mg",
+    "mechanism": "Inhibiteur sélectif non-purinique de la xanthine oxydase.",
+    "half_life": "5-8 heures"
+  },
+  {
+    "id": "U_UPFEN_200",
+    "brand_name": "UPFEN",
+    "generic_name": "Ibuprofène",
+    "strength": "200 MG",
+    "form": "Comprimé enrobé",
+    "route": "Orale",
+    "atc_code": "M01AE01",
+    "therapeutic_group": "AINS",
+    "composition": [
+      {
+        "name": "Ibuprofène",
+        "inn": "",
+        "dose": "200 MG"
+      }
+    ],
+    "dosage": "1 comprimé 3 fois/j. Dose max : 1200 mg/j en automédication.",
+    "market_data": [
+      {
+        "price": 14.3,
+        "price_ph": null,
+        "packaging": "Boîte de 12",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 14.3
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Acide acétylsalicylique"
+        ],
+        "interacting_classes": [
+          "Autres AINS / Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "L'ibuprofène bloque l'effet antiagrégant irréversible de l'aspirine faible dose sur les plaquettes.",
+        "recommendation": "Prendre l'aspirine cardio AU MOINS 30 min AVANT l'ibuprofène. Éviter association prolongée."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Acenocoumarol",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Anticoagulants oraux AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation risque hémorragique (inhibition agrégation + déplacement liaison protéique AVK).",
+        "recommendation": "Association déconseillée. Si indispensable: INR quotidien, durée la plus courte possible."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate > 15 mg/semaine"
+        ],
+        "interacting_classes": [
+          "Antifoliques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "AINS réduit l'élimination rénale du méthotrexate → toxicité hématologique sévère.",
+        "recommendation": "CONTRE-INDIQUÉ avec MTX doses intermédiaires/hautes. Prudence avec MTX faible dose (rhumatologie)."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Teralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "AINS diminuent l'élimination rénale du lithium → accumulation → intoxication.",
+        "recommendation": "Surveiller lithiémie 3-4 jours après initiation AINS. Préférer paracétamol si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Lisinopril",
+          "Losartan",
+          "Valsartan"
+        ],
+        "interacting_classes": [
+          "IEC / ARA2"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Atténuation de l'effet antihypertenseur. Risque insuffisance rénale aiguë (triple whammy si diurétique associé).",
+        "recommendation": "Surveillance TA et créatinine. Éviter chez patient IRC ou insuffisant cardiaque."
+      },
+      {
+        "interacting_drugs": [
+          "Diurétiques (furosémide, hydrochlorothiazide)"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Réduction effet diurétique + risque insuffisance rénale (triple whammy).",
+        "recommendation": "Bonne hydratation. Surveiller créatinine et kaliémie."
+      }
+    ],
+    "smart_flags": [
+      "AINS",
+      "ESTOMAC_PROTECTION_RECOMMANDEE",
+      "GROSSESSE_CONTRE_INDIQUEE_T2_T3",
+      "GROSSESSE_EVITER_T1",
+      "ALLAITEMENT_FAIBLE_DOSE_COMPATIBLE",
+      "PRISE_AVEC_REPAS_OU_LAIT",
+      "INSUFFISANCE_RENALE_PRUDENCE",
+      "INSUFFISANCE_CARDIAQUE_CI",
+      "ULCERE_ACTIF_CI",
+      "DOSE_MINIMALE_EFFICACE"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "CI au T3 (fermeture prématurée du canal artériel).",
+      "breastfeeding": "Eviter."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 3,
+      "warning": "Pédiatrie >= 3 ans selon indication.",
+      "dose_rule": "5-10 mg/kg/prise."
+    },
+    "record_id": "upfen_ibuprofene_200_mg",
+    "mechanism": "AINS : inhibition COX-1/COX-2.",
+    "half_life": "2 heures",
+    "indications": [
+      "Douleurs, fièvre, inflammation"
+    ],
+    "contraindications": [
+      "Ulcère évolutif"
+    ],
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "adverse_effects": [
+      "Troubles digestifs"
+    ],
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas de données spécifiques disponibles, prudence usuelle recommandée en cas d'insuffisance rénale."
+    }
+  },
+  {
+    "id": "U_UPFEN_400",
+    "brand_name": "UPFEN",
+    "generic_name": "Ibuprofène",
+    "strength": "400 MG",
+    "form": "Comprimé enrobé",
+    "route": "Orale",
+    "atc_code": "M01AE01",
+    "therapeutic_group": "AINS",
+    "composition": [
+      {
+        "name": "Ibuprofène",
+        "inn": "",
+        "dose": "400 MG"
+      }
+    ],
+    "dosage": "1 comprimé 3 fois/j. Dose max : 1200 mg/j (automédication) ou 2400 mg/j (prescription).",
+    "market_data": [
+      {
+        "price": 22.6,
+        "price_ph": null,
+        "packaging": "Boîte de 12",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 22.6
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Acide acétylsalicylique"
+        ],
+        "interacting_classes": [
+          "Autres AINS / Antiagrégants"
+        ],
+        "severity": "DANGER",
+        "effect": "L'ibuprofène bloque l'effet antiagrégant irréversible de l'aspirine faible dose sur les plaquettes.",
+        "recommendation": "Prendre l'aspirine cardio AU MOINS 30 min AVANT l'ibuprofène. Éviter association prolongée."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Acenocoumarol",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Anticoagulants oraux AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation risque hémorragique (inhibition agrégation + déplacement liaison protéique AVK).",
+        "recommendation": "Association déconseillée. Si indispensable: INR quotidien, durée la plus courte possible."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate > 15 mg/semaine"
+        ],
+        "interacting_classes": [
+          "Antifoliques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "AINS réduit l'élimination rénale du méthotrexate → toxicité hématologique sévère.",
+        "recommendation": "CONTRE-INDIQUÉ avec MTX doses intermédiaires/hautes. Prudence avec MTX faible dose (rhumatologie)."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Teralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "AINS diminuent l'élimination rénale du lithium → accumulation → intoxication.",
+        "recommendation": "Surveiller lithiémie 3-4 jours après initiation AINS. Préférer paracétamol si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Lisinopril",
+          "Losartan",
+          "Valsartan"
+        ],
+        "interacting_classes": [
+          "IEC / ARA2"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Atténuation de l'effet antihypertenseur. Risque insuffisance rénale aiguë (triple whammy si diurétique associé).",
+        "recommendation": "Surveillance TA et créatinine. Éviter chez patient IRC ou insuffisant cardiaque."
+      },
+      {
+        "interacting_drugs": [
+          "Diurétiques (furosémide, hydrochlorothiazide)"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Réduction effet diurétique + risque insuffisance rénale (triple whammy).",
+        "recommendation": "Bonne hydratation. Surveiller créatinine et kaliémie."
+      }
+    ],
+    "smart_flags": [
+      "AINS",
+      "ESTOMAC_PROTECTION_RECOMMANDEE",
+      "GROSSESSE_CONTRE_INDIQUEE_T2_T3",
+      "GROSSESSE_EVITER_T1",
+      "ALLAITEMENT_FAIBLE_DOSE_COMPATIBLE",
+      "PRISE_AVEC_REPAS_OU_LAIT",
+      "INSUFFISANCE_RENALE_PRUDENCE",
+      "INSUFFISANCE_CARDIAQUE_CI",
+      "ULCERE_ACTIF_CI",
+      "DOSE_MINIMALE_EFFICACE"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "CI au T3 (fermeture prématurée du canal artériel).",
+      "breastfeeding": "Eviter."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Pédiatrie >= 6 ans.",
+      "dose_rule": "10 mg/kg/prise max 3x/j."
+    },
+    "record_id": "upfen_ibuprofene_400_mg",
+    "mechanism": "AINS : inhibition COX-1/COX-2.",
+    "half_life": "2 heures",
+    "indications": [
+      "Douleurs, fièvre, inflammation"
+    ],
+    "contraindications": [
+      "Ulcère évolutif"
+    ],
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "adverse_effects": [
+      "Troubles digestifs"
+    ],
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas de données spécifiques disponibles, prudence usuelle recommandée en cas d'insuffisance rénale."
+    }
+  },
+  {
+    "id": "ultibro_breezhaler_110_mcg_50_mcg_poudre_pour_inhalation_en_g_lule",
+    "brand_name": "ULTIBRO BREEZHALER",
+    "generic_name": "Indacatérol + Glycopyrronium (inhalé)",
+    "strength": "110 MCG / 50 MCG",
+    "form": "Poudre pour inhalation en gélule",
+    "route": "Inhalée",
+    "atc_code": "R03AL04",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "LABA + LAMA",
+    "indications": [
+      "BPCO"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Bêta-bloquants"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 676,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "NOVARTIS PHARMA MAROC",
+        "price_ppv_dhs": 676
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aténolol",
+          "Bisoprolol",
+          "Métoprolol",
+          "Carvédilol"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Antagonisme pharmacologique sur la bronchodilatation β2",
+        "recommendation": "Éviter bêta-bloquants non sélectifs (propranolol). Préférer cardiosélectifs avec surveillance."
+      },
+      {
+        "interacting_drugs": [
+          "Tiotropium",
+          "Ipratropium",
+          "Bromure d'aclidinium"
+        ],
+        "interacting_classes": [
+          "Anticholinergiques inhalés"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Effet anticholinergique additif → rétention urinaire, glaucome",
+        "recommendation": "Ne pas associer à un autre anticholinergique inhalé (Spiriva, Eklira)."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Sotalol",
+          "Érythromycine IV"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QT"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque additif d'allongement du QT",
+        "recommendation": "Surveiller ECG. Éviter associations multiples."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/ultibro-breezhaler-110-mcg-50-mcg-poudre-pour-inhalation-en-gelule",
+    "composition": [
+      {
+        "name": "Indacatérol",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Glycopyrronium (inhalé)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "ultibro_breezhaler_indacaterol_glycopyrronium_inhale_110_mcg_50_mcg",
+    "mechanism": "Double bronchodilatation longue durée.",
+    "half_life": "variable"
+  },
+  {
+    "id": "ultra_levure_250_mg_g_lule",
+    "brand_name": "ULTRA-LEVURE",
+    "generic_name": "Saccharomyces boulardii",
+    "strength": "250 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A07FA02",
+    "therapeutic_group": "Probiotiques",
+    "drug_class": "Probiotique (levure)",
+    "indications": [
+      "Diarrhée aiguë, post-antibiothérapie"
+    ],
+    "contraindications": [
+      "Immunodépression sévère"
+    ],
+    "interactions": [
+      "Antifongiques"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 60.8,
+        "price_ph": null,
+        "packaging": "Boite de 20",
+        "laboratory": "BIOCODEX MAROC",
+        "price_ppv_dhs": 60.8
+      },
+      {
+        "price": 34.6,
+        "price_ph": null,
+        "packaging": "Flacon de 10",
+        "laboratory": "BIOCODEX MAROC",
+        "price_ppv_dhs": 34.6
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Ballonnements légers"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluconazole",
+          "Kétoconazole",
+          "Itraconazole",
+          "Voriconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Les antifongiques détruisent Saccharomyces boulardii (levure vivante) → perte d'efficacité totale",
+        "recommendation": "NE PAS associer. Espacer d'au moins 48-72h d'un antifongique systémique."
+      },
+      {
+        "interacting_drugs": [
+          "Amphotéricine B"
+        ],
+        "interacting_classes": [
+          "Antifongiques polyéniques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Destruction de S. boulardii",
+        "recommendation": "Association contre-indiquée."
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "ANTIFONGIQUES_CI",
+      "IMMUNODEPRIME_PRUDENCE",
+      "VOIE_CENTRALE_PRUDENCE",
+      "PROBIOTIQUE",
+      "ESPACER_DES_ANTIFONGIQUES_48H",
+      "CONSERVER_SEC"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/ultra-levure-250-mg-gelule",
+    "composition": [
+      {
+        "name": "Saccharomyces boulardii",
+        "inn": "",
+        "dose": "250 MG"
+      }
+    ],
+    "record_id": "ultra_levure_saccharomyces_boulardii_250_mg",
+    "mechanism": "Probiotique levure : restauration de la flore intestinale.",
+    "half_life": "non pertinent (non absorbé)"
+  },
+  {
+    "id": "ultra_levure_250_mg_sachet",
+    "brand_name": "ULTRA-LEVURE",
+    "generic_name": "Saccharomyces boulardii",
+    "strength": "250 MG",
+    "form": "Sachet",
+    "route": "Orale",
+    "atc_code": "A07FA02",
+    "therapeutic_group": "Probiotiques",
+    "drug_class": "Probiotique (levure)",
+    "indications": [
+      "Diarrhée aiguë, post-antibiothérapie"
+    ],
+    "contraindications": [
+      "Immunodépression sévère"
+    ],
+    "interactions": [
+      "Antifongiques"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 67,
+        "price_ph": 44.27,
+        "packaging": "Boite de 20",
+        "laboratory": "BIOCODEX MAROC",
+        "price_ppv_dhs": 67
+      },
+      {
+        "price": 35.6,
+        "price_ph": null,
+        "packaging": "Boîte de 10",
+        "laboratory": "BIOCODEX MAROC",
+        "price_ppv_dhs": 35.6
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Ballonnements légers"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluconazole",
+          "Kétoconazole",
+          "Itraconazole",
+          "Voriconazole"
+        ],
+        "interacting_classes": [
+          "Antifongiques azolés"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Les antifongiques détruisent Saccharomyces boulardii (levure vivante) → perte d'efficacité totale",
+        "recommendation": "NE PAS associer. Espacer d'au moins 48-72h d'un antifongique systémique."
+      },
+      {
+        "interacting_drugs": [
+          "Amphotéricine B"
+        ],
+        "interacting_classes": [
+          "Antifongiques polyéniques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Destruction de S. boulardii",
+        "recommendation": "Association contre-indiquée."
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "ANTIFONGIQUES_CI",
+      "IMMUNODEPRIME_PRUDENCE",
+      "VOIE_CENTRALE_PRUDENCE",
+      "PROBIOTIQUE",
+      "ESPACER_DES_ANTIFONGIQUES_48H",
+      "CONSERVER_SEC"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/ultra-levure-250-mg-sachet",
+    "composition": [
+      {
+        "name": "Saccharomyces boulardii",
+        "inn": "",
+        "dose": "250 MG"
+      }
+    ],
+    "record_id": "ultra_levure_saccharomyces_boulardii_250_mg_2",
+    "mechanism": "Probiotique levure : restauration de la flore intestinale.",
+    "half_life": "non pertinent (non absorbé)"
+  },
+  {
+    "id": "ultravist_300_mg_ml_solution_injectable",
+    "brand_name": "ULTRAVIST",
+    "generic_name": "Iopromide (produit de contraste iodé)",
+    "strength": "300 MG / ML",
+    "form": "Solution injectable",
+    "route": "IV",
+    "atc_code": "V08AB05",
+    "therapeutic_group": "Produits de contraste",
+    "drug_class": "Produit de contraste iodé non ionique",
+    "indications": [
+      "Imagerie radiologique avec contraste"
+    ],
+    "contraindications": [
+      "Hyperthyroïdie non contrôlée"
+    ],
+    "interactions": [
+      "Metformine"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 194.6,
+        "price_ph": null,
+        "packaging": "Flacon de 50 ml",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 194.6
+      },
+      {
+        "price": 75.8,
+        "price_ph": null,
+        "packaging": "Flacon de 20 ml",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 75.8
+      },
+      {
+        "price": 388,
+        "price_ph": null,
+        "packaging": "Flacon de 100 ml",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 388
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Néphrotoxicité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Metformine",
+          "Glucophage",
+          "Stagid"
+        ],
+        "interacting_classes": [
+          "Biguanides"
+        ],
+        "severity": "DANGER",
+        "effect": "Insuffisance rénale induite par contraste → accumulation de metformine → acidose lactique",
+        "recommendation": "ARRÊTER la metformine 48h AVANT l'injection. Reprendre 48h APRÈS si créatinine normale."
+      },
+      {
+        "interacting_drugs": [
+          "Aminosides",
+          "AINS",
+          "Ciclosporine",
+          "Tacrolimus"
+        ],
+        "interacting_classes": [
+          "Néphrotoxiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Néphrotoxicité additive → risque de néphropathie aux produits de contraste",
+        "recommendation": "Hydratation IV préventive. Minimiser dose de contraste. Surveiller créatinine 24-48h après."
+      },
+      {
+        "interacting_drugs": [
+          "Interleukine-2",
+          "Proleukin"
+        ],
+        "interacting_classes": [
+          "Immunomodulateurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque accru de réactions retardées aux contrastes iodés",
+        "recommendation": "Délai de 2 semaines recommandé entre IL-2 et injection de contraste."
+      },
+      {
+        "interacting_drugs": [
+          "Bêta-bloquants"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "En cas de réaction anaphylactoïde, les bêta-bloquants masquent l'effet de l'adrénaline",
+        "recommendation": "Avoir adrénaline disponible. Dose plus élevée d'adrénaline si réaction."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/ultravist-300-mg-ml-solution-injectable",
+    "composition": [
+      {
+        "name": "Iopromide (produit de contraste iodé)",
+        "inn": "",
+        "dose": "300 MG / ML"
+      }
+    ],
+    "record_id": "ultravist_iopromide_produit_de_contraste_iode_300_mg_ml",
+    "mechanism": "Produit de contraste iodé non ionique.",
+    "half_life": "2 heures"
+  },
+  {
+    "id": "ultravist_370_mg_ml_solution_injectable",
+    "brand_name": "ULTRAVIST",
+    "generic_name": "Iopromide (produit de contraste iodé)",
+    "strength": "370 MG / ML",
+    "form": "Solution injectable",
+    "route": "IV",
+    "atc_code": "V08AB05",
+    "therapeutic_group": "Produits de contraste",
+    "drug_class": "Produit de contraste iodé non ionique",
+    "indications": [
+      "Imagerie radiologique avec contraste"
+    ],
+    "contraindications": [
+      "Hyperthyroïdie non contrôlée"
+    ],
+    "interactions": [
+      "Metformine"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 230,
+        "price_ph": null,
+        "packaging": "Flacon de 50 ml",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 230
+      },
+      {
+        "price": 434,
+        "price_ph": null,
+        "packaging": "Flacon de 100 ml",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 434
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Néphrotoxicité"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Metformine",
+          "Glucophage",
+          "Stagid"
+        ],
+        "interacting_classes": [
+          "Biguanides"
+        ],
+        "severity": "DANGER",
+        "effect": "Insuffisance rénale induite par contraste → accumulation de metformine → acidose lactique",
+        "recommendation": "ARRÊTER la metformine 48h AVANT l'injection. Reprendre 48h APRÈS si créatinine normale."
+      },
+      {
+        "interacting_drugs": [
+          "Aminosides",
+          "AINS",
+          "Ciclosporine",
+          "Tacrolimus"
+        ],
+        "interacting_classes": [
+          "Néphrotoxiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Néphrotoxicité additive → risque de néphropathie aux produits de contraste",
+        "recommendation": "Hydratation IV préventive. Minimiser dose de contraste. Surveiller créatinine 24-48h après."
+      },
+      {
+        "interacting_drugs": [
+          "Interleukine-2",
+          "Proleukin"
+        ],
+        "interacting_classes": [
+          "Immunomodulateurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque accru de réactions retardées aux contrastes iodés",
+        "recommendation": "Délai de 2 semaines recommandé entre IL-2 et injection de contraste."
+      },
+      {
+        "interacting_drugs": [
+          "Bêta-bloquants"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "En cas de réaction anaphylactoïde, les bêta-bloquants masquent l'effet de l'adrénaline",
+        "recommendation": "Avoir adrénaline disponible. Dose plus élevée d'adrénaline si réaction."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/ultravist-370-mg-ml-solution-injectable",
+    "composition": [
+      {
+        "name": "Iopromide (produit de contraste iodé)",
+        "inn": "",
+        "dose": "370 MG / ML"
+      }
+    ],
+    "record_id": "ultravist_iopromide_produit_de_contraste_iode_370_mg_ml",
+    "mechanism": "Produit de contraste iodé non ionique.",
+    "half_life": "2 heures"
+  },
+  {
+    "id": "umax_400_g_0_4mg_g_lule",
+    "brand_name": "UMAX",
+    "generic_name": "Tamsulosine",
+    "strength": "400 µg (0.4MG)",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "G04CA02",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Alpha-1 bloquant sélectif",
+    "indications": [
+      "Hypertrophie bénigne de la prostate"
+    ],
+    "contraindications": [
+      "Hypotension orthostatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs PDE5"
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 113.4,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "COOPER PHARMA",
+        "price_ppv_dhs": 113.4
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Trouble de l'éjaculation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Clarithromycine",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4/CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation significative des taux de tamsulosine → hypotension sévère",
+        "recommendation": "Association déconseillée avec inhibiteurs puissants. Surveillance TA en position debout."
+      },
+      {
+        "interacting_drugs": [
+          "Sildénafil",
+          "Viagra",
+          "Tadalafil",
+          "Cialis",
+          "Vardénafil"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs PDE5"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension orthostatique sévère (effet α-bloquant additif)",
+        "recommendation": "Prendre PDE5i au moins 6h après tamsulosine. Commencer à plus faible dose de PDE5i."
+      },
+      {
+        "interacting_drugs": [
+          "Doxazosine",
+          "Térazosine",
+          "Alfuzosine"
+        ],
+        "interacting_classes": [
+          "Autres alpha-bloquants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension additive sévère",
+        "recommendation": "Ne pas associer deux alpha-bloquants."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/umax-400-g-0-4mg-gelule",
+    "composition": [
+      {
+        "name": "Tamsulosine",
+        "inn": "",
+        "dose": "400 µg (0.4MG)"
+      }
+    ],
+    "record_id": "umax_tamsulosine_400_g_0_4mg",
+    "mechanism": "Alpha-1 bloquant urosélectif.",
+    "half_life": "10-13 heures"
+  },
+  {
+    "id": "umax_400_g_lp_0_4_mg_g_lule",
+    "brand_name": "UMAX",
+    "generic_name": "Tamsulosine",
+    "strength": "400 µg LP (0.4 MG)",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "G04CA02",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Alpha-1 bloquant sélectif",
+    "indications": [
+      "Hypertrophie bénigne de la prostate"
+    ],
+    "contraindications": [
+      "Hypotension orthostatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs PDE5"
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 199.7,
+        "price_ph": null,
+        "packaging": "Boîte de 60",
+        "laboratory": "COOPER PHARMA",
+        "price_ppv_dhs": 199.7
+      },
+      {
+        "price": 43.1,
+        "price_ph": null,
+        "packaging": "Boîte de 10",
+        "laboratory": "COOPER PHARMA",
+        "price_ppv_dhs": 43.1
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Trouble de l'éjaculation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Clarithromycine",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4/CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation significative des taux de tamsulosine → hypotension sévère",
+        "recommendation": "Association déconseillée avec inhibiteurs puissants. Surveillance TA en position debout."
+      },
+      {
+        "interacting_drugs": [
+          "Sildénafil",
+          "Viagra",
+          "Tadalafil",
+          "Cialis",
+          "Vardénafil"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs PDE5"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension orthostatique sévère (effet α-bloquant additif)",
+        "recommendation": "Prendre PDE5i au moins 6h après tamsulosine. Commencer à plus faible dose de PDE5i."
+      },
+      {
+        "interacting_drugs": [
+          "Doxazosine",
+          "Térazosine",
+          "Alfuzosine"
+        ],
+        "interacting_classes": [
+          "Autres alpha-bloquants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension additive sévère",
+        "recommendation": "Ne pas associer deux alpha-bloquants."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/umax-400-g-lp-0-4-mg-gelule",
+    "composition": [
+      {
+        "name": "Tamsulosine",
+        "inn": "",
+        "dose": "400 µg LP (0.4 MG)"
+      }
+    ],
+    "record_id": "umax_tamsulosine_400_g_lp_0_4_mg",
+    "mechanism": "Alpha-1 bloquant urosélectif.",
+    "half_life": "10-13 heures"
+  },
+  {
+    "id": "umuline_nph_100_ui_ml_suspension_injectable",
+    "brand_name": "UMULINE NPH",
+    "generic_name": "Insuline NPH (humaine)",
+    "strength": "100 UI / ML",
+    "form": "Suspension injectable",
+    "route": "SC",
+    "atc_code": "A10AC01",
+    "therapeutic_group": "Insulines",
+    "drug_class": "Insuline intermédiaire (NPH)",
+    "indications": [
+      "Diabète nécessitant insulinothérapie"
+    ],
+    "contraindications": [
+      "Hypoglycémie"
+    ],
+    "interactions": [
+      "Bêta-bloquants"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 166,
+        "price_ph": 109.68,
+        "packaging": "Flacon de 10 ML",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 166
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypoglycémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aténolol",
+          "Bisoprolol",
+          "Propranolol",
+          "Métoprolol"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage des signes adrénergiques de l'hypoglycémie (tachycardie). Hypoglycémie prolongée.",
+        "recommendation": "Automesure renforcée. Préférer bêta-bloquants cardiosélectifs. Attention à la sueur (signe non masqué)."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Méthylprednisolone",
+          "Dexaméthasone",
+          "Bétaméthasone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperglycémie franche → déséquilibre diabétique majeur",
+        "recommendation": "Augmenter les doses d'insuline. Glycémies pluriquotidiennes. Diabète cortisonique à surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Bière",
+          "Vin"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "DANGER",
+        "effect": "Potentialisation hypoglycémiante + masquage des symptômes",
+        "recommendation": "Éviter la consommation à jeun. Collation systématique. Ne pas conduire."
+      },
+      {
+        "interacting_drugs": [
+          "Ciprofloxacine",
+          "Lévofloxacine",
+          "Moxifloxacine"
+        ],
+        "interacting_classes": [
+          "Fluoroquinolones"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Dysglycémie (hypoglycémie ou hyperglycémie) imprévisible",
+        "recommendation": "Surveillance glycémique renforcée pendant toute la durée du traitement."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Lisinopril"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Augmentation de la sensibilité à l'insuline → risque hypoglycémie",
+        "recommendation": "Glycémies de contrôle à l'initiation ou changement de dose IEC."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "HYPOGLYCEMIE_RISQUE",
+      "CONSERVATION_FRIGO_2_8C",
+      "FLACON_OUVERT_28J_TEMPERATURE_AMBIANTE",
+      "TECHNIQUE_INJECTION_REQUISE",
+      "ROTATION_SITES_INJECTION",
+      "SURVEILLER_GLYCEMIE_PLURIQUOTIDIENNE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/umuline-nph-100-ui-ml-suspension-injectable",
+    "composition": [
+      {
+        "name": "Insuline NPH (humaine)",
+        "inn": "",
+        "dose": "100 UI / ML"
+      }
+    ],
+    "record_id": "umuline_nph_insuline_nph_humaine_100_ui_ml",
+    "mechanism": "Insuline humaine protaminée à action intermédiaire.",
+    "half_life": "action 12-18h"
+  },
+  {
+    "id": "umuline_nph_kwikpen_100_ui_ml_suspension_injectable_stylo_pr_rempli",
+    "brand_name": "UMULINE NPH KWIKPEN",
+    "generic_name": "Insuline NPH (humaine)",
+    "strength": "100 UI / ML",
+    "form": "Suspension injectable stylo pré-rempli",
+    "route": "SC",
+    "atc_code": "A10AC01",
+    "therapeutic_group": "Insulines",
+    "drug_class": "Insuline intermédiaire (NPH)",
+    "indications": [
+      "Diabète nécessitant insulinothérapie"
+    ],
+    "contraindications": [
+      "Hypoglycémie"
+    ],
+    "interactions": [
+      "Bêta-bloquants"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 104,
+        "price_ph": 68.71,
+        "packaging": "Stylo pré-rempli de 3 ml",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 104
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypoglycémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aténolol",
+          "Bisoprolol",
+          "Propranolol",
+          "Métoprolol"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage des signes adrénergiques de l'hypoglycémie (tachycardie). Hypoglycémie prolongée.",
+        "recommendation": "Automesure renforcée. Préférer bêta-bloquants cardiosélectifs. Attention à la sueur (signe non masqué)."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Méthylprednisolone",
+          "Dexaméthasone",
+          "Bétaméthasone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperglycémie franche → déséquilibre diabétique majeur",
+        "recommendation": "Augmenter les doses d'insuline. Glycémies pluriquotidiennes. Diabète cortisonique à surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Bière",
+          "Vin"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "DANGER",
+        "effect": "Potentialisation hypoglycémiante + masquage des symptômes",
+        "recommendation": "Éviter la consommation à jeun. Collation systématique. Ne pas conduire."
+      },
+      {
+        "interacting_drugs": [
+          "Ciprofloxacine",
+          "Lévofloxacine",
+          "Moxifloxacine"
+        ],
+        "interacting_classes": [
+          "Fluoroquinolones"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Dysglycémie (hypoglycémie ou hyperglycémie) imprévisible",
+        "recommendation": "Surveillance glycémique renforcée pendant toute la durée du traitement."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Lisinopril"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Augmentation de la sensibilité à l'insuline → risque hypoglycémie",
+        "recommendation": "Glycémies de contrôle à l'initiation ou changement de dose IEC."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "HYPOGLYCEMIE_RISQUE",
+      "CONSERVATION_FRIGO_2_8C",
+      "FLACON_OUVERT_28J_TEMPERATURE_AMBIANTE",
+      "TECHNIQUE_INJECTION_REQUISE",
+      "ROTATION_SITES_INJECTION",
+      "SURVEILLER_GLYCEMIE_PLURIQUOTIDIENNE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/umuline-nph-kwikpen-100-ui-ml-suspension-injectable-stylo-pre-rempli",
+    "composition": [
+      {
+        "name": "Insuline NPH (humaine)",
+        "inn": "",
+        "dose": "100 UI / ML"
+      }
+    ],
+    "record_id": "umuline_nph_kwikpen_insuline_nph_humaine_100_ui_ml",
+    "mechanism": "Insuline humaine protaminée à action intermédiaire.",
+    "half_life": "action 12-18h"
+  },
+  {
+    "id": "umuline_nph_pen_100_ui_ml_suspension_injectable",
+    "brand_name": "UMULINE NPH PEN",
+    "generic_name": "Insuline NPH (humaine)",
+    "strength": "100 UI / ML",
+    "form": "Suspension injectable",
+    "route": "SC",
+    "atc_code": "A10AC01",
+    "therapeutic_group": "Insulines",
+    "drug_class": "Insuline intermédiaire (NPH)",
+    "indications": [
+      "Diabète nécessitant insulinothérapie"
+    ],
+    "contraindications": [
+      "Hypoglycémie"
+    ],
+    "interactions": [
+      "Bêta-bloquants"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 104,
+        "price_ph": 68.71,
+        "packaging": "Boîte de 1 stylo avec cartouche de 3 ml",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 104
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypoglycémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aténolol",
+          "Bisoprolol",
+          "Propranolol",
+          "Métoprolol"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage des signes adrénergiques de l'hypoglycémie (tachycardie). Hypoglycémie prolongée.",
+        "recommendation": "Automesure renforcée. Préférer bêta-bloquants cardiosélectifs. Attention à la sueur (signe non masqué)."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Méthylprednisolone",
+          "Dexaméthasone",
+          "Bétaméthasone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperglycémie franche → déséquilibre diabétique majeur",
+        "recommendation": "Augmenter les doses d'insuline. Glycémies pluriquotidiennes. Diabète cortisonique à surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Bière",
+          "Vin"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "DANGER",
+        "effect": "Potentialisation hypoglycémiante + masquage des symptômes",
+        "recommendation": "Éviter la consommation à jeun. Collation systématique. Ne pas conduire."
+      },
+      {
+        "interacting_drugs": [
+          "Ciprofloxacine",
+          "Lévofloxacine",
+          "Moxifloxacine"
+        ],
+        "interacting_classes": [
+          "Fluoroquinolones"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Dysglycémie (hypoglycémie ou hyperglycémie) imprévisible",
+        "recommendation": "Surveillance glycémique renforcée pendant toute la durée du traitement."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Lisinopril"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Augmentation de la sensibilité à l'insuline → risque hypoglycémie",
+        "recommendation": "Glycémies de contrôle à l'initiation ou changement de dose IEC."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "HYPOGLYCEMIE_RISQUE",
+      "CONSERVATION_FRIGO_2_8C",
+      "FLACON_OUVERT_28J_TEMPERATURE_AMBIANTE",
+      "TECHNIQUE_INJECTION_REQUISE",
+      "ROTATION_SITES_INJECTION",
+      "SURVEILLER_GLYCEMIE_PLURIQUOTIDIENNE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/umuline-nph-pen-100-ui-ml-suspension-injectable",
+    "composition": [
+      {
+        "name": "Insuline NPH (humaine)",
+        "inn": "",
+        "dose": "100 UI / ML"
+      }
+    ],
+    "record_id": "umuline_nph_pen_insuline_nph_humaine_100_ui_ml",
+    "mechanism": "Insuline humaine protaminée à action intermédiaire.",
+    "half_life": "action 12-18h"
+  },
+  {
+    "id": "umuline_profil_30_100_ui_ml_suspension_injectable",
+    "brand_name": "UMULINE PROFIL 30",
+    "generic_name": "Insuline mixte NPH/rapide (humaine)",
+    "strength": "100 UI / ML",
+    "form": "Suspension injectable",
+    "route": "SC",
+    "atc_code": "A10AD01",
+    "therapeutic_group": "Insulines",
+    "drug_class": "Insuline biphasique",
+    "indications": [
+      "Diabète nécessitant insulinothérapie"
+    ],
+    "contraindications": [
+      "Hypoglycémie"
+    ],
+    "interactions": [
+      "Bêta-bloquants"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 166,
+        "price_ph": null,
+        "packaging": "Flacon de 10 ml",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 166
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypoglycémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aténolol",
+          "Bisoprolol",
+          "Propranolol",
+          "Métoprolol"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage des signes adrénergiques de l'hypoglycémie (tachycardie). Hypoglycémie prolongée.",
+        "recommendation": "Automesure renforcée. Préférer bêta-bloquants cardiosélectifs. Attention à la sueur (signe non masqué)."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Méthylprednisolone",
+          "Dexaméthasone",
+          "Bétaméthasone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperglycémie franche → déséquilibre diabétique majeur",
+        "recommendation": "Augmenter les doses d'insuline. Glycémies pluriquotidiennes. Diabète cortisonique à surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Bière",
+          "Vin"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "DANGER",
+        "effect": "Potentialisation hypoglycémiante + masquage des symptômes",
+        "recommendation": "Éviter la consommation à jeun. Collation systématique. Ne pas conduire."
+      },
+      {
+        "interacting_drugs": [
+          "Ciprofloxacine",
+          "Lévofloxacine",
+          "Moxifloxacine"
+        ],
+        "interacting_classes": [
+          "Fluoroquinolones"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Dysglycémie (hypoglycémie ou hyperglycémie) imprévisible",
+        "recommendation": "Surveillance glycémique renforcée pendant toute la durée du traitement."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Lisinopril"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Augmentation de la sensibilité à l'insuline → risque hypoglycémie",
+        "recommendation": "Glycémies de contrôle à l'initiation ou changement de dose IEC."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "HYPOGLYCEMIE_RISQUE",
+      "CONSERVATION_FRIGO_2_8C",
+      "FLACON_OUVERT_28J_TEMPERATURE_AMBIANTE",
+      "TECHNIQUE_INJECTION_REQUISE",
+      "ROTATION_SITES_INJECTION",
+      "SURVEILLER_GLYCEMIE_PLURIQUOTIDIENNE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/umuline-profil-30-100-ui-ml-suspension-injectable",
+    "composition": [
+      {
+        "name": "Insuline mixte NPH/rapide (humaine)",
+        "inn": "",
+        "dose": "100 UI / ML"
+      }
+    ],
+    "record_id": "umuline_profil_30_insuline_mixte_nph_rapide_humaine_100_ui_ml",
+    "mechanism": "Mélange d'insuline rapide et NPH.",
+    "half_life": "variable selon composant"
+  },
+  {
+    "id": "umuline_profil_30_pen_100_ui_ml_suspension_injectable",
+    "brand_name": "UMULINE PROFIL 30 PEN",
+    "generic_name": "Insuline mixte NPH/rapide (humaine)",
+    "strength": "100 UI / ML",
+    "form": "Suspension injectable",
+    "route": "SC",
+    "atc_code": "A10AD01",
+    "therapeutic_group": "Insulines",
+    "drug_class": "Insuline biphasique",
+    "indications": [
+      "Diabète nécessitant insulinothérapie"
+    ],
+    "contraindications": [
+      "Hypoglycémie"
+    ],
+    "interactions": [
+      "Bêta-bloquants"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 104,
+        "price_ph": 68.71,
+        "packaging": "Boîte de 1 stylo",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 104
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypoglycémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Aténolol",
+          "Bisoprolol",
+          "Propranolol",
+          "Métoprolol"
+        ],
+        "interacting_classes": [
+          "Bêta-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage des signes adrénergiques de l'hypoglycémie (tachycardie). Hypoglycémie prolongée.",
+        "recommendation": "Automesure renforcée. Préférer bêta-bloquants cardiosélectifs. Attention à la sueur (signe non masqué)."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Méthylprednisolone",
+          "Dexaméthasone",
+          "Bétaméthasone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperglycémie franche → déséquilibre diabétique majeur",
+        "recommendation": "Augmenter les doses d'insuline. Glycémies pluriquotidiennes. Diabète cortisonique à surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Bière",
+          "Vin"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "DANGER",
+        "effect": "Potentialisation hypoglycémiante + masquage des symptômes",
+        "recommendation": "Éviter la consommation à jeun. Collation systématique. Ne pas conduire."
+      },
+      {
+        "interacting_drugs": [
+          "Ciprofloxacine",
+          "Lévofloxacine",
+          "Moxifloxacine"
+        ],
+        "interacting_classes": [
+          "Fluoroquinolones"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Dysglycémie (hypoglycémie ou hyperglycémie) imprévisible",
+        "recommendation": "Surveillance glycémique renforcée pendant toute la durée du traitement."
+      },
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Lisinopril"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Augmentation de la sensibilité à l'insuline → risque hypoglycémie",
+        "recommendation": "Glycémies de contrôle à l'initiation ou changement de dose IEC."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "HYPOGLYCEMIE_RISQUE",
+      "CONSERVATION_FRIGO_2_8C",
+      "FLACON_OUVERT_28J_TEMPERATURE_AMBIANTE",
+      "TECHNIQUE_INJECTION_REQUISE",
+      "ROTATION_SITES_INJECTION",
+      "SURVEILLER_GLYCEMIE_PLURIQUOTIDIENNE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/umuline-profil-30-pen-100-ui-ml-suspension-injectable",
+    "composition": [
+      {
+        "name": "Insuline mixte NPH/rapide (humaine)",
+        "inn": "",
+        "dose": "100 UI / ML"
+      }
+    ],
+    "record_id": "umuline_profil_30_pen_insuline_mixte_nph_rapide_humaine_100_ui_ml",
+    "mechanism": "Mélange d'insuline rapide et NPH.",
+    "half_life": "variable selon composant"
+  },
+  {
+    "id": "un_alfa_0_25_g_capsule",
+    "brand_name": "UN-ALFA",
+    "generic_name": "Alfacalcidol",
+    "strength": "0.25 µg",
+    "form": "Capsule",
+    "route": "Orale",
+    "atc_code": "A11CC03",
+    "therapeutic_group": "Vitamines",
+    "drug_class": "Vitamine D active (1-alpha-hydroxycholécalciférol)",
+    "indications": [
+      "Ostéodystrophie rénale, ostéoporose, hypoparathyroïdie"
+    ],
+    "contraindications": [
+      "Hypercalcémie"
+    ],
+    "interactions": [
+      "Digitaliques (risque arythmie si hypercalcémie)"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 69.7,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "POLYMEDIC",
+        "price_ppv_dhs": 69.7
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypercalcémie",
+      "Troubles digestifs"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Hydrochlorothiazide",
+          "Indapamide",
+          "Furosémide"
+        ],
+        "interacting_classes": [
+          "Diurétiques thiazidiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Les thiazidiques réduisent l'excrétion urinaire de calcium → hypercalcémie additive",
+        "recommendation": "Surveiller calcémie régulièrement. Réduire dose d'alfacalcidol si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine",
+          "Lanoxin"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "DANGER",
+        "effect": "L'hypercalcémie potentialise la toxicité de la digoxine → arythmies fatales",
+        "recommendation": "Maintenir calcémie normale. ECG de surveillance si digitalique associé."
+      },
+      {
+        "interacting_drugs": [
+          "Calcium",
+          "Cacit",
+          "Calperos"
+        ],
+        "interacting_classes": [
+          "Suppléments calciques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque d'hypercalcémie cumulée",
+        "recommendation": "Ajuster la dose de calcium. Surveiller calcémie et calciurie."
+      },
+      {
+        "interacting_drugs": [
+          "Cholestyramine",
+          "Questran"
+        ],
+        "interacting_classes": [
+          "Résines chélatrices"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution absorption intestinale de l'alfacalcidol (liposoluble)",
+        "recommendation": "Espacer les prises d'au moins 2 heures."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/un-alfa-0-25-g-capsule",
+    "composition": [
+      {
+        "name": "Alfacalcidol",
+        "inn": "",
+        "dose": "0.25 µg"
+      }
+    ],
+    "record_id": "un_alfa_alfacalcidol_0_25_g",
+    "mechanism": "Analogue actif de la vitamine D : favorise l'absorption intestinale du calcium (insuffisance rénale, ostéoporose).",
+    "half_life": "variable (métabolite actif)"
+  },
+  {
+    "id": "un_alfa_1_g_capsule",
+    "brand_name": "UN-ALFA",
+    "generic_name": "Alfacalcidol",
+    "strength": "1 µg",
+    "form": "Capsule",
+    "route": "Orale",
+    "atc_code": "A11CC03",
+    "therapeutic_group": "Vitamines",
+    "drug_class": "Vitamine D active (1-alpha-hydroxycholécalciférol)",
+    "indications": [
+      "Ostéodystrophie rénale, ostéoporose, hypoparathyroïdie"
+    ],
+    "contraindications": [
+      "Hypercalcémie"
+    ],
+    "interactions": [
+      "Digitaliques (risque arythmie si hypercalcémie)"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 161,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "POLYMEDIC",
+        "price_ppv_dhs": 161
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypercalcémie",
+      "Troubles digestifs"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Hydrochlorothiazide",
+          "Indapamide",
+          "Furosémide"
+        ],
+        "interacting_classes": [
+          "Diurétiques thiazidiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Les thiazidiques réduisent l'excrétion urinaire de calcium → hypercalcémie additive",
+        "recommendation": "Surveiller calcémie régulièrement. Réduire dose d'alfacalcidol si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine",
+          "Lanoxin"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "DANGER",
+        "effect": "L'hypercalcémie potentialise la toxicité de la digoxine → arythmies fatales",
+        "recommendation": "Maintenir calcémie normale. ECG de surveillance si digitalique associé."
+      },
+      {
+        "interacting_drugs": [
+          "Calcium",
+          "Cacit",
+          "Calperos"
+        ],
+        "interacting_classes": [
+          "Suppléments calciques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque d'hypercalcémie cumulée",
+        "recommendation": "Ajuster la dose de calcium. Surveiller calcémie et calciurie."
+      },
+      {
+        "interacting_drugs": [
+          "Cholestyramine",
+          "Questran"
+        ],
+        "interacting_classes": [
+          "Résines chélatrices"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution absorption intestinale de l'alfacalcidol (liposoluble)",
+        "recommendation": "Espacer les prises d'au moins 2 heures."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/un-alfa-1-g-capsule",
+    "composition": [
+      {
+        "name": "Alfacalcidol",
+        "inn": "",
+        "dose": "1 µg"
+      }
+    ],
+    "record_id": "un_alfa_alfacalcidol_1_g",
+    "mechanism": "Analogue actif de la vitamine D : favorise l'absorption intestinale du calcium (insuffisance rénale, ostéoporose).",
+    "half_life": "variable (métabolite actif)"
+  },
+  {
+    "id": "unik_g_lule",
+    "brand_name": "UNIK",
+    "generic_name": "Multivitamines + Minéraux (complément)",
+    "strength": "Association multivitaminée",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A11AA",
+    "therapeutic_group": "Compléments",
+    "drug_class": "Multivitamines",
+    "indications": [
+      "Carences, fatigue"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 49.5,
+        "price_ph": 32.67,
+        "packaging": "Boite de 30",
+        "laboratory": "BOTTU S.A.",
+        "price_ppv_dhs": 49.5
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Bonne tolérance générale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tétracyclines",
+          "Fluoroquinolones",
+          "Bisphosphonates"
+        ],
+        "interacting_classes": [
+          "Médicaments chélatables par minéraux bivalents"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Les minéraux (Fe2+, Ca2+, Mg2+, Zn2+) peuvent chélater certains antibiotiques et bisphosphonates → diminution absorption",
+        "recommendation": "Espacer la prise de ce complément d'au moins 2h de tout antibiotique ou bisphosphonate."
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "INTERACTIONS_MINERAUX_POSSIBLE",
+      "COMPLEMENTAIRE_NON_SUBSTITUT",
+      "MULTIVITAMINES",
+      "ESPACER_ANTIBIOTIQUES_2H"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/unik-gelule",
+    "composition": [
+      {
+        "name": "Multivitamines",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Minéraux (complément)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "unik_multivitamines_mineraux_complement_association_multivitaminee",
+    "mechanism": "Supplémentation nutritionnelle.",
+    "half_life": "non pertinent"
+  },
+  {
+    "id": "unizitro_200_mg_5_ml_suspension_buvable",
+    "brand_name": "UNIZITRO",
+    "generic_name": "Azithromycine",
+    "strength": "200 MG / 5 ML",
+    "form": "Suspension buvable",
+    "route": "Orale",
+    "atc_code": "J01FA10",
+    "therapeutic_group": "Antibactériens - Macrolides",
+    "drug_class": "Macrolide (azalide)",
+    "indications": [
+      "Infections respiratoires",
+      "Otite moyenne",
+      "Infections cutanées",
+      "IST (chlamydia, gonorrhée)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Ergotamine",
+      "Statines"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Dès 6 mois.",
+      "dose_rule": "10 mg/kg J1 puis 5 mg/kg J2-5. Ou 10 mg/kg/j x 3j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "500 mg J1 puis 250 mg J2-5. Ou 500 mg/j x 3j.",
+      "children": "10 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 58.9,
+        "price_ph": null,
+        "packaging": "Flacon de 15 ml",
+        "laboratory": "AFRIC-PHAR",
+        "price_ppv_dhs": 58.9
+      },
+      {
+        "price": 71.9,
+        "price_ph": null,
+        "packaging": "Flacon de 30 ml",
+        "laboratory": "AFRIC-PHAR",
+        "price_ppv_dhs": 71.9
+      }
+    ],
+    "drugbank_id": "DB00207",
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Douleurs abdominales",
+      "Allongement QT (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Possible augmentation INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation digoxinémie",
+        "recommendation": "Doser digoxine."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux ciclosporine",
+        "recommendation": "Doser et ajuster."
+      }
+    ],
+    "smart_flags": [
+      "INSUFFISANCE_HEPATIQUE_PRUDENCE",
+      "ALLONGEMENT_QT_RISQUE",
+      "PRISE_1H_AVANT_OU_2H_APRES_REPAS",
+      "DOSE_UNIQUE_JOURNALIERE_3_JOURS"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/unizitro-200-mg-5-ml-suspension-buvable",
+    "composition": [
+      {
+        "name": "Azithromycine",
+        "inn": "",
+        "dose": "200 MG / 5 ML"
+      }
+    ],
+    "record_id": "unizitro_azithromycine_200_mg_5_ml",
+    "mechanism": "Macrolide : inhibition de la synthèse protéique bactérienne (sous-unité 50S), diffusion tissulaire prolongée.",
+    "half_life": "68 heures"
+  },
+  {
+    "id": "unizitro_500_mg_comprim_pellicul",
+    "brand_name": "UNIZITRO",
+    "generic_name": "Azithromycine",
+    "strength": "500 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "J01FA10",
+    "therapeutic_group": "Antibactériens - Macrolides",
+    "drug_class": "Macrolide (azalide)",
+    "indications": [
+      "Infections respiratoires",
+      "Otite moyenne",
+      "Infections cutanées",
+      "IST (chlamydia, gonorrhée)"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux macrolides",
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Ergotamine",
+      "Statines"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Dès 6 mois.",
+      "dose_rule": "10 mg/kg J1 puis 5 mg/kg J2-5. Ou 10 mg/kg/j x 3j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "500 mg J1 puis 250 mg J2-5. Ou 500 mg/j x 3j.",
+      "children": "10 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 67.3,
+        "price_ph": null,
+        "packaging": "Boîte de 3",
+        "laboratory": "AFRIC-PHAR",
+        "price_ppv_dhs": 67.3
+      }
+    ],
+    "drugbank_id": "DB00207",
+    "adverse_effects": [
+      "Nausées",
+      "Diarrhée",
+      "Douleurs abdominales",
+      "Allongement QT (rare)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Possible augmentation INR",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation digoxinémie",
+        "recommendation": "Doser digoxine."
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux ciclosporine",
+        "recommendation": "Doser et ajuster."
+      }
+    ],
+    "smart_flags": [
+      "INSUFFISANCE_HEPATIQUE_PRUDENCE",
+      "ALLONGEMENT_QT_RISQUE",
+      "PRISE_1H_AVANT_OU_2H_APRES_REPAS",
+      "DOSE_UNIQUE_JOURNALIERE_3_JOURS"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/unizitro-500-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Azithromycine",
+        "inn": "",
+        "dose": "500 MG"
+      }
+    ],
+    "record_id": "unizitro_azithromycine_500_mg",
+    "mechanism": "Macrolide : inhibition de la synthèse protéique bactérienne (sous-unité 50S), diffusion tissulaire prolongée.",
+    "half_life": "68 heures"
+  },
+  {
+    "id": "uperio_100_mg_comprim_pellicul",
+    "brand_name": "UPERIO",
+    "generic_name": "Sacubitril + Valsartan",
+    "strength": "100 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DX04",
+    "therapeutic_group": "Cardiologie - Insuffisance cardiaque",
+    "drug_class": "Inhibiteur de la néprilysine + ARA2 (ARNI)",
+    "indications": [
+      "Insuffisance cardiaque chronique avec fraction d'éjection réduite (ICFEr, NYHA II-IV)",
+      "Insuffisance cardiaque avec fraction d'éjection préservée (ICFEp)"
+    ],
+    "contraindications": [
+      "Association avec IEC (wash-out 36h obligatoire)",
+      "Grossesse",
+      "Antécédent d'angioedème sous IEC ou ARA2",
+      "Insuffisance hépatique sévère (Child-Pugh C)",
+      "Association avec aliskiren chez le diabétique",
+      "Sténose bilatérale artères rénales"
+    ],
+    "interactions": [
+      "IEC (CI association)"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CONTRE-INDIQUÉ aux 2e et 3e trimestres (fœtotoxique: oligohydramnios, hypoplasie pulmonaire). Arrêter dès que grossesse connue.",
+      "breastfeeding": "Déconseillé. Passage probable dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Données pédiatriques insuffisantes.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "DFGe 30-60: pas d'ajustement. DFGe <30: début à 24/26 mg 2x/j. Surveiller kaliémie et créatinine."
+    },
+    "dosage": {
+      "adult": "Début: 24/26 mg ou 49/51 mg 2x/j (selon traitement antérieur). Cible: 97/103 mg 2x/j. Doubler toutes les 2-4 semaines si toléré. ⚠️ WASH-OUT 36h après arrêt IEC avant d'initier UPERIO.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 405,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "NOVARTIS PHARMA MAROC",
+        "price_ppv_dhs": 405
+      }
+    ],
+    "drugbank_id": "DB09292",
+    "adverse_effects": [
+      "Hypotension",
+      "Hyperkaliémie",
+      "Insuffisance rénale",
+      "Angioedème (rare)",
+      "Vertiges",
+      "Toux"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Lisinopril",
+          "Captopril"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Angioedème potentiellement fatal (double inhibition de la dégradation de la bradykinine)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Respecter un wash-out de 36 HEURES entre l'arrêt de l'IEC et le début du sacubitril/valsartan."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren",
+          "Rasilez"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs directs de la rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA → hyperkaliémie, IRA, hypotension",
+        "recommendation": "CONTRE-INDIQUÉ chez le diabétique et l'IRC."
+      },
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Aldactone",
+          "Éplérénone",
+          "Potassium",
+          "Kalieff"
+        ],
+        "interacting_classes": [
+          "Épargneurs de K+",
+          "Suppléments K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie sévère",
+        "recommendation": "Surveiller kaliémie régulièrement. CI si K+ > 5.4 mmol/L."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal + hyperkaliémie",
+        "recommendation": "Éviter AINS prolongés. Surveiller PA, créatinine, K+."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie → toxicité",
+        "recommendation": "Doser lithémie fréquemment."
+      },
+      {
+        "interacting_drugs": [
+          "Statines (atorvastatine)"
+        ],
+        "interacting_classes": [
+          "Statines (OATP1B1/B3)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de statine (inhibition OATP par sacubitril)",
+        "recommendation": "Surveiller signes musculaires."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/uperio-100-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sacubitril",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "uperio_sacubitril_valsartan_100_mg",
+    "mechanism": "Inhibiteur de la néprilysine + antagoniste AT1.",
+    "half_life": "sacubitril ~11h, valsartan ~10h"
+  },
+  {
+    "id": "uperio_200_mg_comprim_pellicul",
+    "brand_name": "UPERIO",
+    "generic_name": "Sacubitril + Valsartan",
+    "strength": "200 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DX04",
+    "therapeutic_group": "Cardiologie - Insuffisance cardiaque",
+    "drug_class": "Inhibiteur de la néprilysine + ARA2 (ARNI)",
+    "indications": [
+      "Insuffisance cardiaque chronique avec fraction d'éjection réduite (ICFEr, NYHA II-IV)",
+      "Insuffisance cardiaque avec fraction d'éjection préservée (ICFEp)"
+    ],
+    "contraindications": [
+      "Association avec IEC (wash-out 36h obligatoire)",
+      "Grossesse",
+      "Antécédent d'angioedème sous IEC ou ARA2",
+      "Insuffisance hépatique sévère (Child-Pugh C)",
+      "Association avec aliskiren chez le diabétique",
+      "Sténose bilatérale artères rénales"
+    ],
+    "interactions": [
+      "IEC (CI association)"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CONTRE-INDIQUÉ aux 2e et 3e trimestres (fœtotoxique: oligohydramnios, hypoplasie pulmonaire). Arrêter dès que grossesse connue.",
+      "breastfeeding": "Déconseillé. Passage probable dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Données pédiatriques insuffisantes.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "DFGe 30-60: pas d'ajustement. DFGe <30: début à 24/26 mg 2x/j. Surveiller kaliémie et créatinine."
+    },
+    "dosage": {
+      "adult": "Début: 24/26 mg ou 49/51 mg 2x/j (selon traitement antérieur). Cible: 97/103 mg 2x/j. Doubler toutes les 2-4 semaines si toléré. ⚠️ WASH-OUT 36h après arrêt IEC avant d'initier UPERIO.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 810,
+        "price_ph": null,
+        "packaging": "Boite de 56",
+        "laboratory": "NOVARTIS PHARMA MAROC",
+        "price_ppv_dhs": 810
+      }
+    ],
+    "drugbank_id": "DB09292",
+    "adverse_effects": [
+      "Hypotension",
+      "Hyperkaliémie",
+      "Insuffisance rénale",
+      "Angioedème (rare)",
+      "Vertiges",
+      "Toux"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Lisinopril",
+          "Captopril"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Angioedème potentiellement fatal (double inhibition de la dégradation de la bradykinine)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Respecter un wash-out de 36 HEURES entre l'arrêt de l'IEC et le début du sacubitril/valsartan."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren",
+          "Rasilez"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs directs de la rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA → hyperkaliémie, IRA, hypotension",
+        "recommendation": "CONTRE-INDIQUÉ chez le diabétique et l'IRC."
+      },
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Aldactone",
+          "Éplérénone",
+          "Potassium",
+          "Kalieff"
+        ],
+        "interacting_classes": [
+          "Épargneurs de K+",
+          "Suppléments K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie sévère",
+        "recommendation": "Surveiller kaliémie régulièrement. CI si K+ > 5.4 mmol/L."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal + hyperkaliémie",
+        "recommendation": "Éviter AINS prolongés. Surveiller PA, créatinine, K+."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie → toxicité",
+        "recommendation": "Doser lithémie fréquemment."
+      },
+      {
+        "interacting_drugs": [
+          "Statines (atorvastatine)"
+        ],
+        "interacting_classes": [
+          "Statines (OATP1B1/B3)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de statine (inhibition OATP par sacubitril)",
+        "recommendation": "Surveiller signes musculaires."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/uperio-200-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sacubitril",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "uperio_sacubitril_valsartan_200_mg",
+    "mechanism": "Inhibiteur de la néprilysine + antagoniste AT1.",
+    "half_life": "sacubitril ~11h, valsartan ~10h"
+  },
+  {
+    "id": "uperio_50_mg_comprim_pellicul",
+    "brand_name": "UPERIO",
+    "generic_name": "Sacubitril + Valsartan",
+    "strength": "50 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DX04",
+    "therapeutic_group": "Cardiologie - Insuffisance cardiaque",
+    "drug_class": "Inhibiteur de la néprilysine + ARA2 (ARNI)",
+    "indications": [
+      "Insuffisance cardiaque chronique avec fraction d'éjection réduite (ICFEr, NYHA II-IV)",
+      "Insuffisance cardiaque avec fraction d'éjection préservée (ICFEp)"
+    ],
+    "contraindications": [
+      "Association avec IEC (wash-out 36h obligatoire)",
+      "Grossesse",
+      "Antécédent d'angioedème sous IEC ou ARA2",
+      "Insuffisance hépatique sévère (Child-Pugh C)",
+      "Association avec aliskiren chez le diabétique",
+      "Sténose bilatérale artères rénales"
+    ],
+    "interactions": [
+      "IEC (CI association)"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CONTRE-INDIQUÉ aux 2e et 3e trimestres (fœtotoxique: oligohydramnios, hypoplasie pulmonaire). Arrêter dès que grossesse connue.",
+      "breastfeeding": "Déconseillé. Passage probable dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans. Données pédiatriques insuffisantes.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "DFGe 30-60: pas d'ajustement. DFGe <30: début à 24/26 mg 2x/j. Surveiller kaliémie et créatinine."
+    },
+    "dosage": {
+      "adult": "Début: 24/26 mg ou 49/51 mg 2x/j (selon traitement antérieur). Cible: 97/103 mg 2x/j. Doubler toutes les 2-4 semaines si toléré. ⚠️ WASH-OUT 36h après arrêt IEC avant d'initier UPERIO.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 405,
+        "price_ph": 284.61,
+        "packaging": "Boite de 28",
+        "laboratory": "NOVARTIS PHARMA MAROC",
+        "price_ppv_dhs": 405
+      }
+    ],
+    "drugbank_id": "DB09292",
+    "adverse_effects": [
+      "Hypotension",
+      "Hyperkaliémie",
+      "Insuffisance rénale",
+      "Angioedème (rare)",
+      "Vertiges",
+      "Toux"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Énalapril",
+          "Ramipril",
+          "Périndopril",
+          "Lisinopril",
+          "Captopril"
+        ],
+        "interacting_classes": [
+          "IEC"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Angioedème potentiellement fatal (double inhibition de la dégradation de la bradykinine)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Respecter un wash-out de 36 HEURES entre l'arrêt de l'IEC et le début du sacubitril/valsartan."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren",
+          "Rasilez"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs directs de la rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA → hyperkaliémie, IRA, hypotension",
+        "recommendation": "CONTRE-INDIQUÉ chez le diabétique et l'IRC."
+      },
+      {
+        "interacting_drugs": [
+          "Spironolactone",
+          "Aldactone",
+          "Éplérénone",
+          "Potassium",
+          "Kalieff"
+        ],
+        "interacting_classes": [
+          "Épargneurs de K+",
+          "Suppléments K+"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie sévère",
+        "recommendation": "Surveiller kaliémie régulièrement. CI si K+ > 5.4 mmol/L."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène",
+          "Diclofénac"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal + hyperkaliémie",
+        "recommendation": "Éviter AINS prolongés. Surveiller PA, créatinine, K+."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie → toxicité",
+        "recommendation": "Doser lithémie fréquemment."
+      },
+      {
+        "interacting_drugs": [
+          "Statines (atorvastatine)"
+        ],
+        "interacting_classes": [
+          "Statines (OATP1B1/B3)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de statine (inhibition OATP par sacubitril)",
+        "recommendation": "Surveiller signes musculaires."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/uperio-50-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sacubitril",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "uperio_sacubitril_valsartan_50_mg",
+    "mechanism": "Inhibiteur de la néprilysine + antagoniste AT1.",
+    "half_life": "sacubitril ~11h, valsartan ~10h"
+  },
+  {
+    "id": "upro_lp_0_4_mg_g_lule_lib_ration_prolong_e",
+    "brand_name": "UPRO LP",
+    "generic_name": "Tamsulosine",
+    "strength": "0.4 MG",
+    "form": "Gélule à libération prolongée",
+    "route": "Orale",
+    "atc_code": "G04CA02",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Alpha-1 bloquant sélectif",
+    "indications": [
+      "Hypertrophie bénigne de la prostate"
+    ],
+    "contraindications": [
+      "Hypotension orthostatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs PDE5"
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 102.5,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+        "price_ppv_dhs": 102.5
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Trouble de l'éjaculation"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Clarithromycine",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4/CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation significative des taux de tamsulosine → hypotension sévère",
+        "recommendation": "Association déconseillée avec inhibiteurs puissants. Surveillance TA en position debout."
+      },
+      {
+        "interacting_drugs": [
+          "Sildénafil",
+          "Viagra",
+          "Tadalafil",
+          "Cialis",
+          "Vardénafil"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs PDE5"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension orthostatique sévère (effet α-bloquant additif)",
+        "recommendation": "Prendre PDE5i au moins 6h après tamsulosine. Commencer à plus faible dose de PDE5i."
+      },
+      {
+        "interacting_drugs": [
+          "Doxazosine",
+          "Térazosine",
+          "Alfuzosine"
+        ],
+        "interacting_classes": [
+          "Autres alpha-bloquants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension additive sévère",
+        "recommendation": "Ne pas associer deux alpha-bloquants."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/upro-lp-0-4-mg-gelule-a-liberation-prolongee",
+    "composition": [
+      {
+        "name": "Tamsulosine",
+        "inn": "",
+        "dose": "0.4 MG"
+      }
+    ],
+    "record_id": "upro_lp_tamsulosine_0_4_mg",
+    "mechanism": "Alpha-1 bloquant urosélectif.",
+    "half_life": "10-13 heures"
+  },
+  {
+    "id": "uptravi_1000_g_comprim_pellicul",
+    "brand_name": "UPTRAVI",
+    "generic_name": "Sélexipag",
+    "strength": "1000 µG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AC27",
+    "therapeutic_group": "HTAP",
+    "drug_class": "Agoniste sélectif du récepteur IP de la prostacycline",
+    "indications": [
+      "Hypertension artérielle pulmonaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2C8/3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29573,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 29573
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Lopid"
+        ],
+        "interacting_classes": [
+          "Fibrates (inhibiteurs CYP2C8)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Inhibition massive du CYP2C8 → exposition multipliée par ~12 au métabolite actif (ACT-333679) → hypotension sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Fluconazole",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés CYP2C8"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des concentrations de l'ACT-333679",
+        "recommendation": "Utiliser la dose la mieux tolérée. Surveiller signes de surdosage (céphalées, flush)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution drastique des concentrations → perte d'efficacité sur la HTAP",
+        "recommendation": "Éviter. Si inévitable: augmenter la dose sous surveillance clinique stricte."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan",
+          "Macitentan",
+          "Ambrisentan"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'endothéline (traitement HTAP)"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Association possible dans la HTAP (triple thérapie). Surveiller hypotension additive.",
+        "recommendation": "Titration progressive. Surveiller PA et tolérance."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uptravi-1000-g-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sélexipag",
+        "inn": "",
+        "dose": "1000 µG"
+      }
+    ],
+    "record_id": "uptravi_selexipag_1000_g",
+    "mechanism": "Agoniste sélectif des récepteurs de la prostacycline (IP).",
+    "half_life": "0.8-2.5 heures (métabolite actif plus long)"
+  },
+  {
+    "id": "uptravi_1200_g_comprim_pellicul",
+    "brand_name": "UPTRAVI",
+    "generic_name": "Sélexipag",
+    "strength": "1200 µG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AC27",
+    "therapeutic_group": "HTAP",
+    "drug_class": "Agoniste sélectif du récepteur IP de la prostacycline",
+    "indications": [
+      "Hypertension artérielle pulmonaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2C8/3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29573,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 29573
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Lopid"
+        ],
+        "interacting_classes": [
+          "Fibrates (inhibiteurs CYP2C8)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Inhibition massive du CYP2C8 → exposition multipliée par ~12 au métabolite actif (ACT-333679) → hypotension sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Fluconazole",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés CYP2C8"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des concentrations de l'ACT-333679",
+        "recommendation": "Utiliser la dose la mieux tolérée. Surveiller signes de surdosage (céphalées, flush)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution drastique des concentrations → perte d'efficacité sur la HTAP",
+        "recommendation": "Éviter. Si inévitable: augmenter la dose sous surveillance clinique stricte."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan",
+          "Macitentan",
+          "Ambrisentan"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'endothéline (traitement HTAP)"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Association possible dans la HTAP (triple thérapie). Surveiller hypotension additive.",
+        "recommendation": "Titration progressive. Surveiller PA et tolérance."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uptravi-1200-g-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sélexipag",
+        "inn": "",
+        "dose": "1200 µG"
+      }
+    ],
+    "record_id": "uptravi_selexipag_1200_g",
+    "mechanism": "Agoniste sélectif des récepteurs de la prostacycline (IP).",
+    "half_life": "0.8-2.5 heures (métabolite actif plus long)"
+  },
+  {
+    "id": "uptravi_1400_g_comprim_pellicul",
+    "brand_name": "UPTRAVI",
+    "generic_name": "Sélexipag",
+    "strength": "1400 µG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AC27",
+    "therapeutic_group": "HTAP",
+    "drug_class": "Agoniste sélectif du récepteur IP de la prostacycline",
+    "indications": [
+      "Hypertension artérielle pulmonaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2C8/3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29573,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 29573
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Lopid"
+        ],
+        "interacting_classes": [
+          "Fibrates (inhibiteurs CYP2C8)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Inhibition massive du CYP2C8 → exposition multipliée par ~12 au métabolite actif (ACT-333679) → hypotension sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Fluconazole",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés CYP2C8"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des concentrations de l'ACT-333679",
+        "recommendation": "Utiliser la dose la mieux tolérée. Surveiller signes de surdosage (céphalées, flush)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution drastique des concentrations → perte d'efficacité sur la HTAP",
+        "recommendation": "Éviter. Si inévitable: augmenter la dose sous surveillance clinique stricte."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan",
+          "Macitentan",
+          "Ambrisentan"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'endothéline (traitement HTAP)"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Association possible dans la HTAP (triple thérapie). Surveiller hypotension additive.",
+        "recommendation": "Titration progressive. Surveiller PA et tolérance."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uptravi-1400-g-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sélexipag",
+        "inn": "",
+        "dose": "1400 µG"
+      }
+    ],
+    "record_id": "uptravi_selexipag_1400_g",
+    "mechanism": "Agoniste sélectif des récepteurs de la prostacycline (IP).",
+    "half_life": "0.8-2.5 heures (métabolite actif plus long)"
+  },
+  {
+    "id": "uptravi_1600_g_comprim_pellicul",
+    "brand_name": "UPTRAVI",
+    "generic_name": "Sélexipag",
+    "strength": "1600 µG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AC27",
+    "therapeutic_group": "HTAP",
+    "drug_class": "Agoniste sélectif du récepteur IP de la prostacycline",
+    "indications": [
+      "Hypertension artérielle pulmonaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2C8/3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29573,
+        "price_ph": 29173,
+        "packaging": "Boite de 60",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 29573
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Lopid"
+        ],
+        "interacting_classes": [
+          "Fibrates (inhibiteurs CYP2C8)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Inhibition massive du CYP2C8 → exposition multipliée par ~12 au métabolite actif (ACT-333679) → hypotension sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Fluconazole",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés CYP2C8"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des concentrations de l'ACT-333679",
+        "recommendation": "Utiliser la dose la mieux tolérée. Surveiller signes de surdosage (céphalées, flush)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution drastique des concentrations → perte d'efficacité sur la HTAP",
+        "recommendation": "Éviter. Si inévitable: augmenter la dose sous surveillance clinique stricte."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan",
+          "Macitentan",
+          "Ambrisentan"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'endothéline (traitement HTAP)"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Association possible dans la HTAP (triple thérapie). Surveiller hypotension additive.",
+        "recommendation": "Titration progressive. Surveiller PA et tolérance."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uptravi-1600-g-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sélexipag",
+        "inn": "",
+        "dose": "1600 µG"
+      }
+    ],
+    "record_id": "uptravi_selexipag_1600_g",
+    "mechanism": "Agoniste sélectif des récepteurs de la prostacycline (IP).",
+    "half_life": "0.8-2.5 heures (métabolite actif plus long)"
+  },
+  {
+    "id": "uptravi_200_g_comprim_pellicul",
+    "brand_name": "UPTRAVI",
+    "generic_name": "Sélexipag",
+    "strength": "200 µG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AC27",
+    "therapeutic_group": "HTAP",
+    "drug_class": "Agoniste sélectif du récepteur IP de la prostacycline",
+    "indications": [
+      "Hypertension artérielle pulmonaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2C8/3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29573,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 29573
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Lopid"
+        ],
+        "interacting_classes": [
+          "Fibrates (inhibiteurs CYP2C8)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Inhibition massive du CYP2C8 → exposition multipliée par ~12 au métabolite actif (ACT-333679) → hypotension sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Fluconazole",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés CYP2C8"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des concentrations de l'ACT-333679",
+        "recommendation": "Utiliser la dose la mieux tolérée. Surveiller signes de surdosage (céphalées, flush)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution drastique des concentrations → perte d'efficacité sur la HTAP",
+        "recommendation": "Éviter. Si inévitable: augmenter la dose sous surveillance clinique stricte."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan",
+          "Macitentan",
+          "Ambrisentan"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'endothéline (traitement HTAP)"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Association possible dans la HTAP (triple thérapie). Surveiller hypotension additive.",
+        "recommendation": "Titration progressive. Surveiller PA et tolérance."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uptravi-200-g-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sélexipag",
+        "inn": "",
+        "dose": "200 µG"
+      }
+    ],
+    "record_id": "uptravi_selexipag_200_g",
+    "mechanism": "Agoniste sélectif des récepteurs de la prostacycline (IP).",
+    "half_life": "0.8-2.5 heures (métabolite actif plus long)"
+  },
+  {
+    "id": "uptravi_400_g_comprim_pellicul",
+    "brand_name": "UPTRAVI",
+    "generic_name": "Sélexipag",
+    "strength": "400 µG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AC27",
+    "therapeutic_group": "HTAP",
+    "drug_class": "Agoniste sélectif du récepteur IP de la prostacycline",
+    "indications": [
+      "Hypertension artérielle pulmonaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2C8/3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29573,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 29573
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Lopid"
+        ],
+        "interacting_classes": [
+          "Fibrates (inhibiteurs CYP2C8)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Inhibition massive du CYP2C8 → exposition multipliée par ~12 au métabolite actif (ACT-333679) → hypotension sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Fluconazole",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés CYP2C8"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des concentrations de l'ACT-333679",
+        "recommendation": "Utiliser la dose la mieux tolérée. Surveiller signes de surdosage (céphalées, flush)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution drastique des concentrations → perte d'efficacité sur la HTAP",
+        "recommendation": "Éviter. Si inévitable: augmenter la dose sous surveillance clinique stricte."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan",
+          "Macitentan",
+          "Ambrisentan"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'endothéline (traitement HTAP)"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Association possible dans la HTAP (triple thérapie). Surveiller hypotension additive.",
+        "recommendation": "Titration progressive. Surveiller PA et tolérance."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uptravi-400-g-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sélexipag",
+        "inn": "",
+        "dose": "400 µG"
+      }
+    ],
+    "record_id": "uptravi_selexipag_400_g",
+    "mechanism": "Agoniste sélectif des récepteurs de la prostacycline (IP).",
+    "half_life": "0.8-2.5 heures (métabolite actif plus long)"
+  },
+  {
+    "id": "uptravi_600_g_comprim_pellicul",
+    "brand_name": "UPTRAVI",
+    "generic_name": "Sélexipag",
+    "strength": "600 µG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AC27",
+    "therapeutic_group": "HTAP",
+    "drug_class": "Agoniste sélectif du récepteur IP de la prostacycline",
+    "indications": [
+      "Hypertension artérielle pulmonaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2C8/3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29573,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 29573
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Lopid"
+        ],
+        "interacting_classes": [
+          "Fibrates (inhibiteurs CYP2C8)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Inhibition massive du CYP2C8 → exposition multipliée par ~12 au métabolite actif (ACT-333679) → hypotension sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Fluconazole",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés CYP2C8"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des concentrations de l'ACT-333679",
+        "recommendation": "Utiliser la dose la mieux tolérée. Surveiller signes de surdosage (céphalées, flush)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution drastique des concentrations → perte d'efficacité sur la HTAP",
+        "recommendation": "Éviter. Si inévitable: augmenter la dose sous surveillance clinique stricte."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan",
+          "Macitentan",
+          "Ambrisentan"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'endothéline (traitement HTAP)"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Association possible dans la HTAP (triple thérapie). Surveiller hypotension additive.",
+        "recommendation": "Titration progressive. Surveiller PA et tolérance."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uptravi-600-g-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sélexipag",
+        "inn": "",
+        "dose": "600 µG"
+      }
+    ],
+    "record_id": "uptravi_selexipag_600_g",
+    "mechanism": "Agoniste sélectif des récepteurs de la prostacycline (IP).",
+    "half_life": "0.8-2.5 heures (métabolite actif plus long)"
+  },
+  {
+    "id": "uptravi_800_g_comprim_pellicul",
+    "brand_name": "UPTRAVI",
+    "generic_name": "Sélexipag",
+    "strength": "800 µG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AC27",
+    "therapeutic_group": "HTAP",
+    "drug_class": "Agoniste sélectif du récepteur IP de la prostacycline",
+    "indications": [
+      "Hypertension artérielle pulmonaire"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2C8/3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 29573,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 29573
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Céphalées"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Gemfibrozil",
+          "Lopid"
+        ],
+        "interacting_classes": [
+          "Fibrates (inhibiteurs CYP2C8)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Inhibition massive du CYP2C8 → exposition multipliée par ~12 au métabolite actif (ACT-333679) → hypotension sévère",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Fluconazole",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés CYP2C8"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des concentrations de l'ACT-333679",
+        "recommendation": "Utiliser la dose la mieux tolérée. Surveiller signes de surdosage (céphalées, flush)."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution drastique des concentrations → perte d'efficacité sur la HTAP",
+        "recommendation": "Éviter. Si inévitable: augmenter la dose sous surveillance clinique stricte."
+      },
+      {
+        "interacting_drugs": [
+          "Bosentan",
+          "Macitentan",
+          "Ambrisentan"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de l'endothéline (traitement HTAP)"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Association possible dans la HTAP (triple thérapie). Surveiller hypotension additive.",
+        "recommendation": "Titration progressive. Surveiller PA et tolérance."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uptravi-800-g-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Sélexipag",
+        "inn": "",
+        "dose": "800 µG"
+      }
+    ],
+    "record_id": "uptravi_selexipag_800_g",
+    "mechanism": "Agoniste sélectif des récepteurs de la prostacycline (IP).",
+    "half_life": "0.8-2.5 heures (métabolite actif plus long)"
+  },
+  {
+    "id": "uradox_2_mg_comprim",
+    "brand_name": "URADOX",
+    "generic_name": "Doxazosine",
+    "strength": "2 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C02CA04",
+    "therapeutic_group": "Antihypertenseurs / Urologie",
+    "drug_class": "Alpha-1 bloquant",
+    "indications": [
+      "Hypertension artérielle",
+      "Hypertrophie bénigne de la prostate"
+    ],
+    "contraindications": [
+      "Hypotension orthostatique sévère"
+    ],
+    "interactions": [
+      "Autres antihypertenseurs",
+      "Inhibiteurs PDE5"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 136.7,
+        "price_ph": 90.32,
+        "packaging": "Boite de 60",
+        "laboratory": "PHI",
+        "price_ppv_dhs": 136.7
+      },
+      {
+        "price": 76.5,
+        "price_ph": 50.55,
+        "packaging": "Boîte de 30",
+        "laboratory": "PHI",
+        "price_ppv_dhs": 76.5
+      },
+      {
+        "price": 53,
+        "price_ph": 35.02,
+        "packaging": "Boite de 20",
+        "laboratory": "PHI",
+        "price_ppv_dhs": 53
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypotension orthostatique",
+      "Vertiges"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Sildénafil",
+          "Tadalafil",
+          "Vardénafil"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs PDE5"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère (effet α-bloquant + vasodilatation PDE5i)",
+        "recommendation": "Association formellement déconseillée. Si indispensable: faible dose PDE5i, espacer 6h."
+      },
+      {
+        "interacting_drugs": [
+          "Antihypertenseurs (IEC, ARA2, diurétiques)"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension additive, surtout à la 1ère dose",
+        "recommendation": "Initier à 1 mg/j. TA couché/debout à chaque changement de dose."
+      },
+      {
+        "interacting_drugs": [
+          "Tamsulosine",
+          "Alfuzosine"
+        ],
+        "interacting_classes": [
+          "Autres alpha-bloquants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension sévère par double blocage α1",
+        "recommendation": "Ne pas associer deux alpha-bloquants."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uradox-2-mg-comprime",
+    "composition": [
+      {
+        "name": "Doxazosine",
+        "inn": "",
+        "dose": "2 MG"
+      }
+    ],
+    "record_id": "uradox_doxazosine_2_mg",
+    "mechanism": "Alpha-1 bloquant : relâchement du muscle lisse vasculaire et prostatique.",
+    "half_life": "22 heures"
+  },
+  {
+    "id": "urbanyl_10_mg_comprim_s_cable_p_tab_iv_cv",
+    "brand_name": "URBANYL",
+    "generic_name": "Clobazam",
+    "strength": "10 MG",
+    "form": "Comprimé sécable [P] [TAB IV-CV]",
+    "route": "Orale",
+    "atc_code": "N05BA09",
+    "therapeutic_group": "Anxiolytiques / Antiépileptiques",
+    "drug_class": "Benzodiazépine (1,5-benzodiazépine)",
+    "indications": [
+      "Anxiété sévère",
+      "Épilepsie (adjuvant, syndrome de Lennox-Gastaut)",
+      "Prémédication anesthésique"
+    ],
+    "contraindications": [
+      "Insuffisance respiratoire sévère",
+      "Myasthénie",
+      "SAS",
+      "Insuffisance hépatique sévère",
+      "Dépendance aux substances"
+    ],
+    "interactions": [
+      "Autres dépresseurs du SNC"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Déconseillé. Risque de syndrome de sevrage néonatal et d'hypotonie.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans pour l'épilepsie (Lennox-Gastaut).",
+      "dose_rule": "≥ 2 ans: début 5 mg/j, augmenter progressivement. Max: 0.5-1 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: réduire dose. Début à dose minimale."
+    },
+    "dosage": {
+      "adult": "Anxiété: 20-30 mg/j en 2-3 prises. Épilepsie: 10-40 mg/j.",
+      "children": "≥ 2 ans: 5-20 mg/j."
+    },
+    "market_data": [
+      {
+        "price": 22,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 22
+      }
+    ],
+    "drugbank_id": "DB00349",
+    "adverse_effects": [
+      "Somnolence",
+      "Sédation",
+      "Dépendance",
+      "Syndrome de sevrage",
+      "Ataxie",
+      "Amnésie",
+      "Dépression respiratoire"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression SNC sévère + dépression respiratoire",
+        "recommendation": "INTERDIRE l'alcool."
+      },
+      {
+        "interacting_drugs": [
+          "Opioïdes",
+          "Morphine",
+          "Tramadol",
+          "Fentanyl"
+        ],
+        "interacting_classes": [
+          "Opioïdes"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression respiratoire potentiellement fatale",
+        "recommendation": "Réduire doses des deux. Surveillance rapprochée."
+      },
+      {
+        "interacting_drugs": [
+          "Valproate",
+          "Dépakine"
+        ],
+        "interacting_classes": [
+          "Antiépileptiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux du métabolite actif N-desméthylclobazam",
+        "recommendation": "Ajuster dose."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/urbanyl-10-mg-comprime-secable-p-tab-iv-cv",
+    "composition": [
+      {
+        "name": "Clobazam",
+        "inn": "",
+        "dose": "10 MG"
+      }
+    ],
+    "record_id": "urbanyl_clobazam_10_mg",
+    "mechanism": "Benzodiazépine (1,5-benzodiazépine) : effet anxiolytique et anticonvulsivant.",
+    "half_life": "36-42 heures"
+  },
+  {
+    "id": "urispas_200_mg_comprim",
+    "brand_name": "URISPAS",
+    "generic_name": "Flavoxate",
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BD02",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Antispasmodique urinaire (musculotrope)",
+    "indications": [
+      "Hyperactivité vésicale, pollakiurie"
+    ],
+    "contraindications": [
+      "Occlusion digestive/urinaire"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 58.4,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 58.4
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Atropine",
+          "Scopolamine",
+          "Oxybutynine",
+          "Solifénacine",
+          "Toltérodine"
+        ],
+        "interacting_classes": [
+          "Anticholinergiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Effets anticholinergiques additifs : bouche sèche, rétention urinaire, constipation, confusion",
+        "recommendation": "Association déconseillée, surtout chez le sujet âgé (risque STOPP)."
+      },
+      {
+        "interacting_drugs": [
+          "Métoclopramide",
+          "Dompéridone"
+        ],
+        "interacting_classes": [
+          "Prokinétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Antagonisme pharmacodynamique : le flavoxate réduit l'effet procinétique",
+        "recommendation": "Éviter l'association si traitement procinétique indiqué."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GLAUCOME_CI",
+      "RETENTION_URINAIRE_OBSTRUCTIVE_CI",
+      "SUJET_AGE_PRUDENCE",
+      "SOMNOLENCE_POSSIBLE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/urispas-200-mg-comprime",
+    "composition": [
+      {
+        "name": "Flavoxate",
+        "inn": "",
+        "dose": "200 MG"
+      }
+    ],
+    "record_id": "urispas_flavoxate_200_mg",
+    "mechanism": "Antispasmodique musculotrope urinaire.",
+    "half_life": "non précisée"
+  },
+  {
+    "id": "uritab_xl_10_mg_comprim_lib_ration_prolong_e",
+    "brand_name": "URITAB XL",
+    "generic_name": "Solifénacine",
+    "strength": "10 MG",
+    "form": "Comprimé à libération prolongée",
+    "route": "Orale",
+    "atc_code": "G04BD08",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Anticholinergique sélectif (récepteurs M3)",
+    "indications": [
+      "Hyperactivité vésicale"
+    ],
+    "contraindications": [
+      "Glaucome à angle fermé, rétention urinaire"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP3A4"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 137.9,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "ZENITH PHARMA",
+        "price_ppv_dhs": 137.9
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des concentrations de solifénacine → effets anticholinergiques majorés",
+        "recommendation": "Ne pas dépasser 5 mg/j si association avec inhibiteur puissant CYP3A4."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Sotalol",
+          "Érythromycine",
+          "Méthadone"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QT"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque additif d'allongement de l'intervalle QT",
+        "recommendation": "ECG de contrôle. Éviter associations multiples."
+      },
+      {
+        "interacting_drugs": [
+          "Autres anticholinergiques"
+        ],
+        "interacting_classes": [
+          "Anticholinergiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Effets anticholinergiques additifs systémiques",
+        "recommendation": "Éviter co-prescription. Risque STOPP/START chez le sujet âgé."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uritab-xl-10-mg-comprime-a-liberation-prolongee",
+    "composition": [
+      {
+        "name": "Solifénacine",
+        "inn": "",
+        "dose": "10 MG"
+      }
+    ],
+    "record_id": "uritab_xl_solifenacine_10_mg",
+    "mechanism": "Antimuscarinique sélectif M3.",
+    "half_life": "45-68 heures"
+  },
+  {
+    "id": "urodine_4_mg_g_lule_lib_ration_prolong_e",
+    "brand_name": "URODINE",
+    "generic_name": "Toltérodine",
+    "strength": "4 MG",
+    "form": "Gélule à libération prolongée",
+    "route": "Orale",
+    "atc_code": "G04BD07",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Anticholinergique (antispasmodique vésical)",
+    "indications": [
+      "Hyperactivité vésicale"
+    ],
+    "contraindications": [
+      "Glaucome à angle fermé, rétention urinaire"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP2D6/3A4"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 88.5,
+        "price_ph": null,
+        "packaging": "Boite de 14",
+        "laboratory": "ZENITH PHARMA",
+        "price_ppv_dhs": 88.5
+      },
+      {
+        "price": 161,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "ZENITH PHARMA",
+        "price_ppv_dhs": 161
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Paroxétine",
+          "Bupropion"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des concentrations de toltérodine",
+        "recommendation": "Surveiller effets anticholinergiques. Réduire dose si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation significative des taux plasmatiques de toltérodine",
+        "recommendation": "Réduire la dose à 2 mg/j (LP). Ne pas dépasser cette dose."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Sotalol",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QT"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Allongement QT additif",
+        "recommendation": "ECG si association. Éviter si QTc > 470ms."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/urodine-4-mg-gelule-a-liberation-prolongee",
+    "composition": [
+      {
+        "name": "Toltérodine",
+        "inn": "",
+        "dose": "4 MG"
+      }
+    ],
+    "record_id": "urodine_tolterodine_4_mg",
+    "mechanism": "Antimuscarinique.",
+    "half_life": "2-10 heures"
+  },
+  {
+    "id": "urosta_5_mg_comprim",
+    "brand_name": "UROSTA",
+    "generic_name": "Solifénacine",
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BD08",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Anticholinergique sélectif (récepteurs M3)",
+    "indications": [
+      "Hyperactivité vésicale"
+    ],
+    "contraindications": [
+      "Glaucome à angle fermé, rétention urinaire"
+    ],
+    "interactions": [
+      "Inhibiteurs du CYP3A4"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 58.6,
+        "price_ph": null,
+        "packaging": "Boîte de 60",
+        "laboratory": "BOTTU S.A.",
+        "price_ppv_dhs": 58.6
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Sécheresse buccale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des concentrations de solifénacine → effets anticholinergiques majorés",
+        "recommendation": "Ne pas dépasser 5 mg/j si association avec inhibiteur puissant CYP3A4."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Sotalol",
+          "Érythromycine",
+          "Méthadone"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QT"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque additif d'allongement de l'intervalle QT",
+        "recommendation": "ECG de contrôle. Éviter associations multiples."
+      },
+      {
+        "interacting_drugs": [
+          "Autres anticholinergiques"
+        ],
+        "interacting_classes": [
+          "Anticholinergiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Effets anticholinergiques additifs systémiques",
+        "recommendation": "Éviter co-prescription. Risque STOPP/START chez le sujet âgé."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/urosta-5-mg-comprime",
+    "composition": [
+      {
+        "name": "Solifénacine",
+        "inn": "",
+        "dose": "5 MG"
+      }
+    ],
+    "record_id": "urosta_solifenacine_5_mg",
+    "mechanism": "Antimuscarinique sélectif M3.",
+    "half_life": "45-68 heures"
+  },
+  {
+    "id": "uroxine_200_mg_comprim",
+    "brand_name": "UROXINE",
+    "generic_name": "Nitrofurantoïne",
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01XE01",
+    "therapeutic_group": "Antibactériens",
+    "drug_class": "Nitrofurane (antiseptique urinaire)",
+    "indications": [
+      "Infections urinaires basses"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Antiacides"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 40,
+        "price_ph": null,
+        "packaging": "Boîte de 2",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 40
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Toxicité pulmonaire (usage prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Antiacides à base de Magnésium",
+          "Maalox",
+          "Gelox"
+        ],
+        "interacting_classes": [
+          "Antiacides à Mg2+"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'absorption de la nitrofurantoïne",
+        "recommendation": "Espacer les prises d'au moins 2 heures."
+      },
+      {
+        "interacting_drugs": [
+          "Probénécide",
+          "Sulfinpyrazone"
+        ],
+        "interacting_classes": [
+          "Uricosuriques"
+        ],
+        "severity": "DANGER",
+        "effect": "Inhibition de l'excrétion rénale de la nitrofurantoïne → accumulation + perte d'efficacité urinaire",
+        "recommendation": "Association contre-indiquée."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoroquinolones (ciprofloxacine, norfloxacine)"
+        ],
+        "interacting_classes": [
+          "Fluoroquinolones"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Antagonisme in vitro possible (mécanisme différent + compétition pour l'excrétion tubulaire)",
+        "recommendation": "Éviter l'association pour les infections urinaires."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "PRISE_AVEC_REPAS_OBLIGATOIRE",
+      "COLORATION_URINES_MARRON_NORMALE",
+      "INSUFFISANCE_RENALE_CI_SI_DFG_LT_45",
+      "GROSSESSE_T3_CI",
+      "TRAITEMENT_COURT_7J_MAX"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uroxine-200-mg-comprime",
+    "composition": [
+      {
+        "name": "Nitrofurantoïne",
+        "inn": "",
+        "dose": "200 MG"
+      }
+    ],
+    "record_id": "uroxine_nitrofurantoine_200_mg",
+    "mechanism": "Antiseptique urinaire.",
+    "half_life": "20-60 minutes"
+  },
+  {
+    "id": "uteron_100_mg_capsule_molle",
+    "brand_name": "UTERON",
+    "generic_name": "Progestérone micronisée",
+    "strength": "100 MG",
+    "form": "Capsule molle",
+    "route": "Orale / Vaginale",
+    "atc_code": "G03DA04",
+    "therapeutic_group": "Progestatifs",
+    "drug_class": "Progestérone naturelle micronisée",
+    "indications": [
+      "Insuffisance lutéale",
+      "Soutien de phase lutéale en FIV",
+      "Ménométrorragies par déséquilibre hormonal",
+      "Mastopathies bénignes",
+      "Menace d'avortement (voie vaginale)",
+      "THS de la ménopause (en association avec œstrogènes)"
+    ],
+    "contraindications": [
+      "Cancer du sein ou des organes génitaux connu ou suspecté",
+      "Hémorragie génitale non diagnostiquée",
+      "Accident thromboembolique récent",
+      "Insuffisance hépatique sévère",
+      "Porphyrie"
+    ],
+    "interactions": [
+      "Inducteurs enzymatiques"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "UTROGESTAN voie vaginale: utilisé pour le soutien de grossesse (FIV, menace fausse couche). Voie orale: non recommandée pendant la grossesse (excipient huile d'arachide).",
+      "breastfeeding": "Passage dans le lait. Pas de risque démontré pour le nourrisson."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Réservé à la femme adulte.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Insuffisance lutéale PO: 200-300 mg/j le soir au coucher (10-12j/cycle). THS: 200 mg/j x 12-14j/mois. FIV (vaginal): 200-600 mg/j en 2-3 prises.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 52.9,
+        "price_ph": 37.4,
+        "packaging": "Boite de 30",
+        "laboratory": "ZENITH PHARMA",
+        "price_ppv_dhs": 52.9
+      }
+    ],
+    "drugbank_id": "DB00396",
+    "adverse_effects": [
+      "Somnolence (voie orale — effet GABA-ergique)",
+      "Vertiges",
+      "Céphalées",
+      "Ballonnements",
+      "Spotting"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Carbamazépine",
+          "Phénytoïne",
+          "Rifampicine",
+          "Phénobarbital",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques (CYP3A4)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution des taux de progestérone → perte d'efficacité",
+        "recommendation": "Préférer la voie vaginale qui bypasse l'effet de premier passage hépatique."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de progestérone",
+        "recommendation": "Surveiller effets indésirables."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/uteron-100-mg-capsule-molle",
+    "composition": [
+      {
+        "name": "Progestérone micronisée",
+        "inn": "",
+        "dose": "100 MG"
+      }
+    ],
+    "record_id": "uteron_progesterone_micronisee_100_mg",
+    "mechanism": "Progestérone naturelle micronisée.",
+    "half_life": "variable selon voie"
+  },
+  {
+    "id": "uteron_200_mg_capsule_molle",
+    "brand_name": "UTERON",
+    "generic_name": "Progestérone micronisée",
+    "strength": "200 MG",
+    "form": "Capsule molle",
+    "route": "Orale / Vaginale",
+    "atc_code": "G03DA04",
+    "therapeutic_group": "Progestatifs",
+    "drug_class": "Progestérone naturelle micronisée",
+    "indications": [
+      "Insuffisance lutéale",
+      "Soutien de phase lutéale en FIV",
+      "Ménométrorragies par déséquilibre hormonal",
+      "Mastopathies bénignes",
+      "Menace d'avortement (voie vaginale)",
+      "THS de la ménopause (en association avec œstrogènes)"
+    ],
+    "contraindications": [
+      "Cancer du sein ou des organes génitaux connu ou suspecté",
+      "Hémorragie génitale non diagnostiquée",
+      "Accident thromboembolique récent",
+      "Insuffisance hépatique sévère",
+      "Porphyrie"
+    ],
+    "interactions": [
+      "Inducteurs enzymatiques"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "UTROGESTAN voie vaginale: utilisé pour le soutien de grossesse (FIV, menace fausse couche). Voie orale: non recommandée pendant la grossesse (excipient huile d'arachide).",
+      "breastfeeding": "Passage dans le lait. Pas de risque démontré pour le nourrisson."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Réservé à la femme adulte.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Insuffisance lutéale PO: 200-300 mg/j le soir au coucher (10-12j/cycle). THS: 200 mg/j x 12-14j/mois. FIV (vaginal): 200-600 mg/j en 2-3 prises.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 62.1,
+        "price_ph": 41.03,
+        "packaging": "Boite de 15",
+        "laboratory": "ZENITH PHARMA",
+        "price_ppv_dhs": 62.1
+      }
+    ],
+    "drugbank_id": "DB00396",
+    "adverse_effects": [
+      "Somnolence (voie orale — effet GABA-ergique)",
+      "Vertiges",
+      "Céphalées",
+      "Ballonnements",
+      "Spotting"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Carbamazépine",
+          "Phénytoïne",
+          "Rifampicine",
+          "Phénobarbital",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques (CYP3A4)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution des taux de progestérone → perte d'efficacité",
+        "recommendation": "Préférer la voie vaginale qui bypasse l'effet de premier passage hépatique."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de progestérone",
+        "recommendation": "Surveiller effets indésirables."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/uteron-200-mg-capsule-molle",
+    "composition": [
+      {
+        "name": "Progestérone micronisée",
+        "inn": "",
+        "dose": "200 MG"
+      }
+    ],
+    "record_id": "uteron_progesterone_micronisee_200_mg",
+    "mechanism": "Progestérone naturelle micronisée.",
+    "half_life": "variable selon voie"
+  },
+  {
+    "id": "utrogestan_100_mg_capsule_molle_orale_ou_vaginale",
+    "brand_name": "UTROGESTAN",
+    "generic_name": "Progestérone micronisée",
+    "strength": "100 MG",
+    "form": "Capsule molle orale ou vaginale",
+    "route": "Orale / Vaginale",
+    "atc_code": "G03DA04",
+    "therapeutic_group": "Progestatifs",
+    "drug_class": "Progestérone naturelle micronisée",
+    "indications": [
+      "Insuffisance lutéale",
+      "Soutien de phase lutéale en FIV",
+      "Ménométrorragies par déséquilibre hormonal",
+      "Mastopathies bénignes",
+      "Menace d'avortement (voie vaginale)",
+      "THS de la ménopause (en association avec œstrogènes)"
+    ],
+    "contraindications": [
+      "Cancer du sein ou des organes génitaux connu ou suspecté",
+      "Hémorragie génitale non diagnostiquée",
+      "Accident thromboembolique récent",
+      "Insuffisance hépatique sévère",
+      "Porphyrie"
+    ],
+    "interactions": [
+      "Inducteurs enzymatiques"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "UTROGESTAN voie vaginale: utilisé pour le soutien de grossesse (FIV, menace fausse couche). Voie orale: non recommandée pendant la grossesse (excipient huile d'arachide).",
+      "breastfeeding": "Passage dans le lait. Pas de risque démontré pour le nourrisson."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Réservé à la femme adulte.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Insuffisance lutéale PO: 200-300 mg/j le soir au coucher (10-12j/cycle). THS: 200 mg/j x 12-14j/mois. FIV (vaginal): 200-600 mg/j en 2-3 prises.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 63.3,
+        "price_ph": 49.9,
+        "packaging": "Boîte de 30",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 63.3
+      }
+    ],
+    "drugbank_id": "DB00396",
+    "adverse_effects": [
+      "Somnolence (voie orale — effet GABA-ergique)",
+      "Vertiges",
+      "Céphalées",
+      "Ballonnements",
+      "Spotting"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Carbamazépine",
+          "Phénytoïne",
+          "Rifampicine",
+          "Phénobarbital",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques (CYP3A4)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution des taux de progestérone → perte d'efficacité",
+        "recommendation": "Préférer la voie vaginale qui bypasse l'effet de premier passage hépatique."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de progestérone",
+        "recommendation": "Surveiller effets indésirables."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/utrogestan-100-mg-capsule-molle-orale-ou-vaginale",
+    "composition": [
+      {
+        "name": "Progestérone micronisée",
+        "inn": "",
+        "dose": "100 MG"
+      }
+    ],
+    "record_id": "utrogestan_progesterone_micronisee_100_mg",
+    "mechanism": "Progestérone naturelle micronisée.",
+    "half_life": "variable selon voie"
+  },
+  {
+    "id": "utrogestan_200_mg_capsule_molle_orale_ou_vaginale",
+    "brand_name": "UTROGESTAN",
+    "generic_name": "Progestérone micronisée",
+    "strength": "200 MG",
+    "form": "Capsule molle orale ou vaginale",
+    "route": "Orale / Vaginale",
+    "atc_code": "G03DA04",
+    "therapeutic_group": "Progestatifs",
+    "drug_class": "Progestérone naturelle micronisée",
+    "indications": [
+      "Insuffisance lutéale",
+      "Soutien de phase lutéale en FIV",
+      "Ménométrorragies par déséquilibre hormonal",
+      "Mastopathies bénignes",
+      "Menace d'avortement (voie vaginale)",
+      "THS de la ménopause (en association avec œstrogènes)"
+    ],
+    "contraindications": [
+      "Cancer du sein ou des organes génitaux connu ou suspecté",
+      "Hémorragie génitale non diagnostiquée",
+      "Accident thromboembolique récent",
+      "Insuffisance hépatique sévère",
+      "Porphyrie"
+    ],
+    "interactions": [
+      "Inducteurs enzymatiques"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "UTROGESTAN voie vaginale: utilisé pour le soutien de grossesse (FIV, menace fausse couche). Voie orale: non recommandée pendant la grossesse (excipient huile d'arachide).",
+      "breastfeeding": "Passage dans le lait. Pas de risque démontré pour le nourrisson."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Réservé à la femme adulte.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire."
+    },
+    "dosage": {
+      "adult": "Insuffisance lutéale PO: 200-300 mg/j le soir au coucher (10-12j/cycle). THS: 200 mg/j x 12-14j/mois. FIV (vaginal): 200-600 mg/j en 2-3 prises.",
+      "children": "Non applicable."
+    },
+    "market_data": [
+      {
+        "price": 88.8,
+        "price_ph": 58.66,
+        "packaging": "Boîte de 15",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 88.8
+      }
+    ],
+    "drugbank_id": "DB00396",
+    "adverse_effects": [
+      "Somnolence (voie orale — effet GABA-ergique)",
+      "Vertiges",
+      "Céphalées",
+      "Ballonnements",
+      "Spotting"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Carbamazépine",
+          "Phénytoïne",
+          "Rifampicine",
+          "Phénobarbital",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs enzymatiques (CYP3A4)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution des taux de progestérone → perte d'efficacité",
+        "recommendation": "Préférer la voie vaginale qui bypasse l'effet de premier passage hépatique."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de progestérone",
+        "recommendation": "Surveiller effets indésirables."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/utrogestan-200-mg-capsule-molle-orale-ou-vaginale",
+    "composition": [
+      {
+        "name": "Progestérone micronisée",
+        "inn": "",
+        "dose": "200 MG"
+      }
+    ],
+    "record_id": "utrogestan_progesterone_micronisee_200_mg",
+    "mechanism": "Progestérone naturelle micronisée.",
+    "half_life": "variable selon voie"
+  },
+  {
+    "id": "uvedose_100_000_ui_solution_buvable_en_ampoule",
+    "brand_name": "UVEDOSE",
+    "generic_name": "Cholécalciférol (Vitamine D3)",
+    "strength": "100 000 UI",
+    "form": "Solution buvable en ampoule",
+    "route": "Orale",
+    "atc_code": "A11CC05",
+    "therapeutic_group": "Vitamines",
+    "drug_class": "Vitamine D3",
+    "indications": [
+      "Carence en vitamine D"
+    ],
+    "contraindications": [
+      "Hypercalcémie"
+    ],
+    "interactions": [
+      "Digitaliques"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 18.2,
+        "price_ph": null,
+        "packaging": "Boite d'une ampoule de 2 ML",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 18.2
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypercalcémie (surdosage)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Digoxine",
+          "Lanoxin"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypercalcémie possible → potentialisation toxicité digitalique",
+        "recommendation": "Surveiller calcémie et ECG si association digitalique."
+      },
+      {
+        "interacting_drugs": [
+          "Thiazidiques",
+          "Furosémide"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Thiazidiques réduisent l'excrétion calcique → hypercalcémie si forte dose D3",
+        "recommendation": "Calcémie annuelle si doses répétées de Uvedose + thiazidique."
+      },
+      {
+        "interacting_drugs": [
+          "Anticalciques (amlodipine, vérapamil)"
+        ],
+        "interacting_classes": [
+          "Antagonistes calciques"
+        ],
+        "severity": "SURVEILLANCE",
+        "effect": "Hypercalcémie peut interférer avec l'action des anticalciques",
+        "recommendation": "Pas d'adaptation de dose systématique. Surveiller si surdosage D3."
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "DOSE_UNIQUE_TRIMESTRIELLE_OU_MENSUELLE",
+      "HYPERVITAMINOSE_D_RISQUE_SURDOSAGE",
+      "SURVEILLER_CALCEMIE_SI_DOSES_REPETEES"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uvedose-100-000-ui-solution-buvable-en-ampoule",
+    "composition": [
+      {
+        "name": "Cholécalciférol (Vitamine D3)",
+        "inn": "",
+        "dose": "100 000 UI"
+      }
+    ],
+    "record_id": "uvedose_cholecalciferol_vitamine_d3_100_000_ui",
+    "mechanism": "Vitamine liposoluble : favorise l'absorption intestinale du calcium et du phosphore.",
+    "half_life": "non pertinent (stockage tissulaire prolongé)"
+  },
+  {
+    "id": "uvimag_b6_500_mg_125_mg_solution_buvable",
+    "brand_name": "UVIMAG B6",
+    "generic_name": "Magnésium + Vitamine B6",
+    "strength": "500 MG / 125 MG",
+    "form": "Solution buvable",
+    "route": "Orale",
+    "atc_code": "A11JB",
+    "therapeutic_group": "Suppléments",
+    "drug_class": "Magnésium + Pyridoxine",
+    "indications": [
+      "Carence magnésienne"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Tétracyclines"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 45.5,
+        "price_ph": null,
+        "packaging": "20 ampoules de 10 ml",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 45.5
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Diarrhée légère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tétracyclines",
+          "Fluoroquinolones",
+          "Bisphosphonates"
+        ],
+        "interacting_classes": [
+          "Médicaments à absorption réduite par le Mg2+"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Chélation du magnésium → diminution absorption de l'antibiotique ou bisphosphonate",
+        "recommendation": "Espacer les prises d'au moins 2 heures."
+      },
+      {
+        "interacting_drugs": [
+          "Lévodopa",
+          "Modopar"
+        ],
+        "interacting_classes": [
+          "Antiparkinsoniens (lévodopa sans inhibiteur DDC)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "La pyridoxine (B6) accélère le métabolisme périphérique de la lévodopa → réduction efficacité",
+        "recommendation": "Pas d'interaction si lévodopa associée à un inhibiteur DDC (carbidopa, bensérazide)."
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "PRISE_AVEC_EAU_ABONDANTE",
+      "EFFERVESCENT_BOIRE_LENTEMENT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/uvimag-b6-500-mg-125-mg-solution-buvable",
+    "composition": [
+      {
+        "name": "Magnésium",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Vitamine B6",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "uvimag_b6_magnesium_vitamine_b6_500_mg_125_mg",
+    "mechanism": "Cofacteurs enzymatiques.",
+    "half_life": "non pertinent"
+  }
+]

@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { settingsService } from './services/settingsService';
 
 export type Language = 'fr' | 'ar';
@@ -14,6 +14,7 @@ export const translations = {
         settings: 'Paramètres',
         tasks: 'Tâches',
         smart_doc: 'SmartDoc',
+        notifications: 'Notifications',
 
         // Dashboard
         welcome: 'Bienvenue',
@@ -68,6 +69,7 @@ export const translations = {
         todays_patients: 'Patients du Jour',
         empty_queue: 'La salle d\'attente est vide',
         consult: 'Consulter',
+        all_patients_seen: 'Tous les patients ont été pris en charge',
 
         // Prescription Editor
         patient_name: 'Nom du Patient',
@@ -259,6 +261,7 @@ export const translations = {
         settings: 'الإعدادات',
         tasks: 'المهام',
         smart_doc: 'SmartDoc',
+        notifications: 'الإشعارات',
 
         // Dashboard
         welcome: 'مرحباً',
@@ -313,6 +316,7 @@ export const translations = {
         todays_patients: 'مرضى اليوم',
         empty_queue: 'قاعة الانتظار فارغة',
         consult: 'فحص',
+        all_patients_seen: 'تم فحص جميع المرضى',
 
         // Prescription Editor
         patient_name: 'اسم المريض',

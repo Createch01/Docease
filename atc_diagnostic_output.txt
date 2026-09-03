@@ -1,0 +1,51 @@
+TOTAL medicaments: 2845
+has atc_code (non-empty): 2837
+NO atc_code (empty/missing): 8
+atc_code present but first letter NOT in official 14 (A,B,C,D,G,H,J,L,M,N,P,R,S,V): 0
+  => Would fall into 'Non classe' under new system: 8 / 2845 (0.3%)
+
+--- Distinct 'bad' first letters (not in official 14) and counts ---
+
+--- Sample bad-letter records ---
+
+--- Sample empty-atc records ---
+  file=public/medicaments\medicament_A_final.json brand=ADFIL tg=Produit dermo-cosmétique (parapharmacie)
+  file=public/medicaments\medicament_C_final.json brand=CURARTI tg=Complément alimentaire (articulations)
+  file=public/medicaments\medicament_D_final.json brand=DEFLAMOL tg=Anti-inflammatoire à usage topique
+  file=public/medicaments\medicament_D_final.json brand=DEPURATIVA tg=Phytothérapie
+  file=public/medicaments\medicament_D_final.json brand=DIETAZ tg=Complément alimentaire
+
+--- Counts per official 14-letter group ---
+  A: 407
+  B: 135
+  C: 493
+  D: 105
+  G: 112
+  H: 67
+  J: 383
+  L: 272
+  M: 204
+  N: 315
+  P: 32
+  R: 168
+  S: 109
+  V: 35
+
+has therapeutic_group field non-empty: 2843 / 2845 (99.9%)
+has drug_class field non-empty: 2838 / 2845 (99.8%)
+
+--- Sample therapeutic_group text per official group (for level-2 quality check) ---
+  A: ['Antiflatulent, adsorbant', 'Antidiabétique, biguanide', 'Antidiarrhéique, microorganisme']
+  B: ['Antianémique', 'Vitamine, Antianémique (acide folique)', 'Antiagrégant plaquettaire']
+  C: ['Sympathomimétique, agoniste adrénergique non sélectif', "Association d'un Diurétique d’épargne potassique, antagoniste de l'aldostérone et d'un inhibiteur de la réabsorption du sodium au niveau du segment cortical de dilution", "Diurétique d’épargne potassique, antagoniste de l'aldostérone"]
+  D: ['Antiacnéique systémique, rétinoïde', 'Antibiotique à usage topique', 'Dermatologique']
+  G: ['Progestatif', 'Antagoniste des récepteurs alpha-1 adrénergiques', 'Contraceptifs oraux combinés']
+  H: ['Glucocorticoïde systémique', 'Corticoide', 'Corticoide']
+  J: ['Antiviral', 'Antiviral', 'Antiviral']
+  L: ['Endocrinothérapie, autres antagonistes hormonaux et agents apparentés', 'Antinéoplasique, inhibiteur de la biosynthèse des androgènes (inhibiteur du CYP17A1)', "Immunosuppresseur, anticorps monoclonal humanisé (anti-récepteur del'IL-6)"]
+  M: ['Antalgique, antipyrétique, décontracturant et myorelaxant', 'Régulateur du métabolisme osseux, bisphosphonate', 'Médicaments pour le traitement de maladies osseuses, bisphosphonate.']
+  N: ['Analgésique , antipyrétique', 'Neuroleptique atypique', 'Antalgiques opioïdes']
+  P: ['Antipaludéen / médicament antirhumatismal', "Antipaludique (dérivé de l'artémisinine + arylaminoalcool)", 'Antiparasitaire externe — scabicide']
+  R: ['Antihistaminiques H1', 'Antiémétique, antihistaminique', 'Glucocorticoïde par voie inhalée (Anti-inflammatoire)']
+  S: ['Ceruminolytique auriculaire', 'Décongestionnant et antiallergique', 'Antiglaucomateux']
+  V: ['Radiologie produit de contraste', 'Antidote, Hémochromatose', 'Antidote, Hémochromatose']

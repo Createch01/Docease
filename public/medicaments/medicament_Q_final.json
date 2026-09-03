@@ -1,0 +1,2046 @@
+[
+  {
+    "id": "Q-QUINOLOX",
+    "brand_name": "QUINOLOX",
+    "generic_name": "Ofloxacine",
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "J01MA01",
+    "therapeutic_group": "Antibactériens - Fluoroquinolones",
+    "drug_class": "Fluoroquinolone de 2e génération",
+    "indications": [
+      "Infections urinaires compliquées et non compliquées",
+      "Prostatite bactérienne chronique",
+      "Infections génitales (urétrite, cervicite gonococcique et non gonococcique, salpingite)",
+      "Infections respiratoires basses (pneumonie, exacerbation BPCO)",
+      "Infections ORL (otite moyenne chronique, sinusite)",
+      "Infections cutanées et des tissus mous",
+      "Infections ostéo-articulaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux fluoroquinolones",
+      "Grossesse et allaitement",
+      "Enfant et adolescent < 18 ans (risque d'arthropathie)",
+      "Antécédents de tendinopathie sous fluoroquinolone",
+      "Épilepsie non contrôlée",
+      "Déficit en G6PD"
+    ],
+    "interactions": [
+      {
+        "drug": "Antiacides (Al, Mg), Fer, Zinc, Calcium",
+        "severity": "modérée",
+        "effect": "Diminution absorption de l'ofloxacine (chélation par cations divalents)"
+      },
+      {
+        "drug": "Théophylline",
+        "severity": "modérée",
+        "effect": "Augmentation des taux de théophylline (inhibition métabolisme)"
+      },
+      {
+        "drug": "Anticoagulants oraux (AVK)",
+        "severity": "modérée",
+        "effect": "Potentialisation de l'effet anticoagulant → risque hémorragique"
+      },
+      {
+        "drug": "AINS (Ibuprofène, Kétoprofène)",
+        "severity": "modérée",
+        "effect": "Risque accru de convulsions"
+      },
+      {
+        "drug": "Corticostéroïdes systémiques",
+        "severity": "modérée",
+        "effect": "Risque accru de tendinopathie et rupture tendineuse"
+      },
+      {
+        "drug": "Méthotrexate",
+        "severity": "modérée",
+        "effect": "Diminution de la clairance rénale du MTX → toxicité accrue"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué pendant la grossesse. Risque d'arthropathie chez le fœtus (toxicité sur le cartilage de croissance démontrée chez l'animal).",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait maternel."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Contre-indiqué chez l'enfant et l'adolescent < 18 ans en raison du risque d'arthropathie (atteinte du cartilage de conjugaison en croissance).",
+      "dose_rule": "Non recommandé < 18 ans."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 20-50 mL/min: 200 mg/jour (1 prise). ClCr < 20 mL/min: 200 mg/48h. Hémodialyse: 200 mg/48h (pas de dose supplémentaire après dialyse)."
+    },
+    "dosage": {
+      "adult": "Infections urinaires non compliquées: 200 mg 2x/jour x 3 jours. Infections urinaires compliquées: 200 mg 2x/jour x 7-10 jours. Prostatite: 200 mg 2x/jour x 28 jours. IST: 200-400 mg dose unique ou 400 mg/jour x 7 jours. Infections respiratoires/cutanées: 200 mg 2x/jour x 7-14 jours.",
+      "children": "Non recommandé < 18 ans."
+    },
+    "market_data": [
+      {
+        "price": 139.2,
+        "packaging": "pelliculé Boîte de 20",
+        "laboratory": "PHARMA5",
+        "url": "https://www.medicament.ma/medicament/quinolox-200-mg-comprime",
+        "price_ppv_dhs": 139.2
+      }
+    ],
+    "drugbank_id": "DB01165",
+    "mechanism": "Inhibition de l'ADN gyrase (topoisomérase II) et de la topoisomérase IV bactériennes → blocage de la réplication, transcription et réparation de l'ADN bactérien → effet bactéricide.",
+    "half_life": "5-8 heures",
+    "adverse_effects": [
+      "Nausées, diarrhée, douleurs abdominales",
+      "Céphalées, vertiges, insomnie",
+      "Tendinopathie et rupture tendineuse (tendon d'Achille surtout, favorisée par corticothérapie et âge > 60 ans)",
+      "Photosensibilisation",
+      "Neuropathie périphérique (parfois irréversible)",
+      "Allongement du QT (rare)",
+      "Anévrisme aortique (risque accru, usage prolongé)",
+      "Réactions allergiques, rash",
+      "Élévation des transaminases"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Maalox",
+          "Gaviscon",
+          "Hydroxyde d'aluminium",
+          "Fer",
+          "Fermed",
+          "Tardyféron",
+          "Calcium",
+          "Cacit",
+          "Zinc"
+        ],
+        "interacting_classes": [
+          "Antiacides contenant Al/Mg",
+          "Fer oral",
+          "Calcium",
+          "Zinc"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'absorption de l'ofloxacine de 50-90% par chélation avec les cations divalents/trivalents",
+        "recommendation": "Prendre l'ofloxacine AU MOINS 2 HEURES AVANT ou 6 HEURES APRÈS les antiacides, fer, calcium ou zinc."
+      },
+      {
+        "interacting_drugs": [
+          "Théophylline",
+          "Dilatrane",
+          "Euphylline"
+        ],
+        "interacting_classes": [
+          "Bases xanthiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation des taux de théophylline → risque de convulsions et arythmies",
+        "recommendation": "Doser la théophyllinémie et ajuster la dose de théophylline."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Coumadine",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "Anticoagulants oraux (AVK)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Potentialisation de l'effet anticoagulant → risque hémorragique",
+        "recommendation": "Surveiller l'INR fréquemment pendant l'antibiothérapie et quelques jours après l'arrêt."
+      },
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Nurodol",
+          "Diclofénac",
+          "Fenac",
+          "Kétoprofène",
+          "Ketoflex"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque accru de convulsions (abaissement du seuil épileptogène)",
+        "recommendation": "Éviter l'association si possible. Surveiller l'apparition de signes neurologiques."
+      },
+      {
+        "interacting_drugs": [
+          "Prednisone",
+          "Prednisolone",
+          "Méthylprednisolone",
+          "Dexaméthasone"
+        ],
+        "interacting_classes": [
+          "Corticostéroïdes systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque accru de tendinopathie et de rupture tendineuse (tendon d'Achille)",
+        "recommendation": "Éviter l'association. Si indispensable: surveiller tout signe tendineux (douleur, gonflement). Arrêter la fluoroquinolone immédiatement en cas de tendinite."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate",
+          "Novatrex",
+          "Imeth"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de la clairance rénale du MTX → toxicité accrue",
+        "recommendation": "Surveiller la toxicité du méthotrexate (NFS, fonction rénale, mucosite)."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "EPILEPSIE"
+    ],
+    "composition": [
+      {
+        "name": "Ofloxacine",
+        "inn": "",
+        "dose": "200 mg"
+      }
+    ],
+    "record_id": "quinolox_ofloxacine_200_mg"
+  },
+  {
+    "id": "Q-QUINUX",
+    "brand_name": "QUINUX",
+    "generic_name": "Méthotrexate",
+    "strength": "10 MG / 0.4 ML",
+    "form": "Solution",
+    "route": "SC",
+    "atc_code": "L04AX03",
+    "therapeutic_group": "Immunosuppresseurs / Antirhumatismaux",
+    "drug_class": "Antimétabolite antifolique (DMARD)",
+    "indications": [
+      "Polyarthrite rhumatoïde (traitement de fond de référence, 1ère intention)",
+      "Psoriasis sévère en plaques (résistant aux traitements conventionnels)",
+      "Rhumatisme psoriasique",
+      "Maladie de Crohn (hors AMM dans certains pays)",
+      "Lupus (hors AMM)",
+      "Grossesse extra-utérine (dose unique en gynécologie)"
+    ],
+    "contraindications": [
+      "Grossesse (TÉRATOGÈNE PUISSANT) — contraception obligatoire femme: 1 mois après arrêt, homme: 3 mois après arrêt",
+      "Allaitement",
+      "Insuffisance rénale sévère (ClCr < 30 mL/min)",
+      "Insuffisance hépatique sévère ou hépatopathie chronique",
+      "Cytopénies (leucopénie, thrombopénie, anémie sévère)",
+      "Immunodéficience sévère",
+      "Infection active grave",
+      "Ulcère gastroduodénal actif",
+      "Alcoolisme"
+    ],
+    "interactions": [
+      {
+        "drug": "AINS (Ibuprofène, Diclofénac, Naproxène)",
+        "severity": "majeure",
+        "effect": "Augmentation de la toxicité du MTX par diminution de sa clairance rénale → pancytopénie, néphrotoxicité, mucosite"
+      },
+      {
+        "drug": "Triméthoprime / Sulfaméthoxazole (Bactrim)",
+        "severity": "majeure",
+        "effect": "Pancytopénie sévère — effet antifolique additif → aplasie médullaire"
+      },
+      {
+        "drug": "IPP (Oméprazole, Lansoprazole, Ésoméprazole)",
+        "severity": "modérée",
+        "effect": "Diminution de l'élimination rénale du MTX → toxicité à haute dose"
+      },
+      {
+        "drug": "Pénicillines (Amoxicilline)",
+        "severity": "modérée",
+        "effect": "Diminution de la sécrétion tubulaire du MTX → accumulation et toxicité"
+      },
+      {
+        "drug": "Léflunomide",
+        "severity": "majeure",
+        "effect": "Hépatotoxicité et hématotoxicité additives"
+      },
+      {
+        "drug": "Vaccins vivants (BCG, ROR, Fièvre jaune)",
+        "severity": "majeure",
+        "effect": "Risque d'infection disséminée vaccinale sous immunosuppression"
+      }
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "STRICTEMENT CONTRE-INDIQUÉ. Le méthotrexate est un tératogène puissant: risque de malformations crâniofaciales, des membres et du SNC (syndrome aminoptérine). Avortement spontané fréquent. Contraception efficace OBLIGATOIRE pendant le traitement et au moins 1 mois après l'arrêt chez la femme, 3 mois chez l'homme.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait maternel."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 3,
+      "warning": "Utilisé en pédiatrie pour l'arthrite juvénile idiopathique (AJI) à partir de 3 ans. Surveillance hépatique et hématologique stricte.",
+      "dose_rule": "AJI: 10-15 mg/m²/semaine en 1 prise SC ou PO. Max: 20 mg/m²/semaine. Associer acide folique 5 mg/semaine (24-48h après MTX)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-59 mL/min: réduire la dose de 50%. ClCr < 30 mL/min: CONTRE-INDIQUÉ. Le méthotrexate est éliminé à 90% par voie rénale — l'insuffisance rénale entraîne une accumulation toxique."
+    },
+    "dosage": {
+      "adult": "PR: 7.5-25 mg UNE FOIS PAR SEMAINE (⚠️ NE JAMAIS donner quotidiennement — risque fatal de surdosage). Voie SC préférée pour meilleure biodisponibilité et tolérance GI. Psoriasis: 7.5-25 mg/semaine. TOUJOURS associer acide folique 5-10 mg/semaine, 24-48h après la dose de MTX.",
+      "children": "AJI: 10-15 mg/m²/semaine SC. Associer acide folique."
+    },
+    "market_data": [
+      {
+        "price": 115.5,
+        "packaging": "injectable en seringue pré remplie Boite unitaire",
+        "laboratory": "IBERMA",
+        "url": "https://www.medicament.ma/medicament/quinux-10-mg-0-4-ml-solution",
+        "price_ppv_dhs": 115.5
+      }
+    ],
+    "drugbank_id": "DB00563",
+    "mechanism": "Inhibition de la dihydrofolate réductase (DHFR) → blocage de la synthèse des purines et pyrimidines → effet antiprolifératif et immunosuppresseur. À faible dose (rhumatologie): effet anti-inflammatoire via libération d'adénosine.",
+    "half_life": "3-10 heures (dose faible). Métabolite polyglutamate: accumulation intracellulaire sur plusieurs semaines.",
+    "adverse_effects": [
+      "Nausées, stomatite (les plus fréquents)",
+      "Hépatotoxicité (élévation transaminases, fibrose hépatique à long terme)",
+      "Myélosuppression (leucopénie, thrombopénie, pancytopénie — potentiellement fatale)",
+      "Pneumopathie interstitielle (pneumopathie d'hypersensibilité — arrêt immédiat)",
+      "Infections opportunistes (immunodépression)",
+      "Néphrotoxicité (haute dose)",
+      "Alopécie",
+      "Photosensibilisation",
+      "Tératogénicité (malformations sévères)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ibuprofène",
+          "Nurodol",
+          "Diclofénac",
+          "Fenac",
+          "Naproxène",
+          "Kétoprofène",
+          "Ketoflex",
+          "Piroxicam",
+          "Feldene",
+          "Célécoxib",
+          "Aspirine"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure de la toxicité du MTX (pancytopénie, néphrotoxicité, mucosite) par diminution de la clairance rénale du MTX",
+        "recommendation": "CONTRE-INDIQUÉ si MTX ≥ 15 mg/semaine. Si MTX < 15 mg/semaine: possible avec PRUDENCE, surveiller NFS et créatinine. Préférer le paracétamol comme antalgique."
+      },
+      {
+        "interacting_drugs": [
+          "Triméthoprime",
+          "Sulfaméthoxazole",
+          "Bactrim",
+          "Cotrimoxazole"
+        ],
+        "interacting_classes": [
+          "Antifoliques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Pancytopénie sévère potentiellement fatale — effet antifolique additif (double blocage de la synthèse des folates)",
+        "recommendation": "ASSOCIATION FORMELLEMENT CONTRE-INDIQUÉE. Utiliser un antibiotique alternatif."
+      },
+      {
+        "interacting_drugs": [
+          "Oméprazole",
+          "Kalest",
+          "Lansoprazole",
+          "Lanzen",
+          "Ésoméprazole",
+          "Mezor",
+          "Pantoprazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs de la pompe à protons (IPP)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'élimination rénale du MTX → augmentation des taux plasmatiques → risque de toxicité, surtout à haute dose",
+        "recommendation": "Envisager l'arrêt de l'IPP pendant les cycles de MTX à haute dose. À dose rhumatologique: surveillance."
+      },
+      {
+        "interacting_drugs": [
+          "Amoxicilline",
+          "Neomox",
+          "Ampicilline"
+        ],
+        "interacting_classes": [
+          "Pénicillines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de la sécrétion tubulaire rénale du MTX → accumulation et toxicité",
+        "recommendation": "Surveiller la NFS et la fonction rénale. Espacer si possible."
+      },
+      {
+        "interacting_drugs": [
+          "Léflunomide",
+          "Arava"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs (DMARD)"
+        ],
+        "severity": "DANGER",
+        "effect": "Hépatotoxicité et hématotoxicité additives sévères",
+        "recommendation": "Association possible mais sous surveillance hépatique et hématologique TRÈS étroite. Réduire doses."
+      },
+      {
+        "interacting_drugs": [
+          "Vaccin BCG",
+          "Vaccin ROR",
+          "Vaccin Fièvre jaune",
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins vivants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque d'infection disséminée vaccinale potentiellement fatale sous immunosuppression par MTX",
+        "recommendation": "CONTRE-INDIQUÉ. Mettre à jour les vaccinations AVANT de débuter le MTX. Vaccins inactivés autorisés."
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "INSUFFISANCE_RENALE_CONTRE_INDIQUE",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "composition": [
+      {
+        "name": "Méthotrexate sodique",
+        "inn": "",
+        "dose": "10 mg / 0.4 mL (≡ 10 mg MTX base)"
+      }
+    ],
+    "record_id": "quinux_methotrexate_10_mg_0_4_ml"
+  },
+  {
+    "id": "Q-SEROQUEL-25",
+    "brand_name": "SEROQUEL",
+    "generic_name": "Quétiapine",
+    "strength": "25 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "N05AH04",
+    "therapeutic_group": "Antipsychotiques atypiques",
+    "drug_class": "Antagoniste des récepteurs dopaminergiques D2 et sérotoninergiques 5-HT2 (MARTA)",
+    "indications": [
+      "Schizophrénie (traitement des épisodes aigus et entretien)",
+      "Épisodes maniaques dans le trouble bipolaire I (en monothérapie ou en association)",
+      "Épisodes dépressifs majeurs dans le trouble bipolaire",
+      "Traitement adjuvant de la dépression unipolaire résistante (hors AMM fréquent)"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la quétiapine",
+      "Association aux inhibiteurs puissants du CYP3A4 (kétoconazole, ritonavir)",
+      "Association aux IMAO",
+      "Démence chez le sujet âgé (mortalité accrue)",
+      "QTc > 500 ms"
+    ],
+    "composition": [
+      {
+        "name": "Fumarate de quétiapine",
+        "inn": "",
+        "dose": "28.77 mg (≡ 25 mg quétiapine base)"
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Phénelzine",
+          "Tranylcypromine",
+          "Sélégiline",
+          "Moclobémide",
+          "Rasagiline"
+        ],
+        "interacting_classes": [
+          "IMAO (inhibiteurs de la MAO)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque de syndrome sérotoninergique sévère et d'hyperthermie maligne. Association absolument contre-indiquée.",
+        "recommendation": "Ne jamais associer. Respecter un délai de 14 jours après arrêt de l'IMAO avant d'introduire la quétiapine."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Cordarone",
+          "Sotalol",
+          "Méthadone",
+          "Halopéridol",
+          "Haldol",
+          "Érythromycine",
+          "Clarithromycine",
+          "Lévofloxacine",
+          "Moxifloxacine",
+          "Azithromycine",
+          "Citalopram",
+          "Escitalopram",
+          "Ondansétron"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QTc"
+        ],
+        "severity": "DANGER",
+        "effect": "Allongement additif de l'intervalle QT → risque de torsades de pointes et de mort subite. Risque majoré si hypokaliémie ou hypomagnésémie.",
+        "recommendation": "Éviter l'association. Si indispensable: ECG de base et surveillance électrocardiographique régulière. Corriger toute hypokaliémie avant l'instauration."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Fluconazole",
+          "Voriconazole",
+          "Clarithromycine",
+          "Érythromycine",
+          "Ritonavir",
+          "Indinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs du CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure des concentrations plasmatiques de quétiapine (×6 avec kétoconazole) par inhibition du métabolisme hépatique → sédation excessive, hypotension, arythmies.",
+        "recommendation": "Association déconseillée. Si inévitable: réduire fortement la dose de quétiapine et surveiller étroitement."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Rifadine",
+          "Carbamazépine",
+          "Tégretol",
+          "Phénytoïne",
+          "Di-Hydan",
+          "Phénobarbital",
+          "Gardénal",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants du CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution majeure des concentrations plasmatiques de quétiapine (×7 avec rifampicine) → perte d'efficacité clinique.",
+        "recommendation": "Éviter l'association. Si inévitable: augmenter la dose de quétiapine jusqu'à 5× la dose initiale. Réduire progressivement à l'arrêt de l'inducteur pour éviter les pics toxiques."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Diazépam",
+          "Valium",
+          "Lorazépam",
+          "Temesta",
+          "Morphine",
+          "Tramadol",
+          "Codéine",
+          "Zolpidem"
+        ],
+        "interacting_classes": [
+          "Dépresseurs du SNC",
+          "Benzodiazépines",
+          "Opioïdes",
+          "Hypnotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Sédation additive sévère pouvant entraîner une dépression respiratoire. L'alcool majore également le risque hypotenseur.",
+        "recommendation": "Éviter l'alcool absolument. Association avec BZD/opioïdes: surveillance respiratoire étroite, dose minimale, durée limitée."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe",
+          "Camcolit"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs au lithium"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Neurotoxicité additive (tremblements, confusion, syndrome extrapyramidal). Risque de neurotoxicité même à lithiémies normales.",
+        "recommendation": "Surveiller les signes de neurotoxicité. Contrôler la lithiémie régulièrement. Hydratation correcte obligatoire."
+      },
+      {
+        "interacting_drugs": [
+          "Amlodipine",
+          "Amlor",
+          "Vérapamil",
+          "Diltiazem",
+          "Captopril",
+          "Ramipril",
+          "Losartan",
+          "Furosémide",
+          "Lasilix"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additive → risque de chutes et syncopes, surtout en début de traitement.",
+        "recommendation": "Mesure de la tension en position debout. Adapter les doses antihypertenseurs. Prévenir le patient du risque de vertiges au lever."
+      },
+      {
+        "interacting_drugs": [
+          "Métformine",
+          "Glucophage",
+          "Glibenclamide",
+          "Gliclazide",
+          "Insuline"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "La quétiapine peut induire une hyperglycémie, une résistance à l'insuline et une prise de poids → déséquilibre du diabète et nécessité d'adaptation du traitement antidiabétique.",
+        "recommendation": "Surveiller la glycémie à jeun régulièrement. Contrôler poids, bilan lipidique et glycémie à l'instauration et tous les 3-6 mois."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données humaines limitées. Risque de signes de sevrage néonataux (agitation, hypertonie, tremblements, somnolence, détresse respiratoire) si exposition au 3e trimestre. Risque de troubles métaboliques néonataux. À utiliser uniquement si le bénéfice justifie le risque.",
+      "breastfeeding": "Déconseillé. Passage dans le lait maternel documenté. Risque de sédation néonatale."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 13,
+      "warning": "Schizophrénie: autorisé à partir de 13 ans. Épisode maniaque bipolaire: autorisé à partir de 10 ans. Non recommandé < 10 ans. Surveillance de la croissance, poids et développement pubertaire.",
+      "dose_rule": "Schizophrénie (≥13 ans): débuter 25 mg/j, titration jusqu'à 400-800 mg/j. Manie bipolaire (≥10 ans): débuter 25 mg/j, max 600 mg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement nécessaire en insuffisance rénale. Prudence en insuffisance hépatique sévère: débuter par 25 mg/j et augmenter progressivement."
+    },
+    "dosage": {
+      "adult": "Schizophrénie: débuter 25 mg 2x/jour J1, puis augmenter progressivement jusqu'à 150-750 mg/jour. Manie bipolaire: débuter 50 mg/jour, cible 400-800 mg/jour. Dépression bipolaire: 50 mg/jour le soir, cible 300 mg/jour. Comprimé à avaler entier, peut être pris avec ou sans aliment.",
+      "children": "Voir précautions pédiatriques. Titration très progressive avec paliers de 25-50 mg."
+    },
+    "market_data": [
+      {
+        "price": 178.5,
+        "price_ppv_dhs": 178.5,
+        "packaging": "Comprimé pelliculé Boîte de 60",
+        "laboratory": "AstraZeneca",
+        "url": "https://www.medicament.ma/medicament/seroquel-25-mg-comprime"
+      }
+    ],
+    "drugbank_id": "DB01224",
+    "mechanism": "Antagonisme des récepteurs dopaminergiques D1 et D2, sérotoninergiques 5-HT1A et 5-HT2, histaminergiques H1 (→ sédation), adrénergiques α1 (→ hypotension orthostatique) et muscariniques (faible). L'antagonisme 5-HT2/D2 confère le profil atypique (moins d'EPS).",
+    "half_life": "7 heures (quétiapine), 12 heures (métabolite actif N-désalkyl-quétiapine)",
+    "adverse_effects": [
+      "Somnolence, sédation (très fréquent, dose-dépendant)",
+      "Prise de poids, augmentation de l'appétit",
+      "Sécheresse buccale, constipation",
+      "Hypotension orthostatique, tachycardie réflexe",
+      "Hyperglycémie, diabète de type 2 (surveillance glycémique obligatoire)",
+      "Dyslipidémie (↑ triglycérides, ↓ HDL)",
+      "Syndrome métabolique à long terme",
+      "Allongement du QTc (rare mais grave)",
+      "Symptômes extrapyramidaux (rares, inférieurs aux typiques)",
+      "Akathisie",
+      "Syndrome malin des neuroleptiques (rare, urgence médicale)"
+    ],
+    "tableau_maroc": "B",
+    "smart_flags": [
+      "QTC_RISQUE",
+      "SEDATION_MAJEURE",
+      "DIABETE_RISQUE",
+      "PRISE_POIDS",
+      "HYPOTENSION_ORTHOSTATIQUE",
+      "GROSSESSE_PRUDENCE",
+      "SYNDROME_METABOLIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/seroquel-25-mg-comprime",
+    "record_id": "seroquel_quetiapine_25_mg",
+    "interactions": [
+      "Autres dépresseurs du SNC",
+      "Inhibiteurs du CYP3A4"
+    ]
+  },
+  {
+    "id": "Q-SEROQUEL-100",
+    "brand_name": "SEROQUEL",
+    "generic_name": "Quétiapine",
+    "strength": "100 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "N05AH04",
+    "therapeutic_group": "Antipsychotiques atypiques",
+    "drug_class": "Antagoniste des récepteurs dopaminergiques D2 et sérotoninergiques 5-HT2 (MARTA)",
+    "indications": [
+      "Schizophrénie (traitement des épisodes aigus et entretien)",
+      "Épisodes maniaques dans le trouble bipolaire I",
+      "Épisodes dépressifs majeurs dans le trouble bipolaire"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la quétiapine",
+      "Association aux inhibiteurs puissants du CYP3A4",
+      "Association aux IMAO",
+      "Démence chez le sujet âgé",
+      "QTc > 500 ms"
+    ],
+    "composition": [
+      {
+        "name": "Fumarate de quétiapine",
+        "inn": "",
+        "dose": "115.07 mg (≡ 100 mg quétiapine base)"
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Phénelzine",
+          "Tranylcypromine",
+          "Sélégiline",
+          "Moclobémide",
+          "Rasagiline"
+        ],
+        "interacting_classes": [
+          "IMAO (inhibiteurs de la MAO)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque de syndrome sérotoninergique sévère et d'hyperthermie maligne. Association absolument contre-indiquée.",
+        "recommendation": "Ne jamais associer. Respecter un délai de 14 jours après arrêt de l'IMAO avant d'introduire la quétiapine."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Cordarone",
+          "Sotalol",
+          "Méthadone",
+          "Halopéridol",
+          "Haldol",
+          "Érythromycine",
+          "Clarithromycine",
+          "Lévofloxacine",
+          "Moxifloxacine",
+          "Azithromycine",
+          "Citalopram",
+          "Escitalopram",
+          "Ondansétron"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QTc"
+        ],
+        "severity": "DANGER",
+        "effect": "Allongement additif de l'intervalle QT → risque de torsades de pointes et de mort subite. Risque majoré si hypokaliémie ou hypomagnésémie.",
+        "recommendation": "Éviter l'association. Si indispensable: ECG de base et surveillance électrocardiographique régulière. Corriger toute hypokaliémie avant l'instauration."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Fluconazole",
+          "Voriconazole",
+          "Clarithromycine",
+          "Érythromycine",
+          "Ritonavir",
+          "Indinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs du CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure des concentrations plasmatiques de quétiapine (×6 avec kétoconazole) par inhibition du métabolisme hépatique → sédation excessive, hypotension, arythmies.",
+        "recommendation": "Association déconseillée. Si inévitable: réduire fortement la dose de quétiapine et surveiller étroitement."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Rifadine",
+          "Carbamazépine",
+          "Tégretol",
+          "Phénytoïne",
+          "Di-Hydan",
+          "Phénobarbital",
+          "Gardénal",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants du CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution majeure des concentrations plasmatiques de quétiapine (×7 avec rifampicine) → perte d'efficacité clinique.",
+        "recommendation": "Éviter l'association. Si inévitable: augmenter la dose de quétiapine jusqu'à 5× la dose initiale. Réduire progressivement à l'arrêt de l'inducteur pour éviter les pics toxiques."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Diazépam",
+          "Valium",
+          "Lorazépam",
+          "Temesta",
+          "Morphine",
+          "Tramadol",
+          "Codéine",
+          "Zolpidem"
+        ],
+        "interacting_classes": [
+          "Dépresseurs du SNC",
+          "Benzodiazépines",
+          "Opioïdes",
+          "Hypnotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Sédation additive sévère pouvant entraîner une dépression respiratoire. L'alcool majore également le risque hypotenseur.",
+        "recommendation": "Éviter l'alcool absolument. Association avec BZD/opioïdes: surveillance respiratoire étroite, dose minimale, durée limitée."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe",
+          "Camcolit"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs au lithium"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Neurotoxicité additive (tremblements, confusion, syndrome extrapyramidal). Risque de neurotoxicité même à lithiémies normales.",
+        "recommendation": "Surveiller les signes de neurotoxicité. Contrôler la lithiémie régulièrement. Hydratation correcte obligatoire."
+      },
+      {
+        "interacting_drugs": [
+          "Amlodipine",
+          "Amlor",
+          "Vérapamil",
+          "Diltiazem",
+          "Captopril",
+          "Ramipril",
+          "Losartan",
+          "Furosémide",
+          "Lasilix"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additive → risque de chutes et syncopes, surtout en début de traitement.",
+        "recommendation": "Mesure de la tension en position debout. Adapter les doses antihypertenseurs. Prévenir le patient du risque de vertiges au lever."
+      },
+      {
+        "interacting_drugs": [
+          "Métformine",
+          "Glucophage",
+          "Glibenclamide",
+          "Gliclazide",
+          "Insuline"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "La quétiapine peut induire une hyperglycémie, une résistance à l'insuline et une prise de poids → déséquilibre du diabète et nécessité d'adaptation du traitement antidiabétique.",
+        "recommendation": "Surveiller la glycémie à jeun régulièrement. Contrôler poids, bilan lipidique et glycémie à l'instauration et tous les 3-6 mois."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Risque de signes de sevrage néonataux si exposition au 3e trimestre. À utiliser uniquement si bénéfice > risque.",
+      "breastfeeding": "Déconseillé. Passage dans le lait maternel."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "Schizophrénie ≥13 ans, manie bipolaire ≥10 ans. Surveillance croissance et développement.",
+      "dose_rule": "Titration progressive. Dose max: 800 mg/jour (schizophrénie ≥13 ans), 600 mg/jour (manie ≥10 ans)."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement en insuffisance rénale. Prudence en insuffisance hépatique sévère."
+    },
+    "dosage": {
+      "adult": "Schizophrénie: 150-750 mg/jour en 2 prises. Manie bipolaire: 400-800 mg/jour. Dépression bipolaire: 300 mg/jour le soir.",
+      "children": "Titration très progressive."
+    },
+    "market_data": [
+      {
+        "price": 382.0,
+        "price_ppv_dhs": 382.0,
+        "packaging": "Comprimé pelliculé Boîte de 60",
+        "laboratory": "AstraZeneca",
+        "url": "https://www.medicament.ma/medicament/seroquel-100-mg-comprime"
+      }
+    ],
+    "drugbank_id": "DB01224",
+    "mechanism": "Voir SEROQUEL 25 mg. Même mécanisme — dosage différent.",
+    "half_life": "7 heures",
+    "adverse_effects": [
+      "Somnolence, sédation",
+      "Prise de poids",
+      "Hyperglycémie",
+      "Hypotension orthostatique",
+      "Allongement QTc",
+      "Dyslipidémie"
+    ],
+    "tableau_maroc": "B",
+    "smart_flags": [
+      "QTC_RISQUE",
+      "SEDATION_MAJEURE",
+      "DIABETE_RISQUE",
+      "PRISE_POIDS",
+      "HYPOTENSION_ORTHOSTATIQUE",
+      "GROSSESSE_PRUDENCE",
+      "SYNDROME_METABOLIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/seroquel-100-mg-comprime",
+    "record_id": "seroquel_quetiapine_100_mg",
+    "interactions": [
+      "Autres dépresseurs du SNC",
+      "Inhibiteurs du CYP3A4"
+    ]
+  },
+  {
+    "id": "Q-SEROQUEL-200",
+    "brand_name": "SEROQUEL",
+    "generic_name": "Quétiapine",
+    "strength": "200 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "N05AH04",
+    "therapeutic_group": "Antipsychotiques atypiques",
+    "drug_class": "Antagoniste des récepteurs dopaminergiques D2 et sérotoninergiques 5-HT2 (MARTA)",
+    "indications": [
+      "Schizophrénie",
+      "Épisodes maniaques bipolaires",
+      "Dépression bipolaire"
+    ],
+    "contraindications": [
+      "Inhibiteurs puissants CYP3A4",
+      "IMAO",
+      "Démence sujet âgé",
+      "QTc > 500 ms"
+    ],
+    "composition": [
+      {
+        "name": "Fumarate de quétiapine",
+        "inn": "",
+        "dose": "230.15 mg (≡ 200 mg quétiapine base)"
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Phénelzine",
+          "Tranylcypromine",
+          "Sélégiline",
+          "Moclobémide",
+          "Rasagiline"
+        ],
+        "interacting_classes": [
+          "IMAO (inhibiteurs de la MAO)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque de syndrome sérotoninergique sévère et d'hyperthermie maligne. Association absolument contre-indiquée.",
+        "recommendation": "Ne jamais associer. Respecter un délai de 14 jours après arrêt de l'IMAO avant d'introduire la quétiapine."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Cordarone",
+          "Sotalol",
+          "Méthadone",
+          "Halopéridol",
+          "Haldol",
+          "Érythromycine",
+          "Clarithromycine",
+          "Lévofloxacine",
+          "Moxifloxacine",
+          "Azithromycine",
+          "Citalopram",
+          "Escitalopram",
+          "Ondansétron"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QTc"
+        ],
+        "severity": "DANGER",
+        "effect": "Allongement additif de l'intervalle QT → risque de torsades de pointes et de mort subite. Risque majoré si hypokaliémie ou hypomagnésémie.",
+        "recommendation": "Éviter l'association. Si indispensable: ECG de base et surveillance électrocardiographique régulière. Corriger toute hypokaliémie avant l'instauration."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Fluconazole",
+          "Voriconazole",
+          "Clarithromycine",
+          "Érythromycine",
+          "Ritonavir",
+          "Indinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs du CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure des concentrations plasmatiques de quétiapine (×6 avec kétoconazole) par inhibition du métabolisme hépatique → sédation excessive, hypotension, arythmies.",
+        "recommendation": "Association déconseillée. Si inévitable: réduire fortement la dose de quétiapine et surveiller étroitement."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Rifadine",
+          "Carbamazépine",
+          "Tégretol",
+          "Phénytoïne",
+          "Di-Hydan",
+          "Phénobarbital",
+          "Gardénal",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants du CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution majeure des concentrations plasmatiques de quétiapine (×7 avec rifampicine) → perte d'efficacité clinique.",
+        "recommendation": "Éviter l'association. Si inévitable: augmenter la dose de quétiapine jusqu'à 5× la dose initiale. Réduire progressivement à l'arrêt de l'inducteur pour éviter les pics toxiques."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Diazépam",
+          "Valium",
+          "Lorazépam",
+          "Temesta",
+          "Morphine",
+          "Tramadol",
+          "Codéine",
+          "Zolpidem"
+        ],
+        "interacting_classes": [
+          "Dépresseurs du SNC",
+          "Benzodiazépines",
+          "Opioïdes",
+          "Hypnotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Sédation additive sévère pouvant entraîner une dépression respiratoire. L'alcool majore également le risque hypotenseur.",
+        "recommendation": "Éviter l'alcool absolument. Association avec BZD/opioïdes: surveillance respiratoire étroite, dose minimale, durée limitée."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe",
+          "Camcolit"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs au lithium"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Neurotoxicité additive (tremblements, confusion, syndrome extrapyramidal). Risque de neurotoxicité même à lithiémies normales.",
+        "recommendation": "Surveiller les signes de neurotoxicité. Contrôler la lithiémie régulièrement. Hydratation correcte obligatoire."
+      },
+      {
+        "interacting_drugs": [
+          "Amlodipine",
+          "Amlor",
+          "Vérapamil",
+          "Diltiazem",
+          "Captopril",
+          "Ramipril",
+          "Losartan",
+          "Furosémide",
+          "Lasilix"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additive → risque de chutes et syncopes, surtout en début de traitement.",
+        "recommendation": "Mesure de la tension en position debout. Adapter les doses antihypertenseurs. Prévenir le patient du risque de vertiges au lever."
+      },
+      {
+        "interacting_drugs": [
+          "Métformine",
+          "Glucophage",
+          "Glibenclamide",
+          "Gliclazide",
+          "Insuline"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "La quétiapine peut induire une hyperglycémie, une résistance à l'insuline et une prise de poids → déséquilibre du diabète et nécessité d'adaptation du traitement antidiabétique.",
+        "recommendation": "Surveiller la glycémie à jeun régulièrement. Contrôler poids, bilan lipidique et glycémie à l'instauration et tous les 3-6 mois."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Sevrage néonatal possible au 3e trimestre. Bénéfice > risque à évaluer.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 10,
+      "warning": "Usage pédiatrique encadré (≥10 ans manie, ≥13 ans schizophrénie).",
+      "dose_rule": "Titration progressive."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Aucun ajustement rénal nécessaire."
+    },
+    "dosage": {
+      "adult": "Schizophrénie: 150-750 mg/jour en 2 prises. Manie: 400-800 mg/jour. Dépression bipolaire: 300 mg/jour.",
+      "children": "Sous surveillance spécialisée."
+    },
+    "market_data": [
+      {
+        "price": 625.0,
+        "price_ppv_dhs": 625.0,
+        "packaging": "Comprimé pelliculé Boîte de 60",
+        "laboratory": "AstraZeneca",
+        "url": "https://www.medicament.ma/medicament/seroquel-200-mg-comprime"
+      }
+    ],
+    "drugbank_id": "DB01224",
+    "mechanism": "Antagonisme multi-récepteurs (D1/D2, 5-HT1A/2, H1, α1). Profil atypique par ratio 5-HT2/D2 élevé.",
+    "half_life": "7 heures",
+    "adverse_effects": [
+      "Somnolence",
+      "Prise de poids",
+      "Hyperglycémie",
+      "Allongement QTc",
+      "Hypotension"
+    ],
+    "tableau_maroc": "B",
+    "smart_flags": [
+      "QTC_RISQUE",
+      "SEDATION_MAJEURE",
+      "DIABETE_RISQUE",
+      "PRISE_POIDS",
+      "HYPOTENSION_ORTHOSTATIQUE",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/seroquel-200-mg-comprime",
+    "record_id": "seroquel_quetiapine_200_mg",
+    "interactions": [
+      "Autres dépresseurs du SNC",
+      "Inhibiteurs du CYP3A4"
+    ]
+  },
+  {
+    "id": "Q-SEROQUEL-300",
+    "brand_name": "SEROQUEL",
+    "generic_name": "Quétiapine",
+    "strength": "300 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "N05AH04",
+    "therapeutic_group": "Antipsychotiques atypiques",
+    "drug_class": "Antagoniste des récepteurs dopaminergiques D2 et sérotoninergiques 5-HT2 (MARTA)",
+    "indications": [
+      "Schizophrénie (dose d'entretien)",
+      "Épisodes maniaques bipolaires sévères",
+      "Dépression bipolaire (moins fréquent à ce dosage)"
+    ],
+    "contraindications": [
+      "Inhibiteurs puissants CYP3A4",
+      "IMAO",
+      "Démence sujet âgé",
+      "QTc > 500 ms"
+    ],
+    "composition": [
+      {
+        "name": "Fumarate de quétiapine",
+        "inn": "",
+        "dose": "345.22 mg (≡ 300 mg quétiapine base)"
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Phénelzine",
+          "Tranylcypromine",
+          "Sélégiline",
+          "Moclobémide",
+          "Rasagiline"
+        ],
+        "interacting_classes": [
+          "IMAO (inhibiteurs de la MAO)"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Risque de syndrome sérotoninergique sévère et d'hyperthermie maligne. Association absolument contre-indiquée.",
+        "recommendation": "Ne jamais associer. Respecter un délai de 14 jours après arrêt de l'IMAO avant d'introduire la quétiapine."
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Cordarone",
+          "Sotalol",
+          "Méthadone",
+          "Halopéridol",
+          "Haldol",
+          "Érythromycine",
+          "Clarithromycine",
+          "Lévofloxacine",
+          "Moxifloxacine",
+          "Azithromycine",
+          "Citalopram",
+          "Escitalopram",
+          "Ondansétron"
+        ],
+        "interacting_classes": [
+          "Médicaments allongeant le QTc"
+        ],
+        "severity": "DANGER",
+        "effect": "Allongement additif de l'intervalle QT → risque de torsades de pointes et de mort subite. Risque majoré si hypokaliémie ou hypomagnésémie.",
+        "recommendation": "Éviter l'association. Si indispensable: ECG de base et surveillance électrocardiographique régulière. Corriger toute hypokaliémie avant l'instauration."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Fluconazole",
+          "Voriconazole",
+          "Clarithromycine",
+          "Érythromycine",
+          "Ritonavir",
+          "Indinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs du CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure des concentrations plasmatiques de quétiapine (×6 avec kétoconazole) par inhibition du métabolisme hépatique → sédation excessive, hypotension, arythmies.",
+        "recommendation": "Association déconseillée. Si inévitable: réduire fortement la dose de quétiapine et surveiller étroitement."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Rifadine",
+          "Carbamazépine",
+          "Tégretol",
+          "Phénytoïne",
+          "Di-Hydan",
+          "Phénobarbital",
+          "Gardénal",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants du CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution majeure des concentrations plasmatiques de quétiapine (×7 avec rifampicine) → perte d'efficacité clinique.",
+        "recommendation": "Éviter l'association. Si inévitable: augmenter la dose de quétiapine jusqu'à 5× la dose initiale. Réduire progressivement à l'arrêt de l'inducteur pour éviter les pics toxiques."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Diazépam",
+          "Valium",
+          "Lorazépam",
+          "Temesta",
+          "Morphine",
+          "Tramadol",
+          "Codéine",
+          "Zolpidem"
+        ],
+        "interacting_classes": [
+          "Dépresseurs du SNC",
+          "Benzodiazépines",
+          "Opioïdes",
+          "Hypnotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Sédation additive sévère pouvant entraîner une dépression respiratoire. L'alcool majore également le risque hypotenseur.",
+        "recommendation": "Éviter l'alcool absolument. Association avec BZD/opioïdes: surveillance respiratoire étroite, dose minimale, durée limitée."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium",
+          "Téralithe",
+          "Camcolit"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs au lithium"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Neurotoxicité additive (tremblements, confusion, syndrome extrapyramidal). Risque de neurotoxicité même à lithiémies normales.",
+        "recommendation": "Surveiller les signes de neurotoxicité. Contrôler la lithiémie régulièrement. Hydratation correcte obligatoire."
+      },
+      {
+        "interacting_drugs": [
+          "Amlodipine",
+          "Amlor",
+          "Vérapamil",
+          "Diltiazem",
+          "Captopril",
+          "Ramipril",
+          "Losartan",
+          "Furosémide",
+          "Lasilix"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additive → risque de chutes et syncopes, surtout en début de traitement.",
+        "recommendation": "Mesure de la tension en position debout. Adapter les doses antihypertenseurs. Prévenir le patient du risque de vertiges au lever."
+      },
+      {
+        "interacting_drugs": [
+          "Métformine",
+          "Glucophage",
+          "Glibenclamide",
+          "Gliclazide",
+          "Insuline"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "La quétiapine peut induire une hyperglycémie, une résistance à l'insuline et une prise de poids → déséquilibre du diabète et nécessité d'adaptation du traitement antidiabétique.",
+        "recommendation": "Surveiller la glycémie à jeun régulièrement. Contrôler poids, bilan lipidique et glycémie à l'instauration et tous les 3-6 mois."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Sevrage néonatal possible. À utiliser uniquement si bénéfice > risque (psychiatrie sévère).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Ce dosage (300 mg) n'est généralement pas recommandé en pédiatrie.",
+      "dose_rule": "Usage adulte uniquement à ce dosage."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Aucun ajustement rénal nécessaire."
+    },
+    "dosage": {
+      "adult": "Schizophrénie entretien: 300-450 mg/jour en 2 prises (max 750 mg/jour). Manie sévère: jusqu'à 800 mg/jour.",
+      "children": "Non recommandé à ce dosage."
+    },
+    "market_data": [
+      {
+        "price": 810.0,
+        "price_ppv_dhs": 810.0,
+        "packaging": "Comprimé pelliculé Boîte de 60",
+        "laboratory": "AstraZeneca",
+        "url": "https://www.medicament.ma/medicament/seroquel-300-mg-comprime"
+      }
+    ],
+    "drugbank_id": "DB01224",
+    "mechanism": "Antagonisme multi-récepteurs. Voir SEROQUEL 25 mg.",
+    "half_life": "7 heures",
+    "adverse_effects": [
+      "Somnolence",
+      "Prise de poids",
+      "Hyperglycémie",
+      "Allongement QTc",
+      "Hypotension"
+    ],
+    "tableau_maroc": "B",
+    "smart_flags": [
+      "QTC_RISQUE",
+      "SEDATION_MAJEURE",
+      "DIABETE_RISQUE",
+      "PRISE_POIDS",
+      "HYPOTENSION_ORTHOSTATIQUE",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/seroquel-300-mg-comprime",
+    "record_id": "seroquel_quetiapine_300_mg",
+    "interactions": [
+      "Autres dépresseurs du SNC",
+      "Inhibiteurs du CYP3A4"
+    ]
+  },
+  {
+    "id": "Q-QUASYM-10",
+    "brand_name": "QUASYM LP",
+    "generic_name": "Méthylphénidate chlorhydrate",
+    "strength": "10 MG",
+    "form": "Gélule à libération prolongée",
+    "route": "Orale",
+    "atc_code": "N06BA04",
+    "therapeutic_group": "Psychostimulants / Traitement du TDAH",
+    "drug_class": "Inhibiteur de la recapture de la dopamine et de la noradrénaline (IRIN)",
+    "indications": [
+      "Trouble Déficit de l'Attention avec ou sans Hyperactivité (TDAH) chez l'enfant ≥ 6 ans et l'adolescent",
+      "Uniquement dans le cadre d'un programme thérapeutique global incluant mesures psychologiques, éducatives et sociales",
+      "Traitement après échec des seules mesures non médicamenteuses"
+    ],
+    "contraindications": [
+      "IMAO en cours ou dans les 14 jours précédents (CONTRE-INDIQUÉ ABSOLU)",
+      "Hyperthyroïdie, thyrotoxicose",
+      "Glaucome à angle fermé",
+      "Phéochromocytome",
+      "Antécédents de troubles cardiovasculaires sévères (arythmies, angine de poitrine, cardiopathie structurale)",
+      "Hypertension artérielle non contrôlée",
+      "Anxiété sévère, agitation, tension",
+      "Anorexie mentale, anorexigènes",
+      "Adultes (indication non retenue à ce dosage dans le TDAH adulte)"
+    ],
+    "composition": [
+      {
+        "name": "Méthylphénidate chlorhydrate",
+        "inn": "",
+        "dose": "10 mg (libération prolongée: 30% immédiate + 70% différée)"
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Phénelzine",
+          "Tranylcypromine",
+          "Sélégiline",
+          "Moclobémide",
+          "Rasagiline"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Crise hypertensive sévère, hyperthermie maligne, convulsions, décès possibles. Interaction absolument contre-indiquée.",
+        "recommendation": "CONTRE-INDIQUÉ pendant le traitement par IMAO et dans les 14 jours suivant l'arrêt."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Acénocoumarol",
+          "Phénytoïne",
+          "Phénobarbital",
+          "Imiprimine",
+          "Clomipramine",
+          "Amitriptyline"
+        ],
+        "interacting_classes": [
+          "Anticoagulants AVK",
+          "Antiépileptiques",
+          "Antidépresseurs tricycliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Inhibition du métabolisme de ces médicaments par le méthylphénidate → augmentation de leurs concentrations plasmatiques et risque de toxicité.",
+        "recommendation": "Surveillance de l'INR si AVK. Dosage des antiépileptiques. Adapter les doses si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Prozac",
+          "Paroxétine",
+          "Sertraline",
+          "Venlafaxine",
+          "Effexor",
+          "Duloxétine"
+        ],
+        "interacting_classes": [
+          "ISRS / IRSNA"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Interactions pharmacocinétiques (inhibition CYP2D6) → augmentation des taux d'antidépresseurs. Risque de syndrome sérotoninergique à haute dose.",
+        "recommendation": "Surveiller l'efficacité et la tolérance. Adapter les doses d'antidépresseurs si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Ramipril",
+          "Captopril",
+          "Amlodipine",
+          "Bisoprolol",
+          "Aténolol"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Le méthylphénidate peut diminuer l'effet antihypertenseur → risque d'hypertension.",
+        "recommendation": "Surveiller la tension artérielle régulièrement. Ajuster le traitement antihypertenseur si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Halopéridol",
+          "Haldol",
+          "Chlorpromazine",
+          "Rispéridone",
+          "Risperdal"
+        ],
+        "interacting_classes": [
+          "Antipsychotiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Antagonisme des effets du méthylphénidate. Halopéridol et chlorpromazine peuvent réduire l'efficacité dans le TDAH.",
+        "recommendation": "Évaluer le rapport bénéfice/risque de l'association. Surveiller l'efficacité du méthylphénidate."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Bière",
+          "Vin"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "L'alcool peut modifier la pharmacocinétique du méthylphénidate LP (libération accélérée) et exacerber les effets cardiovasculaires.",
+        "recommendation": "Éviter la consommation d'alcool pendant le traitement."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "CONTRE-INDIQUÉ pendant la grossesse. Données insuffisantes. Risque théorique de malformations cardiovasculaires. Contraception efficace obligatoire chez les femmes en âge de procréer.",
+      "breastfeeding": "Contre-indiqué. Passage possible dans le lait maternel."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Indiqué uniquement à partir de 6 ans dans le TDAH. Non recommandé < 6 ans. Surveiller croissance, poids, TA, fréquence cardiaque et symptômes psychiatriques. Réévaluer périodiquement la nécessité du traitement.",
+      "dose_rule": "Débuter 5 mg 2x/jour (ou 10 mg LP 1x/jour le matin). Titration hebdomadaire. Dose max: 60 mg/jour. Administrer le matin, avaler la gélule entière (ou ouvrir et saupoudrer sur une cuillère de compote — sans mâcher les granules)."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas de données spécifiques. Prudence en insuffisance rénale sévère."
+    },
+    "dosage": {
+      "adult": "Non recommandé en routine chez l'adulte à ce dosage. Consultation spécialisée requise.",
+      "children": "TDAH ≥6 ans: 10 mg LP le matin (équivalent à 5 mg IR matin + 5 mg IR midi). Augmenter par paliers de 10 mg/semaine. Dose max: 60 mg/jour."
+    },
+    "market_data": [
+      {
+        "price": 95.0,
+        "price_ppv_dhs": 95.0,
+        "packaging": "Gélule LP Boîte de 30",
+        "laboratory": "UCB Pharma / Recordati",
+        "url": "https://www.medicament.ma/medicament/quasym-lp-10-mg-gelule"
+      }
+    ],
+    "drugbank_id": "DB00422",
+    "mechanism": "Blocage des transporteurs de la dopamine (DAT) et de la noradrénaline (NET) dans le striatum et le cortex préfrontal → augmentation des concentrations synaptiques de DA et NA → amélioration de l'attention, du contrôle inhibiteur et des fonctions exécutives.",
+    "half_life": "3-4 heures (phase IR) + 6-8 heures (phase ER). Durée d'action totale: 8 heures.",
+    "adverse_effects": [
+      "Insomnie (prendre le matin pour minimiser)",
+      "Anorexie, perte d'appétit (pauses thérapeutiques estivales envisageables)",
+      "Maux de tête, douleurs abdominales",
+      "Irritabilité, anxiété, labilité émotionnelle",
+      "Tachycardie, élévation tension artérielle",
+      "Ralentissement de la croissance staturale et pondérale (surveillance obligatoire)",
+      "Tics (peut aggraver ou révéler des tics)",
+      "Psychose, manie (rare, surtout si prédisposition)"
+    ],
+    "tableau_maroc": "B",
+    "smart_flags": [
+      "STUPEFIANT_PSYCHOTROPE",
+      "ENFANT_TDAH_UNIQUEMENT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "IMAO_CONTRE_INDIQUE",
+      "SURVEILLANCE_CARDIOVASCULAIRE",
+      "CROISSANCE_SURVEILLER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/quasym-lp-10-mg-gelule",
+    "record_id": "quasym_lp_methylphenidate_chlorhydrate_10_mg",
+    "interactions": [
+      "IMAO (CI)",
+      "Antihypertenseurs (antagonisme)"
+    ]
+  },
+  {
+    "id": "Q-QUASYM-20",
+    "brand_name": "QUASYM LP",
+    "generic_name": "Méthylphénidate chlorhydrate",
+    "strength": "20 MG",
+    "form": "Gélule à libération prolongée",
+    "route": "Orale",
+    "atc_code": "N06BA04",
+    "therapeutic_group": "Psychostimulants / Traitement du TDAH",
+    "drug_class": "Inhibiteur de la recapture de la dopamine et de la noradrénaline (IRIN)",
+    "indications": [
+      "TDAH chez l'enfant ≥ 6 ans et l'adolescent (dans le cadre d'un programme thérapeutique global)"
+    ],
+    "contraindications": [
+      "IMAO (CI absolu)",
+      "Glaucome à angle fermé",
+      "Phéochromocytome",
+      "Cardiopathie structurale sévère",
+      "HTA non contrôlée",
+      "Anxiété sévère"
+    ],
+    "composition": [
+      {
+        "name": "Méthylphénidate chlorhydrate",
+        "inn": "",
+        "dose": "20 mg (libération prolongée: 30% immédiate + 70% différée)"
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Phénelzine",
+          "Tranylcypromine",
+          "Sélégiline",
+          "Moclobémide",
+          "Rasagiline"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Crise hypertensive sévère, hyperthermie maligne, convulsions, décès possibles. Interaction absolument contre-indiquée.",
+        "recommendation": "CONTRE-INDIQUÉ pendant le traitement par IMAO et dans les 14 jours suivant l'arrêt."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Acénocoumarol",
+          "Phénytoïne",
+          "Phénobarbital",
+          "Imiprimine",
+          "Clomipramine",
+          "Amitriptyline"
+        ],
+        "interacting_classes": [
+          "Anticoagulants AVK",
+          "Antiépileptiques",
+          "Antidépresseurs tricycliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Inhibition du métabolisme de ces médicaments par le méthylphénidate → augmentation de leurs concentrations plasmatiques et risque de toxicité.",
+        "recommendation": "Surveillance de l'INR si AVK. Dosage des antiépileptiques. Adapter les doses si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Prozac",
+          "Paroxétine",
+          "Sertraline",
+          "Venlafaxine",
+          "Effexor",
+          "Duloxétine"
+        ],
+        "interacting_classes": [
+          "ISRS / IRSNA"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Interactions pharmacocinétiques (inhibition CYP2D6) → augmentation des taux d'antidépresseurs. Risque de syndrome sérotoninergique à haute dose.",
+        "recommendation": "Surveiller l'efficacité et la tolérance. Adapter les doses d'antidépresseurs si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Ramipril",
+          "Captopril",
+          "Amlodipine",
+          "Bisoprolol",
+          "Aténolol"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Le méthylphénidate peut diminuer l'effet antihypertenseur → risque d'hypertension.",
+        "recommendation": "Surveiller la tension artérielle régulièrement. Ajuster le traitement antihypertenseur si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Halopéridol",
+          "Haldol",
+          "Chlorpromazine",
+          "Rispéridone",
+          "Risperdal"
+        ],
+        "interacting_classes": [
+          "Antipsychotiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Antagonisme des effets du méthylphénidate. Halopéridol et chlorpromazine peuvent réduire l'efficacité dans le TDAH.",
+        "recommendation": "Évaluer le rapport bénéfice/risque de l'association. Surveiller l'efficacité du méthylphénidate."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Bière",
+          "Vin"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "L'alcool peut modifier la pharmacocinétique du méthylphénidate LP (libération accélérée) et exacerber les effets cardiovasculaires.",
+        "recommendation": "Éviter la consommation d'alcool pendant le traitement."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué pendant la grossesse.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "≥6 ans uniquement. Surveillance croissance, TA, FC et signes psychiatriques.",
+      "dose_rule": "20 mg LP le matin (palier suivant 10 mg). Max 60 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Prudence en insuffisance rénale sévère."
+    },
+    "dosage": {
+      "adult": "Non recommandé en routine.",
+      "children": "20 mg LP le matin. Ajustement par paliers de 10 mg. Dose max: 60 mg/jour."
+    },
+    "market_data": [
+      {
+        "price": 148.0,
+        "price_ppv_dhs": 148.0,
+        "packaging": "Gélule LP Boîte de 30",
+        "laboratory": "UCB Pharma / Recordati",
+        "url": "https://www.medicament.ma/medicament/quasym-lp-20-mg-gelule"
+      }
+    ],
+    "drugbank_id": "DB00422",
+    "mechanism": "Blocage DAT et NET → augmentation DA/NA synaptique → amélioration fonctions exécutives dans le TDAH.",
+    "half_life": "3-4 h (IR) + 6-8 h (ER). Durée d'action: 8 heures.",
+    "adverse_effects": [
+      "Insomnie",
+      "Anorexie",
+      "Céphalées",
+      "Irritabilité",
+      "Tachycardie",
+      "HTA",
+      "Ralentissement croissance"
+    ],
+    "tableau_maroc": "B",
+    "smart_flags": [
+      "STUPEFIANT_PSYCHOTROPE",
+      "ENFANT_TDAH_UNIQUEMENT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "IMAO_CONTRE_INDIQUE",
+      "SURVEILLANCE_CARDIOVASCULAIRE",
+      "CROISSANCE_SURVEILLER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/quasym-lp-20-mg-gelule",
+    "record_id": "quasym_lp_methylphenidate_chlorhydrate_20_mg",
+    "interactions": [
+      "IMAO (CI)",
+      "Antihypertenseurs (antagonisme)"
+    ]
+  },
+  {
+    "id": "Q-QUASYM-30",
+    "brand_name": "QUASYM LP",
+    "generic_name": "Méthylphénidate chlorhydrate",
+    "strength": "30 MG",
+    "form": "Gélule à libération prolongée",
+    "route": "Orale",
+    "atc_code": "N06BA04",
+    "therapeutic_group": "Psychostimulants / Traitement du TDAH",
+    "drug_class": "Inhibiteur de la recapture de la dopamine et de la noradrénaline (IRIN)",
+    "indications": [
+      "TDAH chez l'enfant ≥ 6 ans et l'adolescent (dans le cadre d'un programme thérapeutique global)"
+    ],
+    "contraindications": [
+      "IMAO (CI absolu)",
+      "Glaucome à angle fermé",
+      "Phéochromocytome",
+      "Cardiopathie structurale sévère",
+      "HTA non contrôlée"
+    ],
+    "composition": [
+      {
+        "name": "Méthylphénidate chlorhydrate",
+        "inn": "",
+        "dose": "30 mg (libération prolongée: 30% immédiate + 70% différée)"
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Phénelzine",
+          "Tranylcypromine",
+          "Sélégiline",
+          "Moclobémide",
+          "Rasagiline"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Crise hypertensive sévère, hyperthermie maligne, convulsions, décès possibles. Interaction absolument contre-indiquée.",
+        "recommendation": "CONTRE-INDIQUÉ pendant le traitement par IMAO et dans les 14 jours suivant l'arrêt."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Acénocoumarol",
+          "Phénytoïne",
+          "Phénobarbital",
+          "Imiprimine",
+          "Clomipramine",
+          "Amitriptyline"
+        ],
+        "interacting_classes": [
+          "Anticoagulants AVK",
+          "Antiépileptiques",
+          "Antidépresseurs tricycliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Inhibition du métabolisme de ces médicaments par le méthylphénidate → augmentation de leurs concentrations plasmatiques et risque de toxicité.",
+        "recommendation": "Surveillance de l'INR si AVK. Dosage des antiépileptiques. Adapter les doses si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Prozac",
+          "Paroxétine",
+          "Sertraline",
+          "Venlafaxine",
+          "Effexor",
+          "Duloxétine"
+        ],
+        "interacting_classes": [
+          "ISRS / IRSNA"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Interactions pharmacocinétiques (inhibition CYP2D6) → augmentation des taux d'antidépresseurs. Risque de syndrome sérotoninergique à haute dose.",
+        "recommendation": "Surveiller l'efficacité et la tolérance. Adapter les doses d'antidépresseurs si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Ramipril",
+          "Captopril",
+          "Amlodipine",
+          "Bisoprolol",
+          "Aténolol"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Le méthylphénidate peut diminuer l'effet antihypertenseur → risque d'hypertension.",
+        "recommendation": "Surveiller la tension artérielle régulièrement. Ajuster le traitement antihypertenseur si nécessaire."
+      },
+      {
+        "interacting_drugs": [
+          "Halopéridol",
+          "Haldol",
+          "Chlorpromazine",
+          "Rispéridone",
+          "Risperdal"
+        ],
+        "interacting_classes": [
+          "Antipsychotiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Antagonisme des effets du méthylphénidate. Halopéridol et chlorpromazine peuvent réduire l'efficacité dans le TDAH.",
+        "recommendation": "Évaluer le rapport bénéfice/risque de l'association. Surveiller l'efficacité du méthylphénidate."
+      },
+      {
+        "interacting_drugs": [
+          "Alcool",
+          "Bière",
+          "Vin"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "L'alcool peut modifier la pharmacocinétique du méthylphénidate LP (libération accélérée) et exacerber les effets cardiovasculaires.",
+        "recommendation": "Éviter la consommation d'alcool pendant le traitement."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Contre-indiqué pendant la grossesse.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "≥6 ans uniquement. Dose max 60 mg/jour. Surveillance obligatoire.",
+      "dose_rule": "30 mg LP le matin. Max 60 mg/jour (soit 2 gélules de 30 mg)."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Prudence en insuffisance rénale sévère."
+    },
+    "dosage": {
+      "adult": "Non recommandé en routine.",
+      "children": "30 mg LP le matin. Max 60 mg/jour."
+    },
+    "market_data": [
+      {
+        "price": 196.0,
+        "price_ppv_dhs": 196.0,
+        "packaging": "Gélule LP Boîte de 30",
+        "laboratory": "UCB Pharma / Recordati",
+        "url": "https://www.medicament.ma/medicament/quasym-lp-30-mg-gelule"
+      }
+    ],
+    "drugbank_id": "DB00422",
+    "mechanism": "Blocage DAT et NET. Voir QUASYM LP 10 mg.",
+    "half_life": "3-4 h (IR) + 6-8 h (ER). Durée d'action: 8 heures.",
+    "adverse_effects": [
+      "Insomnie",
+      "Anorexie",
+      "Céphalées",
+      "Tachycardie",
+      "Ralentissement croissance"
+    ],
+    "tableau_maroc": "B",
+    "smart_flags": [
+      "STUPEFIANT_PSYCHOTROPE",
+      "ENFANT_TDAH_UNIQUEMENT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "IMAO_CONTRE_INDIQUE",
+      "SURVEILLANCE_CARDIOVASCULAIRE",
+      "CROISSANCE_SURVEILLER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/quasym-lp-30-mg-gelule",
+    "record_id": "quasym_lp_methylphenidate_chlorhydrate_30_mg",
+    "interactions": [
+      "IMAO (CI)",
+      "Antihypertenseurs (antagonisme)"
+    ]
+  },
+  {
+    "id": "Q-QUESTRAN",
+    "brand_name": "QUESTRAN",
+    "generic_name": "Cholestyramine",
+    "strength": "4 G",
+    "form": "Poudre pour suspension buvable",
+    "route": "Orale",
+    "atc_code": "C10AC01",
+    "therapeutic_group": "Hypocholestérolémiants / Résines échangeuses d'anions",
+    "drug_class": "Résine chélatrice des acides biliaires (séquestrant)",
+    "indications": [
+      "Hypercholestérolémie primaire (type IIa) en complément du régime alimentaire",
+      "Prurit associé à l'obstruction biliaire partielle (cholestase)",
+      "Diarrhée associée aux acides biliaires (malabsorption)"
+    ],
+    "contraindications": [
+      "Obstruction biliaire complète",
+      "Phénylcétonurie (contient de la phénylalanine dans certaines formulations)",
+      "Hypersensibilité à la cholestyramine",
+      "Occlusion intestinale"
+    ],
+    "composition": [
+      {
+        "name": "Cholestyramine (résine anhydre)",
+        "inn": "",
+        "dose": "4 g par sachet"
+      }
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tous les médicaments administrés par voie orale"
+        ],
+        "interacting_classes": [
+          "Médicaments à administration orale (générique)"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "La cholestyramine est une résine échangeuse d'anions qui fixe non spécifiquement de nombreux médicaments dans le tube digestif → diminution de l'absorption de pratiquement tous les médicaments oraux.",
+        "recommendation": "Règle universelle : prendre TOUS les autres médicaments au moins 1 HEURE AVANT ou 4 à 6 HEURES APRÈS la cholestyramine."
+      },
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom",
+          "Acénocoumarol"
+        ],
+        "interacting_classes": [
+          "Anticoagulants AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution significative de l'absorption des AVK → risque thrombo-embolique par sous-anticoagulation. L'INR peut varier de façon imprévisible.",
+        "recommendation": "Prendre les AVK au moins 1h avant la cholestyramine. Surveiller l'INR fréquemment lors de l'introduction, modification ou arrêt de la cholestyramine."
+      },
+      {
+        "interacting_drugs": [
+          "Lévothyroxine",
+          "Euthyrox",
+          "L-Thyroxine"
+        ],
+        "interacting_classes": [
+          "Hormones thyroïdiennes"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution de l'absorption de la lévothyroxine → hypothyroïdie de substitution inadéquate.",
+        "recommendation": "Prendre la lévothyroxine au moins 4 heures avant la cholestyramine. Surveiller la TSH régulièrement."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine",
+          "Hémigoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution de l'absorption de la digoxine et interruption du cycle entéro-hépatique → réduction de l'effet digitalique.",
+        "recommendation": "Espacer les prises. Surveiller la digoxinémie et les signes d'efficacité/toxicité."
+      },
+      {
+        "interacting_drugs": [
+          "Acide folique",
+          "Vitamines liposolubles A, D, E, K"
+        ],
+        "interacting_classes": [
+          "Vitamines liposolubles",
+          "Folates"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Malabsorption des vitamines liposolubles (A, D, E, K) et de l'acide folique à long terme → risque de carence.",
+        "recommendation": "Supplémenter en vitamines liposolubles et acide folique si traitement prolongé, en les prenant à distance de la cholestyramine."
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Non absorbé systémiquement. Peut entraîner une carence en vitamines liposolubles (A, D, E, K) et en acide folique → risque pour le fœtus. Supplémenter en vitamines si traitement prolongé.",
+      "breastfeeding": "Non absorbé systémiquement. Peut entraîner des carences nutritionnelles indirectes. Surveillance."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "Utilisé en pédiatrie pour hypercholestérolémie familiale à partir de 6 ans sous surveillance spécialisée.",
+      "dose_rule": "Pédiatrie: 240 mg/kg/jour en 2-3 prises. Surveillance nutritionnelle stricte."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Non absorbé systémiquement. Pas d'ajustement nécessaire en insuffisance rénale."
+    },
+    "dosage": {
+      "adult": "4-8 g (1-2 sachets) 2-3 fois par jour avant les repas. Diluer dans 150-200 mL d'eau ou de jus de fruits. Dose max: 24 g/jour. Débuter progressivement pour améliorer la tolérance digestive.",
+      "children": "6-12 ans: 240 mg/kg/jour en 2-3 prises. Sous surveillance spécialisée."
+    },
+    "market_data": [
+      {
+        "price": 118.0,
+        "price_ppv_dhs": 118.0,
+        "packaging": "Sachet de poudre Boîte de 60 sachets",
+        "laboratory": "Bristol-Myers Squibb / Pfizer",
+        "url": "https://www.medicament.ma/medicament/questran-4-g-poudre"
+      }
+    ],
+    "drugbank_id": "DB01432",
+    "mechanism": "Résine non absorbée qui fixe les acides biliaires dans la lumière intestinale → formation de complexes insolubles éliminés dans les selles → interruption du cycle entéro-hépatique des acides biliaires → augmentation de la conversion hépatique du cholestérol en acides biliaires → augmentation des récepteurs LDL hépatiques → captation accrue du LDL plasmatique.",
+    "half_life": "N/A (non absorbée, action locale intestinale)",
+    "adverse_effects": [
+      "Constipation (très fréquent, souvent limitant)",
+      "Ballonnements, flatulences, nausées",
+      "Douleurs abdominales",
+      "Impaction fécale (si apports hydriques insuffisants)",
+      "Malabsorption des vitamines liposolubles A, D, E, K (traitement prolongé)",
+      "Hypertriglycéridémie (peut aggraver une hypertriglycéridémie préexistante)",
+      "Acidose hyperchlorémique (enfants)"
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "INTERACTION_MEDICAMENTEUSE_UNIVERSELLE",
+      "ESPACER_TOUS_MEDICAMENTS_1H",
+      "CARENCE_VITAMINES_LIPOSOLUBLES",
+      "CONSTIPATION_MAJEURE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/questran-4-g-poudre",
+    "record_id": "questran_cholestyramine_4_g",
+    "interactions": [
+      "Réduit l'absorption de nombreux médicaments (espacer 2h)"
+    ]
+  }
+]

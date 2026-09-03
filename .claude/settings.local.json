@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \":*)",
+      "Bash(python3 -c ' *)",
+      "Bash(iconv -f utf-8 -t utf-8 \"C:/Users/hp/AppData/Local/Temp/claude/C--src-DOCEASE/db2dc2b8-bf70-4654-9ae2-4dcdc3004417/scratchpad/tg_check.txt\")",
+      "Bash(python3 \"C:/Users/hp/AppData/Local/Temp/claude/C--src-DOCEASE/db2dc2b8-bf70-4654-9ae2-4dcdc3004417/scratchpad/analyze_meds.py\")",
+      "Bash(npx tsc *)",
+      "Bash(node -e ' *)",
+      "Bash(powershell -Command \"Stop-Process -Id 17388 -Force\")",
+      "WebFetch(domain:medicament.ma)",
+      "WebSearch",
+      "Bash(powershell -Command \"Get-Process node -ErrorAction SilentlyContinue | Select-Object Id\")",
+      "WebFetch(domain:www.vidal.fr)",
+      "Bash(node \"C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--src-DOCEASE\\\\88ac01fa-297b-413c-94e8-f100048d7d3c\\\\scratchpad\\\\reconstruct.js\")",
+      "WebFetch(domain:agence-prd.ansm.sante.fr)",
+      "Bash(node \"C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--src-DOCEASE\\\\88ac01fa-297b-413c-94e8-f100048d7d3c\\\\scratchpad\\\\fix_acucarb_acupaxil.js\")",
+      "Bash(node \"C:\\\\Users\\\\hp\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--src-DOCEASE\\\\88ac01fa-297b-413c-94e8-f100048d7d3c\\\\scratchpad\\\\fix_batch2.js\")"
+    ]
+  }
+}

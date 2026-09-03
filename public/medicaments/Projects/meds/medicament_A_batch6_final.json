@@ -1,0 +1,4400 @@
+[
+  {
+    "id": "almantin_20_mg",
+    "brand_name": "ALMANTIN",
+    "generic_name": "Amoxicilline + Acide clavulanique",
+    "composition": [
+      "Mémantine"
+    ],
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N06DX01",
+    "therapeutic_group": "Antagoniste des récepteurs de l'acide N-méthyl-D-aspartique (NMDA)",
+    "drug_class": "Pénicilline à large spectre (aminopénicilline)",
+    "drugbank_id": "DB01060",
+    "mechanism": "Inhibition de la synthèse de la paroi bactérienne par liaison aux PBP (Penicillin Binding Proteins).",
+    "half_life": "1-1.5h",
+    "indications": [
+      "Infections respiratoires (pneumonie, bronchite, sinusite, OMA)",
+      "Infections urinaires",
+      "Infections cutanées et des tissus mous",
+      "Éradication H. pylori (en association)",
+      "Prophylaxie endocardite infectieuse"
+    ],
+    "contraindications": [
+      "Allergie aux pénicillines",
+      "Hypersensibilité aux céphalosporines (allergie croisée possible)",
+      "Mononucléose infectieuse (rash)"
+    ],
+    "interactions": [
+      {
+        "drug": "Méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation toxicité MTX par compétition sur élimination tubulaire"
+      },
+      {
+        "drug": "Anticoagulants oraux",
+        "severity": "modérée",
+        "effect": "Possible potentialisation effet anticoagulant"
+      },
+      {
+        "drug": "Allopurinol",
+        "severity": "mineure",
+        "effect": "Augmentation incidence du rash cutané"
+      },
+      {
+        "drug": "Contraceptifs oraux",
+        "severity": "mineure",
+        "effect": "Possible réduction efficacité contraceptive (rare)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisable pendant la grossesse. Pas de tératogénicité démontrée.",
+      "breastfeeding": "Compatible. Passe en faibles quantités dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisable dès la naissance. Adapter la dose au poids.",
+      "dose_rule": "25-50 mg/kg/j en 2-3 prises selon l'indication"
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Réduire la dose si DFG<30 ml/min. Allonger les intervalles."
+    },
+    "dosage": {
+      "adult": "500mg à 1g toutes les 8h ou 1g toutes les 12h selon la sévérité",
+      "children": "25-50mg/kg/j en 2-3 prises"
+    },
+    "adverse_effects": [
+      "Diarrhée",
+      "Nausées",
+      "Rash cutané (fréquent)",
+      "Réactions allergiques (urticaire, anaphylaxie)",
+      "Colite à Clostridium difficile",
+      "Candidose"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 28",
+        "price_ppv_dhs": 220,
+        "price_ph_dhs": 137.9,
+        "laboratory": "SUN PHARMACEUTICALS NORTH AFRICA S.A",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/almantin-20-mg-comprime-pellicule-secable/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/almantin-20-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB01060",
+      "drugs_com": "https://www.drugs.com/amoxicilline.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard"
+    ],
+    "verification_corrections": [
+      "composition: ['Amoxicilline', 'Acide clavulanique'] -> ['Mémantine']",
+      "therapeutic_group: 'Antibiotique' -> \"Antagoniste des récepteurs de l'acide N-méthyl-D-aspartique (NMDA)\"",
+      "atc_code: 'J01CA04' -> 'N06DX01'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "almide_0.1_%",
+    "brand_name": "ALMIDE",
+    "generic_name": "Almitrine",
+    "composition": [
+      "Lodoxamide",
+      "Trométamol"
+    ],
+    "strength": "0.1 %",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01JX01",
+    "therapeutic_group": "Décongestionnant et antiallergique",
+    "drug_class": "Anti-allergique ophtalmique — Stabilisateur des mastocytes",
+    "drugbank_id": null,
+    "mechanism": "Inhibition de la dégranulation des mastocytes, prévention de la libération d'histamine et d'autres médiateurs de l'allergie.",
+    "half_life": "8,5 h (exposition systémique faible)",
+    "indications": [
+      "Conjonctivites allergiques, kérato-conjonctivite printanière"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Port de lentilles souples (pendant traitement)"
+    ],
+    "interactions": [
+      {
+        "drug": "Aucune interaction significative",
+        "severity": "mineure",
+        "effect": "N/A"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisation possible si nécessaire.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Brûlure, picotement transitoire à l'instillation",
+      "Vision floue",
+      "Prurit, larmoiement",
+      "Céphalées (rares)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 5 ml",
+        "price_ppv_dhs": 56.3,
+        "price_ph_dhs": 35.2,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/almide-0001-collyre/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/almide-0-1-%25-collyre/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/almitrine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "Aucun",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Lodoxamide')"
+    ],
+    "verification_corrections": [
+      "composition: ['Almitrine'] -> ['Lodoxamide', 'Trométamol']",
+      "therapeutic_group: None -> 'Décongestionnant et antiallergique'",
+      "atc_code: None -> 'S01JX01'",
+      "tableau_maroc: 'A' -> 'Aucun'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Lodoxamide"
+    ]
+  },
+  {
+    "id": "alora_5_mg",
+    "brand_name": "ALORA",
+    "generic_name": "Estradiol",
+    "composition": [
+      "Desloratadine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX27",
+    "therapeutic_group": "Antihistaminique H1",
+    "drug_class": "Antihistaminique H1 (2ème génération, non sédatif)",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif et de longue durée des récepteurs H1 de l'histamine. Peu de pénétration SNC.",
+    "half_life": "27h",
+    "indications": [
+      "Rhinite allergique (saisonnière et pérenne)",
+      "Urticaire chronique idiopathique"
+    ],
+    "contraindications": [
+      "Hypersensibilité à la desloratadine ou loratadine"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs CYP3A4, CYP2D6 (kétoconazole, érythromycine)",
+        "severity": "mineure",
+        "effect": "Légère augmentation de l'exposition mais sans signification clinique démontrée"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Données insuffisantes. Éviter si possible. Préférer loratadine (plus de données).",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Somnolence (rare)",
+      "Tachycardie (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 10",
+        "price_ppv_dhs": 27.1,
+        "price_ph_dhs": 16.9,
+        "laboratory": "DEVA PHARMACEUTIQUE",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alora-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_C"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alora-5-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/estradiol.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "C",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] sister-fill from aerius_5_mg (same ingredient 'desloratadine'): mechanism, half_life, drug_class, interactions, indications, adverse_effects, contraindications, pregnancy.category, pregnancy.breastfeeding, pregnancy.warning",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Estradiol'] -> ['Desloratadine']",
+      "therapeutic_group: None -> 'Antihistaminique H1'",
+      "atc_code: None -> 'R06AX27'",
+      "tableau_maroc: 'A' -> 'C'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "aloxia_15_mg",
+    "brand_name": "ALOXIA",
+    "generic_name": "Palonosetron",
+    "composition": [
+      "Méloxicam"
+    ],
+    "strength": "15 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M01AC06",
+    "therapeutic_group": "Anti-inflammatoire non stéroïdien",
+    "drug_class": "AINS — Oxicam sélectif COX-2 préférentiel",
+    "drugbank_id": null,
+    "mechanism": "Inhibition préférentielle de la cyclo-oxygénase COX-2, réduisant la synthèse de prostaglandines pro-inflammatoires.",
+    "half_life": "20 h",
+    "indications": [
+      "Polyarthrite rhumatoïde",
+      "Spondylarthrite ankylosante",
+      "Arthrose symptomatique"
+    ],
+    "contraindications": [
+      "Ulcère gastro-duodénal évolutif",
+      "Insuffisance hépatique sévère",
+      "Insuffisance rénale sévère",
+      "Insuffisance cardiaque sévère",
+      "3e trimestre de grossesse",
+      "Antécédent d'hémorragie digestive aux AINS"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux (warfarine)",
+        "severity": "majeure",
+        "effect": "Majoration risque hémorragique"
+      },
+      {
+        "drug": "Autres AINS, corticoïdes",
+        "severity": "majeure",
+        "effect": "Majoration risque ulcérogène"
+      },
+      {
+        "drug": "IEC, ARA II, diurétiques",
+        "severity": "modérée",
+        "effect": "Risque IR aiguë, perte d'efficacité antihypertensive"
+      },
+      {
+        "drug": "Lithium, méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation toxicité (réduction élimination rénale)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C(T1-T2)/D(T3)",
+      "warning": "Contre-indiqué à partir du 6e mois — risque fermeture prématurée du canal artériel fœtal et toxicité rénale fœtale.",
+      "breastfeeding": "Passage limité mais préférer AINS mieux documentés (ibuprofène)."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Troubles digestifs (dyspepsie, ulcère)",
+      "Insuffisance rénale fonctionnelle",
+      "HTA",
+      "Œdèmes",
+      "Élévation transaminases",
+      "Réactions cutanées rares sévères (Stevens-Johnson)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 10",
+        "price_ppv_dhs": 37.1,
+        "price_ph_dhs": 23.2,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aloxia-15-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aloxia-15-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/palonosetron.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Méloxicam')",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Palonosetron'] -> ['Méloxicam']",
+      "therapeutic_group: None -> 'Anti-inflammatoire non stéroïdien'",
+      "atc_code: None -> 'M01AC06'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Méloxicam"
+    ]
+  },
+  {
+    "id": "aloxia_7.5_mg",
+    "brand_name": "ALOXIA",
+    "generic_name": "Palonosetron",
+    "composition": [
+      "Méloxicam"
+    ],
+    "strength": "7.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M01AC06",
+    "therapeutic_group": "Anti-inflammatoire non stéroïdien",
+    "drug_class": "AINS — Oxicam sélectif COX-2 préférentiel",
+    "drugbank_id": null,
+    "mechanism": "Inhibition préférentielle de la cyclo-oxygénase COX-2, réduisant la synthèse de prostaglandines pro-inflammatoires.",
+    "half_life": "20 h",
+    "indications": [
+      "Polyarthrite rhumatoïde",
+      "Spondylarthrite ankylosante",
+      "Arthrose symptomatique"
+    ],
+    "contraindications": [
+      "Ulcère gastro-duodénal évolutif",
+      "Insuffisance hépatique sévère",
+      "Insuffisance rénale sévère",
+      "Insuffisance cardiaque sévère",
+      "3e trimestre de grossesse",
+      "Antécédent d'hémorragie digestive aux AINS"
+    ],
+    "interactions": [
+      {
+        "drug": "Anticoagulants oraux (warfarine)",
+        "severity": "majeure",
+        "effect": "Majoration risque hémorragique"
+      },
+      {
+        "drug": "Autres AINS, corticoïdes",
+        "severity": "majeure",
+        "effect": "Majoration risque ulcérogène"
+      },
+      {
+        "drug": "IEC, ARA II, diurétiques",
+        "severity": "modérée",
+        "effect": "Risque IR aiguë, perte d'efficacité antihypertensive"
+      },
+      {
+        "drug": "Lithium, méthotrexate",
+        "severity": "majeure",
+        "effect": "Augmentation toxicité (réduction élimination rénale)"
+      }
+    ],
+    "pregnancy": {
+      "category": "C(T1-T2)/D(T3)",
+      "warning": "Contre-indiqué à partir du 6e mois — risque fermeture prématurée du canal artériel fœtal et toxicité rénale fœtale.",
+      "breastfeeding": "Passage limité mais préférer AINS mieux documentés (ibuprofène)."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Troubles digestifs (dyspepsie, ulcère)",
+      "Insuffisance rénale fonctionnelle",
+      "HTA",
+      "Œdèmes",
+      "Élévation transaminases",
+      "Réactions cutanées rares sévères (Stevens-Johnson)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 10",
+        "price_ppv_dhs": 27.1,
+        "price_ph_dhs": 16.9,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/loxia-75-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aloxia-7-5-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/palonosetron.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Méloxicam')",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Meloxicam')",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Palonosetron'] -> ['Méloxicam']",
+      "therapeutic_group: None -> 'Anti-inflammatoire non stéroïdien'",
+      "atc_code: None -> 'M01AC06'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Méloxicam"
+    ]
+  },
+  {
+    "id": "alperide_100_mg",
+    "brand_name": "ALPERIDE",
+    "generic_name": "Risperidone",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptique atypique",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Schizophrénie",
+      "Trouble bipolaire (manie)",
+      "Agressivité dans la démence (courte durée)",
+      "Troubles du comportement (enfant)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Risque de symptômes extrapyramidaux néonataux.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 5,
+      "warning": "≥ 5 ans pour les troubles du comportement.",
+      "dose_rule": "≥ 5 ans: 0.25-0.5 mg/j, titrer. Max: 1.5 mg/j (15-20 kg), 2.5 mg/j (>20 kg)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: début 0.5 mg 2x/j, titration lente."
+    },
+    "dosage": {
+      "adult": "Schizophrénie: 2-6 mg/j. Manie: 1-6 mg/j.",
+      "children": "0.25-2.5 mg/j selon poids."
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 84.8,
+        "price_ph_dhs": 53,
+        "laboratory": "POLYMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alperide-100-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alperide-100-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/risperidone.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Paroxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux rispéridone",
+        "recommendation": "Réduire dose rispéridone."
+      },
+      {
+        "interacting_drugs": [
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux rispéridone",
+        "recommendation": "Augmenter dose."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Risperidone'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptique atypique'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "alperide_200_mg",
+    "brand_name": "ALPERIDE",
+    "generic_name": "Risperidone",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptique atypique",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Schizophrénie",
+      "Trouble bipolaire (manie)",
+      "Agressivité dans la démence (courte durée)",
+      "Troubles du comportement (enfant)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Risque de symptômes extrapyramidaux néonataux.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 5,
+      "warning": "≥ 5 ans pour les troubles du comportement.",
+      "dose_rule": "≥ 5 ans: 0.25-0.5 mg/j, titrer. Max: 1.5 mg/j (15-20 kg), 2.5 mg/j (>20 kg)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: début 0.5 mg 2x/j, titration lente."
+    },
+    "dosage": {
+      "adult": "Schizophrénie: 2-6 mg/j. Manie: 1-6 mg/j.",
+      "children": "0.25-2.5 mg/j selon poids."
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 191,
+        "price_ph_dhs": 119.4,
+        "laboratory": "POLYMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alperide-200-mg/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alperide-200-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/risperidone.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Paroxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux rispéridone",
+        "recommendation": "Réduire dose rispéridone."
+      },
+      {
+        "interacting_drugs": [
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux rispéridone",
+        "recommendation": "Augmenter dose."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Risperidone'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptique atypique'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "alperide_400_mg",
+    "brand_name": "ALPERIDE",
+    "generic_name": "Risperidone",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "400 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptique atypique",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Schizophrénie",
+      "Trouble bipolaire (manie)",
+      "Agressivité dans la démence (courte durée)",
+      "Troubles du comportement (enfant)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Risque de symptômes extrapyramidaux néonataux.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 5,
+      "warning": "≥ 5 ans pour les troubles du comportement.",
+      "dose_rule": "≥ 5 ans: 0.25-0.5 mg/j, titrer. Max: 1.5 mg/j (15-20 kg), 2.5 mg/j (>20 kg)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: début 0.5 mg 2x/j, titration lente."
+    },
+    "dosage": {
+      "adult": "Schizophrénie: 2-6 mg/j. Manie: 1-6 mg/j.",
+      "children": "0.25-2.5 mg/j selon poids."
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 276,
+        "price_ph_dhs": 172.7,
+        "laboratory": "POLYMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alperide-400-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alperide-400-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/risperidone.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Paroxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux rispéridone",
+        "recommendation": "Réduire dose rispéridone."
+      },
+      {
+        "interacting_drugs": [
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux rispéridone",
+        "recommendation": "Augmenter dose."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Risperidone'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptique atypique'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "alperide_50_mg",
+    "brand_name": "ALPERIDE",
+    "generic_name": "Risperidone",
+    "composition": [
+      "Amisulpride"
+    ],
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N05AL05",
+    "therapeutic_group": "Neuroleptique atypique",
+    "drug_class": "Antipsychotique atypique — Benzamide substitué",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs dopaminergiques D2/D3. Faibles doses : bloc présynaptique (effet désinhibiteur); fortes doses : bloc post-synaptique (effet antipsychotique).",
+    "half_life": "12 h",
+    "indications": [
+      "Schizophrénie",
+      "Trouble bipolaire (manie)",
+      "Agressivité dans la démence (courte durée)",
+      "Troubles du comportement (enfant)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Lévodopa, agonistes dopaminergiques",
+        "severity": "majeure",
+        "effect": "Antagonisme réciproque — contre-indiqué"
+      },
+      {
+        "drug": "Médicaments allongeant QT (anti-arythmiques classe IA/III, macrolides, fluoroquinolones)",
+        "severity": "majeure",
+        "effect": "Risque de torsades de pointes"
+      },
+      {
+        "drug": "Dépresseurs SNC (benzodiazépines, opioïdes, alcool)",
+        "severity": "modérée",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Majoration hypotension"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser si nécessaire. Risque de symptômes extrapyramidaux néonataux.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 5,
+      "warning": "≥ 5 ans pour les troubles du comportement.",
+      "dose_rule": "≥ 5 ans: 0.25-0.5 mg/j, titrer. Max: 1.5 mg/j (15-20 kg), 2.5 mg/j (>20 kg)."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: début 0.5 mg 2x/j, titration lente."
+    },
+    "dosage": {
+      "adult": "Schizophrénie: 2-6 mg/j. Manie: 1-6 mg/j.",
+      "children": "0.25-2.5 mg/j selon poids."
+    },
+    "adverse_effects": [
+      "Syndrome extrapyramidal",
+      "Hyperprolactinémie (aménorrhée, galactorrhée, gynécomastie)",
+      "Prise de poids",
+      "Allongement QT",
+      "Hypotension orthostatique",
+      "Somnolence"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 55.6,
+        "price_ph_dhs": 34.8,
+        "laboratory": "POLYMEDIC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/alperide/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/alperide-50-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/risperidone.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Paroxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux rispéridone",
+        "recommendation": "Réduire dose rispéridone."
+      },
+      {
+        "interacting_drugs": [
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux rispéridone",
+        "recommendation": "Augmenter dose."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Amisulpride')"
+    ],
+    "verification_corrections": [
+      "composition: ['Risperidone'] -> ['Amisulpride']",
+      "therapeutic_group: None -> 'Neuroleptique atypique'",
+      "atc_code: None -> 'N05AL05'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Amisulpride"
+    ]
+  },
+  {
+    "id": "anginib_100_mg",
+    "brand_name": "ANGINIB",
+    "generic_name": "Isosorbide dinitrate",
+    "composition": [
+      "Losartan"
+    ],
+    "strength": "100 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA01",
+    "therapeutic_group": "Antagoniste de l'angiotensine II",
+    "drug_class": "Antihypertenseur — Antagoniste des récepteurs AT1 de l'angiotensine II (ARA II)",
+    "drugbank_id": null,
+    "mechanism": "Blocage sélectif des récepteurs AT1 de l'angiotensine II, entraînant vasodilatation et réduction de la sécrétion d'aldostérone.",
+    "half_life": "2 h (losartan), 6-9 h (métabolite actif E-3174)",
+    "indications": [
+      "HTA essentielle",
+      "Néphropathie diabétique de type 2",
+      "Insuffisance cardiaque (intolérance aux IEC)",
+      "Prévention AVC chez hypertendus avec HVG"
+    ],
+    "contraindications": [
+      "Grossesse (T2 et T3)",
+      "Sténose bilatérale des artères rénales",
+      "Insuffisance hépatique sévère",
+      "Hyperkaliémie"
+    ],
+    "interactions": [
+      {
+        "drug": "Diurétiques épargneurs de K+, suppléments K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Réduction effet antihypertenseur, risque IR"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation lithémie"
+      },
+      {
+        "drug": "IEC",
+        "severity": "majeure",
+        "effect": "Risque d'hypotension, d'hyperkaliémie et d'IR — association déconseillée"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CONTRE-INDIQUÉ aux 2e et 3e trimestres — toxicité fœtale (oligohydramnios, anurie néonatale, hypoplasie crânienne).",
+      "breastfeeding": "Déconseillé — données limitées, alternative préférable."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Hyperkaliémie",
+      "Vertiges",
+      "Hypotension",
+      "Insuffisance rénale fonctionnelle",
+      "Angio-œdème (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 148,
+        "price_ph_dhs": 92.5,
+        "laboratory": "PHI",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anginib-100-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anginib-100-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/isosorbide-dinitrate.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Losartan')"
+    ],
+    "verification_corrections": [
+      "composition: ['Isosorbide dinitrate'] -> ['Losartan']",
+      "therapeutic_group: None -> \"Antagoniste de l'angiotensine II\"",
+      "atc_code: None -> 'C09CA01'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Losartan"
+    ]
+  },
+  {
+    "id": "anginib_50_mg",
+    "brand_name": "ANGINIB",
+    "generic_name": "Isosorbide dinitrate",
+    "composition": [
+      "Losartan"
+    ],
+    "strength": "50 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA01",
+    "therapeutic_group": "ANTAGONISTE DE L'ANGIOTENSINE II",
+    "drug_class": "Antihypertenseur — Antagoniste des récepteurs AT1 de l'angiotensine II (ARA II)",
+    "drugbank_id": null,
+    "mechanism": "Blocage sélectif des récepteurs AT1 de l'angiotensine II, entraînant vasodilatation et réduction de la sécrétion d'aldostérone.",
+    "half_life": "2 h (losartan), 6-9 h (métabolite actif E-3174)",
+    "indications": [
+      "HTA essentielle",
+      "Néphropathie diabétique de type 2",
+      "Insuffisance cardiaque (intolérance aux IEC)",
+      "Prévention AVC chez hypertendus avec HVG"
+    ],
+    "contraindications": [
+      "Grossesse (T2 et T3)",
+      "Sténose bilatérale des artères rénales",
+      "Insuffisance hépatique sévère",
+      "Hyperkaliémie"
+    ],
+    "interactions": [
+      {
+        "drug": "Diurétiques épargneurs de K+, suppléments K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Réduction effet antihypertenseur, risque IR"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation lithémie"
+      },
+      {
+        "drug": "IEC",
+        "severity": "majeure",
+        "effect": "Risque d'hypotension, d'hyperkaliémie et d'IR — association déconseillée"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CONTRE-INDIQUÉ aux 2e et 3e trimestres — toxicité fœtale (oligohydramnios, anurie néonatale, hypoplasie crânienne).",
+      "breastfeeding": "Déconseillé — données limitées, alternative préférable."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Hyperkaliémie",
+      "Vertiges",
+      "Hypotension",
+      "Insuffisance rénale fonctionnelle",
+      "Angio-œdème (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 77.2,
+        "price_ph_dhs": 48.2,
+        "laboratory": "PHI",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anginib-50-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anginib-50-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/isosorbide-dinitrate.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Losartan')",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Isosorbide dinitrate'] -> ['Losartan']",
+      "therapeutic_group: None -> \"ANTAGONISTE DE L'ANGIOTENSINE II\"",
+      "atc_code: None -> 'C09CA01'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Losartan"
+    ]
+  },
+  {
+    "id": "anglor_10_mg",
+    "brand_name": "ANGLOR",
+    "generic_name": "Atenolol",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": null,
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "HTA",
+      "Angor stable",
+      "Prévention post-IDM"
+    ],
+    "contraindications": [
+      "Asthme",
+      "BAV 2e-3e degré",
+      "Bradycardie < 50 bpm",
+      "Hypotension",
+      "Phéochromocytome non traité"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Déconseillé. RCIU, bradycardie et hypoglycémie néonatale.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "≥ 6 ans pour l'HTA.",
+      "dose_rule": "1-2 mg/kg/jour en 1 prise. Max: 100 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 15-35: 50 mg/jour. ClCr <15: 25 mg/jour."
+    },
+    "dosage": {
+      "adult": "HTA: 50-100 mg/jour. Angor: 100 mg/jour. Post-IDM: 100 mg/jour.",
+      "children": "1-2 mg/kg/jour."
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 75.9,
+        "price_ph_dhs": 47.5,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anclor-10-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anglor-10-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/atenolol.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Diltiazem"
+        ],
+        "interacting_classes": [
+          "IC bradycardisants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie, BAV",
+        "recommendation": "Déconseillé."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Glibenclamide"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage hypoglycémie",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Clonidine"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs centraux"
+        ],
+        "severity": "DANGER",
+        "effect": "Rebond HTA",
+        "recommendation": "Arrêter BB AVANT clonidine."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] sister-fill from am-10_10_mg (same ingredient 'amlodipine'): mechanism, half_life, drug_class, interactions, adverse_effects"
+    ],
+    "verification_corrections": [
+      "composition: ['Atenolol'] -> ['Amlodipine']",
+      "therapeutic_group: None -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "atc_code: None -> 'C08CA01'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "anglor_5_mg",
+    "brand_name": "ANGLOR",
+    "generic_name": "Atenolol",
+    "composition": [
+      "Amlodipine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C08CA01",
+    "therapeutic_group": "Inhibiteur calcique, dérivé de la dihydropyridine",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": null,
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "HTA",
+      "Angor stable",
+      "Prévention post-IDM"
+    ],
+    "contraindications": [
+      "Asthme",
+      "BAV 2e-3e degré",
+      "Bradycardie < 50 bpm",
+      "Hypotension",
+      "Phéochromocytome non traité"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Déconseillé. RCIU, bradycardie et hypoglycémie néonatale.",
+      "breastfeeding": "Passage dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 6,
+      "warning": "≥ 6 ans pour l'HTA.",
+      "dose_rule": "1-2 mg/kg/jour en 1 prise. Max: 100 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 15-35: 50 mg/jour. ClCr <15: 25 mg/jour."
+    },
+    "dosage": {
+      "adult": "HTA: 50-100 mg/jour. Angor: 100 mg/jour. Post-IDM: 100 mg/jour.",
+      "children": "1-2 mg/kg/jour."
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 43,
+        "price_ph_dhs": 26.9,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anglor-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anglor-5-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/atenolol.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Diltiazem"
+        ],
+        "interacting_classes": [
+          "IC bradycardisants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie, BAV",
+        "recommendation": "Déconseillé."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Glibenclamide"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage hypoglycémie",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Clonidine"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs centraux"
+        ],
+        "severity": "DANGER",
+        "effect": "Rebond HTA",
+        "recommendation": "Arrêter BB AVANT clonidine."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] sister-fill from am-10_10_mg (same ingredient 'amlodipine'): mechanism, half_life, drug_class, interactions, adverse_effects"
+    ],
+    "verification_corrections": [
+      "composition: ['Atenolol'] -> ['Amlodipine']",
+      "therapeutic_group: None -> 'Inhibiteur calcique, dérivé de la dihydropyridine'",
+      "atc_code: None -> 'C08CA01'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "anor_10_mg",
+    "brand_name": "ANOR",
+    "generic_name": "Paracétamol",
+    "composition": [
+      "Alendronate"
+    ],
+    "strength": "10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M05BA04",
+    "therapeutic_group": "Régulateur du métabolisme osseux, bisphosphonate",
+    "drug_class": "Analgésique non opioïde, Antipyrétique",
+    "drugbank_id": "DB00316",
+    "mechanism": "Mécanisme central: inhibition de la synthèse des prostaglandines dans le SNC. Mécanisme périphérique moins important que les AINS.",
+    "half_life": "2-3h",
+    "indications": [
+      "Douleurs légères à modérées",
+      "Fièvre",
+      "Céphalées, migraines légères",
+      "Douleurs dentaires",
+      "Douleurs musculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité au paracétamol",
+      "Insuffisance hépatique sévère",
+      "Phénylcétonurie (formes effervescentes avec aspartam)"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool (consommation chronique)",
+        "severity": "majeure",
+        "effect": "Majoration risque hépatotoxicité"
+      },
+      {
+        "drug": "Anticoagulants oraux (warfarine)",
+        "severity": "modérée",
+        "effect": "Potentialisation légère de l'effet anticoagulant à fortes doses"
+      },
+      {
+        "drug": "Inducteurs enzymatiques (rifampicine, carbamazépine)",
+        "severity": "modérée",
+        "effect": "Augmentation métabolite toxique NAPQI"
+      },
+      {
+        "drug": "Isoniazide",
+        "severity": "modérée",
+        "effect": "Augmentation hépatotoxicité"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Médicament de référence pour la douleur et la fièvre pendant la grossesse. Utiliser à la dose minimale efficace.",
+      "breastfeeding": "Compatible avec l'allaitement. Faibles quantités dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Médicament de référence chez l'enfant pour fièvre et douleur. Ne pas dépasser 4 prises/j.",
+      "dose_rule": "15mg/kg par prise, max 60mg/kg/j, toutes les 4-6h. Nouveau-né: 10mg/kg par prise."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Espacer les prises si DFG<30 ml/min (toutes les 8h minimum)"
+    },
+    "dosage": {
+      "adult": "500-1000mg toutes les 4-6h, max 4g/j (3g/j si alcoolisme, dénutrition)",
+      "children": "15mg/kg/prise, toutes les 4-6h, max 60mg/kg/j"
+    },
+    "adverse_effects": [
+      "Hépatotoxicité (surdosage)",
+      "Réactions allergiques rares",
+      "Néphrotoxicité (usage prolongé)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 84",
+        "price_ppv_dhs": 422,
+        "price_ph_dhs": 280,
+        "laboratory": "PHARMA5",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anor-10-mg-comprimes/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "INTERACTION_ALCOOL",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anor-10-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00316",
+      "drugs_com": "https://www.drugs.com/paracetamol.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Paracetamol'] -> ['Alendronate']",
+      "therapeutic_group: 'Analgésique, Antipyrétique' -> 'Régulateur du métabolisme osseux, bisphosphonate'",
+      "atc_code: 'N02BE01' -> 'M05BA04'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "anor_70_mg",
+    "brand_name": "ANOR",
+    "generic_name": "Paracétamol",
+    "composition": [
+      "Alendronate"
+    ],
+    "strength": "70 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "M05BA04",
+    "therapeutic_group": "Régulateur du métabolisme osseux, bisphosphonate",
+    "drug_class": "Analgésique non opioïde, Antipyrétique",
+    "drugbank_id": "DB00316",
+    "mechanism": "Mécanisme central: inhibition de la synthèse des prostaglandines dans le SNC. Mécanisme périphérique moins important que les AINS.",
+    "half_life": "2-3h",
+    "indications": [
+      "Douleurs légères à modérées",
+      "Fièvre",
+      "Céphalées, migraines légères",
+      "Douleurs dentaires",
+      "Douleurs musculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité au paracétamol",
+      "Insuffisance hépatique sévère",
+      "Phénylcétonurie (formes effervescentes avec aspartam)"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool (consommation chronique)",
+        "severity": "majeure",
+        "effect": "Majoration risque hépatotoxicité"
+      },
+      {
+        "drug": "Anticoagulants oraux (warfarine)",
+        "severity": "modérée",
+        "effect": "Potentialisation légère de l'effet anticoagulant à fortes doses"
+      },
+      {
+        "drug": "Inducteurs enzymatiques (rifampicine, carbamazépine)",
+        "severity": "modérée",
+        "effect": "Augmentation métabolite toxique NAPQI"
+      },
+      {
+        "drug": "Isoniazide",
+        "severity": "modérée",
+        "effect": "Augmentation hépatotoxicité"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Médicament de référence pour la douleur et la fièvre pendant la grossesse. Utiliser à la dose minimale efficace.",
+      "breastfeeding": "Compatible avec l'allaitement. Faibles quantités dans le lait."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Médicament de référence chez l'enfant pour fièvre et douleur. Ne pas dépasser 4 prises/j.",
+      "dose_rule": "15mg/kg par prise, max 60mg/kg/j, toutes les 4-6h. Nouveau-né: 10mg/kg par prise."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "Espacer les prises si DFG<30 ml/min (toutes les 8h minimum)"
+    },
+    "dosage": {
+      "adult": "500-1000mg toutes les 4-6h, max 4g/j (3g/j si alcoolisme, dénutrition)",
+      "children": "15mg/kg/prise, toutes les 4-6h, max 60mg/kg/j"
+    },
+    "adverse_effects": [
+      "Hépatotoxicité (surdosage)",
+      "Réactions allergiques rares",
+      "Néphrotoxicité (usage prolongé)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 4",
+        "price_ppv_dhs": 164.5,
+        "price_ph_dhs": 102.8,
+        "laboratory": "PHARMA5",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anor-70-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "INTERACTION_ALCOOL",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anor-70-mg-comprime/",
+      "drugbank": "https://go.drugbank.com/drugs/DB00316",
+      "drugs_com": "https://www.drugs.com/paracetamol.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Paracetamol'] -> ['Alendronate']",
+      "therapeutic_group: 'Analgésique, Antipyrétique' -> 'Régulateur du métabolisme osseux, bisphosphonate'",
+      "atc_code: 'N02BE01' -> 'M05BA04'",
+      "nature_produit: None -> 'Médicament'"
+    ]
+  },
+  {
+    "id": "anoro_ellipta_55_µg___22_µg",
+    "brand_name": "ANORO ELLIPTA",
+    "generic_name": "Umeclidinium + Vilanterol",
+    "composition": [
+      "Uméclidinium",
+      "Vilantérol"
+    ],
+    "strength": "55 µG | 22 µG",
+    "form": "Dose",
+    "route": "Orale",
+    "atc_code": "R03AL03",
+    "therapeutic_group": "Anticholinergique avec bêta-2-sympathomimétique lors de BPCO",
+    "drug_class": "Bronchodilatateur — Antagoniste muscarinique de longue durée d'action (LAMA)",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste compétitif des récepteurs muscariniques M3 des muscles lisses bronchiques, bronchodilatation 24h.",
+    "half_life": "11 h",
+    "indications": [
+      "BPCO — traitement bronchodilatateur de fond",
+      "Asthme (forme associée ICS+LABA+LAMA)"
+    ],
+    "contraindications": [
+      "Hypersensibilité",
+      "Association à d'autres anticholinergiques"
+    ],
+    "interactions": [
+      {
+        "drug": "Autres anticholinergiques",
+        "severity": "majeure",
+        "effect": "Effets atropiniques majorés — déconseillé"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé — données humaines insuffisantes.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Sécheresse buccale",
+      "Céphalées",
+      "Rhinopharyngite",
+      "Tachycardie",
+      "Constipation",
+      "Rétention urinaire (rare)",
+      "Glaucome aigu (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "POUDRE POUR INHALATION EN RECIPIENT UNIDOSE BOITE DE 30",
+        "price_ppv_dhs": 497,
+        "price_ph_dhs": 330,
+        "laboratory": "GLAXO SMITHKLINE",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anoro-ellipta-55-%c2%b5g-22-%c2%b5g-dose-poudre-pour-inhalation-en-recipient-unidose/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anoro-ellipta-55-%C2%B5g-22-%C2%B5g-dose/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/umeclidinium.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Uméclidinium')"
+    ],
+    "verification_corrections": [
+      "composition: ['Umeclidinium', 'Vilanterol'] -> ['Uméclidinium', 'Vilantérol']",
+      "therapeutic_group: None -> 'Anticholinergique avec bêta-2-sympathomimétique lors de BPCO'",
+      "atc_code: None -> 'R03AL03'",
+      "nature_produit: None -> 'Médicament'",
+      "strength: '55 µG / 22 µG' -> '55 µG | 22 µG'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Uméclidinium"
+    ]
+  },
+  {
+    "id": "antagon_h2_200_mg",
+    "brand_name": "ANTAGON H2",
+    "generic_name": "Famotidine",
+    "composition": [
+      "Cimétidine"
+    ],
+    "strength": "200 MG",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "A02BA01",
+    "therapeutic_group": "Antagoniste des récepteurs H2 à l'histamine",
+    "drug_class": "Antiulcéreux — Antagoniste H2 histaminique",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste compétitif des récepteurs H2 des cellules pariétales gastriques, réduisant la sécrétion acide basale et stimulée.",
+    "half_life": "2 h",
+    "indications": [
+      "Ulcère gastroduodénal",
+      "RGO",
+      "Syndrome de Zollinger-Ellison"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Warfarine, phénytoïne, théophylline, BZD, bêta-bloquants",
+        "severity": "majeure",
+        "effect": "Augmentation concentrations (inhibition multiple CYP450)"
+      },
+      {
+        "drug": "Kétoconazole, itraconazole, atazanavir",
+        "severity": "modérée",
+        "effect": "Réduction absorption (pH gastrique)"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé si nécessaire.",
+      "breastfeeding": "Passage dans le lait. Prudence."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "0.5 mg/kg/jour en 1-2 prises. Max: 40 mg/jour."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <50: réduire de 50% ou doubler intervalle."
+    },
+    "dosage": {
+      "adult": "Ulcère: 40 mg/soir. RGO: 20 mg 2x/j.",
+      "children": "0.5 mg/kg/j."
+    },
+    "adverse_effects": [
+      "Troubles digestifs",
+      "Gynécomastie, impuissance (blocage récepteurs androgènes)",
+      "Confusion (sujet âgé, IR)",
+      "Thrombopénie, leucopénie",
+      "Hépatite"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 10 ampoules de 2 ml",
+        "price_ppv_dhs": 53.4,
+        "price_ph_dhs": 33.4,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/antagon-h2-solution-injectable-ampoule-de-2-ml/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "TABLEAU_C"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/antagon-h2-200-mg-solution/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/famotidine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "C",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Cimétidine')",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Famotidine'] -> ['Cimétidine']",
+      "therapeutic_group: None -> \"Antagoniste des récepteurs H2 à l'histamine\"",
+      "atc_code: None -> 'A02BA01'",
+      "tableau_maroc: 'A' -> 'C'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Cimétidine"
+    ]
+  },
+  {
+    "id": "anti-spa_200_mg",
+    "brand_name": "ANTI-SPA",
+    "generic_name": "Phloroglucinol",
+    "composition": [
+      "Mebeverine"
+    ],
+    "strength": "200 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "A03AA04",
+    "therapeutic_group": "Antispasmodique musculotrope",
+    "drug_class": "Antispasmodique musculotrope — Dérivé papavérine",
+    "drugbank_id": null,
+    "mechanism": "Action directe sur le muscle lisse intestinal sans effet anticholinergique ; réduit la contractilité intestinale excessive.",
+    "half_life": "2,5 h",
+    "indications": [
+      "Spasmes digestifs",
+      "Spasmes urogénitaux",
+      "Dysménorrhée",
+      "Colique néphrétique (adjuvant)"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      {
+        "drug": "Aucune interaction significative documentée",
+        "severity": "mineure",
+        "effect": "N/A"
+      }
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "Compatible. Largement utilisé pendant la grossesse.",
+      "breastfeeding": "Compatible."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "Lyoc: ≥ 6 ans. Solution: dès la naissance."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "80 mg 3x/j. Lyoc: 2 lyoc/prise (max 6/j).",
+      "children": "6 mg/kg/j en 3 prises."
+    },
+    "adverse_effects": [
+      "Réactions cutanées (rares, incluant Quincke)",
+      "Troubles digestifs légers",
+      "Céphalées",
+      "Étourdissements"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 37.4,
+        "price_ph_dhs": 23.4,
+        "laboratory": "SOTHEMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anti-spa-200-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anti-spa-200-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/phloroglucinol.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "Aucun",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Mebeverine')"
+    ],
+    "verification_corrections": [
+      "composition: ['Phloroglucinol'] -> ['Mebeverine']",
+      "therapeutic_group: None -> 'Antispasmodique musculotrope'",
+      "atc_code: None -> 'A03AA04'",
+      "tableau_maroc: 'A' -> 'Aucun'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Mebeverine"
+    ]
+  },
+  {
+    "id": "antinorex_0.04_%",
+    "brand_name": "ANTINOREX",
+    "generic_name": "Metoclopramide",
+    "composition": [
+      "Cyproheptadine"
+    ],
+    "strength": "0.04 %",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AX02",
+    "therapeutic_group": "Antihistaminique H1 à usage systémique",
+    "drug_class": "Antihistaminique H1 de 1re génération avec effet orexigène (anti-sérotoninergique)",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste des récepteurs H1 et 5-HT2, ainsi qu'anticholinergique modeste. Stimule l'appétit par action centrale.",
+    "half_life": "8 h",
+    "indications": [
+      "Nausées/vomissements",
+      "Gastroparésie"
+    ],
+    "contraindications": [
+      "Phéochromocytome",
+      "Obstruction GI mécanique",
+      "Épilepsie",
+      "Maladie de Parkinson",
+      "Enfant <1 an"
+    ],
+    "interactions": [
+      {
+        "drug": "Dépresseurs SNC, alcool",
+        "severity": "majeure",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Effets anticholinergiques potentialisés — contre-indiqué"
+      },
+      {
+        "drug": "ISRS",
+        "severity": "modérée",
+        "effect": "Antagonisme de l'effet antidépresseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé (courte durée).",
+      "breastfeeding": "Compatible en cure courte."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an. Durée max 5 jours.",
+      "dose_rule": "0.1-0.15 mg/kg/dose, max 3x/j. Max 5 jours."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <40: réduire de 50%."
+    },
+    "dosage": {
+      "adult": "10 mg 3x/j. Max 5 jours.",
+      "children": "0.1-0.15 mg/kg 3x/j."
+    },
+    "adverse_effects": [
+      "Somnolence marquée",
+      "Sécheresse buccale",
+      "Prise de poids",
+      "Constipation",
+      "Rétention urinaire",
+      "Confusion (sujet âgé)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 125 ml",
+        "price_ppv_dhs": 13.1,
+        "price_ph_dhs": 8.2,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/antinorex-004-sirop/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/antinorex-0-04-%25-sirop/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/metoclopramide.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Lévodopa"
+        ],
+        "interacting_classes": [
+          "Antiparkinsoniens dopaminergiques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Antagonisme pharmacologique",
+        "recommendation": "CONTRE-INDIQUÉ."
+      }
+    ],
+    "tableau_maroc": "Aucun",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Cyproheptadine')"
+    ],
+    "verification_corrections": [
+      "composition: ['Metoclopramide'] -> ['Cyproheptadine']",
+      "therapeutic_group: None -> 'Antihistaminique H1 à usage systémique'",
+      "atc_code: None -> 'R06AX02'",
+      "tableau_maroc: 'A' -> 'Aucun'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Cyproheptadine"
+    ]
+  },
+  {
+    "id": "antinorex_4_mg",
+    "brand_name": "ANTINOREX",
+    "generic_name": "Metoclopramide",
+    "composition": [
+      "Cyproheptadine"
+    ],
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX02",
+    "therapeutic_group": "antihistaminique H1 à usage systémique",
+    "drug_class": "Antihistaminique H1 de 1re génération avec effet orexigène (anti-sérotoninergique)",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste des récepteurs H1 et 5-HT2, ainsi qu'anticholinergique modeste. Stimule l'appétit par action centrale.",
+    "half_life": "8 h",
+    "indications": [
+      "Nausées/vomissements",
+      "Gastroparésie"
+    ],
+    "contraindications": [
+      "Phéochromocytome",
+      "Obstruction GI mécanique",
+      "Épilepsie",
+      "Maladie de Parkinson",
+      "Enfant <1 an"
+    ],
+    "interactions": [
+      {
+        "drug": "Dépresseurs SNC, alcool",
+        "severity": "majeure",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Effets anticholinergiques potentialisés — contre-indiqué"
+      },
+      {
+        "drug": "ISRS",
+        "severity": "modérée",
+        "effect": "Antagonisme de l'effet antidépresseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Peut être utilisé (courte durée).",
+      "breastfeeding": "Compatible en cure courte."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an. Durée max 5 jours.",
+      "dose_rule": "0.1-0.15 mg/kg/dose, max 3x/j. Max 5 jours."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <40: réduire de 50%."
+    },
+    "dosage": {
+      "adult": "10 mg 3x/j. Max 5 jours.",
+      "children": "0.1-0.15 mg/kg 3x/j."
+    },
+    "adverse_effects": [
+      "Somnolence marquée",
+      "Sécheresse buccale",
+      "Prise de poids",
+      "Constipation",
+      "Rétention urinaire",
+      "Confusion (sujet âgé)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 16,
+        "price_ph_dhs": 10,
+        "laboratory": "LAPROPHAN",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/antinorex-4-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/antinorex-4-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/metoclopramide.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Lévodopa"
+        ],
+        "interacting_classes": [
+          "Antiparkinsoniens dopaminergiques"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Antagonisme pharmacologique",
+        "recommendation": "CONTRE-INDIQUÉ."
+      }
+    ],
+    "tableau_maroc": "Aucun",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Cyproheptadine')"
+    ],
+    "verification_corrections": [
+      "composition: ['Metoclopramide'] -> ['Cyproheptadine']",
+      "therapeutic_group: None -> 'antihistaminique H1 à usage systémique'",
+      "atc_code: None -> 'R06AX02'",
+      "tableau_maroc: 'A' -> 'Aucun'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Cyproheptadine"
+    ]
+  },
+  {
+    "id": "anzatax_150_mg___25_ml",
+    "brand_name": "ANZATAX",
+    "generic_name": "Paclitaxel",
+    "composition": [
+      "Paclitaxel"
+    ],
+    "strength": "150 MG / 25 ML",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "L01CD01",
+    "therapeutic_group": "Cytostatique, taxane",
+    "drug_class": "Antinéoplasique — Taxane (stabilisateur des microtubules)",
+    "drugbank_id": null,
+    "mechanism": "Stabilisation des microtubules par liaison à la tubuline β, bloquant la mitose en phase G2/M.",
+    "half_life": "13-20 h (triphasique)",
+    "indications": [
+      "Cancer ovarien",
+      "Cancer du sein",
+      "Cancer bronchique non à petites cellules",
+      "Sarcome de Kaposi lié au SIDA"
+    ],
+    "contraindications": [
+      "Neutropénie <1500/mm³",
+      "Hypersensibilité au Cremophor EL",
+      "Grossesse et allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole)",
+        "severity": "majeure",
+        "effect": "Augmentation toxicité"
+      },
+      {
+        "drug": "Cisplatine (ordre d'administration)",
+        "severity": "majeure",
+        "effect": "Myélosuppression majorée si cisplatine donné avant"
+      },
+      {
+        "drug": "Vaccins vivants",
+        "severity": "majeure",
+        "effect": "Contre-indiqué"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué — tératogène et embryotoxique.",
+      "breastfeeding": "Contre-indiqué."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Neutropénie dose-limitante",
+      "Neuropathie périphérique",
+      "Alopécie",
+      "Myalgies/arthralgies",
+      "Réactions d'hypersensibilité (prémédiquer corticoïdes + antiH1/H2)",
+      "Cardiotoxicité"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 25 ml",
+        "price_ppv_dhs": 2396,
+        "price_ph_dhs": 2055,
+        "laboratory": "PFIZER MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/anzatax-150-mg-25-ml-solution-pour-perfusion/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/anzatax-150-mg-25-ml-solution/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/paclitaxel.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Paclitaxel')"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: None -> 'Cytostatique, taxane'",
+      "atc_code: None -> 'L01CD01'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Paclitaxel"
+    ]
+  },
+  {
+    "id": "apadex_lp_1.5_mg",
+    "brand_name": "APADEX LP",
+    "generic_name": "Tramadol",
+    "composition": [
+      "Indapamide"
+    ],
+    "strength": "1.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C03BA11",
+    "therapeutic_group": "Diurétique, sulfamide",
+    "drug_class": "Diurétique thiazidique-like — Sulfonamide non-thiazidique",
+    "drugbank_id": null,
+    "mechanism": "Inhibition du symport Na+/Cl- au niveau du tube contourné distal, diurèse modérée. Effet vasodilatateur direct indépendant de la diurèse.",
+    "half_life": "14-18 h",
+    "indications": [
+      "Douleurs modérées à sévères"
+    ],
+    "contraindications": [
+      "Épilepsie non contrôlée",
+      "IMAO",
+      "Enfant <12 ans",
+      "Insuffisance respiratoire sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation lithémie"
+      },
+      {
+        "drug": "Digoxine, allongeurs QT",
+        "severity": "majeure",
+        "effect": "Toxicité majorée (si hypokaliémie)"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Réduction effet, IR"
+      },
+      {
+        "drug": "IEC/ARA II (initiation)",
+        "severity": "modérée",
+        "effect": "Hypotension de 1re dose"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Éviter, surtout en fin de grossesse (sevrage néonatal).",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 12,
+      "warning": "CI < 12 ans.",
+      "dose_rule": "≥ 12 ans: 50-100 mg/4-6h. Max: 400 mg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: 50-100 mg/12h. Max 200 mg/j."
+    },
+    "dosage": {
+      "adult": "50-100 mg/4-6h. Max: 400 mg/j. LP: 100-200 mg/12h.",
+      "children": "≥ 12 ans: 50-100 mg/4-6h."
+    },
+    "adverse_effects": [
+      "Hypokaliémie",
+      "Hyponatrémie",
+      "Hyperuricémie, goutte",
+      "Hyperglycémie (prudence diabétique)",
+      "Allongement QT, torsades (rare, si hypoK)",
+      "Photosensibilité",
+      "Cytopénies (rares)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 29.3,
+        "price_ph_dhs": 18.3,
+        "laboratory": "RIM PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/apadex-lp-1-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "CONDUITE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/apadex-lp-1-5-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/tramadol.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Moclobémide",
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Syndrome sérotoninergique",
+        "recommendation": "CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "ISRS",
+          "Venlafaxine"
+        ],
+        "interacting_classes": [
+          "Antidépresseurs sérotoninergiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Syndrome sérotoninergique + convulsions",
+        "recommendation": "Éviter."
+      },
+      {
+        "interacting_drugs": [
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux tramadol",
+        "recommendation": "Ajuster dose."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Indapamide')"
+    ],
+    "verification_corrections": [
+      "composition: ['Tramadol'] -> ['Indapamide']",
+      "therapeutic_group: None -> 'Diurétique, sulfamide'",
+      "atc_code: None -> 'C03BA11'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Indapamide"
+    ]
+  },
+  {
+    "id": "aparkof_1_mg",
+    "brand_name": "APARKOF",
+    "generic_name": "Levodopa + Carbidopa",
+    "composition": [
+      "RASAGILINE"
+    ],
+    "strength": "1 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "N04BD02",
+    "therapeutic_group": "Inhibiteur sélectif puissant et irréversible de la MAO-B",
+    "drug_class": "Antiparkinsonien — Inhibiteur sélectif et irréversible de la MAO-B",
+    "drugbank_id": null,
+    "mechanism": "Inhibition de la monoamine oxydase B cérébrale, augmentation dopamine striatale ; effet neuroprotecteur discuté.",
+    "half_life": "3 h (effet pharmacologique prolongé — enzyme liée irréversiblement)",
+    "indications": [
+      "Maladie de Parkinson (monothérapie précoce ou adjuvant à lévodopa)"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère",
+      "Association à d'autres IMAO, péthidine, tramadol, millepertuis, dextrométhorphane, linézolide",
+      "Phéochromocytome"
+    ],
+    "interactions": [
+      {
+        "drug": "ISRS, IRSN, clomipramine, tramadol, péthidine, méthadone",
+        "severity": "majeure",
+        "effect": "Syndrome sérotoninergique — CI ou espacer"
+      },
+      {
+        "drug": "Dextrométhorphane",
+        "severity": "majeure",
+        "effect": "Syndrome sérotoninergique — CI"
+      },
+      {
+        "drug": "Ciprofloxacine, inhibiteurs CYP1A2",
+        "severity": "modérée",
+        "effect": "Augmentation concentrations"
+      },
+      {
+        "drug": "Sympathomimétiques",
+        "severity": "majeure",
+        "effect": "Crise hypertensive"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé — données insuffisantes.",
+      "breastfeeding": "Déconseillé (inhibe prolactine)."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Dyskinésies (association L-dopa)",
+      "Hypotension orthostatique",
+      "Troubles digestifs",
+      "Syndrome sérotoninergique (interactions)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 178.1,
+        "price_ph_dhs": 111.3,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aparkof-1-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aparkof-1-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/levodopa.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "Non listé",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] nat inferred as Médicament (source page lacks Nature du Produit field)",
+      "[2026-04-19] tableau_maroc inferred as Non listé (source page lacks Tableau field)",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='RASAGILINE')"
+    ],
+    "verification_corrections": [
+      "composition: ['Levodopa', 'Carbidopa'] -> ['RASAGILINE']",
+      "therapeutic_group: None -> 'Inhibiteur sélectif puissant et irréversible de la MAO-B'",
+      "atc_code: None -> 'N04BD02'",
+      "tableau_maroc: 'A' -> 'Non listé' (inferred)",
+      "nature_produit: None -> 'Médicament' (inferred)",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for RASAGILINE"
+    ]
+  },
+  {
+    "id": "apazide_200_mg",
+    "brand_name": "APAZIDE",
+    "generic_name": "Hydrochlorothiazide",
+    "composition": [
+      "Nifuroxazide"
+    ],
+    "strength": "200 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "A07AX03",
+    "therapeutic_group": "Antibactérien intestinal",
+    "drug_class": "Antibactérien intestinal — Nitrofurane",
+    "drugbank_id": null,
+    "mechanism": "Interférence avec les systèmes enzymatiques bactériens (action bactériostatique/bactéricide locale, non absorbé dans le tube digestif).",
+    "half_life": "N/A (minimalement absorbé)",
+    "indications": [
+      "HTA",
+      "Œdèmes"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère (anurie)",
+      "Encéphalopathie hépatique",
+      "Hypokaliémie sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool",
+        "severity": "modérée",
+        "effect": "Effet antabuse théorique"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Déconseillé. Risque d'ischémie fœtoplacentaire.",
+      "breastfeeding": "Compatible à faible dose."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "Utilisé en pédiatrie.",
+      "dose_rule": "1-2 mg/kg/j en 1-2 prises."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: inefficace. Utiliser diurétique de l'anse."
+    },
+    "dosage": {
+      "adult": "HTA: 12.5-25 mg/j. Max: 50 mg/j.",
+      "children": "1-2 mg/kg/j."
+    },
+    "adverse_effects": [
+      "Réactions cutanées allergiques (urticaire, œdème de Quincke, anaphylaxie rare)",
+      "Troubles digestifs"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 16",
+        "price_ppv_dhs": 18.4,
+        "price_ph_dhs": 11.5,
+        "laboratory": "BOTTU S.A.",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/apazide-200-mg-gelule/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "RENAL_PRUDENCE",
+      "HEPATIQUE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/apazide-200-mg-gelule/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/hydrochlorothiazide.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypokaliémie favorise toxicité digitalique",
+        "recommendation": "Surveiller K+."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution effet diurétique",
+        "recommendation": "Surveiller PA."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Nifuroxazide')"
+    ],
+    "verification_corrections": [
+      "composition: ['Hydrochlorothiazide'] -> ['Nifuroxazide']",
+      "therapeutic_group: None -> 'Antibactérien intestinal'",
+      "atc_code: None -> 'A07AX03'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Nifuroxazide"
+    ]
+  },
+  {
+    "id": "apcalis_20_mg",
+    "brand_name": "APCALIS",
+    "generic_name": "Tadalafil",
+    "composition": [
+      "Tadalafil"
+    ],
+    "strength": "20 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "G04BE08",
+    "therapeutic_group": "Inhibiteur de la phosphodiestérase de type 5",
+    "drug_class": "Inhibiteur sélectif de la phosphodiestérase de type 5 (IPDE5) — Urologique",
+    "drugbank_id": null,
+    "mechanism": "Inhibition sélective de la PDE5, augmentation du GMPc, relaxation du muscle lisse des corps caverneux et vasodilatation artérielle pulmonaire.",
+    "half_life": "17,5 h (plus longue parmi IPDE5)",
+    "indications": [
+      "Dysfonction érectile",
+      "HBP",
+      "HTAP"
+    ],
+    "contraindications": [
+      "Dérivés nitrés",
+      "Hypotension sévère",
+      "IDM récent <90j",
+      "AVC récent <6 mois",
+      "IC non contrôlée"
+    ],
+    "interactions": [
+      {
+        "drug": "Dérivés nitrés",
+        "severity": "majeure",
+        "effect": "Hypotension sévère — CONTRE-INDIQUÉ"
+      },
+      {
+        "drug": "α-bloquants",
+        "severity": "majeure",
+        "effect": "Hypotension — prudence, titration progressive"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Majoration exposition"
+      },
+      {
+        "drug": "Inducteurs CYP3A4 (rifampicine)",
+        "severity": "modérée",
+        "effect": "Réduction efficacité"
+      }
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "Non applicable (réservé à l'homme).",
+      "breastfeeding": "Non applicable."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non applicable."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr 30-50: début 5 mg. ClCr <30: max 5 mg."
+    },
+    "dosage": {
+      "adult": "DE: 10-20 mg avant activité ou 5 mg/j. HBP: 5 mg/j. HTAP: 40 mg/j.",
+      "children": "Non applicable."
+    },
+    "adverse_effects": [
+      "Céphalées",
+      "Bouffées vasomotrices",
+      "Dyspepsie",
+      "Douleurs dorsales/myalgies",
+      "Congestion nasale",
+      "Troubles visuels (rares)",
+      "Priapisme (rare)",
+      "Ototoxicité brutale (rare)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 2",
+        "price_ppv_dhs": 106.9,
+        "price_ph_dhs": 66.8,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/apcalis-20-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "RENAL_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/apcalis-20-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/tadalafil.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Trinitrine",
+          "Natispray",
+          "Risordan"
+        ],
+        "interacting_classes": [
+          "Dérivés nitrés"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypotension fatale",
+        "recommendation": "FORMELLEMENT CONTRE-INDIQUÉ."
+      },
+      {
+        "interacting_drugs": [
+          "Alfuzosine",
+          "Tamsulosine"
+        ],
+        "interacting_classes": [
+          "Alpha-bloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension",
+        "recommendation": "Stabiliser sous alpha-bloquant d'abord."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux tadalafil",
+        "recommendation": "Max 10 mg/72h."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Tadalafil')",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: None -> 'Inhibiteur de la phosphodiestérase de type 5'",
+      "atc_code: None -> 'G04BE08'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Tadalafil"
+    ]
+  },
+  {
+    "id": "apetine_4_mg",
+    "brand_name": "APETINE",
+    "generic_name": "Cyproheptadine",
+    "composition": [
+      "Cyproheptadine"
+    ],
+    "strength": "4 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AX02",
+    "therapeutic_group": "Antihistaminique H1 à usage systémique",
+    "drug_class": "Antihistaminique H1 de 1re génération avec effet orexigène (anti-sérotoninergique)",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste des récepteurs H1 et 5-HT2, ainsi qu'anticholinergique modeste. Stimule l'appétit par action centrale.",
+    "half_life": "8 h",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire",
+      "Stimulation de l'appétit"
+    ],
+    "contraindications": [
+      "Glaucome à angle fermé",
+      "Rétention urinaire",
+      "Nourrisson"
+    ],
+    "interactions": [
+      {
+        "drug": "Dépresseurs SNC, alcool",
+        "severity": "majeure",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Effets anticholinergiques potentialisés — contre-indiqué"
+      },
+      {
+        "drug": "ISRS",
+        "severity": "modérée",
+        "effect": "Antagonisme de l'effet antidépresseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Éviter si possible.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2 mg 2-3x/j. 7-14 ans: 4 mg 2-3x/j. Max: 12-16 mg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "4 mg 3x/jour. Max: 32 mg/jour.",
+      "children": "2-6 ans: 2 mg 2-3x/j. 7-14 ans: 4 mg 2-3x/j."
+    },
+    "adverse_effects": [
+      "Somnolence marquée",
+      "Sécheresse buccale",
+      "Prise de poids",
+      "Constipation",
+      "Rétention urinaire",
+      "Confusion (sujet âgé)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 30",
+        "price_ppv_dhs": 15.2,
+        "price_ph_dhs": 9.5,
+        "laboratory": "GALENICA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/apetine-4-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/apetine-4-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/cyproheptadine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "Aucun",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Cyproheptadine')",
+      "[2026-04-19] tableau_maroc inferred as Non listé (source page lacks Tableau field)",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: None -> 'Antihistaminique H1 à usage systémique'",
+      "atc_code: None -> 'R06AX02'",
+      "tableau_maroc: 'Non classe' -> 'Aucun'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Cyproheptadine"
+    ]
+  },
+  {
+    "id": "apetine_40_mg",
+    "brand_name": "APETINE",
+    "generic_name": "Cyproheptadine",
+    "composition": [
+      "Cyproheptadine"
+    ],
+    "strength": "40 MG",
+    "form": "Solution",
+    "route": "Orale",
+    "atc_code": "R06AX02",
+    "therapeutic_group": "Antihistaminique H1 à usage systémique",
+    "drug_class": "Antihistaminique H1 de 1re génération avec effet orexigène (anti-sérotoninergique)",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste des récepteurs H1 et 5-HT2, ainsi qu'anticholinergique modeste. Stimule l'appétit par action centrale.",
+    "half_life": "8 h",
+    "indications": [
+      "Rhinite allergique",
+      "Urticaire",
+      "Stimulation de l'appétit"
+    ],
+    "contraindications": [
+      "Glaucome à angle fermé",
+      "Rétention urinaire",
+      "Nourrisson"
+    ],
+    "interactions": [
+      {
+        "drug": "Dépresseurs SNC, alcool",
+        "severity": "majeure",
+        "effect": "Majoration sédation"
+      },
+      {
+        "drug": "IMAO",
+        "severity": "majeure",
+        "effect": "Effets anticholinergiques potentialisés — contre-indiqué"
+      },
+      {
+        "drug": "ISRS",
+        "severity": "modérée",
+        "effect": "Antagonisme de l'effet antidépresseur"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Éviter si possible.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "≥ 2 ans.",
+      "dose_rule": "2-6 ans: 2 mg 2-3x/j. 7-14 ans: 4 mg 2-3x/j. Max: 12-16 mg/j."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "4 mg 3x/jour. Max: 32 mg/jour.",
+      "children": "2-6 ans: 2 mg 2-3x/j. 7-14 ans: 4 mg 2-3x/j."
+    },
+    "adverse_effects": [
+      "Somnolence marquée",
+      "Sécheresse buccale",
+      "Prise de poids",
+      "Constipation",
+      "Rétention urinaire",
+      "Confusion (sujet âgé)"
+    ],
+    "market_data": [
+      {
+        "packaging": "Flacon de 125 ml",
+        "price_ppv_dhs": 12.2,
+        "price_ph_dhs": 7.6,
+        "laboratory": "GALENICA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/apetine-40-mg-solution-buvable/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/apetine-40-mg-solution/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/cyproheptadine.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "Aucun",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Cyproheptadine')"
+    ],
+    "verification_corrections": [
+      "therapeutic_group: None -> 'Antihistaminique H1 à usage systémique'",
+      "atc_code: None -> 'R06AX02'",
+      "tableau_maroc: 'Non classe' -> 'Aucun'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Cyproheptadine"
+    ]
+  },
+  {
+    "id": "aplevax_5_mg",
+    "brand_name": "APLEVAX",
+    "generic_name": "Vaccin hepatite A",
+    "composition": [
+      "Lévocétirizine"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminique à usage systémique",
+    "drug_class": "Antihistaminique H1 de 3e génération (énantiomère R de la cétirizine)",
+    "drugbank_id": null,
+    "mechanism": "Antagoniste sélectif des récepteurs H1 périphériques, forme active de la cétirizine.",
+    "half_life": "7-8 h",
+    "indications": [
+      "Rhinite allergique (saisonnière et perannuelle)",
+      "Urticaire chronique"
+    ],
+    "contraindications": [
+      "Insuffisance rénale terminale",
+      "Hypersensibilité à la cétirizine, hydroxyzine ou pipérazines",
+      "Enfant <2 ans"
+    ],
+    "interactions": [
+      {
+        "drug": "Alcool, dépresseurs SNC",
+        "severity": "modérée",
+        "effect": "Majoration effet sédatif"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Utilisation possible si nécessaire — données rassurantes.",
+      "breastfeeding": "Déconseillé — passage dans le lait."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Somnolence légère",
+      "Sécheresse buccale",
+      "Fatigue",
+      "Céphalées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 30",
+        "price_ppv_dhs": 70.6,
+        "price_ph_dhs": 44.1,
+        "laboratory": "ZENITH PHARMA",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aplevax-5-mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_C"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aplevax-5-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/vaccin-hepatite-a.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "C",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='Lévocétirizine')",
+      "[2026-04-19] dedup: 2 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Vaccin hepatite A'] -> ['Lévocétirizine']",
+      "therapeutic_group: None -> 'Antihistaminique à usage systémique'",
+      "atc_code: None -> 'R06AE09'",
+      "tableau_maroc: 'A' -> 'C'",
+      "nature_produit: None -> 'Médicament'",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for Lévocétirizine"
+    ]
+  },
+  {
+    "id": "aprovasc_150_mg___10_mg",
+    "brand_name": "APROVASC",
+    "generic_name": "Irbesartan + Amlodipine",
+    "composition": [
+      "Amlodipine",
+      "Irbesartan"
+    ],
+    "strength": "150 MG | 10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA04",
+    "therapeutic_group": "Antagoniste de l’angiotensine II en association avec un inhibiteur calcique",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": null,
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 28",
+        "price_ppv_dhs": 179.5,
+        "price_ph_dhs": 112.2,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aprovasc-150mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aprovasc-150-mg-10-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/irbesartan.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] sister-fill from am-10_10_mg (same ingredient 'amlodipine'): mechanism, half_life, drug_class, interactions, indications, adverse_effects, contraindications, pregnancy.category, pregnancy.breastfeeding, pregnancy.warning"
+    ],
+    "verification_corrections": [
+      "composition: ['Irbesartan', 'Amlodipine'] -> ['Amlodipine', 'Irbesartan']",
+      "therapeutic_group: None -> 'Antagoniste de l’angiotensine II en association avec un inhibiteur calcique'",
+      "atc_code: None -> 'C09CA04'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "strength: '150 MG / 10 MG' -> '150 MG | 10 MG'"
+    ]
+  },
+  {
+    "id": "aprovasc_150_mg___5mg",
+    "brand_name": "APROVASC",
+    "generic_name": "Irbesartan + Amlodipine",
+    "composition": [
+      "Amlodipine",
+      "Irbesartan"
+    ],
+    "strength": "150 MG | 5MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA04",
+    "therapeutic_group": "Antagoniste de l’angiotensine II en association avec un inhibiteur calcique",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": null,
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 28",
+        "price_ppv_dhs": 155.8,
+        "price_ph_dhs": 97.4,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aprovasc-150mg5mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aprovasc-150-mg-5mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/irbesartan.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] sister-fill from am-10_10_mg (same ingredient 'amlodipine'): mechanism, half_life, drug_class, interactions, indications, adverse_effects, contraindications, pregnancy.category, pregnancy.breastfeeding, pregnancy.warning"
+    ],
+    "verification_corrections": [
+      "composition: ['Irbesartan', 'Amlodipine'] -> ['Amlodipine', 'Irbesartan']",
+      "therapeutic_group: None -> 'Antagoniste de l’angiotensine II en association avec un inhibiteur calcique'",
+      "atc_code: None -> 'C09CA04'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "strength: '150 MG / 5MG' -> '150 MG | 5MG'"
+    ]
+  },
+  {
+    "id": "aprovasc_300_mg___10_mg",
+    "brand_name": "APROVASC",
+    "generic_name": "Irbesartan + Amlodipine",
+    "composition": [
+      "Amlodipine",
+      "Irbesartan"
+    ],
+    "strength": "300 MG | 10 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA04",
+    "therapeutic_group": "Antagoniste de l’angiotensine II en association avec un inhibiteur calcique",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": null,
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 28",
+        "price_ppv_dhs": 209,
+        "price_ph_dhs": 130.8,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aprovasc-300mg10mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aprovasc-300-mg-10-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/irbesartan.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] sister-fill from am-10_10_mg (same ingredient 'amlodipine'): mechanism, half_life, drug_class, interactions, indications, adverse_effects, contraindications, pregnancy.category, pregnancy.breastfeeding, pregnancy.warning"
+    ],
+    "verification_corrections": [
+      "composition: ['Irbesartan', 'Amlodipine'] -> ['Amlodipine', 'Irbesartan']",
+      "therapeutic_group: None -> 'Antagoniste de l’angiotensine II en association avec un inhibiteur calcique'",
+      "atc_code: None -> 'C09CA04'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "strength: '300 MG / 10 MG' -> '300 MG | 10 MG'"
+    ]
+  },
+  {
+    "id": "aprovasc_300_mg___5_mg",
+    "brand_name": "APROVASC",
+    "generic_name": "Irbesartan + Amlodipine",
+    "composition": [
+      "Amlodipine",
+      "Irbesartan"
+    ],
+    "strength": "300 MG | 5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA04",
+    "therapeutic_group": "Antagoniste de l’angiotensine II en association avec un inhibiteur calcique",
+    "drug_class": "Inhibiteur calcique (dihydropyridine)",
+    "drugbank_id": null,
+    "mechanism": "Bloc des canaux calciques voltage-dépendants de type L dans les cellules musculaires lisses vasculaires et cardiaques → vasodilatation.",
+    "half_life": "35-50h",
+    "indications": [
+      "Hypertension artérielle",
+      "Angor stable et spastique",
+      "Prévention des événements cardiovasculaires"
+    ],
+    "contraindications": [
+      "Hypersensibilité aux dihydropyridines",
+      "Hypotension sévère",
+      "Choc cardiogénique",
+      "Sténose aortique sévère"
+    ],
+    "interactions": [
+      {
+        "drug": "Simvastatine (>20mg)",
+        "severity": "majeure",
+        "effect": "Augmentation risque myopathie/rhabdomyolyse"
+      },
+      {
+        "drug": "Ciclosporine",
+        "severity": "majeure",
+        "effect": "Augmentation taux de ciclosporine"
+      },
+      {
+        "drug": "Inhibiteurs CYP3A4 (kétoconazole, ritonavir)",
+        "severity": "modérée",
+        "effect": "Augmentation exposition amlodipine"
+      },
+      {
+        "drug": "Antihypertenseurs",
+        "severity": "modérée",
+        "effect": "Potentialisation hypotension"
+      },
+      {
+        "drug": "Jus de pamplemousse",
+        "severity": "modérée",
+        "effect": "Augmentation biodisponibilité"
+      }
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Utiliser uniquement si bénéfice>risque. Données limitées chez la femme enceinte.",
+      "breastfeeding": "Passe dans le lait. Déconseillé."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Oedèmes des membres inférieurs",
+      "Céphalées",
+      "Flush",
+      "Palpitations",
+      "Fatigue",
+      "Nausées"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 28",
+        "price_ppv_dhs": 185.6,
+        "price_ph_dhs": 116,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aprovasc-300mg5mg-comprime/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aprovasc-300-mg-5-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/irbesartan.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] sister-fill from am-10_10_mg (same ingredient 'amlodipine'): mechanism, half_life, drug_class, interactions, indications, adverse_effects, contraindications, pregnancy.category, pregnancy.breastfeeding, pregnancy.warning"
+    ],
+    "verification_corrections": [
+      "composition: ['Irbesartan', 'Amlodipine'] -> ['Amlodipine', 'Irbesartan']",
+      "therapeutic_group: None -> 'Antagoniste de l’angiotensine II en association avec un inhibiteur calcique'",
+      "atc_code: None -> 'C09CA04'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "strength: '300 MG / 5 MG' -> '300 MG | 5 MG'"
+    ]
+  },
+  {
+    "id": "aprovel_150_mg",
+    "brand_name": "APROVEL",
+    "generic_name": "Irbesartan",
+    "composition": [
+      "Irbésartan"
+    ],
+    "strength": "150 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA04",
+    "therapeutic_group": "Antagoniste sélectif des récepteurs de l'angiotensine II",
+    "drug_class": "Antihypertenseur — Antagoniste des récepteurs AT1 de l'angiotensine II (ARA II)",
+    "drugbank_id": null,
+    "mechanism": "Blocage sélectif des récepteurs AT1 de l'angiotensine II, vasodilatation et réduction aldostérone.",
+    "half_life": "11-15 h",
+    "indications": [
+      "HTA",
+      "Néphropathie diabétique (DT2)"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Sténose bilatérale artères rénales"
+    ],
+    "interactions": [
+      {
+        "drug": "Diurétiques épargneurs K+, K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Réduction effet, risque IR"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation lithémie"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué. Fœtotoxique.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans sauf cas spéciaux.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement. Prudence si IRC sévère."
+    },
+    "dosage": {
+      "adult": "HTA: 150-300 mg/j. Néphropathie: 300 mg/j.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Hyperkaliémie",
+      "Hypotension",
+      "Vertiges",
+      "Insuffisance rénale fonctionnelle"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 108.7,
+        "price_ph_dhs": 67.9,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aprovel-150-mg-comprime-2/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aprovel-150-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/irbesartan.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA",
+        "recommendation": "CI chez diabétique."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Irbésartan')"
+    ],
+    "verification_corrections": [
+      "composition: ['Irbesartan'] -> ['Irbésartan']",
+      "therapeutic_group: None -> \"Antagoniste sélectif des récepteurs de l'angiotensine II\"",
+      "atc_code: None -> 'C09CA04'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Irbésartan"
+    ]
+  },
+  {
+    "id": "aprovel_300_mg",
+    "brand_name": "APROVEL",
+    "generic_name": "Irbesartan",
+    "composition": [
+      "Irbésartan"
+    ],
+    "strength": "300 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C09CA04",
+    "therapeutic_group": "Antagoniste sélectif des récepteurs de l'angiotensine II",
+    "drug_class": "Antihypertenseur — Antagoniste des récepteurs AT1 de l'angiotensine II (ARA II)",
+    "drugbank_id": null,
+    "mechanism": "Blocage sélectif des récepteurs AT1 de l'angiotensine II, vasodilatation et réduction aldostérone.",
+    "half_life": "11-15 h",
+    "indications": [
+      "HTA",
+      "Néphropathie diabétique (DT2)"
+    ],
+    "contraindications": [
+      "Grossesse",
+      "Sténose bilatérale artères rénales"
+    ],
+    "interactions": [
+      {
+        "drug": "Diurétiques épargneurs K+, K+",
+        "severity": "majeure",
+        "effect": "Hyperkaliémie"
+      },
+      {
+        "drug": "AINS",
+        "severity": "modérée",
+        "effect": "Réduction effet, risque IR"
+      },
+      {
+        "drug": "Lithium",
+        "severity": "majeure",
+        "effect": "Augmentation lithémie"
+      }
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Contre-indiqué. Fœtotoxique.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans sauf cas spéciaux.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement. Prudence si IRC sévère."
+    },
+    "dosage": {
+      "adult": "HTA: 150-300 mg/j. Néphropathie: 300 mg/j.",
+      "children": "Non recommandé."
+    },
+    "adverse_effects": [
+      "Hyperkaliémie",
+      "Hypotension",
+      "Vertiges",
+      "Insuffisance rénale fonctionnelle"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boîte de 28",
+        "price_ppv_dhs": 218,
+        "price_ph_dhs": 136.3,
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/aprovel-300-mg-comprime-2/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/aprovel-300-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/irbesartan.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser lithémie."
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution efficacité + risque rénal",
+        "recommendation": "Surveiller."
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs rénine"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double blocage SRAA",
+        "recommendation": "CI chez diabétique."
+      }
+    ],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": "Oui",
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, adverse_effects, interactions from pharmaceutical reference (ingredient='Irbésartan')"
+    ],
+    "verification_corrections": [
+      "composition: ['Irbesartan'] -> ['Irbésartan']",
+      "therapeutic_group: None -> \"Antagoniste sélectif des récepteurs de l'angiotensine II\"",
+      "atc_code: None -> 'C09CA04'",
+      "nature_produit: None -> 'Médicament'",
+      "princeps: None -> 'Oui'",
+      "clinical_pass 2026-04-19: filled 5 field(s) from reference for Irbésartan"
+    ]
+  },
+  {
+    "id": "apxia_2.5_mg",
+    "brand_name": "APXIA",
+    "generic_name": "Perindopril + Amlodipine",
+    "composition": [
+      "APIXABAN"
+    ],
+    "strength": "2.5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AF02",
+    "therapeutic_group": "Anticoagulant, inhibiteur direct du facteur Xa",
+    "drug_class": "Anticoagulant oral direct — Inhibiteur sélectif du facteur Xa",
+    "drugbank_id": null,
+    "mechanism": "Inhibition sélective, réversible et directe du facteur Xa libre et lié au caillot, bloquant la conversion de prothrombine en thrombine.",
+    "half_life": "12 h",
+    "indications": [
+      "FA non valvulaire — prévention AVC et embolie systémique",
+      "Traitement TVP/EP et prévention récidives",
+      "Prévention TEV post-chirurgie orthopédique majeure"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à haut risque hémorragique",
+      "Hépatopathie avec coagulopathie",
+      "Valve mécanique",
+      "Grossesse et allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4/P-gp (kétoconazole, itraconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation exposition — contre-indiqué"
+      },
+      {
+        "drug": "Inducteurs puissants CYP3A4/P-gp (rifampicine, phénytoïne, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction exposition — association déconseillée"
+      },
+      {
+        "drug": "Autres anticoagulants, antiagrégants, AINS",
+        "severity": "majeure",
+        "effect": "Majoration risque hémorragique"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Déconseillé — pas de données humaines suffisantes, risque hémorragique fœtal.",
+      "breastfeeding": "Déconseillé — passage dans le lait probable."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Hémorragies (gastro-intestinales, cutanées, épistaxis)",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 10",
+        "price_ppv_dhs": 85.1,
+        "price_ph_dhs": 53.2,
+        "laboratory": "PHARMIS",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/apxia-2-5-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [
+      "TABLEAU_A"
+    ],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/apxia-2-5-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/perindopril.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "A",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] nat inferred as Médicament (source page lacks Nature du Produit field)",
+      "[2026-04-19] tg inferred (inferred from sister apxia entries (same active ingredient APIXABAN))",
+      "[2026-04-19] atc inferred (inferred from sister apxia entries (same active ingredient APIXABAN))",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='APIXABAN')",
+      "[2026-04-19] tableau_maroc inferred as Non listé (source page lacks Tableau field)",
+      "[2026-04-19] dedup: 3 duplicate copies of this id within batch — kept best, merged audit_notes"
+    ],
+    "verification_corrections": [
+      "composition: ['Perindopril', 'Amlodipine'] -> ['APIXABAN']",
+      "nature_produit: None -> 'Médicament' (inferred)",
+      "therapeutic_group: None -> 'Anticoagulant, inhibiteur direct du facteur Xa' (inferred)",
+      "atc_code: None -> 'B01AF02' (inferred)",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for APIXABAN"
+    ]
+  },
+  {
+    "id": "apxia_5_mg",
+    "brand_name": "APXIA",
+    "generic_name": "Perindopril + Amlodipine",
+    "composition": [
+      "APIXABAN"
+    ],
+    "strength": "5 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "B01AF02",
+    "therapeutic_group": "Anticoagulant, inhibiteur direct du facteur Xa",
+    "drug_class": "Anticoagulant oral direct — Inhibiteur sélectif du facteur Xa",
+    "drugbank_id": null,
+    "mechanism": "Inhibition sélective, réversible et directe du facteur Xa libre et lié au caillot, bloquant la conversion de prothrombine en thrombine.",
+    "half_life": "12 h",
+    "indications": [
+      "FA non valvulaire — prévention AVC et embolie systémique",
+      "Traitement TVP/EP et prévention récidives",
+      "Prévention TEV post-chirurgie orthopédique majeure"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à haut risque hémorragique",
+      "Hépatopathie avec coagulopathie",
+      "Valve mécanique",
+      "Grossesse et allaitement"
+    ],
+    "interactions": [
+      {
+        "drug": "Inhibiteurs puissants CYP3A4/P-gp (kétoconazole, itraconazole, ritonavir)",
+        "severity": "majeure",
+        "effect": "Augmentation exposition — contre-indiqué"
+      },
+      {
+        "drug": "Inducteurs puissants CYP3A4/P-gp (rifampicine, phénytoïne, carbamazépine)",
+        "severity": "majeure",
+        "effect": "Réduction exposition — association déconseillée"
+      },
+      {
+        "drug": "Autres anticoagulants, antiagrégants, AINS",
+        "severity": "majeure",
+        "effect": "Majoration risque hémorragique"
+      }
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "Déconseillé — pas de données humaines suffisantes, risque hémorragique fœtal.",
+      "breastfeeding": "Déconseillé — passage dans le lait probable."
+    },
+    "children": {
+      "allowed": null,
+      "min_age": null,
+      "warning": null,
+      "dose_rule": null
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": null
+    },
+    "dosage": {
+      "adult": null,
+      "children": null
+    },
+    "adverse_effects": [
+      "Hémorragies (gastro-intestinales, cutanées, épistaxis)",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases"
+    ],
+    "market_data": [
+      {
+        "packaging": "Boite de 20",
+        "price_ppv_dhs": 151.9,
+        "price_ph_dhs": 94.9,
+        "laboratory": "PHARMIS",
+        "status": "Commercialisé",
+        "source_url": "https://medicament.ma/medicament/apxia-5-mg-comprime-pellicule/"
+      }
+    ],
+    "notice_url": null,
+    "smart_flags": [],
+    "data_sources": {
+      "medicament_ma": "https://medicament.ma/medicament/apxia-5-mg-comprime/",
+      "drugbank": null,
+      "drugs_com": "https://www.drugs.com/perindopril.html",
+      "knowledge_base": "Claude Medical KB v1.0 (enrichi manuellement)"
+    },
+    "last_updated": "2026-03-29",
+    "drug_interactions": [],
+    "tableau_maroc": "Non listé",
+    "nature_produit": "Médicament",
+    "princeps": null,
+    "verified_medicament_ma": "2026-04-19",
+    "needs_verification": "partial (drugs.com pending)",
+    "audit_notes": [
+      "[2026-04-19] medicament.ma verified at Acupan-level 6-field standard",
+      "[2026-04-19] nat inferred as Médicament (source page lacks Nature du Produit field)",
+      "[2026-04-19] tableau_maroc inferred as Non listé (source page lacks Tableau field)",
+      "[2026-04-19] clinical_pass: filled drug_class, mechanism, half_life, indications, contraindications, adverse_effects, interactions, pregnancy.category, pregnancy.warning, pregnancy.breastfeeding from pharmaceutical reference (ingredient='APIXABAN')"
+    ],
+    "verification_corrections": [
+      "composition: ['Perindopril', 'Amlodipine'] -> ['APIXABAN']",
+      "therapeutic_group: None -> 'Anticoagulant, inhibiteur direct du facteur Xa'",
+      "atc_code: None -> 'B01AF02'",
+      "tableau_maroc: 'A' -> 'Non listé' (inferred)",
+      "nature_produit: None -> 'Médicament' (inferred)",
+      "clinical_pass 2026-04-19: filled 10 field(s) from reference for APIXABAN"
+    ]
+  }
+]

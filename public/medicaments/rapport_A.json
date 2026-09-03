@@ -1,0 +1,4368 @@
+[
+  {
+    "index": 0,
+    "brand_name": "A.V.T.",
+    "generic_name": "Acide acetylsalicylique + Vitamine C + Vitamine B1",
+    "drugbank_id": "DB00945",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 1,
+    "brand_name": "ABIP",
+    "generic_name": "Aripiprazole",
+    "drugbank_id": "DB01238",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 2,
+    "brand_name": "ABIRANAT",
+    "generic_name": "Abiraterone",
+    "drugbank_id": "DB05812",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'L02BX03' diffère d'autres fiches partageant le même generic_name ('Abiraterone'), qui utilisent ['L02BX0']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "children.dose_rule",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 3,
+    "brand_name": "ABIRATERONE GT",
+    "generic_name": "Abiraterone",
+    "drugbank_id": "DB05812",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'L02BX0' diffère d'autres fiches partageant le même generic_name ('Abiraterone'), qui utilisent ['L02BX03']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "children.dose_rule",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 4,
+    "brand_name": "ABSTRAL",
+    "generic_name": "Fentanyl",
+    "drugbank_id": "DB00813",
+    "logic_errors": [],
+    "empty_fields": [
+      "children.dose_rule",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 5,
+    "brand_name": "ACDIGEST",
+    "generic_name": "Argile + Charbon végétal",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "interactions",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugs_com = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)",
+      "variants[].laboratory = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 6,
+    "brand_name": "ACERUMEN",
+    "generic_name": "Carbamide peroxyde",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "drug_interactions[0].interacting_drugs",
+      "drug_interactions[0].interacting_classes",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugs_com = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 7,
+    "brand_name": "ACETHIO",
+    "generic_name": "Acetylcysteine + Thiocolchicoside",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Paracetamol'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Acetylcysteine + Thiocolchicoside'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée)."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 8,
+    "brand_name": "ACFOL",
+    "generic_name": "Acide folique",
+    "drugbank_id": "DB00158",
+    "logic_errors": [],
+    "empty_fields": [
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 9,
+    "brand_name": "ACICLOVIR ARWA MEDIC",
+    "generic_name": "Aciclovir",
+    "drugbank_id": "DB00787",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 10,
+    "brand_name": "ACICLOVIR ISIO",
+    "generic_name": "Aciclovir",
+    "drugbank_id": "DB00787",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 11,
+    "brand_name": "ACICLOVIR VIATRIS",
+    "generic_name": "Aciclovir",
+    "drugbank_id": "DB00787",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 12,
+    "brand_name": "ACIDE ALENDRONIQUE GT",
+    "generic_name": "Acide alendronique",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'analgesique' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 13,
+    "brand_name": "ACIDE ZOLEDRONIQUE MYLAN",
+    "generic_name": "Acide zoledronique",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'analgesique' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 14,
+    "brand_name": "ACIDE ZOLEDRONIQUE PROMOPHARM",
+    "generic_name": "Acide zoledronique",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 15,
+    "brand_name": "ACIDE ZOLEDRONIQUE SP",
+    "generic_name": "Acide zoledronique",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 16,
+    "brand_name": "ACIGAM",
+    "generic_name": "Acide ursodésoxycholique",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'analgesique' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 17,
+    "brand_name": "ACLASTA",
+    "generic_name": "Acide zoledronique",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'analgesique' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 18,
+    "brand_name": "ACLAV",
+    "generic_name": "Amoxicilline + Acide clavulanique",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'J01CR02' diffère d'autres fiches partageant le même generic_name ('Amoxicilline + Acide clavulanique'), qui utilisent ['J01CA04', 'N06DX01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (11/11 variantes)",
+      "variants[].price_ph_dhs = null/vide (10/11 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 19,
+    "brand_name": "ACNO",
+    "generic_name": "Isotretinoine",
+    "drugbank_id": "DB00982",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/4 variantes)"
+    ]
+  },
+  {
+    "index": 20,
+    "brand_name": "ACOL",
+    "generic_name": "Paracétamol + Codéine",
+    "drugbank_id": "DB00316",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB00316' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (donepezil, metformine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Metformine'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Paracétamol + Codéine'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'A10BA02' diffère d'autres fiches partageant le même generic_name ('Paracétamol + Codéine'), qui utilisent ['N02BE01']. À vérifier (formes combinées exceptées)."
+      },
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antidiabet' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente.",
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 21,
+    "brand_name": "ACONCEPT",
+    "generic_name": "Lévonorgestrel (contraception d'urgence)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 22,
+    "brand_name": "ACT HIB",
+    "generic_name": "Vaccin Haemophilus influenzae type b",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "drug_interactions",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 23,
+    "brand_name": "ACTACEPT",
+    "generic_name": "Donépézil",
+    "drugbank_id": "DB00316",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB00316' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (metformine, paracetamol, paracetamol + codeine, paracetamol + ibuprofene). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Paracetamol'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Donépézil'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      }
+    ],
+    "empty_fields": [
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée)."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 24,
+    "brand_name": "ACTALEVURE",
+    "generic_name": "Saccharomyces boulardii",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 25,
+    "brand_name": "ACTEMRA",
+    "generic_name": "Tocilizumab",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 26,
+    "brand_name": "ACTICARBINE",
+    "generic_name": "Charbon activé",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'A07BA51' diffère d'autres fiches partageant le même generic_name ('Charbon activé'), qui utilisent ['A07BA01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "smart_flags",
+      "drug_interactions[0].interacting_drugs",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 27,
+    "brand_name": "ACTICARBON PLUS",
+    "generic_name": "Charbon activé",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'A07BA01' diffère d'autres fiches partageant le même generic_name ('Charbon activé'), qui utilisent ['A07BA51']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 28,
+    "brand_name": "ACTICARBON TRANSIT",
+    "generic_name": "Charbon activé",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'A07BA01' diffère d'autres fiches partageant le même generic_name ('Charbon activé'), qui utilisent ['A07BA51']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 29,
+    "brand_name": "ACTIDIGEST",
+    "generic_name": "Probiotiques + Prébiotiques (complément alimentaire)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugs_com = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)",
+      "variants[].laboratory = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 30,
+    "brand_name": "ACTIPETIT",
+    "generic_name": "Vitamines + Minéraux (complément)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 31,
+    "brand_name": "ACTITRANS",
+    "generic_name": "Sirop laxatif (agave, figue, pruneau, artichaut, tamarin, rhubarbe)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)",
+      "variants[].laboratory = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 32,
+    "brand_name": "ACTRAPID HM",
+    "generic_name": "Insuline humaine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 33,
+    "brand_name": "ACTYL B9",
+    "generic_name": "Acide folique",
+    "drugbank_id": "DB00158",
+    "logic_errors": [],
+    "empty_fields": [
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 34,
+    "brand_name": "ACTYL D",
+    "generic_name": "Cholecalciferol",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)",
+      "variants[].laboratory = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 35,
+    "brand_name": "ACUCARB",
+    "generic_name": "Acarbose",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'anticancereux' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 36,
+    "brand_name": "ACUPAN",
+    "generic_name": "Nefopam",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 37,
+    "brand_name": "ACUPAXIL",
+    "generic_name": "Paroxetine",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Paclitaxel'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Paroxetine'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'anticancereux' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 38,
+    "brand_name": "ADACEL-POLIO",
+    "generic_name": "Vaccin DTCaP",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 39,
+    "brand_name": "ADDITIVA MAGNESIUM",
+    "generic_name": "Magnesium",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 40,
+    "brand_name": "ADDITIVA MULTIVITAMINES",
+    "generic_name": "Multivitamines (complément)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)",
+      "variants[].laboratory = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 41,
+    "brand_name": "ADDITIVA VITAL",
+    "generic_name": "Vitamines + Minéraux (complément)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)",
+      "variants[].laboratory = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 42,
+    "brand_name": "ADENOL LP",
+    "generic_name": "Nifedipine",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Alfuzosine'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Nifedipine'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée)."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 43,
+    "brand_name": "ADEPAL",
+    "generic_name": "Levonorgestrel + Ethinylestradiol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'G03AB03' diffère d'autres fiches partageant le même generic_name ('Levonorgestrel + Ethinylestradiol'), qui utilisent ['G03AA07', 'N03AX16']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 44,
+    "brand_name": "ADFIL",
+    "generic_name": "Alfuzosine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].strength = null/vide (1/1 variantes)",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)",
+      "variants[].laboratory = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 45,
+    "brand_name": "ADMOXEL",
+    "generic_name": "Amoxicilline",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'L01CD02' diffère d'autres fiches partageant le même generic_name ('Amoxicilline'), qui utilisent ['C08CA01', 'J01CA04']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 46,
+    "brand_name": "ADO",
+    "generic_name": "Metformine",
+    "drugbank_id": "DB00316",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB00316' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (donepezil, paracetamol, paracetamol + codeine, paracetamol + ibuprofene). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Paracetamol'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Metformine'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antidiabet' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 47,
+    "brand_name": "ADO",
+    "generic_name": "Paracétamol",
+    "drugbank_id": "DB00316",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB00316' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (donepezil, metformine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Metformine'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Paracétamol'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N02BE01' diffère d'autres fiches partageant le même generic_name ('Paracétamol'), qui utilisent ['M05BA04']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/4 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 48,
+    "brand_name": "ADRENALINE SOTHEMA",
+    "generic_name": "Adrénaline (épinéphrine)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 49,
+    "brand_name": "ADRONAT",
+    "generic_name": "Acide alendronique",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 50,
+    "brand_name": "ADVAQUENIL",
+    "generic_name": "Hydroxychloroquine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 51,
+    "brand_name": "AERIUS",
+    "generic_name": "Desloratadine",
+    "drugbank_id": "DB00334",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 52,
+    "brand_name": "AFINITOR",
+    "generic_name": "Everolimus",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 53,
+    "brand_name": "AFLAMIC",
+    "generic_name": "Acide niflumique",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Meloxicam'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Acide niflumique'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (6/6 variantes)",
+      "variants[].data_sources.drugbank = null/vide (6/6 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/6 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée)."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 54,
+    "brand_name": "AFLOX",
+    "generic_name": "Ofloxacine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 55,
+    "brand_name": "AFONGIS",
+    "generic_name": "Terbinafine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 56,
+    "brand_name": "AGIDERM",
+    "generic_name": "Miconazole + Hydrocortisone",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 57,
+    "brand_name": "AGIFENE",
+    "generic_name": "Ibuprofene",
+    "drugbank_id": "DB01050",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'M01AE01' diffère d'autres fiches partageant le même generic_name ('Ibuprofene'), qui utilisent ['M01AE02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 58,
+    "brand_name": "AGLIM",
+    "generic_name": "Glimepiride",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (6/6 variantes)",
+      "variants[].data_sources.drugbank = null/vide (6/6 variantes)"
+    ]
+  },
+  {
+    "index": 59,
+    "brand_name": "AGREL",
+    "generic_name": "Clopidogrel",
+    "drugbank_id": "DB00758",
+    "logic_errors": [],
+    "empty_fields": [
+      "children.dose_rule",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 60,
+    "brand_name": "AGYRAX",
+    "generic_name": "Meclozine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 61,
+    "brand_name": "AIRCORT",
+    "generic_name": "Budesonide",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 62,
+    "brand_name": "AIRFASTEC",
+    "generic_name": "Salbutamol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'R03DC03' diffère d'autres fiches partageant le même generic_name ('Salbutamol'), qui utilisent ['R03AC02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 63,
+    "brand_name": "AIRLIX",
+    "generic_name": "Cetirizine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 64,
+    "brand_name": "ALBUTEIN",
+    "generic_name": "Albumine humaine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 65,
+    "brand_name": "ALDACTAZINE",
+    "generic_name": "Spironolactone + Altizide",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 66,
+    "brand_name": "ALDACTONE",
+    "generic_name": "Spironolactone",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 67,
+    "brand_name": "ALDOMET",
+    "generic_name": "Methyldopa",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 68,
+    "brand_name": "ALDOPA",
+    "generic_name": "Methyldopa",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 69,
+    "brand_name": "ALECENSA",
+    "generic_name": "Alectinib",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 70,
+    "brand_name": "ALEPSIA",
+    "generic_name": "Valproate de sodium",
+    "drugbank_id": "DB00313",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 71,
+    "brand_name": "ALER-Z",
+    "generic_name": "Cetirizine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 72,
+    "brand_name": "ALFAMOX",
+    "generic_name": "Amoxicilline",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'J01CA04' diffère d'autres fiches partageant le même generic_name ('Amoxicilline'), qui utilisent ['C08CA01', 'L01CD02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (10/10 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 73,
+    "brand_name": "ALFAPROXINE",
+    "generic_name": "Proxyphylline",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (5/5 variantes)",
+      "variants[].data_sources.drugbank = null/vide (5/5 variantes)"
+    ]
+  },
+  {
+    "index": 74,
+    "brand_name": "ALFATIL",
+    "generic_name": "Cefaclor",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 75,
+    "brand_name": "ALGANTIL",
+    "generic_name": "Phloroglucinol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Ibuprofène'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Phloroglucinol'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'M01AE01' diffère d'autres fiches partageant le même generic_name ('Phloroglucinol'), qui utilisent ['A03AA04']. À vérifier (formes combinées exceptées)."
+      },
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'analgesique' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (8/8 variantes)",
+      "variants[].data_sources.drugbank = null/vide (8/8 variantes)",
+      "variants[].price_ph_dhs = null/vide (8/8 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente.",
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 76,
+    "brand_name": "ALGIK",
+    "generic_name": "Paracetamol + Ibuprofene",
+    "drugbank_id": "DB00316",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB00316' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (donepezil, metformine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 77,
+    "brand_name": "ALGIXENE",
+    "generic_name": "Ibuprofene",
+    "drugbank_id": "DB01050",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'M01AE02' diffère d'autres fiches partageant le même generic_name ('Ibuprofene'), qui utilisent ['M01AE01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 78,
+    "brand_name": "ALIMTA",
+    "generic_name": "Pemetrexed",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 79,
+    "brand_name": "ALIVIAR",
+    "generic_name": "Sulpiride",
+    "drugbank_id": "DB00391",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 80,
+    "brand_name": "ALKAPEZIL",
+    "generic_name": "Donepezil",
+    "drugbank_id": "DB00843",
+    "logic_errors": [],
+    "empty_fields": [
+      "children.dose_rule",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 81,
+    "brand_name": "ALKERAN",
+    "generic_name": "Melphalan",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 82,
+    "brand_name": "ALLEGRA",
+    "generic_name": "Fexofenadine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 83,
+    "brand_name": "ALLERGINE",
+    "generic_name": "Dexchlorpheniramine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 84,
+    "brand_name": "ALMANTIN",
+    "generic_name": "Amoxicilline + Acide clavulanique",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N06DX01' diffère d'autres fiches partageant le même generic_name ('Amoxicilline + Acide clavulanique'), qui utilisent ['J01CA04', 'J01CR02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 85,
+    "brand_name": "ALMIDE",
+    "generic_name": "Almitrine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 86,
+    "brand_name": "ALORA",
+    "generic_name": "Estradiol (dispositif transdermique)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 87,
+    "brand_name": "ALOXIA",
+    "generic_name": "Palonsétron (Palonosetron)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 88,
+    "brand_name": "ALPERIDE",
+    "generic_name": "Risperidone",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 89,
+    "brand_name": "ALPHAGAN",
+    "generic_name": "Brimonidine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 90,
+    "brand_name": "ALTEC",
+    "generic_name": "Ramipril + Amlodipine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 91,
+    "brand_name": "ALTIAZEM",
+    "generic_name": "Diltiazem",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 92,
+    "brand_name": "ALYSE",
+    "generic_name": "Levonorgestrel + Ethinylestradiol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N03AX16' diffère d'autres fiches partageant le même generic_name ('Levonorgestrel + Ethinylestradiol'), qui utilisent ['G03AA07', 'G03AB03']. À vérifier (formes combinées exceptées)."
+      },
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antiepileptique' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente.",
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 93,
+    "brand_name": "ALZIM LP",
+    "generic_name": "Zolpidem",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antiepileptique' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 94,
+    "brand_name": "ALZOLE",
+    "generic_name": "Albendazole",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Oméprazole'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Albendazole'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'A02BC01' diffère d'autres fiches partageant le même generic_name ('Albendazole'), qui utilisent ['P02CA03']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 95,
+    "brand_name": "AM-10",
+    "generic_name": "Amlodipine",
+    "drugbank_id": "DB00381",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 96,
+    "brand_name": "AM-5",
+    "generic_name": "Amlodipine",
+    "drugbank_id": "DB00381",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 97,
+    "brand_name": "AMAREL",
+    "generic_name": "Glimepiride",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 98,
+    "brand_name": "AMBISOME",
+    "generic_name": "Amphotericine B liposomale",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 99,
+    "brand_name": "AMCARD",
+    "generic_name": "Amlodipine",
+    "drugbank_id": "DB00381",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (6/6 variantes)"
+    ]
+  },
+  {
+    "index": 100,
+    "brand_name": "AMEP",
+    "generic_name": "Amlodipine",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amoxicilline, amoxicilline + acide clavulanique). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antihypertenseur' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 101,
+    "brand_name": "AMEP",
+    "generic_name": "Amoxicilline",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Amlodipine'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Amoxicilline'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'J01CA04' diffère d'autres fiches partageant le même generic_name ('Amoxicilline'), qui utilisent ['C08CA01', 'L01CD02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 102,
+    "brand_name": "AMIAN",
+    "generic_name": "Amiodarone",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antipsychotique' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 103,
+    "brand_name": "AMIFLOX",
+    "generic_name": "Ofloxacine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 104,
+    "brand_name": "AMIKACINE MYLAN",
+    "generic_name": "Amikacine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 105,
+    "brand_name": "AMIPRIM",
+    "generic_name": "Co-trimoxazole (Triméthoprime + Sulfaméthoxazole)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 106,
+    "brand_name": "AMLODIPINE GT",
+    "generic_name": "Amlodipine",
+    "drugbank_id": "DB00381",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 107,
+    "brand_name": "AMLODIPINE MAPHAR",
+    "generic_name": "Amlodipine",
+    "drugbank_id": "DB00381",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 108,
+    "brand_name": "AMLOR",
+    "generic_name": "Amlodipine",
+    "drugbank_id": "DB00381",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 109,
+    "brand_name": "AMLOR PLUS",
+    "generic_name": "Amlodipine + Atorvastatine",
+    "drugbank_id": "DB00381",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'C10BX03' diffère d'autres fiches partageant le même generic_name ('Amlodipine + Atorvastatine'), qui utilisent ['C08CA01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 110,
+    "brand_name": "AMOVAS",
+    "generic_name": "Amoxicilline",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Amlodipine'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Amoxicilline'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'C08CA01' diffère d'autres fiches partageant le même generic_name ('Amoxicilline'), qui utilisent ['J01CA04', 'L01CD02']. À vérifier (formes combinées exceptées)."
+      },
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antihypertenseur' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (5/5 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente.",
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 111,
+    "brand_name": "AMOXICILLINE LLORENTE",
+    "generic_name": "Amoxicilline",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'J01CA04' diffère d'autres fiches partageant le même generic_name ('Amoxicilline'), qui utilisent ['C08CA01', 'L01CD02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 112,
+    "brand_name": "AMOXICILLINE SP",
+    "generic_name": "Amoxicilline",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'J01CA04' diffère d'autres fiches partageant le même generic_name ('Amoxicilline'), qui utilisent ['C08CA01', 'L01CD02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 113,
+    "brand_name": "AMOXIL",
+    "generic_name": "Amoxicilline",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'J01CA04' diffère d'autres fiches partageant le même generic_name ('Amoxicilline'), qui utilisent ['C08CA01', 'L01CD02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (6/6 variantes)",
+      "variants[].price_ph_dhs = null/vide (6/6 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 114,
+    "brand_name": "ANAPRED",
+    "generic_name": "Prednisolone",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 115,
+    "brand_name": "ANASTROZOLE GT",
+    "generic_name": "Anastrozole",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 116,
+    "brand_name": "ANASTROZOLE PHARMED",
+    "generic_name": "Anastrozole",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 117,
+    "brand_name": "ANASTROZOLE ZENITH",
+    "generic_name": "Anastrozole",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 118,
+    "brand_name": "ANCINE",
+    "generic_name": "Cinnarizine",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antihypertenseur' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 119,
+    "brand_name": "ANCINE PLUS",
+    "generic_name": "Cinnarizine + Dimenhydrinate",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Hydrochlorothiazide'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Cinnarizine + Dimenhydrinate'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée)."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 120,
+    "brand_name": "ANDOL",
+    "generic_name": "Acide acetylsalicylique",
+    "drugbank_id": "DB00945",
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Paracétamol'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Acide acetylsalicylique'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N02BE01' diffère d'autres fiches partageant le même generic_name ('Acide acetylsalicylique'), qui utilisent ['N02BA01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (4/4 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 121,
+    "brand_name": "ANDOL C",
+    "generic_name": "Acide acetylsalicylique + Vitamine C",
+    "drugbank_id": "DB00945",
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Paracétamol'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Acide acetylsalicylique + Vitamine C'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée)."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 122,
+    "brand_name": "ANDROCUR",
+    "generic_name": "Cyproterone",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 123,
+    "brand_name": "ANGINIB",
+    "generic_name": "Isosorbide dinitrate",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 124,
+    "brand_name": "ANGLOR",
+    "generic_name": "Atenolol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Amlodipine'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Atenolol'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'C08CA01' diffère d'autres fiches partageant le même generic_name ('Atenolol'), qui utilisent ['C07AB03']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée).",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 125,
+    "brand_name": "ANOR",
+    "generic_name": "Paracétamol",
+    "drugbank_id": "DB00316",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB00316' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (donepezil, metformine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'M05BA04' diffère d'autres fiches partageant le même generic_name ('Paracétamol'), qui utilisent ['N02BE01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 126,
+    "brand_name": "ANORO ELLIPTA",
+    "generic_name": "Umeclidinium + Vilanterol",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 127,
+    "brand_name": "ANTAGON H2",
+    "generic_name": "Famotidine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 128,
+    "brand_name": "ANTI-SPA",
+    "generic_name": "Phloroglucinol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'A03AA04' diffère d'autres fiches partageant le même generic_name ('Phloroglucinol'), qui utilisent ['M01AE01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 129,
+    "brand_name": "ANTINOREX",
+    "generic_name": "Metoclopramide",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "composition",
+          "generic_name"
+        ],
+        "description": "composition contient ['Cyproheptadine'], qui correspond exactement au generic_name d'une AUTRE fiche du fichier, sans rapport avec 'Metoclopramide'. Résidu probable d'une contamination croisée (copié depuis une autre fiche)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Retirer de composition le(s) principe(s) actif(s) appartenant à une autre fiche du fichier (résidu de contamination croisée)."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 130,
+    "brand_name": "ANZATAX",
+    "generic_name": "Paclitaxel",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 131,
+    "brand_name": "APADEX LP",
+    "generic_name": "Tramadol",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 132,
+    "brand_name": "APARKOF",
+    "generic_name": "Levodopa + Carbidopa",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 133,
+    "brand_name": "APAZIDE",
+    "generic_name": "Hydrochlorothiazide",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 134,
+    "brand_name": "APCALIS",
+    "generic_name": "Tadalafil",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 135,
+    "brand_name": "APETINE",
+    "generic_name": "Cyproheptadine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 136,
+    "brand_name": "APLEVAX",
+    "generic_name": "Vaccin contre l'hépatite A (inactivé)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 137,
+    "brand_name": "APROVASC",
+    "generic_name": "Irbesartan + Amlodipine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 138,
+    "brand_name": "APROVEL",
+    "generic_name": "Irbesartan",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 139,
+    "brand_name": "APXIA",
+    "generic_name": "Perindopril + Amlodipine",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antihypertenseur' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (5/5 variantes)",
+      "variants[].data_sources.drugbank = null/vide (5/5 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 140,
+    "brand_name": "AQUINEX",
+    "generic_name": "Moxifloxacine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 141,
+    "brand_name": "ARACTINE",
+    "generic_name": "Cyproheptadine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 142,
+    "brand_name": "ARACYTINE",
+    "generic_name": "Cytarabine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 143,
+    "brand_name": "ARADOS",
+    "generic_name": "Acide alendronique",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 144,
+    "brand_name": "ARAPRO",
+    "generic_name": "Irbésartan",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antihypertenseur' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "children.dose_rule",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (4/4 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 145,
+    "brand_name": "ARATENS",
+    "generic_name": "Irbesartan",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 146,
+    "brand_name": "ARAVA",
+    "generic_name": "Leflunomide",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 147,
+    "brand_name": "ARCOXIA",
+    "generic_name": "Etoricoxib",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 148,
+    "brand_name": "ARES",
+    "generic_name": "Amlodipine + Atorvastatine",
+    "drugbank_id": "DB00381",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'C08CA01' diffère d'autres fiches partageant le même generic_name ('Amlodipine + Atorvastatine'), qui utilisent ['C10BX03']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 149,
+    "brand_name": "ARGENT",
+    "generic_name": "Argent colloïdal 5%",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 150,
+    "brand_name": "ARGININE",
+    "generic_name": "Arginine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 151,
+    "brand_name": "ARICEPT",
+    "generic_name": "Donepezil",
+    "drugbank_id": "DB00843",
+    "logic_errors": [],
+    "empty_fields": [
+      "children.dose_rule",
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 152,
+    "brand_name": "ARIMIDEX",
+    "generic_name": "Anastrozole",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 153,
+    "brand_name": "ARIPIPHI",
+    "generic_name": "Aripiprazole",
+    "drugbank_id": "DB01238",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 154,
+    "brand_name": "ARITROZOLE",
+    "generic_name": "Anastrozole",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "therapeutic_group",
+      "drug_class",
+      "drugbank_id",
+      "mechanism",
+      "half_life",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 155,
+    "brand_name": "ARIXIB",
+    "generic_name": "Etoricoxib",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 156,
+    "brand_name": "AROMASINE",
+    "generic_name": "Exemestane",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 157,
+    "brand_name": "ARTANE",
+    "generic_name": "Trihexyphenidyle",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 158,
+    "brand_name": "ARTEMON",
+    "generic_name": "Artéméther + Luméfantrine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].data_sources.drugbank = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 159,
+    "brand_name": "ARTINIBSA",
+    "generic_name": "Articaïne chlorhydrate + Adrénaline (anesthésique local)",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 160,
+    "brand_name": "ARTROFOR",
+    "generic_name": "Glucosamine + Chondroitine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "children.dose_rule",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 161,
+    "brand_name": "ARTYX",
+    "generic_name": "Méloxicam",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 162,
+    "brand_name": "ASCABIOL",
+    "generic_name": "Benzoate de benzyle",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 163,
+    "brand_name": "ASCAL",
+    "generic_name": "Acide acetylsalicylique",
+    "drugbank_id": "DB00945",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N02BA01' diffère d'autres fiches partageant le même generic_name ('Acide acetylsalicylique'), qui utilisent ['N02BE01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 164,
+    "brand_name": "ASIMPLEX",
+    "generic_name": "Paracétamol + Codéine",
+    "drugbank_id": "DB00316",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB00316' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (donepezil, metformine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N02BE01' diffère d'autres fiches partageant le même generic_name ('Paracétamol + Codéine'), qui utilisent ['A10BA02']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 165,
+    "brand_name": "ASKARDIL",
+    "generic_name": "Acide acetylsalicylique",
+    "drugbank_id": "DB00945",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N02BA01' diffère d'autres fiches partageant le même generic_name ('Acide acetylsalicylique'), qui utilisent ['N02BE01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 166,
+    "brand_name": "ASPEGIC",
+    "generic_name": "Acide acetylsalicylique",
+    "drugbank_id": "DB00945",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N02BA01' diffère d'autres fiches partageant le même generic_name ('Acide acetylsalicylique'), qui utilisent ['N02BE01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (4/4 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 167,
+    "brand_name": "ASPIRINE",
+    "generic_name": "Acide acetylsalicylique",
+    "drugbank_id": "DB00945",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N02BA01' diffère d'autres fiches partageant le même generic_name ('Acide acetylsalicylique'), qui utilisent ['N02BE01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 168,
+    "brand_name": "ASPRO",
+    "generic_name": "Acide acetylsalicylique",
+    "drugbank_id": "DB00945",
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'N02BA01' diffère d'autres fiches partageant le même generic_name ('Acide acetylsalicylique'), qui utilisent ['N02BE01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 169,
+    "brand_name": "ASTAPH",
+    "generic_name": "Flucloxacilline",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (5/5 variantes)",
+      "variants[].data_sources.drugbank = null/vide (5/5 variantes)",
+      "variants[].price_ph_dhs = null/vide (5/5 variantes)"
+    ]
+  },
+  {
+    "index": 170,
+    "brand_name": "ASTHALIN",
+    "generic_name": "Salbutamol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'R03AC02' diffère d'autres fiches partageant le même generic_name ('Salbutamol'), qui utilisent ['R03DC03']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "drug_interactions",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 171,
+    "brand_name": "ASUMATE",
+    "generic_name": "Levonorgestrel + Ethinylestradiol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'G03AA07' diffère d'autres fiches partageant le même generic_name ('Levonorgestrel + Ethinylestradiol'), qui utilisent ['G03AB03', 'N03AX16']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 172,
+    "brand_name": "ATACAND",
+    "generic_name": "Candesartan",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].data_sources.drugbank = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 173,
+    "brand_name": "ATARAX",
+    "generic_name": "Hydroxyzine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 174,
+    "brand_name": "ATENOR",
+    "generic_name": "Atenolol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'C07AB03' diffère d'autres fiches partageant le même generic_name ('Atenolol'), qui utilisent ['C08CA01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 175,
+    "brand_name": "ATHYMIL",
+    "generic_name": "Miansérine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 176,
+    "brand_name": "ATIAF",
+    "generic_name": "Acide tiaprofénique",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "nature_produit",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 177,
+    "brand_name": "ATIKEN",
+    "generic_name": "Valsartan",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 178,
+    "brand_name": "ATOPIX",
+    "generic_name": "Cetirizine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 179,
+    "brand_name": "ATROVENT",
+    "generic_name": "Ipratropium",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 180,
+    "brand_name": "AUBAGIO",
+    "generic_name": "Teriflunomide",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 181,
+    "brand_name": "AUGMENTIN",
+    "generic_name": "Amoxicilline + Acide clavulanique",
+    "drugbank_id": "DB01060",
+    "logic_errors": [
+      {
+        "fields": [
+          "drugbank_id",
+          "generic_name"
+        ],
+        "description": "drugbank_id 'DB01060' est partagé avec au moins une autre fiche dont le generic_name est totalement différent, sans principe actif commun (amlodipine). Signale une contamination croisée entre médicaments distincts (pas un simple produit combiné)."
+      },
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'J01CA04' diffère d'autres fiches partageant le même generic_name ('Amoxicilline + Acide clavulanique'), qui utilisent ['J01CR02', 'N06DX01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Corriger drugbank_id vers l'identifiant DrugBank réel de generic_name (ou corriger generic_name si drugbank_id est fiable) — ne devrait jamais être partagé avec un médicament sans principe actif commun.",
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 182,
+    "brand_name": "AULCER",
+    "generic_name": "Oméprazole",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 183,
+    "brand_name": "AUREOMYCINE",
+    "generic_name": "Chlortetracycline",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "nature_produit",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 184,
+    "brand_name": "AURICULARUM",
+    "generic_name": "Phenazone + Lidocaine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "drug_interactions[0].interacting_drugs",
+      "drug_interactions[0].interacting_classes",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 185,
+    "brand_name": "AURIDOL",
+    "generic_name": "Phenazone + Benzocaine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "drug_interactions[0].interacting_drugs",
+      "drug_interactions[0].interacting_classes",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 186,
+    "brand_name": "AVACOR",
+    "generic_name": "Atorvastatine",
+    "drugbank_id": "DB01076",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 187,
+    "brand_name": "AVAMYS",
+    "generic_name": "Fluticasone furoate",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 188,
+    "brand_name": "AVAQUIN",
+    "generic_name": "Levofloxacine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 189,
+    "brand_name": "AVAXIM",
+    "generic_name": "Vaccin hepatite A",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "smart_flags",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].data_sources.drugbank = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 190,
+    "brand_name": "AVAZAR",
+    "generic_name": "Bevacizumab",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "renal_adjustment.rule",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 191,
+    "brand_name": "AVELOX",
+    "generic_name": "Moxifloxacine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 192,
+    "brand_name": "AVEPRO",
+    "generic_name": "Rabeprazole",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 193,
+    "brand_name": "AVER",
+    "generic_name": "Ivermectine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 194,
+    "brand_name": "AVLOCAN",
+    "generic_name": "Propranolol",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "therapeutic_group",
+          "drug_class",
+          "indications",
+          "mechanism"
+        ],
+        "description": "therapeutic_group/drug_class suggèrent la catégorie 'antihypertenseur' mais aucun mot-clé attendu pour cette catégorie n'apparaît dans indications/mechanism. Possible incohérence de catégorie ou de contenu clinique."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "interactions",
+      "adverse_effects",
+      "smart_flags",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Vérifier therapeutic_group/drug_class vs indications/mechanism: l'un des deux groupes de champs appartient probablement à un autre médicament et doit être remplacé par le contenu cohérent avec generic_name."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 195,
+    "brand_name": "AVLOCARDYL",
+    "generic_name": "Propranolol",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "mechanism",
+      "half_life",
+      "interactions",
+      "adverse_effects",
+      "smart_flags",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 196,
+    "brand_name": "AVODART",
+    "generic_name": "Dutasteride",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 197,
+    "brand_name": "AVONEX",
+    "generic_name": "Interferon beta-1a",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 198,
+    "brand_name": "AXAIR",
+    "generic_name": "Salmeterol + Fluticasone",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "interactions",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 199,
+    "brand_name": "AXIFY",
+    "generic_name": "Axitinib",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "interactions",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 200,
+    "brand_name": "AXIMYCINE",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (4/4 variantes)",
+      "variants[].price_ph_dhs = null/vide (4/4 variantes)"
+    ]
+  },
+  {
+    "index": 201,
+    "brand_name": "AXONYL",
+    "generic_name": "Quétiapine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (5/5 variantes)",
+      "variants[].price_ph_dhs = null/vide (5/5 variantes)"
+    ]
+  },
+  {
+    "index": 202,
+    "brand_name": "AZ",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 203,
+    "brand_name": "AZACITEA",
+    "generic_name": "Azacitidine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 204,
+    "brand_name": "AZELASTIN-COMOD",
+    "generic_name": "Azelastine",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 205,
+    "brand_name": "AZIBAC",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 206,
+    "brand_name": "AZILIDE",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 207,
+    "brand_name": "AZIMAX",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 208,
+    "brand_name": "AZIMYCINE",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 209,
+    "brand_name": "AZITHRIX",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ]
+  },
+  {
+    "index": 210,
+    "brand_name": "AZIX",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (3/3 variantes)",
+      "variants[].price_ph_dhs = null/vide (3/3 variantes)"
+    ]
+  },
+  {
+    "index": 211,
+    "brand_name": "AZOLE",
+    "generic_name": "Albendazole",
+    "drugbank_id": null,
+    "logic_errors": [
+      {
+        "fields": [
+          "atc_code",
+          "generic_name"
+        ],
+        "description": "atc_code 'P02CA03' diffère d'autres fiches partageant le même generic_name ('Albendazole'), qui utilisent ['A02BC01']. À vérifier (formes combinées exceptées)."
+      }
+    ],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "interactions",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (2/2 variantes)",
+      "variants[].price_ph_dhs = null/vide (2/2 variantes)"
+    ],
+    "suggested_fix": {
+      "actions": [
+        "Aligner atc_code sur le code ATC officiel de ce principe actif (cohérent avec les autres fiches partageant le même generic_name), sauf s'il s'agit d'une forme/voie réellement différente."
+      ],
+      "note": "Détection heuristique automatique — vérification manuelle recommandée avant correction en base."
+    }
+  },
+  {
+    "index": 212,
+    "brand_name": "AZOPT",
+    "generic_name": "Brinzolamide",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "half_life",
+      "indications",
+      "contraindications",
+      "interactions",
+      "dosage.adult",
+      "dosage.children",
+      "adverse_effects",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 213,
+    "brand_name": "AZYTER",
+    "generic_name": "Azithromycine",
+    "drugbank_id": "DB00207",
+    "logic_errors": [],
+    "empty_fields": [
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  },
+  {
+    "index": 214,
+    "brand_name": "BACQURE",
+    "generic_name": "Cefuroxime + Ornidazole",
+    "drugbank_id": null,
+    "logic_errors": [],
+    "empty_fields": [
+      "drugbank_id",
+      "drug_interactions",
+      "nature_produit",
+      "variants[].notice_url = null/vide (1/1 variantes)",
+      "variants[].data_sources.drugbank = null/vide (1/1 variantes)",
+      "variants[].price_ph_dhs = null/vide (1/1 variantes)"
+    ]
+  }
+]

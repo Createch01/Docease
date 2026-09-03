@@ -1,0 +1,6994 @@
+[
+  {
+    "id": "xailin_ha_collyre",
+    "brand_name": "XAILIN HA",
+    "generic_name": "Hyaluronate de sodium (collyre)",
+    "strength": "",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01XA18",
+    "therapeutic_group": "Larmes artificielles",
+    "drug_class": "Lubrifiant ophtalmique",
+    "indications": [
+      "Sécheresse oculaire"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Espacer avec autres collyres"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": null,
+        "price_ph": 65.8,
+        "packaging": "Flacon de 10 ml",
+        "laboratory": "NON RENSEIGNÉ",
+        "price_ppv_dhs": 65.8
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Vision trouble transitoire"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Autres collyres"
+        ],
+        "interacting_classes": [
+          "Ophtalmiques"
+        ],
+        "severity": "INFO",
+        "effect": "Espacer instillations de 5 min",
+        "recommendation": "Pas d'interaction systémique"
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "LUBRIFIANT_OCULAIRE",
+      "USAGE_LOCAL",
+      "GROSSESSE_COMPATIBLE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xailin-ha-collyre",
+    "composition": [
+      {
+        "name": "Hyaluronate de sodium 1,5 mg/mL (0,15%) collyre unidoses",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xailin_ha_hyaluronate_de_sodium_collyre",
+    "mechanism": "Substitut lacrymal.",
+    "half_life": "action locale"
+  },
+  {
+    "id": "xailin_pommade_ophtalmique",
+    "brand_name": "XAILIN",
+    "generic_name": "Vitamine A (pommade ophtalmique)",
+    "strength": "",
+    "form": "Pommade ophtalmique",
+    "route": "Ophtalmique",
+    "atc_code": "S01XA02",
+    "therapeutic_group": "Préparations ophtalmiques",
+    "drug_class": "Rétinol palmitate",
+    "indications": [
+      "Sécheresse oculaire sévère, kératite"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Aucune interaction systémique significative"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 69,
+        "price_ph": null,
+        "packaging": "Tube de 5 g",
+        "laboratory": "NON RENSEIGNÉ",
+        "price_ppv_dhs": 69
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Vision trouble transitoire"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Tétracyclines orales",
+          "Doxycycline"
+        ],
+        "interacting_classes": [
+          "Antibiotiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypervitaminose A additive (rétinoïde + tétracycline → HTIC)",
+        "recommendation": "Éviter association — risque HTIC"
+      },
+      {
+        "interacting_drugs": [
+          "Autres préparations vitamine A"
+        ],
+        "interacting_classes": [
+          "Vitamines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypervitaminose A cumulative",
+        "recommendation": "Usage localisé — pas de risque aux doses topiques normales"
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "VITAMINE_A_OCULAIRE",
+      "USAGE_LOCAL",
+      "GROSSESSE_COMPATIBLE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xailin-pommade-ophtalmique",
+    "composition": [
+      {
+        "name": "Rétinol palmitate 250 UI/g pommade ophtalmique (paraffine + vaseline)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xailin_vitamine_a_pommade_ophtalmique",
+    "mechanism": "Vitamine A topique : soutien trophique de la surface oculaire.",
+    "half_life": "action locale"
+  },
+  {
+    "id": "xalacom_collyre",
+    "brand_name": "XALACOM",
+    "generic_name": "Latanoprost + Timolol (collyre)",
+    "strength": "",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01ED51",
+    "therapeutic_group": "Antiglaucomateux",
+    "drug_class": "PGF2α + bêta-bloquant",
+    "indications": [
+      "Glaucome à angle ouvert"
+    ],
+    "contraindications": [
+      "Asthme, bloc AV (composant bêta-bloquant)"
+    ],
+    "interactions": [
+      "Bêta-bloquants systémiques"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 83.7,
+        "price_ph": null,
+        "packaging": "Flacon de 2.5 ml (50 µg / 5 mg)",
+        "laboratory": "VIATRIS PHARMACEUTICALS",
+        "price_ppv_dhs": 83.7
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hyperhémie conjonctivale",
+      "Bradycardie (absorption systémique)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Bêtabloquants systémiques",
+          "Propranolol"
+        ],
+        "interacting_classes": [
+          "Bêtabloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie additive (timolol absorbé)",
+        "recommendation": "Surveiller ECG — CI bêtabloquants systémiques"
+      },
+      {
+        "interacting_drugs": [
+          "Amiodarone",
+          "Vérapamil",
+          "Diltiazem"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques/ICa"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie + BAV cumulatifs",
+        "recommendation": "Surveiller ECG"
+      },
+      {
+        "interacting_drugs": [
+          "Autres analogues PGF2α",
+          "Bimatoprost"
+        ],
+        "interacting_classes": [
+          "Prostaglandines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Absence de bénéfice additif — interactions locales",
+        "recommendation": "Éviter double analogue"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xalacom-collyre",
+    "composition": [
+      {
+        "name": "Latanoprost 50 µg/mL",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Maléate de timolol 5 mg/mL collyre",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xalacom_latanoprost_timolol_collyre",
+    "mechanism": "Analogue des prostaglandines + bêta-bloquant : double réduction de la pression intraoculaire.",
+    "half_life": "action locale"
+  },
+  {
+    "id": "xalatan_50_g_collyre",
+    "brand_name": "XALATAN",
+    "generic_name": "Latanoprost (collyre)",
+    "strength": "50 µg",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01EE01",
+    "therapeutic_group": "Antiglaucomateux",
+    "drug_class": "Analogue PGF2α",
+    "indications": [
+      "Glaucome à angle ouvert"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Espacer avec autres collyres"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 91.8,
+        "price_ph": null,
+        "packaging": "Flacon 2.5 ml",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 91.8
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hyperpigmentation de l'iris (usage prolongé)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Autres analogues PGF2α",
+          "Bimatoprost",
+          "Travoprost"
+        ],
+        "interacting_classes": [
+          "Prostaglandines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Pas de bénéfice additif — interactions locales",
+        "recommendation": "Éviter double analogue PGF2α"
+      },
+      {
+        "interacting_drugs": [
+          "Thimerosal (collyres)"
+        ],
+        "interacting_classes": [
+          "Conservateurs"
+        ],
+        "severity": "INFO",
+        "effect": "Précipitation si thimerosal",
+        "recommendation": "Espacer de 5 min les instillations"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xalatan-50-g-collyre",
+    "composition": [
+      {
+        "name": "Latanoprost 50 µg/mL (0,005%) collyre en solution",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xalatan_latanoprost_collyre_50_g",
+    "mechanism": "Analogue des prostaglandines F2-alpha : augmente l'écoulement uvéoscléral de l'humeur aqueuse.",
+    "half_life": "17 minutes"
+  },
+  {
+    "id": "xalkori_200_mg_g_lule",
+    "brand_name": "XALKORI",
+    "generic_name": "Crizotinib",
+    "strength": "200 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "L01ED01",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur ALK/ROS1/MET",
+    "indications": [
+      "Cancer du poumon non à petites cellules ALK+/ROS1+"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4",
+      "QT-longs"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 36100,
+        "price_ph": null,
+        "packaging": "Boîte de 60",
+        "laboratory": "PFIZER MAROC",
+        "price_ppv_dhs": 36100
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Troubles visuels",
+      "Troubles digestifs",
+      "Hépatotoxicité",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4",
+          "Kétoconazole",
+          "Clarithromycine",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ AUC crizotinib — toxicité",
+        "recommendation": "Éviter — réduire dose si nécessaire"
+      },
+      {
+        "interacting_drugs": [
+          "Inducteurs CYP3A4",
+          "Rifampicine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "↓↓ efficacité crizotinib",
+        "recommendation": "Éviter association"
+      },
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone",
+          "Sotalol"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc crizotinib + → torsades",
+        "recommendation": "Surveiller ECG — CI si QTc >500 ms"
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins"
+        ],
+        "severity": "DANGER",
+        "effect": "CI sous immunosuppression",
+        "recommendation": "Vacciner avant traitement"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xalkori-200-mg-gelule",
+    "composition": [
+      {
+        "name": "Crizotinib 200 mg / 250 mg gélule",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xalkori_crizotinib_200_mg",
+    "mechanism": "Inhibiteur de tyrosine kinase ciblant ALK, ROS1 et MET : blocage de la signalisation oncogénique (cancer du poumon ALK+).",
+    "half_life": "42 heures"
+  },
+  {
+    "id": "xalkori_250_mg_g_lule",
+    "brand_name": "XALKORI",
+    "generic_name": "Crizotinib",
+    "strength": "250 MG",
+    "form": "Gélule",
+    "route": "Orale",
+    "atc_code": "L01ED01",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Inhibiteur ALK/ROS1/MET",
+    "indications": [
+      "Cancer du poumon non à petites cellules ALK+/ROS1+"
+    ],
+    "contraindications": [
+      "Insuffisance hépatique sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4",
+      "QT-longs"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 36100,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "PFIZER MAROC",
+        "price_ppv_dhs": 36100
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Troubles visuels",
+      "Troubles digestifs",
+      "Hépatotoxicité",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4",
+          "Kétoconazole",
+          "Clarithromycine",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ AUC crizotinib — toxicité",
+        "recommendation": "Éviter — réduire dose si nécessaire"
+      },
+      {
+        "interacting_drugs": [
+          "Inducteurs CYP3A4",
+          "Rifampicine",
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "↓↓ efficacité crizotinib",
+        "recommendation": "Éviter association"
+      },
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone",
+          "Sotalol"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc crizotinib + → torsades",
+        "recommendation": "Surveiller ECG — CI si QTc >500 ms"
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins"
+        ],
+        "severity": "DANGER",
+        "effect": "CI sous immunosuppression",
+        "recommendation": "Vacciner avant traitement"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xalkori-250-mg-gelule",
+    "composition": [
+      {
+        "name": "Crizotinib 200 mg / 250 mg gélule",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xalkori_crizotinib_250_mg",
+    "mechanism": "Inhibiteur de tyrosine kinase ciblant ALK, ROS1 et MET : blocage de la signalisation oncogénique (cancer du poumon ALK+).",
+    "half_life": "42 heures"
+  },
+  {
+    "id": "xanax_0_5_mg_comprim_s_cable_p_tab_iv_cv",
+    "brand_name": "XANAX",
+    "generic_name": "Alprazolam",
+    "strength": "0.5 MG",
+    "form": "Comprimé sécable [P] [TAB IV-CV]",
+    "route": "Orale",
+    "atc_code": "N05BA12",
+    "therapeutic_group": "Anxiolytiques",
+    "drug_class": "Benzodiazépine (courte durée d'action, triazolobenzodiazépine)",
+    "indications": [
+      "Anxiété sévère",
+      "Trouble panique",
+      "Anxiété associée à la dépression"
+    ],
+    "contraindications": [
+      "Insuffisance respiratoire sévère",
+      "Myasthénie",
+      "SAS",
+      "Insuffisance hépatique sévère",
+      "Glaucome à angle fermé"
+    ],
+    "interactions": [
+      "Autres dépresseurs du SNC"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Déconseillé. Risque de syndrome de sevrage néonatal et d'hypotonie (floppy infant syndrome).",
+      "breastfeeding": "Passage dans le lait. Déconseillé (sédation nourrisson)."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: début 0.25 mg 2-3x/j."
+    },
+    "dosage": {
+      "adult": "Anxiété: 0.25-0.5 mg 3x/j. Max 4 mg/j. Panique: 0.5-1 mg 3x/j. Durée max: 8-12 sem (sevrage progressif). ARRÊT PROGRESSIF OBLIGATOIRE.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 37.6,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "PFIZER MAROC",
+        "price_ppv_dhs": 37.6
+      }
+    ],
+    "drugbank_id": "DB00404",
+    "adverse_effects": [
+      "Somnolence",
+      "Dépendance (RISQUE MAJEUR)",
+      "Syndrome de sevrage",
+      "Amnésie antérograde",
+      "Ataxie",
+      "Dépression respiratoire"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Boissons alcoolisées"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression SNC sévère + dépression respiratoire",
+        "recommendation": "INTERDIRE l'alcool."
+      },
+      {
+        "interacting_drugs": [
+          "Opioïdes",
+          "Morphine",
+          "Tramadol",
+          "Codéine",
+          "Fentanyl"
+        ],
+        "interacting_classes": [
+          "Opioïdes"
+        ],
+        "severity": "DANGER",
+        "effect": "Dépression respiratoire potentiellement fatale",
+        "recommendation": "Réduire doses des deux. Surveillance rapprochée."
+      },
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation majeure des taux d'alprazolam → sédation excessive",
+        "recommendation": "Réduire dose alprazolam de 50% ou éviter."
+      },
+      {
+        "interacting_drugs": [
+          "Fluoxétine",
+          "Fluvoxamine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4/2D6"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation taux alprazolam",
+        "recommendation": "Réduire dose si nécessaire."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xanax-0-5-mg-comprime-secable-p-tab-iv-cv",
+    "composition": [
+      {
+        "name": "Alprazolam 0,25 mg / 0,5 mg / 1 mg comprimé sécable",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xanax_alprazolam_0_5_mg",
+    "mechanism": "Benzodiazépine anxiolytique.",
+    "half_life": "12-15 heures"
+  },
+  {
+    "id": "xanthium_lp_200_mg_g_lule_lp",
+    "brand_name": "XANTHIUM LP",
+    "generic_name": "Théophylline",
+    "strength": "200 MG",
+    "form": "Gélule LP",
+    "route": "Orale",
+    "atc_code": "R03DA04",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "Base xanthique",
+    "indications": [
+      "Asthme, BPCO"
+    ],
+    "contraindications": [
+      "Troubles du rythme cardiaque non contrôlés"
+    ],
+    "interactions": [
+      "Nombreuses interactions"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 21.8,
+        "price_ph": 14.4,
+        "packaging": "Boîte de 30",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 21.8
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Nausées, tremblements"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoroquinolones",
+          "Ciprofloxacine"
+        ],
+        "interacting_classes": [
+          "Antibiotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ théophyllinémie → convulsions, arythmie",
+        "recommendation": "Surveiller taux — réduire dose théophylline"
+      },
+      {
+        "interacting_drugs": [
+          "Macrolides",
+          "Érythromycine",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Macrolides"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ théophyllinémie (inhibition CYP1A2)",
+        "recommendation": "Surveiller taux"
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Tabac"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP1A2"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓↓ théophyllinémie — sevrage tabac ↑ taux",
+        "recommendation": "Surveiller taux à chaque changement"
+      },
+      {
+        "interacting_drugs": [
+          "Cimétidine"
+        ],
+        "interacting_classes": [
+          "Anti-H2"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ théophyllinémie",
+        "recommendation": "Utiliser autre anti-H2"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xanthium-lp-200-mg-gelule-lp",
+    "composition": [
+      {
+        "name": "Théophylline anhydre 100 mg / 200 mg / 300 mg comprimé LP",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xanthium_lp_theophylline_200_mg",
+    "mechanism": "Méthylxanthine : inhibition des phosphodiestérases.",
+    "half_life": "8-9 heures (marge thérapeutique étroite)"
+  },
+  {
+    "id": "xanthium_lp_300_mg_g_lule_lp",
+    "brand_name": "XANTHIUM LP",
+    "generic_name": "Théophylline",
+    "strength": "300 MG",
+    "form": "Gélule LP",
+    "route": "Orale",
+    "atc_code": "R03DA04",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "Base xanthique",
+    "indications": [
+      "Asthme, BPCO"
+    ],
+    "contraindications": [
+      "Troubles du rythme cardiaque non contrôlés"
+    ],
+    "interactions": [
+      "Nombreuses interactions"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 51.5,
+        "price_ph": 34.03,
+        "packaging": "Boîte de 60",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 51.5
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Nausées, tremblements"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoroquinolones",
+          "Ciprofloxacine"
+        ],
+        "interacting_classes": [
+          "Antibiotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ théophyllinémie → convulsions, arythmie",
+        "recommendation": "Surveiller taux — réduire dose théophylline"
+      },
+      {
+        "interacting_drugs": [
+          "Macrolides",
+          "Érythromycine",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Macrolides"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ théophyllinémie (inhibition CYP1A2)",
+        "recommendation": "Surveiller taux"
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Tabac"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP1A2"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓↓ théophyllinémie — sevrage tabac ↑ taux",
+        "recommendation": "Surveiller taux à chaque changement"
+      },
+      {
+        "interacting_drugs": [
+          "Cimétidine"
+        ],
+        "interacting_classes": [
+          "Anti-H2"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ théophyllinémie",
+        "recommendation": "Utiliser autre anti-H2"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xanthium-lp-300-mg-gelule-lp",
+    "composition": [
+      {
+        "name": "Théophylline anhydre 100 mg / 200 mg / 300 mg comprimé LP",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xanthium_lp_theophylline_300_mg",
+    "mechanism": "Méthylxanthine : inhibition des phosphodiestérases.",
+    "half_life": "8-9 heures (marge thérapeutique étroite)"
+  },
+  {
+    "id": "xanthium_lp_400_mg_g_lule_lp",
+    "brand_name": "XANTHIUM LP",
+    "generic_name": "Théophylline",
+    "strength": "400 MG",
+    "form": "Gélule LP",
+    "route": "Orale",
+    "atc_code": "R03DA04",
+    "therapeutic_group": "Bronchodilatateurs",
+    "drug_class": "Base xanthique",
+    "indications": [
+      "Asthme, BPCO"
+    ],
+    "contraindications": [
+      "Troubles du rythme cardiaque non contrôlés"
+    ],
+    "interactions": [
+      "Nombreuses interactions"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 37.6,
+        "price_ph": 24.84,
+        "packaging": "Boîte de 30",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 37.6
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Nausées, tremblements"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Fluoroquinolones",
+          "Ciprofloxacine"
+        ],
+        "interacting_classes": [
+          "Antibiotiques"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ théophyllinémie → convulsions, arythmie",
+        "recommendation": "Surveiller taux — réduire dose théophylline"
+      },
+      {
+        "interacting_drugs": [
+          "Macrolides",
+          "Érythromycine",
+          "Clarithromycine"
+        ],
+        "interacting_classes": [
+          "Macrolides"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ théophyllinémie (inhibition CYP1A2)",
+        "recommendation": "Surveiller taux"
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Tabac"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP1A2"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓↓ théophyllinémie — sevrage tabac ↑ taux",
+        "recommendation": "Surveiller taux à chaque changement"
+      },
+      {
+        "interacting_drugs": [
+          "Cimétidine"
+        ],
+        "interacting_classes": [
+          "Anti-H2"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ théophyllinémie",
+        "recommendation": "Utiliser autre anti-H2"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xanthium-lp-400-mg-gelule-lp",
+    "composition": [
+      {
+        "name": "Théophylline anhydre 100 mg / 200 mg / 300 mg comprimé LP",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xanthium_lp_theophylline_400_mg",
+    "mechanism": "Méthylxanthine : inhibition des phosphodiestérases.",
+    "half_life": "8-9 heures (marge thérapeutique étroite)"
+  },
+  {
+    "id": "xarelto_10_mg_comprim_pellicul",
+    "brand_name": "XARELTO",
+    "generic_name": "Rivaroxaban",
+    "strength": "10 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct du facteur Xa",
+    "indications": [
+      "Prévention AVC dans FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique",
+      "Prévention événements athérothrombotiques post-SCA (2.5 mg)"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à risque hémorragique significatif",
+      "Insuffisance hépatique avec coagulopathie (Child-Pugh B/C avec coagulopathie)",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Risque hémorragique fœtal. Tératogène chez l'animal.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49: 15 mg/j (au lieu de 20 mg). ClCr <15: non recommandé. TVP/EP: ClCr 15-29: prudence. ClCr <15: non recommandé."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner (15 mg si ClCr 15-49). TVP/EP: 15 mg 2x/j x 21j puis 20 mg/j. Prévention ortho: 10 mg/j. Post-SCA: 2.5 mg 2x/j + aspirine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 140.5,
+        "price_ph": null,
+        "packaging": "Boîte de 10",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 140.5
+      }
+    ],
+    "drugbank_id": "DB06228",
+    "adverse_effects": [
+      "Hémorragie",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Ecchymoses"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux de rivaroxaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "ÉVITER l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix",
+          "AINS"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de co-prescription. Surveiller signes hémorragiques."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Énoxaparine",
+          "Lovenox",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie majeure",
+        "recommendation": "NE PAS associer (sauf relais thérapeutique contrôlé)."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Amiodarone",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux de rivaroxaban",
+        "recommendation": "Prudence chez l'IRC. Pas d'ajustement systématique chez le normo-rénal."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xarelto-10-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Rivaroxaban 2,5 mg / 10 mg / 15 mg / 20 mg comprimé pelliculé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xarelto_rivaroxaban_10_mg",
+    "mechanism": "Anticoagulant oral direct : inhibiteur du facteur Xa.",
+    "half_life": "5-13 heures"
+  },
+  {
+    "id": "xarelto_15_mg_comprim_pellicul",
+    "brand_name": "XARELTO",
+    "generic_name": "Rivaroxaban",
+    "strength": "15 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct du facteur Xa",
+    "indications": [
+      "Prévention AVC dans FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique",
+      "Prévention événements athérothrombotiques post-SCA (2.5 mg)"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à risque hémorragique significatif",
+      "Insuffisance hépatique avec coagulopathie (Child-Pugh B/C avec coagulopathie)",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Risque hémorragique fœtal. Tératogène chez l'animal.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49: 15 mg/j (au lieu de 20 mg). ClCr <15: non recommandé. TVP/EP: ClCr 15-29: prudence. ClCr <15: non recommandé."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner (15 mg si ClCr 15-49). TVP/EP: 15 mg 2x/j x 21j puis 20 mg/j. Prévention ortho: 10 mg/j. Post-SCA: 2.5 mg 2x/j + aspirine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 555,
+        "price_ph": null,
+        "packaging": "Boite de 42",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 555
+      },
+      {
+        "price": 215,
+        "price_ph": null,
+        "packaging": "Boite de 14",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 215
+      }
+    ],
+    "drugbank_id": "DB06228",
+    "adverse_effects": [
+      "Hémorragie",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Ecchymoses"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux de rivaroxaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "ÉVITER l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix",
+          "AINS"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de co-prescription. Surveiller signes hémorragiques."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Énoxaparine",
+          "Lovenox",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie majeure",
+        "recommendation": "NE PAS associer (sauf relais thérapeutique contrôlé)."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Amiodarone",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux de rivaroxaban",
+        "recommendation": "Prudence chez l'IRC. Pas d'ajustement systématique chez le normo-rénal."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xarelto-15-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Rivaroxaban 2,5 mg / 10 mg / 15 mg / 20 mg comprimé pelliculé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xarelto_rivaroxaban_15_mg",
+    "mechanism": "Anticoagulant oral direct : inhibiteur du facteur Xa.",
+    "half_life": "5-13 heures"
+  },
+  {
+    "id": "xarelto_2_5_mg_comprim_pellicul",
+    "brand_name": "XARELTO",
+    "generic_name": "Rivaroxaban",
+    "strength": "2.5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct du facteur Xa",
+    "indications": [
+      "Prévention AVC dans FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique",
+      "Prévention événements athérothrombotiques post-SCA (2.5 mg)"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à risque hémorragique significatif",
+      "Insuffisance hépatique avec coagulopathie (Child-Pugh B/C avec coagulopathie)",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Risque hémorragique fœtal. Tératogène chez l'animal.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49: 15 mg/j (au lieu de 20 mg). ClCr <15: non recommandé. TVP/EP: ClCr 15-29: prudence. ClCr <15: non recommandé."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner (15 mg si ClCr 15-49). TVP/EP: 15 mg 2x/j x 21j puis 20 mg/j. Prévention ortho: 10 mg/j. Post-SCA: 2.5 mg 2x/j + aspirine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 283,
+        "price_ph": null,
+        "packaging": "Boite de 14",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 283
+      }
+    ],
+    "drugbank_id": "DB06228",
+    "adverse_effects": [
+      "Hémorragie",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Ecchymoses"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux de rivaroxaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "ÉVITER l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix",
+          "AINS"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de co-prescription. Surveiller signes hémorragiques."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Énoxaparine",
+          "Lovenox",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie majeure",
+        "recommendation": "NE PAS associer (sauf relais thérapeutique contrôlé)."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Amiodarone",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux de rivaroxaban",
+        "recommendation": "Prudence chez l'IRC. Pas d'ajustement systématique chez le normo-rénal."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xarelto-2-5-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Rivaroxaban 2,5 mg / 10 mg / 15 mg / 20 mg comprimé pelliculé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xarelto_rivaroxaban_2_5_mg",
+    "mechanism": "Anticoagulant oral direct : inhibiteur du facteur Xa.",
+    "half_life": "5-13 heures"
+  },
+  {
+    "id": "xarelto_20_mg_comprim_pellicul",
+    "brand_name": "XARELTO",
+    "generic_name": "Rivaroxaban",
+    "strength": "20 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "B01AF01",
+    "therapeutic_group": "Anticoagulants",
+    "drug_class": "Anticoagulant oral direct (AOD) — inhibiteur direct du facteur Xa",
+    "indications": [
+      "Prévention AVC dans FA non valvulaire",
+      "Traitement et prévention TVP/EP",
+      "Prévention thromboembolique post-chirurgie orthopédique",
+      "Prévention événements athérothrombotiques post-SCA (2.5 mg)"
+    ],
+    "contraindications": [
+      "Hémorragie active",
+      "Lésion à risque hémorragique significatif",
+      "Insuffisance hépatique avec coagulopathie (Child-Pugh B/C avec coagulopathie)",
+      "Grossesse",
+      "Allaitement"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "Contre-indiqué. Risque hémorragique fœtal. Tératogène chez l'animal.",
+      "breastfeeding": "Contre-indiqué. Passage dans le lait."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé < 18 ans.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "FA: ClCr 15-49: 15 mg/j (au lieu de 20 mg). ClCr <15: non recommandé. TVP/EP: ClCr 15-29: prudence. ClCr <15: non recommandé."
+    },
+    "dosage": {
+      "adult": "FA: 20 mg/j au dîner (15 mg si ClCr 15-49). TVP/EP: 15 mg 2x/j x 21j puis 20 mg/j. Prévention ortho: 10 mg/j. Post-SCA: 2.5 mg 2x/j + aspirine.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 375,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 375
+      },
+      {
+        "price": 215,
+        "price_ph": null,
+        "packaging": "Boite de 14",
+        "laboratory": "BAYER S.A",
+        "price_ppv_dhs": 215
+      }
+    ],
+    "drugbank_id": "DB06228",
+    "adverse_effects": [
+      "Hémorragie",
+      "Anémie",
+      "Nausées",
+      "Élévation transaminases",
+      "Ecchymoses"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Kétoconazole",
+          "Itraconazole",
+          "Ritonavir",
+          "Lopinavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Augmentation majeure des taux de rivaroxaban → hémorragie",
+        "recommendation": "ASSOCIATION CONTRE-INDIQUÉE."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine",
+          "Carbamazépine",
+          "Phénytoïne",
+          "Millepertuis"
+        ],
+        "interacting_classes": [
+          "Inducteurs puissants CYP3A4 + P-gp"
+        ],
+        "severity": "DANGER",
+        "effect": "Diminution des taux → perte d'efficacité → risque thrombotique",
+        "recommendation": "ÉVITER l'association."
+      },
+      {
+        "interacting_drugs": [
+          "Aspirine",
+          "Kardégic",
+          "Clopidogrel",
+          "Plavix",
+          "AINS"
+        ],
+        "interacting_classes": [
+          "Antiagrégants",
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique majeur",
+        "recommendation": "Durée minimale de co-prescription. Surveiller signes hémorragiques."
+      },
+      {
+        "interacting_drugs": [
+          "Héparine",
+          "Énoxaparine",
+          "Lovenox",
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "Autres anticoagulants"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Double anticoagulation → hémorragie majeure",
+        "recommendation": "NE PAS associer (sauf relais thérapeutique contrôlé)."
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Amiodarone",
+          "Dronédarone"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs modérés P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation modérée des taux de rivaroxaban",
+        "recommendation": "Prudence chez l'IRC. Pas d'ajustement systématique chez le normo-rénal."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "ALLAITEMENT_INTERDIT",
+      "AJUSTEMENT_RENAL",
+      "INSUFFISANCE_HEPATIQUE",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xarelto-20-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Rivaroxaban 2,5 mg / 10 mg / 15 mg / 20 mg comprimé pelliculé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xarelto_rivaroxaban_20_mg",
+    "mechanism": "Anticoagulant oral direct : inhibiteur du facteur Xa.",
+    "half_life": "5-13 heures"
+  },
+  {
+    "id": "xatral_10_mg_comprim_pellicul_lib_ration_prolong_e",
+    "brand_name": "XATRAL",
+    "generic_name": "Alfuzosine",
+    "strength": "10 MG",
+    "form": "Comprimé pelliculé à libération prolongée",
+    "route": "Orale",
+    "atc_code": "G04CA01",
+    "therapeutic_group": "Urologie",
+    "drug_class": "Alpha-1 bloquant sélectif",
+    "indications": [
+      "Hypertrophie bénigne de la prostate"
+    ],
+    "contraindications": [
+      "Hypotension orthostatique sévère"
+    ],
+    "interactions": [
+      "Autres alpha-bloquants",
+      "Antihypertenseurs"
+    ],
+    "pregnancy": {
+      "category": "N/A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 82.6,
+        "price_ph": null,
+        "packaging": "Boîte de 10",
+        "laboratory": "SANOFI AVENTIS MAROC",
+        "price_ppv_dhs": 82.6
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypotension orthostatique",
+      "Vertiges"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inhibiteurs PDE5",
+          "Sildénafil",
+          "Tadalafil"
+        ],
+        "interacting_classes": [
+          "Anti-érectiles"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypotension sévère",
+        "recommendation": "CI ou délai strict"
+      },
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4",
+          "Kétoconazole",
+          "Itraconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ taux alfuzosine → hypotension",
+        "recommendation": "CI avec inhibiteurs CYP3A4 puissants"
+      },
+      {
+        "interacting_drugs": [
+          "Autres alpha-bloquants"
+        ],
+        "interacting_classes": [
+          "Alpha-bloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension additive",
+        "recommendation": "Éviter association"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xatral-10-mg-comprime-pellicule-a-liberation-prolongee",
+    "composition": [
+      {
+        "name": "Chlorhydrate d'alfuzosine 2,5 mg / 10 mg LP",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xatral_alfuzosine_10_mg",
+    "mechanism": "Alpha-1 bloquant urosélectif : relâchement du muscle lisse prostatique et cervical vésical.",
+    "half_life": "8-10 heures"
+  },
+  {
+    "id": "xautis_10_mg_comprim_orodispersible_p",
+    "brand_name": "XAUTIS",
+    "generic_name": "Aripiprazole (orodispersible)",
+    "strength": "10 MG",
+    "form": "Comprimé orodispersible [P]",
+    "route": "Orale",
+    "atc_code": "N05AX12",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Agoniste partiel D2/5-HT1A",
+    "indications": [
+      "Schizophrénie, trouble bipolaire"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs du CYP2D6/3A4"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 13,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 262,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "COOPER PHARMA",
+        "price_ppv_dhs": 262
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Akathisie",
+      "Insomnie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc addif → torsades",
+        "recommendation": "Surveiller ECG"
+      },
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4/2D6",
+          "Kétoconazole",
+          "Fluoxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux aripiprazole",
+        "recommendation": "Réduire dose à 50%"
+      },
+      {
+        "interacting_drugs": [
+          "Antihypertenseurs"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additionnelle",
+        "recommendation": "Surveiller PA"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xautis-10-mg-comprime-orodispersible-p",
+    "composition": [
+      {
+        "name": "Aripiprazole 10 mg / 15 mg comprimé orodispersible",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xautis_aripiprazole_orodispersible_10_mg",
+    "mechanism": "Antipsychotique atypique, forme orodispersible.",
+    "half_life": "75 heures"
+  },
+  {
+    "id": "xautis_15_mg_comprim_orodispersible_p",
+    "brand_name": "XAUTIS",
+    "generic_name": "Aripiprazole (orodispersible)",
+    "strength": "15 MG",
+    "form": "Comprimé orodispersible [P]",
+    "route": "Orale",
+    "atc_code": "N05AX12",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Agoniste partiel D2/5-HT1A",
+    "indications": [
+      "Schizophrénie, trouble bipolaire"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs du CYP2D6/3A4"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 13,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 332,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "COOPER PHARMA",
+        "price_ppv_dhs": 332
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Akathisie",
+      "Insomnie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc addif → torsades",
+        "recommendation": "Surveiller ECG"
+      },
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4/2D6",
+          "Kétoconazole",
+          "Fluoxétine"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux aripiprazole",
+        "recommendation": "Réduire dose à 50%"
+      },
+      {
+        "interacting_drugs": [
+          "Antihypertenseurs"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additionnelle",
+        "recommendation": "Surveiller PA"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xautis-15-mg-comprime-orodispersible-p",
+    "composition": [
+      {
+        "name": "Aripiprazole 10 mg / 15 mg comprimé orodispersible",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xautis_aripiprazole_orodispersible_15_mg",
+    "mechanism": "Antipsychotique atypique, forme orodispersible.",
+    "half_life": "75 heures"
+  },
+  {
+    "id": "xedilol_25_mg_comprim",
+    "brand_name": "XEDILOL",
+    "generic_name": "Carvédilol",
+    "strength": "25 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C07AG02",
+    "therapeutic_group": "Bêta-bloquants",
+    "drug_class": "Bêta-bloquant non sélectif + alpha-1 bloquant",
+    "indications": [
+      "Insuffisance cardiaque chronique stable",
+      "HTA",
+      "Post-IDM avec dysfonction VG"
+    ],
+    "contraindications": [
+      "IC décompensée nécessitant inotropes IV",
+      "Asthme",
+      "BAV 2e-3e degré",
+      "Bradycardie sévère",
+      "Hypotension",
+      "IH sévère",
+      "Phéochromocytome non traité"
+    ],
+    "interactions": [
+      "Autres bradycardisants"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé. Bradycardie, hypoglycémie néonatale.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "IC: début 3.125 mg 2x/j, titrer/2 sem → cible 25-50 mg 2x/j. HTA: 12.5-25 mg 2x/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 88.1,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 88.1
+      }
+    ],
+    "drugbank_id": "DB01136",
+    "adverse_effects": [
+      "Bradycardie",
+      "Hypotension",
+      "Vertiges",
+      "Fatigue",
+      "Prise de poids",
+      "Aggravation IC initiale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Diltiazem"
+        ],
+        "interacting_classes": [
+          "IC bradycardisants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie, BAV, IC",
+        "recommendation": "Déconseillé."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Sulfamides"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage hypoglycémie",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation digoxinémie + bradycardie additive",
+        "recommendation": "Doser digoxine."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux carvédilol",
+        "recommendation": "Surveiller efficacité."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xedilol-25-mg-comprime",
+    "composition": [
+      {
+        "name": "Carvédilol 6,25 mg / 25 mg comprimé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xedilol_carvedilol_25_mg",
+    "mechanism": "Bêta-bloquant non cardiosélectif avec activité alpha-1 bloquante additionnelle.",
+    "half_life": "6-10 heures"
+  },
+  {
+    "id": "xedilol_6_25_mg_comprim",
+    "brand_name": "XEDILOL",
+    "generic_name": "Carvédilol",
+    "strength": "6.25 MG",
+    "form": "Comprimé",
+    "route": "Orale",
+    "atc_code": "C07AG02",
+    "therapeutic_group": "Bêta-bloquants",
+    "drug_class": "Bêta-bloquant non sélectif + alpha-1 bloquant",
+    "indications": [
+      "Insuffisance cardiaque chronique stable",
+      "HTA",
+      "Post-IDM avec dysfonction VG"
+    ],
+    "contraindications": [
+      "IC décompensée nécessitant inotropes IV",
+      "Asthme",
+      "BAV 2e-3e degré",
+      "Bradycardie sévère",
+      "Hypotension",
+      "IH sévère",
+      "Phéochromocytome non traité"
+    ],
+    "interactions": [
+      "Autres bradycardisants"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "Déconseillé. Bradycardie, hypoglycémie néonatale.",
+      "breastfeeding": "Déconseillé."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "Non recommandé.",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": "Pas d'ajustement."
+    },
+    "dosage": {
+      "adult": "IC: début 3.125 mg 2x/j, titrer/2 sem → cible 25-50 mg 2x/j. HTA: 12.5-25 mg 2x/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 43.8,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 43.8
+      }
+    ],
+    "drugbank_id": "DB01136",
+    "adverse_effects": [
+      "Bradycardie",
+      "Hypotension",
+      "Vertiges",
+      "Fatigue",
+      "Prise de poids",
+      "Aggravation IC initiale"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Diltiazem"
+        ],
+        "interacting_classes": [
+          "IC bradycardisants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie, BAV, IC",
+        "recommendation": "Déconseillé."
+      },
+      {
+        "interacting_drugs": [
+          "Insuline",
+          "Sulfamides"
+        ],
+        "interacting_classes": [
+          "Antidiabétiques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Masquage hypoglycémie",
+        "recommendation": "Surveiller glycémie."
+      },
+      {
+        "interacting_drugs": [
+          "Digoxine"
+        ],
+        "interacting_classes": [
+          "Digitaliques"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Augmentation digoxinémie + bradycardie additive",
+        "recommendation": "Doser digoxine."
+      },
+      {
+        "interacting_drugs": [
+          "Rifampicine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Diminution taux carvédilol",
+        "recommendation": "Surveiller efficacité."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xedilol-6-25-mg-comprime",
+    "composition": [
+      {
+        "name": "Carvédilol 6,25 mg / 25 mg comprimé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xedilol_carvedilol_6_25_mg",
+    "mechanism": "Bêta-bloquant non cardiosélectif avec activité alpha-1 bloquante additionnelle.",
+    "half_life": "6-10 heures"
+  },
+  {
+    "id": "xeljanz_5_mg_comprim_pellicul",
+    "brand_name": "XELJANZ",
+    "generic_name": "Tofacitinib",
+    "strength": "5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "L04AA29",
+    "therapeutic_group": "Immunosuppresseurs",
+    "drug_class": "Inhibiteur JAK1/3",
+    "indications": [
+      "Polyarthrite rhumatoïde",
+      "Rectocolite hémorragique"
+    ],
+    "contraindications": [
+      "Infection active sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs/inducteurs puissants du CYP3A4"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 6896,
+        "price_ph": null,
+        "packaging": "Boite de 56",
+        "laboratory": "PFIZER MAROC",
+        "price_ppv_dhs": 6896
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Risque infectieux accru"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Vaccins vivants",
+          "BCG"
+        ],
+        "interacting_classes": [
+          "Vaccins vivants"
+        ],
+        "severity": "DANGER",
+        "effect": "CI absolue sous inhibiteur JAK",
+        "recommendation": "Vacciner avant traitement"
+      },
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4 puissants",
+          "Kétoconazole"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ exposition tofacitinib",
+        "recommendation": "Réduire dose à 5 mg/j"
+      },
+      {
+        "interacting_drugs": [
+          "Immunosuppresseurs puissants",
+          "Azathioprine",
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "DANGER",
+        "effect": "Immunosuppression excessive — infections opportunistes",
+        "recommendation": "Éviter combinaison"
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ risque GI",
+        "recommendation": "Surveiller"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xeljanz-5-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Tofacitinib citrate 5 mg / 10 mg comprimé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xeljanz_tofacitinib_5_mg",
+    "mechanism": "Inhibiteur des Janus kinases (JAK1/JAK3).",
+    "half_life": "3 heures"
+  },
+  {
+    "id": "xeloda_500_mg_comprim_pellicul",
+    "brand_name": "XELODA",
+    "generic_name": "Capécitabine",
+    "strength": "500 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "L01BC06",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Prodrogue du 5-FU (fluoropyrimidine orale)",
+    "indications": [
+      "Cancer colorectal, cancer du sein"
+    ],
+    "contraindications": [
+      "Déficit en DPD",
+      "Insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Warfarine (potentialisation)",
+      "Phénytoïne"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1983,
+        "price_ph": 1683.51,
+        "packaging": "Boîte de 120",
+        "laboratory": "BOTTU S.A.",
+        "price_ppv_dhs": 1983
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Syndrome main-pied",
+      "Diarrhée",
+      "Myélosuppression"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AVK",
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "Anticoagulants"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ INR — hémorragie (inhibition CYP2C9)",
+        "recommendation": "Surveiller INR hebdomadaire — réduire AVK"
+      },
+      {
+        "interacting_drugs": [
+          "Phénytoïne"
+        ],
+        "interacting_classes": [
+          "Antiépileptiques"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ taux phénytoïne → toxicité",
+        "recommendation": "Surveiller phénytoinémie"
+      },
+      {
+        "interacting_drugs": [
+          "Acide folinique",
+          "Lévofolinate"
+        ],
+        "interacting_classes": [
+          "Modulateurs de fluoropyrimidines"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ toxicité capécitabine",
+        "recommendation": "CI ou surveillance stricte — protocole spécifique"
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins"
+        ],
+        "severity": "DANGER",
+        "effect": "CI sous chimiothérapie",
+        "recommendation": "Vacciner avant traitement"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xeloda-500-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Capécitabine 150 mg / 500 mg comprimé pelliculé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xeloda_capecitabine_500_mg",
+    "mechanism": "Prodrogue orale du 5-fluorouracile : conversion enzymatique tumorale préférentielle en 5-FU actif (inhibition thymidylate synthase).",
+    "half_life": "45 minutes"
+  },
+  {
+    "id": "xenical_120_mg_capsule",
+    "brand_name": "XENICAL",
+    "generic_name": "Orlistat",
+    "strength": "120 MG",
+    "form": "Capsule",
+    "route": "Orale",
+    "atc_code": "A08AB01",
+    "therapeutic_group": "Anti-obésité",
+    "drug_class": "Inhibiteur lipase pancréatique",
+    "indications": [
+      "Obésité (adjuvant régime)"
+    ],
+    "contraindications": [
+      "Syndrome de malabsorption chronique"
+    ],
+    "interactions": [
+      "Anticoagulants oraux"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 926,
+        "price_ph": 627.76,
+        "packaging": "Boîte de 84",
+        "laboratory": "BOTTU S.A.",
+        "price_ppv_dhs": 926
+      },
+      {
+        "price": 510,
+        "price_ph": null,
+        "packaging": "Boîte de 42",
+        "laboratory": "BOTTU S.A.",
+        "price_ppv_dhs": 510
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Stéatorrhée"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ absorption ciclosporine jusqu'à 30%",
+        "recommendation": "Espacer de 2h — surveiller ciclosporinémie"
+      },
+      {
+        "interacting_drugs": [
+          "Lévothyroxine",
+          "T4"
+        ],
+        "interacting_classes": [
+          "Hormones thyroïdiennes"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ absorption T4",
+        "recommendation": "Espacer de 4h"
+      },
+      {
+        "interacting_drugs": [
+          "Vitamines liposolubles A,D,E,K"
+        ],
+        "interacting_classes": [
+          "Vitamines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ absorption vitamines liposolubles",
+        "recommendation": "Supplémenter — prendre 2h avant ou après orlistat"
+      },
+      {
+        "interacting_drugs": [
+          "AVK",
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "Anticoagulants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ INR (↓ absorption vitamine K)",
+        "recommendation": "Surveiller INR"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xenical-120-mg-capsule",
+    "composition": [
+      {
+        "name": "Orlistat 120 mg gélule",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xenical_orlistat_120_mg",
+    "mechanism": "Inhibiteur des lipases gastro-intestinales.",
+    "half_life": "non pertinent (action locale digestive)"
+  },
+  {
+    "id": "xenid_100_mg_suppositoire",
+    "brand_name": "XENID",
+    "generic_name": "Diclofénac",
+    "strength": "100 MG",
+    "form": "Suppositoire",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AB05",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide phénylacétique",
+    "indications": [
+      "Douleurs inflammatoires",
+      "Arthrose",
+      "PR",
+      "Dysménorrhée",
+      "Colique néphrétique",
+      "Douleurs post-opératoires"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS",
+      "Cardiopathie ischémique",
+      "AVC"
+    ],
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre. Déconseillé 1er-2e.",
+      "breastfeeding": "Compatible courte durée."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (supp). ≥ 16 ans (oral).",
+      "dose_rule": "1-3 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "75-150 mg/j en 2-3 prises. IM: 75 mg/j max 2j.",
+      "children": "1-3 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 28.1,
+        "price_ph": null,
+        "packaging": "Boîte de 10",
+        "laboratory": "NOVOPHARMA",
+        "price_ppv_dhs": 28.1
+      }
+    ],
+    "drugbank_id": "DB00586",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Ulcère GI",
+      "Hémorragie",
+      "Insuffisance rénale",
+      "Risque CV"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2",
+          "Diurétiques"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Triple whammy → IRA",
+        "recommendation": "Surveiller créatinine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xenid-100-mg-suppositoire",
+    "composition": [
+      {
+        "name": "Diclofénac sodique 25 mg / 50 mg / 75 mg / 100 mg — cp / suppo / injectable",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xenid_diclofenac_100_mg",
+    "mechanism": "AINS : inhibition COX-1/COX-2.",
+    "half_life": "1-2 heures"
+  },
+  {
+    "id": "xenid_25_mg_comprim_pellicul",
+    "brand_name": "XENID",
+    "generic_name": "Diclofénac",
+    "strength": "25 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AB05",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide phénylacétique",
+    "indications": [
+      "Douleurs inflammatoires",
+      "Arthrose",
+      "PR",
+      "Dysménorrhée",
+      "Colique néphrétique",
+      "Douleurs post-opératoires"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS",
+      "Cardiopathie ischémique",
+      "AVC"
+    ],
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre. Déconseillé 1er-2e.",
+      "breastfeeding": "Compatible courte durée."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (supp). ≥ 16 ans (oral).",
+      "dose_rule": "1-3 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "75-150 mg/j en 2-3 prises. IM: 75 mg/j max 2j.",
+      "children": "1-3 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 25.2,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "NOVOPHARMA",
+        "price_ppv_dhs": 25.2
+      }
+    ],
+    "drugbank_id": "DB00586",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Ulcère GI",
+      "Hémorragie",
+      "Insuffisance rénale",
+      "Risque CV"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2",
+          "Diurétiques"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Triple whammy → IRA",
+        "recommendation": "Surveiller créatinine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xenid-25-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Diclofénac sodique 25 mg / 50 mg / 75 mg / 100 mg — cp / suppo / injectable",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xenid_diclofenac_25_mg",
+    "mechanism": "AINS : inhibition COX-1/COX-2.",
+    "half_life": "1-2 heures"
+  },
+  {
+    "id": "xenid_25_mg_suppositoire",
+    "brand_name": "XENID",
+    "generic_name": "Diclofénac",
+    "strength": "25 MG",
+    "form": "Suppositoire",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AB05",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide phénylacétique",
+    "indications": [
+      "Douleurs inflammatoires",
+      "Arthrose",
+      "PR",
+      "Dysménorrhée",
+      "Colique néphrétique",
+      "Douleurs post-opératoires"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS",
+      "Cardiopathie ischémique",
+      "AVC"
+    ],
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre. Déconseillé 1er-2e.",
+      "breastfeeding": "Compatible courte durée."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (supp). ≥ 16 ans (oral).",
+      "dose_rule": "1-3 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "75-150 mg/j en 2-3 prises. IM: 75 mg/j max 2j.",
+      "children": "1-3 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 12.6,
+        "price_ph": null,
+        "packaging": "Boîte de 10",
+        "laboratory": "NOVOPHARMA",
+        "price_ppv_dhs": 12.6
+      }
+    ],
+    "drugbank_id": "DB00586",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Ulcère GI",
+      "Hémorragie",
+      "Insuffisance rénale",
+      "Risque CV"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2",
+          "Diurétiques"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Triple whammy → IRA",
+        "recommendation": "Surveiller créatinine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xenid-25-mg-suppositoire",
+    "composition": [
+      {
+        "name": "Diclofénac sodique 25 mg / 50 mg / 75 mg / 100 mg — cp / suppo / injectable",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xenid_diclofenac_25_mg_2",
+    "mechanism": "AINS : inhibition COX-1/COX-2.",
+    "half_life": "1-2 heures"
+  },
+  {
+    "id": "xenid_50_mg_comprim_pellicul",
+    "brand_name": "XENID",
+    "generic_name": "Diclofénac",
+    "strength": "50 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AB05",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide phénylacétique",
+    "indications": [
+      "Douleurs inflammatoires",
+      "Arthrose",
+      "PR",
+      "Dysménorrhée",
+      "Colique néphrétique",
+      "Douleurs post-opératoires"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS",
+      "Cardiopathie ischémique",
+      "AVC"
+    ],
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre. Déconseillé 1er-2e.",
+      "breastfeeding": "Compatible courte durée."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (supp). ≥ 16 ans (oral).",
+      "dose_rule": "1-3 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "75-150 mg/j en 2-3 prises. IM: 75 mg/j max 2j.",
+      "children": "1-3 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 43.6,
+        "price_ph": null,
+        "packaging": "Boîte de 30",
+        "laboratory": "NOVOPHARMA",
+        "price_ppv_dhs": 43.6
+      }
+    ],
+    "drugbank_id": "DB00586",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Ulcère GI",
+      "Hémorragie",
+      "Insuffisance rénale",
+      "Risque CV"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2",
+          "Diurétiques"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Triple whammy → IRA",
+        "recommendation": "Surveiller créatinine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xenid-50-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Diclofénac sodique 25 mg / 50 mg / 75 mg / 100 mg — cp / suppo / injectable",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xenid_diclofenac_50_mg",
+    "mechanism": "AINS : inhibition COX-1/COX-2.",
+    "half_life": "1-2 heures"
+  },
+  {
+    "id": "xenid_75_mg_3_ml_ampoule_injectable",
+    "brand_name": "XENID",
+    "generic_name": "Diclofénac",
+    "strength": "75 MG / 3 ML",
+    "form": "Ampoule injectable",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AB05",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide phénylacétique",
+    "indications": [
+      "Douleurs inflammatoires",
+      "Arthrose",
+      "PR",
+      "Dysménorrhée",
+      "Colique néphrétique",
+      "Douleurs post-opératoires"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS",
+      "Cardiopathie ischémique",
+      "AVC"
+    ],
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre. Déconseillé 1er-2e.",
+      "breastfeeding": "Compatible courte durée."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (supp). ≥ 16 ans (oral).",
+      "dose_rule": "1-3 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "75-150 mg/j en 2-3 prises. IM: 75 mg/j max 2j.",
+      "children": "1-3 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 14.5,
+        "price_ph": null,
+        "packaging": "Boite de 2",
+        "laboratory": "NOVOPHARMA",
+        "price_ppv_dhs": 14.5
+      }
+    ],
+    "drugbank_id": "DB00586",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Ulcère GI",
+      "Hémorragie",
+      "Insuffisance rénale",
+      "Risque CV"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2",
+          "Diurétiques"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Triple whammy → IRA",
+        "recommendation": "Surveiller créatinine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xenid-75-mg-3-ml-ampoule-injectable",
+    "composition": [
+      {
+        "name": "Diclofénac sodique 25 mg / 50 mg / 75 mg / 100 mg — cp / suppo / injectable",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xenid_diclofenac_75_mg_3_ml",
+    "mechanism": "AINS : inhibition COX-1/COX-2.",
+    "half_life": "1-2 heures"
+  },
+  {
+    "id": "xenid_75_mg_3_ml_injectable",
+    "brand_name": "XENID",
+    "generic_name": "Diclofénac",
+    "strength": "75 MG / 3 ML",
+    "form": "Injectable",
+    "route": "Orale / IM / Rectale / Cutanée",
+    "atc_code": "M01AB05",
+    "therapeutic_group": "AINS",
+    "drug_class": "Dérivé acide phénylacétique",
+    "indications": [
+      "Douleurs inflammatoires",
+      "Arthrose",
+      "PR",
+      "Dysménorrhée",
+      "Colique néphrétique",
+      "Douleurs post-opératoires"
+    ],
+    "contraindications": [
+      "Ulcère GD",
+      "IRC/IH sévère",
+      "IC sévère",
+      "3e trimestre",
+      "Allergie AINS",
+      "Cardiopathie ischémique",
+      "AVC"
+    ],
+    "interactions": [
+      "Anticoagulants"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "CI au 3e trimestre. Déconseillé 1er-2e.",
+      "breastfeeding": "Compatible courte durée."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 1,
+      "warning": "≥ 1 an (supp). ≥ 16 ans (oral).",
+      "dose_rule": "1-3 mg/kg/j."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: CI."
+    },
+    "dosage": {
+      "adult": "75-150 mg/j en 2-3 prises. IM: 75 mg/j max 2j.",
+      "children": "1-3 mg/kg/j."
+    },
+    "market_data": [
+      {
+        "price": 40.9,
+        "price_ph": null,
+        "packaging": "6 ampoules",
+        "laboratory": "NOVOPHARMA",
+        "price_ppv_dhs": 40.9
+      }
+    ],
+    "drugbank_id": "DB00586",
+    "adverse_effects": [
+      "Douleurs épigastriques",
+      "Ulcère GI",
+      "Hémorragie",
+      "Insuffisance rénale",
+      "Risque CV"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Warfarine",
+          "Sintrom"
+        ],
+        "interacting_classes": [
+          "AVK"
+        ],
+        "severity": "DANGER",
+        "effect": "Risque hémorragique",
+        "recommendation": "Surveiller INR."
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Sels de lithium"
+        ],
+        "severity": "DANGER",
+        "effect": "Augmentation lithémie",
+        "recommendation": "Doser."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité MTX",
+        "recommendation": "CI si MTX ≥15 mg/sem."
+      },
+      {
+        "interacting_drugs": [
+          "IEC",
+          "ARA2",
+          "Diurétiques"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Triple whammy → IRA",
+        "recommendation": "Surveiller créatinine."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CARDIOPATHIE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xenid-75-mg-3-ml-injectable",
+    "composition": [
+      {
+        "name": "Diclofénac sodique 25 mg / 50 mg / 75 mg / 100 mg — cp / suppo / injectable",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xenid_diclofenac_75_mg_3_ml_2",
+    "mechanism": "AINS : inhibition COX-1/COX-2.",
+    "half_life": "1-2 heures"
+  },
+  {
+    "id": "xepine_500_mg_comprim_pellicul",
+    "brand_name": "XEPINE",
+    "generic_name": "Lévofloxacine",
+    "strength": "500 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "J01MA12",
+    "therapeutic_group": "Fluoroquinolones",
+    "drug_class": "FQ 3e gén.",
+    "indications": [
+      "Infections respiratoires, urinaires"
+    ],
+    "contraindications": [
+      "Antécédent de tendinopathie"
+    ],
+    "interactions": [
+      "Antiacides"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1947,
+        "price_ph": 1647,
+        "packaging": "Boite de 120",
+        "laboratory": "ZENITH PHARMA",
+        "price_ppv_dhs": 1947
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Tendinopathies"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone",
+          "Sotalol"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc — torsades de pointes",
+        "recommendation": "Surveiller ECG"
+      },
+      {
+        "interacting_drugs": [
+          "AVK",
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "Anticoagulants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ INR",
+        "recommendation": "Surveiller INR"
+      },
+      {
+        "interacting_drugs": [
+          "Antiacides",
+          "Fer",
+          "Zinc",
+          "Ca²⁺"
+        ],
+        "interacting_classes": [
+          "Chélateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ absorption lévofloxacine",
+        "recommendation": "Espacer de 2h"
+      },
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ risque convulsions",
+        "recommendation": "Prudence chez patients à risque"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xepine-500-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Hémihydrate de lévofloxacine 500 mg comprimé pelliculé / solution IV",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xepine_levofloxacine_500_mg",
+    "mechanism": "Fluoroquinolone.",
+    "half_life": "6-8 heures"
+  },
+  {
+    "id": "xeplion_100_mg_suspension_injectable_lp_en_seringue_pr_remplie_p",
+    "brand_name": "XEPLION",
+    "generic_name": "Palipéridone (injectable LP)",
+    "strength": "100 MG",
+    "form": "Suspension injectable LP en seringue pré-remplie [P]",
+    "route": "IM",
+    "atc_code": "N05AX13",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Antipsychotique atypique (métabolite actif rispéridone)",
+    "indications": [
+      "Schizophrénie"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Autres dépresseurs du SNC"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 2002,
+        "price_ph": null,
+        "packaging": "Boite d'une seringue pré-remplie + 2 aiguilles",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 2002
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Syndrome extrapyramidal"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone",
+          "Sotalol"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc → torsades",
+        "recommendation": "Surveiller ECG avant injection"
+      },
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4/P-gp",
+          "Kétoconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ exposition palipéridone (métabolisme limité mais P-gp)",
+        "recommendation": "Surveiller EI"
+      },
+      {
+        "interacting_drugs": [
+          "Dépresseurs SNC",
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Dépresseurs SNC"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Sédation additive",
+        "recommendation": "Prudence"
+      },
+      {
+        "interacting_drugs": [
+          "Antihypertenseurs"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additionnelle",
+        "recommendation": "Surveiller PA"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xeplion-100-mg-suspension-injectable-lp-en-seringue-pre-remplie-p",
+    "composition": [
+      {
+        "name": "Palmitate de palipéridone 25 mg / 50 mg / 75 mg / 100 mg / 150 mg suspension injectable LP IM",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xeplion_paliperidone_injectable_lp_100_mg",
+    "mechanism": "Antipsychotique atypique injectable à libération prolongée.",
+    "half_life": "25-49 jours"
+  },
+  {
+    "id": "xeplion_150_mg_suspension_injectable_lp_en_seringue_pr_remplie_p",
+    "brand_name": "XEPLION",
+    "generic_name": "Palipéridone (injectable LP)",
+    "strength": "150 MG",
+    "form": "Suspension injectable LP en seringue pré-remplie [P]",
+    "route": "IM",
+    "atc_code": "N05AX13",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Antipsychotique atypique (métabolite actif rispéridone)",
+    "indications": [
+      "Schizophrénie"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Autres dépresseurs du SNC"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 2763,
+        "price_ph": null,
+        "packaging": "Boite d'une seringue pré-remplie + 2 aiguilles",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 2763
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Syndrome extrapyramidal"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone",
+          "Sotalol"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc → torsades",
+        "recommendation": "Surveiller ECG avant injection"
+      },
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4/P-gp",
+          "Kétoconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ exposition palipéridone (métabolisme limité mais P-gp)",
+        "recommendation": "Surveiller EI"
+      },
+      {
+        "interacting_drugs": [
+          "Dépresseurs SNC",
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Dépresseurs SNC"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Sédation additive",
+        "recommendation": "Prudence"
+      },
+      {
+        "interacting_drugs": [
+          "Antihypertenseurs"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additionnelle",
+        "recommendation": "Surveiller PA"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xeplion-150-mg-suspension-injectable-lp-en-seringue-pre-remplie-p",
+    "composition": [
+      {
+        "name": "Palmitate de palipéridone 25 mg / 50 mg / 75 mg / 100 mg / 150 mg suspension injectable LP IM",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xeplion_paliperidone_injectable_lp_150_mg",
+    "mechanism": "Antipsychotique atypique injectable à libération prolongée.",
+    "half_life": "25-49 jours"
+  },
+  {
+    "id": "xeplion_75_mg_suspension_injectable_lp_en_seringue_pr_remplie_p",
+    "brand_name": "XEPLION",
+    "generic_name": "Palipéridone (injectable LP)",
+    "strength": "75 MG",
+    "form": "Suspension injectable LP en seringue pré-remplie [P]",
+    "route": "IM",
+    "atc_code": "N05AX13",
+    "therapeutic_group": "Neuroleptiques atypiques",
+    "drug_class": "Antipsychotique atypique (métabolite actif rispéridone)",
+    "indications": [
+      "Schizophrénie"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Autres dépresseurs du SNC"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1612,
+        "price_ph": null,
+        "packaging": "Boite d'une seringue pré-remplie + 2 aiguilles",
+        "laboratory": "MAPHAR",
+        "price_ppv_dhs": 1612
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Syndrome extrapyramidal"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone",
+          "Sotalol"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc → torsades",
+        "recommendation": "Surveiller ECG avant injection"
+      },
+      {
+        "interacting_drugs": [
+          "Inhibiteurs CYP3A4/P-gp",
+          "Kétoconazole",
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ exposition palipéridone (métabolisme limité mais P-gp)",
+        "recommendation": "Surveiller EI"
+      },
+      {
+        "interacting_drugs": [
+          "Dépresseurs SNC",
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Dépresseurs SNC"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Sédation additive",
+        "recommendation": "Prudence"
+      },
+      {
+        "interacting_drugs": [
+          "Antihypertenseurs"
+        ],
+        "interacting_classes": [
+          "Antihypertenseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Hypotension orthostatique additionnelle",
+        "recommendation": "Surveiller PA"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xeplion-75-mg-suspension-injectable-lp-en-seringue-pre-remplie-p",
+    "composition": [
+      {
+        "name": "Palmitate de palipéridone 25 mg / 50 mg / 75 mg / 100 mg / 150 mg suspension injectable LP IM",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xeplion_paliperidone_injectable_lp_75_mg",
+    "mechanism": "Antipsychotique atypique injectable à libération prolongée.",
+    "half_life": "25-49 jours"
+  },
+  {
+    "id": "xeractan_10_mg_capsule_molle",
+    "brand_name": "XERACTAN",
+    "generic_name": "Isotrétinoïne",
+    "strength": "10 MG",
+    "form": "Capsule molle",
+    "route": "Orale",
+    "atc_code": "D10BA01",
+    "therapeutic_group": "Dermatologiques",
+    "drug_class": "Rétinoïde systémique",
+    "indications": [
+      "Acné sévère nodulaire/conglobata",
+      "Acné résistante aux traitements conventionnels"
+    ],
+    "contraindications": [
+      "Grossesse (TÉRATOGÈNE MAJEUR)",
+      "Allaitement",
+      "IH sévère",
+      "Hypervitaminose A",
+      "Hyperlipidémie non contrôlée",
+      "Association tétracyclines"
+    ],
+    "interactions": [
+      "Vitamine A, tétracyclines"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "STRICTEMENT CI. Tératogène majeur. Double contraception obligatoire. Test grossesse mensuel.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "≥ 12 ans.",
+      "dose_rule": "0.5-1 mg/kg/j x 16-24 sem."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: réduire dose initiale."
+    },
+    "dosage": {
+      "adult": "0.5-1 mg/kg/j avec repas gras. Dose cumulative cible: 120-150 mg/kg.",
+      "children": "≥ 12 ans: idem."
+    },
+    "market_data": [
+      {
+        "price": 142.3,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 142.3
+      }
+    ],
+    "drugbank_id": "DB00982",
+    "adverse_effects": [
+      "Sécheresse cutanéomuqueuse",
+      "Chéilite",
+      "Élévation transaminases",
+      "Hypertriglycéridémie",
+      "Myalgies"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Doxycycline",
+          "Tétracycline",
+          "Minocycline"
+        ],
+        "interacting_classes": [
+          "Tétracyclines"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypertension intracrânienne bénigne",
+        "recommendation": "FORMELLEMENT CI."
+      },
+      {
+        "interacting_drugs": [
+          "Vitamine A"
+        ],
+        "interacting_classes": [
+          "Vitamine A"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypervitaminose A",
+        "recommendation": "NE PAS supplémenter."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Hépatotoxicité additive",
+        "recommendation": "Éviter."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xeractan-10-mg-capsule-molle",
+    "composition": [
+      {
+        "name": "Isotrétinoïne 10 mg / 20 mg gélule molle",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xeractan_isotretinoine_10_mg",
+    "mechanism": "Rétinoïde oral : réduction de la production de sébum.",
+    "half_life": "19-20 heures"
+  },
+  {
+    "id": "xeractan_20_mg_capsule_molle",
+    "brand_name": "XERACTAN",
+    "generic_name": "Isotrétinoïne",
+    "strength": "20 MG",
+    "form": "Capsule molle",
+    "route": "Orale",
+    "atc_code": "D10BA01",
+    "therapeutic_group": "Dermatologiques",
+    "drug_class": "Rétinoïde systémique",
+    "indications": [
+      "Acné sévère nodulaire/conglobata",
+      "Acné résistante aux traitements conventionnels"
+    ],
+    "contraindications": [
+      "Grossesse (TÉRATOGÈNE MAJEUR)",
+      "Allaitement",
+      "IH sévère",
+      "Hypervitaminose A",
+      "Hyperlipidémie non contrôlée",
+      "Association tétracyclines"
+    ],
+    "interactions": [
+      "Vitamine A, tétracyclines"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "STRICTEMENT CI. Tératogène majeur. Double contraception obligatoire. Test grossesse mensuel.",
+      "breastfeeding": "CI."
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 12,
+      "warning": "≥ 12 ans.",
+      "dose_rule": "0.5-1 mg/kg/j x 16-24 sem."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "IRC sévère: réduire dose initiale."
+    },
+    "dosage": {
+      "adult": "0.5-1 mg/kg/j avec repas gras. Dose cumulative cible: 120-150 mg/kg.",
+      "children": "≥ 12 ans: idem."
+    },
+    "market_data": [
+      {
+        "price": 265,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 265
+      }
+    ],
+    "drugbank_id": "DB00982",
+    "adverse_effects": [
+      "Sécheresse cutanéomuqueuse",
+      "Chéilite",
+      "Élévation transaminases",
+      "Hypertriglycéridémie",
+      "Myalgies"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Doxycycline",
+          "Tétracycline",
+          "Minocycline"
+        ],
+        "interacting_classes": [
+          "Tétracyclines"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypertension intracrânienne bénigne",
+        "recommendation": "FORMELLEMENT CI."
+      },
+      {
+        "interacting_drugs": [
+          "Vitamine A"
+        ],
+        "interacting_classes": [
+          "Vitamine A"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Hypervitaminose A",
+        "recommendation": "NE PAS supplémenter."
+      },
+      {
+        "interacting_drugs": [
+          "Méthotrexate"
+        ],
+        "interacting_classes": [
+          "Antimétabolites"
+        ],
+        "severity": "DANGER",
+        "effect": "Hépatotoxicité additive",
+        "recommendation": "Éviter."
+      }
+    ],
+    "smart_flags": [
+      "GROSSESSE_CONTRE_INDIQUE",
+      "AJUSTEMENT_RENAL",
+      "TERATOGENE"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xeractan-20-mg-capsule-molle",
+    "composition": [
+      {
+        "name": "Isotrétinoïne 10 mg / 20 mg gélule molle",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xeractan_isotretinoine_20_mg",
+    "mechanism": "Rétinoïde oral : réduction de la production de sébum.",
+    "half_life": "19-20 heures"
+  },
+  {
+    "id": "xerium_20_mg_10_ml_suspension_buvable_p",
+    "brand_name": "XERIUM",
+    "generic_name": "Prednisolone",
+    "strength": "20 MG / 10 ML",
+    "form": "Suspension buvable [P]",
+    "route": "Orale",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticostéroïdes",
+    "drug_class": "Glucocorticoïde",
+    "indications": [
+      "Affections inflammatoires"
+    ],
+    "contraindications": [
+      "Infection non contrôlée"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 111.9,
+        "price_ph": null,
+        "packaging": "Flacon de 150 ML",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 111.9
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hyperglycémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Aspirine"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ risque ulcère GI hémorragie",
+        "recommendation": "Associer IPP systématiquement"
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants",
+          "BCG"
+        ],
+        "interacting_classes": [
+          "Vaccins vivants"
+        ],
+        "severity": "DANGER",
+        "effect": "CI absolue sous corticoïde systémique",
+        "recommendation": "Vacciner avant traitement"
+      },
+      {
+        "interacting_drugs": [
+          "Antidiabétiques",
+          "Insuline"
+        ],
+        "interacting_classes": [
+          "Hypoglycémiants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ glycémie",
+        "recommendation": "Adapter doses antidiabétiques"
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Élévation réciproque des taux (CYP3A4)",
+        "recommendation": "Surveiller ciclosporinémie"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xerium-20-mg-10-ml-suspension-buvable-p",
+    "composition": [
+      {
+        "name": "Prednisolone 5 mg / 20 mg comprimé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xerium_prednisolone_20_mg_10_ml",
+    "mechanism": "Corticostéroïde de synthèse.",
+    "half_life": "2-3 heures"
+  },
+  {
+    "id": "xerium_20_mg_comprim_s_cable_p",
+    "brand_name": "XERIUM",
+    "generic_name": "Prednisolone",
+    "strength": "20 MG",
+    "form": "Comprimé sécable [P]",
+    "route": "Orale",
+    "atc_code": "H02AB06",
+    "therapeutic_group": "Corticostéroïdes",
+    "drug_class": "Glucocorticoïde",
+    "indications": [
+      "Affections inflammatoires"
+    ],
+    "contraindications": [
+      "Infection non contrôlée"
+    ],
+    "interactions": [
+      "AINS"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 115.1,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 115.1
+      },
+      {
+        "price": 65.4,
+        "price_ph": null,
+        "packaging": "Boite de 14",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 65.4
+      },
+      {
+        "price": 202,
+        "price_ph": null,
+        "packaging": "Boite de 56",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 202
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hyperglycémie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Aspirine"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↑↑ risque ulcère GI hémorragie",
+        "recommendation": "Associer IPP systématiquement"
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants",
+          "BCG"
+        ],
+        "interacting_classes": [
+          "Vaccins vivants"
+        ],
+        "severity": "DANGER",
+        "effect": "CI absolue sous corticoïde systémique",
+        "recommendation": "Vacciner avant traitement"
+      },
+      {
+        "interacting_drugs": [
+          "Antidiabétiques",
+          "Insuline"
+        ],
+        "interacting_classes": [
+          "Hypoglycémiants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ glycémie",
+        "recommendation": "Adapter doses antidiabétiques"
+      },
+      {
+        "interacting_drugs": [
+          "Ciclosporine"
+        ],
+        "interacting_classes": [
+          "Immunosuppresseurs"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Élévation réciproque des taux (CYP3A4)",
+        "recommendation": "Surveiller ciclosporinémie"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xerium-20-mg-comprime-secable-p",
+    "composition": [
+      {
+        "name": "Prednisolone 5 mg / 20 mg comprimé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xerium_prednisolone_20_mg",
+    "mechanism": "Corticostéroïde de synthèse.",
+    "half_life": "2-3 heures"
+  },
+  {
+    "id": "xetap_10_mg_comprim_pellicul_s_cable_p",
+    "brand_name": "XETAP",
+    "generic_name": "Paroxétine",
+    "strength": "10 MG",
+    "form": "Comprimé pelliculé sécable [P]",
+    "route": "Orale",
+    "atc_code": "N06AB05",
+    "therapeutic_group": "Antidépresseurs",
+    "drug_class": "ISRS",
+    "indications": [
+      "Dépression",
+      "TAG",
+      "TOC",
+      "Trouble panique",
+      "Phobie sociale",
+      "ESPT"
+    ],
+    "contraindications": [
+      "IMAO (14j wash-out)",
+      "Pimozide",
+      "Thioridazine"
+    ],
+    "interactions": [
+      "IMAO"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Risque malformatif cardiaque 1er T. Syndrome sevrage néonatal 3e T.",
+      "breastfeeding": "Passage lait. Prudence."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI < 18 ans (risque suicidaire).",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: max 20 mg/j."
+    },
+    "dosage": {
+      "adult": "Dépression: 20 mg/j (max 50 mg). Anxiété: 20-50 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 47.7,
+        "price_ph": null,
+        "packaging": "Boite de 10",
+        "laboratory": "SPIMACO",
+        "price_ppv_dhs": 47.7
+      },
+      {
+        "price": 122.4,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "SPIMACO",
+        "price_ppv_dhs": 122.4
+      }
+    ],
+    "drugbank_id": "DB00715",
+    "adverse_effects": [
+      "Nausées",
+      "Troubles sexuels",
+      "Prise de poids",
+      "Syndrome de sevrage (le pire des ISRS)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Syndrome sérotoninergique fatal",
+        "recommendation": "CI. Wash-out 14j."
+      },
+      {
+        "interacting_drugs": [
+          "Tamoxifène"
+        ],
+        "interacting_classes": [
+          "Anti-œstrogènes"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Perte efficacité tamoxifène (inhibition CYP2D6)",
+        "recommendation": "UTILISER escitalopram ou venlafaxine."
+      },
+      {
+        "interacting_drugs": [
+          "Tramadol"
+        ],
+        "interacting_classes": [
+          "Opioïdes sérotoninergiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Syndrome sérotoninergique + convulsions",
+        "recommendation": "Éviter."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Aspirine"
+        ],
+        "interacting_classes": [
+          "AINS/Antiagrégants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Surveiller saignements."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xetap-10-mg-comprime-pellicule-secable-p",
+    "composition": [
+      {
+        "name": "Paroxétine HCl 10 mg / 20 mg comprimé pelliculé (ISRS)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xetap_paroxetine_10_mg",
+    "mechanism": "ISRS.",
+    "half_life": "24 heures"
+  },
+  {
+    "id": "xetap_20_mg_comprim_pellicul_s_cable_p",
+    "brand_name": "XETAP",
+    "generic_name": "Paroxétine",
+    "strength": "20 MG",
+    "form": "Comprimé pelliculé sécable [P]",
+    "route": "Orale",
+    "atc_code": "N06AB05",
+    "therapeutic_group": "Antidépresseurs",
+    "drug_class": "ISRS",
+    "indications": [
+      "Dépression",
+      "TAG",
+      "TOC",
+      "Trouble panique",
+      "Phobie sociale",
+      "ESPT"
+    ],
+    "contraindications": [
+      "IMAO (14j wash-out)",
+      "Pimozide",
+      "Thioridazine"
+    ],
+    "interactions": [
+      "IMAO"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "Risque malformatif cardiaque 1er T. Syndrome sevrage néonatal 3e T.",
+      "breastfeeding": "Passage lait. Prudence."
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "CI < 18 ans (risque suicidaire).",
+      "dose_rule": "Non recommandé."
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": "ClCr <30: max 20 mg/j."
+    },
+    "dosage": {
+      "adult": "Dépression: 20 mg/j (max 50 mg). Anxiété: 20-50 mg/j.",
+      "children": "Non recommandé."
+    },
+    "market_data": [
+      {
+        "price": 178.2,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "SPIMACO",
+        "price_ppv_dhs": 178.2
+      }
+    ],
+    "drugbank_id": "DB00715",
+    "adverse_effects": [
+      "Nausées",
+      "Troubles sexuels",
+      "Prise de poids",
+      "Syndrome de sevrage (le pire des ISRS)"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Syndrome sérotoninergique fatal",
+        "recommendation": "CI. Wash-out 14j."
+      },
+      {
+        "interacting_drugs": [
+          "Tamoxifène"
+        ],
+        "interacting_classes": [
+          "Anti-œstrogènes"
+        ],
+        "severity": "CONTRE_INDIQUE",
+        "effect": "Perte efficacité tamoxifène (inhibition CYP2D6)",
+        "recommendation": "UTILISER escitalopram ou venlafaxine."
+      },
+      {
+        "interacting_drugs": [
+          "Tramadol"
+        ],
+        "interacting_classes": [
+          "Opioïdes sérotoninergiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Syndrome sérotoninergique + convulsions",
+        "recommendation": "Éviter."
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Aspirine"
+        ],
+        "interacting_classes": [
+          "AINS/Antiagrégants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Risque hémorragique accru",
+        "recommendation": "Surveiller saignements."
+      }
+    ],
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "tableau_maroc": "A",
+    "market_url": "https://www.medicament.ma/medicament/xetap-20-mg-comprime-pellicule-secable-p",
+    "composition": [
+      {
+        "name": "Paroxétine HCl 10 mg / 20 mg comprimé pelliculé (ISRS)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xetap_paroxetine_20_mg",
+    "mechanism": "ISRS.",
+    "half_life": "24 heures"
+  },
+  {
+    "id": "xgeva_120_mg_solution_injectable",
+    "brand_name": "XGEVA",
+    "generic_name": "Dénosumab",
+    "strength": "120 MG",
+    "form": "Solution injectable",
+    "route": "SC",
+    "atc_code": "M05BX04",
+    "therapeutic_group": "Médicaments de l'os",
+    "drug_class": "Anticorps anti-RANKL",
+    "indications": [
+      "Ostéoporose",
+      "Métastases osseuses",
+      "Tumeur à cellules géantes de l'os"
+    ],
+    "contraindications": [
+      "Hypocalcémie non corrigée"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 3480,
+        "price_ph": null,
+        "packaging": "Boite de 1 flacon de 1.7 ml",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 3480
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypocalcémie",
+      "Ostéonécrose de la mâchoire (rare)",
+      "Fractures fémorales atypiques"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Biphosphonates",
+          "Zolédronate"
+        ],
+        "interacting_classes": [
+          "Antirésorbeurs"
+        ],
+        "severity": "DANGER",
+        "effect": "Ostéonécrose de la mâchoire additive",
+        "recommendation": "Éviter association — bilan dentaire avant"
+      },
+      {
+        "interacting_drugs": [
+          "Médicaments hypocalcémiants",
+          "Cinacalcet"
+        ],
+        "interacting_classes": [
+          "Hypocalcémiants"
+        ],
+        "severity": "DANGER",
+        "effect": "Hypocalcémie sévère",
+        "recommendation": "Surveiller calcémie + vitD + Mg²⁺"
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "Immunosuppression modérée",
+        "recommendation": "Vacciner avant traitement"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xgeva-120-mg-solution-injectable",
+    "composition": [
+      {
+        "name": "Dénosumab 120 mg/1,7 mL solution injectable SC",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xgeva_denosumab_120_mg",
+    "mechanism": "Anticorps monoclonal anti-RANKL : inhibition de la formation, fonction et survie des ostéoclastes → réduction de la résorption osseuse.",
+    "half_life": "26 jours"
+  },
+  {
+    "id": "xilam_10_mg_160_mg_comprim_pellicul",
+    "brand_name": "XILAM",
+    "generic_name": "Amlodipine + Valsartan",
+    "strength": "10 MG / 160 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DB01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "IC + ARA2",
+    "indications": [
+      "Hypertension artérielle"
+    ],
+    "contraindications": [
+      "Grossesse"
+    ],
+    "interactions": [
+      "Diurétiques épargneurs de potassium"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 185.2,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 185.2
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Œdèmes",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ effet ARA2 + ↑ risque IRA",
+        "recommendation": "Surveiller PA et créatinine"
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithiémie",
+        "recommendation": "Surveiller lithiémie"
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine"
+        ],
+        "interacting_classes": [
+          "Statines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux simvastatine (amlodipine inhibe CYP3A4)",
+        "recommendation": "Dose max simvastatine 20 mg"
+      },
+      {
+        "interacting_drugs": [
+          "Diurétiques épargneurs K⁺"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie (ARA2)",
+        "recommendation": "Surveiller K⁺"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xilam-10-mg-160-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Amlodipine bésylate 5 mg / 10 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan 80 mg / 160 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xilam_amlodipine_valsartan_10_mg_160_mg",
+    "mechanism": "Inhibiteur calcique + antagoniste AT1.",
+    "half_life": "amlodipine ~30-50h, valsartan ~6h"
+  },
+  {
+    "id": "xilam_5_mg_160_mg_comprim_pellicul",
+    "brand_name": "XILAM",
+    "generic_name": "Amlodipine + Valsartan",
+    "strength": "5 MG / 160 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DB01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "IC + ARA2",
+    "indications": [
+      "Hypertension artérielle"
+    ],
+    "contraindications": [
+      "Grossesse"
+    ],
+    "interactions": [
+      "Diurétiques épargneurs de potassium"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 185.2,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 185.2
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Œdèmes",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ effet ARA2 + ↑ risque IRA",
+        "recommendation": "Surveiller PA et créatinine"
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithiémie",
+        "recommendation": "Surveiller lithiémie"
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine"
+        ],
+        "interacting_classes": [
+          "Statines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux simvastatine (amlodipine inhibe CYP3A4)",
+        "recommendation": "Dose max simvastatine 20 mg"
+      },
+      {
+        "interacting_drugs": [
+          "Diurétiques épargneurs K⁺"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie (ARA2)",
+        "recommendation": "Surveiller K⁺"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xilam-5-mg-160-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Amlodipine bésylate 5 mg / 10 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan 80 mg / 160 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xilam_amlodipine_valsartan_5_mg_160_mg",
+    "mechanism": "Inhibiteur calcique + antagoniste AT1.",
+    "half_life": "amlodipine ~30-50h, valsartan ~6h"
+  },
+  {
+    "id": "xilam_5_mg_80_mg_comprim_pellicul",
+    "brand_name": "XILAM",
+    "generic_name": "Amlodipine + Valsartan",
+    "strength": "5 MG / 80 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DB01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "IC + ARA2",
+    "indications": [
+      "Hypertension artérielle"
+    ],
+    "contraindications": [
+      "Grossesse"
+    ],
+    "interactions": [
+      "Diurétiques épargneurs de potassium"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 151.6,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 151.6
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Œdèmes",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ effet ARA2 + ↑ risque IRA",
+        "recommendation": "Surveiller PA et créatinine"
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithiémie",
+        "recommendation": "Surveiller lithiémie"
+      },
+      {
+        "interacting_drugs": [
+          "Simvastatine"
+        ],
+        "interacting_classes": [
+          "Statines"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ taux simvastatine (amlodipine inhibe CYP3A4)",
+        "recommendation": "Dose max simvastatine 20 mg"
+      },
+      {
+        "interacting_drugs": [
+          "Diurétiques épargneurs K⁺"
+        ],
+        "interacting_classes": [
+          "Diurétiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Hyperkaliémie (ARA2)",
+        "recommendation": "Surveiller K⁺"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xilam-5-mg-80-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Amlodipine bésylate 5 mg / 10 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan 80 mg / 160 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xilam_amlodipine_valsartan_5_mg_80_mg",
+    "mechanism": "Inhibiteur calcique + antagoniste AT1.",
+    "half_life": "amlodipine ~30-50h, valsartan ~6h"
+  },
+  {
+    "id": "xilam_hct_10_mg_160_mg_12_5_mg_comprim_pellicul",
+    "brand_name": "XILAM HCT",
+    "generic_name": "Amlodipine + Valsartan + Hydrochlorothiazide",
+    "strength": "10 MG / 160 MG / 12.5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DX01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "Triple association IC + ARA2 + thiazidique",
+    "indications": [
+      "Hypertension artérielle non contrôlée"
+    ],
+    "contraindications": [
+      "Grossesse, insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Lithium",
+      "Diurétiques épargneurs de potassium"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 185.2,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 185.2
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypokaliémie",
+      "Œdèmes",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ effet ARA2 + ↑ risque IRA",
+        "recommendation": "Surveiller PA et créatinine"
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithiémie (ARA2 + thiazide)",
+        "recommendation": "Surveiller lithiémie"
+      },
+      {
+        "interacting_drugs": [
+          "Antiarythmiques QT",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Torsades de pointes (hypokaliémie thiazide)",
+        "recommendation": "Surveiller K⁺ et ECG"
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren (IRC/DT)"
+        ],
+        "interacting_classes": [
+          "Anti-HTA"
+        ],
+        "severity": "DANGER",
+        "effect": "Triple bloc SRA — CI",
+        "recommendation": "CI chez diabétique/IRC"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xilam-hct-10-mg-160-mg-12-5-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Amlodipine bésylate 5 mg / 10 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan 160 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Hydrochlorothiazide 12,5 mg / 25 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xilam_hct_amlodipine_valsartan_hydrochlorothiazide_10_mg_160_mg_12_5_mg",
+    "mechanism": "Trithérapie antihypertensive.",
+    "half_life": "variable selon composants"
+  },
+  {
+    "id": "xilam_hct_10_mg_160_mg_25_mg_comprim_pellicul",
+    "brand_name": "XILAM HCT",
+    "generic_name": "Amlodipine + Valsartan + Hydrochlorothiazide",
+    "strength": "10 MG / 160 MG / 25 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DX01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "Triple association IC + ARA2 + thiazidique",
+    "indications": [
+      "Hypertension artérielle non contrôlée"
+    ],
+    "contraindications": [
+      "Grossesse, insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Lithium",
+      "Diurétiques épargneurs de potassium"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 185.2,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 185.2
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypokaliémie",
+      "Œdèmes",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ effet ARA2 + ↑ risque IRA",
+        "recommendation": "Surveiller PA et créatinine"
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithiémie (ARA2 + thiazide)",
+        "recommendation": "Surveiller lithiémie"
+      },
+      {
+        "interacting_drugs": [
+          "Antiarythmiques QT",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Torsades de pointes (hypokaliémie thiazide)",
+        "recommendation": "Surveiller K⁺ et ECG"
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren (IRC/DT)"
+        ],
+        "interacting_classes": [
+          "Anti-HTA"
+        ],
+        "severity": "DANGER",
+        "effect": "Triple bloc SRA — CI",
+        "recommendation": "CI chez diabétique/IRC"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xilam-hct-10-mg-160-mg-25-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Amlodipine bésylate 5 mg / 10 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan 160 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Hydrochlorothiazide 12,5 mg / 25 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xilam_hct_amlodipine_valsartan_hydrochlorothiazide_10_mg_160_mg_25_mg",
+    "mechanism": "Trithérapie antihypertensive.",
+    "half_life": "variable selon composants"
+  },
+  {
+    "id": "xilam_hct_5_mg_160_mg_12_5_mg_comprim_pellicul",
+    "brand_name": "XILAM HCT",
+    "generic_name": "Amlodipine + Valsartan + Hydrochlorothiazide",
+    "strength": "5 MG / 160 MG / 12.5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DX01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "Triple association IC + ARA2 + thiazidique",
+    "indications": [
+      "Hypertension artérielle non contrôlée"
+    ],
+    "contraindications": [
+      "Grossesse, insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Lithium",
+      "Diurétiques épargneurs de potassium"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 182.1,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 182.1
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypokaliémie",
+      "Œdèmes",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ effet ARA2 + ↑ risque IRA",
+        "recommendation": "Surveiller PA et créatinine"
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithiémie (ARA2 + thiazide)",
+        "recommendation": "Surveiller lithiémie"
+      },
+      {
+        "interacting_drugs": [
+          "Antiarythmiques QT",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Torsades de pointes (hypokaliémie thiazide)",
+        "recommendation": "Surveiller K⁺ et ECG"
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren (IRC/DT)"
+        ],
+        "interacting_classes": [
+          "Anti-HTA"
+        ],
+        "severity": "DANGER",
+        "effect": "Triple bloc SRA — CI",
+        "recommendation": "CI chez diabétique/IRC"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xilam-hct-5-mg-160-mg-12-5-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Amlodipine bésylate 5 mg / 10 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan 160 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Hydrochlorothiazide 12,5 mg / 25 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xilam_hct_amlodipine_valsartan_hydrochlorothiazide_5_mg_160_mg_12_5_mg",
+    "mechanism": "Trithérapie antihypertensive.",
+    "half_life": "variable selon composants"
+  },
+  {
+    "id": "xilam_hct_5_mg_160_mg_25_mg_comprim_pellicul",
+    "brand_name": "XILAM HCT",
+    "generic_name": "Amlodipine + Valsartan + Hydrochlorothiazide",
+    "strength": "5 MG / 160 MG / 25 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "C09DX01",
+    "therapeutic_group": "Antihypertenseurs",
+    "drug_class": "Triple association IC + ARA2 + thiazidique",
+    "indications": [
+      "Hypertension artérielle non contrôlée"
+    ],
+    "contraindications": [
+      "Grossesse, insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Lithium",
+      "Diurétiques épargneurs de potassium"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 185.2,
+        "price_ph": null,
+        "packaging": "Boite de 28",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 185.2
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Hypokaliémie",
+      "Œdèmes",
+      "Hypotension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "AINS"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ effet ARA2 + ↑ risque IRA",
+        "recommendation": "Surveiller PA et créatinine"
+      },
+      {
+        "interacting_drugs": [
+          "Lithium"
+        ],
+        "interacting_classes": [
+          "Thymorégulateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ lithiémie (ARA2 + thiazide)",
+        "recommendation": "Surveiller lithiémie"
+      },
+      {
+        "interacting_drugs": [
+          "Antiarythmiques QT",
+          "Amiodarone"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Torsades de pointes (hypokaliémie thiazide)",
+        "recommendation": "Surveiller K⁺ et ECG"
+      },
+      {
+        "interacting_drugs": [
+          "Aliskiren (IRC/DT)"
+        ],
+        "interacting_classes": [
+          "Anti-HTA"
+        ],
+        "severity": "DANGER",
+        "effect": "Triple bloc SRA — CI",
+        "recommendation": "CI chez diabétique/IRC"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xilam-hct-5-mg-160-mg-25-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Amlodipine bésylate 5 mg / 10 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Valsartan 160 mg",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Hydrochlorothiazide 12,5 mg / 25 mg",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xilam_hct_amlodipine_valsartan_hydrochlorothiazide_5_mg_160_mg_25_mg",
+    "mechanism": "Trithérapie antihypertensive.",
+    "half_life": "variable selon composants"
+  },
+  {
+    "id": "xiloial_solution_ophtalmique",
+    "brand_name": "XILOIAL",
+    "generic_name": "Hyaluronate + Xyloglucane (collyre)",
+    "strength": "",
+    "form": "Solution ophtalmique",
+    "route": "Ophtalmique",
+    "atc_code": "S01XA20",
+    "therapeutic_group": "Larmes artificielles",
+    "drug_class": "Lubrifiant ophtalmique",
+    "indications": [
+      "Sécheresse oculaire sévère"
+    ],
+    "contraindications": [
+      "Hypersensibilité"
+    ],
+    "interactions": [
+      "Espacer avec autres collyres"
+    ],
+    "pregnancy": {
+      "category": "A",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": null,
+        "price_ph": 83.34,
+        "packaging": "Flacon de 10 ML",
+        "laboratory": "PHI",
+        "price_ppv_dhs": 83.34
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Vision trouble transitoire"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Autres collyres"
+        ],
+        "interacting_classes": [
+          "Ophtalmiques"
+        ],
+        "severity": "INFO",
+        "effect": "Espacer instillations de 5 min",
+        "recommendation": "Absorption systémique négligeable"
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "LUBRIFIANT_OCULAIRE",
+      "USAGE_LOCAL",
+      "GROSSESSE_COMPATIBLE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xiloial-solution-ophtalmique",
+    "composition": [
+      {
+        "name": "Hyaluronate de sodium 2 mg/mL",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Xyloglucane 1,7 mg/mL collyre",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xiloial_hyaluronate_xyloglucane_collyre",
+    "mechanism": "Substitut lacrymal biomimétique.",
+    "half_life": "action locale"
+  },
+  {
+    "id": "xola_2_solution_ophtalmique",
+    "brand_name": "XOLA",
+    "generic_name": "Dorzolamide (collyre)",
+    "strength": "2 %",
+    "form": "Solution ophtalmique",
+    "route": "Ophtalmique",
+    "atc_code": "S01EC03",
+    "therapeutic_group": "Antiglaucomateux",
+    "drug_class": "Inhibiteur anhydrase carbonique topique",
+    "indications": [
+      "Glaucome à angle ouvert"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Inhibiteurs de l'anhydrase carbonique oraux"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 89,
+        "price_ph": null,
+        "packaging": "Flacon de 5 ml",
+        "laboratory": "BOTTU S.A.",
+        "price_ppv_dhs": 89
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Sensation de brûlure oculaire",
+      "Goût amer"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inhibiteurs anhydrase carbonique systémiques",
+          "Acétazolamide"
+        ],
+        "interacting_classes": [
+          "IAC systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Inhibition AC cumulative → acidose métabolique",
+        "recommendation": "CI double inhibition AC systémique + locale"
+      },
+      {
+        "interacting_drugs": [
+          "Autres collyres"
+        ],
+        "interacting_classes": [
+          "Ophtalmiques"
+        ],
+        "severity": "INFO",
+        "effect": "Espacer instillations de 5 min",
+        "recommendation": "Pas d'interaction systémique significative"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xola-2-solution-ophtalmique",
+    "composition": [
+      {
+        "name": "Dorzolamide HCl 20 mg/mL (2%) collyre",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xola_dorzolamide_collyre_2",
+    "mechanism": "Inhibiteur de l'anhydrase carbonique topique.",
+    "half_life": "action locale"
+  },
+  {
+    "id": "xolamol_collyre",
+    "brand_name": "XOLAMOL",
+    "generic_name": "Dorzolamide + Timolol (collyre)",
+    "strength": "",
+    "form": "Collyre",
+    "route": "Ophtalmique",
+    "atc_code": "S01ED51",
+    "therapeutic_group": "Antiglaucomateux",
+    "drug_class": "IAC + bêta-bloquant ophtalmique",
+    "indications": [
+      "Glaucome à angle ouvert"
+    ],
+    "contraindications": [
+      "Asthme, bloc AV"
+    ],
+    "interactions": [
+      "Bêta-bloquants systémiques"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 103.4,
+        "price_ph": null,
+        "packaging": "Flacon de 5 ml",
+        "laboratory": "BOTTU S.A.",
+        "price_ppv_dhs": 103.4
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Sensation de brûlure oculaire",
+      "Bradycardie"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inhibiteurs AC systémiques",
+          "Acétazolamide"
+        ],
+        "interacting_classes": [
+          "IAC systémiques"
+        ],
+        "severity": "DANGER",
+        "effect": "IAC cumulatif → acidose métabolique",
+        "recommendation": "CI double inhibition AC"
+      },
+      {
+        "interacting_drugs": [
+          "Bêtabloquants systémiques"
+        ],
+        "interacting_classes": [
+          "Bêtabloquants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie additive (timolol absorbé)",
+        "recommendation": "Surveiller ECG"
+      },
+      {
+        "interacting_drugs": [
+          "Vérapamil",
+          "Diltiazem"
+        ],
+        "interacting_classes": [
+          "Anticalciques bradycardisants"
+        ],
+        "severity": "DANGER",
+        "effect": "Bradycardie + BAV additif",
+        "recommendation": "Surveiller ECG"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xolamol-collyre",
+    "composition": [
+      {
+        "name": "Dorzolamide HCl 20 mg/mL (2%)",
+        "inn": "",
+        "dose": ""
+      },
+      {
+        "name": "Maléate de timolol 5 mg/mL collyre",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xolamol_dorzolamide_timolol_collyre",
+    "mechanism": "Double réduction de la production d'humeur aqueuse.",
+    "half_life": "action locale"
+  },
+  {
+    "id": "xtandi_40_mg_capsule_molle",
+    "brand_name": "XTANDI",
+    "generic_name": "Enzalutamide",
+    "strength": "40 MG",
+    "form": "Capsule molle",
+    "route": "Orale",
+    "atc_code": "L02BB04",
+    "therapeutic_group": "Antinéoplasiques hormonaux",
+    "drug_class": "Antagoniste récepteurs androgènes (2e gén.)",
+    "indications": [
+      "Cancer de la prostate métastatique résistant à la castration"
+    ],
+    "contraindications": [
+      "Grossesse (chez la partenaire)"
+    ],
+    "interactions": [
+      "Inducteur puissant du CYP3A4 (nombreuses interactions)"
+    ],
+    "pregnancy": {
+      "category": "X",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 30353,
+        "price_ph": 29953,
+        "packaging": "Boite de 112",
+        "laboratory": "LAPROPHAN",
+        "price_ppv_dhs": 30353
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Fatigue",
+      "Bouffées de chaleur",
+      "Risque convulsivant (rare)",
+      "Hypertension"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Inducteurs CYP2C8",
+          "Rifampicine",
+          "Carbamazépine"
+        ],
+        "interacting_classes": [
+          "Inducteurs CYP2C8/3A4"
+        ],
+        "severity": "DANGER",
+        "effect": "↓↓ AUC enzalutamide",
+        "recommendation": "Éviter association"
+      },
+      {
+        "interacting_drugs": [
+          "Substrats CYP3A4/2C9/2C19",
+          "Warfarine",
+          "Midazolam",
+          "Oméprazole"
+        ],
+        "interacting_classes": [
+          "Substrats CYP"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ taux médicaments métabolisés CYP (inducteur puissant)",
+        "recommendation": "Surveiller efficacité médicaments associés"
+      },
+      {
+        "interacting_drugs": [
+          "Médicaments abaissant le seuil épileptogène"
+        ],
+        "interacting_classes": [
+          "Épileptogènes"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ risque convulsions (enzalutamide épileptogène)",
+        "recommendation": "Éviter — CI si ATCD épilepsie non contrôlée"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_CONTRE_INDIQUE",
+      "TERATOGENE",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xtandi-40-mg-capsule-molle",
+    "composition": [
+      {
+        "name": "Enzalutamide 40 mg / 80 mg gélule / comprimé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xtandi_enzalutamide_40_mg",
+    "mechanism": "Antagoniste puissant du récepteur aux androgènes : inhibe la translocation nucléaire et la liaison à l'ADN du récepteur (cancer de la prostate).",
+    "half_life": "5.8 jours"
+  },
+  {
+    "id": "xycet_0_5_mg_ml_sirop",
+    "brand_name": "XYCET",
+    "generic_name": "Lévocétirizine",
+    "strength": "0.5 MG / ML",
+    "form": "Sirop",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (énantiomère actif cétirizine)",
+    "indications": [
+      "Rhinite allergique, urticaire"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 33.7,
+        "price_ph": null,
+        "packaging": "Flacon de 120 ml",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 33.7
+      },
+      {
+        "price": 22.6,
+        "price_ph": null,
+        "packaging": "Flacon de 60 ml",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 22.6
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence légère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ légère exposition lévocétirizine",
+        "recommendation": "Pas de précaution particulière aux doses normales"
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "INFO",
+        "effect": "Sédation possible à hautes doses",
+        "recommendation": "Prudence conduite"
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xycet-0-5-mg-ml-sirop",
+    "composition": [
+      {
+        "name": "Dichlorhydrate de lévocétirizine 5 mg / 2,5 mg/5 mL",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xycet_levocetirizine_0_5_mg_ml",
+    "mechanism": "Antihistaminique H1 de 2e génération.",
+    "half_life": "7-10 heures"
+  },
+  {
+    "id": "xycet_5_mg_comprim_enrob",
+    "brand_name": "XYCET",
+    "generic_name": "Lévocétirizine",
+    "strength": "5 MG",
+    "form": "Comprimé enrobé",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (énantiomère actif cétirizine)",
+    "indications": [
+      "Rhinite allergique, urticaire"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 70.6,
+        "price_ph": null,
+        "packaging": "Boite de 30",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 70.6
+      },
+      {
+        "price": 40.1,
+        "price_ph": null,
+        "packaging": "Boite de 15",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 40.1
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence légère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ légère exposition lévocétirizine",
+        "recommendation": "Pas de précaution particulière aux doses normales"
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "INFO",
+        "effect": "Sédation possible à hautes doses",
+        "recommendation": "Prudence conduite"
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xycet-5-mg-comprime-enrobe",
+    "composition": [
+      {
+        "name": "Dichlorhydrate de lévocétirizine 5 mg / 2,5 mg/5 mL",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xycet_levocetirizine_5_mg",
+    "mechanism": "Antihistaminique H1 de 2e génération.",
+    "half_life": "7-10 heures"
+  },
+  {
+    "id": "xycet_5_mg_comprim_s_enrob_s",
+    "brand_name": "XYCET",
+    "generic_name": "Lévocétirizine",
+    "strength": "5 MG",
+    "form": "Comprimés enrobés",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (énantiomère actif cétirizine)",
+    "indications": [
+      "Rhinite allergique, urticaire"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 136.4,
+        "price_ph": null,
+        "packaging": "Boite de 60",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 136.4
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence légère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp/CYP3A4"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ légère exposition lévocétirizine",
+        "recommendation": "Pas de précaution particulière aux doses normales"
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "INFO",
+        "effect": "Sédation possible à hautes doses",
+        "recommendation": "Prudence conduite"
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xycet-5-mg-comprimes-enrobes",
+    "composition": [
+      {
+        "name": "Dichlorhydrate de lévocétirizine 5 mg / 2,5 mg/5 mL",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xycet_levocetirizine_5_mg_2",
+    "mechanism": "Antihistaminique H1 de 2e génération.",
+    "half_life": "7-10 heures"
+  },
+  {
+    "id": "xyflo_400_mg_comprim_enrob",
+    "brand_name": "XYFLO",
+    "generic_name": "Moxifloxacine",
+    "strength": "400 MG",
+    "form": "Comprimé enrobé",
+    "route": "Orale",
+    "atc_code": "J01MA14",
+    "therapeutic_group": "Fluoroquinolones",
+    "drug_class": "FQ 4e gén. (anti-pneumococcique)",
+    "indications": [
+      "Infections respiratoires sévères"
+    ],
+    "contraindications": [
+      "Allongement QT"
+    ],
+    "interactions": [
+      "QT-longs"
+    ],
+    "pregnancy": {
+      "category": "C",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 182.5,
+        "price_ph": null,
+        "packaging": "Boite de 7",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 182.5
+      },
+      {
+        "price": 130.3,
+        "price_ph": null,
+        "packaging": "Boite de 5",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 130.3
+      },
+      {
+        "price": 229,
+        "price_ph": null,
+        "packaging": "Boite de 10",
+        "laboratory": "PROMOPHARM (HIKMA)",
+        "price_ppv_dhs": 229
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Tendinopathies",
+      "Allongement QT"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "QT-allongeurs",
+          "Amiodarone",
+          "Sotalol",
+          "Antipsychotiques"
+        ],
+        "interacting_classes": [
+          "Allongeurs QT"
+        ],
+        "severity": "DANGER",
+        "effect": "↑ QTc additif — torsades de pointes",
+        "recommendation": "CI si QTc allongé — surveiller ECG"
+      },
+      {
+        "interacting_drugs": [
+          "AVK",
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "Anticoagulants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ INR",
+        "recommendation": "Surveiller INR"
+      },
+      {
+        "interacting_drugs": [
+          "AINS",
+          "Ibuprofène"
+        ],
+        "interacting_classes": [
+          "AINS"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ risque convulsions",
+        "recommendation": "Prudence chez épileptique"
+      },
+      {
+        "interacting_drugs": [
+          "Antiacides",
+          "Cations bivalents"
+        ],
+        "interacting_classes": [
+          "Chélateurs"
+        ],
+        "severity": "DANGER",
+        "effect": "↓ absorption moxifloxacine",
+        "recommendation": "Espacer de 4h"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_PRUDENCE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xyflo-400-mg-comprime-enrobe",
+    "composition": [
+      {
+        "name": "Moxifloxacine HCl 400 mg comprimé pelliculé",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xyflo_moxifloxacine_400_mg",
+    "mechanism": "Fluoroquinolone de 4e génération.",
+    "half_life": "12 heures"
+  },
+  {
+    "id": "xylatin_100_mg_poudre_pour_solution",
+    "brand_name": "XYLATIN",
+    "generic_name": "Oxaliplatine",
+    "strength": "100 MG",
+    "form": "Poudre pour solution",
+    "route": "IV",
+    "atc_code": "L01XA03",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Sel de platine (3e gén.)",
+    "indications": [
+      "Cancer colorectal métastatique/adjuvant"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère",
+      "Neuropathie sévère préexistante"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1866,
+        "price_ph": 1308.3,
+        "packaging": "Poudre pour flacon de 20 ml",
+        "laboratory": "ZENITH PHARMA",
+        "price_ppv_dhs": 1866
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Neuropathie périphérique sensitive (dose-limitante, aggravée par le froid)",
+      "Myélosuppression",
+      "Réactions allergiques"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "5-FU",
+          "Capécitabine"
+        ],
+        "interacting_classes": [
+          "Fluoropyrimidines"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité neurologique et hématologique cumulative",
+        "recommendation": "Surveiller NFS et neurologie — protocole FOLFOX"
+      },
+      {
+        "interacting_drugs": [
+          "Néphrotoxiques",
+          "AINS",
+          "Aminosides"
+        ],
+        "interacting_classes": [
+          "Néphrotoxiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité rénale cumulative",
+        "recommendation": "Éviter — bonne hydratation IV obligatoire"
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins vivants"
+        ],
+        "severity": "DANGER",
+        "effect": "CI sous chimiothérapie",
+        "recommendation": "Vacciner avant traitement"
+      },
+      {
+        "interacting_drugs": [
+          "Anticoagulants",
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "Anticoagulants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ risque hémorragique (thrombopénie)",
+        "recommendation": "Surveiller NFS et INR"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xylatin-100-mg-poudre-pour-solution",
+    "composition": [
+      {
+        "name": "Oxaliplatine 5 mg/mL poudre pour solution IV (50 mg / 100 mg flacon)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xylatin_oxaliplatine_100_mg",
+    "mechanism": "Dérivé du platine : formation de ponts covalents avec l'ADN (adduits) → inhibition de la réplication et transcription (cancer colorectal).",
+    "half_life": "391 heures (platine total lié)"
+  },
+  {
+    "id": "xylatin_50_mg_poudre_pour_solution",
+    "brand_name": "XYLATIN",
+    "generic_name": "Oxaliplatine",
+    "strength": "50 MG",
+    "form": "Poudre pour solution",
+    "route": "IV",
+    "atc_code": "L01XA03",
+    "therapeutic_group": "Antinéoplasiques",
+    "drug_class": "Sel de platine (3e gén.)",
+    "indications": [
+      "Cancer colorectal métastatique/adjuvant"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère",
+      "Neuropathie sévère préexistante"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "D",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": false,
+      "min_age": 18,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 1089,
+        "price_ph": 789,
+        "packaging": "Poudre pour Flacon de 10 ml",
+        "laboratory": "ZENITH PHARMA",
+        "price_ppv_dhs": 1089
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Neuropathie périphérique sensitive (dose-limitante, aggravée par le froid)",
+      "Myélosuppression",
+      "Réactions allergiques"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "5-FU",
+          "Capécitabine"
+        ],
+        "interacting_classes": [
+          "Fluoropyrimidines"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité neurologique et hématologique cumulative",
+        "recommendation": "Surveiller NFS et neurologie — protocole FOLFOX"
+      },
+      {
+        "interacting_drugs": [
+          "Néphrotoxiques",
+          "AINS",
+          "Aminosides"
+        ],
+        "interacting_classes": [
+          "Néphrotoxiques"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité rénale cumulative",
+        "recommendation": "Éviter — bonne hydratation IV obligatoire"
+      },
+      {
+        "interacting_drugs": [
+          "Vaccins vivants"
+        ],
+        "interacting_classes": [
+          "Vaccins vivants"
+        ],
+        "severity": "DANGER",
+        "effect": "CI sous chimiothérapie",
+        "recommendation": "Vacciner avant traitement"
+      },
+      {
+        "interacting_drugs": [
+          "Anticoagulants",
+          "Warfarine"
+        ],
+        "interacting_classes": [
+          "Anticoagulants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ risque hémorragique (thrombopénie)",
+        "recommendation": "Surveiller NFS et INR"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ENFANT_INTERDIT",
+      "GROSSESSE_DANGER",
+      "AJUSTEMENT_RENAL",
+      "CYTOTOXIQUE"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xylatin-50-mg-poudre-pour-solution",
+    "composition": [
+      {
+        "name": "Oxaliplatine 5 mg/mL poudre pour solution IV (50 mg / 100 mg flacon)",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xylatin_oxaliplatine_50_mg",
+    "mechanism": "Dérivé du platine : formation de ponts covalents avec l'ADN (adduits) → inhibition de la réplication et transcription (cancer colorectal).",
+    "half_life": "391 heures (platine total lié)"
+  },
+  {
+    "id": "xylonor_15_g_0_15_g_solution_pour_usage_dentaire",
+    "brand_name": "XYLONOR",
+    "generic_name": "Lidocaïne (dentaire)",
+    "strength": "15 G / 0.15 G",
+    "form": "Solution pour usage dentaire",
+    "route": "Locale",
+    "atc_code": "N01BB02",
+    "therapeutic_group": "Anesthésiques locaux",
+    "drug_class": "Anesthésique local (amide)",
+    "indications": [
+      "Anesthésie locale dentaire"
+    ],
+    "contraindications": [
+      "Allergie aux anesthésiques locaux amide"
+    ],
+    "interactions": [
+      "Autres anesthésiques locaux"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 0,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": false,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 418,
+        "price_ph": null,
+        "packaging": "Flacon pulvérisateur 36 g",
+        "laboratory": "STERIPHARMA",
+        "price_ppv_dhs": 418
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Toxicité systémique si injection intravasculaire"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Antiarythmiques",
+          "Amiodarone",
+          "Mexilétine"
+        ],
+        "interacting_classes": [
+          "Antiarythmiques de classe I"
+        ],
+        "severity": "DANGER",
+        "effect": "Toxicité cardiaque additive (effet stabilisant membranaire)",
+        "recommendation": "Surveiller ECG — doses cumulatives"
+      },
+      {
+        "interacting_drugs": [
+          "IMAO"
+        ],
+        "interacting_classes": [
+          "IMAO"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ absorption systémique lidocaïne (vasoconstriction)",
+        "recommendation": "Prudence si adrénaline associée"
+      },
+      {
+        "interacting_drugs": [
+          "Bêtabloquants"
+        ],
+        "interacting_classes": [
+          "Bêtabloquants"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↓ clairance lidocaïne → toxicité",
+        "recommendation": "Surveiller signes toxicité SNC"
+      }
+    ],
+    "tableau_maroc": "A",
+    "smart_flags": [
+      "ANESTHESIQUE_LOCAL",
+      "USAGE_EXTERNE_OR_INJECTABLE",
+      "DENTAIRE",
+      "CI_ALLERGIE_AMIDES"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xylonor-15-g-0-15-g-solution-pour-usage-dentaire",
+    "composition": [
+      {
+        "name": "Chlorhydrate de lidocaïne 2% gel dentaire / solution injectable",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xylonor_lidocaine_dentaire_15_g_0_15_g",
+    "mechanism": "Anesthésique local amide.",
+    "half_life": "1.5-2 heures"
+  },
+  {
+    "id": "xyzall_5_mg_comprim_pellicul",
+    "brand_name": "XYZALL",
+    "generic_name": "Lévocétirizine",
+    "strength": "5 MG",
+    "form": "Comprimé pelliculé",
+    "route": "Orale",
+    "atc_code": "R06AE09",
+    "therapeutic_group": "Antihistaminiques",
+    "drug_class": "Anti-H1 non sédatif (énantiomère actif cétirizine)",
+    "indications": [
+      "Rhinite allergique, urticaire"
+    ],
+    "contraindications": [
+      "Insuffisance rénale sévère"
+    ],
+    "interactions": [
+      "Aucune interaction majeure connue"
+    ],
+    "pregnancy": {
+      "category": "B",
+      "warning": "",
+      "breastfeeding": ""
+    },
+    "children": {
+      "allowed": true,
+      "min_age": 2,
+      "warning": "",
+      "dose_rule": ""
+    },
+    "renal_adjustment": {
+      "required": true,
+      "rule": ""
+    },
+    "dosage": {
+      "adult": "",
+      "children": ""
+    },
+    "market_data": [
+      {
+        "price": 74.9,
+        "price_ph": null,
+        "packaging": "Boîte de 28",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 74.9
+      },
+      {
+        "price": 37.4,
+        "price_ph": null,
+        "packaging": "Boîte de 14",
+        "laboratory": "SOTHEMA",
+        "price_ppv_dhs": 37.4
+      }
+    ],
+    "drugbank_id": "",
+    "adverse_effects": [
+      "Somnolence légère"
+    ],
+    "drug_interactions": [
+      {
+        "interacting_drugs": [
+          "Ritonavir"
+        ],
+        "interacting_classes": [
+          "Inhibiteurs P-gp"
+        ],
+        "severity": "PRUDENCE",
+        "effect": "↑ légère exposition lévocétirizine",
+        "recommendation": "Pas de précaution cliniquement significative"
+      },
+      {
+        "interacting_drugs": [
+          "Alcool"
+        ],
+        "interacting_classes": [
+          "Alcool"
+        ],
+        "severity": "INFO",
+        "effect": "Sédation possible",
+        "recommendation": "Prudence conduite"
+      }
+    ],
+    "tableau_maroc": "HTC",
+    "smart_flags": [
+      "AJUSTEMENT_RENAL"
+    ],
+    "market_url": "https://www.medicament.ma/medicament/xyzall-5-mg-comprime-pellicule",
+    "composition": [
+      {
+        "name": "Dichlorhydrate de lévocétirizine 5 mg comprimé pelliculé / 2,5 mg/5 mL solution",
+        "inn": "",
+        "dose": ""
+      }
+    ],
+    "record_id": "xyzall_levocetirizine_5_mg",
+    "mechanism": "Antihistaminique H1 de 2e génération.",
+    "half_life": "7-10 heures"
+  }
+]

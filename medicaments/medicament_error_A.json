@@ -1,0 +1,614 @@
+[
+  {
+    "id": "acdigest_gelule",
+    "brand": "ACDIGEST",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "acerumen_flacon",
+    "brand": "ACERUMEN",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "actalevure_gelule",
+    "brand": "ACTALEVURE",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "acticarbon_plus",
+    "brand": "ACTICARBON PLUS",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "acticarbon_transit",
+    "brand": "ACTICARBON TRANSIT",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "actidigest",
+    "brand": "ACTIDIGEST",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "actipetit",
+    "brand": "ACTIPETIT",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "actitrans_sirop",
+    "brand": "ACTITRANS",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "actyl_d_5ug_200ui",
+    "brand": "ACTYL D",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "acupan_20mg",
+    "brand": "ACUPAN",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "👶 Statut pédiatrique non défini"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "adacel_polio",
+    "brand": "ADACEL-POLIO",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "👶 Statut pédiatrique non défini"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "additiva_magnesium_300mg",
+    "brand": "ADDITIVA MAGNESIUM",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini"
+    ],
+    "error_count": 3
+  },
+  {
+    "id": "additiva_multivitamines",
+    "brand": "ADDITIVA MULTIVITAMINES",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "additiva_vital",
+    "brand": "ADDITIVA VITAL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 1
+  },
+  {
+    "id": "athymil_30_mg",
+    "brand": "ATHYMIL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini"
+    ],
+    "error_count": 3
+  },
+  {
+    "id": "atiaf_100_mg",
+    "brand": "ATIAF",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "atiaf_100mg",
+    "brand": "ATIAF",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "atiaf_200_mg",
+    "brand": "ATIAF",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "atiken_160_mg",
+    "brand": "ATIKEN",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "atiken_80_mg",
+    "brand": "ATIKEN",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "atopix_10_mg",
+    "brand": "ATOPIX",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "atrovent_adulte_0.5_mg_/_2_ml",
+    "brand": "ATROVENT",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "atrovent_enfant_0.25_mg_/_2_ml",
+    "brand": "ATROVENT",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "aubagio_14_mg",
+    "brand": "AUBAGIO",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "aulcer_20_mg",
+    "brand": "AULCER",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "aureomycine_1_%",
+    "brand": "AUREOMYCINE",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 3
+  },
+  {
+    "id": "aureomycine_3_%",
+    "brand": "AUREOMYCINE",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 3
+  },
+  {
+    "id": "aureomycine_theraplix_3_%",
+    "brand": "AUREOMYCINE",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 3
+  },
+  {
+    "id": "auricularum_90000_ui-100000ui",
+    "brand": "AURICULARUM",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "auridol_7_g",
+    "brand": "AURIDOL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "avamys_27.5_µg_/_pulvérisation",
+    "brand": "AVAMYS",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "avaquin_500_mg",
+    "brand": "AVAQUIN",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "avaxim_160_u",
+    "brand": "AVAXIM",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "avaxim_80_u",
+    "brand": "AVAXIM",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "avazar_50_mg",
+    "brand": "AVAZAR",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 3
+  },
+  {
+    "id": "avelox_400_mg_iv",
+    "brand": "AVELOX",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "avelox_400_mg",
+    "brand": "AVELOX",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "avepro_150_mg",
+    "brand": "AVEPRO",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "avepro_300_mg",
+    "brand": "AVEPRO",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "aver_16_mg",
+    "brand": "AVER",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "aver_24_mg",
+    "brand": "AVER",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "avlocan_40_mg",
+    "brand": "AVLOCAN",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "avlocardyl_40_mg",
+    "brand": "AVLOCARDYL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "avodart_0.5_mg",
+    "brand": "AVODART",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "avonex_30_µg_/_0.5_ml",
+    "brand": "AVONEX",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "axair_125_µg",
+    "brand": "AXAIR",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "axair_250_µg",
+    "brand": "AXAIR",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "axify_20_mg",
+    "brand": "AXIFY",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "axonyl_100_mg",
+    "brand": "AXONYL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "axonyl_150_mg",
+    "brand": "AXONYL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "axonyl_200_mg",
+    "brand": "AXONYL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "axonyl_25_mg",
+    "brand": "AXONYL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "axonyl_300_mg",
+    "brand": "AXONYL",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "👶 Statut pédiatrique non défini",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 4
+  },
+  {
+    "id": "azacitea_100_mg",
+    "brand": "AZACITEA",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 3
+  },
+  {
+    "id": "azelastin-comod_0.5_mg_/_ml",
+    "brand": "AZELASTIN-COMOD",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 3
+  },
+  {
+    "id": "azole_4_%",
+    "brand": "AZOLE",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "azole_400_mg",
+    "brand": "AZOLE",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 2
+  },
+  {
+    "id": "azopt_10_mg_/_ml",
+    "brand": "AZOPT",
+    "status": "FIXED - Verified by Medicament.ma & Drugs.com",
+    "errors_resolved": [
+      "⚠️ Aucune interaction listée (Vérifier si c'est normal)",
+      "🤰 Catégorie Grossesse manquante",
+      "🔑 Code ATC manquant"
+    ],
+    "error_count": 3
+  }
+]

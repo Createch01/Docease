@@ -1,0 +1,39 @@
+{
+  "totalMedicines": 2973,
+  "totalClasses": 8,
+  "totalAlerts": 5774,
+  "classesCount": {
+    "Antibiotiques": {
+      "count": 344,
+      "file": "class_antibiotiques.json"
+    },
+    "Antihypertenseurs": {
+      "count": 230,
+      "file": "class_antihypertenseurs.json"
+    },
+    "Antidiabétiques": {
+      "count": 76,
+      "file": "class_antidiab_tiques.json"
+    },
+    "Analgésiques": {
+      "count": 127,
+      "file": "class_analg_siques.json"
+    },
+    "Anti-inflammatoires": {
+      "count": 140,
+      "file": "class_anti_inflammatoires.json"
+    },
+    "Anticoagulants": {
+      "count": 25,
+      "file": "class_anticoagulants.json"
+    },
+    "Gastroprotecteurs": {
+      "count": 102,
+      "file": "class_gastroprotecteurs.json"
+    },
+    "Antihistaminiques": {
+      "count": 46,
+      "file": "class_antihistaminiques.json"
+    }
+  }
+}

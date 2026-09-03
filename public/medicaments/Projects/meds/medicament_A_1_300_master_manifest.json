@@ -1,0 +1,31 @@
+{
+  "version": "DocEase Master 1-300",
+  "generated_at": "2026-04-19",
+  "total_entries": 242,
+  "batch_breakdown": {
+    "B1": 50,
+    "B2": 50,
+    "B3": 39,
+    "B4": 33,
+    "B5": 34,
+    "B6": 36
+  },
+  "by_nature": {
+    "Médicament": 229,
+    "Complément alimentaire": 12,
+    "Dispositif médical": 1
+  },
+  "by_tableau": {
+    "Aucun": 29,
+    "A": 175,
+    "B": 3,
+    "Non listé": 8,
+    "C": 27
+  },
+  "acupan_6_fields_complete": 242,
+  "clinical_pack_complete_drugs": 229,
+  "total_drug_entries": 229,
+  "supplements": 12,
+  "devices": 1,
+  "verified_medicament_ma_pct": 100.0
+}

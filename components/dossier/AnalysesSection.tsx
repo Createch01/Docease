@@ -1,8 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Filter, Printer, Check, X, Search, FlaskConical, Radio, FileText, Activity, Eye, FileDigit, ChevronRight, Loader2 } from 'lucide-react';
 import { useI18n } from '../../i18n';
-// @ts-ignore
-import html2pdf from 'html2pdf.js';
 import { dataService } from '../../services/dataService';
 import { LabRequest, Patient } from '../../types';
 import { printService } from '../../services/printService';
@@ -115,7 +113,7 @@ const AnalysesSection: React.FC<AnalysesSectionProps> = ({ patientId, patientNam
         return groups;
     };
 
-    const handleExportPDF = (req: LabRequest) => {
+    const handleExportPDF = async (req: LabRequest) => {
         const element = document.getElementById(`pdf-render-${req.id}`);
         if (!element) return;
 
@@ -129,6 +127,7 @@ const AnalysesSection: React.FC<AnalysesSectionProps> = ({ patientId, patientNam
         };
 
         toastService.info(t('generating_pdf'));
+        const html2pdf = (await import('html2pdf.js')).default;
         html2pdf()
             .set(opt)
             .from(element)
@@ -174,7 +173,7 @@ const AnalysesSection: React.FC<AnalysesSectionProps> = ({ patientId, patientNam
                         <div className={`flex gap-4 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
                             <button onClick={() => setIsAddingLabRequest(false)} className="px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all">{t('cancel')}</button>
                             <button
-                                onClick={() => {
+                                onClick={async () => {
                                     const element = document.getElementById('preview-sheet-creation');
                                     if (element) {
                                         toastService.info(t('preparing_pdf'));
@@ -186,6 +185,7 @@ const AnalysesSection: React.FC<AnalysesSectionProps> = ({ patientId, patientNam
                                             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
                                             pagebreak: { mode: 'avoid-all' }
                                         };
+                                        const html2pdf = (await import('html2pdf.js')).default;
                                         html2pdf()
                                             .set(opt)
                                             .from(element)

@@ -1,0 +1,178 @@
+/* ════════════════════════════════════════════════════════════════════
+   DocEase — Design Tokens
+   Central source of truth for colors, spacing, typography, motion.
+   Import once at the top of index.css:  @import './variables.css';
+   ════════════════════════════════════════════════════════════════════ */
+
+@import url('https://rsms.me/inter/inter.css');
+
+:root {
+  /* ─── Brand colors ─── */
+  --color-primary:        #1A6B8A;
+  --color-primary-hover:  #155874;
+  --color-primary-active: #114862;
+  --color-primary-50:     #E8F0F4;
+  --color-primary-100:    #C5DAE3;
+  --color-primary-200:    #8AB5C7;
+
+  --color-secondary:       #2ECC9A;
+  --color-secondary-hover: #25B187;
+  --color-secondary-50:    #E8F9F2;
+  --color-secondary-100:   #C5F0DD;
+
+  /* ─── Status colors ─── */
+  --color-danger:        #E53E3E;
+  --color-danger-hover:  #C53030;
+  --color-danger-50:     #FEE7E7;
+  --color-danger-100:    #FBC9C9;
+  --color-danger-700:    #9B2C2C;
+
+  --color-warning:        #F6AD55;
+  --color-warning-hover:  #ED8936;
+  --color-warning-50:     #FFF6E6;
+  --color-warning-100:    #FCE4B7;
+  --color-warning-800:    #7B341E;
+
+  --color-success: var(--color-secondary);
+  --color-info:    var(--color-primary);
+
+  /* ─── Surfaces ─── */
+  --color-bg:          #F0F4F8;
+  --color-surface:     #FFFFFF;
+  --color-surface-alt: #F7FAFC;
+  --color-row-hover:   #EBF8FF;
+
+  /* ─── Text ─── */
+  --color-text:         #1A202C;
+  --color-text-muted:   #4A5568;
+  --color-text-subtle:  #718096;
+  --color-text-faint:   #A0AEC0;
+  --color-text-inverse: #FFFFFF;
+
+  /* ─── Borders / dividers ─── */
+  --color-border:        #E2E8F0;
+  --color-border-strong: #CBD5E0;
+  --color-border-focus:  var(--color-primary);
+
+  /* ─── Spacing — strict 8px grid ─── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  --space-9: 64px;
+  --space-10: 80px;
+
+  /* ─── Radii ─── */
+  --radius-sm:   6px;
+  --radius-md:   8px;   /* buttons, inputs, badges */
+  --radius-lg:   12px;  /* cards, panels */
+  --radius-xl:   16px;  /* modals */
+  --radius-pill: 9999px;
+
+  /* ─── Shadows ─── */
+  --shadow-xs:    0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-soft:  0 1px 2px rgba(15, 23, 42, 0.04), 0 2px 8px rgba(15, 23, 42, 0.04);
+  --shadow-card:  0 1px 3px rgba(15, 23, 42, 0.06), 0 4px 12px rgba(15, 23, 42, 0.04);
+  --shadow-premium: 0 4px 20px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-focus-primary: 0 0 0 3px rgba(26, 107, 138, 0.18);
+  --shadow-focus-danger:  0 0 0 3px rgba(229, 62, 62, 0.18);
+
+  /* ─── Layout ─── */
+  --sidebar-width:           260px;
+  --sidebar-collapsed-width: 72px;
+  --topbar-height:           64px;
+  --max-content-width:       1200px;
+
+  /* ─── Typography ─── */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-arabic: 'Cairo', 'Tajawal', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-xs:   12px;
+  --text-sm:   14px;
+  --text-base: 16px;
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+  --text-3xl:  30px;
+  --text-4xl:  36px;
+
+  --leading-tight:   1.25;
+  --leading-normal:  1.5;
+  --leading-relaxed: 1.625;
+
+  /* ─── Motion ─── */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ─── Z-index ─── */
+  --z-sidebar: 40;
+  --z-topbar:  50;
+  --z-overlay: 60;
+  --z-modal:   70;
+  --z-toast:   80;
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Base reset
+   ════════════════════════════════════════════════════════════════════ */
+html { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+}
+
+/* ════════════════════════════════════════════════════════════════════
+   Utility classes (used by .tsx files via Tailwind escape hatch)
+   ════════════════════════════════════════════════════════════════════ */
+.gradient-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+}
+.shadow-soft    { box-shadow: var(--shadow-soft); }
+.shadow-card    { box-shadow: var(--shadow-card); }
+.shadow-premium { box-shadow: var(--shadow-premium); }
+.premium-border { border: 1px solid var(--color-border); }
+.transition-smooth { transition: all var(--transition-base); }
+
+.font-arabic { font-family: var(--font-arabic); }
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ════════════════════════════════════════════════════════════════════
+   Pulsing danger alert — for child contraindications
+   ════════════════════════════════════════════════════════════════════ */
+@keyframes danger-pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.55), var(--shadow-card); }
+  50%      { box-shadow: 0 0 0 10px rgba(229, 62, 62, 0), var(--shadow-card); }
+}
+@keyframes danger-pulse-bg {
+  0%, 100% { background-color: #FEF0F0; }
+  50%      { background-color: #FDDEDE; }
+}
+.alert-pulse {
+  animation: danger-pulse-ring 1.8s ease-in-out infinite,
+             danger-pulse-bg   1.8s ease-in-out infinite;
+}
+
+/* Subtle dot indicator pulse — for online/active states */
+@keyframes dot-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; opacity: 1; }
+  50%      { box-shadow: 0 0 0 4px transparent; opacity: 0.6; }
+}
+.dot-pulse { animation: dot-pulse 2s ease-in-out infinite; }
+
+/* ════════════════════════════════════════════════════════════════════
+   Print contract — leave UNTOUCHED, used by DocumentShell.tsx
+   ════════════════════════════════════════════════════════════════════ */
+@media print {
+  body { background: white !important; }
+}

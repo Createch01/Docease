@@ -1,11 +1,79 @@
 import { Patient, PrescriptionItem } from '../types';
+import { getAllLoadedMedicines, mapMedicamentToMedicine, type Medicament } from './drugCatalogService';
+import { checkGroupAgainstProfile, getDocumentedSafetyCategories, type SafetyCategory } from './drugSafetyCheck';
+import type { ActivePatientProfile } from './activeProfileService';
+
+// Finds, for a set of prescribed items, which patient-status categories (renal/hepatic/
+// cardiac/pregnancy/breastfeeding/diabete) at least one of them actually documents safety
+// data for — so "missing data" is only raised when it could change how one of THESE
+// medications is used, not as a blanket checklist run against every prescription regardless
+// of content.
+function documentedCategoriesForItems(items: PrescriptionItem[]): Set<SafetyCategory> {
+    const categories = new Set<SafetyCategory>();
+    if (!items.length) return categories;
+    const rawCatalog = getAllLoadedMedicines();
+    items.forEach(item => {
+        const prescribedNorm = item.medicineName.trim().toUpperCase();
+        // Strip trailing dosage/strength/form suffixes (e.g. "DOLIPRANE 1000 mg" → "DOLIPRANE")
+        // to correctly match the catalog entry "DOLIPRANE".
+        const prescribedFirstWord = prescribedNorm.split(/[\s\d]/)[0];
+        const rawMed = rawCatalog.find((m: Medicament) => {
+            const brandNorm = m.brand_name.toUpperCase();
+            // Exact match first
+            if (brandNorm === prescribedNorm) return true;
+            // Prescribed name starts with brand (e.g. "DOLIPRANE 1000 MG" starts with "DOLIPRANE")
+            if (prescribedNorm.startsWith(brandNorm + ' ') || prescribedNorm.startsWith(brandNorm + '\t')) return true;
+            // Brand starts with first word of prescribed name (handles abbreviated entries)
+            if (brandNorm === prescribedFirstWord) return true;
+            // Generic name match (fallback)
+            if (m.generic_name && prescribedNorm.includes(m.generic_name.toUpperCase())) return true;
+            return false;
+        });
+        if (!rawMed) return;
+        getDocumentedSafetyCategories(rawMed).forEach(c => categories.add(c));
+    });
+    return categories;
+}
 
 export interface DrugAlert {
-    severity: 'CRITIQUE' | 'ATTENTION';
+    severity: 'CRITIQUE' | 'ATTENTION' | 'INFO';
     title: string;
     message: string;
-    type: 'REGLE_SYSTEME' | 'INTERACTION' | 'CONTRE_INDICATION' | 'DOUBLON' | 'ENFANT_INTERDIT';
+    type: 'REGLE_SYSTEME' | 'INTERACTION' | 'CONTRE_INDICATION' | 'DOUBLON' | 'ENFANT_INTERDIT' | 'DONNEE_MANQUANTE';
 }
+
+/**
+ * Builds the same profile shape PharmaDirectory's safety check uses (services/activeProfileService.ts)
+ * from a real saved Patient record, so checkGroupAgainstProfile — the single authoritative
+ * contraindication engine — can run identically for both screens instead of PrescriptionEditor
+ * relying on its own weaker, partial flag checks.
+ */
+function patientToActiveProfile(patient: Patient, isChild: boolean, ptAge: number): ActivePatientProfile {
+    return {
+        isChild,
+        childAgeYears: ptAge > 0 ? ptAge : undefined,
+        isPregnant: patient.isPregnant,
+        pregnancyWeeks: patient.pregnancyWeeks,
+        isBreastfeeding: patient.isBreastfeeding,
+        isRenalImpaired: patient.isKidneyPatient,
+        isHepaticImpaired: patient.isLiverPatient,
+        isCardiac: patient.isHeartPatient,
+        isDiabetic: !!(patient.pathologyTags?.some(t => t.toUpperCase().startsWith('DIABÈTE')) || patient.pathologiesOtherTags?.some(t => t.toUpperCase().includes('DIABÈTE'))),
+    };
+}
+
+// Mirrors PharmaDirectory's CATEGORY_LABEL (components/PharmaDirectory.tsx) — plain category
+// names, since severity (CRITIQUE/ATTENTION/INFO) already conveys how serious the alert is;
+// prefixing every title with "CONTRE-INDICATION" would mislabel the benign/INFO cases.
+const SAFETY_CATEGORY_TITLES: Record<string, string> = {
+    grossesse: 'GROSSESSE',
+    allaitement: 'ALLAITEMENT',
+    enfant: 'PÉDIATRIE',
+    renal: 'FONCTION RÉNALE',
+    hepatique: 'FONCTION HÉPATIQUE',
+    cardiaque: 'CARDIAQUE',
+    diabete: 'DIABÈTE',
+};
 
 interface DrugRule {
     id: string;
@@ -39,6 +107,22 @@ const INTERACTION_GROUPS = {
     METHOTREXATE: ['METHOTREXATE', 'METOJECT', 'IMETH'],
     LITHIUM: ['LITHIUM', 'TERALITHE']
 };
+
+// Maps each structured allergy tag (from constants/medicalData.ts COMMON_ALLERGIES) to
+// keywords matched against the medicine name/active ingredient/category/interaction group
+// and its free-text contraindication notes. Food/contact allergies have no drug-name
+// equivalent, so they only match via contraindicationNotes.
+const ALLERGY_KEYWORDS: Record<string, string[]> = {
+    'Pénicilline': ['PENICILLIN', 'PÉNICILLINE', 'AMOXICILLIN', 'AMOXICILLINE', 'AUGMENTIN', 'ACLAV', 'CLAVULIN', 'AMOXIL', 'ALFAMOX', 'ALMOXEL', 'BETALACTAM', 'BÊTA-LACTAM', 'BETA-LACTAM'],
+    'Amoxicilline': ['AMOXICILLIN', 'AMOXICILLINE', 'AUGMENTIN', 'ACLAV', 'CLAVULIN', 'AMOXIL', 'ALFAMOX'],
+    'Aspirine': INTERACTION_GROUPS.ASPIRINE,
+    'AINS': INTERACTION_GROUPS.AINS,
+    'Sulfamides': ['SULFAMIDE', 'SULFAMETHOXAZOLE', 'COTRIMOXAZOLE', 'BACTRIM', 'SULFA'],
+    'Iode': ['IODE', 'IODÉ', 'PRODUIT DE CONTRASTE', 'CONTRASTE IODÉ'],
+};
+// Tags without a keyword entry above (food/contact allergies like Latex, Arachides...)
+// fall back to a plain substring match against the haystack — mainly useful when the
+// catalog's free-text contraindicationNotes mention them explicitly.
 
 const DRUG_RULES: DrugRule[] = [
     {
@@ -88,6 +172,104 @@ const DRUG_RULES: DrugRule[] = [
 ];
 
 export const drugRulesService = {
+    // Flags patient-profile fields that are simply unknown (never entered) rather than
+    // negated, so the doctor is told to check instead of silently getting no alert at all.
+    // Must be run against the real saved Patient record — the prescription form always
+    // collapses undefined booleans to `false`, which would hide the "unknown" state.
+    // Only raised once a medication is prescribed, and only for the statuses that medication
+    // actually documents safety data for — an empty ordonnance or a drug with no renal/hepatic/
+    // cardiac data attached should never produce a "missing data" notice.
+    checkMissingData: (patient: Patient | null, items: PrescriptionItem[] = []): DrugAlert[] => {
+        const alerts: DrugAlert[] = [];
+        if (!patient || !items.length) return alerts;
+        const relevant = documentedCategoriesForItems(items);
+
+        if (patient.sex === 'F') {
+            const age = patient.age || 0;
+            const isReproductiveAge = age >= 12 && age <= 50;
+            if (isReproductiveAge) {
+                if (relevant.has('grossesse') && patient.isPregnant === undefined) {
+                    alerts.push({
+                        severity: 'ATTENTION',
+                        title: 'DONNÉE MANQUANTE : GROSSESSE',
+                        message: 'Statut grossesse non renseigné — vérifier avant prescription si applicable.',
+                        type: 'DONNEE_MANQUANTE'
+                    });
+                }
+                if (relevant.has('allaitement') && patient.isBreastfeeding === undefined) {
+                    alerts.push({
+                        severity: 'ATTENTION',
+                        title: 'DONNÉE MANQUANTE : ALLAITEMENT',
+                        message: 'Statut allaitement non renseigné — vérifier avant prescription si applicable.',
+                        type: 'DONNEE_MANQUANTE'
+                    });
+                }
+            }
+        }
+
+        if (relevant.has('renal') && patient.isKidneyPatient === undefined) {
+            alerts.push({
+                severity: 'ATTENTION',
+                title: 'DONNÉE MANQUANTE : FONCTION RÉNALE',
+                message: 'Statut rénal non renseigné — vérifier avant prescription de médicaments à élimination rénale.',
+                type: 'DONNEE_MANQUANTE'
+            });
+        }
+        if (relevant.has('hepatique') && patient.isLiverPatient === undefined) {
+            alerts.push({
+                severity: 'ATTENTION',
+                title: 'DONNÉE MANQUANTE : FONCTION HÉPATIQUE',
+                message: 'Statut hépatique non renseigné — vérifier avant prescription de médicaments à métabolisme hépatique.',
+                type: 'DONNEE_MANQUANTE'
+            });
+        }
+        if (relevant.has('cardiaque') && patient.isHeartPatient === undefined) {
+            alerts.push({
+                severity: 'ATTENTION',
+                title: 'DONNÉE MANQUANTE : CARDIAQUE',
+                message: 'Statut cardiaque non renseigné — vérifier avant prescription si applicable.',
+                type: 'DONNEE_MANQUANTE'
+            });
+        }
+        return alerts;
+    },
+
+    // Flags any pathologies/allergies entries that were never matched to the structured
+    // reference list — "Autre" tags, or legacy free-text patients that predate the tag
+    // fields — since these are not (and cannot be) auto-verified against the drug catalog.
+    // Only relevant once a medication is actually being prescribed against that profile.
+    checkUnstructuredData: (patient: Patient | null, items: PrescriptionItem[] = []): DrugAlert[] => {
+        const alerts: DrugAlert[] = [];
+        if (!patient || !items.length) return alerts;
+
+        const unstructuredAllergies = [
+            ...(patient.allergiesOtherTags || []),
+            ...((!patient.allergyTags?.length && !patient.allergiesOtherTags?.length && patient.allergies) ? [patient.allergies] : [])
+        ];
+        const unstructuredPathologies = [
+            ...(patient.pathologiesOtherTags || []),
+            ...((!patient.pathologyTags?.length && !patient.pathologiesOtherTags?.length && patient.pathologies) ? [patient.pathologies] : [])
+        ];
+
+        if (unstructuredAllergies.length) {
+            alerts.push({
+                severity: 'ATTENTION',
+                title: 'ALLERGIE NON STRUCTURÉE — VÉRIFICATION MANUELLE',
+                message: `Entrée(s) non reconnue(s) par la liste de référence : ${unstructuredAllergies.join(', ')}. Non vérifiable automatiquement — à croiser manuellement avec l'ordonnance.`,
+                type: 'DONNEE_MANQUANTE'
+            });
+        }
+        if (unstructuredPathologies.length) {
+            alerts.push({
+                severity: 'ATTENTION',
+                title: 'PATHOLOGIE NON STRUCTURÉE — VÉRIFICATION MANUELLE',
+                message: `Entrée(s) non reconnue(s) par la liste de référence : ${unstructuredPathologies.join(', ')}. Non vérifiable automatiquement.`,
+                type: 'DONNEE_MANQUANTE'
+            });
+        }
+        return alerts;
+    },
+
     // Helper to extract info from raw drug string "ACLAV 1g/125mg SA"
     parseMedicine: (rawName: string) => {
         const normalized = normalizeName(rawName);
@@ -97,7 +279,7 @@ export const drugRulesService = {
         };
     },
 
-    checkRules: (patient: Patient, items: PrescriptionItem[]): DrugAlert[] => {
+    checkRules: (patient: Patient, items: PrescriptionItem[], currentMedications?: PrescriptionItem[]): DrugAlert[] => {
         const alerts: DrugAlert[] = [];
 
         // Patient Profile Parsing
@@ -110,7 +292,10 @@ export const drugRulesService = {
         const isChild = patient.type === 'Child' || (ptAge > 0 && ptAge < 12) || (ptWeight > 0 && ptWeight < 40);
 
         // Load all medicines from database to check custom restrictions
-        const dbMedicines = (window as any).dataService?.getMedicines() || [];
+        const customMedicines = (window as any).dataService?.getMedicines() || [];
+        const rawCatalog = getAllLoadedMedicines();
+        const loadedCatalog = rawCatalog.map(mapMedicamentToMedicine);
+        const dbMedicines = [...customMedicines, ...loadedCatalog];
 
         // Pre-map items to DB medicines for efficiency
         const itemsWithMedData = items.map(item => ({
@@ -118,8 +303,32 @@ export const drugRulesService = {
             dbMed: dbMedicines.find((m: any) =>
                 m.name.toUpperCase() === item.medicineName.toUpperCase() ||
                 (m.active_ingredient && item.medicineName.toUpperCase().includes(m.active_ingredient.toUpperCase()))
+            ),
+            // Raw catalog record (undiluted pregnancy/children/renal_adjustment/smart_flags), matched
+            // separately from `dbMed` above because mapMedicamentToMedicine() collapses those fields
+            // into a handful of lossy booleans that miss trimester- or condition-specific contraindications.
+            rawMed: rawCatalog.find((m: Medicament) =>
+                m.brand_name.toUpperCase() === item.medicineName.toUpperCase() ||
+                (m.generic_name && item.medicineName.toUpperCase().includes(m.generic_name.toUpperCase()))
             )
         }));
+
+        // 0. Authoritative contraindication check — same checkGroupAgainstProfile() engine
+        // PharmaDirectory uses, run here against the real saved patient profile so a doctor
+        // writing directly in PrescriptionEditor gets the identical pregnancy/breastfeeding/
+        // renal/hepatic/cardiac/diabetic alerts, not just the narrower legacy flag checks below.
+        const activeProfile = patientToActiveProfile(patient, isChild, ptAge);
+        itemsWithMedData.forEach(({ item, rawMed }) => {
+            if (!rawMed) return;
+            checkGroupAgainstProfile(rawMed, activeProfile).forEach(safetyAlert => {
+                alerts.push({
+                    severity: safetyAlert.severity,
+                    title: SAFETY_CATEGORY_TITLES[safetyAlert.category] || 'CONTRE-INDICATION',
+                    message: `${item.medicineName} : ${safetyAlert.message}`,
+                    type: safetyAlert.severity === 'INFO' ? 'DONNEE_MANQUANTE' : 'CONTRE_INDICATION',
+                });
+            });
+        });
 
         // 1. Check for Duplicate Active Ingredients
         const activeIngredients = new Map<string, string[]>();
@@ -226,7 +435,38 @@ export const drugRulesService = {
             });
         }
 
-        itemsWithMedData.forEach(({ item, dbMed }) => {
+        // 1c. Check new prescriptions against current medications
+        if (currentMedications && currentMedications.length > 0) {
+            const currentMedNames = currentMedications.map(m => m.medicineName.toUpperCase());
+            items.forEach(item => {
+                const newMedName = item.medicineName.toUpperCase();
+                currentMedNames.forEach(currentMedName => {
+                    // Check interaction groups
+                    Object.entries(INTERACTION_GROUPS).forEach(([group, keywords]) => {
+                        const newMedInGroup = keywords.some(k => newMedName.includes(k));
+                        const currentMedInGroup = keywords.some(k => currentMedName.includes(k));
+
+                        if (newMedInGroup && currentMedInGroup && group === 'AINS') {
+                            alerts.push({
+                                severity: 'CRITIQUE',
+                                title: "INTERACTION : AINS (traitement actuel) + AINS (nouveau)",
+                                message: `${item.medicineName} (nouveau) s'ajoute à un AINS existant. Risque hémorragique majeur.`,
+                                type: 'INTERACTION'
+                            });
+                        } else if (newMedInGroup && currentMedInGroup && group === 'ANTICOAGULANT') {
+                            alerts.push({
+                                severity: 'CRITIQUE',
+                                title: "INTERACTION MAJEURE : Anticoagulant + Nouveau médicament",
+                                message: `${item.medicineName} peut interagir avec votre traitement anticoagulant actuel (${currentMedName}).`,
+                                type: 'INTERACTION'
+                            });
+                        }
+                    });
+                });
+            });
+        }
+
+        itemsWithMedData.forEach(({ item, dbMed, rawMed }) => {
             const { name, hasAdultStrength } = drugRulesService.parseMedicine(item.medicineName);
             const doseInfo = item.dosage.toLowerCase();
 
@@ -255,6 +495,39 @@ export const drugRulesService = {
                     });
                 }
 
+                // Structured allergy tags vs. medicine identity/composition/contraindication notes
+                // Enhanced to check: brand name, active ingredient (DCI), composition, interaction group, contraindication notes
+                (patient.allergyTags || []).forEach(tag => {
+                    const haystackParts = [
+                        item.medicineName,
+                        dbMed.active_ingredient,
+                        dbMed.category,
+                        dbMed.interactionGroup,
+                        ...(dbMed.contraindicationNotes || [])
+                    ];
+
+                    // Add composition from raw medicament if available
+                    if (rawMed?.composition && Array.isArray(rawMed.composition)) {
+                        haystackParts.push(...rawMed.composition);
+                    }
+
+                    const haystack = haystackParts.filter(Boolean).join(' ').toUpperCase();
+
+                    const keywords = ALLERGY_KEYWORDS[tag];
+                    const matched = keywords
+                        ? keywords.some(k => haystack.includes(k))
+                        : haystack.includes(tag.toUpperCase());
+
+                    if (matched) {
+                        alerts.push({
+                            severity: 'CRITIQUE',
+                            title: `CONTRE-INDICATION ALLERGIE : ${tag.toUpperCase()}`,
+                            message: `${item.medicineName} : patient allergique à ${tag}, ce médicament appartient à cette famille ou la contient.`,
+                            type: 'CONTRE_INDICATION'
+                        });
+                    }
+                });
+
                 // Contraindications from Array
                 if (dbMed.contraindications) {
                     dbMed.contraindications.forEach((c: any) => {
@@ -268,7 +541,6 @@ export const drugRulesService = {
                         else if (c.type === 'heart' && patient.isHeartPatient) violation = true;
                         else if (c.type === 'kidney' && patient.isKidneyPatient) violation = true;
                         else if (c.type === 'liver' && patient.isLiverPatient) violation = true;
-                        else if (c.type === 'allergy' && patient.allergies?.toUpperCase().includes(c.substance?.toUpperCase())) violation = true;
 
                         if (violation) {
                             alerts.push({
@@ -280,6 +552,31 @@ export const drugRulesService = {
                         }
                     });
                 }
+
+                // Structured allergy tags vs. medicine identity/contraindication notes
+                (patient.allergyTags || []).forEach(tag => {
+                    const haystack = [
+                        item.medicineName,
+                        dbMed.active_ingredient,
+                        dbMed.category,
+                        dbMed.interactionGroup,
+                        ...(dbMed.contraindicationNotes || [])
+                    ].filter(Boolean).join(' ').toUpperCase();
+
+                    const keywords = ALLERGY_KEYWORDS[tag];
+                    const matched = keywords
+                        ? keywords.some(k => haystack.includes(k))
+                        : haystack.includes(tag.toUpperCase());
+
+                    if (matched) {
+                        alerts.push({
+                            severity: 'CRITIQUE',
+                            title: `CONTRE-INDICATION ALLERGIE : ${tag.toUpperCase()}`,
+                            message: `${item.medicineName} : patient allergique à ${tag}, ce médicament appartient à cette famille ou la contient.`,
+                            type: 'CONTRE_INDICATION'
+                        });
+                    }
+                });
 
                 // Legacy Boolean Flags (Redundancy check)
                 if (dbMed.isAdultOnly && isChild) {

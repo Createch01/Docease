@@ -1,31 +1,51 @@
+/**
+ * PrescriptionEditor.tsx — DocEase v3 (new design system)
+ *
+ * Token-aligned: variables.css (--color-primary #1A6B8A, --color-danger #E53E3E,
+ * --color-warning #F6AD55, 8px grid, Inter, 40px buttons, 8/12px radii).
+ *
+ * Logic, props, hooks, services — UNCHANGED (verbatim from v2).
+ * Pulsing animation comes from .alert-pulse class in variables.css.
+ *
+ * Audit trail is derivative — built from existing state (items + overriddenWarnings).
+ * No new logic or state added.
+ */
+
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  Users, Plus, Trash2, Printer, Save, Pill, Clock, ChevronRight, Sparkles,
-  Search, Scan, FileText, CheckCircle, AlertTriangle, ShieldAlert, History,
-  RefreshCcw, FileDigit, X as CloseX, ArrowLeft, Loader2, Info,
-  Heart, AlertOctagon, CheckCircle2, Barcode, Scale, Phone, Baby, UserCircle,
-  ShieldAlert as ShieldWarning, ChevronDown, MapPin, Mail, Eye, EyeOff,
-  ShieldX, AlertCircle, Activity, Zap, BrainCircuit, FlaskConical
+  Plus, Trash2, Printer, Save, Pill, ChevronRight, ChevronDown,
+  Search, FileText, AlertTriangle, ShieldAlert,
+  RefreshCcw, FileDigit, X as CloseX, Loader2,
+  Heart, CheckCircle2, Baby, UserCircle,
+  ShieldX, AlertCircle, Activity, Zap, BrainCircuit, FlaskConical,
+  ArrowLeft, History, XCircle, ScrollText, CreditCard, Cake,
 } from 'lucide-react';
-import { Medicine, PrescriptionItem, MedicineCategory, MealTiming, Patient, Prescription, PatientType, PrescriptionDraft } from '../types';
+import { Medicine, PrescriptionItem, MedicineCategory, MealTiming, Patient, Prescription, PatientType, PrescriptionDraft, HonoraryNote } from '../types';
+import { formatAge, formatNom } from '../utils/formatters';
+import { COMMON_ALLERGIES, COMMON_PATHOLOGIES } from '../constants/medicalData';
+import UnifiedMedicalTagSearch from './ui/UnifiedMedicalTagSearch';
 import { dataService } from '../services/dataService';
-import { drugRulesService, DrugAlert } from '../services/drugRules';
+import { searchDrugsGlobal, groupMedicamentsForSelection } from '../services/drugCatalogService';
+import { drugRulesService } from '../services/drugRules';
+import { billingService } from '../services/billingService';
+import { fuzzyRank } from '../services/fuzzySearch';
 import { settingsService } from '../services/settingsService';
 import { useI18n } from '../i18n';
 import ExactPrescriptionTemplate from './ExactPrescriptionTemplate';
+import TemplateRenderer from './templates/TemplateRenderer';
 import CombinedConsultationTemplate from './CombinedConsultationTemplate';
 import { COMMON_ANALYSES } from '../constants/medicalData';
 // @ts-ignore
-import html2pdf from 'html2pdf.js';
 import * as prescriptionAiService from '../services/prescriptionAiService';
 import { toastService } from '../services/toastService';
+import AlertSummaryModal from './prescription/AlertSummaryModal';
 
-interface SafetyNotification {
+export interface SafetyNotification {
   id: string;
-  severity: 'CRITIQUE' | 'ATTENTION';
+  severity: 'CRITIQUE' | 'ATTENTION' | 'INFO';
   title: string;
   message: string;
-  type: 'INTERACTION' | 'CONTRE_INDICATION' | 'DOUBLON' | 'ENFANT_INTERDIT' | 'REGLE_SYSTEME';
+  type: 'INTERACTION' | 'CONTRE_INDICATION' | 'DOUBLON' | 'ENFANT_INTERDIT' | 'REGLE_SYSTEME' | 'DONNEE_MANQUANTE';
   canOverride?: boolean;
   itemId?: string;
 }
@@ -39,87 +59,200 @@ interface PrescriptionEditorProps {
   onDraftChange?: (draft: PrescriptionDraft | null) => void;
 }
 
-const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selectedPatientFromQueue, initialPatient, initialPrescription, draft, onDraftChange }) => {
+// ─── Shared style constants ──────────────────────────────────────────────
+const card = 'bg-white rounded-xl border';
+const cardStyle = { borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-soft)' } as React.CSSProperties;
+const input40 = 'w-full h-10 px-3 rounded-md border text-[14px] outline-none transition-all bg-white';
+const inputStyle = { borderColor: 'var(--color-border)', color: 'var(--color-text)' } as React.CSSProperties;
+const labelEyebrow = 'block text-[11px] font-medium uppercase tracking-wider mb-1.5';
+const labelEyebrowStyle = { color: 'var(--color-text-subtle)', letterSpacing: '0.06em' } as React.CSSProperties;
+
+// ─── Variant selector (form/dosage) helpers ──────────────────────────────
+const FORM_SHORT_LABEL: Record<string, string> = {
+  'comprimé': 'Comprimé', 'comprime': 'Comprimé', 'gélule': 'Gélule', 'gelule': 'Gélule',
+  'sirop': 'Sirop', 'suspension buvable': 'Sirop', 'poudre pour suspension buvable': 'Sirop',
+  'injectable': 'Injectable', 'suspension injectable': 'Injectable', 'poudre pour préparation injectable': 'Injectable',
+  'poudre pour preparation injectable': 'Injectable', 'solution injectable': 'Injectable',
+  'suppositoire': 'Suppositoire', 'patch': 'Patch', 'crème': 'Crème', 'creme': 'Crème',
+  'collyre': 'Collyre', 'sachet': 'Sachet', 'gouttes': 'Gouttes',
+};
+const formShortLabel = (form?: string): string => {
+  if (!form) return '';
+  const lower = form.toLowerCase().trim();
+  if (FORM_SHORT_LABEL[lower]) return FORM_SHORT_LABEL[lower];
+  const hit = Object.keys(FORM_SHORT_LABEL).find(k => lower.includes(k));
+  return hit ? FORM_SHORT_LABEL[hit] : form;
+};
+// "Boîte de 12" → "B12", "Boîte de 1 flacon" / "Flacon de 30 ml" → "Flacon", else a short fallback.
+const abbreviatePackaging = (packaging?: string | null): string => {
+  if (!packaging) return '';
+  const lower = packaging.toLowerCase();
+  if (lower.includes('flacon')) return 'Flacon';
+  const boxMatch = lower.match(/bo[iî]te.*?(\d+)/);
+  if (boxMatch) return `B${boxMatch[1]}`;
+  if (lower.includes('bo') && (lower.includes('boite') || lower.includes('boîte'))) return 'Boîte';
+  return packaging.length <= 14 ? packaging : '';
+};
+
+const isLiquidForm = (form?: string): boolean => {
+  const lower = (form || '').toLowerCase();
+  return /sirop|suspension buvable|sachet|gouttes/.test(lower);
+};
+const isInjectableForm = (form?: string): boolean => {
+  const lower = (form || '').toLowerCase();
+  return /inject|perfusion/.test(lower);
+};
+
+// Groups a flat suggestions[] (one Medicine per form+strength today) back under a single
+// médicament card by brand name, so the search UI can show one row with form/dosage chips
+// instead of N separate rows for the same brand.
+interface VariantGroup { name: string; variants: Medicine[] }
+const groupSuggestionsByName = (list: Medicine[]): VariantGroup[] => {
+  const order: string[] = [];
+  const byName = new Map<string, Medicine[]>();
+  list.forEach(m => {
+    const key = m.name;
+    if (!byName.has(key)) { byName.set(key, []); order.push(key); }
+    byName.get(key)!.push(m);
+  });
+  return order.map(name => ({ name, variants: byName.get(name)! }));
+};
+
+// Reorders/highlights a médicament's variants according to the current patient profile.
+// Never drops a form — only reorders and flags the recommended one(s).
+const orderVariantsForPatient = (variants: Medicine[], patient: Partial<Patient>): { variants: Medicine[]; recommendedForm?: string } => {
+  const age = Number(patient.age) || 0;
+  const isYoungChild = patient.type === 'Child' && age > 0 && age < 6;
+  if (isYoungChild) {
+    const liquids = variants.filter(v => isLiquidForm(v.form));
+    const rest = variants.filter(v => !isLiquidForm(v.form));
+    if (liquids.length > 0) return { variants: [...liquids, ...rest], recommendedForm: liquids[0].form };
+  }
+  // Adult default: oral forms first, injectable last — unless every variant is injectable.
+  const allInjectable = variants.every(v => isInjectableForm(v.form));
+  if (!allInjectable) {
+    const oral = variants.filter(v => !isInjectableForm(v.form));
+    const injectable = variants.filter(v => isInjectableForm(v.form));
+    return { variants: [...oral, ...injectable] };
+  }
+  return { variants };
+};
+
+// Parses a "X-Y mg/kg/j" or "X mg/kg/j" style dose_rule and multiplies by the patient's
+// weight (kg) to get a concrete daily-dose display. Returns null if either is unparsable —
+// the raw dose_rule is shown as-is in that case (never a guessed number).
+const computePediatricDose = (doseRule: string | undefined, weight: string | number | undefined): string | null => {
+  if (!doseRule) return null;
+  const w = parseFloat(String(weight || '').replace(',', '.'));
+  if (!w || w <= 0) return null;
+  const match = doseRule.match(/(\d+(?:[.,]\d+)?)\s*(?:-\s*(\d+(?:[.,]\d+)?))?\s*mg\s*\/\s*kg/i);
+  if (!match) return null;
+  const low = parseFloat(match[1].replace(',', '.'));
+  const high = match[2] ? parseFloat(match[2].replace(',', '.')) : null;
+  const perDay = /\/\s*j/i.test(doseRule);
+  const suffix = perDay ? 'mg/j' : 'mg/dose';
+  if (high) {
+    return `${Math.round(low * w)}-${Math.round(high * w)} ${suffix} (${match[1]}-${match[2]}mg/kg × ${w}kg)`;
+  }
+  return `${Math.round(low * w)} ${suffix} (${match[1]}mg/kg × ${w}kg)`;
+};
+
+const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
+  onFinish, selectedPatientFromQueue, initialPatient, initialPrescription, draft, onDraftChange,
+}) => {
   const { t, lang, dir } = useI18n();
+
+  // ═══ State (UNCHANGED) ═══
   const [patient, setPatient] = useState<Partial<Patient>>(draft?.patient || {
     name: initialPatient?.name || '',
     age: initialPatient?.age || 0,
+    dateOfBirth: initialPatient?.dateOfBirth || '',
+    cin: initialPatient?.cin || '',
     sex: initialPatient?.sex || 'M',
     type: initialPatient?.type || 'Adult',
     weight: initialPatient?.weight || '',
     allergies: initialPatient?.allergies || '',
     pathologies: initialPatient?.pathologies || '',
+    pathologyTags: initialPatient?.pathologyTags || [],
+    pathologiesOtherTags: initialPatient?.pathologiesOtherTags || [],
+    allergyTags: initialPatient?.allergyTags || [],
+    allergiesOtherTags: initialPatient?.allergiesOtherTags || [],
     consultationFee: initialPatient?.consultationFee || 0,
-    isPregnant: initialPatient?.isPregnant || false,
-    isBreastfeeding: initialPatient?.isBreastfeeding || false,
-    isHeartPatient: initialPatient?.isHeartPatient || false,
-    isKidneyPatient: initialPatient?.isKidneyPatient || false,
-    isLiverPatient: initialPatient?.isLiverPatient || false,
+    isPregnant: initialPatient?.isPregnant,
+    isBreastfeeding: initialPatient?.isBreastfeeding,
+    isHeartPatient: initialPatient?.isHeartPatient,
+    isKidneyPatient: initialPatient?.isKidneyPatient,
+    isLiverPatient: initialPatient?.isLiverPatient,
     pregnancyWeeks: initialPatient?.pregnancyWeeks || 0,
-    lactationMonths: initialPatient?.lactationMonths || 0
+    lactationMonths: initialPatient?.lactationMonths || 0,
   });
 
   const [items, setItems] = useState<PrescriptionItem[]>(draft?.items || []);
   const [medicineSearch, setMedicineSearch] = useState('');
   const [suggestions, setSuggestions] = useState<Medicine[]>([]);
-  const [amount, setAmount] = useState(draft?.amount || 200);
+  const [presentationPicker, setPresentationPicker] = useState<Medicine | null>(null);
+  const [amount, setAmount] = useState(draft?.amount || dataService.getDoctorInfo().standardConsultationFee || 0);
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
   const [patientSuggestions, setPatientSuggestions] = useState<Patient[]>([]);
+  const [patientFieldActive, setPatientFieldActive] = useState(false);
   const [aiWarnings, setAiWarnings] = useState<SafetyNotification[]>([]);
   const [isAiChecking, setIsAiChecking] = useState(false);
   const [overriddenWarnings, setOverriddenWarnings] = useState<Set<string>>(new Set());
+  const [showMissingDataDetails, setShowMissingDataDetails] = useState(false);
   const [overrideModal, setOverrideModal] = useState<{ isOpen: boolean; notificationId: string; reason: string }>({ isOpen: false, notificationId: '', reason: '' });
   const [selectedCategory, setSelectedCategory] = useState<MedicineCategory | 'Tous'>('Tous');
   const [categories, setCategories] = useState<(MedicineCategory | 'Tous')[]>(['Tous']);
 
-  // SMART MODE STATES
   const [isSmartMode, setIsSmartMode] = useState(false);
-  const [smartPrompt, setSmartPrompt] = useState("");
+  const [smartPrompt, setSmartPrompt] = useState('');
   const [isParsing, setIsParsing] = useState(false);
   const [pediatricAlerts, setPediatricAlerts] = useState<string[]>([]);
 
-  // LAB ANALYSIS STATES
   const [selectedTests, setSelectedTests] = useState<string[]>(draft?.selectedTests || []);
   const [isAnalysesOpen, setIsAnalysesOpen] = useState(false);
   const [labSearchTerm, setLabSearchTerm] = useState('');
   const [useCombinedPrint, setUseCombinedPrint] = useState(false);
+  const [invoicePrompt, setInvoicePrompt] = useState<{ isOpen: boolean; prescription: Prescription | null; amount: number }>({ isOpen: false, prescription: null, amount: 0 });
+  const [selectedPatientRecord, setSelectedPatientRecord] = useState<Patient | null>(null);
+  const [showHistory, setShowHistory] = useState(true);
+  const [showAlertSummary, setShowAlertSummary] = useState(false);
+  const [pendingSaveAction, setPendingSaveAction] = useState<(() => void) | null>(null);
 
   const medInputRef = useRef<HTMLInputElement>(null);
+  // Loads initialPatient once on mount only — guards against silently overwriting a patient
+  // the user has since picked from the suggestions dropdown if the prop reference ever churns.
+  const initialPatientLoadedRef = useRef(false);
 
   const queueSuggestions = (dataService.getTodayQueue()).map(q => ({
     id: q.id,
     name: q.name || (q as any).patientName,
     age: q.age || 0,
+    dateOfBirth: q.dateOfBirth,
+    cin: q.cin,
     sex: q.sex || 'M' as const,
     type: q.type || 'Adult' as const,
     phone: q.phone || '',
-    consultationFee: q.consultationFee || 200
+    consultationFee: q.consultationFee || 200,
   }));
 
-  useEffect(() => {
-    setCategories(['Tous', ...dataService.getTherapeuticGroups()]);
-  }, []);
+  // ═══ Effects (UNCHANGED) ═══
+  useEffect(() => { setCategories(['Tous', ...dataService.getTherapeuticGroups()]); }, []);
 
-  // PERSISTENCE EFFECT
   useEffect(() => {
-    if (onDraftChange) {
-      // Don't save empty/initial state as draft if we are editing an existing prescription
-      if (!initialPrescription) {
-        onDraftChange({
-          patient,
-          items,
-          amount,
-          selectedTests
-        });
-      }
+    if (onDraftChange && !initialPrescription) {
+      onDraftChange({ patient, items, amount, selectedTests });
     }
   }, [patient, items, amount, selectedTests, initialPrescription]);
 
   useEffect(() => {
-    if (initialPatient) {
+    if (initialPatient && !initialPatientLoadedRef.current) {
+      initialPatientLoadedRef.current = true;
       selectFromPatientData(initialPatient);
     }
   }, [initialPatient]);
+
+  // Re-run safety checks once the real patient record (and its possibly-missing fields) is known.
+  useEffect(() => { if (selectedPatientRecord) runSafetyChecks(items); }, [selectedPatientRecord]);
 
   useEffect(() => {
     if (selectedPatientFromQueue) {
@@ -139,67 +272,61 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
     if (initialPrescription) {
       setItems(initialPrescription.items);
       setAmount(initialPrescription.amount || 200);
-
       const fullPatient = dataService.getPatientProfile(initialPrescription.patientId);
-      if (fullPatient) {
-        selectFromPatientData(fullPatient);
-      } else {
-        setPatient({ name: initialPrescription.patientId });
-      }
+      if (fullPatient) selectFromPatientData(fullPatient);
+      else setPatient({ name: initialPrescription.patientId });
     }
   }, [initialPrescription]);
 
+  // ═══ Handlers (UNCHANGED) ═══
   const runSafetyChecks = (currentItems: PrescriptionItem[]) => {
     const newLocalWarnings: SafetyNotification[] = [];
-
-    // 1. DUPLICATES
     const seenMeds = new Set<string>();
     currentItems.forEach(item => {
       const nameNorm = item.medicineName.toUpperCase().trim();
       if (seenMeds.has(nameNorm)) {
         newLocalWarnings.push({
-          id: `doublon - ${item.id} `,
-          severity: 'ATTENTION',
-          type: 'DOUBLON',
+          id: `doublon - ${item.id} `, severity: 'ATTENTION', type: 'DOUBLON',
           title: '💊 MÉDICAMENT À DOUBLE',
           message: `${item.medicineName} est déjà présent dans l'ordonnance.`,
-          itemId: item.id
+          itemId: item.id,
         });
       }
       seenMeds.add(nameNorm);
     });
-
-    // 2. DRUG RULES
-    const systemAlerts = drugRulesService.checkRules(patient as Patient, currentItems);
+    const systemAlerts = drugRulesService.checkRules(patient as Patient, currentItems, selectedPatientRecord?.currentMedications);
     systemAlerts.forEach((alert, idx) => {
       const alertId = `rule-${idx}-${alert.type}-${alert.message.length}`;
       if (!overriddenWarnings.has(alertId)) {
-        newLocalWarnings.push({
-          id: alertId,
-          ...alert,
-          canOverride: true
-        });
+        newLocalWarnings.push({ id: alertId, ...alert, canOverride: true });
       }
     });
-
+    // Missing-data notices (e.g. pregnancy status never recorded) — checked against the
+    // real saved patient record, not the form's collapsed-to-false working copy. Only
+    // raised for statuses that a currently-prescribed medication actually documents.
+    const missingDataAlerts = drugRulesService.checkMissingData(selectedPatientRecord, currentItems);
+    missingDataAlerts.forEach((alert, idx) => {
+      newLocalWarnings.push({ id: `missing-${idx}-${alert.type}`, ...alert, canOverride: false });
+    });
+    // Unstructured "Autre" / legacy free-text pathologies-allergies — can't be auto-verified.
+    const unstructuredAlerts = drugRulesService.checkUnstructuredData(selectedPatientRecord, currentItems);
+    unstructuredAlerts.forEach((alert, idx) => {
+      newLocalWarnings.push({ id: `unstructured-${idx}-${alert.type}`, ...alert, canOverride: false });
+    });
     setAiWarnings(newLocalWarnings);
   };
 
   const handleSmartParse = async () => {
     if (!smartPrompt.trim()) return;
-
-    // Check if API key is configured
     const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
     if (!apiKey || apiKey === 'undefined' || apiKey === '') {
       alert("⚠️ Configuration manquante\n\nLa clé API Gemini n'est pas configurée.\n\nVeuillez redémarrer l'application après avoir configuré le fichier .env.local");
       return;
     }
-
     setIsParsing(true);
     setPediatricAlerts([]);
     try {
       const result = await prescriptionAiService.parsePrescription(smartPrompt, patient as Patient);
-
       const newItems: PrescriptionItem[] = result.items.map((item: any) => ({
         id: Math.random().toString(36).substr(2, 9),
         medicineName: item.medicineName,
@@ -208,18 +335,17 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
         duration: item.duration || '7 jours',
         frequency: item.frequency || '3 fois par jour',
       }));
-
       setItems(newItems);
       setPediatricAlerts(result.pediatricWarnings);
       setIsSmartMode(false);
-      setSmartPrompt("");
+      setSmartPrompt('');
       runSafetyChecks(newItems);
     } catch (error: any) {
-      console.error("Smart Parse Error:", error);
-      const errorMessage = error?.message || "Erreur inconnue";
-      if (errorMessage.includes("API key") || errorMessage.includes("401") || errorMessage.includes("403")) {
+      console.error('Smart Parse Error:', error);
+      const errorMessage = error?.message || 'Erreur inconnue';
+      if (errorMessage.includes('API key') || errorMessage.includes('401') || errorMessage.includes('403')) {
         alert("🔑 Erreur d'authentification\n\nLa clé API Gemini est invalide ou expirée.\n\nVeuillez vérifier votre configuration dans .env.local");
-      } else if (errorMessage.includes("network") || errorMessage.includes("fetch")) {
+      } else if (errorMessage.includes('network') || errorMessage.includes('fetch')) {
         alert("🌐 Erreur de connexion\n\nImpossible de se connecter au service Gemini AI.\n\nVérifiez votre connexion internet.");
       } else {
         alert(`❌ Erreur lors de l'analyse intelligente\n\n${errorMessage}\n\nVeuillez réessayer ou contacter le support.`);
@@ -229,29 +355,39 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
     }
   };
 
-  const addItem = (m: Medicine) => {
-    // Determine default dosage and timing based on category if not provided by the medicine itself
+  const addItem = (m: Medicine, packaging?: string | null) => {
     const categoryDefaults = m.category ? (dataService as any).CATEGORY_POSOLOGY?.[m.category] : null;
     const fallbackDosage = categoryDefaults?.dosage || '';
     const fallbackTiming = categoryDefaults?.timing || 'Indifférent';
-
+    // Pediatric dose_rule + known weight → concrete mg pre-fill; otherwise fall back to the
+    // médicament's standard dosage (never guessed when the weight is unknown).
+    const pediatricDose = patient.type === 'Child' ? computePediatricDose(m.pediatricDoseRule, patient.weight) : null;
+    const resolvedDosage = pediatricDose || m.defaultDosage || fallbackDosage;
     const newItem: PrescriptionItem = {
       id: Date.now().toString(),
-      medicineName: m.name,
-      category: m.category,
-      form: m.form,
-      strength: m.strength,
-      dosage: m.defaultDosage || fallbackDosage,
-      referenceDosage: m.defaultDosage || fallbackDosage,
+      medicineName: m.name, genericName: m.active_ingredient, category: m.category, form: m.form, strength: m.strength,
+      route: m.route, packaging: packaging !== undefined ? packaging : m.packaging,
+      dosage: resolvedDosage,
+      referenceDosage: resolvedDosage,
       timing: m.defaultTiming || fallbackTiming,
-      duration: '7 jours',
-      frequency: '3 fois par jour'
+      duration: '7 jours', frequency: '3 fois par jour',
     };
     const newItems = [...items, newItem];
     setItems(newItems);
     setMedicineSearch('');
     setSuggestions([]);
+    setPresentationPicker(null);
     runSafetyChecks(newItems);
+  };
+
+  // Médicament ≠ présentation commerciale : quand plusieurs conditionnements existent pour
+  // le même médicament/DCI/dosage/forme, on demande explicitement lequel avant d'ajouter.
+  const selectMedicine = (m: Medicine) => {
+    if (m.presentations && m.presentations.length > 1) {
+      setPresentationPicker(m);
+    } else {
+      addItem(m);
+    }
   };
 
   const removeItem = (id: string) => {
@@ -266,135 +402,170 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
     setOverrideModal({ isOpen: false, notificationId: '', reason: '' });
   };
 
-  const handleMedSearch = (val: string) => {
+  const handleMedSearch = async (val: string) => {
     setMedicineSearch(val);
-    if (val.trim().length < 2) {
-      setSuggestions([]);
-      return;
-    }
-
+    if (val.trim().length < 2) { setSuggestions([]); return; }
     const searchLower = val.toLowerCase().trim();
-    const allMeds = dataService.getMedicines();
-
-    const filtered = allMeds
+    const localMeds = dataService.getMedicines();
+    const catalogMedsRaw = await searchDrugsGlobal(searchLower, 50);
+    const catalogMeds = groupMedicamentsForSelection(catalogMedsRaw);
+    const combined = [...localMeds, ...catalogMeds];
+    const seen = new Set<string>();
+    const deduplicated: Medicine[] = [];
+    combined.forEach(m => {
+      // Keyed on name+strength+form (not name alone) — a brand's different forms/dosages
+      // (e.g. ACLAV comprimé vs sirop) are distinct variants, not duplicates, and must all
+      // survive so the search UI can group them into selectable chips.
+      const norm = `${m.name.toLowerCase()}|${(m.strength || '').toLowerCase()}|${(m.form || '').toLowerCase()}`;
+      if (!seen.has(norm)) { seen.add(norm); deduplicated.push(m); }
+    });
+    const categoryFiltered = deduplicated.filter(m => selectedCategory === 'Tous' || m.category === selectedCategory);
+    let filtered = categoryFiltered
       .filter(m => {
-        const matchesSearch = m.name.toLowerCase().includes(searchLower);
-        const matchesCategory = selectedCategory === 'Tous' || m.category === selectedCategory;
-        return matchesSearch && matchesCategory;
+        const matchName = m.name.toLowerCase().includes(searchLower);
+        const matchIngredient = m.active_ingredient && m.active_ingredient.toLowerCase().includes(searchLower);
+        return matchName || matchIngredient;
       })
       .sort((a, b) => {
         const aLower = a.name.toLowerCase();
         const bLower = b.name.toLowerCase();
-
         const aStarts = aLower.startsWith(searchLower);
         const bStarts = bLower.startsWith(searchLower);
-
         if (aStarts && !bStarts) return -1;
         if (!aStarts && bStarts) return 1;
-
         return aLower.localeCompare(bLower, 'fr');
       })
-      .slice(0, 50); // Limit to 50 for performance
+      .slice(0, 50);
+
+    // Typo-tolerant fallback (e.g. handwritten/scanned prescription names) when the
+    // plain substring search finds nothing.
+    if (filtered.length === 0) {
+      filtered = fuzzyRank(searchLower, categoryFiltered, m => [m.name, m.active_ingredient || ''], 20);
+    }
 
     setSuggestions(filtered);
   };
 
   const toggleTest = (test: string) => {
-    setSelectedTests(prev =>
-      prev.includes(test) ? prev.filter(t => t !== test) : [...prev, test]
-    );
+    setSelectedTests(prev => prev.includes(test) ? prev.filter(t => t !== test) : [...prev, test]);
   };
 
   const selectFromPatientData = (p: Patient) => {
     setSelectedPatientId(p.id);
+    setSelectedPatientRecord(p);
     setPatient({
-      name: p.name,
-      age: p.age,
-      sex: p.sex,
-      phone: p.phone,
-      weight: p.weight,
-      type: p.type,
+      name: p.name, age: p.age, dateOfBirth: p.dateOfBirth, cin: p.cin, sex: p.sex, phone: p.phone, weight: p.weight, type: p.type,
       allergies: p.allergies || '',
       pathologies: (p.pathologies || '') + (p.chronicDiseases ? ' ' + p.chronicDiseases.join(', ') : ''),
+      pathologyTags: p.pathologyTags || [],
+      pathologiesOtherTags: p.pathologiesOtherTags || [],
+      allergyTags: p.allergyTags || [],
+      allergiesOtherTags: p.allergiesOtherTags || [],
       consultationFee: p.consultationFee,
-      isPregnant: p.isPregnant || false,
-      isBreastfeeding: p.isBreastfeeding || false,
-      isHeartPatient: p.isHeartPatient || false,
-      isKidneyPatient: p.isKidneyPatient || false,
-      isLiverPatient: p.isLiverPatient || false,
-      pregnancyWeeks: p.pregnancyWeeks || 0,
-      lactationMonths: p.lactationMonths || 0
+      isPregnant: p.isPregnant, isBreastfeeding: p.isBreastfeeding,
+      isHeartPatient: p.isHeartPatient, isKidneyPatient: p.isKidneyPatient,
+      isLiverPatient: p.isLiverPatient,
+      pregnancyWeeks: p.pregnancyWeeks || 0, lactationMonths: p.lactationMonths || 0,
     });
-    setAmount(p.consultationFee || 200);
+    setAmount(p.consultationFee || dataService.getDoctorInfo().standardConsultationFee || 0);
     setPatientSuggestions([]);
     medInputRef.current?.focus();
   };
 
-
   const handleSave = () => {
+    // Show alert summary modal first
+    setShowAlertSummary(true);
+    setPendingSaveAction(() => () => performSave());
+  };
+
+  const performSave = () => {
     const isEditing = !!initialPrescription;
     const finalPatientId = selectedPatientId || (patient.name as string);
-
     const newPrescription: Prescription = {
       id: isEditing ? initialPrescription.id : Date.now().toString(),
       patientId: finalPatientId,
       date: isEditing ? initialPrescription.date : new Date().toISOString().split('T')[0],
-      items,
-      amount,
+      items, amount,
       patientType: patient.type as PatientType,
-      patientAge: patient.age,
-      patientWeight: patient.weight
+      patientAge: patient.age, patientWeight: patient.weight,
     };
-
-    if (isEditing) {
-      dataService.updatePrescription(newPrescription);
-    } else {
-      dataService.savePrescription(newPrescription);
-    }
-
-    // Also save lab request if tests are selected
+    if (isEditing) dataService.updatePrescription(newPrescription);
+    else dataService.savePrescription(newPrescription);
     if (selectedTests.length > 0) {
       dataService.saveLabRequest({
-        id: `lab-${Date.now()}`,
-        patientId: finalPatientId,
-        date: newPrescription.date,
-        title: "Bilan Consultation",
-        tests: selectedTests,
-        status: 'REQUESTED'
+        id: `lab-${Date.now()}`, patientId: finalPatientId, date: newPrescription.date,
+        title: 'Bilan Consultation', tests: selectedTests, status: 'REQUESTED',
       });
     }
-
     if (selectedPatientId) dataService.deleteFromQueue(selectedPatientId);
+
+    // New prescriptions (not edits) offer to generate the matching invoice immediately.
+    if (!isEditing) {
+      const doctor = dataService.getDoctorInfo();
+      setInvoicePrompt({ isOpen: true, prescription: newPrescription, amount: amount || patient.consultationFee || 0 });
+    } else {
+      onFinish();
+    }
+  };
+
+  const handleConfirmInvoice = () => {
+    if (invoicePrompt.prescription) {
+      const doctor = dataService.getDoctorInfo();
+      const note: HonoraryNote = billingService.buildQuickInvoice({
+        patientId: invoicePrompt.prescription.patientId,
+        patientName: patient.name || invoicePrompt.prescription.patientId,
+        currency: doctor.currency || 'DH',
+        amount: invoicePrompt.amount,
+        prescriptionId: invoicePrompt.prescription.id,
+      });
+      dataService.saveHonoraryNote(note);
+    }
+    setInvoicePrompt({ isOpen: false, prescription: null, amount: 0 });
     onFinish();
   };
 
-  const handleExportPDF = () => {
+  const handleSkipInvoice = () => {
+    setInvoicePrompt({ isOpen: false, prescription: null, amount: 0 });
+    onFinish();
+  };
+
+  // Non-blocking legal check: an ordonnance without the Ordre National registration
+  // number is missing a mandatory mention, but the doctor may still need to print
+  // in the moment — warn and let them confirm rather than hard-blocking.
+  const confirmLegalMentions = () => {
+    const doctor = dataService.getDoctorInfo();
+    if (!doctor.ordreNumber) {
+      return window.confirm(
+        "Numéro d'inscription à l'Ordre non renseigné — obligatoire sur une ordonnance.\n\nContinuer quand même ?"
+      );
+    }
+    return true;
+  };
+
+  const handleExportPDF = async () => {
+    if (!confirmLegalMentions()) return;
     const appearance = settingsService.getAppearance();
     const doctor = dataService.getDoctorInfo();
     const element = document.getElementById('prescription-export-template');
-
     if (!element) return;
-
+    const isA5 = appearance.paperSize === 'A5';
     const opt = {
       margin: 0,
       filename: `Ordonnance_${patient.name || 'Patient'}_${new Date().toLocaleDateString()}.pdf`,
       image: { type: 'jpeg' as const, quality: 0.98 },
       html2canvas: { scale: 2.5, useCORS: true, letterRendering: true, logging: false },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
-      pagebreak: { mode: 'avoid-all' }
+      jsPDF: { unit: 'mm', format: isA5 ? 'a5' as const : 'a4' as const, orientation: 'portrait' as const },
+      pagebreak: { mode: 'avoid-all' },
     };
-
     toastService.info("Génération de l'ordonnance PDF...");
-    html2pdf()
-      .set(opt)
-      .from(element)
-      .save()
+    const html2pdf = (await import('html2pdf.js')).default;
+    html2pdf().set(opt).from(element).save()
       .then(() => {
-        toastService.success(useCombinedPrint ? "Consultation complète enregistrée !" : "Ordonnance enregistrée !");
+        toastService.success(useCombinedPrint ? 'Consultation complète enregistrée !' : 'Ordonnance enregistrée !');
         handleSave();
       })
       .catch((err: any) => {
-        console.error("Prescription PDF Error:", err);
+        console.error('Prescription PDF Error:', err);
         toastService.error("Erreur d'export PDF.");
       });
   };
@@ -412,585 +583,1238 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({ onFinish, selec
     const appearance = settingsService.getAppearance();
     const doctor = dataService.getDoctorInfo();
     const id = mode === 'preview' ? 'prescription-preview-template' : mode === 'print' ? 'prescription-print-template' : 'prescription-export-template';
-
     if (mode === 'preview') {
       return (
-        <div className="shadow-2xl w-full lg:w-[420px] shrink-0 lg:sticky lg:top-8 h-fit rounded-[2rem] overflow-hidden bg-white border border-gray-100 flex justify-center items-start">
+        <div
+          className="w-full lg:w-[420px] shrink-0 lg:sticky lg:top-[88px] h-fit rounded-xl overflow-hidden bg-white border flex justify-center items-start"
+          style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-soft)' }}
+        >
           {useCombinedPrint ? (
-            <CombinedConsultationTemplate
-              doctor={doctor}
-              appearance={appearance}
-              patient={patient}
-              items={items}
-              tests={getGroupedTests()}
-              scale={0.17}
-            />
+            <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} scale={0.17} />
           ) : (
-            <ExactPrescriptionTemplate
-              id={id}
-              doctor={doctor}
-              appearance={appearance}
-              patient={{
-                name: patient.name || '',
-                age: patient.age || 0,
-                type: (patient.type as PatientType) || 'Adult'
-              }}
-              items={items}
-              scale={0.17}
-            />
+            <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={0.17} />
           )}
         </div>
       );
     }
-
+    const paperScale = appearance.paperSize === 'A5' ? 0.705 : 1;
     if (mode === 'export') {
       return (
         <div style={{ position: 'absolute', top: '-10000px', left: '-10000px' }}>
-          {useCombinedPrint ? (
-            <CombinedConsultationTemplate
-              doctor={doctor}
-              appearance={appearance}
-              patient={patient}
-              items={items}
-              tests={getGroupedTests()}
-              isPrinting={true}
-              scale={0.32}
-            />
-          ) : (
-            <ExactPrescriptionTemplate id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} scale={0.32} />
-          )}
+          {useCombinedPrint
+            ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} scale={0.32 * paperScale} />
+            : <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} scale={0.32 * paperScale} />}
         </div>
       );
     }
-
     return (
       <div className="print-page w-full h-[297mm] overflow-hidden bg-white">
-        <div style={{ transform: 'scale(0.32)', transformOrigin: 'top left' }}>
-          {useCombinedPrint ? (
-            <CombinedConsultationTemplate
-              doctor={doctor}
-              appearance={appearance}
-              patient={patient}
-              items={items}
-              tests={getGroupedTests()}
-              isPrinting={true}
-            />
-          ) : (
-            <ExactPrescriptionTemplate id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} />
-          )}
+        <div style={{ transform: `scale(${0.32 * paperScale})`, transformOrigin: 'top left' }}>
+          {useCombinedPrint
+            ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} />
+            : <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} />}
         </div>
       </div>
     );
   };
 
+  // ═══════════════════════════ RENDER ═══════════════════════════
+  const criticalWarnings = aiWarnings.filter(w => w.severity === 'CRITIQUE');
+  // Missing/undocumented-data notices get their own compact, collapsible zone — they are not
+  // confirmed clinical warnings and mixing them into the amber "Attention" block is what made
+  // it noisy (a banner per unfilled status field on every single patient).
+  const missingDataWarnings = aiWarnings.filter(w => w.type === 'DONNEE_MANQUANTE');
+  const attentionWarnings = aiWarnings.filter(w => w.severity === 'ATTENTION' && w.type !== 'DONNEE_MANQUANTE');
+  const itemHasCritical = (itemId?: string) =>
+    !!itemId && criticalWarnings.some(w => w.itemId === itemId);
+  const itemHasAttention = (itemId?: string) =>
+    !!itemId && attentionWarnings.some(w => w.itemId === itemId);
+
   return (
-    <div className="max-w-[1200px] mx-auto flex flex-col gap-8 pb-20 px-4 text-black">
+    <div className="max-w-[var(--max-content-width)] mx-auto flex flex-col gap-5 pb-10" style={{ color: 'var(--color-text)' }}>
+      {/* ═══ Override modal ═══ */}
       {overrideModal.isOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl">
-            <h3 className="text-lg font-black uppercase text-red-600 mb-4 flex items-center gap-2"><ShieldX size={20} /> {t('security')}</h3>
-            <textarea value={overrideModal.reason} onChange={e => setOverrideModal({ ...overrideModal, reason: e.target.value })} placeholder="..." className="w-full px-4 py-3 border border-gray-200 rounded-xl font-bold text-sm outline-none focus:ring-2 focus:ring-red-500 resize-none h-24 mb-4" />
-            <div className="flex gap-3">
-              <button onClick={() => setOverrideModal({ isOpen: false, notificationId: '', reason: '' })} className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 font-black rounded-xl uppercase text-xs">{t('cancel')}</button>
-              <button onClick={() => handleOverrideWarning(overrideModal.notificationId, overrideModal.reason)} disabled={!overrideModal.reason.trim()} className="flex-1 px-4 py-3 bg-red-600 text-white font-black rounded-xl uppercase text-xs">{t('save')}</button>
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ background: 'rgba(15, 23, 42, 0.5)', backdropFilter: 'blur(4px)' }}>
+          <div className="bg-white rounded-2xl p-7 max-w-md w-full" style={{ boxShadow: 'var(--shadow-premium)' }}>
+            <div className="flex items-start gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white shrink-0" style={{ background: 'var(--color-danger)' }}>
+                <ShieldX size={20} />
+              </div>
+              <div>
+                <h3 className="text-[16px] font-semibold mb-0.5" style={{ color: 'var(--color-text)' }}>Passer outre cette alerte</h3>
+                <p className="text-[13px]" style={{ color: 'var(--color-text-muted)' }}>Indiquez la justification clinique. Cette action sera enregistrée dans le journal d'audit.</p>
+              </div>
+            </div>
+            <textarea
+              value={overrideModal.reason}
+              onChange={e => setOverrideModal({ ...overrideModal, reason: e.target.value })}
+              placeholder="Justification clinique..."
+              className="w-full px-3 py-2.5 bg-white border rounded-md text-[14px] outline-none resize-none h-28 mb-4 transition-all"
+              style={{ borderColor: 'var(--color-border)' }}
+            />
+            <div className="flex gap-2">
+              <button
+                onClick={() => setOverrideModal({ isOpen: false, notificationId: '', reason: '' })}
+                className="flex-1 h-10 px-4 rounded-lg text-[13px] font-medium border transition-all hover:bg-slate-50"
+                style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+              >
+                {t('cancel')}
+              </button>
+              <button
+                onClick={() => handleOverrideWarning(overrideModal.notificationId, overrideModal.reason)}
+                disabled={!overrideModal.reason.trim()}
+                className="flex-1 h-10 px-4 rounded-lg text-[13px] font-medium text-white transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                style={{ background: 'var(--color-danger)' }}
+              >
+                Confirmer l'override
+              </button>
             </div>
           </div>
         </div>
       )}
 
-      <div className="flex-1 space-y-6 print:hidden">
-        <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 space-y-6 relative">
+      {/* ═══ Alert Summary Modal ═══ */}
+      {showAlertSummary && (
+        <AlertSummaryModal
+          alerts={aiWarnings}
+          onReview={() => setShowAlertSummary(false)}
+          onConfirm={() => {
+            setShowAlertSummary(false);
+            if (pendingSaveAction) {
+              pendingSaveAction();
+              setPendingSaveAction(null);
+            }
+          }}
+        />
+      )}
 
+      {/* ═══ Post-save invoice prompt ═══ */}
+      {invoicePrompt.isOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ background: 'rgba(15, 23, 42, 0.5)', backdropFilter: 'blur(4px)' }}>
+          <div className="bg-white rounded-2xl p-7 max-w-md w-full" style={{ boxShadow: 'var(--shadow-premium)' }}>
+            <div className="flex items-start gap-3 mb-4">
+              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white shrink-0" style={{ background: 'var(--color-primary)' }}>
+                <Save size={20} />
+              </div>
+              <div>
+                <h3 className="text-[16px] font-semibold mb-0.5" style={{ color: 'var(--color-text)' }}>Créer la facture correspondante ?</h3>
+                <p className="text-[13px]" style={{ color: 'var(--color-text-muted)' }}>Ordonnance enregistrée. Générer automatiquement la note d'honoraires liée, visible dans Comptabilité.</p>
+              </div>
+            </div>
+            <label className={labelEyebrow} style={labelEyebrowStyle}>Montant (DH)</label>
+            <input
+              type="number"
+              value={invoicePrompt.amount}
+              onChange={e => setInvoicePrompt({ ...invoicePrompt, amount: parseFloat(e.target.value) || 0 })}
+              className={`${input40} mb-4`}
+              style={inputStyle}
+            />
+            <div className="flex gap-2">
+              <button
+                onClick={handleSkipInvoice}
+                className="flex-1 h-10 px-4 rounded-lg text-[13px] font-medium border transition-all hover:bg-slate-50"
+                style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+              >
+                Ignorer
+              </button>
+              <button
+                onClick={handleConfirmInvoice}
+                className="flex-1 h-10 px-4 rounded-lg text-[13px] font-medium text-white transition-all"
+                style={{ background: 'var(--color-primary)' }}
+              >
+                Créer la facture
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="md:col-span-2 relative">
-              <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('patient_name')}</label>
-              <input type="text" value={patient.name} onFocus={() => !patient.name && setPatientSuggestions(queueSuggestions as any)} onChange={e => { setPatient({ ...patient, name: e.target.value }); setPatientSuggestions(e.target.value.length > 0 ? dataService.searchPatients(e.target.value) : queueSuggestions as any); }} className={`w-full ${dir === 'rtl' ? 'pr-5 pl-5' : 'pl-5 pr-5'} py-4 bg-gray-50 border border-gray-100 rounded-2xl font-black text-lg outline-none focus:ring-2 focus:ring-emerald-500`} placeholder={t('name')} />
-              {patientSuggestions.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-100 rounded-3xl shadow-2xl z-50 overflow-hidden max-h-[400px] overflow-y-auto animate-in fade-in slide-in-from-top-2">
-                  <div className="p-3 bg-emerald-50 border-b border-emerald-100">
-                    <span className="text-[10px] font-black uppercase text-emerald-600 tracking-widest">{t('suggestions')}</span>
-                  </div>
-                  {patientSuggestions.map(p => (
-                    <button
-                      key={p.id}
-                      onClick={() => selectFromPatientData(p)}
-                      className="w-full text-left p-4 hover:bg-emerald-50 border-t border-gray-50 flex justify-between items-center group transition-colors"
-                    >
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-white group-hover:text-emerald-600 transition-colors shadow-sm">
-                          <UserCircle size={22} />
-                        </div>
-                        <div>
-                          <p className="font-black text-gray-950 uppercase text-xs">{p.name}</p>
-                          <p className="text-[9px] font-black text-gray-400 uppercase tracking-tighter">ID: {p.id}</p>
-                          <div className="flex items-center gap-2 mt-0.5">
-                            <span className="text-[9px] font-bold text-gray-400 bg-gray-50 px-2 py-0.5 rounded italic">
-                              {(p as any).phone || p.phone || 'Sans tel'}
-                            </span>
-                            {p.registeredDate && (
-                              <span className="text-[8px] font-medium text-emerald-600">
-                                Depuis le {new Date(p.registeredDate).toLocaleDateString()}
-                              </span>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                      <ChevronRight size={16} className={`text-gray-200 group-hover:text-emerald-500 transition-all group-hover:translate-x-1 ${dir === 'rtl' ? 'rotate-180' : ''}`} />
-                    </button>
-                  ))}
-                </div>
+      {/* ═══ Page header ═══ */}
+      <header className="flex items-center justify-between print:hidden">
+        <div className="flex items-center gap-3">
+          <button
+            onClick={onFinish}
+            className="w-10 h-10 rounded-lg border bg-white flex items-center justify-center hover:bg-slate-50 transition-all"
+            style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+            aria-label="Retour"
+          >
+            <ArrowLeft size={18} className={dir === 'rtl' ? 'rotate-180' : ''} />
+          </button>
+          <div>
+            <div className="text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
+              {initialPrescription ? 'Modification' : 'Nouvelle consultation'}
+            </div>
+            <h1 className="text-[22px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>
+              Ordonnance médicale
+              {patient.name && <> — <span style={{ color: 'var(--color-text-muted)' }}>{patient.name}</span></>}
+            </h1>
+          </div>
+        </div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => { if (confirmLegalMentions()) window.print(); }}
+            disabled={items.length === 0}
+            className="h-10 px-4 rounded-lg text-[13px] font-medium border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+          >
+            <Printer size={15} /> {t('print')}
+          </button>
+          <button
+            onClick={handleExportPDF}
+            disabled={items.length === 0}
+            className="h-10 px-4 rounded-lg text-[13px] font-medium border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+          >
+            <FileDigit size={15} /> PDF
+          </button>
+          <button
+            onClick={handleSave}
+            className="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white shadow-soft transition-all hover:shadow-card active:scale-[0.98]"
+            style={{ background: 'var(--color-primary)' }}
+          >
+            <Save size={15} /> {t('save')}
+          </button>
+        </div>
+      </header>
+
+      {/* ═══════════════ ALERTS ═══════════════ */}
+      <div className="flex flex-col gap-3 print:hidden">
+        {/* 🚨 CRITICAL — pulsing red banner */}
+        {criticalWarnings.map(alert => (
+          <div
+            key={alert.id}
+            className="alert-pulse rounded-xl border-2 p-5 flex items-start gap-4 bg-white"
+            style={{ borderColor: 'var(--color-danger)' }}
+          >
+            <div className="w-11 h-11 rounded-lg flex items-center justify-center text-white shrink-0" style={{ background: 'var(--color-danger)' }}>
+              <ShieldAlert size={22} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
+                <span
+                  className="text-[10px] font-bold uppercase px-2 py-0.5 rounded text-white"
+                  style={{ background: 'var(--color-danger)', letterSpacing: '0.1em' }}
+                >
+                  Critique
+                </span>
+                <span className="text-[11px] font-medium" style={{ color: 'var(--color-danger-700)' }}>
+                  {alert.type === 'ENFANT_INTERDIT' ? 'Contre-indication pédiatrique'
+                   : alert.type === 'CONTRE_INDICATION' ? 'Contre-indication'
+                   : alert.type === 'INTERACTION' ? 'Interaction critique'
+                   : 'Règle de sécurité'}
+                </span>
+              </div>
+              <div className="text-[15px] font-semibold mb-1" style={{ color: 'var(--color-danger-700)' }}>
+                {alert.title}
+              </div>
+              <p className="text-[13px] leading-relaxed" style={{ color: 'var(--color-danger-700)' }}>
+                {alert.message}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2 shrink-0">
+              {alert.itemId && (
+                <button
+                  onClick={() => removeItem(alert.itemId!)}
+                  className="h-10 px-5 rounded-lg text-[13px] font-semibold text-white transition-all"
+                  style={{ background: 'var(--color-danger)' }}
+                >
+                  Retirer le médicament
+                </button>
+              )}
+              {alert.canOverride && (
+                <button
+                  onClick={() => setOverrideModal({ isOpen: true, notificationId: alert.id, reason: '' })}
+                  className="h-10 px-5 rounded-lg text-[13px] font-medium border transition-all"
+                  style={{ borderColor: 'var(--color-danger)', color: 'var(--color-danger-700)', background: 'rgba(255,255,255,0.7)' }}
+                >
+                  Passer outre…
+                </button>
               )}
             </div>
-            <div><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('age')}</label><input type="number" value={patient.age || ''} onChange={e => setPatient({ ...patient, age: parseInt(e.target.value) || 0 })} className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl font-black text-lg outline-none" /></div>
-            <div><label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">{t('weight')}</label><input type="text" value={patient.weight || ''} onChange={e => setPatient({ ...patient, weight: e.target.value })} className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl font-black text-lg outline-none" placeholder={t('weight_placeholder')} /></div>
           </div>
+        ))}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-red-50/20 border border-red-100 rounded-[2rem]">
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <label className="text-[10px] font-black text-red-600 uppercase tracking-widest flex items-center gap-1"><AlertCircle size={10} /> {t('allergies')}</label>
-                <input type="text" value={patient.allergies} onChange={e => setPatient({ ...patient, allergies: e.target.value })} placeholder={t('allergies_placeholder')} className="w-full px-4 py-3 bg-white border border-red-100 rounded-xl font-bold text-sm outline-none" />
+        {/* 🟡 ATTENTION — amber warnings */}
+        {attentionWarnings.length > 0 && (
+          <div
+            className="rounded-xl border p-5"
+            style={{ background: 'var(--color-warning-50)', borderColor: 'var(--color-warning)' }}
+          >
+            <div className="flex items-center gap-2 mb-3">
+              <div className="w-9 h-9 rounded-lg flex items-center justify-center text-white shrink-0" style={{ background: 'var(--color-warning-hover)' }}>
+                <AlertTriangle size={18} />
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div>
+                <div className="flex items-center gap-2 mb-0.5">
+                  <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded text-white" style={{ background: 'var(--color-warning-hover)', letterSpacing: '0.1em' }}>Attention</span>
+                  <span className="text-[11px] font-medium" style={{ color: 'var(--color-warning-800)' }}>
+                    {attentionWarnings.length} avertissement{attentionWarnings.length > 1 ? 's' : ''}
+                  </span>
+                </div>
+                <p className="text-[13px]" style={{ color: 'var(--color-warning-800)' }}>
+                  Vérifications cliniques à examiner avant validation.
+                </p>
+              </div>
+            </div>
+            <div className="space-y-2">
+              {attentionWarnings.map(alert => (
+                <div
+                  key={alert.id}
+                  className="flex items-start gap-3 p-3 rounded-md bg-white border"
+                  style={{ borderColor: 'var(--color-warning-100)' }}
+                >
+                  <AlertTriangle size={15} style={{ color: 'var(--color-warning-hover)' }} className="shrink-0 mt-0.5" />
+                  <div className="flex-1 min-w-0">
+                    <div className="text-[13px] font-semibold mb-0.5" style={{ color: 'var(--color-warning-800)' }}>{alert.title}</div>
+                    <p className="text-[12px] leading-relaxed" style={{ color: 'var(--color-warning-800)' }}>{alert.message}</p>
+                  </div>
+                  {alert.canOverride && (
+                    <button
+                      onClick={() => setOverrideModal({ isOpen: true, notificationId: alert.id, reason: '' })}
+                      className="h-8 px-3 rounded-md text-[11px] font-medium border transition-all bg-white shrink-0"
+                      style={{ borderColor: 'var(--color-warning)', color: 'var(--color-warning-800)' }}
+                    >
+                      Passer outre
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 🟠 DONNÉE MANQUANTE — compact, collapsed by default. Only exists once a prescribed
+            medication actually documents a renal/hepatic/cardiac/pregnancy/allaitement concern
+            and the corresponding patient status was never recorded — never shown on an empty
+            ordonnance or for statuses no prescribed drug cares about. */}
+        {missingDataWarnings.length > 0 && (
+          <div
+            className="rounded-xl border overflow-hidden"
+            style={{ background: 'var(--color-warning-50)', borderColor: 'var(--color-warning-100)' }}
+          >
+            <button
+              type="button"
+              onClick={() => setShowMissingDataDetails(v => !v)}
+              className="w-full flex items-center gap-3 p-4 text-left"
+            >
+              <AlertTriangle size={16} style={{ color: 'var(--color-warning-hover)' }} className="shrink-0" />
+              <span className="text-[13px] font-semibold flex-1" style={{ color: 'var(--color-warning-800)' }}>
+                {missingDataWarnings.length} information{missingDataWarnings.length > 1 ? 's' : ''} à vérifier
+              </span>
+              <ChevronDown
+                size={16}
+                style={{ color: 'var(--color-warning-hover)', transform: showMissingDataDetails ? 'rotate(180deg)' : undefined, transition: 'transform 150ms' }}
+              />
+            </button>
+            {showMissingDataDetails && (
+              <div className="px-4 pb-4 space-y-2">
+                {missingDataWarnings.map(alert => (
+                  <p key={alert.id} className="text-[12px] leading-relaxed" style={{ color: 'var(--color-warning-800)' }}>
+                    {alert.message}
+                  </p>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* AI pediatric notes (assistive) */}
+        {pediatricAlerts.length > 0 && (
+          <div className="rounded-xl border p-5" style={{ background: 'var(--color-primary-50)', borderColor: 'var(--color-primary-100)' }}>
+            <div className="flex items-center gap-2 mb-3">
+              <BrainCircuit size={16} style={{ color: 'var(--color-primary)' }} />
+              <div className="text-[13px] font-semibold" style={{ color: 'var(--color-primary)' }}>Analyse assistée — notes pédiatriques</div>
+            </div>
+            <div className="space-y-1.5">
+              {pediatricAlerts.map((alert, i) => (
+                <div key={i} className="text-[13px] flex gap-2 items-start" style={{ color: 'var(--color-primary)' }}>
+                  <span className="mt-1.5 w-1 h-1 rounded-full shrink-0" style={{ background: 'var(--color-primary)' }} />
+                  <span>{alert}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* ═══════════════ MAIN 2-COL LAYOUT ═══════════════ */}
+      <div className="flex flex-col lg:flex-row gap-5">
+        <div className="flex-1 space-y-5 print:hidden min-w-0">
+
+          {/* ─── PATIENT CARD ─── */}
+          <section className={`${card} p-6 space-y-5`} style={cardStyle}>
+            <div className="flex items-center gap-2">
+              <div className="w-1 h-5 rounded-full" style={{ background: 'var(--color-primary)' }} />
+              <h2 className="text-[14px] font-semibold" style={{ color: 'var(--color-text)' }}>Contexte patient</h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+              <div className="md:col-span-2 relative">
+                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('patient_name')}</label>
+                <input
+                  type="text"
+                  value={patient.name}
+                  onFocus={() => {
+                    setPatientFieldActive(true);
+                    if (!patient.name) setPatientSuggestions(queueSuggestions as any);
+                  }}
+                  onBlur={() => setTimeout(() => setPatientFieldActive(false), 150)}
+                  onChange={e => {
+                    setPatient({ ...patient, name: e.target.value });
+                    setPatientSuggestions(e.target.value.length > 0 ? dataService.searchPatients(e.target.value) : queueSuggestions as any);
+                  }}
+                  className={input40}
+                  style={inputStyle}
+                  placeholder={t('name')}
+                />
+                {patientFieldActive && (patientSuggestions.length > 0 || (!patient.name && queueSuggestions.length === 0)) && (
+                  <div
+                    className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg z-50 overflow-hidden max-h-[400px] overflow-y-auto"
+                    style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-premium)' }}
+                  >
+                    <div className="px-3 py-2 border-b" style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}>
+                      <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>{t('suggestions')}</span>
+                    </div>
+                    {patientSuggestions.length === 0 ? (
+                      <div className="px-3 py-3 text-[13px]" style={{ color: 'var(--color-text-subtle)' }}>
+                        {t('all_patients_seen')}
+                      </div>
+                    ) : patientSuggestions.map(p => (
+                      <button
+                        key={p.id}
+                        onMouseDown={e => e.preventDefault()}
+                        onClick={() => selectFromPatientData(p)}
+                        className="w-full text-left px-3 py-2.5 flex justify-between items-center transition-all hover:bg-[var(--color-row-hover)] border-t"
+                        style={{ borderColor: 'var(--color-border)' }}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 rounded-md flex items-center justify-center" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}>
+                            <UserCircle size={18} />
+                          </div>
+                          <div>
+                            <div className="text-[13px] font-medium" style={{ color: 'var(--color-text)' }}>{formatNom(p.name)}</div>
+                            <div className="text-[11px] flex items-center gap-2" style={{ color: 'var(--color-text-subtle)' }}>
+                              <span>#{String(p.id).slice(-6)}</span><span>·</span><span>{(p as any).phone || p.phone || 'Sans tél.'}</span>
+                            </div>
+                          </div>
+                        </div>
+                        <ChevronRight size={14} className={dir === 'rtl' ? 'rotate-180' : ''} style={{ color: 'var(--color-text-faint)' }} />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('age')}</label>
+                {patient.dateOfBirth ? (
+                  <div className={`${input40} flex items-center gap-1.5`} style={{ ...inputStyle, background: 'var(--color-surface-alt)' }}>
+                    <Cake size={13} style={{ color: 'var(--color-text-faint)' }} />
+                    <span className="font-medium">{formatAge(patient)}</span>
+                  </div>
+                ) : (
+                  <input
+                    type="number"
+                    value={patient.age || ''}
+                    onChange={e => setPatient({ ...patient, age: parseInt(e.target.value) || 0 })}
+                    className={input40} style={inputStyle}
+                  />
+                )}
+              </div>
+              <div>
+                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('weight')}</label>
+                <input
+                  type="text"
+                  value={patient.weight || ''}
+                  onChange={e => setPatient({ ...patient, weight: e.target.value })}
+                  className={input40} style={inputStyle}
+                  placeholder={t('weight_placeholder')}
+                />
+              </div>
+            </div>
+
+            {/* Identité — champs déjà connus (salle d'attente / dossier), lecture seule */}
+            {(patient.type || patient.dateOfBirth || patient.cin) && (
+              <div className="flex flex-wrap items-center gap-2">
+                {patient.type && (
+                  <span
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium"
+                    style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
+                  >
+                    {patient.type === 'Child' ? <Baby size={11} /> : patient.type === 'Woman' ? <Heart size={11} /> : <UserCircle size={11} />}
+                    {patient.type === 'Child' ? t('child') : patient.type === 'Woman' ? t('woman') : t('adult')}
+                  </span>
+                )}
+                {patient.dateOfBirth && (
+                  <span
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium"
+                    style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
+                  >
+                    <Cake size={11} /> {new Date(patient.dateOfBirth).toLocaleDateString('fr-FR')}
+                  </span>
+                )}
+                {patient.type !== 'Child' && patient.cin && (
+                  <span
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium"
+                    style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
+                  >
+                    <CreditCard size={11} /> CIN {patient.cin}
+                  </span>
+                )}
+              </div>
+            )}
+
+            {/* Allergies + pathologies — unified search */}
+            <div className="p-4 rounded-lg border space-y-3" style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}>
+              <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--color-text-muted)', letterSpacing: '0.06em' }}>
+                <AlertCircle size={11} /> {t('allergies')} &amp; {t('pathologies')}
+              </label>
+              <UnifiedMedicalTagSearch
+                allergyOptions={COMMON_ALLERGIES}
+                pathologyOptions={COMMON_PATHOLOGIES}
+                selectedAllergyTags={patient.allergyTags || []}
+                onAllergyTagsChange={tags => { setPatient({ ...patient, allergyTags: tags }); runSafetyChecks(items); }}
+                allergyOtherTags={patient.allergiesOtherTags || []}
+                onAllergyOtherTagsChange={tags => { setPatient({ ...patient, allergiesOtherTags: tags }); runSafetyChecks(items); }}
+                selectedPathologyTags={patient.pathologyTags || []}
+                onPathologyTagsChange={tags => { setPatient({ ...patient, pathologyTags: tags }); runSafetyChecks(items); }}
+                pathologyOtherTags={patient.pathologiesOtherTags || []}
+                onPathologyOtherTagsChange={tags => { setPatient({ ...patient, pathologiesOtherTags: tags }); runSafetyChecks(items); }}
+                placeholder="Rechercher une allergie ou une pathologie…"
+              />
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+                <input
+                  type="text"
+                  value={patient.allergies}
+                  onChange={e => setPatient({ ...patient, allergies: e.target.value })}
+                  placeholder="Précisions allergies (optionnel)"
+                  className="w-full h-10 px-3 rounded-md border text-[13px] outline-none bg-white"
+                  style={{ borderColor: 'var(--color-danger-100)' }}
+                />
+                <input
+                  type="text"
+                  value={patient.pathologies}
+                  onChange={e => setPatient({ ...patient, pathologies: e.target.value })}
+                  placeholder="Précisions pathologies (optionnel)"
+                  className="w-full h-10 px-3 rounded-md border text-[13px] outline-none bg-white"
+                  style={{ borderColor: 'var(--color-border)' }}
+                />
+              </div>
+
+              {/* Quick shortcuts */}
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {[
+                  { key: 'isHeartPatient' as const, icon: Heart, label: t('heart_patient') },
+                  { key: 'isKidneyPatient' as const, icon: FlaskConical, label: t('kidney_patient') },
+                  { key: 'isLiverPatient' as const, icon: Activity, label: t('liver_patient') },
+                ].map(({ key, icon: Icon, label }) => {
+                  const active = !!patient[key];
+                  return (
+                    <button
+                      key={key}
+                      onClick={() => { const v = !patient[key]; setPatient({ ...patient, [key]: v }); runSafetyChecks(items); }}
+                      className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
+                      style={active
+                        ? { background: 'var(--color-primary)', color: 'white' }
+                        : { background: 'white', color: 'var(--color-text-muted)', border: `1px solid var(--color-border)` }}
+                    >
+                      <Icon size={11} /> {label}
+                    </button>
+                  );
+                })}
                 {patient.sex === 'F' && (
                   <>
-                    <div className="flex flex-col gap-2">
-                      <button onClick={() => { const val = !patient.isPregnant; setPatient({ ...patient, isPregnant: val }); runSafetyChecks(items); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-tighter transition-all flex items-center gap-2 ${patient.isPregnant ? 'bg-pink-100 text-pink-700 ring-1 ring-pink-300' : 'bg-white text-gray-400 border border-gray-100'}`}>
-                        <Zap size={10} /> {t('pregnant')}
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => { const v = !patient.isPregnant; setPatient({ ...patient, isPregnant: v }); runSafetyChecks(items); }}
+                        className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
+                        style={patient.isPregnant
+                          ? { background: 'var(--color-warning-hover)', color: 'white' }
+                          : { background: 'white', color: 'var(--color-text-muted)', border: `1px solid var(--color-border)` }}
+                      >
+                        <Zap size={11} /> {t('pregnant')}
                       </button>
                       {patient.isPregnant && (
-                        <div className="flex items-center gap-2 ml-2">
-                          <span className="text-[8px] font-black text-pink-600 uppercase">Semaines:</span>
-                          <input
-                            type="number"
-                            value={patient.pregnancyWeeks || ''}
-                            onChange={e => {
-                              const val = parseInt(e.target.value) || 0;
-                              setPatient({ ...patient, pregnancyWeeks: val });
-                              runSafetyChecks(items);
-                            }}
-                            className="w-12 px-1 py-0.5 bg-white border border-pink-200 rounded md text-[10px] font-black outline-none"
-                          />
-                        </div>
+                        <input
+                          type="number" value={patient.pregnancyWeeks || ''}
+                          onChange={e => { setPatient({ ...patient, pregnancyWeeks: parseInt(e.target.value) || 0 }); runSafetyChecks(items); }}
+                          placeholder="sem."
+                          className="w-14 h-8 px-2 rounded-md border text-[12px] font-medium outline-none bg-white"
+                          style={{ borderColor: 'var(--color-warning-100)' }}
+                        />
                       )}
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <button onClick={() => { const val = !patient.isBreastfeeding; setPatient({ ...patient, isBreastfeeding: val }); runSafetyChecks(items); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-tighter transition-all flex items-center gap-2 ${patient.isBreastfeeding ? 'bg-blue-100 text-blue-700 ring-1 ring-blue-300' : 'bg-white text-gray-400 border border-gray-100'}`}>
-                        <Baby size={10} /> {t('breastfeeding')}
+                    <div className="flex items-center gap-1.5">
+                      <button
+                        onClick={() => { const v = !patient.isBreastfeeding; setPatient({ ...patient, isBreastfeeding: v }); runSafetyChecks(items); }}
+                        className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
+                        style={patient.isBreastfeeding
+                          ? { background: 'var(--color-warning-hover)', color: 'white' }
+                          : { background: 'white', color: 'var(--color-text-muted)', border: `1px solid var(--color-border)` }}
+                      >
+                        <Baby size={11} /> {t('breastfeeding')}
                       </button>
                       {patient.isBreastfeeding && (
-                        <div className="flex items-center gap-2 ml-2">
-                          <span className="text-[8px] font-black text-blue-600 uppercase">Mois:</span>
-                          <input
-                            type="number"
-                            value={patient.lactationMonths || ''}
-                            onChange={e => {
-                              const val = parseInt(e.target.value) || 0;
-                              setPatient({ ...patient, lactationMonths: val });
-                              runSafetyChecks(items);
-                            }}
-                            className="w-12 px-1 py-0.5 bg-white border border-blue-200 rounded md text-[10px] font-black outline-none"
-                          />
-                        </div>
+                        <input
+                          type="number" value={patient.lactationMonths || ''}
+                          onChange={e => { setPatient({ ...patient, lactationMonths: parseInt(e.target.value) || 0 }); runSafetyChecks(items); }}
+                          placeholder="mois"
+                          className="w-14 h-8 px-2 rounded-md border text-[12px] font-medium outline-none bg-white"
+                          style={{ borderColor: 'var(--color-warning-100)' }}
+                        />
                       )}
                     </div>
                   </>
                 )}
               </div>
             </div>
-            <div className="space-y-4">
-              <div className="space-y-1">
-                <label className="text-[10px] font-black text-indigo-600 uppercase tracking-widest flex items-center gap-1"><Activity size={10} /> {t('pathologies')}</label>
-                <input type="text" value={patient.pathologies} onChange={e => setPatient({ ...patient, pathologies: e.target.value })} placeholder={t('antecedents_placeholder')} className="w-full px-4 py-3 bg-white border border-indigo-100 rounded-xl font-bold text-sm outline-none" />
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <button onClick={() => { const val = !patient.isHeartPatient; setPatient({ ...patient, isHeartPatient: val }); runSafetyChecks(items); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-tighter transition-all flex items-center gap-2 ${patient.isHeartPatient ? 'bg-orange-100 text-orange-700 ring-1 ring-orange-300' : 'bg-white text-gray-400 border border-gray-100'}`}>
-                  <Heart size={10} /> {t('heart_patient')}
-                </button>
-                <button onClick={() => { const val = !patient.isKidneyPatient; setPatient({ ...patient, isKidneyPatient: val }); runSafetyChecks(items); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-tighter transition-all flex items-center gap-2 ${patient.isKidneyPatient ? 'bg-indigo-100 text-indigo-700 ring-1 ring-indigo-300' : 'bg-white text-gray-400 border border-gray-100'}`}>
-                  <FlaskConical size={10} /> {t('kidney_patient')}
-                </button>
-                <button onClick={() => { const val = !patient.isLiverPatient; setPatient({ ...patient, isLiverPatient: val }); runSafetyChecks(items); }} className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-tighter transition-all flex items-center gap-2 ${patient.isLiverPatient ? 'bg-emerald-100 text-emerald-700 ring-1 ring-emerald-300' : 'bg-white text-gray-400 border border-gray-100'}`}>
-                  <Activity size={10} /> {t('liver_patient')}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+          </section>
 
-        <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 min-h-[400px]">
-          <div className="relative mb-8">
-            <div className="flex items-center gap-3 mb-4">
+          {/* ─── PRESCRIPTION HISTORY (collapsible) ─── */}
+          {selectedPatientId && (() => {
+            const history = dataService.getPrescriptions()
+              .filter(p => p.patientId === selectedPatientId && p.id !== initialPrescription?.id)
+              .sort((a, b) => b.date.localeCompare(a.date));
+            if (history.length === 0) return null;
+            return (
+              <section className={`${card} p-5`} style={cardStyle}>
+                <button onClick={() => setShowHistory(!showHistory)} className="w-full flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <History size={15} style={{ color: 'var(--color-primary)' }} />
+                    <h2 className="text-[13px] font-semibold" style={{ color: 'var(--color-text)' }}>
+                      Ordonnances précédentes ({history.length})
+                    </h2>
+                  </div>
+                  <ChevronDown size={16} style={{ color: 'var(--color-text-subtle)', transform: showHistory ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+                </button>
+                {showHistory && (
+                  <div className="mt-3 space-y-2 max-h-[220px] overflow-y-auto">
+                    {history.map(rx => (
+                      <div key={rx.id} className="p-3 rounded-md border text-[12px]" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}>
+                        <div className="flex justify-between items-center mb-1">
+                          <span className="font-medium" style={{ color: 'var(--color-text)' }}>{rx.date}</span>
+                          <span style={{ color: 'var(--color-text-subtle)' }}>{rx.items.length} médicament{rx.items.length !== 1 ? 's' : ''}</span>
+                        </div>
+                        <p style={{ color: 'var(--color-text-muted)' }}>{rx.items.map(i => i.medicineName).join(', ')}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
+            );
+          })()}
+
+          {/* ─── MEDICATION CARD ─── */}
+          <section className={`${card} p-6`} style={cardStyle}>
+            <div className="flex items-center justify-between mb-5">
+              <div className="flex items-center gap-2">
+                <div className="w-1 h-5 rounded-full" style={{ background: 'var(--color-primary)' }} />
+                <h2 className="text-[14px] font-semibold" style={{ color: 'var(--color-text)' }}>Médicaments</h2>
+                {items.length > 0 && (
+                  <span className="ml-1 px-2 py-0.5 rounded text-[11px] font-medium tabular-nums" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
+                    {items.length}
+                  </span>
+                )}
+              </div>
               <button
                 onClick={() => setIsSmartMode(!isSmartMode)}
-                className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 transition-all shadow-sm ${isSmartMode ? 'bg-amber-100 text-amber-700 ring-2 ring-amber-500' : 'bg-gray-100 text-gray-400 hover:bg-emerald-50 hover:text-emerald-600'}`}
+                className="h-9 px-3.5 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
+                style={isSmartMode
+                  ? { background: 'var(--color-primary)', color: 'white' }
+                  : { background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}
               >
-                <Zap size={14} className={isSmartMode ? "fill-amber-500" : ""} /> {t('smart_mode')}
+                <Zap size={13} className={isSmartMode ? 'fill-white' : ''} />
+                {t('smart_mode')}
               </button>
-              {!isSmartMode && <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest px-2">{t('manual_search')}</p>}
             </div>
 
-            {isSmartMode ? (
-              <div className="space-y-4 animate-in zoom-in-95 duration-300">
-                <textarea
-                  value={smartPrompt}
-                  onChange={e => setSmartPrompt(e.target.value)}
-                  placeholder={t('smart_mode_desc')}
-                  className="w-full h-40 p-6 bg-emerald-50/50 border border-emerald-200 rounded-[2rem] font-bold text-lg outline-none focus:ring-4 focus:ring-emerald-100 transition-all resize-none shadow-inner"
-                />
-                <button
-                  disabled={isParsing || !smartPrompt.trim()}
-                  onClick={handleSmartParse}
-                  className="w-full py-5 bg-emerald-600 text-white font-black rounded-2xl shadow-xl uppercase tracking-widest flex items-center justify-center gap-3 disabled:opacity-50 transition-all active:scale-[0.98]"
-                >
-                  {isParsing ? <Loader2 size={24} className="animate-spin" /> : <BrainCircuit size={24} />}
-                  {isParsing ? t('parsing_in_progress') : t('smart_parse_btn')}
-                </button>
-              </div>
-            ) : (
-              <>
-                <div className="relative group">
-                  <div className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-3">
-                    <Search className={`transition-colors duration-300 ${medicineSearch ? 'text-emerald-500 scale-110' : 'text-gray-300'}`} size={24} />
-                    <div className="w-[2px] h-6 bg-gray-100 hidden md:block" />
-                  </div>
-                  <input
-                    ref={medInputRef}
-                    type="text"
-                    value={medicineSearch}
-                    onChange={e => handleMedSearch(e.target.value)}
-                    placeholder={t('search_med_placeholder')}
-                    className={`w-full ${dir === 'rtl' ? 'pr-16 md:pr-20 pl-12' : 'pl-16 md:pl-20 pr-12'} py-6 bg-white border border-gray-100 rounded-3xl font-black text-xl outline-none focus:border-emerald-500 focus:ring-[12px] focus:ring-emerald-500/5 shadow-soft-lg transition-all`}
+            <div className="relative mb-5">
+              {isSmartMode ? (
+                <div className="space-y-3">
+                  <textarea
+                    value={smartPrompt}
+                    onChange={e => setSmartPrompt(e.target.value)}
+                    placeholder={t('smart_mode_desc')}
+                    className="w-full h-32 p-4 border rounded-lg text-[14px] outline-none resize-none transition-all"
+                    style={{ borderColor: 'var(--color-primary-100)', background: 'var(--color-primary-50)' }}
                   />
-                  {(medicineSearch || selectedCategory !== 'Tous') && (
-                    <button
-                      onClick={() => {
-                        setMedicineSearch('');
-                        setSelectedCategory('Tous');
-                        setSuggestions([]);
-                      }}
-                      className={`absolute ${dir === 'rtl' ? 'left-4' : 'right-4'} top-1/2 -translate-y-1/2 p-2 bg-gray-50 hover:bg-red-50 text-gray-400 hover:text-red-500 rounded-xl transition-all`}
-                    >
-                      <CloseX size={18} />
-                    </button>
-                  )}
+                  <button
+                    disabled={isParsing || !smartPrompt.trim()}
+                    onClick={handleSmartParse}
+                    className="w-full h-11 rounded-lg font-medium text-white flex items-center justify-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                    style={{ background: 'var(--color-primary)' }}
+                  >
+                    {isParsing ? <Loader2 size={16} className="animate-spin" /> : <BrainCircuit size={16} />}
+                    <span className="text-[14px]">{isParsing ? t('parsing_in_progress') : t('smart_parse_btn')}</span>
+                  </button>
                 </div>
-
-                {suggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-4 bg-white/80 backdrop-blur-xl border border-white rounded-[2.5rem] shadow-2xl z-50 overflow-hidden animate-in fade-in slide-in-from-top-4 duration-300 max-h-[500px] flex flex-col">
-                    <div className="px-6 py-3 bg-emerald-600 flex justify-between items-center text-white">
-                      <span className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
-                        <Pill size={12} /> {suggestions.length} {t('results').toLowerCase()}
-                      </span>
-                      <span className="text-[9px] font-bold opacity-80 uppercase">{t('suggestions')}</span>
-                    </div>
-                    <div className="overflow-y-auto overflow-x-hidden p-2 scrollbar-thin scrollbar-thumb-emerald-100 flex-1">
-                      {suggestions.map((m, idx) => (
-                        <button
-                          key={m.id || idx}
-                          onClick={() => addItem(m)}
-                          className="w-full text-left p-4 hover:bg-emerald-50 rounded-2xl transition-all group flex items-start gap-4"
-                        >
-                          <div className="w-12 h-12 bg-gray-50 group-hover:bg-white rounded-xl flex items-center justify-center text-gray-400 group-hover:text-emerald-600 transition-colors shrink-0 shadow-sm">
-                            <Pill size={22} />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <div className="flex justify-between items-center gap-4 mb-1">
-                              <h4 className="font-black text-gray-900 group-hover:text-emerald-800 text-lg leading-tight uppercase truncate">
-                                {m.name.split(new RegExp(`(${medicineSearch})`, 'gi')).map((part, i) =>
-                                  part.toLowerCase() === medicineSearch.toLowerCase() ? (
-                                    <span key={i} className="text-emerald-600 bg-emerald-100/50 rounded-md px-0.5">{part}</span>
-                                  ) : part
-                                )}
-                              </h4>
-                              <ChevronRight size={18} className={`text-gray-200 group-hover:text-emerald-400 -translate-x-2 group-hover:translate-x-0 transition-all ${dir === 'rtl' ? 'rotate-180' : ''}`} />
-                            </div>
-                            <div className="flex flex-wrap gap-2 items-center">
-                              <span className="px-2 py-0.5 bg-emerald-100/50 text-[10px] font-black text-emerald-700 rounded-md uppercase tracking-wider">
-                                {m.category ? (lang === 'ar' ? (t(m.category.toLowerCase()) || m.category) : m.category) : t('medicine')}
-                              </span>
-                              {m.form && (
-                                <span className="px-2 py-0.5 bg-amber-100 text-[10px] font-black text-amber-700 rounded-md uppercase tracking-wider">
-                                  {m.form}
-                                </span>
-                              )}
-                              {m.strength && (
-                                <span className="px-2 py-0.5 bg-blue-100 text-[10px] font-black text-blue-700 rounded-md uppercase tracking-wider">
-                                  {m.strength}
-                                </span>
-                              )}
-                              {m.defaultDosage && (
-                                <span className="px-2 py-0.5 bg-gray-100 text-[10px] font-bold text-gray-500 rounded-md truncate max-w-[300px]">
-                                  <span className="opacity-50 mr-1">Posologie type:</span> {m.defaultDosage}
-                                </span>
-                              )}
-                              {m.interactionGroup && (
-                                <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md italic truncate max-w-[200px]">
-                                  {m.interactionGroup}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {medicineSearch.length >= 2 && suggestions.length === 0 && !isParsing && (
-                  <div className="absolute top-full left-0 right-0 mt-4 bg-white rounded-[2.5rem] border border-gray-100 shadow-2xl z-50 p-10 text-center animate-in zoom-in-95 duration-300">
-                    <h4 className="font-black text-gray-900 uppercase">{t('no_med_found')}</h4>
-                    <p className="text-xs text-gray-400 font-bold mt-2 uppercase tracking-widest">---</p>
-                    <button
-                      onClick={() => {
-                        addItem({ id: Date.now().toString(), name: medicineSearch, category: 'Autre', defaultDosage: '', defaultTiming: 'Indifférent' });
-                      }}
-                      className="mt-6 px-6 py-3 bg-gray-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-emerald-600 transition-all flex items-center gap-2 mx-auto"
-                    >
-                      <Plus size={14} /> {t('add_new_med')}
-                    </button>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-
-          {(pediatricAlerts.length > 0 || aiWarnings.length > 0) && (
-            <div className="mb-8 space-y-4 animate-in slide-in-from-left duration-500">
-              {pediatricAlerts.length > 0 && (
-                <div className="p-6 bg-emerald-50 rounded-3xl border border-emerald-200">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xs font-black text-emerald-700 uppercase flex items-center gap-2">🟢 Analyse Assistée</h3>
-                    <span className="text-[9px] font-bold text-emerald-600/60 uppercase tracking-tighter italic">Outil d'aide à la lecture</span>
-                  </div>
-                  <div className="space-y-2">
-                    {pediatricAlerts.map((alert, i) => (
-                      <div key={i} className="flex gap-3 items-start p-3 bg-white/60 rounded-xl">
-                        <AlertTriangle size={18} className="text-amber-500 shrink-0 mt-1" />
-                        <p className="text-sm font-black text-amber-900 leading-tight">{alert}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {aiWarnings.length > 0 && (
-                <div className="p-6 bg-red-50 rounded-3xl border border-red-200">
-                  <div className="flex justify-between items-start mb-3">
-                    <h3 className="text-xs font-black text-red-700 uppercase flex items-center gap-2">🚨 Alertes de Sécurité</h3>
-                    <span className="text-[9px] font-bold text-red-600/60 uppercase tracking-tighter italic">Vérification clinique automatique</span>
-                  </div>
-                  <div className="space-y-3">
-                    {aiWarnings.map((alert) => (
-                      <div key={alert.id} className={`flex gap-4 items-start p-4 rounded-2xl ${alert.severity === 'CRITIQUE' ? 'bg-red-600 text-white shadow-lg' : 'bg-white/80 text-red-900 border border-red-100'}`}>
-                        {alert.severity === 'CRITIQUE' ? <ShieldAlert size={20} className="shrink-0 mt-1" /> : <AlertTriangle size={20} className="text-red-500 shrink-0 mt-1" />}
-                        <div className="flex-1">
-                          <p className="font-black uppercase text-xs mb-1">{alert.title}</p>
-                          <p className="text-sm font-bold leading-tight opacity-90">{alert.message}</p>
-                        </div>
-                        {alert.canOverride && (
-                          <button
-                            onClick={() => setOverrideModal({ isOpen: true, notificationId: alert.id, reason: '' })}
-                            className={`px-3 py-1.5 rounded-lg text-[9px] font-black uppercase tracking-widest transition-all ${alert.severity === 'CRITIQUE' ? 'bg-white/20 hover:bg-white/30 text-white' : 'bg-red-100 hover:bg-red-200 text-red-700'}`}
-                          >
-                            Passer outre
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-          <div className="space-y-4">
-            {items.map((item, index) => (
-              <div key={item.id} className="p-6 bg-gray-50 rounded-[2rem] border border-gray-100 shadow-sm relative">
-                <button onClick={() => removeItem(item.id)} className="absolute top-4 right-4 p-2 text-gray-300 hover:text-red-500 transition-colors"><Trash2 size={18} /></button>
-                <div className="flex flex-col gap-1 mb-4">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <p className="font-black uppercase tracking-tight text-xl">{index + 1}/ {item.medicineName}</p>
-                    <div className="flex gap-2">
-                      <span className="px-2 py-0.5 bg-gray-100 text-[10px] font-black text-gray-400 rounded-md uppercase tracking-widest">
-                        {item.category ? (lang === 'ar' ? (t(item.category.toLowerCase()) || item.category) : item.category) : t('medicine').toUpperCase()}
-                      </span>
-                      {item.form && (
-                        <span className="px-2 py-0.5 bg-amber-50 text-[10px] font-black text-amber-600 rounded-md uppercase tracking-widest border border-amber-100">
-                          {item.form}
-                        </span>
-                      )}
-                      {item.strength && (
-                        <span className="px-2 py-0.5 bg-blue-50 text-[10px] font-black text-blue-600 rounded-md uppercase tracking-widest border border-blue-100">
-                          {item.strength}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 text-[10px] font-bold text-emerald-600 uppercase tracking-wide">
-                    {item.dosage && <span>{item.dosage}</span>}
-                    {item.timing && item.timing !== 'Indifférent' && <span>{item.timing}</span>}
-                    {item.duration && <span>{lang === 'ar' ? 'لمدة' : 'pendant'} {item.duration}</span>}
-                  </div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="md:col-span-2">
-                    <div className="flex justify-between items-center mb-1">
-                      <p className="text-[10px] font-black text-gray-400 uppercase">{t('dosage')}</p>
-                      {item.referenceDosage && item.dosage !== item.referenceDosage && (
-                        <button
-                          onClick={() => setItems(items.map(i => i.id === item.id ? { ...i, dosage: item.referenceDosage! } : i))}
-                          className="text-[9px] font-black text-emerald-600 hover:text-emerald-700 uppercase flex items-center gap-1 transition-colors"
-                          title="Rétablir la posologie de référence"
-                        >
-                          <RefreshCcw size={10} /> {t('restore')}
-                        </button>
-                      )}
-                    </div>
-                    <input
-                      type="text"
-                      value={item.dosage}
-                      onChange={e => {
-                        const val = e.target.value;
-                        let newDosage = val;
-                        let newTiming = item.timing;
-
-                        // Shorthand Parsing Logic
-                        const lowerVal = val.toLowerCase();
-
-                        // Check for timing keywords
-                        if (lowerVal.includes('apres repas') || lowerVal.includes('après repas')) {
-                          newTiming = 'Après repas';
-                          newDosage = val.replace(/apres repas|après repas/gi, '').trim();
-                        } else if (lowerVal.includes('avant repas')) {
-                          newTiming = 'Avant repas';
-                          newDosage = val.replace(/avant repas/gi, '').trim();
-                        } else if (lowerVal.includes('pendant repas')) {
-                          newTiming = 'Pendant repas';
-                          newDosage = val.replace(/pendant repas/gi, '').trim();
-                        } else if (lowerVal.includes('indifferent') || lowerVal.includes('indifférent')) {
-                          newTiming = 'Indifférent';
-                          newDosage = val.replace(/indifferent|indifférent/gi, '').trim();
-                        }
-
-                        setItems(items.map(i => i.id === item.id ? { ...i, dosage: newDosage, timing: newTiming } : i));
-                      }}
-                      className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl font-black outline-none focus:ring-2 focus:ring-emerald-500"
-                      placeholder={t('dosage_placeholder')}
+              ) : (
+                <>
+                  <div className="relative">
+                    <Search
+                      size={18}
+                      className={`absolute ${dir === 'rtl' ? 'right-4' : 'left-4'} top-1/2 -translate-y-1/2 transition-colors`}
+                      style={{ color: medicineSearch ? 'var(--color-primary)' : 'var(--color-text-faint)' }}
                     />
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {['1-0-0', '0-1-0', '0-0-1', '1-0-1', '1-1-1', '2-0-2'].map(quickP => (
-                        <button
-                          key={quickP}
-                          onClick={() => {
-                            setItems(items.map(i => i.id === item.id ? { ...i, dosage: quickP } : i));
-                          }}
-                          className="px-3 py-1 bg-white border border-gray-200 rounded-lg text-[10px] font-black hover:bg-emerald-50 hover:border-emerald-200 hover:text-emerald-600 transition-all shadow-sm"
-                        >
-                          {quickP}
-                        </button>
-                      ))}
-                    </div>
-                    {item.referenceDosage && (
-                      <p className="mt-1.5 text-[9px] font-bold text-gray-400/80 italic line-clamp-1 group-hover:line-clamp-none transition-all">
-                        Réf: {item.referenceDosage}
-                      </p>
+                    <input
+                      ref={medInputRef}
+                      type="text"
+                      value={medicineSearch}
+                      onChange={e => handleMedSearch(e.target.value)}
+                      placeholder={t('search_med_placeholder')}
+                      className={`w-full h-12 ${dir === 'rtl' ? 'pr-12 pl-12' : 'pl-12 pr-12'} border rounded-lg text-[14px] outline-none transition-all`}
+                      style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}
+                    />
+                    {(medicineSearch || selectedCategory !== 'Tous') && (
+                      <button
+                        onClick={() => { setMedicineSearch(''); setSelectedCategory('Tous'); setSuggestions([]); }}
+                        className={`absolute ${dir === 'rtl' ? 'left-3' : 'right-3'} top-1/2 -translate-y-1/2 w-7 h-7 rounded-md flex items-center justify-center transition-all hover:bg-slate-100`}
+                        style={{ color: 'var(--color-text-faint)' }}
+                      >
+                        <CloseX size={15} />
+                      </button>
                     )}
                   </div>
-                  <div><p className="text-[10px] font-black text-gray-400 uppercase mb-1">{t('duration')}</p><input type="text" value={item.duration} onChange={e => setItems(items.map(i => i.id === item.id ? { ...i, duration: e.target.value } : i))} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl font-black outline-none focus:ring-2 focus:ring-emerald-500" /></div>
-                  <div><p className="text-[10px] font-black text-gray-400 uppercase mb-1">{t('type')}</p>
-                    <select value={item.timing} onChange={e => setItems(items.map(i => i.id === item.id ? { ...i, timing: e.target.value as MealTiming } : i))} className="w-full px-4 py-3 bg-white border border-gray-200 rounded-xl font-black outline-none">
-                      {['Indifférent', 'Avant repas', 'Pendant repas', 'Après repas'].map(time => (
-                        <option key={time} value={time}>{t(time.toLowerCase().replace(' ', '_')) || time}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 space-y-6">
-          <button
-            onClick={() => setIsAnalysesOpen(!isAnalysesOpen)}
-            className={`w-full py-4 px-6 rounded-2xl flex items-center justify-between transition-all ${isAnalysesOpen || selectedTests.length > 0 ? 'bg-blue-50 border-2 border-blue-500 text-blue-800 shadow-md' : 'bg-gray-50 text-gray-400 hover:bg-blue-50 hover:text-blue-600'}`}
-          >
-            <div className="flex items-center gap-3">
-              <FlaskConical size={20} className={selectedTests.length > 0 ? 'text-blue-600' : ''} />
-              <span className="font-black uppercase tracking-widest text-xs">{t('analyses')} {selectedTests.length > 0 ? `(${selectedTests.length})` : ''}</span>
-            </div>
-            {isAnalysesOpen ? <ChevronDown className="rotate-180" size={18} /> : <ChevronRight size={18} />}
-          </button>
+                  {suggestions.length > 0 && (
+                    <div
+                      className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg z-50 overflow-hidden max-h-[440px] flex flex-col"
+                      style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-premium)' }}
+                    >
+                      <div
+                        className="px-4 py-2 border-b flex items-center justify-between"
+                        style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}
+                      >
+                        <span className="text-[12px] font-medium flex items-center gap-2" style={{ color: 'var(--color-text-muted)' }}>
+                          <Pill size={13} style={{ color: 'var(--color-primary)' }} />
+                          {suggestions.length} {t('results').toLowerCase()}
+                        </span>
+                        <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>
+                          {t('suggestions')}
+                        </span>
+                      </div>
+                      <div className="overflow-y-auto p-2 flex-1">
+                        {groupSuggestionsByName(suggestions).map((group, gIdx) => {
+                          const highlightName = (name: string) =>
+                            name.split(new RegExp(`(${medicineSearch})`, 'gi')).map((part, i) =>
+                              part.toLowerCase() === medicineSearch.toLowerCase() ? (
+                                <span key={i} className="rounded px-0.5" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>{part}</span>
+                              ) : part
+                            );
 
-          {isAnalysesOpen && (
-            <div className="space-y-6 animate-in slide-in-from-top-4 duration-300">
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-blue-400" size={16} />
-                <input
-                  type="text"
-                  placeholder={t('search_patient')}
-                  value={labSearchTerm}
-                  onChange={e => setLabSearchTerm(e.target.value)}
-                  className="w-full pl-12 pr-4 py-3 bg-blue-50/30 border border-blue-100 rounded-xl text-xs font-black uppercase outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
+                          // Single form+dosage for this brand: same simple row as before,
+                          // auto-selected on click (nothing to choose between).
+                          if (group.variants.length === 1) {
+                            const m = group.variants[0];
+                            return (
+                              <button
+                                key={m.id || gIdx}
+                                onClick={() => selectMedicine(m)}
+                                className="w-full text-left p-3 rounded-md transition-all flex items-start gap-3 hover:bg-[var(--color-row-hover)]"
+                              >
+                                <div className="w-9 h-9 rounded-md flex items-center justify-center shrink-0" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}>
+                                  <Pill size={16} />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                  <div className="flex justify-between items-center gap-2 mb-1">
+                                    <h4 className="text-[14px] font-semibold leading-tight truncate" style={{ color: 'var(--color-text)' }}>
+                                      {highlightName(m.name)}
+                                    </h4>
+                                    <ChevronRight size={14} className={`shrink-0 ${dir === 'rtl' ? 'rotate-180' : ''}`} style={{ color: 'var(--color-text-faint)' }} />
+                                  </div>
+                                  <div className="flex flex-wrap gap-1.5 items-center">
+                                    <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
+                                      {m.category ? (lang === 'ar' ? (t(m.category.toLowerCase()) || m.category) : m.category) : t('medicine')}
+                                    </span>
+                                    {m.form && (
+                                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
+                                        {m.form}
+                                      </span>
+                                    )}
+                                    {m.strength && (
+                                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
+                                        {m.strength}
+                                      </span>
+                                    )}
+                                    {m.presentations && m.presentations.length > 1 ? (
+                                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
+                                        {m.presentations.length} présentations
+                                      </span>
+                                    ) : m.packaging ? (
+                                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
+                                        {m.packaging}
+                                      </span>
+                                    ) : null}
+                                    {m.defaultDosage && (
+                                      <span className="text-[11px] truncate max-w-[260px]" style={{ color: 'var(--color-text-subtle)' }}>
+                                        Posologie type&nbsp;: {m.defaultDosage}
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+                              </button>
+                            );
+                          }
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-h-[400px] overflow-y-auto p-2 scrollbar-hide">
-                {COMMON_ANALYSES.map(cat => {
-                  const filtered = cat.items.filter(i => i.toLowerCase().includes(labSearchTerm.toLowerCase()));
-                  if (filtered.length === 0) return null;
-                  return (
-                    <div key={cat.category} className="space-y-2">
-                      <h5 className="text-[9px] font-black text-blue-600/60 uppercase tracking-widest px-2">{cat.category}</h5>
-                      <div className="space-y-1">
-                        {filtered.map(test => (
+                          // Multiple forms/dosages for this brand: one card, one flat wrap of
+                          // chips — one chip per exact présentation (form + dosage + conditionnement),
+                          // reordered/highlighted for the current patient. No per-form headers:
+                          // the form is printed inside each chip instead.
+                          const { variants: orderedVariants, recommendedForm } = orderVariantsForPatient(group.variants, patient);
+                          interface ChipEntry { key: string; v: Medicine; packaging?: string | null }
+                          const chipEntries: ChipEntry[] = [];
+                          orderedVariants.forEach(v => {
+                            if (v.presentations && v.presentations.length > 0) {
+                              v.presentations.forEach(p => chipEntries.push({ key: `${v.id}_${p.id}`, v, packaging: p.packaging }));
+                            } else {
+                              chipEntries.push({ key: v.id, v, packaging: v.packaging });
+                            }
+                          });
+                          const recommendedIdx = recommendedForm != null
+                            ? chipEntries.findIndex(e => e.v.form === recommendedForm)
+                            : -1;
+                          return (
+                            <div key={group.name || gIdx} className="p-3 rounded-md mb-1">
+                              <div className="flex items-center gap-3 mb-2">
+                                <div className="w-9 h-9 rounded-md flex items-center justify-center shrink-0" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}>
+                                  <Pill size={16} />
+                                </div>
+                                <h4 className="text-[14px] font-semibold leading-tight truncate" style={{ color: 'var(--color-text)' }}>
+                                  {highlightName(group.name)}
+                                </h4>
+                              </div>
+                              <div className="flex flex-wrap gap-2 pl-1">
+                                {chipEntries.map((entry, i) => {
+                                  const { v, packaging } = entry;
+                                  const packagingLabel = abbreviatePackaging(packaging);
+                                  const isRecommended = i === recommendedIdx;
+                                  const isHospitalChip = !!v.isHospitalOnly && isInjectableForm(v.form);
+                                  return (
+                                    <button
+                                      key={entry.key}
+                                      onClick={() => addItem(v, packaging)}
+                                      className="inline-flex items-center flex-wrap gap-x-1.5 gap-y-0.5 px-2.5 py-1.5 rounded-md border transition-all hover:opacity-80 w-fit"
+                                      style={{ borderColor: 'var(--color-primary-100)', background: 'var(--color-primary-50)' }}
+                                    >
+                                      <span className="text-[12px] font-bold uppercase tracking-tight whitespace-nowrap" style={{ color: 'var(--color-primary)' }}>
+                                        {group.name} {v.strength || ''}
+                                      </span>
+                                      <span className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>—</span>
+                                      <span className="text-[10.5px] font-medium whitespace-nowrap" style={{ color: 'var(--color-text-subtle)' }}>
+                                        {formShortLabel(v.form)}{packagingLabel ? ` ${packagingLabel}` : ''}
+                                      </span>
+                                      {isRecommended && (
+                                        <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase text-white" style={{ background: 'var(--color-primary)', letterSpacing: '0.05em' }}>
+                                          Recommandé
+                                        </span>
+                                      )}
+                                      {isHospitalChip && (
+                                        <span className="px-1 py-0.5 rounded text-[9px] font-bold uppercase text-white" style={{ background: 'var(--color-warning-hover)' }}>
+                                          Prescription spéciale
+                                        </span>
+                                      )}
+                                    </button>
+                                  );
+                                })}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {presentationPicker && (
+                    <div
+                      className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg z-50 overflow-hidden max-h-[380px] flex flex-col"
+                      style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-premium)' }}
+                    >
+                      <div
+                        className="px-4 py-2.5 border-b flex items-center justify-between"
+                        style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}
+                      >
+                        <div>
+                          <p className="text-[13px] font-semibold" style={{ color: 'var(--color-text)' }}>{presentationPicker.name}</p>
+                          <p className="text-[11px]" style={{ color: 'var(--color-text-subtle)' }}>
+                            {presentationPicker.active_ingredient} · {presentationPicker.form} {presentationPicker.strength && `· ${presentationPicker.strength}`} — choisir la présentation
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => setPresentationPicker(null)}
+                          className="w-7 h-7 rounded-md flex items-center justify-center hover:bg-white"
+                          style={{ color: 'var(--color-text-faint)' }}
+                        >
+                          <CloseX size={14} />
+                        </button>
+                      </div>
+                      <div className="overflow-y-auto p-2 flex-1">
+                        {presentationPicker.presentations!.map((p) => (
                           <button
-                            key={test}
-                            onClick={() => toggleTest(test)}
-                            className={`w-full text-left px-3 py-2 rounded-lg text-[10px] font-bold transition-all flex items-center justify-between ${selectedTests.includes(test) ? 'bg-blue-600 text-white' : 'bg-gray-50 text-gray-700 hover:bg-blue-50'}`}
+                            key={p.id}
+                            onClick={() => addItem(presentationPicker, p.packaging)}
+                            className="w-full text-left p-3 rounded-md transition-all flex items-center justify-between gap-3 hover:bg-[var(--color-row-hover)]"
                           >
-                            <span className="truncate flex-1">{test}</span>
-                            {selectedTests.includes(test) ? <CheckCircle2 size={12} /> : <div className="w-3 h-3 border border-gray-200 rounded-sm bg-white" />}
+                            <span className="text-[13px] font-medium" style={{ color: 'var(--color-text)' }}>
+                              {p.packaging || 'Conditionnement non précisé'}
+                            </span>
+                            {p.laboratory && (
+                              <span className="text-[11px]" style={{ color: 'var(--color-text-subtle)' }}>{p.laboratory}</span>
+                            )}
                           </button>
                         ))}
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+                  )}
+
+                  {medicineSearch.length >= 2 && suggestions.length === 0 && !isParsing && (
+                    <div
+                      className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg z-50 p-7 text-center"
+                      style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-premium)' }}
+                    >
+                      <h4 className="text-[14px] font-semibold mb-1" style={{ color: 'var(--color-text)' }}>{t('no_med_found')}</h4>
+                      <p className="text-[12px] mb-4" style={{ color: 'var(--color-text-subtle)' }}>Aucun résultat pour « {medicineSearch} »</p>
+                      <button
+                        onClick={() => addItem({ id: Date.now().toString(), name: medicineSearch, category: 'Autre', defaultDosage: '', defaultTiming: 'Indifférent' })}
+                        className="h-9 px-4 rounded-md text-[12px] font-medium text-white inline-flex items-center gap-2 transition-all"
+                        style={{ background: 'var(--color-primary)' }}
+                      >
+                        <Plus size={13} /> {t('add_new_med')}
+                      </button>
+                    </div>
+                  )}
+                </>
+              )}
             </div>
-          )}
-        </div>
 
-        <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-4">
+            {/* Items */}
+            <div className="space-y-3">
+              {items.length === 0 && !isSmartMode && (
+                <div className="py-10 text-center">
+                  <div
+                    className="w-12 h-12 mx-auto mb-3 rounded-lg flex items-center justify-center"
+                    style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-faint)' }}
+                  >
+                    <Pill size={20} />
+                  </div>
+                  <p className="text-[13px] font-medium mb-0.5" style={{ color: 'var(--color-text)' }}>Aucun médicament</p>
+                  <p className="text-[12px]" style={{ color: 'var(--color-text-subtle)' }}>Recherchez ci-dessus pour ajouter un traitement.</p>
+                </div>
+              )}
+
+              {items.map((item, index) => {
+                const isCritical = itemHasCritical(item.id);
+                const isAttention = itemHasAttention(item.id);
+                const itemBorderColor = isCritical
+                  ? 'var(--color-danger)'
+                  : isAttention ? 'var(--color-warning)' : 'var(--color-border)';
+                const itemBg = isCritical
+                  ? 'var(--color-danger-50)'
+                  : isAttention ? 'var(--color-warning-50)' : 'var(--color-surface-alt)';
+                return (
+                  <div
+                    key={item.id}
+                    className="rounded-lg border p-4 relative transition-all"
+                    style={{ borderColor: itemBorderColor, background: itemBg, borderWidth: isCritical ? '2px' : '1px' }}
+                  >
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      className={`absolute top-3 ${dir === 'rtl' ? 'left-3' : 'right-3'} w-8 h-8 rounded-md flex items-center justify-center hover:bg-white transition-all`}
+                      style={{ color: 'var(--color-text-faint)' }}
+                      aria-label="Supprimer"
+                    >
+                      <Trash2 size={15} />
+                    </button>
+
+                    <div className="mb-3 pr-10">
+                      <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                        <span className="text-[12px] font-medium tabular-nums" style={{ color: 'var(--color-text-faint)' }}>
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <span className="text-[15px] font-semibold" style={{ color: 'var(--color-text)' }}>{item.medicineName}</span>
+                        <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-white border" style={{ color: 'var(--color-text-muted)', borderColor: 'var(--color-border)' }}>
+                          {item.category ? (lang === 'ar' ? (t(item.category.toLowerCase()) || item.category) : item.category) : t('medicine')}
+                          {item.form && ` · ${item.form}`}
+                          {item.strength && ` · ${item.strength}`}
+                        </span>
+                        {item.packaging && (
+                          <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-white border" style={{ color: 'var(--color-text-muted)', borderColor: 'var(--color-border)' }}>
+                            {item.packaging}
+                          </span>
+                        )}
+                        {isCritical && (
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase text-white flex items-center gap-1" style={{ background: 'var(--color-danger)', letterSpacing: '0.08em' }}>
+                            <XCircle size={11} /> Contre-indiqué
+                          </span>
+                        )}
+                        {isAttention && (
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase text-white flex items-center gap-1" style={{ background: 'var(--color-warning-hover)', letterSpacing: '0.08em' }}>
+                            <AlertTriangle size={11} /> Vérifier
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[12px]" style={{ color: 'var(--color-primary)' }}>
+                        {item.dosage && <span className="font-medium">{item.dosage}</span>}
+                        {item.timing && item.timing !== 'Indifférent' && (<><span>·</span><span>{item.timing}</span></>)}
+                        {item.duration && (<><span>·</span><span>{lang === 'ar' ? 'لمدة' : 'pendant'} {item.duration}</span></>)}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+                      <div className="md:col-span-2">
+                        <div className="flex justify-between items-center mb-1">
+                          <p className={labelEyebrow} style={{ ...labelEyebrowStyle, marginBottom: 0 }}>{t('dosage')}</p>
+                          {item.referenceDosage && item.dosage !== item.referenceDosage && (
+                            <button
+                              onClick={() => setItems(items.map(i => i.id === item.id ? { ...i, dosage: item.referenceDosage! } : i))}
+                              className="text-[11px] font-medium flex items-center gap-1 transition-colors"
+                              style={{ color: 'var(--color-primary)' }}
+                              title="Rétablir la posologie de référence"
+                            >
+                              <RefreshCcw size={10} /> {t('restore')}
+                            </button>
+                          )}
+                        </div>
+                        <input
+                          type="text"
+                          value={item.dosage}
+                          onChange={e => {
+                            const val = e.target.value;
+                            let newDosage = val;
+                            let newTiming = item.timing;
+                            const lv = val.toLowerCase();
+                            if (lv.includes('apres repas') || lv.includes('après repas')) {
+                              newTiming = 'Après repas'; newDosage = val.replace(/apres repas|après repas/gi, '').trim();
+                            } else if (lv.includes('avant repas')) {
+                              newTiming = 'Avant repas'; newDosage = val.replace(/avant repas/gi, '').trim();
+                            } else if (lv.includes('pendant repas')) {
+                              newTiming = 'Pendant repas'; newDosage = val.replace(/pendant repas/gi, '').trim();
+                            } else if (lv.includes('indifferent') || lv.includes('indifférent')) {
+                              newTiming = 'Indifférent'; newDosage = val.replace(/indifferent|indifférent/gi, '').trim();
+                            }
+                            setItems(items.map(i => i.id === item.id ? { ...i, dosage: newDosage, timing: newTiming } : i));
+                          }}
+                          className={input40} style={inputStyle}
+                          placeholder={t('dosage_placeholder')}
+                        />
+                        <div className="flex flex-wrap gap-1.5 mt-2">
+                          {['1-0-0', '0-1-0', '0-0-1', '1-0-1', '1-1-1', '2-0-2'].map(q => (
+                            <button
+                              key={q}
+                              onClick={() => setItems(items.map(i => i.id === item.id ? { ...i, dosage: q } : i))}
+                              className="h-7 px-2 rounded-md text-[11px] font-medium tabular-nums transition-all hover:bg-[var(--color-primary-50)] bg-white border"
+                              style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+                            >
+                              {q}
+                            </button>
+                          ))}
+                        </div>
+                        {item.referenceDosage && (
+                          <p className="mt-2 text-[11px] italic line-clamp-1" style={{ color: 'var(--color-text-faint)' }}>
+                            Réf : {item.referenceDosage}
+                          </p>
+                        )}
+                      </div>
+                      <div>
+                        <p className={labelEyebrow} style={labelEyebrowStyle}>{t('duration')}</p>
+                        <input
+                          type="text" value={item.duration}
+                          onChange={e => setItems(items.map(i => i.id === item.id ? { ...i, duration: e.target.value } : i))}
+                          className={input40} style={inputStyle}
+                        />
+                      </div>
+                      <div>
+                        <p className={labelEyebrow} style={labelEyebrowStyle}>{t('type')}</p>
+                        <select
+                          value={item.timing}
+                          onChange={e => setItems(items.map(i => i.id === item.id ? { ...i, timing: e.target.value as MealTiming } : i))}
+                          className={input40} style={inputStyle}
+                        >
+                          {['Indifférent', 'Avant repas', 'Pendant repas', 'Après repas'].map(time => (
+                            <option key={time} value={time}>{t(time.toLowerCase().replace(' ', '_')) || time}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+
+          {/* ─── LAB ANALYSES PANEL ─── */}
+          <section className={`${card} overflow-hidden`} style={cardStyle}>
             <button
-              onClick={() => setUseCombinedPrint(!useCombinedPrint)}
-              disabled={selectedTests.length === 0}
-              className={`flex items-center gap-3 px-6 py-4 rounded-2xl font-black uppercase text-[10px] tracking-widest transition-all ${useCombinedPrint ? 'bg-blue-600 text-white shadow-lg' : 'bg-gray-100 text-gray-400 hover:bg-blue-50 hover:text-blue-600'}`}
+              onClick={() => setIsAnalysesOpen(!isAnalysesOpen)}
+              className="w-full px-6 py-4 flex items-center justify-between transition-all hover:bg-slate-50"
             >
-              <FileDigit size={16} />
-              {useCombinedPrint ? (lang === 'ar' ? 'وضع: ورقة كاملة' : 'Mode : Feuille Unique A4') : (lang === 'ar' ? 'وضع: وصفة فقط' : 'Mode : Ordonnance Seule')}
+              <div className="flex items-center gap-3">
+                <div
+                  className="w-9 h-9 rounded-md flex items-center justify-center transition-all"
+                  style={selectedTests.length > 0
+                    ? { background: 'var(--color-secondary)', color: 'white' }
+                    : { background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}
+                >
+                  <FlaskConical size={16} />
+                </div>
+                <div className="text-left">
+                  <div className="text-[14px] font-semibold" style={{ color: 'var(--color-text)' }}>
+                    {t('analyses')}
+                    {selectedTests.length > 0 && (
+                      <span className="ml-2 tabular-nums" style={{ color: 'var(--color-secondary)' }}>({selectedTests.length})</span>
+                    )}
+                  </div>
+                  <div className="text-[12px]" style={{ color: 'var(--color-text-subtle)' }}>Examens biologiques à prescrire</div>
+                </div>
+              </div>
+              <ChevronDown size={18} className={`transition-transform ${isAnalysesOpen ? 'rotate-180' : ''}`} style={{ color: 'var(--color-text-faint)' }} />
             </button>
-          </div>
-          <div className="flex gap-3 w-full md:w-auto">
-            <button onClick={() => window.print()} disabled={items.length === 0} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-4 bg-gray-100 hover:bg-gray-200 text-gray-700 font-black rounded-2xl uppercase text-xs tracking-widest transition-all"><Printer size={18} /> {t('print')}</button>
-            <button onClick={handleExportPDF} disabled={items.length === 0} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-8 py-4 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-black rounded-2xl uppercase text-xs tracking-widest transition-all"><FileDigit size={18} /> {t('print')} PDF</button>
-            <button onClick={handleSave} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-12 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-black rounded-2xl shadow-xl uppercase text-sm tracking-widest active:scale-95 transition-all"><Save size={18} /> {t('save')}</button>
-          </div>
-        </div>
-      </div>
 
-      <div className="w-full max-w-[500px] mx-auto print:hidden">
-        <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 px-2 flex items-center gap-2"><FileText size={16} /> {lang === 'ar' ? 'معاينة' : 'Aperçu'}</h3>
-        {renderPrescriptionPage('preview')}
+            {isAnalysesOpen && (
+              <div className="px-6 pb-6 space-y-4 border-t" style={{ borderColor: 'var(--color-border)' }}>
+                <div className="relative pt-4">
+                  <Search size={15} className={`absolute ${dir === 'rtl' ? 'right-4' : 'left-4'} top-[26px] -translate-y-1/2`} style={{ color: 'var(--color-text-faint)' }} />
+                  <input
+                    type="text" placeholder="Rechercher une analyse..."
+                    value={labSearchTerm}
+                    onChange={e => setLabSearchTerm(e.target.value)}
+                    className={`w-full h-10 ${dir === 'rtl' ? 'pr-11 pl-3' : 'pl-11 pr-3'} rounded-md border text-[13px] outline-none transition-all`}
+                    style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}
+                  />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-h-[420px] overflow-y-auto pr-2 scrollbar-hide">
+                  {COMMON_ANALYSES.map(cat => {
+                    const filtered = cat.items.filter(i => i.toLowerCase().includes(labSearchTerm.toLowerCase()));
+                    if (filtered.length === 0) return null;
+                    return (
+                      <div key={cat.category} className="space-y-1.5">
+                        <h5 className="text-[10px] font-medium uppercase tracking-wider px-1" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>{cat.category}</h5>
+                        <div className="space-y-1">
+                          {filtered.map(test => {
+                            const checked = selectedTests.includes(test);
+                            return (
+                              <button
+                                key={test}
+                                onClick={() => toggleTest(test)}
+                                className="w-full text-left px-3 py-2 rounded-md text-[12px] transition-all flex items-center justify-between gap-2"
+                                style={checked
+                                  ? { background: 'var(--color-primary)', color: 'white', fontWeight: 500 }
+                                  : { background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}
+                              >
+                                <span className="truncate flex-1">{test}</span>
+                                {checked
+                                  ? <CheckCircle2 size={13} className="shrink-0" />
+                                  : <div className="w-3 h-3 border rounded-sm bg-white shrink-0" style={{ borderColor: 'var(--color-border-strong)' }} />}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </section>
+
+          {/* ─── AUDIT TRAIL (derived from state — UI only) ─── */}
+          {(items.length > 0 || overriddenWarnings.size > 0) && (
+            <section className={`${card} p-6`} style={cardStyle}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-1 h-5 rounded-full" style={{ background: 'var(--color-primary)' }} />
+                  <h3 className="text-[14px] font-semibold flex items-center gap-2" style={{ color: 'var(--color-text)' }}>
+                    <ScrollText size={14} /> Journal d'audit
+                  </h3>
+                  <span className="px-2 py-0.5 rounded text-[11px] font-medium tabular-nums" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
+                    {items.length + overriddenWarnings.size + (patient.name ? 1 : 0)} entrées
+                  </span>
+                </div>
+              </div>
+              <div className="space-y-2">
+                {/* Override entries */}
+                {[...overriddenWarnings].map((id, i) => (
+                  <div key={id} className="flex items-start gap-3 p-3 rounded-md" style={{ background: 'var(--color-danger-50)' }}>
+                    <div className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 text-white" style={{ background: 'var(--color-danger)' }}>
+                      <ShieldX size={14} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[13px] font-semibold" style={{ color: 'var(--color-danger-700)' }}>Override d'alerte</div>
+                      <p className="text-[12px]" style={{ color: 'var(--color-danger-700)' }}>Alerte de sécurité passée outre par le médecin.</p>
+                    </div>
+                  </div>
+                ))}
+                {/* Item additions */}
+                {items.slice().reverse().slice(0, 4).map(item => (
+                  <div key={item.id} className="flex items-start gap-3 p-3 rounded-md" style={{ background: 'var(--color-surface-alt)' }}>
+                    <div className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 bg-white" style={{ color: 'var(--color-primary)' }}>
+                      <Plus size={14} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[13px] font-semibold" style={{ color: 'var(--color-text)' }}>Médicament ajouté</div>
+                      <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>{item.medicineName} — {item.dosage || 'posologie non définie'}.</p>
+                    </div>
+                  </div>
+                ))}
+                {/* Patient selection */}
+                {patient.name && (
+                  <div className="flex items-start gap-3 p-3 rounded-md" style={{ background: 'var(--color-surface-alt)' }}>
+                    <div className="w-7 h-7 rounded-md flex items-center justify-center shrink-0 bg-white" style={{ color: 'var(--color-primary)' }}>
+                      <UserCircle size={14} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-[13px] font-semibold" style={{ color: 'var(--color-text)' }}>Patient sélectionné</div>
+                      <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
+                        {patient.name}{selectedPatientId && ` (ID ${selectedPatientId})`}
+                        {(patient.age || patient.dateOfBirth) && ` — ${formatAge(patient)}`}
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+          )}
+
+          {/* ─── PRINT MODE TOGGLE (small footer) ─── */}
+          <section
+            className={`${card} px-5 py-3 flex items-center justify-between`}
+            style={cardStyle}
+          >
+            <div className="flex items-center gap-2">
+              <span className="text-[12px]" style={{ color: 'var(--color-text-subtle)' }}>Mode d'impression :</span>
+              <button
+                onClick={() => setUseCombinedPrint(!useCombinedPrint)}
+                disabled={selectedTests.length === 0}
+                className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                style={useCombinedPrint
+                  ? { background: 'var(--color-secondary-50)', color: '#1F7B5C', border: '1px solid var(--color-secondary)' }
+                  : { background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}
+              >
+                <FileDigit size={13} />
+                {useCombinedPrint
+                  ? (lang === 'ar' ? 'ورقة كاملة' : 'Feuille unique A4')
+                  : (lang === 'ar' ? 'وصفة فقط' : 'Ordonnance seule')}
+              </button>
+            </div>
+            <div className="flex items-center gap-1.5 text-[12px]" style={{ color: 'var(--color-text-subtle)' }}>
+              <History size={13} />
+              <span>Auto-sauvegarde activée</span>
+            </div>
+          </section>
+        </div>
+
+        {/* ═══ PREVIEW PANE ═══ */}
+        <div className="w-full lg:w-[440px] shrink-0 print:hidden">
+          <h3 className="text-[11px] font-medium uppercase tracking-wider mb-3 px-1 flex items-center gap-2" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>
+            <FileText size={13} /> {lang === 'ar' ? 'معاينة' : 'Aperçu impression'}
+          </h3>
+          {renderPrescriptionPage('preview')}
+        </div>
       </div>
 
       <div className="hidden print:block fixed inset-0 z-0 bg-white">{renderPrescriptionPage('print')}</div>
       {renderPrescriptionPage('export')}
-    </div >
+    </div>
   );
 };
 

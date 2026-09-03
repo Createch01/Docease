@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle } from 'lucide-react';
+import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import { HonoraryNote, HonoraryMasterService } from '../../types';
-import { formatCurrencyToWords } from '../../utils/numberToWords';
+import { billingService } from '../../services/billingService';
 import { useI18n } from '../../i18n';
 
 interface FinancesSectionProps {
@@ -26,43 +26,28 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
     const honoraryNotes = useMemo(() => dataService.getHonoraryNotes(patientId), [patientId, refreshTrigger]);
     const [toast, setToast] = useState<string | null>(null);
 
-    const stats = useMemo(() => ({
-        total: honoraryNotes.reduce((s, n) => s + n.totalAmount, 0),
-        paid: honoraryNotes.filter(n => n.status === 'PAID').reduce((s, n) => s + n.totalAmount, 0),
-        balance: honoraryNotes.filter(n => n.status === 'UNPAID').reduce((s, n) => s + n.totalAmount, 0),
-    }), [honoraryNotes]);
+    const stats = useMemo(() => {
+        const { total, collected, outstanding } = billingService.computeStats(honoraryNotes);
+        return { total, paid: collected, balance: outstanding };
+    }, [honoraryNotes]);
 
     const handleQuickInvoice = () => {
-        // 1. Get default service (Consultation)
-        const masters = dataService.getHonoraryMasterServices();
-        const consultationService = masters.find(m => m.name.toLowerCase().includes('consultation')) || { name: 'Consultation', price: 300 };
-
-        // 2. Generate Invoice Number
-        const existingNotes = dataService.getHonoraryNotes();
-        const currentYear = new Date().getFullYear();
-        const notesThisYear = existingNotes.filter(n => n.date.startsWith(currentYear.toString()));
-        const invoiceNumber = `${currentYear}-${String(notesThisYear.length + 1).padStart(4, '0')}`;
-
-        // 3. Create Note
-        const total = consultationService.price;
-        const note: HonoraryNote = {
-            id: Date.now().toString(),
-            patientId,
-            patientName,
-            visitId: undefined,
-            date: new Date().toISOString().split('T')[0],
-            invoiceNumber,
-            services: [{ name: consultationService.name, price: total, checked: true }],
-            totalAmount: total,
-            totalInWords: formatCurrencyToWords(total, currency),
-            status: 'PAID',
-            paymentMode: 'CASH'
-        };
-
-        // 4. Save
+        const note = billingService.buildQuickInvoice({ patientId, patientName, currency });
         dataService.saveHonoraryNote(note);
         setToast(t('quick_invoice_generated'));
         setTimeout(() => setToast(null), 3000);
+        window.dispatchEvent(new Event('meddoc_data_update'));
+    };
+
+    const cycleStatus = (note: HonoraryNote) => {
+        const order: HonoraryNote['status'][] = ['UNPAID', 'PARTIAL', 'PAID'];
+        const next = order[(order.indexOf(note.status) + 1) % order.length];
+        const updated: HonoraryNote = {
+            ...note,
+            status: next,
+            amountPaid: next === 'PARTIAL' ? (note.amountPaid ?? Math.round(note.totalAmount / 2)) : undefined,
+        };
+        dataService.saveHonoraryNote(updated);
         window.dispatchEvent(new Event('meddoc_data_update'));
     };
 
@@ -143,10 +128,14 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                     <span className="text-[10px] text-gray-300 ml-1 ml-1">{currency}</span>
                                 </td>
                                 <td className="p-6 text-center">
-                                    <span className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest inline-flex items-center gap-2 ${note.status === 'PAID' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : 'bg-red-50 text-red-600 border border-red-100'}`}>
-                                        {note.status === 'PAID' ? <CheckCircle size={10} /> : <div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />}
-                                        {note.status === 'PAID' ? t('paid') : t('unpaid')}
-                                    </span>
+                                    <button
+                                        onClick={() => cycleStatus(note)}
+                                        title="Cliquer pour changer le statut"
+                                        className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest inline-flex items-center gap-2 transition-all hover:scale-105 ${note.status === 'PAID' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : note.status === 'PARTIAL' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-red-50 text-red-600 border border-red-100'}`}
+                                    >
+                                        {note.status === 'PAID' ? <CheckCircle size={10} /> : note.status === 'PARTIAL' ? <Clock size={10} /> : <div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />}
+                                        {note.status === 'PAID' ? t('paid') : note.status === 'PARTIAL' ? `${note.amountPaid || 0}/${note.totalAmount}` : t('unpaid')}
+                                    </button>
                                 </td>
                                 <td className={`p-6 shrink-0 ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>
                                     <div className={`flex justify-end gap-2 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>

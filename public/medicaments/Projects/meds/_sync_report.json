@@ -1,0 +1,196 @@
+{
+  "version": "DocEase Sync: Master 1-300 → A-Z local",
+  "generated_at": "2026-04-20",
+  "master_entries": 242,
+  "overwritten_in_A": 206,
+  "appended_to_A": 36,
+  "totals": {
+    "entries": 5479,
+    "verified": 242,
+    "needs_verification": 5237
+  },
+  "files": [
+    {
+      "file": "medicament_A.json",
+      "entries": 2943,
+      "verified": 242,
+      "needs_verification": 2701,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_B.json",
+      "entries": 131,
+      "verified": 0,
+      "needs_verification": 131,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_C.json",
+      "entries": 356,
+      "verified": 0,
+      "needs_verification": 356,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_D.json",
+      "entries": 207,
+      "verified": 0,
+      "needs_verification": 207,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_E.json",
+      "entries": 140,
+      "verified": 0,
+      "needs_verification": 140,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_F.json",
+      "entries": 90,
+      "verified": 0,
+      "needs_verification": 90,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_G.json",
+      "entries": 103,
+      "verified": 0,
+      "needs_verification": 103,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_H.json",
+      "entries": 46,
+      "verified": 0,
+      "needs_verification": 46,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_I.json",
+      "entries": 166,
+      "verified": 0,
+      "needs_verification": 166,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_J.json",
+      "entries": 20,
+      "verified": 0,
+      "needs_verification": 20,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_K.json",
+      "entries": 33,
+      "verified": 0,
+      "needs_verification": 33,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_L.json",
+      "entries": 150,
+      "verified": 0,
+      "needs_verification": 150,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_M.json",
+      "entries": 194,
+      "verified": 0,
+      "needs_verification": 194,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_N.json",
+      "entries": 149,
+      "verified": 0,
+      "needs_verification": 149,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_O.json",
+      "entries": 63,
+      "verified": 0,
+      "needs_verification": 63,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_P.json",
+      "entries": 94,
+      "verified": 0,
+      "needs_verification": 94,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_Q.json",
+      "entries": 2,
+      "verified": 0,
+      "needs_verification": 2,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_R.json",
+      "entries": 16,
+      "verified": 0,
+      "needs_verification": 16,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_S.json",
+      "entries": 94,
+      "verified": 0,
+      "needs_verification": 94,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_T.json",
+      "entries": 101,
+      "verified": 0,
+      "needs_verification": 101,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_U.json",
+      "entries": 47,
+      "verified": 0,
+      "needs_verification": 47,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_V.json",
+      "entries": 165,
+      "verified": 0,
+      "needs_verification": 165,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_W.json",
+      "entries": 5,
+      "verified": 0,
+      "needs_verification": 5,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_X.json",
+      "entries": 58,
+      "verified": 0,
+      "needs_verification": 58,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_Y.json",
+      "entries": 7,
+      "verified": 0,
+      "needs_verification": 7,
+      "status": "OK"
+    },
+    {
+      "file": "medicament_Z.json",
+      "entries": 99,
+      "verified": 0,
+      "needs_verification": 99,
+      "status": "OK"
+    }
+  ]
+}
