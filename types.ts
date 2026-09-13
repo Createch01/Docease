@@ -113,6 +113,10 @@ export interface DoctorInfo {
   logoOpacity: number;
   logoScale: number;
   logoPosition: 'left' | 'center' | 'right';
+  // Cachet & signature — centralisés ici, réutilisés automatiquement sur tous les documents
+  // (ordonnances, certificats, factures) sans devoir être resaisis ailleurs.
+  stampUrl?: string;
+  signatureUrl?: string;
   footerColor: string;
   currency: string;
   showBarcode: boolean;

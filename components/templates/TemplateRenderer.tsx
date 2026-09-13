@@ -71,6 +71,62 @@ const TEMPLATES: Record<Exclude<PrescriptionTemplateId, 'custom'>, React.FC<RxTe
     corporate_clean: Template09BlueGradientCorner,
 };
 
+// Single source of truth for the "Modèles" gallery in Réglages > Documents —
+// built from the exact same registry TemplateRenderer uses, so the gallery can
+// never drift out of sync with what actually prints.
+export const PRESCRIPTION_TEMPLATE_META: { id: Exclude<PrescriptionTemplateId, 'custom'>; label: string; accent: string; component: React.FC<RxTemplateProps> }[] = [
+    { id: 'letterhead_simple', label: 'Cabinet classique', accent: '#1B4F9C', component: Template07BlueBandClinic },
+    { id: 'pediatric', label: 'Pédiatrie pastel', accent: '#F2A3B3', component: Template04PastelProfile },
+    { id: 'navy_wave', label: 'Caducée marine', accent: '#0B2A5B', component: Template02NavyCaduceus },
+    { id: 'purple_heart', label: 'Violet élégant', accent: '#6B3FD4', component: Template03PurpleHeart },
+    { id: 'script_elegant', label: 'Courbe orange', accent: '#F0651F', component: Template01OrangeCurve },
+    { id: 'cardio_ecg', label: 'Cardiologie ECG', accent: '#ED1C24', component: Template05RedEcg },
+    { id: 'gyneco_pink', label: 'Gynécologie rose', accent: '#EC4B8C', component: Template06PinkArc },
+    { id: 'teal_hospital', label: 'Hôpital vague bleue', accent: '#1C7BC0', component: Template08BlueWaveCare },
+    { id: 'corporate_clean', label: 'Angle dégradé', accent: '#1565C0', component: Template09BlueGradientCorner },
+];
+
+// Renders a real template component scaled to fit its container exactly —
+// live thumbnails that can never go stale, no separate image-generation step.
+export const TemplateThumbnail: React.FC<{ component: React.FC<RxTemplateProps>; doctor: DoctorInfo }> = ({ component: Comp, doctor }) => {
+    const ref = React.useRef<HTMLDivElement>(null);
+    const [scale, setScale] = React.useState(0.25);
+
+    React.useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const MM_TO_PX = 96 / 25.4;
+        const A4_W = 210 * MM_TO_PX;
+        const update = () => { if (el.clientWidth > 0) setScale(el.clientWidth / A4_W); };
+        update();
+        const ro = new ResizeObserver(update);
+        ro.observe(el);
+        return () => ro.disconnect();
+    }, []);
+
+    const rxDoctor: RxDoctor = {
+        name: `Dr ${doctor.nameFr || 'Nom Prénom'}`,
+        speciality: doctor.specialtyFr || 'Spécialité médicale',
+        phone: doctor.phone || '+212 5 00 00 00 00',
+        address: doctor.addressFr || 'Adresse du cabinet',
+        email: doctor.email || '',
+        registrationNumber: doctor.inpe || doctor.ordreNumber || '',
+    };
+    const rxPatient: RxPatient = { name: 'Ahmed Benali', age: '42', sex: 'M' };
+    const rxItems: RxItem[] = [
+        { drugName: 'Amoxicilline', strength: '500 mg', dosage: '1-0-1', duration: '7 jours' },
+        { drugName: 'Paramétacol', strength: '1 g', dosage: '1-1-1', duration: '5 jours' },
+    ];
+
+    return (
+        <div ref={ref} style={{ width: '100%', aspectRatio: '210 / 297', overflow: 'hidden', background: '#fff', position: 'relative' }}>
+            <div style={{ width: '210mm', height: '297mm', transform: `scale(${scale})`, transformOrigin: 'top left' }}>
+                <Comp doctor={rxDoctor} patient={rxPatient} date="27/05/2026" items={rxItems} />
+            </div>
+        </div>
+    );
+};
+
 const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items, date, appearance, id, scale }) => {
     const Template = (templateId && templateId !== 'custom' && TEMPLATES[templateId]) || TEMPLATES.letterhead_simple;
 

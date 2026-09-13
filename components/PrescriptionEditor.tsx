@@ -26,8 +26,8 @@ import { searchDrugsGlobal, mapMedicamentToMedicine } from '../services/drugCata
 import { drugRulesService } from '../services/drugRules';
 import { settingsService } from '../services/settingsService';
 import { useI18n } from '../i18n';
-import ExactPrescriptionTemplate from './ExactPrescriptionTemplate';
 import CombinedConsultationTemplate from './CombinedConsultationTemplate';
+import TemplateRenderer from './templates/TemplateRenderer';
 import { COMMON_ANALYSES } from '../constants/medicalData';
 // @ts-ignore
 import html2pdf from 'html2pdf.js';
@@ -377,7 +377,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
           {useCombinedPrint ? (
             <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} scale={0.17} />
           ) : (
-            <ExactPrescriptionTemplate id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={0.17} />
+            <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={0.531} />
           )}
         </div>
       );
@@ -387,17 +387,19 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         <div style={{ position: 'absolute', top: '-10000px', left: '-10000px' }}>
           {useCombinedPrint
             ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} scale={0.32} />
-            : <ExactPrescriptionTemplate id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} scale={0.32} />}
+            : <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} />}
         </div>
       );
     }
     return (
       <div className="print-page w-full h-[297mm] overflow-hidden bg-white">
-        <div style={{ transform: 'scale(0.32)', transformOrigin: 'top left' }}>
-          {useCombinedPrint
-            ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} />
-            : <ExactPrescriptionTemplate id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} />}
-        </div>
+        {useCombinedPrint ? (
+          <div style={{ transform: 'scale(0.32)', transformOrigin: 'top left' }}>
+            <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} />
+          </div>
+        ) : (
+          <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} />
+        )}
       </div>
     );
   };
