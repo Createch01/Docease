@@ -1,6 +1,7 @@
-import { PrescriptionAppearance, FontSizeOption } from '../types';
+import { PrescriptionAppearance, FontSizeOption, RxLayoutConfig, CustomTemplateConfig } from '../types';
 
 const APPEARANCE_STORAGE_KEY = 'docease_prescription_appearance';
+const RX_LAYOUT_STORAGE_KEY = 'docease_rx_layout';
 
 const DEFAULT_APPEARANCE: PrescriptionAppearance = {
   primaryColor: '#10b981', // Emerald-600
@@ -18,7 +19,7 @@ const DEFAULT_APPEARANCE: PrescriptionAppearance = {
   qrCodeSize: 120,
   paperSize: 'A4',
   paperMode: 'blank',
-  selectedTemplate: 'classic_moroccan',
+  selectedTemplate: 'letterhead_simple',
 };
 
 export const settingsService = {
@@ -108,5 +109,41 @@ export const settingsService = {
 
   saveLanguage(lang: string): void {
     localStorage.setItem('docease_language', lang);
+  },
+
+  // Récupère la mise en page sur mesure de l'ordonnance
+  getRxLayout(): RxLayoutConfig | null {
+    try {
+      const stored = localStorage.getItem(RX_LAYOUT_STORAGE_KEY);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+      const appearance = this.getAppearance();
+      if (appearance.customTemplateConfig?.layoutConfig) {
+        return appearance.customTemplateConfig.layoutConfig;
+      }
+    } catch (error) {
+      console.error('Erreur lors du chargement de la mise en page ordonnance:', error);
+    }
+    return null;
+  },
+
+  // Sauvegarde la mise en page sur mesure de l'ordonnance
+  saveRxLayout(layout: RxLayoutConfig): void {
+    try {
+      localStorage.setItem(RX_LAYOUT_STORAGE_KEY, JSON.stringify(layout));
+      const appearance = this.getAppearance();
+      const customConfig: CustomTemplateConfig = {
+        ...(appearance.customTemplateConfig || ({} as CustomTemplateConfig)),
+        layoutConfig: layout,
+      };
+      this.saveAppearance({
+        ...appearance,
+        selectedTemplate: 'custom',
+        customTemplateConfig: customConfig,
+      });
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde de la mise en page ordonnance:', error);
+    }
   },
 };

@@ -6,6 +6,7 @@ interface HonoraryNoteTemplateProps {
     doctor: DoctorInfo;
     note: HonoraryNote;
     scale?: number;
+    isPrinting?: boolean;
 }
 
 import DocumentShell from './DocumentShell';

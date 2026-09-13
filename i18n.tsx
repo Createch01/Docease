@@ -501,9 +501,10 @@ export const translations = {
 };
 
 type ContextType = {
-    t: (key: keyof typeof translations.fr) => string;
+    t: (key: string) => string;
     lang: Language;
     setLang: (l: Language) => void;
+    changeLanguage: (l: Language) => void;
     dir: 'ltr' | 'rtl';
 };
 
@@ -530,7 +531,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }, [lang, dir]);
 
     return (
-        <I18nContext.Provider value={{ t, lang, changeLanguage, dir }}>
+        <I18nContext.Provider value={{ t, lang, setLang: setLangState, changeLanguage, dir }}>
             <div dir={dir} className={lang === 'ar' ? 'font-arabic' : ''}>
                 {children}
             </div>

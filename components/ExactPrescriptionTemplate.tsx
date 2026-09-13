@@ -15,7 +15,6 @@ interface ExactPrescriptionTemplateProps {
     date?: string;
     isPrinting?: boolean;
     scale?: number;
-    variant?: 'classic_moroccan' | 'modern_wave' | 'minimal_clean' | 'cardio_pro';
 }
 
 import DocumentShell from './DocumentShell';
@@ -28,14 +27,9 @@ const ExactPrescriptionTemplate: React.FC<ExactPrescriptionTemplateProps> = ({
     items,
     date = new Date().toLocaleDateString('fr-FR'),
     isPrinting = false,
-    scale = 1,
-    variant = 'classic_moroccan'
+    scale = 1
 }) => {
     const contentPadding = appearance.contentVerticalPadding || 40;
-    const numberColor = variant === 'minimal_clean' ? '#9ca3af' : (appearance.secondaryColor || '#4b5563');
-    const accentBorderColor = variant === 'cardio_pro' ? (appearance.primaryColor || '#dc2626')
-        : variant === 'minimal_clean' ? '#111827'
-        : (appearance.primaryColor || '#10b981');
 
     return (
         <DocumentShell
@@ -46,7 +40,6 @@ const ExactPrescriptionTemplate: React.FC<ExactPrescriptionTemplateProps> = ({
             date={date}
             title="Ordonnance"
             scale={scale}
-            variant={variant}
         >
             <div
                 style={{
@@ -56,7 +49,7 @@ const ExactPrescriptionTemplate: React.FC<ExactPrescriptionTemplateProps> = ({
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '80px' }}>
                     {items.map((item, idx) => (
                         <div key={item.id} style={{ display: 'flex', gap: '40px' }}>
-                            <div style={{ fontSize: '48px', fontWeight: 900, color: numberColor, opacity: 0.3 }}>{idx + 1}.</div>
+                            <div style={{ fontSize: '48px', fontWeight: 900, color: appearance.secondaryColor || '#4b5563', opacity: 0.3 }}>{idx + 1}.</div>
                             <div style={{ flex: 1 }}>
                                 <div style={{
                                     fontSize: '56px',
@@ -65,11 +58,9 @@ const ExactPrescriptionTemplate: React.FC<ExactPrescriptionTemplateProps> = ({
                                     marginBottom: '15px',
                                     color: '#000000',
                                     paddingLeft: '30px',
-                                    borderLeft: `12px solid ${accentBorderColor}`
+                                    borderLeft: `12px solid ${appearance.primaryColor || '#10b981'}`
                                 }}>
-                                    {item.medicineName}
-                                    {item.strength && <span style={{ fontSize: '44px', opacity: 0.8, marginLeft: '15px', textTransform: 'none' }}>({item.strength})</span>}
-                                    {item.packaging && <span style={{ fontSize: '40px', opacity: 0.8, marginLeft: '15px', textTransform: 'none' }}>{item.packaging}</span>}
+                                    {item.medicineName} {item.strength && <span style={{ fontSize: '44px', opacity: 0.8, marginLeft: '15px', textTransform: 'none' }}>({item.strength})</span>}
                                 </div>
                                 <div style={{
                                     fontSize: '46px',

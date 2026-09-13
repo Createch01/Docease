@@ -18,27 +18,21 @@ import {
   RefreshCcw, FileDigit, X as CloseX, Loader2,
   Heart, CheckCircle2, Baby, UserCircle,
   ShieldX, AlertCircle, Activity, Zap, BrainCircuit, FlaskConical,
-  ArrowLeft, History, XCircle, ScrollText, CreditCard, Cake,
+  ArrowLeft, History, XCircle, ScrollText,
 } from 'lucide-react';
-import { Medicine, PrescriptionItem, MedicineCategory, MealTiming, Patient, Prescription, PatientType, PrescriptionDraft, HonoraryNote } from '../types';
-import { formatAge, formatNom } from '../utils/formatters';
-import { COMMON_ALLERGIES, COMMON_PATHOLOGIES } from '../constants/medicalData';
-import UnifiedMedicalTagSearch from './ui/UnifiedMedicalTagSearch';
+import { Medicine, PrescriptionItem, MedicineCategory, MealTiming, Patient, Prescription, PatientType, PrescriptionDraft } from '../types';
 import { dataService } from '../services/dataService';
-import { searchDrugsGlobal, groupMedicamentsForSelection } from '../services/drugCatalogService';
+import { searchDrugsGlobal, mapMedicamentToMedicine } from '../services/drugCatalogService';
 import { drugRulesService } from '../services/drugRules';
-import { billingService } from '../services/billingService';
-import { fuzzyRank } from '../services/fuzzySearch';
 import { settingsService } from '../services/settingsService';
 import { useI18n } from '../i18n';
 import ExactPrescriptionTemplate from './ExactPrescriptionTemplate';
-import TemplateRenderer from './templates/TemplateRenderer';
 import CombinedConsultationTemplate from './CombinedConsultationTemplate';
 import { COMMON_ANALYSES } from '../constants/medicalData';
 // @ts-ignore
+import html2pdf from 'html2pdf.js';
 import * as prescriptionAiService from '../services/prescriptionAiService';
 import { toastService } from '../services/toastService';
-import AlertSummaryModal from './prescription/AlertSummaryModal';
 
 export interface SafetyNotification {
   id: string;
@@ -67,96 +61,6 @@ const inputStyle = { borderColor: 'var(--color-border)', color: 'var(--color-tex
 const labelEyebrow = 'block text-[11px] font-medium uppercase tracking-wider mb-1.5';
 const labelEyebrowStyle = { color: 'var(--color-text-subtle)', letterSpacing: '0.06em' } as React.CSSProperties;
 
-// ─── Variant selector (form/dosage) helpers ──────────────────────────────
-const FORM_SHORT_LABEL: Record<string, string> = {
-  'comprimé': 'Comprimé', 'comprime': 'Comprimé', 'gélule': 'Gélule', 'gelule': 'Gélule',
-  'sirop': 'Sirop', 'suspension buvable': 'Sirop', 'poudre pour suspension buvable': 'Sirop',
-  'injectable': 'Injectable', 'suspension injectable': 'Injectable', 'poudre pour préparation injectable': 'Injectable',
-  'poudre pour preparation injectable': 'Injectable', 'solution injectable': 'Injectable',
-  'suppositoire': 'Suppositoire', 'patch': 'Patch', 'crème': 'Crème', 'creme': 'Crème',
-  'collyre': 'Collyre', 'sachet': 'Sachet', 'gouttes': 'Gouttes',
-};
-const formShortLabel = (form?: string): string => {
-  if (!form) return '';
-  const lower = form.toLowerCase().trim();
-  if (FORM_SHORT_LABEL[lower]) return FORM_SHORT_LABEL[lower];
-  const hit = Object.keys(FORM_SHORT_LABEL).find(k => lower.includes(k));
-  return hit ? FORM_SHORT_LABEL[hit] : form;
-};
-// "Boîte de 12" → "B12", "Boîte de 1 flacon" / "Flacon de 30 ml" → "Flacon", else a short fallback.
-const abbreviatePackaging = (packaging?: string | null): string => {
-  if (!packaging) return '';
-  const lower = packaging.toLowerCase();
-  if (lower.includes('flacon')) return 'Flacon';
-  const boxMatch = lower.match(/bo[iî]te.*?(\d+)/);
-  if (boxMatch) return `B${boxMatch[1]}`;
-  if (lower.includes('bo') && (lower.includes('boite') || lower.includes('boîte'))) return 'Boîte';
-  return packaging.length <= 14 ? packaging : '';
-};
-
-const isLiquidForm = (form?: string): boolean => {
-  const lower = (form || '').toLowerCase();
-  return /sirop|suspension buvable|sachet|gouttes/.test(lower);
-};
-const isInjectableForm = (form?: string): boolean => {
-  const lower = (form || '').toLowerCase();
-  return /inject|perfusion/.test(lower);
-};
-
-// Groups a flat suggestions[] (one Medicine per form+strength today) back under a single
-// médicament card by brand name, so the search UI can show one row with form/dosage chips
-// instead of N separate rows for the same brand.
-interface VariantGroup { name: string; variants: Medicine[] }
-const groupSuggestionsByName = (list: Medicine[]): VariantGroup[] => {
-  const order: string[] = [];
-  const byName = new Map<string, Medicine[]>();
-  list.forEach(m => {
-    const key = m.name;
-    if (!byName.has(key)) { byName.set(key, []); order.push(key); }
-    byName.get(key)!.push(m);
-  });
-  return order.map(name => ({ name, variants: byName.get(name)! }));
-};
-
-// Reorders/highlights a médicament's variants according to the current patient profile.
-// Never drops a form — only reorders and flags the recommended one(s).
-const orderVariantsForPatient = (variants: Medicine[], patient: Partial<Patient>): { variants: Medicine[]; recommendedForm?: string } => {
-  const age = Number(patient.age) || 0;
-  const isYoungChild = patient.type === 'Child' && age > 0 && age < 6;
-  if (isYoungChild) {
-    const liquids = variants.filter(v => isLiquidForm(v.form));
-    const rest = variants.filter(v => !isLiquidForm(v.form));
-    if (liquids.length > 0) return { variants: [...liquids, ...rest], recommendedForm: liquids[0].form };
-  }
-  // Adult default: oral forms first, injectable last — unless every variant is injectable.
-  const allInjectable = variants.every(v => isInjectableForm(v.form));
-  if (!allInjectable) {
-    const oral = variants.filter(v => !isInjectableForm(v.form));
-    const injectable = variants.filter(v => isInjectableForm(v.form));
-    return { variants: [...oral, ...injectable] };
-  }
-  return { variants };
-};
-
-// Parses a "X-Y mg/kg/j" or "X mg/kg/j" style dose_rule and multiplies by the patient's
-// weight (kg) to get a concrete daily-dose display. Returns null if either is unparsable —
-// the raw dose_rule is shown as-is in that case (never a guessed number).
-const computePediatricDose = (doseRule: string | undefined, weight: string | number | undefined): string | null => {
-  if (!doseRule) return null;
-  const w = parseFloat(String(weight || '').replace(',', '.'));
-  if (!w || w <= 0) return null;
-  const match = doseRule.match(/(\d+(?:[.,]\d+)?)\s*(?:-\s*(\d+(?:[.,]\d+)?))?\s*mg\s*\/\s*kg/i);
-  if (!match) return null;
-  const low = parseFloat(match[1].replace(',', '.'));
-  const high = match[2] ? parseFloat(match[2].replace(',', '.')) : null;
-  const perDay = /\/\s*j/i.test(doseRule);
-  const suffix = perDay ? 'mg/j' : 'mg/dose';
-  if (high) {
-    return `${Math.round(low * w)}-${Math.round(high * w)} ${suffix} (${match[1]}-${match[2]}mg/kg × ${w}kg)`;
-  }
-  return `${Math.round(low * w)} ${suffix} (${match[1]}mg/kg × ${w}kg)`;
-};
-
 const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   onFinish, selectedPatientFromQueue, initialPatient, initialPrescription, draft, onDraftChange,
 }) => {
@@ -166,23 +70,17 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [patient, setPatient] = useState<Partial<Patient>>(draft?.patient || {
     name: initialPatient?.name || '',
     age: initialPatient?.age || 0,
-    dateOfBirth: initialPatient?.dateOfBirth || '',
-    cin: initialPatient?.cin || '',
     sex: initialPatient?.sex || 'M',
     type: initialPatient?.type || 'Adult',
     weight: initialPatient?.weight || '',
     allergies: initialPatient?.allergies || '',
     pathologies: initialPatient?.pathologies || '',
-    pathologyTags: initialPatient?.pathologyTags || [],
-    pathologiesOtherTags: initialPatient?.pathologiesOtherTags || [],
-    allergyTags: initialPatient?.allergyTags || [],
-    allergiesOtherTags: initialPatient?.allergiesOtherTags || [],
     consultationFee: initialPatient?.consultationFee || 0,
-    isPregnant: initialPatient?.isPregnant,
-    isBreastfeeding: initialPatient?.isBreastfeeding,
-    isHeartPatient: initialPatient?.isHeartPatient,
-    isKidneyPatient: initialPatient?.isKidneyPatient,
-    isLiverPatient: initialPatient?.isLiverPatient,
+    isPregnant: initialPatient?.isPregnant || false,
+    isBreastfeeding: initialPatient?.isBreastfeeding || false,
+    isHeartPatient: initialPatient?.isHeartPatient || false,
+    isKidneyPatient: initialPatient?.isKidneyPatient || false,
+    isLiverPatient: initialPatient?.isLiverPatient || false,
     pregnancyWeeks: initialPatient?.pregnancyWeeks || 0,
     lactationMonths: initialPatient?.lactationMonths || 0,
   });
@@ -190,15 +88,12 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [items, setItems] = useState<PrescriptionItem[]>(draft?.items || []);
   const [medicineSearch, setMedicineSearch] = useState('');
   const [suggestions, setSuggestions] = useState<Medicine[]>([]);
-  const [presentationPicker, setPresentationPicker] = useState<Medicine | null>(null);
-  const [amount, setAmount] = useState(draft?.amount || dataService.getDoctorInfo().standardConsultationFee || 0);
+  const [amount, setAmount] = useState(draft?.amount || 200);
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
   const [patientSuggestions, setPatientSuggestions] = useState<Patient[]>([]);
-  const [patientFieldActive, setPatientFieldActive] = useState(false);
   const [aiWarnings, setAiWarnings] = useState<SafetyNotification[]>([]);
   const [isAiChecking, setIsAiChecking] = useState(false);
   const [overriddenWarnings, setOverriddenWarnings] = useState<Set<string>>(new Set());
-  const [showMissingDataDetails, setShowMissingDataDetails] = useState(false);
   const [overrideModal, setOverrideModal] = useState<{ isOpen: boolean; notificationId: string; reason: string }>({ isOpen: false, notificationId: '', reason: '' });
   const [selectedCategory, setSelectedCategory] = useState<MedicineCategory | 'Tous'>('Tous');
   const [categories, setCategories] = useState<(MedicineCategory | 'Tous')[]>(['Tous']);
@@ -212,23 +107,13 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [isAnalysesOpen, setIsAnalysesOpen] = useState(false);
   const [labSearchTerm, setLabSearchTerm] = useState('');
   const [useCombinedPrint, setUseCombinedPrint] = useState(false);
-  const [invoicePrompt, setInvoicePrompt] = useState<{ isOpen: boolean; prescription: Prescription | null; amount: number }>({ isOpen: false, prescription: null, amount: 0 });
-  const [selectedPatientRecord, setSelectedPatientRecord] = useState<Patient | null>(null);
-  const [showHistory, setShowHistory] = useState(true);
-  const [showAlertSummary, setShowAlertSummary] = useState(false);
-  const [pendingSaveAction, setPendingSaveAction] = useState<(() => void) | null>(null);
 
   const medInputRef = useRef<HTMLInputElement>(null);
-  // Loads initialPatient once on mount only — guards against silently overwriting a patient
-  // the user has since picked from the suggestions dropdown if the prop reference ever churns.
-  const initialPatientLoadedRef = useRef(false);
 
   const queueSuggestions = (dataService.getTodayQueue()).map(q => ({
     id: q.id,
     name: q.name || (q as any).patientName,
     age: q.age || 0,
-    dateOfBirth: q.dateOfBirth,
-    cin: q.cin,
     sex: q.sex || 'M' as const,
     type: q.type || 'Adult' as const,
     phone: q.phone || '',
@@ -244,15 +129,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     }
   }, [patient, items, amount, selectedTests, initialPrescription]);
 
-  useEffect(() => {
-    if (initialPatient && !initialPatientLoadedRef.current) {
-      initialPatientLoadedRef.current = true;
-      selectFromPatientData(initialPatient);
-    }
-  }, [initialPatient]);
-
-  // Re-run safety checks once the real patient record (and its possibly-missing fields) is known.
-  useEffect(() => { if (selectedPatientRecord) runSafetyChecks(items); }, [selectedPatientRecord]);
+  useEffect(() => { if (initialPatient) selectFromPatientData(initialPatient); }, [initialPatient]);
 
   useEffect(() => {
     if (selectedPatientFromQueue) {
@@ -294,24 +171,12 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       }
       seenMeds.add(nameNorm);
     });
-    const systemAlerts = drugRulesService.checkRules(patient as Patient, currentItems, selectedPatientRecord?.currentMedications);
+    const systemAlerts = drugRulesService.checkRules(patient as Patient, currentItems);
     systemAlerts.forEach((alert, idx) => {
       const alertId = `rule-${idx}-${alert.type}-${alert.message.length}`;
       if (!overriddenWarnings.has(alertId)) {
         newLocalWarnings.push({ id: alertId, ...alert, canOverride: true });
       }
-    });
-    // Missing-data notices (e.g. pregnancy status never recorded) — checked against the
-    // real saved patient record, not the form's collapsed-to-false working copy. Only
-    // raised for statuses that a currently-prescribed medication actually documents.
-    const missingDataAlerts = drugRulesService.checkMissingData(selectedPatientRecord, currentItems);
-    missingDataAlerts.forEach((alert, idx) => {
-      newLocalWarnings.push({ id: `missing-${idx}-${alert.type}`, ...alert, canOverride: false });
-    });
-    // Unstructured "Autre" / legacy free-text pathologies-allergies — can't be auto-verified.
-    const unstructuredAlerts = drugRulesService.checkUnstructuredData(selectedPatientRecord, currentItems);
-    unstructuredAlerts.forEach((alert, idx) => {
-      newLocalWarnings.push({ id: `unstructured-${idx}-${alert.type}`, ...alert, canOverride: false });
     });
     setAiWarnings(newLocalWarnings);
   };
@@ -355,20 +220,15 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     }
   };
 
-  const addItem = (m: Medicine, packaging?: string | null) => {
+  const addItem = (m: Medicine) => {
     const categoryDefaults = m.category ? (dataService as any).CATEGORY_POSOLOGY?.[m.category] : null;
     const fallbackDosage = categoryDefaults?.dosage || '';
     const fallbackTiming = categoryDefaults?.timing || 'Indifférent';
-    // Pediatric dose_rule + known weight → concrete mg pre-fill; otherwise fall back to the
-    // médicament's standard dosage (never guessed when the weight is unknown).
-    const pediatricDose = patient.type === 'Child' ? computePediatricDose(m.pediatricDoseRule, patient.weight) : null;
-    const resolvedDosage = pediatricDose || m.defaultDosage || fallbackDosage;
     const newItem: PrescriptionItem = {
       id: Date.now().toString(),
-      medicineName: m.name, genericName: m.active_ingredient, category: m.category, form: m.form, strength: m.strength,
-      route: m.route, packaging: packaging !== undefined ? packaging : m.packaging,
-      dosage: resolvedDosage,
-      referenceDosage: resolvedDosage,
+      medicineName: m.name, category: m.category, form: m.form, strength: m.strength,
+      dosage: m.defaultDosage || fallbackDosage,
+      referenceDosage: m.defaultDosage || fallbackDosage,
       timing: m.defaultTiming || fallbackTiming,
       duration: '7 jours', frequency: '3 fois par jour',
     };
@@ -376,18 +236,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     setItems(newItems);
     setMedicineSearch('');
     setSuggestions([]);
-    setPresentationPicker(null);
     runSafetyChecks(newItems);
-  };
-
-  // Médicament ≠ présentation commerciale : quand plusieurs conditionnements existent pour
-  // le même médicament/DCI/dosage/forme, on demande explicitement lequel avant d'ajouter.
-  const selectMedicine = (m: Medicine) => {
-    if (m.presentations && m.presentations.length > 1) {
-      setPresentationPicker(m);
-    } else {
-      addItem(m);
-    }
   };
 
   const removeItem = (id: string) => {
@@ -408,23 +257,21 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     const searchLower = val.toLowerCase().trim();
     const localMeds = dataService.getMedicines();
     const catalogMedsRaw = await searchDrugsGlobal(searchLower, 50);
-    const catalogMeds = groupMedicamentsForSelection(catalogMedsRaw);
+    const catalogMeds = catalogMedsRaw.map(mapMedicamentToMedicine);
     const combined = [...localMeds, ...catalogMeds];
     const seen = new Set<string>();
     const deduplicated: Medicine[] = [];
     combined.forEach(m => {
-      // Keyed on name+strength+form (not name alone) — a brand's different forms/dosages
-      // (e.g. ACLAV comprimé vs sirop) are distinct variants, not duplicates, and must all
-      // survive so the search UI can group them into selectable chips.
-      const norm = `${m.name.toLowerCase()}|${(m.strength || '').toLowerCase()}|${(m.form || '').toLowerCase()}`;
+      const norm = m.name.toLowerCase();
       if (!seen.has(norm)) { seen.add(norm); deduplicated.push(m); }
     });
-    const categoryFiltered = deduplicated.filter(m => selectedCategory === 'Tous' || m.category === selectedCategory);
-    let filtered = categoryFiltered
+    const filtered = deduplicated
       .filter(m => {
         const matchName = m.name.toLowerCase().includes(searchLower);
         const matchIngredient = m.active_ingredient && m.active_ingredient.toLowerCase().includes(searchLower);
-        return matchName || matchIngredient;
+        const matchesSearch = matchName || matchIngredient;
+        const matchesCategory = selectedCategory === 'Tous' || m.category === selectedCategory;
+        return matchesSearch && matchesCategory;
       })
       .sort((a, b) => {
         const aLower = a.name.toLowerCase();
@@ -436,13 +283,6 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         return aLower.localeCompare(bLower, 'fr');
       })
       .slice(0, 50);
-
-    // Typo-tolerant fallback (e.g. handwritten/scanned prescription names) when the
-    // plain substring search finds nothing.
-    if (filtered.length === 0) {
-      filtered = fuzzyRank(searchLower, categoryFiltered, m => [m.name, m.active_ingredient || ''], 20);
-    }
-
     setSuggestions(filtered);
   };
 
@@ -452,33 +292,22 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
   const selectFromPatientData = (p: Patient) => {
     setSelectedPatientId(p.id);
-    setSelectedPatientRecord(p);
     setPatient({
-      name: p.name, age: p.age, dateOfBirth: p.dateOfBirth, cin: p.cin, sex: p.sex, phone: p.phone, weight: p.weight, type: p.type,
+      name: p.name, age: p.age, sex: p.sex, phone: p.phone, weight: p.weight, type: p.type,
       allergies: p.allergies || '',
       pathologies: (p.pathologies || '') + (p.chronicDiseases ? ' ' + p.chronicDiseases.join(', ') : ''),
-      pathologyTags: p.pathologyTags || [],
-      pathologiesOtherTags: p.pathologiesOtherTags || [],
-      allergyTags: p.allergyTags || [],
-      allergiesOtherTags: p.allergiesOtherTags || [],
       consultationFee: p.consultationFee,
-      isPregnant: p.isPregnant, isBreastfeeding: p.isBreastfeeding,
-      isHeartPatient: p.isHeartPatient, isKidneyPatient: p.isKidneyPatient,
-      isLiverPatient: p.isLiverPatient,
+      isPregnant: p.isPregnant || false, isBreastfeeding: p.isBreastfeeding || false,
+      isHeartPatient: p.isHeartPatient || false, isKidneyPatient: p.isKidneyPatient || false,
+      isLiverPatient: p.isLiverPatient || false,
       pregnancyWeeks: p.pregnancyWeeks || 0, lactationMonths: p.lactationMonths || 0,
     });
-    setAmount(p.consultationFee || dataService.getDoctorInfo().standardConsultationFee || 0);
+    setAmount(p.consultationFee || 200);
     setPatientSuggestions([]);
     medInputRef.current?.focus();
   };
 
   const handleSave = () => {
-    // Show alert summary modal first
-    setShowAlertSummary(true);
-    setPendingSaveAction(() => () => performSave());
-  };
-
-  const performSave = () => {
     const isEditing = !!initialPrescription;
     const finalPatientId = selectedPatientId || (patient.name as string);
     const newPrescription: Prescription = {
@@ -498,67 +327,23 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       });
     }
     if (selectedPatientId) dataService.deleteFromQueue(selectedPatientId);
-
-    // New prescriptions (not edits) offer to generate the matching invoice immediately.
-    if (!isEditing) {
-      const doctor = dataService.getDoctorInfo();
-      setInvoicePrompt({ isOpen: true, prescription: newPrescription, amount: amount || patient.consultationFee || 0 });
-    } else {
-      onFinish();
-    }
-  };
-
-  const handleConfirmInvoice = () => {
-    if (invoicePrompt.prescription) {
-      const doctor = dataService.getDoctorInfo();
-      const note: HonoraryNote = billingService.buildQuickInvoice({
-        patientId: invoicePrompt.prescription.patientId,
-        patientName: patient.name || invoicePrompt.prescription.patientId,
-        currency: doctor.currency || 'DH',
-        amount: invoicePrompt.amount,
-        prescriptionId: invoicePrompt.prescription.id,
-      });
-      dataService.saveHonoraryNote(note);
-    }
-    setInvoicePrompt({ isOpen: false, prescription: null, amount: 0 });
     onFinish();
   };
 
-  const handleSkipInvoice = () => {
-    setInvoicePrompt({ isOpen: false, prescription: null, amount: 0 });
-    onFinish();
-  };
-
-  // Non-blocking legal check: an ordonnance without the Ordre National registration
-  // number is missing a mandatory mention, but the doctor may still need to print
-  // in the moment — warn and let them confirm rather than hard-blocking.
-  const confirmLegalMentions = () => {
-    const doctor = dataService.getDoctorInfo();
-    if (!doctor.ordreNumber) {
-      return window.confirm(
-        "Numéro d'inscription à l'Ordre non renseigné — obligatoire sur une ordonnance.\n\nContinuer quand même ?"
-      );
-    }
-    return true;
-  };
-
-  const handleExportPDF = async () => {
-    if (!confirmLegalMentions()) return;
+  const handleExportPDF = () => {
     const appearance = settingsService.getAppearance();
     const doctor = dataService.getDoctorInfo();
     const element = document.getElementById('prescription-export-template');
     if (!element) return;
-    const isA5 = appearance.paperSize === 'A5';
     const opt = {
       margin: 0,
       filename: `Ordonnance_${patient.name || 'Patient'}_${new Date().toLocaleDateString()}.pdf`,
       image: { type: 'jpeg' as const, quality: 0.98 },
       html2canvas: { scale: 2.5, useCORS: true, letterRendering: true, logging: false },
-      jsPDF: { unit: 'mm', format: isA5 ? 'a5' as const : 'a4' as const, orientation: 'portrait' as const },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
       pagebreak: { mode: 'avoid-all' },
     };
     toastService.info("Génération de l'ordonnance PDF...");
-    const html2pdf = (await import('html2pdf.js')).default;
     html2pdf().set(opt).from(element).save()
       .then(() => {
         toastService.success(useCombinedPrint ? 'Consultation complète enregistrée !' : 'Ordonnance enregistrée !');
@@ -592,27 +377,26 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
           {useCombinedPrint ? (
             <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} scale={0.17} />
           ) : (
-            <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={0.17} />
+            <ExactPrescriptionTemplate id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={0.17} />
           )}
         </div>
       );
     }
-    const paperScale = appearance.paperSize === 'A5' ? 0.705 : 1;
     if (mode === 'export') {
       return (
         <div style={{ position: 'absolute', top: '-10000px', left: '-10000px' }}>
           {useCombinedPrint
-            ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} scale={0.32 * paperScale} />
-            : <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} scale={0.32 * paperScale} />}
+            ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} scale={0.32} />
+            : <ExactPrescriptionTemplate id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} scale={0.32} />}
         </div>
       );
     }
     return (
       <div className="print-page w-full h-[297mm] overflow-hidden bg-white">
-        <div style={{ transform: `scale(${0.32 * paperScale})`, transformOrigin: 'top left' }}>
+        <div style={{ transform: 'scale(0.32)', transformOrigin: 'top left' }}>
           {useCombinedPrint
             ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} />
-            : <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} />}
+            : <ExactPrescriptionTemplate id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} />}
         </div>
       </div>
     );
@@ -620,11 +404,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
   // ═══════════════════════════ RENDER ═══════════════════════════
   const criticalWarnings = aiWarnings.filter(w => w.severity === 'CRITIQUE');
-  // Missing/undocumented-data notices get their own compact, collapsible zone — they are not
-  // confirmed clinical warnings and mixing them into the amber "Attention" block is what made
-  // it noisy (a banner per unfilled status field on every single patient).
-  const missingDataWarnings = aiWarnings.filter(w => w.type === 'DONNEE_MANQUANTE');
-  const attentionWarnings = aiWarnings.filter(w => w.severity === 'ATTENTION' && w.type !== 'DONNEE_MANQUANTE');
+  const attentionWarnings = aiWarnings.filter(w => w.severity === 'ATTENTION');
   const itemHasCritical = (itemId?: string) =>
     !!itemId && criticalWarnings.some(w => w.itemId === itemId);
   const itemHasAttention = (itemId?: string) =>
@@ -673,62 +453,6 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
       )}
 
-      {/* ═══ Alert Summary Modal ═══ */}
-      {showAlertSummary && (
-        <AlertSummaryModal
-          alerts={aiWarnings}
-          onReview={() => setShowAlertSummary(false)}
-          onConfirm={() => {
-            setShowAlertSummary(false);
-            if (pendingSaveAction) {
-              pendingSaveAction();
-              setPendingSaveAction(null);
-            }
-          }}
-        />
-      )}
-
-      {/* ═══ Post-save invoice prompt ═══ */}
-      {invoicePrompt.isOpen && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ background: 'rgba(15, 23, 42, 0.5)', backdropFilter: 'blur(4px)' }}>
-          <div className="bg-white rounded-2xl p-7 max-w-md w-full" style={{ boxShadow: 'var(--shadow-premium)' }}>
-            <div className="flex items-start gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg flex items-center justify-center text-white shrink-0" style={{ background: 'var(--color-primary)' }}>
-                <Save size={20} />
-              </div>
-              <div>
-                <h3 className="text-[16px] font-semibold mb-0.5" style={{ color: 'var(--color-text)' }}>Créer la facture correspondante ?</h3>
-                <p className="text-[13px]" style={{ color: 'var(--color-text-muted)' }}>Ordonnance enregistrée. Générer automatiquement la note d'honoraires liée, visible dans Comptabilité.</p>
-              </div>
-            </div>
-            <label className={labelEyebrow} style={labelEyebrowStyle}>Montant (DH)</label>
-            <input
-              type="number"
-              value={invoicePrompt.amount}
-              onChange={e => setInvoicePrompt({ ...invoicePrompt, amount: parseFloat(e.target.value) || 0 })}
-              className={`${input40} mb-4`}
-              style={inputStyle}
-            />
-            <div className="flex gap-2">
-              <button
-                onClick={handleSkipInvoice}
-                className="flex-1 h-10 px-4 rounded-lg text-[13px] font-medium border transition-all hover:bg-slate-50"
-                style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
-              >
-                Ignorer
-              </button>
-              <button
-                onClick={handleConfirmInvoice}
-                className="flex-1 h-10 px-4 rounded-lg text-[13px] font-medium text-white transition-all"
-                style={{ background: 'var(--color-primary)' }}
-              >
-                Créer la facture
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* ═══ Page header ═══ */}
       <header className="flex items-center justify-between print:hidden">
         <div className="flex items-center gap-3">
@@ -752,7 +476,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => { if (confirmLegalMentions()) window.print(); }}
+            onClick={() => window.print()}
             disabled={items.length === 0}
             className="h-10 px-4 rounded-lg text-[13px] font-medium border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
@@ -883,41 +607,6 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
           </div>
         )}
 
-        {/* 🟠 DONNÉE MANQUANTE — compact, collapsed by default. Only exists once a prescribed
-            medication actually documents a renal/hepatic/cardiac/pregnancy/allaitement concern
-            and the corresponding patient status was never recorded — never shown on an empty
-            ordonnance or for statuses no prescribed drug cares about. */}
-        {missingDataWarnings.length > 0 && (
-          <div
-            className="rounded-xl border overflow-hidden"
-            style={{ background: 'var(--color-warning-50)', borderColor: 'var(--color-warning-100)' }}
-          >
-            <button
-              type="button"
-              onClick={() => setShowMissingDataDetails(v => !v)}
-              className="w-full flex items-center gap-3 p-4 text-left"
-            >
-              <AlertTriangle size={16} style={{ color: 'var(--color-warning-hover)' }} className="shrink-0" />
-              <span className="text-[13px] font-semibold flex-1" style={{ color: 'var(--color-warning-800)' }}>
-                {missingDataWarnings.length} information{missingDataWarnings.length > 1 ? 's' : ''} à vérifier
-              </span>
-              <ChevronDown
-                size={16}
-                style={{ color: 'var(--color-warning-hover)', transform: showMissingDataDetails ? 'rotate(180deg)' : undefined, transition: 'transform 150ms' }}
-              />
-            </button>
-            {showMissingDataDetails && (
-              <div className="px-4 pb-4 space-y-2">
-                {missingDataWarnings.map(alert => (
-                  <p key={alert.id} className="text-[12px] leading-relaxed" style={{ color: 'var(--color-warning-800)' }}>
-                    {alert.message}
-                  </p>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
         {/* AI pediatric notes (assistive) */}
         {pediatricAlerts.length > 0 && (
           <div className="rounded-xl border p-5" style={{ background: 'var(--color-primary-50)', borderColor: 'var(--color-primary-100)' }}>
@@ -954,11 +643,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                 <input
                   type="text"
                   value={patient.name}
-                  onFocus={() => {
-                    setPatientFieldActive(true);
-                    if (!patient.name) setPatientSuggestions(queueSuggestions as any);
-                  }}
-                  onBlur={() => setTimeout(() => setPatientFieldActive(false), 150)}
+                  onFocus={() => !patient.name && setPatientSuggestions(queueSuggestions as any)}
                   onChange={e => {
                     setPatient({ ...patient, name: e.target.value });
                     setPatientSuggestions(e.target.value.length > 0 ? dataService.searchPatients(e.target.value) : queueSuggestions as any);
@@ -967,7 +652,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                   style={inputStyle}
                   placeholder={t('name')}
                 />
-                {patientFieldActive && (patientSuggestions.length > 0 || (!patient.name && queueSuggestions.length === 0)) && (
+                {patientSuggestions.length > 0 && (
                   <div
                     className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg z-50 overflow-hidden max-h-[400px] overflow-y-auto"
                     style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-premium)' }}
@@ -975,14 +660,9 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                     <div className="px-3 py-2 border-b" style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}>
                       <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>{t('suggestions')}</span>
                     </div>
-                    {patientSuggestions.length === 0 ? (
-                      <div className="px-3 py-3 text-[13px]" style={{ color: 'var(--color-text-subtle)' }}>
-                        {t('all_patients_seen')}
-                      </div>
-                    ) : patientSuggestions.map(p => (
+                    {patientSuggestions.map(p => (
                       <button
                         key={p.id}
-                        onMouseDown={e => e.preventDefault()}
                         onClick={() => selectFromPatientData(p)}
                         className="w-full text-left px-3 py-2.5 flex justify-between items-center transition-all hover:bg-[var(--color-row-hover)] border-t"
                         style={{ borderColor: 'var(--color-border)' }}
@@ -992,9 +672,9 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                             <UserCircle size={18} />
                           </div>
                           <div>
-                            <div className="text-[13px] font-medium" style={{ color: 'var(--color-text)' }}>{formatNom(p.name)}</div>
+                            <div className="text-[13px] font-medium" style={{ color: 'var(--color-text)' }}>{p.name}</div>
                             <div className="text-[11px] flex items-center gap-2" style={{ color: 'var(--color-text-subtle)' }}>
-                              <span>#{String(p.id).slice(-6)}</span><span>·</span><span>{(p as any).phone || p.phone || 'Sans tél.'}</span>
+                              <span>ID {p.id}</span><span>·</span><span>{(p as any).phone || p.phone || 'Sans tél.'}</span>
                             </div>
                           </div>
                         </div>
@@ -1007,19 +687,12 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
               <div>
                 <label className={labelEyebrow} style={labelEyebrowStyle}>{t('age')}</label>
-                {patient.dateOfBirth ? (
-                  <div className={`${input40} flex items-center gap-1.5`} style={{ ...inputStyle, background: 'var(--color-surface-alt)' }}>
-                    <Cake size={13} style={{ color: 'var(--color-text-faint)' }} />
-                    <span className="font-medium">{formatAge(patient)}</span>
-                  </div>
-                ) : (
-                  <input
-                    type="number"
-                    value={patient.age || ''}
-                    onChange={e => setPatient({ ...patient, age: parseInt(e.target.value) || 0 })}
-                    className={input40} style={inputStyle}
-                  />
-                )}
+                <input
+                  type="number"
+                  value={patient.age || ''}
+                  onChange={e => setPatient({ ...patient, age: parseInt(e.target.value) || 0 })}
+                  className={input40} style={inputStyle}
+                />
               </div>
               <div>
                 <label className={labelEyebrow} style={labelEyebrowStyle}>{t('weight')}</label>
@@ -1033,98 +706,23 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
               </div>
             </div>
 
-            {/* Identité — champs déjà connus (salle d'attente / dossier), lecture seule */}
-            {(patient.type || patient.dateOfBirth || patient.cin) && (
-              <div className="flex flex-wrap items-center gap-2">
-                {patient.type && (
-                  <span
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium"
-                    style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
-                  >
-                    {patient.type === 'Child' ? <Baby size={11} /> : patient.type === 'Woman' ? <Heart size={11} /> : <UserCircle size={11} />}
-                    {patient.type === 'Child' ? t('child') : patient.type === 'Woman' ? t('woman') : t('adult')}
-                  </span>
-                )}
-                {patient.dateOfBirth && (
-                  <span
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium"
-                    style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
-                  >
-                    <Cake size={11} /> {new Date(patient.dateOfBirth).toLocaleDateString('fr-FR')}
-                  </span>
-                )}
-                {patient.type !== 'Child' && patient.cin && (
-                  <span
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-medium"
-                    style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
-                  >
-                    <CreditCard size={11} /> CIN {patient.cin}
-                  </span>
-                )}
-              </div>
-            )}
-
-            {/* Allergies + pathologies — unified search */}
-            <div className="p-4 rounded-lg border space-y-3" style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}>
-              <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--color-text-muted)', letterSpacing: '0.06em' }}>
-                <AlertCircle size={11} /> {t('allergies')} &amp; {t('pathologies')}
-              </label>
-              <UnifiedMedicalTagSearch
-                allergyOptions={COMMON_ALLERGIES}
-                pathologyOptions={COMMON_PATHOLOGIES}
-                selectedAllergyTags={patient.allergyTags || []}
-                onAllergyTagsChange={tags => { setPatient({ ...patient, allergyTags: tags }); runSafetyChecks(items); }}
-                allergyOtherTags={patient.allergiesOtherTags || []}
-                onAllergyOtherTagsChange={tags => { setPatient({ ...patient, allergiesOtherTags: tags }); runSafetyChecks(items); }}
-                selectedPathologyTags={patient.pathologyTags || []}
-                onPathologyTagsChange={tags => { setPatient({ ...patient, pathologyTags: tags }); runSafetyChecks(items); }}
-                pathologyOtherTags={patient.pathologiesOtherTags || []}
-                onPathologyOtherTagsChange={tags => { setPatient({ ...patient, pathologiesOtherTags: tags }); runSafetyChecks(items); }}
-                placeholder="Rechercher une allergie ou une pathologie…"
-              />
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-1">
+            {/* Allergies + pathologies */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* Allergies */}
+              <div className="p-4 rounded-lg border space-y-3" style={{ background: 'var(--color-danger-50)', borderColor: 'var(--color-danger-100)' }}>
+                <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--color-danger-700)', letterSpacing: '0.06em' }}>
+                  <AlertCircle size={11} /> {t('allergies')}
+                </label>
                 <input
                   type="text"
                   value={patient.allergies}
                   onChange={e => setPatient({ ...patient, allergies: e.target.value })}
-                  placeholder="Précisions allergies (optionnel)"
+                  placeholder={t('allergies_placeholder')}
                   className="w-full h-10 px-3 rounded-md border text-[13px] outline-none bg-white"
                   style={{ borderColor: 'var(--color-danger-100)' }}
                 />
-                <input
-                  type="text"
-                  value={patient.pathologies}
-                  onChange={e => setPatient({ ...patient, pathologies: e.target.value })}
-                  placeholder="Précisions pathologies (optionnel)"
-                  className="w-full h-10 px-3 rounded-md border text-[13px] outline-none bg-white"
-                  style={{ borderColor: 'var(--color-border)' }}
-                />
-              </div>
-
-              {/* Quick shortcuts */}
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                {[
-                  { key: 'isHeartPatient' as const, icon: Heart, label: t('heart_patient') },
-                  { key: 'isKidneyPatient' as const, icon: FlaskConical, label: t('kidney_patient') },
-                  { key: 'isLiverPatient' as const, icon: Activity, label: t('liver_patient') },
-                ].map(({ key, icon: Icon, label }) => {
-                  const active = !!patient[key];
-                  return (
-                    <button
-                      key={key}
-                      onClick={() => { const v = !patient[key]; setPatient({ ...patient, [key]: v }); runSafetyChecks(items); }}
-                      className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
-                      style={active
-                        ? { background: 'var(--color-primary)', color: 'white' }
-                        : { background: 'white', color: 'var(--color-text-muted)', border: `1px solid var(--color-border)` }}
-                    >
-                      <Icon size={11} /> {label}
-                    </button>
-                  );
-                })}
                 {patient.sex === 'F' && (
-                  <>
+                  <div className="flex flex-wrap gap-2 pt-1">
                     <div className="flex items-center gap-1.5">
                       <button
                         onClick={() => { const v = !patient.isPregnant; setPatient({ ...patient, isPregnant: v }); runSafetyChecks(items); }}
@@ -1165,45 +763,47 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                         />
                       )}
                     </div>
-                  </>
+                  </div>
                 )}
+              </div>
+
+              {/* Pathologies */}
+              <div className="p-4 rounded-lg border space-y-3" style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}>
+                <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--color-text-muted)', letterSpacing: '0.06em' }}>
+                  <Activity size={11} /> {t('pathologies')}
+                </label>
+                <input
+                  type="text"
+                  value={patient.pathologies}
+                  onChange={e => setPatient({ ...patient, pathologies: e.target.value })}
+                  placeholder={t('antecedents_placeholder')}
+                  className="w-full h-10 px-3 rounded-md border text-[13px] outline-none bg-white"
+                  style={{ borderColor: 'var(--color-border)' }}
+                />
+                <div className="flex flex-wrap gap-1.5">
+                  {[
+                    { key: 'isHeartPatient' as const, icon: Heart, label: t('heart_patient') },
+                    { key: 'isKidneyPatient' as const, icon: FlaskConical, label: t('kidney_patient') },
+                    { key: 'isLiverPatient' as const, icon: Activity, label: t('liver_patient') },
+                  ].map(({ key, icon: Icon, label }) => {
+                    const active = !!patient[key];
+                    return (
+                      <button
+                        key={key}
+                        onClick={() => { const v = !patient[key]; setPatient({ ...patient, [key]: v }); runSafetyChecks(items); }}
+                        className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
+                        style={active
+                          ? { background: 'var(--color-primary)', color: 'white' }
+                          : { background: 'white', color: 'var(--color-text-muted)', border: `1px solid var(--color-border)` }}
+                      >
+                        <Icon size={11} /> {label}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </section>
-
-          {/* ─── PRESCRIPTION HISTORY (collapsible) ─── */}
-          {selectedPatientId && (() => {
-            const history = dataService.getPrescriptions()
-              .filter(p => p.patientId === selectedPatientId && p.id !== initialPrescription?.id)
-              .sort((a, b) => b.date.localeCompare(a.date));
-            if (history.length === 0) return null;
-            return (
-              <section className={`${card} p-5`} style={cardStyle}>
-                <button onClick={() => setShowHistory(!showHistory)} className="w-full flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <History size={15} style={{ color: 'var(--color-primary)' }} />
-                    <h2 className="text-[13px] font-semibold" style={{ color: 'var(--color-text)' }}>
-                      Ordonnances précédentes ({history.length})
-                    </h2>
-                  </div>
-                  <ChevronDown size={16} style={{ color: 'var(--color-text-subtle)', transform: showHistory ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
-                </button>
-                {showHistory && (
-                  <div className="mt-3 space-y-2 max-h-[220px] overflow-y-auto">
-                    {history.map(rx => (
-                      <div key={rx.id} className="p-3 rounded-md border text-[12px]" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}>
-                        <div className="flex justify-between items-center mb-1">
-                          <span className="font-medium" style={{ color: 'var(--color-text)' }}>{rx.date}</span>
-                          <span style={{ color: 'var(--color-text-subtle)' }}>{rx.items.length} médicament{rx.items.length !== 1 ? 's' : ''}</span>
-                        </div>
-                        <p style={{ color: 'var(--color-text-muted)' }}>{rx.items.map(i => i.medicineName).join(', ')}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </section>
-            );
-          })()}
 
           {/* ─── MEDICATION CARD ─── */}
           <section className={`${card} p-6`} style={cardStyle}>
@@ -1295,172 +895,47 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                         </span>
                       </div>
                       <div className="overflow-y-auto p-2 flex-1">
-                        {groupSuggestionsByName(suggestions).map((group, gIdx) => {
-                          const highlightName = (name: string) =>
-                            name.split(new RegExp(`(${medicineSearch})`, 'gi')).map((part, i) =>
-                              part.toLowerCase() === medicineSearch.toLowerCase() ? (
-                                <span key={i} className="rounded px-0.5" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>{part}</span>
-                              ) : part
-                            );
-
-                          // Single form+dosage for this brand: same simple row as before,
-                          // auto-selected on click (nothing to choose between).
-                          if (group.variants.length === 1) {
-                            const m = group.variants[0];
-                            return (
-                              <button
-                                key={m.id || gIdx}
-                                onClick={() => selectMedicine(m)}
-                                className="w-full text-left p-3 rounded-md transition-all flex items-start gap-3 hover:bg-[var(--color-row-hover)]"
-                              >
-                                <div className="w-9 h-9 rounded-md flex items-center justify-center shrink-0" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}>
-                                  <Pill size={16} />
-                                </div>
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex justify-between items-center gap-2 mb-1">
-                                    <h4 className="text-[14px] font-semibold leading-tight truncate" style={{ color: 'var(--color-text)' }}>
-                                      {highlightName(m.name)}
-                                    </h4>
-                                    <ChevronRight size={14} className={`shrink-0 ${dir === 'rtl' ? 'rotate-180' : ''}`} style={{ color: 'var(--color-text-faint)' }} />
-                                  </div>
-                                  <div className="flex flex-wrap gap-1.5 items-center">
-                                    <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
-                                      {m.category ? (lang === 'ar' ? (t(m.category.toLowerCase()) || m.category) : m.category) : t('medicine')}
-                                    </span>
-                                    {m.form && (
-                                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
-                                        {m.form}
-                                      </span>
-                                    )}
-                                    {m.strength && (
-                                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
-                                        {m.strength}
-                                      </span>
-                                    )}
-                                    {m.presentations && m.presentations.length > 1 ? (
-                                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
-                                        {m.presentations.length} présentations
-                                      </span>
-                                    ) : m.packaging ? (
-                                      <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
-                                        {m.packaging}
-                                      </span>
-                                    ) : null}
-                                    {m.defaultDosage && (
-                                      <span className="text-[11px] truncate max-w-[260px]" style={{ color: 'var(--color-text-subtle)' }}>
-                                        Posologie type&nbsp;: {m.defaultDosage}
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-                              </button>
-                            );
-                          }
-
-                          // Multiple forms/dosages for this brand: one card, one flat wrap of
-                          // chips — one chip per exact présentation (form + dosage + conditionnement),
-                          // reordered/highlighted for the current patient. No per-form headers:
-                          // the form is printed inside each chip instead.
-                          const { variants: orderedVariants, recommendedForm } = orderVariantsForPatient(group.variants, patient);
-                          interface ChipEntry { key: string; v: Medicine; packaging?: string | null }
-                          const chipEntries: ChipEntry[] = [];
-                          orderedVariants.forEach(v => {
-                            if (v.presentations && v.presentations.length > 0) {
-                              v.presentations.forEach(p => chipEntries.push({ key: `${v.id}_${p.id}`, v, packaging: p.packaging }));
-                            } else {
-                              chipEntries.push({ key: v.id, v, packaging: v.packaging });
-                            }
-                          });
-                          const recommendedIdx = recommendedForm != null
-                            ? chipEntries.findIndex(e => e.v.form === recommendedForm)
-                            : -1;
-                          return (
-                            <div key={group.name || gIdx} className="p-3 rounded-md mb-1">
-                              <div className="flex items-center gap-3 mb-2">
-                                <div className="w-9 h-9 rounded-md flex items-center justify-center shrink-0" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}>
-                                  <Pill size={16} />
-                                </div>
+                        {suggestions.map((m, idx) => (
+                          <button
+                            key={m.id || idx}
+                            onClick={() => addItem(m)}
+                            className="w-full text-left p-3 rounded-md transition-all flex items-start gap-3 hover:bg-[var(--color-row-hover)]"
+                          >
+                            <div className="w-9 h-9 rounded-md flex items-center justify-center shrink-0" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}>
+                              <Pill size={16} />
+                            </div>
+                            <div className="flex-1 min-w-0">
+                              <div className="flex justify-between items-center gap-2 mb-1">
                                 <h4 className="text-[14px] font-semibold leading-tight truncate" style={{ color: 'var(--color-text)' }}>
-                                  {highlightName(group.name)}
+                                  {m.name.split(new RegExp(`(${medicineSearch})`, 'gi')).map((part, i) =>
+                                    part.toLowerCase() === medicineSearch.toLowerCase() ? (
+                                      <span key={i} className="rounded px-0.5" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>{part}</span>
+                                    ) : part
+                                  )}
                                 </h4>
+                                <ChevronRight size={14} className={`shrink-0 ${dir === 'rtl' ? 'rotate-180' : ''}`} style={{ color: 'var(--color-text-faint)' }} />
                               </div>
-                              <div className="flex flex-wrap gap-2 pl-1">
-                                {chipEntries.map((entry, i) => {
-                                  const { v, packaging } = entry;
-                                  const packagingLabel = abbreviatePackaging(packaging);
-                                  const isRecommended = i === recommendedIdx;
-                                  const isHospitalChip = !!v.isHospitalOnly && isInjectableForm(v.form);
-                                  return (
-                                    <button
-                                      key={entry.key}
-                                      onClick={() => addItem(v, packaging)}
-                                      className="inline-flex items-center flex-wrap gap-x-1.5 gap-y-0.5 px-2.5 py-1.5 rounded-md border transition-all hover:opacity-80 w-fit"
-                                      style={{ borderColor: 'var(--color-primary-100)', background: 'var(--color-primary-50)' }}
-                                    >
-                                      <span className="text-[12px] font-bold uppercase tracking-tight whitespace-nowrap" style={{ color: 'var(--color-primary)' }}>
-                                        {group.name} {v.strength || ''}
-                                      </span>
-                                      <span className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>—</span>
-                                      <span className="text-[10.5px] font-medium whitespace-nowrap" style={{ color: 'var(--color-text-subtle)' }}>
-                                        {formShortLabel(v.form)}{packagingLabel ? ` ${packagingLabel}` : ''}
-                                      </span>
-                                      {isRecommended && (
-                                        <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase text-white" style={{ background: 'var(--color-primary)', letterSpacing: '0.05em' }}>
-                                          Recommandé
-                                        </span>
-                                      )}
-                                      {isHospitalChip && (
-                                        <span className="px-1 py-0.5 rounded text-[9px] font-bold uppercase text-white" style={{ background: 'var(--color-warning-hover)' }}>
-                                          Prescription spéciale
-                                        </span>
-                                      )}
-                                    </button>
-                                  );
-                                })}
+                              <div className="flex flex-wrap gap-1.5 items-center">
+                                <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
+                                  {m.category ? (lang === 'ar' ? (t(m.category.toLowerCase()) || m.category) : m.category) : t('medicine')}
+                                </span>
+                                {m.form && (
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
+                                    {m.form}
+                                  </span>
+                                )}
+                                {m.strength && (
+                                  <span className="px-1.5 py-0.5 rounded text-[10px] font-medium" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-muted)' }}>
+                                    {m.strength}
+                                  </span>
+                                )}
+                                {m.defaultDosage && (
+                                  <span className="text-[11px] truncate max-w-[260px]" style={{ color: 'var(--color-text-subtle)' }}>
+                                    Posologie type&nbsp;: {m.defaultDosage}
+                                  </span>
+                                )}
                               </div>
                             </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  )}
-
-                  {presentationPicker && (
-                    <div
-                      className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg z-50 overflow-hidden max-h-[380px] flex flex-col"
-                      style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-premium)' }}
-                    >
-                      <div
-                        className="px-4 py-2.5 border-b flex items-center justify-between"
-                        style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}
-                      >
-                        <div>
-                          <p className="text-[13px] font-semibold" style={{ color: 'var(--color-text)' }}>{presentationPicker.name}</p>
-                          <p className="text-[11px]" style={{ color: 'var(--color-text-subtle)' }}>
-                            {presentationPicker.active_ingredient} · {presentationPicker.form} {presentationPicker.strength && `· ${presentationPicker.strength}`} — choisir la présentation
-                          </p>
-                        </div>
-                        <button
-                          onClick={() => setPresentationPicker(null)}
-                          className="w-7 h-7 rounded-md flex items-center justify-center hover:bg-white"
-                          style={{ color: 'var(--color-text-faint)' }}
-                        >
-                          <CloseX size={14} />
-                        </button>
-                      </div>
-                      <div className="overflow-y-auto p-2 flex-1">
-                        {presentationPicker.presentations!.map((p) => (
-                          <button
-                            key={p.id}
-                            onClick={() => addItem(presentationPicker, p.packaging)}
-                            className="w-full text-left p-3 rounded-md transition-all flex items-center justify-between gap-3 hover:bg-[var(--color-row-hover)]"
-                          >
-                            <span className="text-[13px] font-medium" style={{ color: 'var(--color-text)' }}>
-                              {p.packaging || 'Conditionnement non précisé'}
-                            </span>
-                            {p.laboratory && (
-                              <span className="text-[11px]" style={{ color: 'var(--color-text-subtle)' }}>{p.laboratory}</span>
-                            )}
                           </button>
                         ))}
                       </div>
@@ -1537,11 +1012,6 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                           {item.form && ` · ${item.form}`}
                           {item.strength && ` · ${item.strength}`}
                         </span>
-                        {item.packaging && (
-                          <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-white border" style={{ color: 'var(--color-text-muted)', borderColor: 'var(--color-border)' }}>
-                            {item.packaging}
-                          </span>
-                        )}
                         {isCritical && (
                           <span className="px-2 py-0.5 rounded text-[10px] font-bold uppercase text-white flex items-center gap-1" style={{ background: 'var(--color-danger)', letterSpacing: '0.08em' }}>
                             <XCircle size={11} /> Contre-indiqué
@@ -1766,7 +1236,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                       <div className="text-[13px] font-semibold" style={{ color: 'var(--color-text)' }}>Patient sélectionné</div>
                       <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
                         {patient.name}{selectedPatientId && ` (ID ${selectedPatientId})`}
-                        {(patient.age || patient.dateOfBirth) && ` — ${formatAge(patient)}`}
+                        {patient.age && ` — ${patient.age} ans`}
                       </p>
                     </div>
                   </div>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>DocEase — Éditeur d'ordonnance sur mesure</title>
+<link rel="stylesheet" href="variables.css" />
+<link rel="stylesheet" href="editor/editor.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html,body{height:100%}
+  body{margin:0;background:var(--color-bg,#F0F4F8)}
+  #boot{display:flex;align-items:center;justify-content:center;height:100vh;font:13px Inter,system-ui,sans-serif;color:#718096;gap:10px}
+  .spin{width:16px;height:16px;border:2px solid #CBD5E0;border-top-color:#1A6B8A;border-radius:50%;animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  @media print{
+    .ed-noprint{display:none!important}
+    html,body{background:#fff!important}
+    main{padding:0!important;display:block!important}
+    .rx-ord-sheet{box-shadow:none!important;transform:none!important;margin:0!important}
+    .rx-ord-watermark{opacity:min(var(--wm-opacity),0.08)!important}
+    @page{size:A4 portrait;margin:0}
+  }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#F0F4F8">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#F0F4F8"/>
+    <rect x="470" y="150" width="340" height="470" rx="10" fill="#ffffff" stroke="#dbe3ec" stroke-width="4"/>
+    <rect x="502" y="188" width="150" height="14" rx="7" fill="#0B2A5B"/>
+    <rect x="502" y="212" width="200" height="9" rx="4" fill="#c9d3dd"/>
+    <rect x="440" y="260" width="2" height="0" fill="none"/>
+    <rect x="502" y="252" width="276" height="2" fill="#12496B"/>
+    <rect x="592" y="286" width="140" height="30" rx="15" fill="#12496B"/>
+    <rect x="502" y="340" width="276" height="1" fill="#94A3B8" stroke-dasharray="2,2"/>
+    <g fill="#dde5ed"><rect x="502" y="380" width="80" height="9" rx="4"/><rect x="502" y="402" width="240" height="9" rx="4"/><rect x="502" y="424" width="200" height="9" rx="4"/></g>
+    <rect x="470" y="558" width="340" height="62" fill="#E53E3E"/>
+  </svg>
+</template>
+
+<div id="root"><div id="boot"><span class="spin"></span> Chargement de l'éditeur…</div></div>
+
+<script type="text/babel" data-presets="react" src="editor/ordonnanceModel.jsx"></script>
+<script type="text/babel" data-presets="react" src="editor/OrdonnanceTemplate.jsx"></script>
+<script type="text/babel" data-presets="react" src="editor/OrdonnanceControls.jsx"></script>
+<script type="text/babel" data-presets="react" src="editor/OrdonnanceEditorApp.jsx"></script>
+<script type="text/babel" data-presets="react">
+/* Demo host — in DocEase: <OrdonnanceEditorApp doctorInitial={doctor}
+   patient={patient} date={date} items={items}
+   initialAppearance={settingsService.getOrdonnanceAppearance()}
+   onSave={({appearance, doctor}) => settingsService.saveOrdonnanceAppearance(appearance)} /> */
+
+const PATIENT = { name: '', age: '', sex: '' };
+const DATE = '08/09/2026';
+let saved = null;
+try { const s = localStorage.getItem('docease_ordonnance_appearance'); if (s) saved = JSON.parse(s); } catch (_) {}
+
+const boot = () => {
+  if (!window.OrdonnanceEditorApp || !window.OrdonnanceTemplate || !window.OrdonnanceControls || !window.rxOrdDefaultAppearance) {
+    return setTimeout(boot, 50);
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <window.OrdonnanceEditorApp
+      doctorInitial={saved?.doctor || window.rxOrdDefaultDoctor()}
+      patient={PATIENT}
+      date={DATE}
+      items={window.rxOrdDefaultItems()}
+      initialAppearance={saved?.appearance}
+      onSave={(cfg) => console.log('[DocEase] design ordonnance enregistré', cfg)} />
+  );
+};
+boot();
+</script>
+</body>
+</html>
