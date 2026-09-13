@@ -98,6 +98,7 @@ export interface Medicine {
 }
 
 export interface DoctorInfo {
+  name?: string;
   nameAr: string;
   specialtyAr: string;
   diplomasAr: string;
@@ -238,6 +239,103 @@ export interface HonoraryNote {
 
 export type FontSizeOption = 'small' | 'medium' | 'large';
 
+// --- CUSTOM TEMPLATE EDITOR TYPES ---
+// Config for the doctor's own from-scratch prescription design, built in
+// CustomTemplateEditor.tsx and rendered by components/templates/CustomTemplate.tsx.
+// Fully isolated from the 9 built-in Claude Design templates.
+export type RxElementType = 'text' | 'contact' | 'logo' | 'line' | 'icon' | 'body';
+
+export interface RxEditorElement {
+  id: string;
+  type: RxElementType;
+  name: string;
+  x: number;
+  y: number;
+  visible: boolean;
+  locked: boolean;
+  opacity: number;
+  rotation?: number;
+
+  // text / contact
+  bind?: string;
+  text?: string;
+  width?: number;
+  fontSize?: number;
+  fontFamily?: string;
+  fontWeight?: number;
+  color?: string;
+  align?: 'left' | 'center' | 'right';
+  letterSpacing?: number;
+  lineHeight?: number;
+  uppercase?: boolean;
+  rtl?: boolean;
+
+  // contact / icon
+  field?: string;
+  iconStyle?: 'outline' | 'filled';
+  iconSize?: number;
+  iconColor?: string;
+  iconGap?: number;
+  showIcon?: boolean;
+
+  // logo
+  src?: string;
+  w?: number;
+
+  // line
+  length?: number;
+  thickness?: number;
+
+  // body
+  h?: number;
+}
+
+export interface RxLayoutConfig {
+  version: number;
+  page: {
+    size: string;
+    width: number;
+    height: number;
+    background: string;
+  };
+  elements: RxEditorElement[];
+}
+
+export interface CustomTemplateConfig {
+  headerStyle: 'minimal' | 'bande' | 'encadre';
+  headerColor: string;
+  logoUrl?: string | null;
+  logoPosition: 'left' | 'center' | 'right';
+  logoSize: number;
+  showName: boolean;
+  namePosition: 'left' | 'center' | 'right';
+  nameFontSize: number;
+  showSpeciality: boolean;
+  showPhone: boolean;
+  showEmail: boolean;
+  showAddress: boolean;
+  showOrdreNumber: boolean;
+  showWebsite: boolean;
+  website?: string;
+  drugListStyle: 'barre' | 'simple' | 'puces';
+  accentColor: string;
+  fontFamily: 'serif' | 'sans' | 'mono';
+  footerStyle: 'simple' | 'bande' | 'vague';
+  showStamp: boolean;
+  stampUrl?: string | null;
+  stampPosition: 'left' | 'right';
+  showSignature: boolean;
+  signatureUrl?: string | null;
+  enableQrCode: boolean;
+  qrCodePosition: 'left' | 'right';
+  qrCodeContent: string;
+  watermark: 'none' | 'initials' | 'cross';
+  watermarkOpacity: number;
+
+  // Element-based layout configuration from the custom prescription editor
+  layoutConfig?: RxLayoutConfig;
+}
+
 export interface PrescriptionAppearance {
   primaryColor: string;
   fontSize: FontSizeOption;
@@ -265,7 +363,19 @@ export interface PrescriptionAppearance {
   paperMode?: 'blank' | 'letterhead';
   signatureImageUrl?: string;
   stampImageUrl?: string;
-  selectedTemplate?: 'classic_moroccan' | 'modern_wave' | 'minimal_clean' | 'cardio_pro';
+  selectedTemplate?: 'letterhead_simple' | 'pediatric' | 'navy_wave' | 'purple_heart' | 'script_elegant' | 'cardio_ecg' | 'gyneco_pink' | 'teal_hospital' | 'corporate_clean' | 'custom';
+  // Doctor's own from-scratch design, saved when selectedTemplate === 'custom'.
+  customTemplateConfig?: CustomTemplateConfig;
+  // QR code position on the printed page (content/type are covered by qrCodeType/customQrUrl above).
+  qrCodePosition?: 'bottom-left' | 'bottom-right';
+  // Coordonnées affichées — which doctor-profile fields to surface on the document.
+  // Undefined means "shown" (default), consistent with existing templates rendering them unconditionally.
+  showPhone?: boolean;
+  showEmail?: boolean;
+  showAddress?: boolean;
+  showOrdreNumber?: boolean;
+  showWebsite?: boolean;
+  website?: string;
 }
 
 export interface PrescriptionItem {

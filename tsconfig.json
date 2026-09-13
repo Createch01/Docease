@@ -12,7 +12,9 @@
     "skipLibCheck": true,
     "types": [
       "node",
-      "vite/client"
+      "vite/client",
+      "react",
+      "react-dom"
     ],
     "moduleResolution": "bundler",
     "isolatedModules": true,
@@ -30,8 +32,11 @@
   "exclude": [
     "node_modules",
     "Design_extracted",
+    "DESIGN ORDONNANCE",
     "src-tauri",
     "dist",
-    "docease-app"
+    "docease-app",
+    "ordonnance",
+    "components/templates/preview-bundle.tsx"
   ]
 }

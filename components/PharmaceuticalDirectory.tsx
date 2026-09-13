@@ -730,7 +730,7 @@ const PharmaceuticalDirectory: React.FC = () => {
 
                 {/* Search */}
                 <div className="flex-1 relative">
-                    <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 focus-within:ring-2 transition-all" style={{ focusWithinRingColor: '#1D9E75' }}>
+                    <div className="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 focus-within:ring-2 transition-all">
                         <Search size={15} className="text-slate-400 shrink-0" />
                         <input
                             type="text"

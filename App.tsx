@@ -5,7 +5,7 @@ import {
   LayoutDashboard, Users, FileText, Settings, BarChart3, PlusCircle,
   FolderOpen, CheckSquare, CalendarRange, Activity,
   ChevronLeft, ChevronRight, Menu, X, Bell, Database, Search,
-  PanelLeftClose, PanelLeftOpen,
+  PanelLeftClose, PanelLeftOpen, User, Building2, Shield,
 } from 'lucide-react';
 import LoadingIndicator from './components/LoadingIndicator';
 import WaveBackground from './components/WaveBackground';
@@ -20,10 +20,10 @@ import { Patient, AppUser, Permission, PrescriptionDraft } from './types';
 import { LogOut, BookOpen } from 'lucide-react';
 
 // Lazy loading components for code splitting
-const Dashboard = React.lazy(() => import('./components/Dashboard'));
+const Dashboard = React.lazy(() => import('./components/Dashboard')) as React.LazyExoticComponent<React.ComponentType<any>>;
 const PatientManager = React.lazy(() => import('./components/PatientManager'));
 const PrescriptionEditor = React.lazy(() => import('./components/PrescriptionEditor'));
-const SettingsPanel = React.lazy(() => import('./components/SettingsPanel'));
+const SettingsPanel = React.lazy(() => import('./components/SettingsPanel')) as React.LazyExoticComponent<React.ComponentType<any>>;
 const Analytics = React.lazy(() => import('./components/Analytics'));
 const PatientDossier = React.lazy(() => import('./components/PatientDossier'));
 const TaskManager = React.lazy(() => import('./components/TaskManager'));
@@ -63,8 +63,20 @@ const AppContent: React.FC = () => {
   const [securityChecked, setSecurityChecked] = useState(false);
   const [securityConfigured, setSecurityConfigured] = useState(false);
   const [securityUnlocked, setSecurityUnlocked] = useState(false);
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
+  const [activeSettingsTab, setActiveSettingsTab] = useState<string>('profile');
 
   const activeUser = dataService.getActiveUser();
+
+  // Settings sub-menu configuration
+  const settingsSubItems = [
+    { id: 'profile', label: 'Mon profil', icon: User },
+    { id: 'cabinet', label: 'Cabinet', icon: Building2 },
+    { id: 'prescription', label: 'Documents', icon: FileText },
+    { id: 'security', label: 'Sécurité', icon: Shield },
+    { id: 'users', label: 'Collaborateurs', icon: Users },
+    { id: 'database', label: 'Base de données', icon: Database },
+  ];
   const doctor = securityUnlocked ? dataService.getDoctorInfo() : ({} as any);
 
   useEffect(() => {
@@ -184,7 +196,7 @@ const AppContent: React.FC = () => {
       case 'compatibility': return <DrugCompatibility />;
       case 'analytics': return <Analytics />;
       case 'tasks': return <TaskManager />;
-      case 'settings': return <SettingsPanel />;
+      case 'settings': return <SettingsPanel activeTab={activeSettingsTab as any} />;
       case 'notifications': return <NotificationCenter onNavigate={(view, data) => {
         if (data?.patientId) {
           const allPatients = dataService.getAllPatients();
@@ -290,15 +302,15 @@ const AppContent: React.FC = () => {
       <aside
         className={`
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-          fixed lg:relative top-0 left-0 bottom-0 flex flex-col
+          fixed top-0 left-0 bottom-0 flex flex-col
           transition-all duration-300
         `}
         style={{
-          width: sidebarWidth,
+          width: isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)',
           background: 'var(--color-surface)',
           borderRight: '1px solid var(--color-border)',
           height: '100vh',
-          zIndex: 'var(--z-sidebar)' as any,
+          zIndex: 30,
           flexShrink: 0,
         }}
       >
@@ -361,48 +373,114 @@ const AppContent: React.FC = () => {
 
           {navItems.map((item) => {
             const isActive = currentView === item.id;
+            const isSettingsExpanded = expandedMenu === 'settings';
+            const isSettingsItem = item.id === 'settings';
+
             return (
-              <button
-                key={item.id}
-                title={isCollapsed ? item.label : undefined}
-                onClick={() => {
-                  if (item.id !== 'new-prescription') setActivePatient(null);
-                  setCurrentView(item.id as View);
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`relative w-full flex items-center rounded-lg text-left transition-all`}
-                style={{
-                  gap: isCollapsed ? 0 : '10px',
-                  padding: isCollapsed ? '10px' : '10px 12px',
-                  justifyContent: isCollapsed ? 'center' : 'flex-start',
-                  background: isActive ? 'var(--color-primary-50)' : 'transparent',
-                  color: isActive ? 'var(--color-primary)' : 'var(--color-text-muted)',
-                  fontWeight: isActive ? 600 : 500,
-                  fontSize: '14px',
-                  transition: 'all var(--transition-base)',
-                }}
-                onMouseEnter={e => {
-                  if (!isActive) (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
-                }}
-                onMouseLeave={e => {
-                  if (!isActive) (e.currentTarget as HTMLElement).style.background = 'transparent';
-                }}
-              >
-                {isActive && (
-                  <span
-                    className="absolute left-0 rounded-r"
-                    style={{ top: '8px', bottom: '8px', width: '3px', background: 'var(--color-primary)', borderRadius: '0 3px 3px 0' }}
-                  />
+              <div key={item.id}>
+                <button
+                  title={isCollapsed ? item.label : undefined}
+                  onClick={() => {
+                    if (isSettingsItem) {
+                      // Toggle settings menu expansion
+                      setExpandedMenu(isSettingsExpanded ? null : 'settings');
+                    } else {
+                      if (item.id !== 'new-prescription') setActivePatient(null);
+                      setCurrentView(item.id as View);
+                      setExpandedMenu(null); // Close settings menu when switching views
+                      setIsMobileMenuOpen(false);
+                    }
+                  }}
+                  className={`relative w-full flex items-center justify-between rounded-lg text-left transition-all`}
+                  style={{
+                    gap: isCollapsed ? 0 : '10px',
+                    padding: isCollapsed ? '10px' : '10px 12px',
+                    justifyContent: isCollapsed ? 'center' : 'space-between',
+                    background: isActive || isSettingsExpanded ? 'var(--color-primary-50)' : 'transparent',
+                    color: isActive || isSettingsExpanded ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                    fontWeight: isActive || isSettingsExpanded ? 600 : 500,
+                    fontSize: '14px',
+                    transition: 'all var(--transition-base)',
+                  }}
+                  onMouseEnter={e => {
+                    if (!isActive && !isSettingsExpanded) (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
+                  }}
+                  onMouseLeave={e => {
+                    if (!isActive && !isSettingsExpanded) (e.currentTarget as HTMLElement).style.background = 'transparent';
+                  }}
+                >
+                  <div className="flex items-center" style={{ gap: isCollapsed ? 0 : '10px' }}>
+                    {(isActive || isSettingsExpanded) && (
+                      <span
+                        className="absolute left-0 rounded-r"
+                        style={{ top: '8px', bottom: '8px', width: '3px', background: 'var(--color-primary)', borderRadius: '0 3px 3px 0' }}
+                      />
+                    )}
+                    <item.icon size={18} strokeWidth={isActive || isSettingsExpanded ? 2.25 : 2} className="shrink-0" />
+                    {!isCollapsed && <span className="truncate flex-1" title={item.label}>{item.label}</span>}
+                  </div>
+                  {isSettingsItem && !isCollapsed && (
+                    <ChevronRight
+                      size={16}
+                      style={{
+                        transform: isSettingsExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                        transition: 'transform var(--transition-base)',
+                      }}
+                    />
+                  )}
+                  {item.highlight && !isCollapsed && !isSettingsItem && (
+                    <span
+                      className="w-1.5 h-1.5 rounded-full"
+                      style={{ background: 'var(--color-secondary)' }}
+                    />
+                  )}
+                </button>
+
+                {/* Settings sub-menu */}
+                {isSettingsItem && isSettingsExpanded && !isCollapsed && (
+                  <div style={{ overflow: 'hidden', maxHeight: isSettingsExpanded ? '400px' : '0px', transition: 'max-height var(--transition-base)' }}>
+                    {settingsSubItems.map((subItem) => (
+                      <button
+                        key={subItem.id}
+                        onClick={() => {
+                          setCurrentView('settings');
+                          setActiveSettingsTab(subItem.id);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="relative w-full flex items-center rounded-lg text-left transition-all"
+                        style={{
+                          gap: '8px',
+                          padding: '8px 12px 8px 40px',
+                          background: activeSettingsTab === subItem.id && currentView === 'settings' ? 'var(--color-primary-50)' : 'transparent',
+                          color: activeSettingsTab === subItem.id && currentView === 'settings' ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                          fontWeight: activeSettingsTab === subItem.id && currentView === 'settings' ? 600 : 500,
+                          fontSize: '13px',
+                          transition: 'all var(--transition-base)',
+                        }}
+                        onMouseEnter={e => {
+                          if (!(activeSettingsTab === subItem.id && currentView === 'settings')) {
+                            (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
+                          }
+                        }}
+                        onMouseLeave={e => {
+                          if (!(activeSettingsTab === subItem.id && currentView === 'settings')) {
+                            (e.currentTarget as HTMLElement).style.background = 'transparent';
+                          }
+                        }}
+                      >
+                        {activeSettingsTab === subItem.id && currentView === 'settings' && (
+                          <span
+                            className="absolute left-0 rounded-r"
+                            style={{ top: '6px', bottom: '6px', width: '3px', background: 'var(--color-primary)', borderRadius: '0 3px 3px 0' }}
+                          />
+                        )}
+                        <subItem.icon size={16} className="shrink-0" />
+                        <span className="truncate flex-1" title={subItem.label}>{subItem.label}</span>
+                      </button>
+                    ))}
+                  </div>
                 )}
-                <item.icon size={18} strokeWidth={isActive ? 2.25 : 2} className="shrink-0" />
-                {!isCollapsed && <span className="truncate flex-1">{item.label}</span>}
-                {item.highlight && !isCollapsed && (
-                  <span
-                    className="ml-auto w-1.5 h-1.5 rounded-full"
-                    style={{ background: 'var(--color-secondary)' }}
-                  />
-                )}
-              </button>
+              </div>
             );
           })}
 
@@ -473,7 +551,7 @@ const AppContent: React.FC = () => {
       </aside>
 
       {/* ═══════════════ MAIN COLUMN ═══════════════ */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden" style={{ marginLeft: 'var(--sidebar-width)' }}>
 
         {/* ─── TOPBAR ─── */}
         <header

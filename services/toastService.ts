@@ -23,7 +23,7 @@ export const toastService = {
     subscribe: (listener: ToastListener) => {
         listeners.add(listener);
         listener([...toasts]);
-        return () => listeners.delete(listener);
+        return () => { listeners.delete(listener); };
     },
 
     show: (message: string, type: ToastType = 'info', duration = 4000) => {

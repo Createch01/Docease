@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>DocEase — Redesign Preview</title>
+<meta name="viewport" content="width=1280" />
+<link rel="stylesheet" href="variables.css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  /* Tailwind theme overrides so utilities resolve to our tokens */
+  :root { color-scheme: light; }
+  body { font-family: var(--font-sans); }
+
+  /* Custom scrollbar — subtle */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #CBD5E0; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #A0AEC0; }
+
+  /* Nav item active indicator */
+  .nav-item-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 3px;
+    background: var(--color-primary);
+    border-radius: 0 3px 3px 0;
+  }
+
+  /* Striped table */
+  .striped tbody tr:nth-child(even) { background: var(--color-surface-alt); }
+  .striped tbody tr:hover { background: var(--color-row-hover); }
+
+  /* Focus styles */
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-focus-primary);
+  }
+
+  /* Tab underline anim */
+  .tab-active { color: var(--color-primary); position: relative; }
+  .tab-active::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -1px;
+    height: 2px;
+    background: var(--color-primary);
+    border-radius: 2px 2px 0 0;
+  }
+
+  /* Skeleton bar (lab result mini chart) */
+  .bar { display: inline-block; width: 4px; border-radius: 2px; background: var(--color-primary); margin-right: 2px; vertical-align: bottom; }
+</style>
+</head>
+<body class="text-[14px]" style="background: var(--color-bg);">
+
+<!-- ═══════════════ APP SHELL ═══════════════ -->
+<div class="flex min-h-screen">
+
+  <!-- ─────── SIDEBAR ─────── -->
+  <aside id="sidebar" class="bg-white border-r flex flex-col shrink-0 transition-all" style="width: var(--sidebar-width); border-color: var(--color-border); height: 100vh; position: sticky; top: 0;">
+    <!-- Logo block -->
+    <div class="flex items-center gap-3 px-5 h-16 border-b" style="border-color: var(--color-border);">
+      <div class="w-9 h-9 rounded-lg flex items-center justify-center text-white shrink-0" style="background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+        <i data-lucide="stethoscope" class="w-5 h-5"></i>
+      </div>
+      <div class="sidebar-label">
+        <div class="text-[15px] font-semibold leading-tight" style="color: var(--color-text);">DocEase</div>
+        <div class="text-[11px]" style="color: var(--color-text-subtle);">Medical Suite</div>
+      </div>
+    </div>
+
+    <!-- Doctor block -->
+    <div class="px-3 py-4 border-b" style="border-color: var(--color-border);">
+      <div class="flex items-center gap-3 p-2 rounded-lg" style="background: var(--color-surface-alt);">
+        <div class="w-9 h-9 rounded-full flex items-center justify-center text-white font-medium shrink-0" style="background: var(--color-primary);">SA</div>
+        <div class="sidebar-label min-w-0 flex-1">
+          <div class="text-[13px] font-medium truncate" style="color: var(--color-text);">Dr. Selma Amrani</div>
+          <div class="text-[11px] truncate flex items-center gap-1" style="color: var(--color-text-subtle);">
+            <span class="w-1.5 h-1.5 rounded-full" style="background: var(--color-secondary);"></span>
+            Cardiologue
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Primary nav -->
+    <nav class="flex-1 px-3 py-4 space-y-1">
+      <div class="text-[10px] font-semibold uppercase tracking-wider px-3 mb-2 sidebar-label" style="color: var(--color-text-faint); letter-spacing: 0.08em;">Workspace</div>
+
+      <button data-screen="dashboard" class="nav-btn relative w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all" style="color: var(--color-text-muted);">
+        <i data-lucide="layout-dashboard" class="w-[18px] h-[18px] shrink-0"></i>
+        <span class="text-[14px] font-medium sidebar-label">Tableau de bord</span>
+      </button>
+
+      <button data-screen="dossiers" class="nav-btn relative w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all" style="color: var(--color-text-muted);">
+        <i data-lucide="folder-open" class="w-[18px] h-[18px] shrink-0"></i>
+        <span class="text-[14px] font-medium sidebar-label">Dossiers patients</span>
+        <span class="ml-auto text-[11px] px-1.5 py-0.5 rounded sidebar-label" style="background: var(--color-primary-50); color: var(--color-primary);">128</span>
+      </button>
+
+      <button data-screen="prescription" class="nav-btn relative w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all" style="color: var(--color-text-muted);">
+        <i data-lucide="file-text" class="w-[18px] h-[18px] shrink-0"></i>
+        <span class="text-[14px] font-medium sidebar-label">Ordonnance</span>
+      </button>
+
+      <button data-screen="pharma" class="nav-btn relative w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all" style="color: var(--color-text-muted);">
+        <i data-lucide="pill" class="w-[18px] h-[18px] shrink-0"></i>
+        <span class="text-[14px] font-medium sidebar-label">Pharma</span>
+      </button>
+
+      <button class="nav-btn relative w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all" style="color: var(--color-text-muted);">
+        <i data-lucide="calendar" class="w-[18px] h-[18px] shrink-0"></i>
+        <span class="text-[14px] font-medium sidebar-label">Rendez-vous</span>
+      </button>
+
+      <div class="text-[10px] font-semibold uppercase tracking-wider px-3 mb-2 mt-6 sidebar-label" style="color: var(--color-text-faint); letter-spacing: 0.08em;">Administration</div>
+
+      <button class="nav-btn relative w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all" style="color: var(--color-text-muted);">
+        <i data-lucide="bar-chart-3" class="w-[18px] h-[18px] shrink-0"></i>
+        <span class="text-[14px] font-medium sidebar-label">Statistiques</span>
+      </button>
+
+      <button class="nav-btn relative w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all" style="color: var(--color-text-muted);">
+        <i data-lucide="settings" class="w-[18px] h-[18px] shrink-0"></i>
+        <span class="text-[14px] font-medium sidebar-label">Paramètres</span>
+      </button>
+    </nav>
+
+    <!-- Collapse toggle -->
+    <div class="p-3 border-t" style="border-color: var(--color-border);">
+      <button id="collapse-btn" class="w-full flex items-center gap-3 px-3 py-2 rounded-lg transition-all hover:bg-slate-50" style="color: var(--color-text-subtle);">
+        <i data-lucide="panel-left-close" class="w-[18px] h-[18px] shrink-0"></i>
+        <span class="text-[13px] sidebar-label">Réduire</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ─────── MAIN COLUMN ─────── -->
+  <div class="flex-1 flex flex-col min-w-0">
+
+    <!-- ─── TOPBAR ─── -->
+    <header class="bg-white border-b sticky top-0 z-40 flex items-center px-7" style="height: var(--topbar-height); border-color: var(--color-border);">
+      <!-- Search -->
+      <div class="relative w-[420px] max-w-full">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2" style="color: var(--color-text-faint);"></i>
+        <input
+          type="text"
+          placeholder="Rechercher un patient, médicament, ordonnance…"
+          class="w-full pl-10 pr-12 h-10 rounded-lg border text-[14px] transition-all"
+          style="border-color: var(--color-border); background: var(--color-surface-alt);"
+        />
+        <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[11px] rounded border" style="color: var(--color-text-subtle); border-color: var(--color-border); background: white;">⌘K</kbd>
+      </div>
+
+      <div class="ml-auto flex items-center gap-2">
+        <button class="h-10 px-4 rounded-lg text-[13px] font-medium flex items-center gap-2 border transition-all hover:bg-slate-50" style="border-color: var(--color-border); color: var(--color-text-muted);">
+          <i data-lucide="download" class="w-4 h-4"></i>
+          Export
+        </button>
+        <button class="h-10 w-10 rounded-lg flex items-center justify-center relative transition-all hover:bg-slate-50" style="color: var(--color-text-muted);">
+          <i data-lucide="bell" class="w-[18px] h-[18px]"></i>
+          <span class="absolute top-2 right-2 w-2 h-2 rounded-full" style="background: var(--color-danger);"></span>
+        </button>
+        <div class="w-px h-6 mx-1" style="background: var(--color-border);"></div>
+        <button class="h-10 px-3 rounded-lg flex items-center gap-2 transition-all hover:bg-slate-50">
+          <div class="w-7 h-7 rounded-full flex items-center justify-center text-white text-[12px] font-semibold" style="background: var(--color-primary);">SA</div>
+          <i data-lucide="chevron-down" class="w-4 h-4" style="color: var(--color-text-subtle);"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- ─── CONTENT AREA ─── -->
+    <main class="flex-1 px-7 py-6 overflow-y-auto" style="max-width: 100%;">
+      <div style="max-width: var(--max-content-width); margin: 0 auto;">
+
+        <!-- ═══════════════ SCREEN: DASHBOARD ═══════════════ -->
+        <section data-screen-content="dashboard" class="space-y-6">
+          <!-- Page header -->
+          <div class="flex items-end justify-between gap-4 flex-wrap">
+            <div>
+              <div class="text-[12px] font-medium mb-1" style="color: var(--color-text-subtle);">Mercredi 27 mai 2026</div>
+              <h1 class="text-[28px] font-semibold tracking-tight" style="color: var(--color-text);">Bonjour, Dr Amrani</h1>
+              <p class="text-[14px] mt-1" style="color: var(--color-text-muted);">Voici un aperçu de votre journée.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-10 px-4 rounded-lg text-[13px] font-medium flex items-center gap-2 border transition-all hover:bg-slate-50" style="border-color: var(--color-border); color: var(--color-text-muted);">
+                <i data-lucide="database" class="w-4 h-4"></i>
+                Fin de journée
+              </button>
+              <button class="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white transition-all shadow-soft hover:shadow-card" style="background: var(--color-primary);">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+                Nouvelle consultation
+              </button>
+            </div>
+          </div>
+
+          <!-- KPI row -->
+          <div class="grid grid-cols-4 gap-4">
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl p-6 border" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+              <div class="flex items-center justify-between mb-5">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--color-primary-50); color: var(--color-primary);">
+                  <i data-lucide="user-check" class="w-[18px] h-[18px]"></i>
+                </div>
+                <span class="text-[11px] font-medium px-2 py-0.5 rounded flex items-center gap-1" style="background: var(--color-secondary-50); color: #25946A;">
+                  <i data-lucide="trending-up" class="w-3 h-3"></i> +12%
+                </span>
+              </div>
+              <div class="text-[12px] font-medium mb-1" style="color: var(--color-text-subtle);">Consultations</div>
+              <div class="text-[32px] font-bold tabular-nums leading-none mb-1" style="color: var(--color-text);">14</div>
+              <div class="text-[12px]" style="color: var(--color-text-subtle);">Aujourd'hui</div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl p-6 border" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+              <div class="flex items-center justify-between mb-5">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--color-warning-50); color: var(--color-warning-hover);">
+                  <i data-lucide="users" class="w-[18px] h-[18px]"></i>
+                </div>
+                <span class="text-[11px] font-medium px-2 py-0.5 rounded" style="background: var(--color-surface-alt); color: var(--color-text-subtle);">Stable</span>
+              </div>
+              <div class="text-[12px] font-medium mb-1" style="color: var(--color-text-subtle);">Salle d'attente</div>
+              <div class="text-[32px] font-bold tabular-nums leading-none mb-1" style="color: var(--color-text);">6</div>
+              <div class="text-[12px]" style="color: var(--color-text-subtle);">Patients en attente</div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl p-6 border" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+              <div class="flex items-center justify-between mb-5">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--color-secondary-50); color: #1F9B73;">
+                  <i data-lucide="file-text" class="w-[18px] h-[18px]"></i>
+                </div>
+                <span class="text-[11px] font-medium px-2 py-0.5 rounded flex items-center gap-1" style="background: var(--color-secondary-50); color: #25946A;">
+                  <i data-lucide="trending-up" class="w-3 h-3"></i> +8%
+                </span>
+              </div>
+              <div class="text-[12px] font-medium mb-1" style="color: var(--color-text-subtle);">Ordonnances</div>
+              <div class="text-[32px] font-bold tabular-nums leading-none mb-1" style="color: var(--color-text);">11</div>
+              <div class="text-[12px]" style="color: var(--color-text-subtle);">Cette semaine : 47</div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-xl p-6 border" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+              <div class="flex items-center justify-between mb-5">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: var(--color-danger-50); color: var(--color-danger);">
+                  <i data-lucide="shield-alert" class="w-[18px] h-[18px]"></i>
+                </div>
+                <span class="text-[11px] font-medium px-2 py-0.5 rounded" style="background: var(--color-danger-50); color: var(--color-danger);">3 actifs</span>
+              </div>
+              <div class="text-[12px] font-medium mb-1" style="color: var(--color-text-subtle);">Alertes sécurité</div>
+              <div class="text-[32px] font-bold tabular-nums leading-none mb-1" style="color: var(--color-text);">3</div>
+              <div class="text-[12px]" style="color: var(--color-text-subtle);">À vérifier ce jour</div>
+            </div>
+          </div>
+
+          <!-- Two-column panels -->
+          <div class="grid grid-cols-3 gap-4">
+            <!-- Waiting room -->
+            <div class="bg-white rounded-xl border col-span-2" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+              <div class="px-6 py-4 flex items-center justify-between border-b" style="border-color: var(--color-border);">
+                <div class="flex items-center gap-3">
+                  <div class="w-8 h-8 rounded-md flex items-center justify-center" style="background: var(--color-warning-50); color: var(--color-warning-hover);">
+                    <i data-lucide="users" class="w-4 h-4"></i>
+                  </div>
+                  <div>
+                    <div class="text-[15px] font-semibold" style="color: var(--color-text);">Salle d'attente</div>
+                    <div class="text-[12px]" style="color: var(--color-text-subtle);">Ordre d'arrivée</div>
+                  </div>
+                </div>
+                <span class="text-[11px] font-medium px-2 py-1 rounded" style="background: var(--color-warning-50); color: var(--color-warning-800);">6 en attente</span>
+              </div>
+              <div>
+                <!-- queue row -->
+                <div class="px-6 py-3 flex items-center justify-between border-b transition-all cursor-pointer hover:bg-slate-50" style="border-color: var(--color-border);">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-md flex items-center justify-center text-[13px] font-semibold tabular-nums" style="background: var(--color-warning-50); color: var(--color-warning-hover);">1</div>
+                    <div>
+                      <div class="text-[14px] font-medium" style="color: var(--color-text);">Karim Benali</div>
+                      <div class="text-[12px] flex items-center gap-2" style="color: var(--color-text-subtle);">
+                        <span>ID 0184</span><span>·</span><span>42 ans</span><span>·</span><span>78 kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="w-9 h-9 rounded-md flex items-center justify-center transition-all" style="background: var(--color-primary-50); color: var(--color-primary);">
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </button>
+                </div>
+                <div class="px-6 py-3 flex items-center justify-between border-b transition-all cursor-pointer hover:bg-slate-50" style="border-color: var(--color-border);">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-md flex items-center justify-center text-[13px] font-semibold tabular-nums" style="background: var(--color-warning-50); color: var(--color-warning-hover);">2</div>
+                    <div>
+                      <div class="text-[14px] font-medium" style="color: var(--color-text);">Fatima Zerouali</div>
+                      <div class="text-[12px] flex items-center gap-2" style="color: var(--color-text-subtle);">
+                        <span>ID 0211</span><span>·</span><span>34 ans</span><span>·</span>
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-danger-50); color: var(--color-danger);">Enceinte · 28 sem</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="w-9 h-9 rounded-md flex items-center justify-center transition-all" style="background: var(--color-primary-50); color: var(--color-primary);">
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </button>
+                </div>
+                <div class="px-6 py-3 flex items-center justify-between border-b transition-all cursor-pointer hover:bg-slate-50" style="border-color: var(--color-border);">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-md flex items-center justify-center text-[13px] font-semibold tabular-nums" style="background: var(--color-warning-50); color: var(--color-warning-hover);">3</div>
+                    <div>
+                      <div class="text-[14px] font-medium" style="color: var(--color-text);">Yassine El Khattabi</div>
+                      <div class="text-[12px] flex items-center gap-2" style="color: var(--color-text-subtle);">
+                        <span>ID 0245</span><span>·</span><span>8 ans</span><span>·</span>
+                        <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-warning-50); color: var(--color-warning-800);">Pédiatrie</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="w-9 h-9 rounded-md flex items-center justify-center transition-all" style="background: var(--color-primary-50); color: var(--color-primary);">
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </button>
+                </div>
+                <div class="px-6 py-3 flex items-center justify-between cursor-pointer hover:bg-slate-50 transition-all">
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-md flex items-center justify-center text-[13px] font-semibold tabular-nums" style="background: var(--color-warning-50); color: var(--color-warning-hover);">4</div>
+                    <div>
+                      <div class="text-[14px] font-medium" style="color: var(--color-text);">Aïcha Bennani</div>
+                      <div class="text-[12px] flex items-center gap-2" style="color: var(--color-text-subtle);">
+                        <span>ID 0202</span><span>·</span><span>67 ans</span><span>·</span><span>62 kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="w-9 h-9 rounded-md flex items-center justify-center transition-all" style="background: var(--color-primary-50); color: var(--color-primary);">
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Today's stats sparkline -->
+            <div class="bg-white rounded-xl border p-6" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+              <div class="flex items-center justify-between mb-4">
+                <div class="text-[15px] font-semibold" style="color: var(--color-text);">Activité 7 jours</div>
+                <i data-lucide="more-horizontal" class="w-4 h-4" style="color: var(--color-text-faint);"></i>
+              </div>
+              <div class="flex items-end gap-2 h-32 mb-4">
+                <div class="flex-1 rounded-t" style="background: var(--color-primary-100); height: 40%;"></div>
+                <div class="flex-1 rounded-t" style="background: var(--color-primary-100); height: 60%;"></div>
+                <div class="flex-1 rounded-t" style="background: var(--color-primary-100); height: 50%;"></div>
+                <div class="flex-1 rounded-t" style="background: var(--color-primary-100); height: 75%;"></div>
+                <div class="flex-1 rounded-t" style="background: var(--color-primary-100); height: 55%;"></div>
+                <div class="flex-1 rounded-t" style="background: var(--color-primary-100); height: 70%;"></div>
+                <div class="flex-1 rounded-t relative" style="background: var(--color-primary); height: 90%;">
+                  <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[11px] font-semibold px-1.5 py-0.5 rounded text-white" style="background: var(--color-primary);">14</div>
+                </div>
+              </div>
+              <div class="grid grid-cols-7 text-[10px] text-center" style="color: var(--color-text-faint);">
+                <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span class="font-semibold" style="color: var(--color-primary);">D</span>
+              </div>
+              <div class="mt-5 pt-5 border-t flex items-center justify-between" style="border-color: var(--color-border);">
+                <div>
+                  <div class="text-[11px]" style="color: var(--color-text-subtle);">Moy. quotidienne</div>
+                  <div class="text-[18px] font-semibold tabular-nums" style="color: var(--color-text);">11.4</div>
+                </div>
+                <div class="text-right">
+                  <div class="text-[11px]" style="color: var(--color-text-subtle);">Total semaine</div>
+                  <div class="text-[18px] font-semibold tabular-nums" style="color: var(--color-text);">80</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════ SCREEN: PATIENT DOSSIERS ═══════════════ -->
+        <section data-screen-content="dossiers" class="space-y-6 hidden">
+          <!-- Header -->
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-[12px] font-medium mb-1" style="color: var(--color-text-subtle);">Patients</div>
+              <h1 class="text-[28px] font-semibold tracking-tight" style="color: var(--color-text);">Dossiers patients</h1>
+            </div>
+            <button class="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white transition-all shadow-soft" style="background: var(--color-primary);">
+              <i data-lucide="user-plus" class="w-4 h-4"></i>
+              Nouveau patient
+            </button>
+          </div>
+
+          <!-- Patient summary card (when one is selected) -->
+          <div class="bg-white rounded-xl border p-6" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+            <div class="flex items-start gap-5">
+              <div class="w-16 h-16 rounded-full flex items-center justify-center text-white text-[20px] font-semibold shrink-0" style="background: var(--color-primary);">YK</div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-3 flex-wrap mb-1">
+                  <h2 class="text-[20px] font-semibold tracking-tight" style="color: var(--color-text);">Yassine El Khattabi</h2>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background: var(--color-warning-50); color: var(--color-warning-800);">Pédiatrie</span>
+                  <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background: var(--color-danger-50); color: var(--color-danger);">Allergie pénicilline</span>
+                </div>
+                <div class="text-[13px] flex flex-wrap items-center gap-x-4 gap-y-1" style="color: var(--color-text-muted);">
+                  <span class="flex items-center gap-1.5"><i data-lucide="calendar" class="w-3.5 h-3.5"></i>8 ans · né le 12/03/2018</span>
+                  <span class="flex items-center gap-1.5"><i data-lucide="phone" class="w-3.5 h-3.5"></i>+212 6 12 34 56 78</span>
+                  <span class="flex items-center gap-1.5"><i data-lucide="weight" class="w-3.5 h-3.5"></i>26 kg</span>
+                  <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3.5 h-3.5"></i>Casablanca</span>
+                </div>
+              </div>
+              <div class="flex gap-2 shrink-0">
+                <button class="h-10 px-4 rounded-lg text-[13px] font-medium border transition-all hover:bg-slate-50 flex items-center gap-2" style="border-color: var(--color-border); color: var(--color-text-muted);">
+                  <i data-lucide="phone" class="w-4 h-4"></i> Appeler
+                </button>
+                <button class="h-10 px-4 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white transition-all" style="background: var(--color-primary);">
+                  <i data-lucide="file-plus" class="w-4 h-4"></i> Nouvelle ordonnance
+                </button>
+              </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="mt-6 flex items-center gap-6 border-b -mx-6 px-6" style="border-color: var(--color-border);">
+              <button class="tab-active py-3 text-[14px] font-medium">Aperçu</button>
+              <button class="py-3 text-[14px] font-medium" style="color: var(--color-text-subtle);">Antécédents</button>
+              <button class="py-3 text-[14px] font-medium" style="color: var(--color-text-subtle);">Ordonnances <span class="ml-1 text-[11px] px-1.5 py-0.5 rounded" style="background: var(--color-surface-alt);">12</span></button>
+              <button class="py-3 text-[14px] font-medium" style="color: var(--color-text-subtle);">Résultats labo <span class="ml-1 text-[11px] px-1.5 py-0.5 rounded" style="background: var(--color-surface-alt);">8</span></button>
+              <button class="py-3 text-[14px] font-medium" style="color: var(--color-text-subtle);">Imagerie <span class="ml-1 text-[11px] px-1.5 py-0.5 rounded" style="background: var(--color-surface-alt);">3</span></button>
+            </div>
+          </div>
+
+          <!-- Two-column content: history + lab results -->
+          <div class="grid grid-cols-3 gap-4">
+            <!-- Timeline -->
+            <div class="col-span-2 bg-white rounded-xl border" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+              <div class="px-6 py-4 border-b flex items-center justify-between" style="border-color: var(--color-border);">
+                <div class="text-[15px] font-semibold" style="color: var(--color-text);">Historique des consultations</div>
+                <button class="text-[12px] font-medium flex items-center gap-1" style="color: var(--color-primary);">Voir tout <i data-lucide="arrow-right" class="w-3 h-3"></i></button>
+              </div>
+              <div class="p-6 space-y-5">
+                <!-- Timeline entry -->
+                <div class="flex gap-4">
+                  <div class="flex flex-col items-center shrink-0">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--color-primary-50); color: var(--color-primary);">
+                      <i data-lucide="stethoscope" class="w-[18px] h-[18px]"></i>
+                    </div>
+                    <div class="flex-1 w-px my-2" style="background: var(--color-border);"></div>
+                  </div>
+                  <div class="flex-1 pb-2">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                      <div class="text-[14px] font-semibold" style="color: var(--color-text);">Consultation — angine virale</div>
+                      <span class="text-[12px]" style="color: var(--color-text-subtle);">14 mai 2026</span>
+                    </div>
+                    <p class="text-[13px] mb-2" style="color: var(--color-text-muted);">Pharyngite érythémateuse. Prescription d'antalgiques + paracétamol pédiatrique adapté au poids (26 kg).</p>
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background: var(--color-surface-alt); color: var(--color-text-muted);">Paracétamol 250mg</span>
+                      <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background: var(--color-surface-alt); color: var(--color-text-muted);">Ibuprofène sirop</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="flex flex-col items-center shrink-0">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--color-secondary-50); color: #1F9B73;">
+                      <i data-lucide="flask-conical" class="w-[18px] h-[18px]"></i>
+                    </div>
+                    <div class="flex-1 w-px my-2" style="background: var(--color-border);"></div>
+                  </div>
+                  <div class="flex-1 pb-2">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                      <div class="text-[14px] font-semibold" style="color: var(--color-text);">Analyses biologiques — NFS</div>
+                      <span class="text-[12px]" style="color: var(--color-text-subtle);">02 mai 2026</span>
+                    </div>
+                    <p class="text-[13px]" style="color: var(--color-text-muted);">Bilan sanguin complet — résultats normaux, hémoglobine 12.8 g/dL.</p>
+                  </div>
+                </div>
+                <div class="flex gap-4">
+                  <div class="flex flex-col items-center shrink-0">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background: var(--color-primary-50); color: var(--color-primary);">
+                      <i data-lucide="syringe" class="w-[18px] h-[18px]"></i>
+                    </div>
+                  </div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between gap-2 mb-1">
+                      <div class="text-[14px] font-semibold" style="color: var(--color-text);">Vaccination — rappel DTP</div>
+                      <span class="text-[12px]" style="color: var(--color-text-subtle);">18 avril 2026</span>
+                    </div>
+                    <p class="text-[13px]" style="color: var(--color-text-muted);">Rappel diphtérie-tétanos-poliomyélite. Aucune réaction.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Lab results card -->
+            <div class="bg-white rounded-xl border" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+              <div class="px-6 py-4 border-b" style="border-color: var(--color-border);">
+                <div class="text-[15px] font-semibold" style="color: var(--color-text);">Derniers résultats</div>
+                <div class="text-[12px]" style="color: var(--color-text-subtle);">02 mai 2026</div>
+              </div>
+              <div class="p-6 space-y-4">
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-[13px] font-medium" style="color: var(--color-text);">Hémoglobine</span>
+                    <span class="text-[13px] font-semibold tabular-nums" style="color: var(--color-text);">12.8 <span class="text-[11px] font-normal" style="color: var(--color-text-subtle);">g/dL</span></span>
+                  </div>
+                  <div class="h-1.5 rounded-full overflow-hidden" style="background: var(--color-surface-alt);">
+                    <div class="h-full rounded-full" style="background: var(--color-secondary); width: 70%;"></div>
+                  </div>
+                  <div class="text-[11px] mt-1" style="color: var(--color-text-subtle);">Norme : 11.5 – 15.5 g/dL</div>
+                </div>
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-[13px] font-medium" style="color: var(--color-text);">Leucocytes</span>
+                    <span class="text-[13px] font-semibold tabular-nums" style="color: var(--color-text);">7.4 <span class="text-[11px] font-normal" style="color: var(--color-text-subtle);">×10⁹/L</span></span>
+                  </div>
+                  <div class="h-1.5 rounded-full overflow-hidden" style="background: var(--color-surface-alt);">
+                    <div class="h-full rounded-full" style="background: var(--color-secondary); width: 60%;"></div>
+                  </div>
+                  <div class="text-[11px] mt-1" style="color: var(--color-text-subtle);">Norme : 4.5 – 13.0 ×10⁹/L</div>
+                </div>
+                <div>
+                  <div class="flex items-center justify-between mb-1">
+                    <span class="text-[13px] font-medium" style="color: var(--color-text);">CRP</span>
+                    <span class="text-[13px] font-semibold tabular-nums" style="color: var(--color-warning-hover);">14.2 <span class="text-[11px] font-normal" style="color: var(--color-text-subtle);">mg/L</span></span>
+                  </div>
+                  <div class="h-1.5 rounded-full overflow-hidden" style="background: var(--color-surface-alt);">
+                    <div class="h-full rounded-full" style="background: var(--color-warning); width: 85%;"></div>
+                  </div>
+                  <div class="text-[11px] mt-1 flex items-center gap-1" style="color: var(--color-warning-hover);"><i data-lucide="alert-triangle" class="w-3 h-3"></i> Au-dessus de la norme (&lt; 5)</div>
+                </div>
+                <button class="w-full mt-2 h-9 rounded-lg text-[13px] font-medium border transition-all hover:bg-slate-50" style="border-color: var(--color-border); color: var(--color-text-muted);">
+                  Voir le rapport complet
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════ SCREEN: SMART PRESCRIPTION ═══════════════ -->
+        <section data-screen-content="prescription" class="space-y-5 hidden">
+          <!-- Header -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <button class="w-10 h-10 rounded-lg border flex items-center justify-center transition-all hover:bg-slate-50" style="border-color: var(--color-border); color: var(--color-text-muted);">
+                <i data-lucide="arrow-left" class="w-[18px] h-[18px]"></i>
+              </button>
+              <div>
+                <div class="text-[12px] font-medium" style="color: var(--color-text-subtle);">Nouvelle consultation</div>
+                <h1 class="text-[22px] font-semibold tracking-tight" style="color: var(--color-text);">Ordonnance — Yassine El Khattabi · <span style="color: var(--color-text-subtle);">8 ans</span></h1>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button class="h-10 px-4 rounded-lg text-[13px] font-medium border transition-all hover:bg-slate-50 flex items-center gap-2" style="border-color: var(--color-border); color: var(--color-text-muted);">
+                <i data-lucide="printer" class="w-4 h-4"></i> Imprimer
+              </button>
+              <button class="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white transition-all shadow-soft" style="background: var(--color-primary);">
+                <i data-lucide="save" class="w-4 h-4"></i> Enregistrer
+              </button>
+            </div>
+          </div>
+
+          <!-- 🚨 RED PULSING BANNER — child contraindication -->
+          <div class="alert-pulse rounded-xl border-2 p-5 flex items-start gap-4" style="border-color: var(--color-danger);">
+            <div class="w-11 h-11 rounded-lg flex items-center justify-center text-white shrink-0" style="background: var(--color-danger);">
+              <i data-lucide="shield-alert" class="w-6 h-6"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white" style="background: var(--color-danger); letter-spacing: 0.1em;">Critique</span>
+                <span class="text-[11px] font-medium" style="color: var(--color-danger-700);">Contre-indication pédiatrique</span>
+              </div>
+              <div class="text-[16px] font-semibold mb-1" style="color: var(--color-danger-700);">
+                Aspirine 500 mg — interdite chez l'enfant de moins de 15 ans
+              </div>
+              <p class="text-[13px] leading-relaxed" style="color: var(--color-danger-700);">
+                Risque de <strong>syndrome de Reye</strong> (atteinte hépatique et neurologique grave) en cas d'infection virale. Le patient a <strong>8 ans</strong>. Privilégier le paracétamol.
+              </p>
+            </div>
+            <div class="flex flex-col gap-2 shrink-0">
+              <button class="h-10 px-5 rounded-lg text-[13px] font-semibold text-white transition-all" style="background: var(--color-danger);">
+                Retirer le médicament
+              </button>
+              <button class="h-10 px-5 rounded-lg text-[13px] font-medium border transition-all hover:bg-white" style="border-color: var(--color-danger); color: var(--color-danger-700); background: rgba(255,255,255,0.5);">
+                Passer outre (avec justification)
+              </button>
+            </div>
+          </div>
+
+          <!-- 🟡 Amber drug interaction warning -->
+          <div class="rounded-xl border p-5 flex items-start gap-4" style="background: var(--color-warning-50); border-color: var(--color-warning);">
+            <div class="w-11 h-11 rounded-lg flex items-center justify-center shrink-0" style="background: var(--color-warning); color: white;">
+              <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white" style="background: var(--color-warning-hover); letter-spacing: 0.1em;">Attention</span>
+                <span class="text-[11px] font-medium" style="color: var(--color-warning-800);">Interaction médicamenteuse</span>
+              </div>
+              <div class="text-[15px] font-semibold mb-1" style="color: var(--color-warning-800);">
+                Ibuprofène ⇄ Aspirine — interaction modérée
+              </div>
+              <p class="text-[13px] leading-relaxed" style="color: var(--color-warning-800);">
+                Association déconseillée : majoration du risque de saignement digestif. Espacer les prises ou substituer par paracétamol.
+              </p>
+            </div>
+            <button class="h-9 px-4 rounded-lg text-[12px] font-medium transition-all shrink-0" style="background: white; color: var(--color-warning-800); border: 1px solid var(--color-warning);">
+              Détails
+            </button>
+          </div>
+
+          <!-- Patient context card -->
+          <div class="bg-white rounded-xl border p-6" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+            <div class="flex items-center gap-2 mb-5">
+              <div class="w-1 h-5 rounded-full" style="background: var(--color-primary);"></div>
+              <h3 class="text-[14px] font-semibold" style="color: var(--color-text);">Contexte patient</h3>
+            </div>
+            <div class="grid grid-cols-4 gap-4">
+              <div>
+                <label class="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Nom</label>
+                <input type="text" value="Yassine El Khattabi" class="w-full h-10 px-3 rounded-md border text-[14px]" style="border-color: var(--color-border);" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Âge</label>
+                <input type="text" value="8" class="w-full h-10 px-3 rounded-md border text-[14px]" style="border-color: var(--color-border);" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Poids</label>
+                <input type="text" value="26 kg" class="w-full h-10 px-3 rounded-md border text-[14px]" style="border-color: var(--color-border);" />
+              </div>
+              <div>
+                <label class="block text-[11px] font-medium uppercase tracking-wider mb-1.5" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Type</label>
+                <select class="w-full h-10 px-3 rounded-md border text-[14px] bg-white" style="border-color: var(--color-border);">
+                  <option>Pédiatrie</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-4 p-4 rounded-lg flex items-center gap-3" style="background: var(--color-danger-50); border: 1px solid var(--color-danger-100);">
+              <i data-lucide="alert-circle" class="w-4 h-4" style="color: var(--color-danger);"></i>
+              <div class="text-[13px]" style="color: var(--color-danger-700);">
+                <strong>Allergie connue :</strong> Pénicilline (réaction cutanée — 2023)
+              </div>
+            </div>
+          </div>
+
+          <!-- Medication panel -->
+          <div class="bg-white rounded-xl border p-6" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+            <div class="flex items-center justify-between mb-5">
+              <div class="flex items-center gap-2">
+                <div class="w-1 h-5 rounded-full" style="background: var(--color-primary);"></div>
+                <h3 class="text-[14px] font-semibold" style="color: var(--color-text);">Médicaments</h3>
+                <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background: var(--color-primary-50); color: var(--color-primary);">2</span>
+              </div>
+            </div>
+
+            <!-- Search -->
+            <div class="relative mb-4">
+              <i data-lucide="search" class="w-[18px] h-[18px] absolute left-4 top-1/2 -translate-y-1/2" style="color: var(--color-text-faint);"></i>
+              <input type="text" placeholder="Rechercher un médicament (DCI, nom commercial, ATC…)" class="w-full pl-12 pr-4 h-12 rounded-lg border text-[14px]" style="border-color: var(--color-border); background: var(--color-surface-alt);" />
+            </div>
+
+            <!-- Item 1 — flagged red -->
+            <div class="rounded-lg border-2 p-4 mb-3" style="border-color: var(--color-danger); background: var(--color-danger-50);">
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span class="text-[12px] font-medium tabular-nums" style="color: var(--color-text-faint);">01</span>
+                  <span class="text-[15px] font-semibold" style="color: var(--color-text);">Aspirine</span>
+                  <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: white; color: var(--color-text-muted); border: 1px solid var(--color-border);">Comprimé · 500mg · ATC&nbsp;N02BA01</span>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-white flex items-center gap-1" style="background: var(--color-danger); letter-spacing: 0.08em;">
+                    <i data-lucide="x-circle" class="w-3 h-3"></i> Contre-indiqué
+                  </span>
+                </div>
+                <button class="p-1.5 rounded-md transition-all" style="color: var(--color-danger);">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+              <div class="grid grid-cols-4 gap-3">
+                <div class="col-span-2">
+                  <label class="block text-[10px] font-medium uppercase tracking-wider mb-1" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Posologie</label>
+                  <input type="text" value="1-0-1" class="w-full h-10 px-3 rounded-md border text-[13px] bg-white" style="border-color: var(--color-border);" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-medium uppercase tracking-wider mb-1" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Durée</label>
+                  <input type="text" value="5 jours" class="w-full h-10 px-3 rounded-md border text-[13px] bg-white" style="border-color: var(--color-border);" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-medium uppercase tracking-wider mb-1" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Prise</label>
+                  <select class="w-full h-10 px-3 rounded-md border text-[13px] bg-white" style="border-color: var(--color-border);"><option>Après repas</option></select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2 — flagged amber -->
+            <div class="rounded-lg border p-4 mb-3" style="border-color: var(--color-warning); background: var(--color-warning-50);">
+              <div class="flex items-start justify-between gap-3 mb-3">
+                <div class="flex items-center gap-3 flex-wrap">
+                  <span class="text-[12px] font-medium tabular-nums" style="color: var(--color-text-faint);">02</span>
+                  <span class="text-[15px] font-semibold" style="color: var(--color-text);">Ibuprofène</span>
+                  <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: white; color: var(--color-text-muted); border: 1px solid var(--color-border);">Sirop · 100mg/5mL · ATC&nbsp;M01AE01</span>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider text-white flex items-center gap-1" style="background: var(--color-warning-hover); letter-spacing: 0.08em;">
+                    <i data-lucide="alert-triangle" class="w-3 h-3"></i> Interaction
+                  </span>
+                </div>
+                <button class="p-1.5 rounded-md transition-all" style="color: var(--color-text-faint);">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </button>
+              </div>
+              <div class="grid grid-cols-4 gap-3">
+                <div class="col-span-2">
+                  <label class="block text-[10px] font-medium uppercase tracking-wider mb-1" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Posologie</label>
+                  <input type="text" value="5 mL × 3" class="w-full h-10 px-3 rounded-md border text-[13px] bg-white" style="border-color: var(--color-border);" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-medium uppercase tracking-wider mb-1" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Durée</label>
+                  <input type="text" value="3 jours" class="w-full h-10 px-3 rounded-md border text-[13px] bg-white" style="border-color: var(--color-border);" />
+                </div>
+                <div>
+                  <label class="block text-[10px] font-medium uppercase tracking-wider mb-1" style="color: var(--color-text-subtle); letter-spacing: 0.06em;">Prise</label>
+                  <select class="w-full h-10 px-3 rounded-md border text-[13px] bg-white" style="border-color: var(--color-border);"><option>Après repas</option></select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AUDIT TRAIL -->
+          <div class="bg-white rounded-xl border p-6" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+            <div class="flex items-center justify-between mb-5">
+              <div class="flex items-center gap-2">
+                <div class="w-1 h-5 rounded-full" style="background: var(--color-primary);"></div>
+                <h3 class="text-[14px] font-semibold" style="color: var(--color-text);">Journal d'audit</h3>
+                <span class="px-2 py-0.5 rounded text-[11px] font-medium" style="background: var(--color-surface-alt); color: var(--color-text-muted);">5 entrées</span>
+              </div>
+              <button class="text-[12px] font-medium flex items-center gap-1" style="color: var(--color-primary);">Exporter <i data-lucide="download" class="w-3 h-3"></i></button>
+            </div>
+            <div class="space-y-3">
+              <div class="flex items-start gap-3 p-3 rounded-lg" style="background: var(--color-danger-50);">
+                <div class="w-7 h-7 rounded-md flex items-center justify-center shrink-0 text-white" style="background: var(--color-danger);">
+                  <i data-lucide="shield-x" class="w-4 h-4"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2 mb-0.5">
+                    <span class="text-[13px] font-semibold" style="color: var(--color-danger-700);">Alerte critique déclenchée</span>
+                    <span class="text-[11px] font-medium tabular-nums" style="color: var(--color-text-subtle);">14:32:08</span>
+                  </div>
+                  <p class="text-[12px]" style="color: var(--color-danger-700);">Aspirine prescrite à un patient de 8 ans — contre-indication pédiatrique.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 rounded-lg" style="background: var(--color-warning-50);">
+                <div class="w-7 h-7 rounded-md flex items-center justify-center shrink-0 text-white" style="background: var(--color-warning-hover);">
+                  <i data-lucide="alert-triangle" class="w-4 h-4"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2 mb-0.5">
+                    <span class="text-[13px] font-semibold" style="color: var(--color-warning-800);">Interaction détectée</span>
+                    <span class="text-[11px] font-medium tabular-nums" style="color: var(--color-text-subtle);">14:33:41</span>
+                  </div>
+                  <p class="text-[12px]" style="color: var(--color-warning-800);">Aspirine + Ibuprofène — risque hémorragique potentialisé.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 rounded-lg" style="background: var(--color-surface-alt);">
+                <div class="w-7 h-7 rounded-md flex items-center justify-center shrink-0" style="background: white; color: var(--color-primary);">
+                  <i data-lucide="plus" class="w-4 h-4"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2 mb-0.5">
+                    <span class="text-[13px] font-semibold" style="color: var(--color-text);">Médicament ajouté</span>
+                    <span class="text-[11px] font-medium tabular-nums" style="color: var(--color-text-subtle);">14:31:55</span>
+                  </div>
+                  <p class="text-[12px]" style="color: var(--color-text-muted);">Ibuprofène 100mg/5mL — par Dr. Selma Amrani.</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3 p-3 rounded-lg" style="background: var(--color-surface-alt);">
+                <div class="w-7 h-7 rounded-md flex items-center justify-center shrink-0" style="background: white; color: var(--color-primary);">
+                  <i data-lucide="user-check" class="w-4 h-4"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center justify-between gap-2 mb-0.5">
+                    <span class="text-[13px] font-semibold" style="color: var(--color-text);">Patient sélectionné</span>
+                    <span class="text-[11px] font-medium tabular-nums" style="color: var(--color-text-subtle);">14:30:12</span>
+                  </div>
+                  <p class="text-[12px]" style="color: var(--color-text-muted);">Yassine El Khattabi (ID 0245) — depuis la salle d'attente.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════════ SCREEN: PHARMA DIRECTORY ═══════════════ -->
+        <section data-screen-content="pharma" class="space-y-6 hidden">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-[12px] font-medium mb-1" style="color: var(--color-text-subtle);">Base de données</div>
+              <h1 class="text-[28px] font-semibold tracking-tight" style="color: var(--color-text);">Pharma directory</h1>
+              <p class="text-[14px] mt-1" style="color: var(--color-text-muted);">12 487 spécialités · codes ATC · restrictions cliniques</p>
+            </div>
+            <button class="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white transition-all" style="background: var(--color-primary);">
+              <i data-lucide="plus" class="w-4 h-4"></i>
+              Ajouter
+            </button>
+          </div>
+
+          <!-- Filters -->
+          <div class="bg-white rounded-xl border p-4 flex items-center gap-3" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+            <div class="relative flex-1">
+              <i data-lucide="search" class="w-[18px] h-[18px] absolute left-4 top-1/2 -translate-y-1/2" style="color: var(--color-text-faint);"></i>
+              <input type="text" placeholder="Rechercher par DCI, nom commercial, ATC, indication…" class="w-full pl-12 pr-4 h-10 rounded-md border text-[14px]" style="border-color: var(--color-border); background: var(--color-surface-alt);" />
+            </div>
+            <select class="h-10 px-3 rounded-md border text-[13px] bg-white" style="border-color: var(--color-border);">
+              <option>Toutes catégories</option>
+            </select>
+            <select class="h-10 px-3 rounded-md border text-[13px] bg-white" style="border-color: var(--color-border);">
+              <option>Toutes restrictions</option>
+            </select>
+            <button class="h-10 px-3 rounded-md border flex items-center gap-2 text-[13px]" style="border-color: var(--color-border); color: var(--color-text-muted);">
+              <i data-lucide="filter" class="w-4 h-4"></i> Filtres
+            </button>
+          </div>
+
+          <!-- Table -->
+          <div class="bg-white rounded-xl border overflow-hidden" style="border-color: var(--color-border); box-shadow: var(--shadow-soft);">
+            <table class="striped w-full text-[13px]">
+              <thead style="background: var(--color-surface-alt);">
+                <tr style="color: var(--color-text-muted);">
+                  <th class="text-left font-semibold px-6 py-3 text-[12px] uppercase tracking-wider" style="letter-spacing: 0.06em;">Médicament</th>
+                  <th class="text-left font-semibold px-6 py-3 text-[12px] uppercase tracking-wider" style="letter-spacing: 0.06em;">DCI</th>
+                  <th class="text-left font-semibold px-6 py-3 text-[12px] uppercase tracking-wider" style="letter-spacing: 0.06em;">ATC</th>
+                  <th class="text-left font-semibold px-6 py-3 text-[12px] uppercase tracking-wider" style="letter-spacing: 0.06em;">Classe</th>
+                  <th class="text-left font-semibold px-6 py-3 text-[12px] uppercase tracking-wider" style="letter-spacing: 0.06em;">Restrictions</th>
+                  <th class="px-6 py-3"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="px-6 py-3">
+                    <div class="font-semibold" style="color: var(--color-text);">Aspirine 500</div>
+                    <div class="text-[11px]" style="color: var(--color-text-subtle);">Comprimé · 30 unités</div>
+                  </td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Acide acétylsalicylique</td>
+                  <td class="px-6 py-3 font-mono tabular-nums text-[12px]" style="color: var(--color-text-muted);">N02BA01</td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Antalgique</td>
+                  <td class="px-6 py-3">
+                    <div class="flex gap-1 flex-wrap">
+                      <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-danger-50); color: var(--color-danger);">Enfant &lt; 15 ans</span>
+                      <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-warning-50); color: var(--color-warning-800);">3ᵉ trimestre</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-3"><button class="text-[12px] font-medium flex items-center gap-1" style="color: var(--color-primary);">Détails <i data-lucide="chevron-right" class="w-3 h-3"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-3">
+                    <div class="font-semibold" style="color: var(--color-text);">Doliprane 1000</div>
+                    <div class="text-[11px]" style="color: var(--color-text-subtle);">Comprimé · 8 unités</div>
+                  </td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Paracétamol</td>
+                  <td class="px-6 py-3 font-mono tabular-nums text-[12px]" style="color: var(--color-text-muted);">N02BE01</td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Antalgique</td>
+                  <td class="px-6 py-3">
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-secondary-50); color: #1F7B5C;">Aucune</span>
+                  </td>
+                  <td class="px-6 py-3"><button class="text-[12px] font-medium flex items-center gap-1" style="color: var(--color-primary);">Détails <i data-lucide="chevron-right" class="w-3 h-3"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-3">
+                    <div class="font-semibold" style="color: var(--color-text);">Augmentin 1g</div>
+                    <div class="text-[11px]" style="color: var(--color-text-subtle);">Sachet · 12 unités</div>
+                  </td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Amoxicilline + Ac. clavulanique</td>
+                  <td class="px-6 py-3 font-mono tabular-nums text-[12px]" style="color: var(--color-text-muted);">J01CR02</td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Antibiotique</td>
+                  <td class="px-6 py-3">
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-danger-50); color: var(--color-danger);">Allergie pénicilline</span>
+                  </td>
+                  <td class="px-6 py-3"><button class="text-[12px] font-medium flex items-center gap-1" style="color: var(--color-primary);">Détails <i data-lucide="chevron-right" class="w-3 h-3"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-3">
+                    <div class="font-semibold" style="color: var(--color-text);">Tramadol 50</div>
+                    <div class="text-[11px]" style="color: var(--color-text-subtle);">Gélule · 20 unités</div>
+                  </td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Tramadol chlorhydrate</td>
+                  <td class="px-6 py-3 font-mono tabular-nums text-[12px]" style="color: var(--color-text-muted);">N02AX02</td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Antalgique opioïde</td>
+                  <td class="px-6 py-3">
+                    <div class="flex gap-1 flex-wrap">
+                      <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-warning-50); color: var(--color-warning-800);">Conduite</span>
+                      <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-warning-50); color: var(--color-warning-800);">Grossesse</span>
+                    </div>
+                  </td>
+                  <td class="px-6 py-3"><button class="text-[12px] font-medium flex items-center gap-1" style="color: var(--color-primary);">Détails <i data-lucide="chevron-right" class="w-3 h-3"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-3">
+                    <div class="font-semibold" style="color: var(--color-text);">Ventoline</div>
+                    <div class="text-[11px]" style="color: var(--color-text-subtle);">Aérosol · 200 doses</div>
+                  </td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Salbutamol</td>
+                  <td class="px-6 py-3 font-mono tabular-nums text-[12px]" style="color: var(--color-text-muted);">R03AC02</td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Bronchodilatateur</td>
+                  <td class="px-6 py-3">
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-secondary-50); color: #1F7B5C;">Aucune</span>
+                  </td>
+                  <td class="px-6 py-3"><button class="text-[12px] font-medium flex items-center gap-1" style="color: var(--color-primary);">Détails <i data-lucide="chevron-right" class="w-3 h-3"></i></button></td>
+                </tr>
+                <tr>
+                  <td class="px-6 py-3">
+                    <div class="font-semibold" style="color: var(--color-text);">Lévothyrox 50µg</div>
+                    <div class="text-[11px]" style="color: var(--color-text-subtle);">Comprimé · 30 unités</div>
+                  </td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Lévothyroxine sodique</td>
+                  <td class="px-6 py-3 font-mono tabular-nums text-[12px]" style="color: var(--color-text-muted);">H03AA01</td>
+                  <td class="px-6 py-3" style="color: var(--color-text-muted);">Hormone thyroïdienne</td>
+                  <td class="px-6 py-3">
+                    <span class="px-1.5 py-0.5 rounded text-[10px] font-medium" style="background: var(--color-warning-50); color: var(--color-warning-800);">Surveillance TSH</span>
+                  </td>
+                  <td class="px-6 py-3"><button class="text-[12px] font-medium flex items-center gap-1" style="color: var(--color-primary);">Détails <i data-lucide="chevron-right" class="w-3 h-3"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="px-6 py-3 flex items-center justify-between border-t" style="border-color: var(--color-border); background: var(--color-surface-alt);">
+              <span class="text-[12px]" style="color: var(--color-text-subtle);">1–6 sur 12 487 résultats</span>
+              <div class="flex items-center gap-1">
+                <button class="w-8 h-8 rounded-md border flex items-center justify-center" style="border-color: var(--color-border); color: var(--color-text-subtle);" disabled><i data-lucide="chevron-left" class="w-4 h-4"></i></button>
+                <button class="w-8 h-8 rounded-md text-[12px] font-medium text-white" style="background: var(--color-primary);">1</button>
+                <button class="w-8 h-8 rounded-md text-[12px] font-medium" style="color: var(--color-text-muted);">2</button>
+                <button class="w-8 h-8 rounded-md text-[12px] font-medium" style="color: var(--color-text-muted);">3</button>
+                <button class="w-8 h-8 rounded-md border flex items-center justify-center" style="border-color: var(--color-border); color: var(--color-text-subtle);"><i data-lucide="chevron-right" class="w-4 h-4"></i></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+  lucide.createIcons();
+
+  // Nav switching
+  const navBtns = document.querySelectorAll('.nav-btn[data-screen]');
+  const screens = document.querySelectorAll('[data-screen-content]');
+  function activate(screen) {
+    navBtns.forEach(b => {
+      const on = b.dataset.screen === screen;
+      b.classList.toggle('nav-item-active', on);
+      b.style.background = on ? 'var(--color-primary-50)' : '';
+      b.style.color = on ? 'var(--color-primary)' : 'var(--color-text-muted)';
+    });
+    screens.forEach(s => s.classList.toggle('hidden', s.dataset.screenContent !== screen));
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+  navBtns.forEach(b => b.addEventListener('click', () => activate(b.dataset.screen)));
+  activate('dashboard');
+
+  // Sidebar collapse
+  const sidebar = document.getElementById('sidebar');
+  const collapseBtn = document.getElementById('collapse-btn');
+  let collapsed = false;
+  collapseBtn.addEventListener('click', () => {
+    collapsed = !collapsed;
+    sidebar.style.width = collapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)';
+    document.querySelectorAll('.sidebar-label').forEach(el => {
+      el.style.display = collapsed ? 'none' : '';
+    });
+  });
+</script>
+
+</body>
+</html>

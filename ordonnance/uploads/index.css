@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;700&display=swap');
+@import './variables.css';
+
+/* ─── Additional font fallback for Arabic ─── */
+.font-arabic {
+  font-family: var(--font-arabic);
+}
+
+/* ─── Custom scrollbar — token-aligned ─── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-border-strong); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-faint); }
+
+/* ─── Focus styles ─── */
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--color-border-focus) !important;
+  box-shadow: var(--shadow-focus-primary);
+}
+
+/* ─── Sidebar nav active indicator ─── */
+.nav-item-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 3px;
+  background: var(--color-primary);
+  border-radius: 0 3px 3px 0;
+}
+
+/* ─── Striped table ─── */
+.striped tbody tr:nth-child(even) { background: var(--color-surface-alt); }
+.striped tbody tr:hover { background: var(--color-row-hover); }
+
+/* ─── Tab active underline ─── */
+.tab-active { color: var(--color-primary); position: relative; }
+.tab-active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px 2px 0 0;
+}
+
+/* ─── Page enter animation ─── */
+.animate-in {
+  animation: animate-in 0.25s ease-out;
+}
+@keyframes animate-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Critical border pulse — drug interactions ─── */
+@keyframes critical-border-pulse {
+  0%, 100% { border-color: var(--color-danger); box-shadow: 0 0 0 0 rgba(229, 62, 62, 0); }
+  50%       { border-color: var(--color-danger-hover); box-shadow: 0 0 20px 2px rgba(229, 62, 62, 0.2); }
+}
+.animate-critical-border {
+  animation: critical-border-pulse 1.5s infinite ease-in-out;
+  border-width: 2px;
+}
+
+/* ─── Child contraindication blink banner ─── */
+@keyframes danger-blink {
+  0%, 49%, 100% { background-color: var(--color-danger-50); opacity: 1; }
+  50%, 99%      { background-color: var(--color-danger); color: white; opacity: 0.95; }
+}
+.animate-danger-blink { animation: danger-blink 1s infinite; }
+
+/* ─── Incompatibility pulse ─── */
+@keyframes incomp-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229, 62, 62, 0.7); }
+  50%       { box-shadow: 0 0 0 10px rgba(229, 62, 62, 0); }
+}
+.animate-incomp-pulse { animation: incomp-pulse 2s infinite; }
+
+/* ─── Print contract ─── */
+@media print {
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body * { visibility: hidden !important; }
+  .document-print-container,
+  .document-print-container * { visibility: visible !important; }
+  .document-print-container {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+  .high-res-print {
+    transform: scale(0.32) !important;
+    transform-origin: top left !important;
+    width: 2480px !important;
+    height: 3508px !important;
+  }
+  .break-after-page { page-break-after: always !important; }
+  header, footer, aside, nav, button, .no-print, [role="button"] { display: none !important; }
+  @page { size: A4; margin: 0; }
+}

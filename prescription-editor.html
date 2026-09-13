@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<title>DocEase — Éditeur d'ordonnance</title>
+<link rel="stylesheet" href="variables.css" />
+<link rel="stylesheet" href="editor/editor.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  html,body{height:100%}
+  body{margin:0;background:var(--color-bg,#F0F4F8)}
+  a{color:var(--color-primary,#1A6B8A)}
+  a:hover{color:var(--color-primary-hover,#155874)}
+  #boot{display:flex;align-items:center;justify-content:center;height:100vh;
+        font:13px Inter,system-ui,sans-serif;color:#718096;gap:10px}
+  .spin{width:16px;height:16px;border:2px solid #CBD5E0;border-top-color:#1A6B8A;
+        border-radius:50%;animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#F0F4F8">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#F0F4F8"/>
+    <rect x="240" y="200" width="150" height="400" rx="14" fill="#ffffff" stroke="#dbe3ec" stroke-width="4"/>
+    <g fill="#c9d6e2"><rect x="272" y="240" width="86" height="52" rx="8"/><rect x="272" y="306" width="86" height="52" rx="8"/><rect x="272" y="372" width="86" height="52" rx="8"/></g>
+    <rect x="272" y="240" width="86" height="52" rx="8" fill="#1A6B8A"/>
+    <rect x="440" y="180" width="330" height="440" rx="12" fill="#ffffff" stroke="#dbe3ec" stroke-width="4"/>
+    <path d="M440 192a12 12 0 0112-12h306a12 12 0 0112 12v42H440z" fill="#1A6B8A"/>
+    <g fill="#dde5ed"><rect x="472" y="268" width="150" height="12" rx="6"/><rect x="472" y="298" width="104" height="12" rx="6"/></g>
+    <rect x="646" y="262" width="92" height="58" rx="8" fill="none" stroke="#2ECC9A" stroke-width="4" stroke-dasharray="10 8"/>
+    <g fill="#e6edf4"><rect x="472" y="360" width="266" height="12" rx="6"/><rect x="472" y="390" width="220" height="12" rx="6"/><rect x="472" y="420" width="248" height="12" rx="6"/></g>
+    <g fill="#1A6B8A"><circle cx="482" cy="540" r="11"/><circle cx="482" cy="576" r="11"/></g>
+    <g fill="#dde5ed"><rect x="506" y="533" width="180" height="12" rx="6"/><rect x="506" y="569" width="146" height="12" rx="6"/></g>
+    <g stroke="#2ECC9A" stroke-width="4"><path d="M646 250v90"/><path d="M636 262h20M636 320h20"/></g>
+    <rect x="820" y="200" width="150" height="400" rx="14" fill="#ffffff" stroke="#dbe3ec" stroke-width="4"/>
+    <g fill="#e6edf4"><rect x="848" y="236" width="94" height="30" rx="6"/><rect x="848" y="278" width="94" height="30" rx="6"/><rect x="848" y="320" width="94" height="30" rx="6"/><rect x="848" y="362" width="94" height="30" rx="6"/></g>
+  </svg>
+</template>
+
+<div id="root"><div id="boot"><span class="spin"></span> Chargement de l'éditeur…</div></div>
+
+<script type="text/babel" data-presets="react" src="editor/RxContactIcons.jsx"></script>
+<script type="text/babel" data-presets="react" src="editor/rxEditorModel.jsx"></script>
+<script type="text/babel" data-presets="react" src="editor/RxCanvas.jsx"></script>
+<script type="text/babel" data-presets="react" src="editor/RxPanels.jsx"></script>
+<script type="text/babel" data-presets="react" src="editor/RxEditorApp.jsx"></script>
+<script type="text/babel" data-presets="react">
+/* Demo host. In DocEase, render <RxPrescriptionEditor doctor={...}
+   initialConfig={settingsService.getRxLayout()} onSave={settingsService.saveRxLayout} /> */
+
+const DOCTOR = {
+  name: 'Dr. Selma Amrani',
+  speciality: 'Cardiologie — Médecine interne',
+  phone: '+212 5 22 48 71 90',
+  address: '14, rue Ibn Sina, Résidence Al Manar, Maârif, Casablanca 20330',
+  email: 'contact@cabinet-amrani.ma',
+  registrationNumber: 'MA-2019-04471',
+  logoUrl: '',
+};
+
+let saved = null;
+try { const s = localStorage.getItem('docease_rx_layout'); if (s) saved = JSON.parse(s); } catch (_) {}
+
+const boot = () => {
+  if (!window.RxPrescriptionEditor || !window.RxCanvas || !window.RxElementsPanel || !window.rxDefaultConfig) {
+    return setTimeout(boot, 50);
+  }
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <window.RxPrescriptionEditor
+      doctor={DOCTOR}
+      initialConfig={saved}
+      onSave={(cfg) => console.log('[DocEase] layout enregistré', cfg)} />
+  );
+};
+boot();
+</script>
+</body>
+</html>
