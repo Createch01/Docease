@@ -14,19 +14,20 @@ import {
   Save, User, Building2, FileText, Lock, Database, Info,
   MapPin, Phone, Mail, Upload, Trash2, ShieldCheck,
   RefreshCw, Download, Monitor, Globe, CreditCard, X,
-  Eye, EyeOff, Barcode, QrCode, Plus, Users
+  Eye, EyeOff, Barcode, QrCode, Plus, Users, LayoutGrid, Check, Printer, FileStack
 } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { settingsService } from '../services/settingsService';
 import { DoctorInfo, PrescriptionAppearance, CustomTemplateConfig } from '../types';
 import CombinedConsultationTemplate from './CombinedConsultationTemplate';
 import CustomTemplateEditor from './CustomTemplateEditor';
+import { PRESCRIPTION_TEMPLATE_META, TemplateThumbnail, PrescriptionTemplateId } from './templates/TemplateRenderer';
 import { invoke } from '@tauri-apps/api/core';
 import packageJson from '../package.json';
 import { AppUser, UserRole, Permission } from '../types';
 import { useI18n, Language } from '../i18n';
 
-type SettingsTab = 'profile' | 'cabinet' | 'prescription' | 'security' | 'users' | 'database';
+type SettingsTab = 'cabinet' | 'templates' | 'prescription' | 'impression' | 'security' | 'users' | 'database';
 
 interface SettingsPanelProps {
   activeTab?: SettingsTab;
@@ -45,7 +46,7 @@ const iconInputWrap = 'flex items-center gap-2.5 px-3 h-10 rounded-md border bg-
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp }) => {
   const { t, lang, changeLanguage } = useI18n();
-  const [activeTab, setActiveTab] = useState<SettingsTab>(activeTabProp || 'profile');
+  const [activeTab, setActiveTab] = useState<SettingsTab>(activeTabProp || 'cabinet');
 
   // Keep in sync with the outer Paramètres sub-nav in App.tsx, which owns its own
   // activeSettingsTab state and re-mounts this lazily — without this, clicking a
@@ -80,8 +81,16 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
   // Update State
   const [updateAvailable, setUpdateAvailable] = useState(false);
 
+  // Templates gallery state — the doctor picks a card, then confirms with
+  // "Utiliser ce modèle" so a stray click never silently overwrites their design.
+  const [pendingTemplate, setPendingTemplate] = useState<Exclude<PrescriptionTemplateId, 'custom'>>(
+    (appearance.selectedTemplate && appearance.selectedTemplate !== 'custom' ? appearance.selectedTemplate : 'letterhead_simple')
+  );
+
   // File Refs
   const logoInputRef = useRef<HTMLInputElement>(null);
+  const stampInputRef = useRef<HTMLInputElement>(null);
+  const signatureInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     setDbStats(dataService.getDatabaseStats());
@@ -160,6 +169,20 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
     setTimeout(() => toast.remove(), 3000);
   };
 
+  const handleApplyTemplate = () => {
+    const updated: PrescriptionAppearance = { ...appearance, selectedTemplate: pendingTemplate };
+    setAppearance(updated);
+    settingsService.saveAppearance(updated);
+
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-4 right-4 text-white px-6 py-3 rounded-xl z-50 animate-in font-semibold text-sm';
+    toast.style.background = 'var(--color-primary)';
+    toast.style.boxShadow = 'var(--shadow-premium)';
+    toast.textContent = 'Modèle appliqué à vos ordonnances !';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  };
+
   const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -171,6 +194,30 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
     } catch (error) {
       console.error('Error uploading logo:', error);
       alert('Erreur lors du chargement du logo');
+    }
+  };
+
+  const handleStampUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const base64 = await settingsService.fileToBase64(file);
+      setInfo({ ...info, stampUrl: base64 });
+    } catch (error) {
+      console.error('Error uploading stamp:', error);
+      alert('Erreur lors du chargement du cachet');
+    }
+  };
+
+  const handleSignatureUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const base64 = await settingsService.fileToBase64(file);
+      setInfo({ ...info, signatureUrl: base64 });
+    } catch (error) {
+      console.error('Error uploading signature:', error);
+      alert('Erreur lors du chargement de la signature');
     }
   };
 
@@ -260,9 +307,10 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
   );
 
   const menuItems = [
-    { id: 'profile', label: 'Profil Médecin', icon: User, color: 'text-blue-600', bg: 'bg-blue-50' },
-    { id: 'cabinet', label: 'Infos Cabinet', icon: Building2, color: 'text-emerald-600', bg: 'bg-emerald-50' },
-    { id: 'prescription', label: 'Ordonnance', icon: FileText, color: 'text-purple-600', bg: 'bg-purple-50' },
+    { id: 'cabinet', label: 'Informations cabinet', icon: Building2, color: 'text-emerald-600', bg: 'bg-emerald-50' },
+    { id: 'templates', label: 'Modèles', icon: LayoutGrid, color: 'text-blue-600', bg: 'bg-blue-50' },
+    { id: 'prescription', label: 'Mon design', icon: FileText, color: 'text-purple-600', bg: 'bg-purple-50' },
+    { id: 'impression', label: 'Impression', icon: Printer, color: 'text-orange-600', bg: 'bg-orange-50' },
     { id: 'security', label: 'Sécurité', icon: Lock, color: 'text-rose-600', bg: 'bg-rose-50' },
     { id: 'users', label: 'Utilisateurs', icon: Users, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     { id: 'database', label: 'Données', icon: Database, color: 'text-orange-600', bg: 'bg-orange-50' },
@@ -270,9 +318,10 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
 
   // Nav items rendered in the settings sub-sidebar — token-aligned, single accent color
   const navTabs: { id: SettingsTab; label: string; icon: any }[] = [
-    { id: 'profile', label: 'Mon profil', icon: User },
-    { id: 'cabinet', label: 'Cabinet', icon: Building2 },
-    { id: 'prescription', label: 'Documents', icon: FileText },
+    { id: 'cabinet', label: 'Informations cabinet', icon: Building2 },
+    { id: 'templates', label: 'Modèles', icon: LayoutGrid },
+    { id: 'prescription', label: 'Mon design', icon: FileText },
+    { id: 'impression', label: 'Impression', icon: Printer },
     { id: 'security', label: 'Sécurité', icon: Lock },
     { id: 'users', label: 'Collaborateurs', icon: Users },
     { id: 'database', label: 'Base de données', icon: Database },
@@ -346,17 +395,17 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
           <AdminLock />
         ) : (
           <>
-            {/* ═══════════ PROFILE TAB ═══════════ */}
-            {activeTab === 'profile' && (
+            {/* ═══════════ CABINET TAB (fusion Profil + Cabinet) ═══════════ */}
+            {activeTab === 'cabinet' && (
               <div className="space-y-6 max-w-4xl mx-auto animate-in">
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
-                      <User size={19} />
+                      <Building2 size={19} />
                     </div>
                     <div>
-                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Profil professionnel</h3>
-                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Vos informations personnelles affichées sur les documents.</p>
+                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Informations du cabinet</h3>
+                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Vos informations professionnelles, réutilisées automatiquement sur tous les documents.</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -461,30 +510,6 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
-
-            {/* ═══════════ CABINET TAB ═══════════ */}
-            {activeTab === 'cabinet' && (
-              <div className="space-y-6 max-w-4xl mx-auto animate-in">
-                <div className="flex items-center justify-between flex-wrap gap-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
-                      <Building2 size={19} />
-                    </div>
-                    <div>
-                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Informations du cabinet</h3>
-                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Coordonnées et identifiants légaux.</p>
-                    </div>
-                  </div>
-                  <button
-                    onClick={handleSaveInfo}
-                    className="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white transition-all shadow-soft hover:shadow-card active:scale-[0.98]"
-                    style={{ background: 'var(--color-primary)' }}
-                  >
-                    <Save size={15} /> Enregistrer
-                  </button>
-                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   {/* Contact Info */}
@@ -560,6 +585,20 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                     <div className="space-y-3.5">
                       <div>
                         <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-primary)', letterSpacing: '0.06em' }}>Numéro d'ordre</label>
+                          <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--color-primary-100)', color: 'var(--color-primary)' }}>Ordre National des Médecins</span>
+                        </div>
+                        <input
+                          type="text" value={info.ordreNumber || ''}
+                          onChange={e => setInfo({ ...info, ordreNumber: e.target.value })}
+                          className="w-full h-10 px-3 rounded-md border text-[13px] outline-none bg-white"
+                          style={{ borderColor: 'var(--color-primary-100)', color: 'var(--color-text)', fontFamily: 'var(--font-mono)' }}
+                          placeholder="N° d'inscription à l'Ordre"
+                        />
+                      </div>
+
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
                           <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-primary)', letterSpacing: '0.06em' }}>INPE</label>
                           <span className="text-[10px] font-medium px-1.5 py-0.5 rounded" style={{ background: 'var(--color-primary-100)', color: 'var(--color-primary)' }}>Requis</span>
                         </div>
@@ -627,10 +666,150 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                     </div>
                   </div>
                 </div>
+
+                {/* Cachet & signature — centralisés ; réutilisés automatiquement par tous les modèles d'ordonnance */}
+                <div className="p-5 rounded-lg border space-y-4" style={sectionStyle}>
+                  <h4 className="text-[14px] font-semibold flex items-center gap-2" style={{ color: 'var(--color-text)' }}>
+                    <ShieldCheck size={16} style={{ color: 'var(--color-primary)' }} /> Cachet &amp; signature
+                  </h4>
+                  <p className="text-[12px] -mt-2" style={{ color: 'var(--color-text-muted)' }}>
+                    Utilisés automatiquement sur toutes vos ordonnances, certificats et factures.
+                  </p>
+                  <div className="grid grid-cols-2 gap-5 max-w-md">
+                    <div className="text-center space-y-2">
+                      <div
+                        className="w-full aspect-square bg-white rounded-lg border-2 border-dashed flex items-center justify-center overflow-hidden cursor-pointer transition-colors relative group"
+                        style={{ borderColor: 'var(--color-border-strong)' }}
+                        onClick={() => stampInputRef.current?.click()}
+                      >
+                        {info.stampUrl ? (
+                          <>
+                            <img src={info.stampUrl} alt="Cachet" className="w-full h-full object-contain p-2" />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                              <RefreshCw className="text-white" size={18} />
+                            </div>
+                          </>
+                        ) : (
+                          <div className="flex flex-col items-center gap-1.5" style={{ color: 'var(--color-text-faint)' }}>
+                            <Upload size={20} />
+                            <span className="text-[11px] font-medium">Choisir cachet</span>
+                          </div>
+                        )}
+                      </div>
+                      <input type="file" ref={stampInputRef} onChange={handleStampUpload} className="hidden" accept="image/*" />
+                      {info.stampUrl && (
+                        <button
+                          onClick={() => setInfo({ ...info, stampUrl: undefined })}
+                          className="text-[11px] font-medium flex items-center justify-center gap-1.5 transition-colors"
+                          style={{ color: 'var(--color-danger)' }}
+                        >
+                          <Trash2 size={12} /> Supprimer
+                        </button>
+                      )}
+                    </div>
+                    <div className="text-center space-y-2">
+                      <div
+                        className="w-full aspect-square bg-white rounded-lg border-2 border-dashed flex items-center justify-center overflow-hidden cursor-pointer transition-colors relative group"
+                        style={{ borderColor: 'var(--color-border-strong)' }}
+                        onClick={() => signatureInputRef.current?.click()}
+                      >
+                        {info.signatureUrl ? (
+                          <>
+                            <img src={info.signatureUrl} alt="Signature" className="w-full h-full object-contain p-2" />
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                              <RefreshCw className="text-white" size={18} />
+                            </div>
+                          </>
+                        ) : (
+                          <div className="flex flex-col items-center gap-1.5" style={{ color: 'var(--color-text-faint)' }}>
+                            <Upload size={20} />
+                            <span className="text-[11px] font-medium">Choisir signature</span>
+                          </div>
+                        )}
+                      </div>
+                      <input type="file" ref={signatureInputRef} onChange={handleSignatureUpload} className="hidden" accept="image/*" />
+                      {info.signatureUrl && (
+                        <button
+                          onClick={() => setInfo({ ...info, signatureUrl: undefined })}
+                          className="text-[11px] font-medium flex items-center justify-center gap-1.5 transition-colors"
+                          style={{ color: 'var(--color-danger)' }}
+                        >
+                          <Trash2 size={12} /> Supprimer
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
 
-            {/* ═══════════ PRESCRIPTION / DOCUMENTS TAB ═══════════ */}
+            {/* ═══════════ TEMPLATES / MODÈLES TAB ═══════════ */}
+            {activeTab === 'templates' && (
+              <div className="space-y-6 max-w-5xl mx-auto animate-in">
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
+                      <LayoutGrid size={19} />
+                    </div>
+                    <div>
+                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Modèles d'ordonnance</h3>
+                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Choisissez un modèle prêt à l'emploi pour vos ordonnances.</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleApplyTemplate}
+                    disabled={appearance.selectedTemplate === pendingTemplate}
+                    className="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white transition-all shadow-soft hover:shadow-card active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed"
+                    style={{ background: 'var(--color-primary)' }}
+                  >
+                    <Check size={15} /> Utiliser ce modèle
+                  </button>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {PRESCRIPTION_TEMPLATE_META.map(meta => {
+                    const isSelected = pendingTemplate === meta.id;
+                    const isActive = (appearance.selectedTemplate || 'letterhead_simple') === meta.id;
+                    return (
+                      <button
+                        key={meta.id}
+                        onClick={() => setPendingTemplate(meta.id)}
+                        className="text-left rounded-lg border-2 overflow-hidden transition-all group"
+                        style={{
+                          borderColor: isSelected ? 'var(--color-primary)' : 'var(--color-border)',
+                          boxShadow: isSelected ? 'var(--shadow-card)' : 'var(--shadow-soft)',
+                        }}
+                      >
+                        <div className="relative" style={{ background: 'var(--color-surface-alt)' }}>
+                          <TemplateThumbnail component={meta.component} doctor={info} />
+                          {isActive && (
+                            <div
+                              className="absolute top-2 right-2 rounded-full flex items-center justify-center text-white"
+                              style={{ width: 22, height: 22, background: 'var(--color-primary)', boxShadow: 'var(--shadow-soft)' }}
+                              title="Modèle actuellement utilisé"
+                            >
+                              <Check size={13} />
+                            </div>
+                          )}
+                          {isSelected && !isActive && (
+                            <div className="absolute inset-0" style={{ background: 'rgba(26,107,138,0.06)' }} />
+                          )}
+                        </div>
+                        <div className="px-3 py-2.5 flex items-center gap-2" style={{ borderTop: '1px solid var(--color-border)' }}>
+                          <span className="w-2 h-2 rounded-full shrink-0" style={{ background: meta.accent }} />
+                          <span className="text-[12.5px] font-medium flex-1 truncate" style={{ color: 'var(--color-text)' }}>{meta.label}</span>
+                          {isActive && (
+                            <span className="text-[9.5px] font-medium uppercase tracking-wider shrink-0" style={{ color: 'var(--color-primary)' }}>Actif</span>
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* ═══════════ PRESCRIPTION / MON DESIGN TAB ═══════════ */}
             {activeTab === 'prescription' && (
               <div className="space-y-6 animate-in">
                 <div
@@ -642,8 +821,8 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                       <FileText size={19} />
                     </div>
                     <div>
-                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Documents</h3>
-                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Personnalisez l'esthétique de vos documents.</p>
+                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Mon design</h3>
+                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Personnalisez librement l'ordonnance principale, façon Canva.</p>
                     </div>
                   </div>
                 </div>
@@ -652,7 +831,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                 <section className="space-y-3">
                   <div>
                     <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>Ordonnance médicale</label>
-                    <p className="text-[12px] mt-1" style={{ color: 'var(--color-text-muted)' }}>Le design ci-dessous est utilisé pour toutes vos ordonnances imprimées et exportées.</p>
+                    <p className="text-[12px] mt-1" style={{ color: 'var(--color-text-muted)' }}>Le design ci-dessous est utilisé pour toutes vos ordonnances imprimées et exportées. Sélectionnez-le dans l'onglet « Modèles » pour l'activer.</p>
                   </div>
                   <div style={{ height: 720 }}>
                     <CustomTemplateEditor
@@ -662,6 +841,62 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                     />
                   </div>
                 </section>
+              </div>
+            )}
+
+            {/* ═══════════ IMPRESSION TAB ═══════════ */}
+            {activeTab === 'impression' && (
+              <div className="space-y-6 animate-in">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
+                    <Printer size={19} />
+                  </div>
+                  <div>
+                    <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Impression</h3>
+                    <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Format papier et réglages spécifiques à l'impression physique.</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                  <div className="p-5 rounded-lg border space-y-4" style={sectionStyle}>
+                    <h4 className="text-[14px] font-semibold flex items-center gap-2" style={{ color: 'var(--color-text)' }}>
+                      <FileStack size={16} style={{ color: 'var(--color-primary)' }} /> Format du papier
+                    </h4>
+                    <div className="flex rounded-md p-1" style={{ background: 'var(--color-border)' }}>
+                      {(['A4', 'A5'] as const).map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => setAppearance({ ...appearance, paperSize: size })}
+                          className="flex-1 py-2 rounded text-[12px] font-semibold transition-all"
+                          style={(appearance.paperSize || 'A4') === size ? { background: 'white', color: 'var(--color-primary)', boxShadow: 'var(--shadow-xs)' } : { color: 'var(--color-text-subtle)' }}
+                        >
+                          {size}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="p-5 rounded-lg border space-y-4" style={sectionStyle}>
+                    <h4 className="text-[14px] font-semibold flex items-center gap-2" style={{ color: 'var(--color-text)' }}>
+                      <FileText size={16} style={{ color: 'var(--color-primary)' }} /> Type de papier
+                    </h4>
+                    <div className="flex rounded-md p-1" style={{ background: 'var(--color-border)' }}>
+                      {([{ id: 'blank', label: 'Papier vierge' }, { id: 'letterhead', label: 'Papier à en-tête' }] as const).map((mode) => (
+                        <button
+                          key={mode.id}
+                          onClick={() => setAppearance({ ...appearance, paperMode: mode.id })}
+                          className="flex-1 py-2 rounded text-[12px] font-semibold transition-all"
+                          style={(appearance.paperMode || 'blank') === mode.id ? { background: 'white', color: 'var(--color-primary)', boxShadow: 'var(--shadow-xs)' } : { color: 'var(--color-text-subtle)' }}
+                        >
+                          {mode.label}
+                        </button>
+                      ))}
+                    </div>
+                    <p className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
+                      « Papier à en-tête » masque le fond et le filigrane, pour imprimer sur un papier déjà personnalisé.
+                    </p>
+                  </div>
+                </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                   {/* Configuration column */}
