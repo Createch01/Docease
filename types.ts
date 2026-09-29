@@ -1,4 +1,5 @@
 import { Video } from '@google/genai';
+import type { OrdonnanceAppearance } from './components/ordonnance-editor/ordonnanceModel';
 
 
 export type MedicineCategory = string;
@@ -109,6 +110,8 @@ export interface DoctorInfo {
   addressFr: string;
   phone: string;
   email: string;
+  gsm?: string;
+  fax?: string;
   logoUrl?: string;
   logoOpacity: number;
   logoScale: number;
@@ -338,6 +341,10 @@ export interface CustomTemplateConfig {
 
   // Element-based layout configuration from the custom prescription editor
   layoutConfig?: RxLayoutConfig;
+
+  // Nouveau "Mon design" (components/ordonnance-editor). Quand présent, il est
+  // prioritaire sur les champs ci-dessus, conservés pour les anciens designs.
+  ordonnance?: OrdonnanceAppearance;
 }
 
 export interface PrescriptionAppearance {

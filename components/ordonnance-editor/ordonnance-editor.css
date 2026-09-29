@@ -1,0 +1,32 @@
+/* "Mon design" — ordonnance editor styles.
+   Layout/typography come from Tailwind (already loaded by the app); only the
+   editor chrome that Tailwind doesn't cover lives here, scoped under
+   .ord-editor so no other screen is affected. */
+
+.ord-editor button { cursor: pointer; }
+.ord-editor button, .ord-editor input, .ord-editor select, .ord-editor textarea { font: inherit; }
+
+.ord-editor .ed-scroll::-webkit-scrollbar { width: 9px; height: 9px; }
+.ord-editor .ed-scroll::-webkit-scrollbar-track { background: transparent; }
+.ord-editor .ed-scroll::-webkit-scrollbar-thumb { background: #CBD5E0; border-radius: 5px; }
+.ord-editor .ed-scroll::-webkit-scrollbar-thumb:hover { background: #A0AEC0; }
+
+.ord-editor .ed-range { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 2px; background: #E2E8F0; outline: none; cursor: pointer; }
+.ord-editor .ed-range::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%;
+  background: #fff; border: 2px solid var(--color-primary, #1A6B8A); cursor: pointer; box-shadow: 0 1px 3px rgba(15, 23, 42, .2); }
+.ord-editor .ed-range::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #fff;
+  border: 2px solid var(--color-primary, #1A6B8A); cursor: pointer; }
+
+/* Print-test root: rendered into <body> only while printing, invisible on screen. */
+@media screen {
+  .ord-print-root { display: none !important; }
+}
+
+@media print {
+  /* Empty-image placeholders are editing aids, never printed. */
+  .ord-noprint { display: none !important; }
+  .rx-ord-page { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  /* index.css pins the print container to A4 width; widen/narrow it per format. */
+  .document-print-container.ord-print-a5 { width: 148mm !important; height: 210mm !important; }
+  .document-print-container.ord-print-a4 { width: 210mm !important; height: 297mm !important; }
+}

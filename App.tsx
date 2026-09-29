@@ -65,6 +65,13 @@ const AppContent: React.FC = () => {
   const [securityUnlocked, setSecurityUnlocked] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const [activeSettingsTab, setActiveSettingsTab] = useState<string>('profile');
+  // SettingsPanel asks to switch category (e.g. "Modifier dans Cabinet" from
+  // the ordonnance editor) — keep this sub-menu, which owns the tab, in sync.
+  useEffect(() => {
+    const onTab = (e: Event) => setActiveSettingsTab((e as CustomEvent<string>).detail);
+    window.addEventListener('docease:settings-tab', onTab);
+    return () => window.removeEventListener('docease:settings-tab', onTab);
+  }, []);
 
   const activeUser = dataService.getActiveUser();
 

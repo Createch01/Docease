@@ -12,6 +12,8 @@ import Template07BlueBandClinic from './Template07BlueBandClinic';
 import Template08BlueWaveCare from './Template08BlueWaveCare';
 import Template09BlueGradientCorner from './Template09BlueGradientCorner';
 import CustomTemplate, { DEFAULT_CUSTOM_TEMPLATE_CONFIG } from './CustomTemplate';
+import OrdonnanceTemplate from '../ordonnance-editor/OrdonnanceTemplate';
+import { ORD_PAGE, resolveOrdonnanceAppearance, toOrdDoctor } from '../ordonnance-editor/ordonnanceModel';
 
 export type PrescriptionTemplateId =
     | 'letterhead_simple'
@@ -35,6 +37,10 @@ interface Props {
     date?: string;
     isPrinting?: boolean;
     scale?: number;
+    /* Print only: fit the page to appearance.paperSize. "Mon design" is drawn
+       natively in A4/A5; the built-in templates are A4 and are scaled down to
+       A5 (same √2 proportions, so nothing is cropped). */
+    fitPaper?: boolean;
 }
 
 // Builds the QR payload for each qrCodeType option exposed in Réglages > Documents.
@@ -127,7 +133,7 @@ export const TemplateThumbnail: React.FC<{ component: React.FC<RxTemplateProps>;
     );
 };
 
-const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items, date, appearance, id, scale }) => {
+const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items, date, appearance, id, scale: scaleProp, fitPaper }) => {
     const Template = (templateId && templateId !== 'custom' && TEMPLATES[templateId]) || TEMPLATES.letterhead_simple;
 
     const rxDoctor: RxDoctor = {
@@ -163,11 +169,23 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
         }
         : undefined;
 
+    // "Mon design" : nouveau gabarit dès qu'il a été enregistré avec le nouvel
+    // éditeur (config.ordonnance) ou s'il n'existe encore aucun design. Les
+    // anciens designs (et la mise en page libre layoutConfig) gardent leur rendu.
+    const customConfig = appearance.customTemplateConfig;
+    const useOrdonnance = templateId === 'custom' && !customConfig?.layoutConfig?.elements?.length
+        && (!!customConfig?.ordonnance || !customConfig || Object.keys(customConfig).length === 0);
+    const ordAppearance = useOrdonnance
+        ? { ...resolveOrdonnanceAppearance(customConfig), ...(appearance.paperSize ? { paperSize: appearance.paperSize } : {}) }
+        : null;
+    const pageMm = ordAppearance ? ORD_PAGE[ordAppearance.paperSize] : ORD_PAGE.A4;
+    const scale = scaleProp ?? (fitPaper && !ordAppearance && appearance.paperSize === 'A5' ? ORD_PAGE.A5.w / ORD_PAGE.A4.w : undefined);
+
     return (
         <div 
             style={{
-                width: scale ? `calc(210mm * ${scale})` : '210mm',
-                height: scale ? `calc(297mm * ${scale})` : '297mm',
+                width: scale ? `calc(${pageMm.w}mm * ${scale})` : `${pageMm.w}mm`,
+                height: scale ? `calc(${pageMm.h}mm * ${scale})` : `${pageMm.h}mm`,
                 overflow: 'hidden',
                 backgroundColor: 'white',
             }}
@@ -177,13 +195,21 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
                 style={{ 
                     transform: scale ? `scale(${scale})` : undefined,
                     transformOrigin: 'top left',
-                    width: '210mm',
-                    height: '297mm',
+                    width: `${pageMm.w}mm`,
+                    height: `${pageMm.h}mm`,
                     backgroundColor: 'white',
                     boxSizing: 'border-box'
                 }}
             >
-                {templateId === 'custom' ? (
+                {ordAppearance ? (
+                    <OrdonnanceTemplate
+                        appearance={ordAppearance}
+                        doctor={toOrdDoctor(doctor, appearance.website)}
+                        patient={{ name: rxPatient.name, age: patient.age ? `${patient.age} ans` : '', sex: patient.sex || '' }}
+                        date={date || new Date().toLocaleDateString('fr-FR')}
+                        items={rxItems.map(it => ({ drugName: it.drugName, strength: it.strength, form: it.form, dosage: it.dosage, duration: it.duration, timing: it.timing }))}
+                    />
+                ) : templateId === 'custom' ? (
                     <CustomTemplate
                         config={appearance.customTemplateConfig || DEFAULT_CUSTOM_TEMPLATE_CONFIG}
                         doctor={doctor}

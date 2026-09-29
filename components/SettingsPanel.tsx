@@ -18,9 +18,9 @@ import {
 } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { settingsService } from '../services/settingsService';
-import { DoctorInfo, PrescriptionAppearance, CustomTemplateConfig } from '../types';
+import { DoctorInfo, PrescriptionAppearance } from '../types';
 import CombinedConsultationTemplate from './CombinedConsultationTemplate';
-import CustomTemplateEditor from './CustomTemplateEditor';
+import { OrdonnanceEditorApp, OrdonnanceSaveResult } from './ordonnance-editor';
 import { PRESCRIPTION_TEMPLATE_META, TemplateThumbnail, PrescriptionTemplateId } from './templates/TemplateRenderer';
 import { invoke } from '@tauri-apps/api/core';
 import packageJson from '../package.json';
@@ -155,18 +155,20 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
     setTimeout(() => toast.remove(), 3000);
   };
 
-  const handleSaveCustomTemplate = (config: CustomTemplateConfig) => {
-    const updated: PrescriptionAppearance = { ...appearance, selectedTemplate: 'custom', customTemplateConfig: config };
+  // "Mon design" : enregistre le design et le format papier (partagé avec
+  // l'onglet Impression). Ne touche jamais DoctorInfo — les coordonnées sont en
+  // lecture seule dans l'éditeur. L'éditeur affiche lui-même la confirmation.
+  const handleSaveCustomTemplate = ({ config, paperSize }: OrdonnanceSaveResult) => {
+    const updated: PrescriptionAppearance = { ...appearance, selectedTemplate: 'custom', customTemplateConfig: config, paperSize };
     setAppearance(updated);
     settingsService.saveAppearance(updated);
+  };
 
-    const toast = document.createElement('div');
-    toast.className = 'fixed bottom-4 right-4 text-white px-6 py-3 rounded-xl z-50 animate-in font-semibold text-sm';
-    toast.style.background = 'var(--color-primary)';
-    toast.style.boxShadow = 'var(--shadow-premium)';
-    toast.textContent = "Design de l'ordonnance mis à jour !";
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
+  // Liens "Modifier dans Cabinet" de l'éditeur : l'onglet actif appartient au
+  // sous-menu Paramètres d'App.tsx, qui écoute cet événement.
+  const goToSettingsTab = (tab: SettingsTab) => {
+    setActiveTab(tab);
+    window.dispatchEvent(new CustomEvent('docease:settings-tab', { detail: tab }));
   };
 
   const handleApplyTemplate = () => {
@@ -534,6 +536,20 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                       </div>
 
                       <div>
+                        <label className={labelEyebrow} style={labelEyebrowStyle}>GSM</label>
+                        <div className={iconInputWrap} style={inputStyle}>
+                          <Phone size={16} style={{ color: 'var(--color-text-faint)' }} />
+                          <input
+                            type="text" value={info.gsm || ''}
+                            onChange={e => setInfo({ ...info, gsm: e.target.value })}
+                            className="flex-1 bg-transparent border-none outline-none text-[14px]"
+                            style={{ color: 'var(--color-text)' }}
+                            placeholder="06..."
+                          />
+                        </div>
+                      </div>
+
+                      <div>
                         <label className={labelEyebrow} style={labelEyebrowStyle}>Email</label>
                         <div className={iconInputWrap} style={inputStyle}>
                           <Mail size={16} style={{ color: 'var(--color-text-faint)' }} />
@@ -833,11 +849,14 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                     <label className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>Ordonnance médicale</label>
                     <p className="text-[12px] mt-1" style={{ color: 'var(--color-text-muted)' }}>Le design ci-dessous est utilisé pour toutes vos ordonnances imprimées et exportées. Sélectionnez-le dans l'onglet « Modèles » pour l'activer.</p>
                   </div>
-                  <div style={{ height: 720 }}>
-                    <CustomTemplateEditor
+                  <div style={{ height: 'max(720px, calc(100vh - 220px))' }}>
+                    <OrdonnanceEditorApp
                       doctor={info}
+                      website={appearance.website}
+                      paperSize={appearance.paperSize}
                       initialConfig={appearance.customTemplateConfig}
                       onSave={handleSaveCustomTemplate}
+                      onEditCabinet={() => goToSettingsTab('cabinet')}
                     />
                   </div>
                 </section>
