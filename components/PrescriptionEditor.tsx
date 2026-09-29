@@ -28,6 +28,7 @@ import { settingsService } from '../services/settingsService';
 import { useI18n } from '../i18n';
 import CombinedConsultationTemplate from './CombinedConsultationTemplate';
 import TemplateRenderer from './templates/TemplateRenderer';
+import { usePrintMode } from './usePrintMode';
 import { COMMON_ANALYSES } from '../constants/medicalData';
 // @ts-ignore
 import html2pdf from 'html2pdf.js';
@@ -107,6 +108,8 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [isAnalysesOpen, setIsAnalysesOpen] = useState(false);
   const [labSearchTerm, setLabSearchTerm] = useState('');
   const [useCombinedPrint, setUseCombinedPrint] = useState(false);
+  // While printing, only the print copy is mounted (see usePrintMode).
+  const printing = usePrintMode();
 
   const medInputRef = useRef<HTMLInputElement>(null);
 
@@ -391,14 +394,18 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
       );
     }
+    // Print: the page must be a .document-print-container — index.css hides
+    // everything else at print time. Sized and @page-d to the chosen format.
+    const paper = appearance.paperSize === 'A5' && !useCombinedPrint ? 'A5' : 'A4';
     return (
-      <div className="print-page w-full h-[297mm] overflow-hidden bg-white">
+      <div className={`document-print-container print-${paper.toLowerCase()} print-page overflow-hidden bg-white`}>
+        <style>{`@media print { @page { size: ${paper} portrait; margin: 0; } }`}</style>
         {useCombinedPrint ? (
           <div style={{ transform: 'scale(0.32)', transformOrigin: 'top left' }}>
             <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} isPrinting={true} />
           </div>
         ) : (
-          <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} />
+          <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} isPrinting={true} fitPaper />
         )}
       </div>
     );
@@ -1280,12 +1287,12 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
           <h3 className="text-[11px] font-medium uppercase tracking-wider mb-3 px-1 flex items-center gap-2" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>
             <FileText size={13} /> {lang === 'ar' ? 'معاينة' : 'Aperçu impression'}
           </h3>
-          {renderPrescriptionPage('preview')}
+          {!printing && renderPrescriptionPage('preview')}
         </div>
       </div>
 
       <div className="hidden print:block fixed inset-0 z-0 bg-white">{renderPrescriptionPage('print')}</div>
-      {renderPrescriptionPage('export')}
+      {!printing && renderPrescriptionPage('export')}
     </div>
   );
 };

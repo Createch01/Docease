@@ -91,6 +91,12 @@ input:focus, select:focus, textarea:focus {
     print-color-adjust: exact !important;
   }
   body * { visibility: hidden !important; }
+  /* A modal's backdrop blur keeps painting (and greys the page) even when
+     hidden, and makes it the containing block of the fixed print container. */
+  body * { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  /* Entry animations (modal fade/slide-in) restart on the media switch and
+     would print the page at their first frame: transparent and offset. */
+  *, *::before, *::after { animation: none !important; transition: none !important; }
   .document-print-container,
   .document-print-container * { visibility: visible !important; }
   .document-print-container {
@@ -112,4 +118,11 @@ input:focus, select:focus, textarea:focus {
   .break-after-page { page-break-after: always !important; }
   header, footer, aside, nav, button, .no-print, [role="button"] { display: none !important; }
   @page { size: A4; margin: 0; }
+}
+
+/* Print container sized to the chosen paper format (PrescriptionEditor sets
+   print-a4 / print-a5 and the matching @page). */
+@media print {
+  .document-print-container.print-a4 { width: 210mm !important; height: 297mm !important; }
+  .document-print-container.print-a5 { width: 148mm !important; height: 210mm !important; }
 }

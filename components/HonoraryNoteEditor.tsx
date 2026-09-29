@@ -5,6 +5,7 @@ import { dataService } from '../services/dataService';
 import { HonoraryNote, HonoraryService, Patient, DoctorInfo, HonoraryMasterService } from '../types';
 import { formatCurrencyToWords } from '../utils/numberToWords';
 import HonoraryNoteTemplate from './HonoraryNoteTemplate';
+import { usePrintMode } from './usePrintMode';
 // @ts-ignore
 import { toastService } from '../services/toastService';
 import { settingsService } from '../services/settingsService';
@@ -19,6 +20,8 @@ interface HonoraryNoteEditorProps {
 const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitId, onClose }) => {
     const doctor = dataService.getDoctorInfo();
     const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+    // While printing, only the dedicated print layer is mounted (see usePrintMode).
+    const printing = usePrintMode();
     const [masterServices, setMasterServices] = useState<HonoraryMasterService[]>([]);
     const [newServiceName, setNewServiceName] = useState('');
     const [newServicePrice, setNewServicePrice] = useState(0);
@@ -329,7 +332,7 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
 
                             <div className="shadow-2xl aspect-[1/1.41] w-full max-w-[500px] rounded-[2rem] overflow-hidden bg-white border border-gray-100 flex justify-center items-start shrink-0 print:m-0 print:shadow-none print:w-auto print:h-auto print:max-w-none">
                                 <div className="print:block">
-                                    <HonoraryNoteTemplate doctor={doctor} note={savedNote!} scale={0.45} />
+                                    {!printing && <HonoraryNoteTemplate doctor={doctor} note={savedNote!} scale={0.45} />}
                                 </div>
                             </div>
                         </div>
@@ -338,12 +341,20 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
 
                 {/* Hidden Export Layer */}
                 <div className="opacity-0 pointer-events-none fixed -left-[5000px]">
-                    {savedNote && (
+                    {savedNote && !printing && (
                         <div id="note-pdf-export" style={{ width: '2480px', height: '3508px', background: 'white' }}>
                             <HonoraryNoteTemplate doctor={doctor} note={savedNote} isPrinting={true} scale={0.32} />
                         </div>
                     )}
                 </div>
+
+                {/* Print Layer — outside the animated preview panel, whose
+                    slide-in transform/opacity would offset or blank the page. */}
+                {savedNote && (
+                    <div className="hidden print:block fixed inset-0 z-[9999] bg-white">
+                        <HonoraryNoteTemplate doctor={doctor} note={savedNote} isPrinting={true} />
+                    </div>
+                )}
 
             </div>
         </div>

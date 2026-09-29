@@ -6,6 +6,7 @@ import { MedicalCertificate, Patient, CertificateType } from '../types';
 import { settingsService } from '../services/settingsService';
 import { toastService } from '../services/toastService';
 import MedicalCertificateTemplate from './MedicalCertificateTemplate';
+import { usePrintMode } from './usePrintMode';
 // @ts-ignore
 
 interface MedicalCertificateEditorProps {
@@ -52,6 +53,8 @@ const MedicalCertificateEditor: React.FC<MedicalCertificateEditorProps> = ({ pat
     });
 
     const [isPreview, setIsPreview] = useState(false);
+    // While printing, only the print layer is mounted (see usePrintMode).
+    const printing = usePrintMode();
 
     const handleTypeChange = (type: CertificateType) => {
         const typeInfo = CERTIFICATE_TYPES.find(t => t.id === type);
@@ -221,11 +224,13 @@ const MedicalCertificateEditor: React.FC<MedicalCertificateEditorProps> = ({ pat
 
                             <div className="shadow-2xl aspect-[1/1.41] w-full max-w-[500px] rounded-[2rem] overflow-hidden bg-white border border-gray-100 flex justify-center items-start shrink-0">
                                 <div style={{ transform: 'scale(0.145)', transformOrigin: 'top center', width: '2480px', height: '3508px' }}>
-                                    <MedicalCertificateTemplate
-                                        doctor={doctor}
-                                        appearance={appearance}
-                                        certificate={cert as MedicalCertificate}
-                                    />
+                                    {!printing && (
+                                        <MedicalCertificateTemplate
+                                            doctor={doctor}
+                                            appearance={appearance}
+                                            certificate={cert as MedicalCertificate}
+                                        />
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -235,13 +240,13 @@ const MedicalCertificateEditor: React.FC<MedicalCertificateEditorProps> = ({ pat
                 {/* Hidden Export Layer */}
                 <div className="opacity-0 pointer-events-none fixed -left-[5000px]">
                     <div id="cert-pdf-export" style={{ width: '2480px', height: '3508px', background: 'white' }}>
-                        <MedicalCertificateTemplate
+                        {!printing && <MedicalCertificateTemplate
                             doctor={doctor}
                             appearance={appearance}
                             certificate={cert as MedicalCertificate}
                             isPrinting={true}
                             scale={0.32}
-                        />
+                        />}
                     </div>
                 </div>
 

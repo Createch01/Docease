@@ -50,7 +50,8 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
             <style dangerouslySetInnerHTML={{
                 __html: `
                 @media print {
-                    body * { visibility: hidden !important; border: none !important; box-shadow: none !important; margin: 0 !important; padding: 0 !important; }
+                    body * { visibility: hidden !important; }
+                    /* Only hide the app around the document — never strip the document's own margins/padding/borders. */
                     .document-print-container, .document-print-container * { visibility: visible !important; }
                     .document-print-container {
                         position: fixed !important;
