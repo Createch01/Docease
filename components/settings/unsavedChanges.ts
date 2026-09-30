@@ -43,6 +43,24 @@ window.addEventListener('beforeunload', (e) => {
   e.returnValue = '';
 });
 
+// Application de bureau : la fermeture de la fenêtre Tauri (croix, Alt+F4) ne
+// passe pas par beforeunload. onCloseRequested (API Tauri v2) détruit la
+// fenêtre après le handler sauf preventDefault — d'où la permission
+// core:window:allow-destroy dans src-tauri/capabilities/default.json.
+// Garde anti double-enregistrement (HMR en dev).
+const w = window as Window & { __TAURI_INTERNALS__?: unknown; __doceaseCloseGuard?: boolean };
+if (w.__TAURI_INTERNALS__ && !w.__doceaseCloseGuard) {
+  w.__doceaseCloseGuard = true;
+  import('@tauri-apps/api/window')
+    .then(({ getCurrentWindow }) => getCurrentWindow().onCloseRequested((event) => {
+      if (!unsavedChanges.confirmLeave()) event.preventDefault();
+    }))
+    .catch((err) => {
+      w.__doceaseCloseGuard = false;
+      console.error('Alerte de fermeture indisponible :', err);
+    });
+}
+
 export function useUnsavedChanges(key: string, dirty: boolean) {
   useEffect(() => {
     unsavedChanges.set(key, dirty);

@@ -40,7 +40,9 @@ Enregistrer (désactivé sans modification), en-tête collant.
   collaborateurs ni le PIN avec un instantané pris à l'ouverture.
 - Garde de sortie ([unsavedChanges.ts](components/settings/unsavedChanges.ts)) :
   confirmation avant de changer de section, de vue, ou d'onglet dont le
-  brouillon serait perdu (Documents), et au rechargement de la page. Les
+  brouillon serait perdu (Documents), au rechargement de la page et à la
+  fermeture de la fenêtre de l'application de bureau (Tauri
+  `onCloseRequested`, permission `core:window:allow-destroy`). Les
   onglets de Cabinet partagent un brouillon : pas d'alerte entre eux.
 - Route invalide ou section masquée → `#/settings/profile`. Section à onglets
   sans onglet (`#/settings/documents`) → premier onglet.
@@ -155,3 +157,5 @@ disponible. Se met à jour instantanément à chaque changement ci-dessus.
 
 **2026-09-30** — Logo du cabinet unique (DoctorInfo.logoUrl) pour tous les
 documents ; plus de logo DocEase ni de logo propre au design.
+Alerte « modifications non enregistrées » aussi à la fermeture de la fenêtre
+Tauri.
