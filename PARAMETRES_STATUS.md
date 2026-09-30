@@ -57,6 +57,10 @@ Enregistrer (désactivé sans modification), en-tête collant.
   secours tant que Cabinet n'a pas été enregistré ; l'enregistrement la réécrit
   dans DoctorInfo et supprime `appearance.logoUrl`. Mon design n'importe plus de
   logo propre : il renvoie vers Cabinet › Logo.
+- Zone signature et cachet : réglée dans Mon design (côté, largeur, libellé)
+  et reprise par tous les documents rendus par `DocumentShell` (certificat,
+  analyses, note d'honoraires, ordonnance combinée) : espace vide d'au moins
+  30 mm de haut. Documents › Impression garde l'interrupteur et le libellé.
 - Mon design occupe toute la largeur de la zone de contenu ; le bouton
   Enregistrer est dans l'en-tête de la page (et dans la barre de l'éditeur en
   plein écran).
@@ -159,3 +163,4 @@ disponible. Se met à jour instantanément à chaque changement ci-dessus.
 documents ; plus de logo DocEase ni de logo propre au design.
 Alerte « modifications non enregistrées » aussi à la fermeture de la fenêtre
 Tauri.
+Zone signature et cachet uniforme sur tous les documents.

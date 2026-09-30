@@ -20,6 +20,10 @@ import React from 'react';
 import { DoctorInfo, PrescriptionAppearance } from '../types';
 import { QRCodeSVG } from 'qrcode.react';
 import { resolveCabinetLogo } from '../utils/cabinetLogo';
+import { resolveOrdonnanceAppearance } from './ordonnance-editor/ordonnanceModel';
+
+// Canevas A4 de 2480 px pour 210 mm.
+const PX_PER_MM = 2480 / 210;
 
 interface DocumentShellProps {
   id?: string;
@@ -62,6 +66,7 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
   const accentColor    = '#1A6B8A'; // --color-primary — title pill
   const logoPosition   = appearance.logoPosition   || 'center';
   const logoUrl        = resolveCabinetLogo(doctor, appearance);
+  const signatureZone  = resolveOrdonnanceAppearance(appearance.customTemplateConfig).signatureZone;
   const footerVerticalOffset = appearance.footerVerticalOffset || 0;
   const showQr = propShowQr !== undefined
     ? propShowQr
@@ -231,13 +236,15 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
             {children}
           </div>
 
-          {/* ─────────── 6. SIGNATURE ─────────── */}
+          {/* ─────────── 6. SIGNATURE ET CACHET ───────────
+              Même zone vide que l'ordonnance (Mon design › Zone signature) :
+              largeur et côté identiques, hauteur d'au moins 30 mm. */}
           {appearance.showSignature !== false && (
-            <div style={{ position: 'absolute', right: '160px', bottom: `${450 - footerVerticalOffset}px`, width: '600px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '18px' }}>
-              <div style={{ width: '100%', height: '1px', backgroundColor: '#CBD5E0' }} />
-              <span style={{ fontSize: '28px', color: '#94A3B8', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '2px' }}>
-                {appearance.signatureLabel || 'Cachet & Signature'}
-              </span>
+            <div style={{ position: 'absolute', [signatureZone.position === 'left' ? 'left' : 'right']: '160px', bottom: `${380 - footerVerticalOffset}px`,
+                          width: `${signatureZone.width * PX_PER_MM}px`, height: `${Math.max(30, signatureZone.height) * PX_PER_MM}px`, textAlign: 'center' }}>
+              <div style={{ fontSize: '26px', color: '#94A3B8', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', borderBottom: '3px solid #CBD5E0', paddingBottom: '10px' }}>
+                {appearance.signatureLabel || signatureZone.label || 'Cachet & Signature'}
+              </div>
             </div>
           )}
 
