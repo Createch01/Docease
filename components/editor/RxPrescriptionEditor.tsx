@@ -248,7 +248,8 @@ export const RxPrescriptionEditor: React.FC<RxPrescriptionEditorProps> = ({
         setTab('properties');
         flash('Logo mis à jour');
       };
-      if (url) return apply(url);
+      // url '' : élément vide, qui affiche le logo du cabinet (pas de copie).
+      if (url !== undefined) return apply(url);
       if (file) {
         const fr = new FileReader();
         fr.onload = () => apply(String(fr.result));

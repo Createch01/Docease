@@ -10,7 +10,8 @@
    are converted in memory by `fromLegacyConfig`, never overwritten.
 */
 
-import type { CustomTemplateConfig, DoctorInfo } from '../../types';
+import type { CustomTemplateConfig, DoctorInfo, PrescriptionAppearance } from '../../types';
+import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 
 export type PaperSize = 'A4' | 'A5';
 export type Align3 = 'left' | 'center' | 'right';
@@ -283,7 +284,7 @@ export function resolveOrdonnanceAppearance(config?: Partial<CustomTemplateConfi
 }
 
 /* DoctorInfo (profil + cabinet) → template doctor. */
-export function toOrdDoctor(d: DoctorInfo, website?: string): OrdDoctor {
+export function toOrdDoctor(d: DoctorInfo, website?: string, legacyLogo?: Pick<PrescriptionAppearance, 'logoUrl' | 'customTemplateConfig'>): OrdDoctor {
   return {
     name: d.nameFr || '',
     speciality: d.specialtyFr || '',
@@ -303,6 +304,7 @@ export function toOrdDoctor(d: DoctorInfo, website?: string): OrdDoctor {
     inpe: d.inpe || '',
     ice: d.ice || '',
     taxId: d.taxId || '',
-    logoUrl: d.logoUrl || '',
+    // Logo du cabinet (source unique), jamais une copie propre au design.
+    logoUrl: resolveCabinetLogo(d, legacyLogo),
   };
 }

@@ -4,6 +4,7 @@ import { settingsService } from '../../services/settingsService';
 import { normalizeRoute } from './settingsRoutes';
 import { SettingsPageFrame, SettingsCard, TextField, TextAreaField, ImageField, SettingsLink } from './SettingsUI';
 import { useDoctorDraft } from './useDoctorDraft';
+import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 import { SettingsPageProps } from './ProfileSettings';
 
 // Identité de la structure. Les trois onglets éditent le même brouillon
@@ -21,17 +22,17 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
     const appearance = settingsService.getAppearance();
     return {
       website: info.website ?? appearance.website ?? '',
-      logoUrl: info.logoUrl ?? appearance.logoUrl,
+      logoUrl: resolveCabinetLogo(info, appearance),
     };
   });
 
-  // Le logo est aussi lu dans l'apparence (certificats, ordonnances combinées,
-  // modèles 01–10) : un logo changé ici y est recopié. Seulement s'il a changé —
-  // sinon le logo par défaut de DoctorInfo apparaîtrait sur ces documents au
-  // premier enregistrement d'une simple coordonnée.
-  const handleSave = () => save((values, previous) => {
-    if (values.logoUrl === previous.logoUrl) return;
-    settingsService.saveAppearance({ ...settingsService.getAppearance(), logoUrl: values.logoUrl });
+  // DoctorInfo.logoUrl est la seule source du logo pour tous les documents.
+  // Le brouillon a été initialisé avec la lecture de secours (ancienne copie de
+  // l'apparence) : l'enregistrement la réécrit ici ('' si aucun logo), puis
+  // l'ancienne copie est supprimée.
+  const handleSave = () => save(() => {
+    const { logoUrl: _legacy, ...appearance } = settingsService.getAppearance();
+    if (_legacy !== undefined) settingsService.saveAppearance(appearance);
   });
 
   return (
@@ -88,7 +89,7 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
             description="Repris sur l'ordonnance, les certificats et les autres documents. PNG ou JPG, fond transparent de préférence."
           >
             <div className="flex flex-wrap items-start gap-8">
-              <ImageField label="Logo" value={draft.logoUrl} onChange={v => update({ logoUrl: v })} size={176} />
+              <ImageField label="Logo" value={draft.logoUrl} onChange={v => update({ logoUrl: v || '' })} size={176} />
               <div className="space-y-2 max-w-sm pt-6">
                 <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
                   La taille, l'opacité et l'alignement du logo se règlent par document.

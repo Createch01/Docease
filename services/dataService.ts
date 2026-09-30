@@ -54,7 +54,8 @@ const DEFAULT_DOCTOR_INFO: DoctorInfo = {
   addressFr: '***SUPPRIME***',
   phone: '***SUPPRIME***',
   email: '***SUPPRIME***',
-  logoUrl: '/logo.png',
+  // Vide par défaut : aucun document n'affiche le logo DocEase.
+  logoUrl: undefined,
   logoOpacity: 0.1,
   logoScale: 120,
   logoPosition: 'center',

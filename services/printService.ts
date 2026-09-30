@@ -2,6 +2,8 @@ import { Patient, ClinicalConsultation, Prescription, MedicalResult, Vaccination
 import { vaccinationService } from './vaccinationService';
 import { getActiveTreatment } from '../utils/activeTreatment';
 import { calculateIMC } from '../utils/formatters';
+import { resolveCabinetLogo } from '../utils/cabinetLogo';
+import { settingsService } from './settingsService';
 
 const NR = '<span class="empty">Non renseigné</span>';
 const esc = (v: any) => (v === undefined || v === null || v === '') ? null : String(v);
@@ -19,6 +21,7 @@ export const printService = {
     if (!printWindow) return;
 
     const formatDate = (date: string) => new Date(date).toLocaleDateString('fr-FR');
+    const cabinetLogo = resolveCabinetLogo(doctor, settingsService.getAppearance());
 
     const consultationsDesc = [...consultations].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 5);
     const prescriptionsDesc = [...prescriptions].sort((a, b) => b.date.localeCompare(a.date));
@@ -139,7 +142,7 @@ export const printService = {
       </head>
       <body>
         <div class="header">
-          ${doctor?.logoUrl ? `<img class="logo" src="${doctor.logoUrl}" />` : ''}
+          ${cabinetLogo ? `<img class="logo" src="${cabinetLogo}" />` : ''}
           <div>
             <h1 class="doctor-name">Dr. ${esc(doctor?.nameFr) || ''}</h1>
             <div class="doctor-info">${[esc(doctor?.specialtyFr), esc(doctor?.phone), esc(doctor?.addressFr)].filter(Boolean).join(' — ')}</div>

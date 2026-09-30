@@ -6,6 +6,7 @@ import {
 } from './RxShared';
 import { RX_FONTS, rxResolveText, RX_A4 } from '../editor/rxEditorModel';
 import { RxIcon } from '../editor/RxContactIcons';
+import { withoutDocEaseLogo } from '../../utils/cabinetLogo';
 
 export const DEFAULT_CUSTOM_TEMPLATE_CONFIG: CustomTemplateConfig = {
   headerStyle: 'bande',
@@ -181,10 +182,11 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
   );
 
   const logoAlignSelf = c.logoVerticalAlign === 'top' ? 'flex-start' : c.logoVerticalAlign === 'bottom' ? 'flex-end' : 'center';
-  const logoBlock = c.showLogo && c.logoUrl ? (
+  // Logo du cabinet (DoctorInfo, résolu par TemplateRenderer) — c.logoUrl n'est plus lu.
+  const logoBlock = c.showLogo && doctor.logoUrl ? (
     <div style={{ position: 'relative', width: c.logoSize, height: c.logoSize, padding: 6, boxSizing: 'content-box', alignSelf: logoAlignSelf }}>
       <div className="absolute inset-0" style={{ background: c.logoBg, opacity: c.logoBgOpacity, borderRadius: 6 }} />
-      <img src={c.logoUrl} alt="" style={{ position: 'relative', width: c.logoSize, height: c.logoSize, objectFit: 'contain' }} />
+      <img src={doctor.logoUrl} alt="" style={{ position: 'relative', width: c.logoSize, height: c.logoSize, objectFit: 'contain' }} />
     </div>
   ) : null;
 
@@ -390,7 +392,7 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
           };
 
           if (el.type === 'logo') {
-            const src = el.src || doctor.logoUrl;
+            const src = withoutDocEaseLogo(el.src) || doctor.logoUrl;
             if (!src) return null;
             return (
               <div key={el.id} style={{ ...common, width: `${el.w ?? 34}mm` }}>

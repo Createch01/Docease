@@ -12,6 +12,8 @@ import {
   rxResolveText,
 } from './rxEditorModel';
 import { RxIcon, RX_ICON_KEYS, RX_ICON_LABELS } from './RxContactIcons';
+import { resolveCabinetLogo } from '../../utils/cabinetLogo';
+import { settingsService } from '../../services/settingsService';
 
 const T = {
   ink: 'var(--color-text, #1A202C)',
@@ -293,10 +295,10 @@ export const RxElementsPanel: React.FC<RxElementsPanelProps> = ({
             }}
           />
         </label>
-        {doctor?.logoUrl && (
+        {resolveCabinetLogo(doctor, settingsService.getAppearance()) && (
           <button
             type="button"
-            onClick={() => onLogoUpload(null, doctor.logoUrl)}
+            onClick={() => onLogoUpload(null, '')}
             className="mt-1.5 w-full rounded-md border transition-all hover:bg-slate-50"
             style={{ height: 30, borderColor: T.border, fontSize: 11, color: T.muted }}
           >

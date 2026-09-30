@@ -18,7 +18,7 @@ routeur vers les pages de `components/settings/`.
 | Bandeau | Section | Route | Onglets | Enregistre dans |
 |---|---|---|---|---|
 | **Identité & présentation** | Mon profil | `#/settings/profile` | — | DoctorInfo : nom/spécialité/diplômes FR+AR, N° d'ordre, INPE, cachet, signature |
-| | Cabinet | `#/settings/cabinet/{coordonnees,logo,horaires}` | Coordonnées · Logo · Horaires | DoctorInfo : téléphone, GSM, e-mail, fax, site web, adresses FR/AR, ICE, patente, IF, RC, logo, horaires (+ copie du logo dans l'apparence s'il change) |
+| | Cabinet | `#/settings/cabinet/{coordonnees,logo,horaires}` | Coordonnées · Logo · Horaires | DoctorInfo : téléphone, GSM, e-mail, fax, site web, adresses FR/AR, ICE, patente, IF, RC, logo (source unique de tous les documents), horaires |
 | | Documents | `#/settings/documents/{modeles,design,impression}` | Modèles · Mon design · Impression | Apparence (`docease_prescription_appearance`) : modèle choisi · design personnalisé + format · format/type de papier, rendu des certificats et ordonnances combinées, QR |
 | | Apparence | `#/settings/appearance` | — | Langue de l'interface (immédiat). Pas de thème à ce jour. |
 | **Exercice & organisation** | Rendez-vous | `#/settings/agenda` | — | **Masquée** (`SETTINGS_FEATURES.agendaSettings = false`) |
@@ -46,6 +46,15 @@ Enregistrer (désactivé sans modification), en-tête collant.
   sans onglet (`#/settings/documents`) → premier onglet.
 - Site web : `DoctorInfo.website` ; lu en secours dans `appearance.website`
   tant que Cabinet n'a pas été enregistré.
+- Logo : `DoctorInfo.logoUrl` (Cabinet › Logo) est la **seule** source du logo
+  pour tous les documents (ordonnances, ordonnance combinée, certificat,
+  analyses, note d'honoraires, dossier imprimé) — résolu par
+  [utils/cabinetLogo.ts](utils/cabinetLogo.ts). Vide par défaut ; l'ancien
+  `/logo.png` (logo DocEase) est traité comme vide. L'ancienne copie
+  (`appearance.logoUrl`, puis `customTemplateConfig.logoUrl`) n'est lue qu'en
+  secours tant que Cabinet n'a pas été enregistré ; l'enregistrement la réécrit
+  dans DoctorInfo et supprime `appearance.logoUrl`. Mon design n'importe plus de
+  logo propre : il renvoie vers Cabinet › Logo.
 - Mon design occupe toute la largeur de la zone de contenu ; le bouton
   Enregistrer est dans l'en-tête de la page (et dans la barre de l'éditeur en
   plein écran).
@@ -144,9 +153,5 @@ disponible. Se met à jour instantanément à chaque changement ci-dessus.
 
 ## 3. Dernière modification
 
-**2026-09-30** — Navigation unique : suppression de la liste interne
-« Paramètres / Configuration générale », onglets horizontaux (Cabinet,
-Documents), routes `#/settings/...`, garde « modifications non enregistrées »,
-INPE / N° d'ordre / cachet / signature déplacés dans Mon profil, langue dans
-Apparence, fax / site web / horaires éditables dans Cabinet, devise et tarif
-dans Facturation & Tarifs, « Vérifier les mises à jour » dans Base de données.
+**2026-09-30** — Logo du cabinet unique (DoctorInfo.logoUrl) pour tous les
+documents ; plus de logo DocEase ni de logo propre au design.

@@ -8,6 +8,7 @@ import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useLayo
 import { createPortal } from 'react-dom';
 import { CustomTemplateConfig, DoctorInfo } from '../../types';
 import { DEFAULT_CUSTOM_TEMPLATE_CONFIG } from '../templates/CustomTemplate';
+import { settingsService } from '../../services/settingsService';
 import OrdonnanceControls from './OrdonnanceControls';
 import OrdonnanceTemplate from './OrdonnanceTemplate';
 import {
@@ -62,7 +63,7 @@ const OrdonnanceEditorApp = forwardRef<OrdonnanceEditorHandle, OrdonnanceEditorA
     const a = resolveOrdonnanceAppearance(initialConfig);
     return paperSize ? { ...a, paperSize } : a;
   });
-  const doctor: OrdDoctor = useMemo(() => toOrdDoctor(doctorInfo, website), [doctorInfo, website]);
+  const doctor: OrdDoctor = useMemo(() => toOrdDoctor(doctorInfo, website, settingsService.getAppearance()), [doctorInfo, website]);
   const [zoom, setZoom] = useState(0.82);
   const [showJson, setShowJson] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
@@ -125,8 +126,6 @@ const OrdonnanceEditorApp = forwardRef<OrdonnanceEditorHandle, OrdonnanceEditorA
     fr.readAsDataURL(file);
   };
 
-  const onLogoFile = (file: File) => readFile(file, url => { set('header.logo.url', url); flash('Logo importé'); });
-  const onClearLogo = () => set('header.logo.url', '');
   const onBodyLogoFile = (file: File) => readFile(file, url => { set('bodyLogo.url', url); flash('Logo importé'); });
   const onClearBodyLogo = () => set('bodyLogo.url', '');
 
@@ -248,7 +247,6 @@ const OrdonnanceEditorApp = forwardRef<OrdonnanceEditorHandle, OrdonnanceEditorA
       <div className="flex flex-1 min-h-0 min-w-0" style={{ overflow: 'hidden' }}>
         <div className="ed-scroll overflow-y-auto shrink-0 p-4" style={{ width: 340, background: '#fff', borderRight: `1px solid ${T.border}` }}>
           <OrdonnanceControls appearance={appearance} set={set} doctor={doctor}
-                              onLogoFile={onLogoFile} onClearLogo={onClearLogo}
                               onBodyLogoFile={onBodyLogoFile} onClearBodyLogo={onClearBodyLogo}
                               onEditCabinet={onEditCabinet} onEditProfile={onEditProfile} />
         </div>

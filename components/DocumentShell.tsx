@@ -19,6 +19,7 @@
 import React from 'react';
 import { DoctorInfo, PrescriptionAppearance } from '../types';
 import { QRCodeSVG } from 'qrcode.react';
+import { resolveCabinetLogo } from '../utils/cabinetLogo';
 
 interface DocumentShellProps {
   id?: string;
@@ -60,6 +61,7 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
   const secondaryColor = appearance.secondaryColor || '#475569'; // slate-600 — for specialty
   const accentColor    = '#1A6B8A'; // --color-primary — title pill
   const logoPosition   = appearance.logoPosition   || 'center';
+  const logoUrl        = resolveCabinetLogo(doctor, appearance);
   const footerVerticalOffset = appearance.footerVerticalOffset || 0;
   const showQr = propShowQr !== undefined
     ? propShowQr
@@ -134,8 +136,8 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
             {logoPosition === 'left' ? (
               <>
                 <div style={{ width: '400px', height: '520px', display: 'flex', alignItems: 'center', justifyContent: 'flex-start' }}>
-                  {appearance.logoUrl && (
-                    <img src={appearance.logoUrl} style={{ width: '100%', maxHeight: '400px', objectFit: 'contain', transform: `scale(${appearance.logoScale})` }} />
+                  {logoUrl && (
+                    <img src={logoUrl} style={{ width: '100%', maxHeight: '400px', objectFit: 'contain', transform: `scale(${appearance.logoScale})` }} />
                   )}
                 </div>
                 <div style={{ width: '840px', textAlign: 'left' }}>
@@ -167,8 +169,8 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
                   </div>
                 </div>
                 <div style={{ width: '480px', display: 'flex', justifyContent: 'center' }}>
-                  {appearance.logoUrl && (
-                    <img src={appearance.logoUrl} style={{ width: '100%', maxHeight: '480px', objectFit: 'contain', transform: `scale(${appearance.logoScale})` }} />
+                  {logoUrl && (
+                    <img src={logoUrl} style={{ width: '100%', maxHeight: '480px', objectFit: 'contain', transform: `scale(${appearance.logoScale})` }} />
                   )}
                 </div>
                 <div style={{ width: '800px', textAlign: 'right' }} dir="rtl">
@@ -240,9 +242,9 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
           )}
 
           {/* Watermark */}
-          {appearance.logoUrl && (
+          {logoUrl && (
             <div style={{ position: 'absolute', left: '0', top: '0', width: '100%', height: '100%', zIndex: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', opacity: appearance.watermarkOpacity || 0.05 }}>
-              <img src={appearance.logoUrl} alt="Watermark" style={{ width: '60%', filter: 'grayscale(100%)' }} />
+              <img src={logoUrl} alt="Watermark" style={{ width: '60%', filter: 'grayscale(100%)' }} />
             </div>
           )}
 

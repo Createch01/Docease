@@ -94,7 +94,7 @@ const OrdonnanceTemplate: React.FC<OrdonnanceTemplateProps> = ({ doctor, patient
   const mx = A.margins?.horizontal ?? 10, mt = A.margins?.top ?? 9, mb = A.margins?.bottom ?? 8;
   const vAlignMap = { top: 'flex-start', center: 'center', bottom: 'flex-end' } as const;
   // Logo propre au design s'il y en a un, sinon celui du cabinet.
-  const logoUrl = A.header.logo.url || doctor.logoUrl;
+  const logoUrl = doctor.logoUrl;
 
   const logo = A.header.logo.show ? (
     <div style={{ alignSelf: vAlignMap[A.header.logo.verticalAlign] || 'center', padding: A.header.logo.bgShow ? 8 : 0,

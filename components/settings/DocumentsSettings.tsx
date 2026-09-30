@@ -13,6 +13,7 @@ import {
   input40, inputStyle, labelEyebrow, labelEyebrowStyle, fieldsDiffer, pickFields,
 } from './SettingsUI';
 import { useUnsavedChanges } from './unsavedChanges';
+import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 import { SettingsPageProps } from './ProfileSettings';
 
 const DocumentsSettings: React.FC<SettingsPageProps> = (props) => {
@@ -158,6 +159,7 @@ const PrintTab: React.FC<SettingsPageProps> = ({ route, onNavigate }) => {
   const doctor = useMemo(() => dataService.getDoctorInfo(), []);
   const [saved, setSaved] = useState<PrescriptionAppearance>(() => settingsService.getAppearance());
   const [a, setA] = useState<PrescriptionAppearance>(saved);
+  const cabinetLogo = resolveCabinetLogo(doctor, a);
   const [previewScale, setPreviewScale] = useState(0.22);
   const dirty = fieldsDiffer(a, saved, PRINT_FIELDS);
   useUnsavedChanges('documents/impression', dirty);
@@ -196,11 +198,11 @@ const PrintTab: React.FC<SettingsPageProps> = ({ route, onNavigate }) => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           <div className="lg:col-span-5 space-y-5">
             <SettingsCard title="Logo" icon={<ImageIcon size={16} />}
-                          actions={<SettingsLink onClick={() => onNavigate({ section: 'cabinet', tab: 'logo' })}>{a.logoUrl ? 'Changer' : 'Choisir'} dans Cabinet</SettingsLink>}>
-              {a.logoUrl ? (
+                          actions={<SettingsLink onClick={() => onNavigate({ section: 'cabinet', tab: 'logo' })}>{cabinetLogo ? 'Changer' : 'Choisir'} dans Cabinet</SettingsLink>}>
+              {cabinetLogo ? (
                 <div className="space-y-3.5">
                   <div className="flex items-center gap-3">
-                    <img src={a.logoUrl} alt="Logo du cabinet" className="w-12 h-12 object-contain rounded border bg-white p-1" style={{ borderColor: 'var(--color-border)' }} />
+                    <img src={cabinetLogo} alt="Logo du cabinet" className="w-12 h-12 object-contain rounded border bg-white p-1" style={{ borderColor: 'var(--color-border)' }} />
                     <span className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>Logo du cabinet</span>
                   </div>
                   <div className="flex items-center gap-3">

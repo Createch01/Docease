@@ -129,8 +129,6 @@ export interface OrdonnanceControlsProps {
   appearance: OrdonnanceAppearance;
   set: (path: string, value: unknown) => void;
   doctor: OrdDoctor;
-  onLogoFile: (f: File) => void;
-  onClearLogo: () => void;
   onBodyLogoFile: (f: File) => void;
   onClearBodyLogo: () => void;
   onEditCabinet?: () => void;
@@ -145,7 +143,7 @@ const EditCabinetLink: React.FC<{ onClick?: () => void; label?: string }> = ({ o
     </button>
   ) : null;
 
-const OrdonnanceControls: React.FC<OrdonnanceControlsProps> = ({ appearance: A, set, doctor, onLogoFile, onClearLogo, onBodyLogoFile, onClearBodyLogo, onEditCabinet, onEditProfile }) => {
+const OrdonnanceControls: React.FC<OrdonnanceControlsProps> = ({ appearance: A, set, doctor, onBodyLogoFile, onClearBodyLogo, onEditCabinet, onEditProfile }) => {
   const applyTheme = (t: Pick<OrdTheme, 'badge' | 'accent' | 'footerBg' | 'footerText' | 'nameColor'>) => {
     set('badge.bg', t.badge);
     set('drugList.accentColor', t.accent);
@@ -235,10 +233,11 @@ const OrdonnanceControls: React.FC<OrdonnanceControlsProps> = ({ appearance: A, 
         <Divider />
 
         <Row label="Logo">
-          <UploadZone label={doctor.logoUrl ? 'Remplacer le logo du cabinet' : 'Importer un logo'} hasFile={!!A.header.logo.url} onFile={onLogoFile} onClear={onClearLogo} />
-          <p style={{ fontSize: 10, color: T.faint, marginTop: 6 }}>
-            {A.header.logo.url ? 'Logo propre à ce design. Supprimez-le pour revenir au logo du cabinet.' : doctor.logoUrl ? 'Par défaut : logo du cabinet.' : 'Aucun logo de cabinet.'}
-          </p>
+          <div className="flex items-center gap-2">
+            {doctor.logoUrl && <img src={doctor.logoUrl} alt="" style={{ width: 32, height: 32, objectFit: 'contain' }} />}
+            <p style={{ fontSize: 10, color: T.faint }}>{doctor.logoUrl ? 'Logo du cabinet.' : 'Aucun logo de cabinet.'}</p>
+          </div>
+          <EditCabinetLink onClick={onEditCabinet} label={doctor.logoUrl ? 'Changer dans Cabinet › Logo' : 'Choisir dans Cabinet › Logo'} />
         </Row>
         <Row label="Afficher le logo">
           <Toggle on={A.header.logo.show} onChange={v => set('header.logo.show', v)} />

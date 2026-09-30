@@ -14,6 +14,7 @@ import Template09BlueGradientCorner from './Template09BlueGradientCorner';
 import CustomTemplate, { DEFAULT_CUSTOM_TEMPLATE_CONFIG } from './CustomTemplate';
 import OrdonnanceTemplate from '../ordonnance-editor/OrdonnanceTemplate';
 import { ORD_PAGE, resolveOrdonnanceAppearance, toOrdDoctor } from '../ordonnance-editor/ordonnanceModel';
+import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 
 export type PrescriptionTemplateId =
     | 'letterhead_simple'
@@ -204,7 +205,7 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
                 {ordAppearance ? (
                     <OrdonnanceTemplate
                         appearance={ordAppearance}
-                        doctor={toOrdDoctor(doctor, appearance.website)}
+                        doctor={toOrdDoctor(doctor, appearance.website, appearance)}
                         patient={{ name: rxPatient.name, age: patient.age ? `${patient.age} ans` : '', sex: patient.sex || '' }}
                         date={date || new Date().toLocaleDateString('fr-FR')}
                         items={rxItems.map(it => ({ drugName: it.drugName, strength: it.strength, form: it.form, dosage: it.dosage, duration: it.duration, timing: it.timing }))}
@@ -212,7 +213,7 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
                 ) : templateId === 'custom' ? (
                     <CustomTemplate
                         config={appearance.customTemplateConfig || DEFAULT_CUSTOM_TEMPLATE_CONFIG}
-                        doctor={doctor}
+                        doctor={{ ...doctor, logoUrl: resolveCabinetLogo(doctor, appearance) }}
                         patient={rxPatient}
                         date={date || ''}
                         items={rxItems}
@@ -223,7 +224,7 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
                         patient={rxPatient}
                         date={date || ''}
                         items={rxItems}
-                        photoUrl={appearance.logoUrl}
+                        photoUrl={resolveCabinetLogo(doctor, appearance)}
                         accentColor={appearance.primaryColor}
                         qrCode={qrCode}
                     />
