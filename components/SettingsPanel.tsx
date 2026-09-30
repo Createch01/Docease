@@ -66,7 +66,11 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
   const [pinInput, setPinInput] = useState('');
   const [confirmPinInput, setConfirmPinInput] = useState('');
   const [showPins, setShowPins] = useState(false);
-  const [pinEnabledLocal, setPinEnabledLocal] = useState<boolean>(info.pinEnabled || false);
+  // Création du PIN demandée alors qu'aucun PIN n'existe encore : le verrou n'est
+  // activé (pinEnabled) qu'une fois le PIN créé et confirmé, sinon les sections
+  // sensibles se verrouilleraient sans code permettant de les rouvrir.
+  const [pinSetupOpen, setPinSetupOpen] = useState(false);
+  const [pinError, setPinError] = useState('');
   const [settingsPinInput, setSettingsPinInput] = useState(''); // Input for settings lock
 
   // Database State
@@ -264,6 +268,49 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
     }
   };
 
+  const resetPinForm = () => {
+    setCurrentPinInput(''); setPinInput(''); setConfirmPinInput(''); setPinError('');
+  };
+
+  // Part toujours du DoctorInfo enregistré (et non de l'état local du formulaire)
+  // pour ne pas enregistrer au passage des modifications non validées ailleurs.
+  const handleTogglePin = async () => {
+    const saved = dataService.getDoctorInfo();
+    if (info.pinEnabled) {
+      await dataService.saveDoctorInfo({ ...saved, pinEnabled: false });
+      setInfo(prev => ({ ...prev, pinEnabled: false }));
+      setPinSetupOpen(false);
+      resetPinForm();
+    } else if (saved.pin) {
+      await dataService.saveDoctorInfo({ ...saved, pinEnabled: true });
+      setInfo(prev => ({ ...prev, pinEnabled: true }));
+      setIsAdminUnlocked(true);
+    } else {
+      setPinSetupOpen(open => !open);
+      resetPinForm();
+    }
+  };
+
+  const handleSavePin = async () => {
+    const saved = dataService.getDoctorInfo();
+    if (saved.pin && currentPinInput !== saved.pin) { setPinError('Ancien PIN incorrect.'); return; }
+    if (!/^\d{4,6}$/.test(pinInput)) { setPinError('Le PIN doit contenir 4 à 6 chiffres.'); return; }
+    if (pinInput !== confirmPinInput) { setPinError('La confirmation ne correspond pas au nouveau PIN.'); return; }
+    const created = !saved.pin;
+    await dataService.saveDoctorInfo({ ...saved, pin: pinInput, pinEnabled: true });
+    setInfo(prev => ({ ...prev, pin: pinInput, pinEnabled: true }));
+    setIsAdminUnlocked(true);
+    setPinSetupOpen(false);
+    resetPinForm();
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-4 right-4 text-white px-6 py-3 rounded-xl z-50 animate-in font-semibold text-sm';
+    toast.style.background = 'var(--color-primary)';
+    toast.style.boxShadow = 'var(--shadow-premium)';
+    toast.textContent = created ? 'PIN créé et verrouillage activé.' : 'PIN mis à jour.';
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+  };
+
   const handleVerifySettingsPin = () => {
     if (settingsPinInput === info.pin) {
       setIsAdminUnlocked(true);
@@ -274,7 +321,9 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
     }
   };
 
-  const AdminLock = () => (
+  // Fonction de rendu (et non composant) : déclarée dans le corps, un composant
+  // serait remonté à chaque frappe et le champ PIN perdrait le focus.
+  const renderAdminLock = () => (
     <div className="flex flex-col items-center justify-center py-20 animate-in">
       <div
         className="w-16 h-16 rounded-xl flex items-center justify-center mb-5"
@@ -349,7 +398,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
         <nav className="flex-1 px-3 py-3 space-y-0.5 overflow-y-auto scrollbar-hide">
           {navTabs.map((tabItem) => {
             const isActive = activeTab === tabItem.id;
-            const isLocked = SENSITIVE_TABS.includes(tabItem.id) && !isAdminUnlocked && info.pinEnabled;
+            const isLocked = SENSITIVE_TABS.includes(tabItem.id) && !isAdminUnlocked && info.pinEnabled && !!info.pin;
             return (
               <button
                 key={tabItem.id}
@@ -395,8 +444,8 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
         className="flex-1 rounded-xl border p-7 overflow-y-auto relative h-full scrollbar-hide"
         style={{ background: 'var(--color-surface)', borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-soft)' }}
       >
-        {SENSITIVE_TABS.includes(activeTab) && info.pinEnabled && !isAdminUnlocked ? (
-          <AdminLock />
+        {SENSITIVE_TABS.includes(activeTab) && info.pinEnabled && !!info.pin && !isAdminUnlocked ? (
+          renderAdminLock()
         ) : (
           <>
             {/* ═══════════ PROFILE TAB ═══════════ */}
@@ -1296,46 +1345,63 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                     <div
                       className="w-11 h-6 rounded-full transition-colors relative cursor-pointer"
                       style={{ background: info.pinEnabled ? 'var(--color-danger)' : 'var(--color-border-strong)' }}
-                      onClick={() => {
-                        const newState = !info.pinEnabled;
-                        setInfo({ ...info, pinEnabled: newState });
-                        dataService.saveDoctorInfo({ ...info, pinEnabled: newState });
-                      }}
+                      onClick={handleTogglePin}
                     >
                       <div className="absolute top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform" style={{ transform: info.pinEnabled ? 'translateX(20px)' : 'translateX(2px)' }} />
                     </div>
                   </div>
 
-                  {info.pinEnabled && (
+                  {(info.pinEnabled || pinSetupOpen) && (
                     <div className="space-y-5">
+                      <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
+                        {info.pin ? 'Modifier le code PIN (4 à 6 chiffres).' : 'Créez un code PIN de 4 à 6 chiffres pour activer le verrouillage.'}
+                      </p>
                       <div className="space-y-3">
-                        <input
-                          type={showPins ? 'text' : 'password'}
-                          value={currentPinInput}
-                          onChange={e => setCurrentPinInput(e.target.value)}
-                          placeholder="Ancien PIN"
-                          className="w-full h-14 px-5 rounded-lg border text-center text-[20px] font-semibold outline-none transition-all"
-                          style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}
-                        />
-                        <input
-                          type={showPins ? 'text' : 'password'}
-                          value={pinInput}
-                          onChange={e => setPinInput(e.target.value)}
-                          placeholder="Nouveau PIN"
-                          className="w-full h-14 px-5 rounded-lg border text-center text-[20px] font-semibold outline-none transition-all"
-                          style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}
-                        />
+                        {info.pin && (
+                          <input
+                            type={showPins ? 'text' : 'password'} inputMode="numeric"
+                            value={currentPinInput}
+                            onChange={e => { setCurrentPinInput(e.target.value.replace(/\D/g, '').slice(0, 6)); setPinError(''); }}
+                            placeholder="Ancien PIN"
+                            className="w-full h-14 px-5 rounded-lg border text-center text-[20px] font-semibold outline-none transition-all"
+                            style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}
+                          />
+                        )}
+                          <input
+                            type={showPins ? 'text' : 'password'} inputMode="numeric"
+                            value={pinInput}
+                            onChange={e => { setPinInput(e.target.value.replace(/\D/g, '').slice(0, 6)); setPinError(''); }}
+                            placeholder="Nouveau PIN"
+                            className="w-full h-14 px-5 rounded-lg border text-center text-[20px] font-semibold outline-none transition-all"
+                            style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}
+                          />
+                          <input
+                            type={showPins ? 'text' : 'password'} inputMode="numeric"
+                            value={confirmPinInput}
+                            onChange={e => { setConfirmPinInput(e.target.value.replace(/\D/g, '').slice(0, 6)); setPinError(''); }}
+                            onKeyDown={e => e.key === 'Enter' && handleSavePin()}
+                            placeholder="Confirmer le nouveau PIN"
+                            className="w-full h-14 px-5 rounded-lg border text-center text-[20px] font-semibold outline-none transition-all"
+                            style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}
+                          />
+                        <button
+                          type="button"
+                          onClick={() => setShowPins(v => !v)}
+                          className="text-[12px] font-medium flex items-center gap-1.5"
+                          style={{ color: 'var(--color-text-muted)' }}
+                        >
+                          {showPins ? <EyeOff size={14} /> : <Eye size={14} />} {showPins ? 'Masquer les codes' : 'Afficher les codes'}
+                        </button>
+                        {pinError && (
+                          <p role="alert" className="text-[12px] font-medium" style={{ color: 'var(--color-danger)' }}>{pinError}</p>
+                        )}
                       </div>
                       <button
-                        onClick={() => {
-                          if (info.pin && currentPinInput !== info.pin) { alert('PIN incorrect'); return; }
-                          dataService.saveDoctorInfo({ ...info, pin: pinInput });
-                          alert('PIN mis à jour');
-                        }}
+                        onClick={handleSavePin}
                         className="w-full h-12 rounded-lg text-white font-medium text-[14px] transition-all active:scale-[0.98]"
                         style={{ background: 'var(--color-danger)' }}
                       >
-                        Sauvegarder le PIN
+                        {info.pin ? 'Sauvegarder le PIN' : 'Créer le PIN'}
                       </button>
                     </div>
                   )}
