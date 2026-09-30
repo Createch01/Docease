@@ -30,3 +30,15 @@ Docease.zip
 _temp_export_claude_design/
 
 _design_ref/
+
+# Secrets / clés (ne jamais versionner)
+keys.txt
+keys_utf8.txt
+keys*.txt
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
