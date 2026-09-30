@@ -10,23 +10,48 @@ import { RxIcon } from '../editor/RxContactIcons';
 export const DEFAULT_CUSTOM_TEMPLATE_CONFIG: CustomTemplateConfig = {
   headerStyle: 'bande',
   headerColor: '#0d9488',
+  headerBgOpacity: 1,
   logoUrl: null,
+  showLogo: true,
   logoPosition: 'left',
+  logoVerticalAlign: 'center',
   logoSize: 64,
+  logoBg: '#ffffff',
+  logoBgOpacity: 0,
   showName: true,
   namePosition: 'left',
-  nameFontSize: 18,
+  nameFontSize: 24,
+  nameColor: '#ffffff',
   showSpeciality: true,
+  specialityFontSize: 10.5,
+  showDiplomas: true,
+  showArabicName: false,
+  arabicNameFontSize: 17,
+  showArabicSpeciality: false,
+  arabicSpecialityFontSize: 10.5,
   showPhone: true,
   showEmail: true,
   showAddress: true,
   showOrdreNumber: true,
   showWebsite: false,
   website: '',
+  badgeText: 'ORDONNANCE',
+  badgeBg: '#0d9488',
+  badgeColor: '#ffffff',
+  badgeFontSize: 11,
+  badgeRadius: 999,
+  patientLineStyle: 'dotted',
   drugListStyle: 'barre',
   accentColor: '#0d9488',
   fontFamily: 'sans',
   footerStyle: 'vague',
+  footerBg: '#E53E3E',
+  footerTextColor: '#ffffff',
+  showFooterPhone: true,
+  showFooterEmail: true,
+  showFooterAddress: true,
+  showFooterFax: false,
+  showFooterArabicAddress: false,
   showStamp: true,
   stampUrl: null,
   stampPosition: 'right',
@@ -37,6 +62,10 @@ export const DEFAULT_CUSTOM_TEMPLATE_CONFIG: CustomTemplateConfig = {
   qrCodeContent: '',
   watermark: 'none',
   watermarkOpacity: 0.04,
+  showBodyLogo: false,
+  bodyLogoUrl: null,
+  bodyLogoSize: 130,
+  bodyLogoOpacity: 0.08,
 };
 
 interface CustomTemplateProps {
@@ -51,6 +80,15 @@ const FONT_STACKS: Record<CustomTemplateConfig['fontFamily'], string> = {
   serif: "'Georgia', 'Times New Roman', serif",
   sans: "'Inter', 'Helvetica Neue', Arial, sans-serif",
   mono: "'JetBrains Mono', 'Courier New', monospace",
+};
+
+const hexToRgba = (hex: string, alpha: number): string => {
+  const clean = hex.replace('#', '');
+  const full = clean.length === 3 ? clean.split('').map(ch => ch + ch).join('') : clean;
+  const r = parseInt(full.slice(0, 2), 16) || 0;
+  const g = parseInt(full.slice(2, 4), 16) || 0;
+  const b = parseInt(full.slice(4, 6), 16) || 0;
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 };
 
 const justifyFor = (pos: 'left' | 'center' | 'right') =>
@@ -98,22 +136,56 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
     </>
   );
 
-  const nameBlock = (
+  // Bloc nom/spécialité en arabe — même rôle que le bloc FR, aligné RTL, ajouté sous celui-ci.
+  const arabicBlock = (align: 'left' | 'right' | 'center') => (
+    <>
+      {c.showArabicName && doctor.nameAr && (
+        <div dir="rtl" className="font-arabic" style={{ fontSize: `${c.arabicNameFontSize}pt`, fontWeight: 700, color: c.nameColor, lineHeight: 1.2, marginTop: 3, textAlign: align }}>{doctor.nameAr}</div>
+      )}
+      {c.showArabicSpeciality && doctor.specialtyAr && (
+        <div dir="rtl" className="font-arabic" style={{ fontSize: `${c.arabicSpecialityFontSize}pt`, marginTop: 1, opacity: 0.85, textAlign: align }}>{doctor.specialtyAr}</div>
+      )}
+    </>
+  );
+
+  const renderNameBlock = (includeArabic: boolean) => (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: justifyFor(c.namePosition) === 'center' ? 'center' : justifyFor(c.namePosition) === 'flex-end' ? 'flex-end' : 'flex-start' }}>
       {c.showName && (
-        <div style={{ fontSize: `${c.nameFontSize}pt`, fontWeight: 700, color: headerTextColor, lineHeight: 1.1 }}>{doctorName}</div>
+        <div style={{ fontSize: `${c.nameFontSize}pt`, fontWeight: 700, color: c.nameColor, lineHeight: 1.1 }}>{doctorName}</div>
       )}
       {c.showSpeciality && doctor.specialtyFr && (
-        <div style={{ fontSize: '9.5pt', marginTop: 2, color: headerTextColor, opacity: 0.85 }}>{doctor.specialtyFr}</div>
+        <div style={{ fontSize: `${c.specialityFontSize}pt`, marginTop: 2, color: headerTextColor, opacity: 0.85 }}>{doctor.specialtyFr}</div>
+      )}
+      {c.showDiplomas && doctor.diplomasFr && (
+        <div style={{ fontSize: '7.5pt', marginTop: 2, color: headerTextColor, opacity: 0.75, whiteSpace: 'pre-line' }}>{doctor.diplomasFr}</div>
       )}
       {c.showOrdreNumber && doctor.ordreNumber && (
         <div style={{ fontSize: '7.5pt', marginTop: 2, color: headerTextColor, opacity: 0.7 }}>N° Ordre {doctor.ordreNumber}</div>
       )}
+      {includeArabic && arabicBlock(c.namePosition)}
+    </div>
+  );
+  const nameBlock = renderNameBlock(true);
+
+  // Colonne arabe indépendante — même largeur que le bloc FR (grid 1fr/auto/1fr),
+  // utilisée quand le logo est centré entre les deux versions de l'en-tête.
+  const arColumnBlock = (
+    <div dir="rtl" style={{ flex: 1, textAlign: 'right' }}>
+      {c.showArabicName && doctor.nameAr && (
+        <div className="font-arabic" style={{ fontSize: `${c.arabicNameFontSize}pt`, fontWeight: 700, color: c.nameColor, lineHeight: 1.2 }}>{doctor.nameAr}</div>
+      )}
+      {c.showArabicSpeciality && doctor.specialtyAr && (
+        <div className="font-arabic" style={{ fontSize: `${c.arabicSpecialityFontSize}pt`, marginTop: 2, color: headerTextColor, opacity: 0.85 }}>{doctor.specialtyAr}</div>
+      )}
     </div>
   );
 
-  const logoBlock = c.logoUrl ? (
-    <img src={c.logoUrl} alt="" style={{ width: c.logoSize, height: c.logoSize, objectFit: 'contain' }} />
+  const logoAlignSelf = c.logoVerticalAlign === 'top' ? 'flex-start' : c.logoVerticalAlign === 'bottom' ? 'flex-end' : 'center';
+  const logoBlock = c.showLogo && c.logoUrl ? (
+    <div style={{ position: 'relative', width: c.logoSize, height: c.logoSize, padding: 6, boxSizing: 'content-box', alignSelf: logoAlignSelf }}>
+      <div className="absolute inset-0" style={{ background: c.logoBg, opacity: c.logoBgOpacity, borderRadius: 6 }} />
+      <img src={c.logoUrl} alt="" style={{ position: 'relative', width: c.logoSize, height: c.logoSize, objectFit: 'contain' }} />
+    </div>
   ) : null;
 
   const headerHeight = c.headerStyle === 'minimal' ? '26mm' : '34mm';
@@ -149,17 +221,28 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
       );
     }
     // bande
+    if (c.logoPosition === 'center') {
+      // Logo centré entre deux colonnes de largeur égale (FR à gauche, AR à droite),
+      // comme dans le design "Style classique" d'origine. Les deux colonnes gardent
+      // la même largeur même quand la version arabe est masquée.
+      return (
+        <div className="absolute left-0 right-0 top-0" style={{ height: headerHeight, background: hexToRgba(c.headerColor, c.headerBgOpacity) }}>
+          <div className="h-full grid items-center px-[14mm]" style={{ gridTemplateColumns: '1fr auto 1fr', gap: '4mm' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-start' }}>{renderNameBlock(false)}</div>
+            {logoBlock}
+            {arColumnBlock}
+          </div>
+        </div>
+      );
+    }
     return (
-      <div className="absolute left-0 right-0 top-0" style={{ height: headerHeight, background: c.headerColor }}>
+      <div className="absolute left-0 right-0 top-0" style={{ height: headerHeight, background: hexToRgba(c.headerColor, c.headerBgOpacity) }}>
         <div className="h-full flex items-center justify-between px-[14mm]">
           {c.logoPosition === 'left' && logoBlock}
           <div style={{ flex: 1, display: 'flex', justifyContent: justifyFor(c.namePosition), paddingLeft: c.logoPosition === 'left' ? 12 : 0, paddingRight: c.logoPosition === 'right' ? 12 : 0 }}>
             {nameBlock}
           </div>
           {c.logoPosition === 'right' && logoBlock}
-          {c.logoPosition === 'center' && (
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-1.5">{logoBlock}</div>
-          )}
           <div className="text-right shrink-0" style={{ fontSize: '7.8pt', color: '#ffffff', opacity: 0.9 }}>{contactLines}</div>
         </div>
       </div>
@@ -189,9 +272,11 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
   function nameBlockWithColor(accent: string) {
     return (
       <div style={{ display: 'flex', flexDirection: 'column' }}>
-        {c.showName && <div style={{ fontSize: `${c.nameFontSize}pt`, fontWeight: 700, color: accent, lineHeight: 1.1 }}>{doctorName}</div>}
-        {c.showSpeciality && doctor.specialtyFr && <div style={{ fontSize: '9.5pt', marginTop: 2, color: '#374151' }}>{doctor.specialtyFr}</div>}
+        {c.showName && <div style={{ fontSize: `${c.nameFontSize}pt`, fontWeight: 700, color: c.nameColor, lineHeight: 1.1 }}>{doctorName}</div>}
+        {c.showSpeciality && doctor.specialtyFr && <div style={{ fontSize: `${c.specialityFontSize}pt`, marginTop: 2, color: '#374151' }}>{doctor.specialtyFr}</div>}
+        {c.showDiplomas && doctor.diplomasFr && <div style={{ fontSize: '7.5pt', marginTop: 2, color: '#6b7280', whiteSpace: 'pre-line' }}>{doctor.diplomasFr}</div>}
         {c.showOrdreNumber && doctor.ordreNumber && <div style={{ fontSize: '7.5pt', marginTop: 2, color: '#6b7280' }}>N° Ordre {doctor.ordreNumber}</div>}
+        {arabicBlock('left')}
       </div>
     );
   }
@@ -203,6 +288,35 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
     : undefined;
 
   const footerHeight = c.footerStyle === 'vague' ? '30mm' : '20mm';
+
+  // Coordonnées du pied de page — indépendantes de celles de l'en-tête
+  // (showFooterPhone/Email/Address/Fax), avec icônes assorties.
+  function footerContactRow(accent: string) {
+    const hasAny = (c.showFooterPhone && doctor.phone) || (c.showFooterEmail && doctor.email)
+      || (c.showFooterAddress && doctor.addressFr) || (c.showFooterFax && doctor.fax);
+    if (!hasAny && !(c.showFooterArabicAddress && doctor.addressAr)) return null;
+    return (
+      <div style={{ color: accent }}>
+        <div className="flex flex-wrap gap-x-4 gap-y-1" style={{ fontSize: '7.8pt' }}>
+          {c.showFooterPhone && doctor.phone && (
+            <div className="flex items-center gap-1.5"><RxIcon name="phone" size={9} color={accent} strokeWidth={1.8} /><span>{doctor.phone}</span></div>
+          )}
+          {c.showFooterEmail && doctor.email && (
+            <div className="flex items-center gap-1.5"><RxIcon name="mail" size={9} color={accent} strokeWidth={1.8} /><span>{doctor.email}</span></div>
+          )}
+          {c.showFooterAddress && doctor.addressFr && (
+            <div className="flex items-center gap-1.5"><RxIcon name="address" size={9} color={accent} strokeWidth={1.8} /><span>{doctor.addressFr}</span></div>
+          )}
+          {c.showFooterFax && doctor.fax && (
+            <div className="flex items-center gap-1.5"><RxIcon name="fax" size={9} color={accent} strokeWidth={1.8} /><span>{doctor.fax}</span></div>
+          )}
+        </div>
+        {c.showFooterArabicAddress && doctor.addressAr && (
+          <div dir="rtl" className="font-arabic mt-1" style={{ fontSize: '7.8pt', textAlign: 'right' }}>{doctor.addressAr}</div>
+        )}
+      </div>
+    );
+  }
 
   const renderFooter = () => {
     const stampSignRow = (
@@ -225,7 +339,10 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
 
     if (c.footerStyle === 'bande') {
       return (
-        <div className="absolute left-0 right-0 bottom-0" style={{ height: footerHeight, background: c.headerColor }}>
+        <div className="absolute left-0 right-0 bottom-0" style={{ height: footerHeight, background: c.footerBg, color: c.footerTextColor }}>
+          <div className="absolute px-[14mm]" style={{ top: '4mm', left: 0, right: 0 }}>
+            {footerContactRow(c.footerTextColor)}
+          </div>
           {stampSignRow}
         </div>
       );
@@ -233,8 +350,11 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
     if (c.footerStyle === 'vague') {
       return (
         <div className="absolute left-0 right-0 bottom-0" style={{ height: footerHeight }}>
+          <div className="absolute px-[14mm]" style={{ top: 0, left: 0, right: 0 }}>
+            {footerContactRow('#6b7280')}
+          </div>
           <svg className="absolute bottom-0 left-0 w-full" viewBox="0 0 210 30" preserveAspectRatio="none" style={{ height: footerHeight }}>
-            <path d="M0 12 C 40 0, 80 22, 120 10 C 160 -2, 190 16, 210 8 L 210 30 L 0 30 Z" fill={c.headerColor} opacity="0.9" />
+            <path d="M0 12 C 40 0, 80 22, 120 10 C 160 -2, 190 16, 210 8 L 210 30 L 0 30 Z" fill={c.footerBg} opacity="0.9" />
           </svg>
           {stampSignRow}
         </div>
@@ -243,7 +363,10 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
     // simple
     return (
       <div className="absolute left-0 right-0 bottom-0" style={{ height: footerHeight }}>
-        <div className="absolute left-[14mm] right-[14mm]" style={{ top: 0, borderTop: `1px solid ${c.headerColor}` }} />
+        <div className="absolute left-[14mm] right-[14mm]" style={{ top: 0, borderTop: `1px solid ${c.footerBg}` }} />
+        <div className="absolute px-[14mm]" style={{ top: '2mm', left: 0, right: 0 }}>
+          {footerContactRow('#6b7280')}
+        </div>
         {stampSignRow}
       </div>
     );
@@ -379,7 +502,27 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
       {renderHeader()}
 
       <div className="absolute" style={{ left: '14mm', right: '14mm', top: bodyTop, fontSize: '8.5pt', color: '#6b7280' }}>
-        <div className="flex flex-wrap gap-4 pb-2 mb-3" style={{ borderBottom: '1px dotted #cbd5e1' }}>
+        {c.showBodyLogo && c.bodyLogoUrl && (
+          <div
+            className="absolute pointer-events-none"
+            style={{
+              top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+              width: c.bodyLogoSize ?? 130, height: c.bodyLogoSize ?? 130,
+              opacity: c.bodyLogoOpacity ?? 0.08, zIndex: 0,
+            }}
+          >
+            <img src={c.bodyLogoUrl} alt="" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </div>
+        )}
+        <div className="flex justify-center mb-3" style={{ position: 'relative', zIndex: 1 }}>
+          <span style={{
+            background: c.badgeBg, color: c.badgeColor, fontWeight: 700, letterSpacing: '1.5px',
+            fontSize: `${c.badgeFontSize}pt`, borderRadius: c.badgeRadius, padding: '6px 20px',
+          }}>
+            {c.badgeText}
+          </span>
+        </div>
+        <div className="flex flex-wrap gap-4 pb-2 mb-3" style={{ position: 'relative', zIndex: 1, borderBottom: `1px ${c.patientLineStyle} #cbd5e1` }}>
           <span>Patient : <strong style={{ color: '#111827' }}>{patient.name || ''}</strong></span>
           <span>Âge : {patient.age ?? ''}</span>
           <span>Sexe : {patient.sex || ''}</span>
@@ -387,7 +530,7 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
         </div>
 
         {c.drugListStyle === 'simple' ? (
-          <ol className="space-y-3">
+          <ol className="space-y-3" style={{ position: 'relative', zIndex: 1 }}>
             {items.map((it, i) => (
               <li key={i} style={{ breakInside: 'avoid' }}>
                 <div className="flex flex-wrap items-baseline gap-x-2">
@@ -406,7 +549,7 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
             ))}
           </ol>
         ) : c.drugListStyle === 'puces' ? (
-          <ul className="space-y-3">
+          <ul className="space-y-3" style={{ position: 'relative', zIndex: 1 }}>
             {items.map((it, i) => (
               <li key={i} className="flex gap-2.5" style={{ breakInside: 'avoid' }}>
                 <span className="shrink-0 mt-1.5 rounded-full" style={{ width: 6, height: 6, background: c.accentColor }} />
@@ -427,7 +570,9 @@ const CustomTemplate: React.FC<CustomTemplateProps> = ({ config, doctor, patient
             ))}
           </ul>
         ) : (
-          <DrugList items={items} accent={c.accentColor} />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <DrugList items={items} accent={c.accentColor} />
+          </div>
         )}
       </div>
 

@@ -63,6 +63,21 @@ export const settingsService = {
     return DEFAULT_APPEARANCE;
   },
 
+  // Réinitialise "Mon design" (CustomTemplateConfig) aux valeurs par défaut du
+  // code — supprime le config personnalisé sauvegardé et l'éventuelle mise en
+  // page libre associée (docease_rx_layout), sans toucher au reste de
+  // l'apparence (modèle sélectionné, couleur primaire, etc.).
+  resetCustomTemplate(): void {
+    try {
+      localStorage.removeItem(RX_LAYOUT_STORAGE_KEY);
+      const appearance = this.getAppearance();
+      const { customTemplateConfig, ...rest } = appearance;
+      this.saveAppearance(rest as PrescriptionAppearance);
+    } catch (error) {
+      console.error('Erreur lors de la réinitialisation de Mon design:', error);
+    }
+  },
+
   // Convertit la taille en multiplicateur pour les calculs CSS
   getFontSizeMultiplier(fontSize: FontSizeOption): number {
     const multipliers = {

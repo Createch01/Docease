@@ -9,11 +9,12 @@ import React, { useRef, useState } from 'react';
 import {
   Upload, Trash2, RefreshCw, ChevronDown, ChevronLeft, Save,
   Phone, Mail, MapPin, ShieldCheck, Globe, LayoutGrid, Palette,
-  QrCode, User, PenTool, Droplet,
+  QrCode, User, PenTool, Droplet, Printer, RotateCcw,
 } from 'lucide-react';
 import { CustomTemplateConfig, DoctorInfo } from '../types';
 import TemplateRenderer from './templates/TemplateRenderer';
 import { DEFAULT_CUSTOM_TEMPLATE_CONFIG } from './templates/CustomTemplate';
+import { settingsService } from '../services/settingsService';
 
 const PREVIEW_PATIENT = { name: 'M. Ahmed Benali', age: 45, sex: 'M' };
 const PREVIEW_ITEMS = [
@@ -22,6 +23,15 @@ const PREVIEW_ITEMS = [
 ];
 
 const HEADER_COLOR_PRESETS = ['#0d9488', '#1e3a5f', '#7c1d2e', '#2d6a4f', '#374151', '#111827'];
+
+// Palettes de couleurs "appliquer un thème" — recolore badge/accent/pied de page/nom
+// d'un coup ; chaque couleur reste modifiable individuellement ensuite.
+const COLOR_THEMES: { id: string; label: string; badge: string; accent: string; footerBg: string; footerText: string; nameColor: string }[] = [
+  { id: 'classique', label: 'Classique', badge: '#12496B', accent: '#12496B', footerBg: '#E53E3E', footerText: '#FFFFFF', nameColor: '#0B2A5B' },
+  { id: 'emeraude', label: 'Émeraude', badge: '#0F6E5C', accent: '#0F6E5C', footerBg: '#0F6E5C', footerText: '#FFFFFF', nameColor: '#0B4D3F' },
+  { id: 'ardoise', label: 'Ardoise', badge: '#4A5568', accent: '#4A5568', footerBg: '#2D3748', footerText: '#FFFFFF', nameColor: '#2D3748' },
+  { id: 'bordeaux', label: 'Bordeaux', badge: '#7B2D3B', accent: '#7B2D3B', footerBg: '#7B2D3B', footerText: '#FFFFFF', nameColor: '#5C1F2B' },
+];
 
 const input40 = 'w-full h-10 px-3 rounded-md border text-[13px] outline-none transition-all bg-white';
 const inputStyle = { borderColor: 'var(--color-border)', color: 'var(--color-text)' } as React.CSSProperties;
@@ -118,17 +128,29 @@ interface CustomTemplateEditorProps {
 }
 
 const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, initialConfig, onSave, onCancel }) => {
-  const [config, setConfig] = useState<CustomTemplateConfig>(initialConfig || DEFAULT_CUSTOM_TEMPLATE_CONFIG);
+  const [config, setConfig] = useState<CustomTemplateConfig>({ ...DEFAULT_CUSTOM_TEMPLATE_CONFIG, ...initialConfig });
   const [openSection, setOpenSection] = useState('header');
   const previewRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.5);
 
   const logoInputRef = useRef<HTMLInputElement>(null);
+  const bodyLogoInputRef = useRef<HTMLInputElement>(null);
   const stampInputRef = useRef<HTMLInputElement>(null);
   const signatureInputRef = useRef<HTMLInputElement>(null);
 
   const set = <K extends keyof CustomTemplateConfig>(key: K, value: CustomTemplateConfig[K]) =>
     setConfig(prev => ({ ...prev, [key]: value }));
+
+  const applyTheme = (t: typeof COLOR_THEMES[number]) => {
+    setConfig(prev => ({
+      ...prev,
+      badgeBg: t.badge,
+      accentColor: t.accent,
+      footerBg: t.footerBg,
+      footerTextColor: t.footerText,
+      nameColor: t.nameColor,
+    }));
+  };
 
   React.useEffect(() => {
     const el = previewRef.current;
@@ -148,7 +170,7 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
     return () => ro.disconnect();
   }, []);
 
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>, key: 'logoUrl' | 'stampUrl' | 'signatureUrl') => {
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>, key: 'logoUrl' | 'bodyLogoUrl' | 'stampUrl' | 'signatureUrl') => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.size > 2 * 1024 * 1024) { alert('Image trop volumineuse (max 2 Mo).'); return; }
@@ -161,6 +183,13 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
   };
 
   const previewDoctor: DoctorInfo = { ...doctor };
+
+  const handleReset = () => {
+    if (!window.confirm('Réinitialiser "Mon design" aux valeurs par défaut ? Toute personnalisation (logo, couleurs, textes...) sera perdue.')) return;
+    settingsService.resetCustomTemplate();
+    setConfig(DEFAULT_CUSTOM_TEMPLATE_CONFIG);
+    onSave(DEFAULT_CUSTOM_TEMPLATE_CONFIG);
+  };
 
   return (
     <div className="flex gap-5 animate-in" style={{ height: '100%', minWidth: 'min-content' }}>
@@ -181,25 +210,57 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
               <ChevronLeft size={16} />
             </button>
           )}
-          <div>
+          <div className="flex-1 min-w-0">
             <h3 className="text-[14.5px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Mon design personnalisé</h3>
             <p className="text-[11px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Créez votre propre ordonnance.</p>
           </div>
+          <button
+            type="button"
+            onClick={handleReset}
+            title="Efface la personnalisation enregistrée et recharge les valeurs par défaut du code actuel"
+            className="shrink-0 h-8 px-2.5 rounded-lg text-[11px] font-medium flex items-center gap-1.5 transition-all border hover:opacity-80"
+            style={{ borderColor: 'var(--color-danger)', color: 'var(--color-danger)' }}
+          >
+            <RotateCcw size={12} /> Réinitialiser ce design
+          </button>
         </div>
 
         <div className="flex-1 overflow-y-auto scrollbar-hide px-3 py-3 space-y-2.5">
 
+          {/* ── Thème de couleurs (bannière) ── */}
+          <div className="rounded-lg border px-3.5 py-3" style={{ borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' }}>
+            <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Thème de couleurs</span>
+            <div className="grid grid-cols-4 gap-2">
+              {COLOR_THEMES.map(t => (
+                <button key={t.id} type="button" onClick={() => applyTheme(t)} className="flex flex-col items-center gap-1" title={t.label}>
+                  <span className="rounded-full" style={{ width: 26, height: 26, background: t.badge, border: '1px solid var(--color-border)' }} />
+                  <span className="text-[9px]" style={{ color: 'var(--color-text-subtle)' }}>{t.label}</span>
+                </button>
+              ))}
+            </div>
+            <p className="text-[10px] mt-2" style={{ color: 'var(--color-text-faint)' }}>
+              Applique une palette d'un coup ; chaque couleur reste modifiable ensuite dans les sections ci-dessous.
+            </p>
+          </div>
+
           {/* ── En-tête ── */}
           <AccordionItem title="En-tête" icon={<LayoutGrid size={13} />} isOpen={openSection === 'header'} onToggle={() => setOpenSection(s => s === 'header' ? '' : 'header')}>
             <div>
-              <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Logo</span>
+              <div className="flex items-center justify-between mb-2">
+                <span className={sectionLabel} style={{ color: 'var(--color-text)', margin: 0 }}>Logo</span>
+                <ToggleRow label="" checked={config.showLogo} onChange={v => set('showLogo', v)} />
+              </div>
               <div className="grid grid-cols-3 gap-2.5">
                 <UploadSlot label="Logo" url={config.logoUrl} onPick={() => logoInputRef.current?.click()} onClear={() => set('logoUrl', null)} />
               </div>
               <input type="file" ref={logoInputRef} onChange={e => handleUpload(e, 'logoUrl')} className="hidden" accept="image/png,image/jpeg" />
               <div className="mt-2.5">
-                <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Position</span>
+                <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Position horizontale</span>
                 <SegButtons options={[{ id: 'left', label: 'Gauche' }, { id: 'center', label: 'Centre' }, { id: 'right', label: 'Droite' }]} value={config.logoPosition} onChange={v => set('logoPosition', v)} />
+              </div>
+              <div className="mt-2.5">
+                <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Position verticale</span>
+                <SegButtons options={[{ id: 'top', label: 'Haut' }, { id: 'center', label: 'Centre' }, { id: 'bottom', label: 'Bas' }]} value={config.logoVerticalAlign} onChange={v => set('logoVerticalAlign', v)} />
               </div>
               <div className="mt-2.5">
                 <div className="flex justify-between mb-1">
@@ -207,6 +268,22 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
                   <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{config.logoSize}px</span>
                 </div>
                 <input type="range" min={40} max={150} step={5} value={config.logoSize} onChange={e => set('logoSize', parseInt(e.target.value))} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+              </div>
+              <div className="mt-2.5">
+                <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Fond derrière le logo</span>
+                <div className="flex items-center gap-2">
+                  <div className="relative w-7 h-7 rounded-full border-2 shrink-0 overflow-hidden" style={{ borderColor: 'var(--color-border)' }}>
+                    <div className="absolute inset-0" style={{ background: config.logoBg }} />
+                    <input type="color" value={config.logoBg} onChange={e => set('logoBg', e.target.value)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex justify-between mb-1">
+                      <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Opacité</span>
+                      <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{Math.round(config.logoBgOpacity * 100)}%</span>
+                    </div>
+                    <input type="range" min={0} max={100} step={5} value={Math.round(config.logoBgOpacity * 100)} onChange={e => set('logoBgOpacity', parseInt(e.target.value) / 100)} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -222,14 +299,65 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
                     </div>
                     <input type="range" min={14} max={28} value={config.nameFontSize} onChange={e => set('nameFontSize', parseInt(e.target.value))} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
                   </div>
+                  <div>
+                    <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Couleur du nom</span>
+                    <div className="flex items-center gap-2">
+                      <div className="relative w-7 h-7 rounded-full border-2 shrink-0 overflow-hidden" style={{ borderColor: 'var(--color-border)' }}>
+                        <div className="absolute inset-0" style={{ background: config.nameColor }} />
+                        <input type="color" value={config.nameColor} onChange={e => set('nameColor', e.target.value)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                      </div>
+                      <input type="text" value={config.nameColor} onChange={e => set('nameColor', e.target.value)} className={`${input40} uppercase`} style={inputStyle} />
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
 
-            <ToggleRow label="Afficher la spécialité" checked={config.showSpeciality} onChange={v => set('showSpeciality', v)} />
+            <div className="pt-1 border-t" style={{ borderColor: 'var(--color-border)' }}>
+              <ToggleRow label="Afficher la spécialité" checked={config.showSpeciality} onChange={v => set('showSpeciality', v)} />
+              {config.showSpeciality && (
+                <div className="mt-2.5">
+                  <div className="flex justify-between mb-1">
+                    <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Taille spécialité</span>
+                    <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{config.specialityFontSize}px</span>
+                  </div>
+                  <input type="range" min={7} max={16} step={0.5} value={config.specialityFontSize} onChange={e => set('specialityFontSize', parseFloat(e.target.value))} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+                </div>
+              )}
+            </div>
+
+            <ToggleRow label="Diplômes / titres" checked={config.showDiplomas} onChange={v => set('showDiplomas', v)} />
+
+            <div className="pt-1 border-t space-y-3" style={{ borderColor: 'var(--color-border)' }}>
+              <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Version arabe</span>
+              <div>
+                <ToggleRow label="Nom en arabe" checked={config.showArabicName} onChange={v => set('showArabicName', v)} />
+                {config.showArabicName && (
+                  <div className="mt-2">
+                    <div className="flex justify-between mb-1">
+                      <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Taille</span>
+                      <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{config.arabicNameFontSize}px</span>
+                    </div>
+                    <input type="range" min={10} max={24} value={config.arabicNameFontSize} onChange={e => set('arabicNameFontSize', parseInt(e.target.value))} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+                  </div>
+                )}
+              </div>
+              <div>
+                <ToggleRow label="Spécialité en arabe" checked={config.showArabicSpeciality} onChange={v => set('showArabicSpeciality', v)} />
+                {config.showArabicSpeciality && (
+                  <div className="mt-2">
+                    <div className="flex justify-between mb-1">
+                      <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Taille</span>
+                      <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{config.arabicSpecialityFontSize}px</span>
+                    </div>
+                    <input type="range" min={6} max={14} step={0.5} value={config.arabicSpecialityFontSize} onChange={e => set('arabicSpecialityFontSize', parseFloat(e.target.value))} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+                  </div>
+                )}
+              </div>
+            </div>
 
             <div className="pt-1 border-t" style={{ borderColor: 'var(--color-border)' }}>
-              <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Couleur de l'en-tête</span>
+              <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Fond de l'en-tête</span>
               <div className="flex flex-wrap items-center gap-2">
                 {HEADER_COLOR_PRESETS.map(hex => (
                   <button
@@ -244,6 +372,13 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
                   <div className="absolute inset-0" style={{ background: 'conic-gradient(red, yellow, lime, cyan, blue, magenta, red)' }} />
                   <input type="color" value={config.headerColor} onChange={e => set('headerColor', e.target.value)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
                 </div>
+              </div>
+              <div className="mt-2.5">
+                <div className="flex justify-between mb-1">
+                  <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Opacité du fond</span>
+                  <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{Math.round(config.headerBgOpacity * 100)}%</span>
+                </div>
+                <input type="range" min={0} max={100} step={5} value={Math.round(config.headerBgOpacity * 100)} onChange={e => set('headerBgOpacity', parseInt(e.target.value) / 100)} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
               </div>
             </div>
 
@@ -289,6 +424,48 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
           {/* ── Corps de l'ordonnance ── */}
           <AccordionItem title="Corps de l'ordonnance" icon={<Palette size={13} />} isOpen={openSection === 'corps'} onToggle={() => setOpenSection(s => s === 'corps' ? '' : 'corps')}>
             <div>
+              <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Badge "ORDONNANCE"</span>
+              <input type="text" value={config.badgeText} onChange={e => set('badgeText', e.target.value)} className={input40} style={inputStyle} placeholder="ORDONNANCE" />
+              <div className="grid grid-cols-2 gap-2.5 mt-2.5">
+                <div>
+                  <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Couleur du badge</span>
+                  <div className="flex items-center gap-2">
+                    <div className="relative w-7 h-7 rounded-full border-2 shrink-0 overflow-hidden" style={{ borderColor: 'var(--color-border)' }}>
+                      <div className="absolute inset-0" style={{ background: config.badgeBg }} />
+                      <input type="color" value={config.badgeBg} onChange={e => set('badgeBg', e.target.value)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Couleur du texte</span>
+                  <div className="flex items-center gap-2">
+                    <div className="relative w-7 h-7 rounded-full border-2 shrink-0 overflow-hidden" style={{ borderColor: 'var(--color-border)' }}>
+                      <div className="absolute inset-0" style={{ background: config.badgeColor }} />
+                      <input type="color" value={config.badgeColor} onChange={e => set('badgeColor', e.target.value)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-2.5">
+                <div className="flex justify-between mb-1">
+                  <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Taille du texte</span>
+                  <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{config.badgeFontSize}pt</span>
+                </div>
+                <input type="range" min={8} max={18} value={config.badgeFontSize} onChange={e => set('badgeFontSize', parseInt(e.target.value))} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+              </div>
+              <div className="mt-2.5">
+                <div className="flex justify-between mb-1">
+                  <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Forme (rectangle → pilule)</span>
+                  <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{config.badgeRadius >= 60 ? 'Pilule' : `${config.badgeRadius}px`}</span>
+                </div>
+                <input type="range" min={0} max={999} step={2} value={config.badgeRadius} onChange={e => set('badgeRadius', parseInt(e.target.value))} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+              </div>
+            </div>
+            <div className="pt-1 border-t" style={{ borderColor: 'var(--color-border)' }}>
+              <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Style de la ligne patient</span>
+              <SegButtons options={[{ id: 'dotted', label: 'Pointillé' }, { id: 'dashed', label: 'Tirets' }, { id: 'solid', label: 'Continu' }]} value={config.patientLineStyle} onChange={v => set('patientLineStyle', v)} />
+            </div>
+            <div className="pt-1 border-t" style={{ borderColor: 'var(--color-border)' }}>
               <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Style liste médicaments</span>
               <div className="grid grid-cols-1 gap-2">
                 {([
@@ -330,6 +507,32 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
                 <option value="mono">Monospace (Technique)</option>
               </select>
             </div>
+
+            <div className="pt-1 border-t" style={{ borderColor: 'var(--color-border)' }}>
+              <ToggleRow label="Deuxième logo dans le corps" checked={!!config.showBodyLogo} onChange={v => set('showBodyLogo', v)} />
+              {config.showBodyLogo && (
+                <div className="mt-2.5 space-y-2.5">
+                  <div className="grid grid-cols-3 gap-2.5">
+                    <UploadSlot label="Logo (corps)" url={config.bodyLogoUrl} onPick={() => bodyLogoInputRef.current?.click()} onClear={() => set('bodyLogoUrl', null)} />
+                  </div>
+                  <input type="file" ref={bodyLogoInputRef} onChange={e => handleUpload(e, 'bodyLogoUrl')} className="hidden" accept="image/png,image/jpeg" />
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Taille</span>
+                      <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{config.bodyLogoSize ?? 130}px</span>
+                    </div>
+                    <input type="range" min={60} max={220} step={10} value={config.bodyLogoSize ?? 130} onChange={e => set('bodyLogoSize', parseInt(e.target.value))} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between mb-1">
+                      <span className="text-[10.5px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Opacité</span>
+                      <span className="text-[10px]" style={{ color: 'var(--color-text-faint)', fontFamily: 'var(--font-mono)' }}>{Math.round((config.bodyLogoOpacity ?? 0.08) * 100)}%</span>
+                    </div>
+                    <input type="range" min={2} max={30} step={1} value={Math.round((config.bodyLogoOpacity ?? 0.08) * 100)} onChange={e => set('bodyLogoOpacity', parseInt(e.target.value) / 100)} className="w-full h-1.5 rounded-lg cursor-pointer" style={{ accentColor: 'var(--color-primary)' }} />
+                  </div>
+                </div>
+              )}
+            </div>
           </AccordionItem>
 
           {/* ── Pied de page ── */}
@@ -340,7 +543,7 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
                 {([
                   { id: 'simple', label: 'Simple', hint: 'Ligne + texte' },
                   { id: 'bande', label: 'Bande colorée', hint: '' },
-                  { id: 'vague', label: 'Vague SVG', hint: 'Teal par défaut' },
+                  { id: 'vague', label: 'Vague SVG', hint: '' },
                 ] as const).map(opt => (
                   <button
                     key={opt.id}
@@ -356,6 +559,35 @@ const CustomTemplateEditor: React.FC<CustomTemplateEditorProps> = ({ doctor, ini
                   </button>
                 ))}
               </div>
+            </div>
+
+            <div className="pt-1 border-t" style={{ borderColor: 'var(--color-border)' }}>
+              <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Couleurs du pied de page</span>
+              <div className="grid grid-cols-2 gap-2.5">
+                <div>
+                  <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Fond</span>
+                  <div className="relative w-7 h-7 rounded-full border-2 shrink-0 overflow-hidden" style={{ borderColor: 'var(--color-border)' }}>
+                    <div className="absolute inset-0" style={{ background: config.footerBg }} />
+                    <input type="color" value={config.footerBg} onChange={e => set('footerBg', e.target.value)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                  </div>
+                </div>
+                <div>
+                  <span className="text-[10.5px] font-medium mb-1 block" style={{ color: 'var(--color-text-subtle)' }}>Texte</span>
+                  <div className="relative w-7 h-7 rounded-full border-2 shrink-0 overflow-hidden" style={{ borderColor: 'var(--color-border)' }}>
+                    <div className="absolute inset-0" style={{ background: config.footerTextColor }} />
+                    <input type="color" value={config.footerTextColor} onChange={e => set('footerTextColor', e.target.value)} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="pt-1 border-t space-y-3" style={{ borderColor: 'var(--color-border)' }}>
+              <span className={sectionLabel} style={{ color: 'var(--color-text)' }}>Coordonnées affichées</span>
+              <div className="flex items-center gap-2.5"><Phone size={13} style={{ color: 'var(--color-text-faint)' }} /><div className="flex-1"><ToggleRow label="Téléphone" checked={config.showFooterPhone} onChange={v => set('showFooterPhone', v)} /></div></div>
+              <div className="flex items-center gap-2.5"><Mail size={13} style={{ color: 'var(--color-text-faint)' }} /><div className="flex-1"><ToggleRow label="Email" checked={config.showFooterEmail} onChange={v => set('showFooterEmail', v)} /></div></div>
+              <div className="flex items-center gap-2.5"><MapPin size={13} style={{ color: 'var(--color-text-faint)' }} /><div className="flex-1"><ToggleRow label="Adresse" checked={config.showFooterAddress} onChange={v => set('showFooterAddress', v)} /></div></div>
+              <ToggleRow label="Adresse en arabe" checked={config.showFooterArabicAddress} onChange={v => set('showFooterArabicAddress', v)} />
+              <div className="flex items-center gap-2.5"><Printer size={13} style={{ color: 'var(--color-text-faint)' }} /><div className="flex-1"><ToggleRow label="Fax" checked={config.showFooterFax} onChange={v => set('showFooterFax', v)} /></div></div>
             </div>
 
             <div className="pt-1 border-t space-y-3" style={{ borderColor: 'var(--color-border)' }}>

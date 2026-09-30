@@ -311,23 +311,54 @@ export interface RxLayoutConfig {
 export interface CustomTemplateConfig {
   headerStyle: 'minimal' | 'bande' | 'encadre';
   headerColor: string;
+  headerBgOpacity: number;
   logoUrl?: string | null;
+  showLogo: boolean;
   logoPosition: 'left' | 'center' | 'right';
+  logoVerticalAlign: 'top' | 'center' | 'bottom';
   logoSize: number;
+  logoBg: string;
+  logoBgOpacity: number;
   showName: boolean;
   namePosition: 'left' | 'center' | 'right';
   nameFontSize: number;
+  nameColor: string;
   showSpeciality: boolean;
+  specialityFontSize: number;
+  showDiplomas: boolean;
+  showArabicName: boolean;
+  arabicNameFontSize: number;
+  showArabicSpeciality: boolean;
+  arabicSpecialityFontSize: number;
   showPhone: boolean;
   showEmail: boolean;
   showAddress: boolean;
   showOrdreNumber: boolean;
   showWebsite: boolean;
   website?: string;
+  badgeText: string;
+  badgeBg: string;
+  badgeColor: string;
+  badgeFontSize: number;
+  badgeRadius: number;
+  patientLineStyle: 'dotted' | 'dashed' | 'solid';
   drugListStyle: 'barre' | 'simple' | 'puces';
   accentColor: string;
   fontFamily: 'serif' | 'sans' | 'mono';
   footerStyle: 'simple' | 'bande' | 'vague';
+
+  // Couleurs du pied de page — indépendantes de headerColor pour permettre un
+  // pied de page rouge/blanc distinct d'un en-tête d'une autre couleur.
+  footerBg: string;
+  footerTextColor: string;
+  // Coordonnées affichées dans le pied de page — indépendantes des toggles
+  // showPhone/showEmail/showAddress de l'en-tête.
+  showFooterPhone: boolean;
+  showFooterEmail: boolean;
+  showFooterAddress: boolean;
+  showFooterFax: boolean;
+  showFooterArabicAddress: boolean;
+
   showStamp: boolean;
   stampUrl?: string | null;
   stampPosition: 'left' | 'right';
@@ -338,6 +369,13 @@ export interface CustomTemplateConfig {
   qrCodeContent: string;
   watermark: 'none' | 'initials' | 'cross';
   watermarkOpacity: number;
+
+  // Deuxième logo, affiché au centre du corps de l'ordonnance (sous le badge,
+  // derrière la liste des médicaments) — indépendant du logo d'en-tête.
+  showBodyLogo?: boolean;
+  bodyLogoUrl?: string | null;
+  bodyLogoSize?: number;
+  bodyLogoOpacity?: number;
 
   // Element-based layout configuration from the custom prescription editor
   layoutConfig?: RxLayoutConfig;
