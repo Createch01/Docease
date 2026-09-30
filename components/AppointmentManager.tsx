@@ -37,6 +37,7 @@ import {
 } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { toastService } from '../services/toastService';
+import QuickBookingModal from './appointments/QuickBookingModal';
 import { Appointment, AppointmentPriority, AppointmentStatus, AppointmentType, Patient } from '../types';
 
 type CalendarViewMode = 'week' | 'day' | 'list';
@@ -830,137 +831,16 @@ const AppointmentManager: React.FC = () => {
         )}
       </div>
 
-      {/* --- MODAL ADD / EDIT --- */}
+      {/* --- PRISE DE RDV RAPIDE / MODIFICATION --- */}
       {isAdding && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-          <div className="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl p-8 animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center mb-8">
-              <div>
-                <h3 className="text-xl font-black text-gray-900 uppercase tracking-tight">
-                  {editingId ? 'Modifier Rendez-vous' : 'Fixer Rendez-vous'}
-                </h3>
-                <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mt-1">
-                  {editingId ? 'Correction des informations' : 'Analyse automatique par IA activée'}
-                </p>
-              </div>
-              <button onClick={() => { setIsAdding(false); setEditingId(null); setPatientSuggestions([]); resetForm(); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors text-black"><X size={20} /></button>
-            </div>
-
-            <div className="space-y-6">
-              <div className="space-y-2 relative">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Nom du Patient</label>
-                <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300" size={18} />
-                  <input
-                    type="text"
-                    value={patientSearch}
-                    onChange={e => handlePatientSearch(e.target.value)}
-                    className="w-full pl-12 pr-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black outline-none focus:ring-2 focus:ring-emerald-500"
-                    placeholder="Tapez le nom..."
-                  />
-                </div>
-
-                {/* Suggestions Dropdown (Only when adding new) */}
-                {!editingId && patientSuggestions.length > 0 && (
-                  <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-gray-100 rounded-2xl shadow-xl z-50 overflow-hidden">
-                    {patientSuggestions.map(p => (
-                      <button
-                        key={p.id}
-                        onClick={() => selectPatient(p)}
-                        className="w-full text-left px-5 py-3 hover:bg-emerald-50 border-b border-gray-50 last:border-0 flex justify-between items-center group"
-                      >
-                        <div>
-                          <p className="font-black text-gray-900 uppercase text-xs">{p.name}</p>
-                          <p className="text-[9px] text-gray-400 font-bold uppercase tracking-widest">{p.phone || 'Sans tel'}</p>
-                        </div>
-                        <Plus size={14} className="text-emerald-300 group-hover:text-emerald-600 transition-colors" />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Numéro de téléphone</label>
-                <input
-                  type="text"
-                  value={newApp.phone}
-                  onChange={e => setNewApp({ ...newApp, phone: e.target.value })}
-                  className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black outline-none focus:ring-2 focus:ring-emerald-500"
-                  placeholder="06..."
-                />
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Date</label>
-                  <input
-                    type="date"
-                    value={newApp.date}
-                    onChange={e => setNewApp({ ...newApp, date: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black text-sm outline-none focus:ring-2 focus:ring-emerald-500"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Heure</label>
-                  <input
-                    type="time"
-                    value={newApp.time}
-                    onChange={e => setNewApp({ ...newApp, time: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black text-sm outline-none focus:ring-2 focus:ring-emerald-500"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Durée</label>
-                  <select
-                    value={newApp.duration}
-                    onChange={e => setNewApp({ ...newApp, duration: parseInt(e.target.value, 10) })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black text-sm outline-none focus:ring-2 focus:ring-emerald-500"
-                  >
-                    {[15, 30, 45, 60].map(d => <option key={d} value={d}>{d} min</option>)}
-                  </select>
-                </div>
-                <div className="space-y-2">
-                  <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1">Type</label>
-                  <select
-                    value={newApp.consultationType}
-                    onChange={e => setNewApp({ ...newApp, consultationType: e.target.value as AppointmentType })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black text-sm outline-none focus:ring-2 focus:ring-emerald-500"
-                  >
-                    {CONSULTATION_TYPES.map(ct => <option key={ct} value={ct}>{ct}</option>)}
-                  </select>
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1 flex items-center justify-between">
-                  <span>Raison / Note</span>
-                  <span className="flex items-center gap-1 text-[8px] text-indigo-500 font-black animate-pulse">
-                    <BrainCircuit size={10} /> Analyse IA
-                  </span>
-                </label>
-                <textarea
-                  value={newApp.note}
-                  onChange={e => setNewApp({ ...newApp, note: e.target.value })}
-                  className="w-full px-5 py-4 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-black h-24 resize-none outline-none focus:ring-2 focus:ring-emerald-500"
-                  placeholder="Motif de la visite (ex: Douleur thoracique, Contrôle annuel...)"
-                />
-              </div>
-
-              <button
-                onClick={handleSaveAppointment}
-                disabled={isClassifying}
-                className={`w-full py-5 text-white font-black rounded-2xl shadow-xl uppercase tracking-widest transition-all active:scale-[0.98] flex items-center justify-center gap-3 ${editingId ? 'bg-blue-600 hover:bg-blue-700 shadow-blue-100' : 'bg-emerald-600 hover:bg-emerald-700 shadow-emerald-100'}`}
-              >
-                {isClassifying ? <Loader2 className="animate-spin" size={20} /> : <Zap size={18} />}
-                {isClassifying ? 'Classification IA en cours...' : editingId ? 'Mettre à jour' : 'Confirmer Rendez-vous'}
-              </button>
-            </div>
-          </div>
-        </div>
+        <QuickBookingModal
+          appointments={allAppointments}
+          settings={dataService.getAppointmentSettings()}
+          initialDate={newApp.date}
+          initialTime={newApp.time || undefined}
+          editing={editingId ? allAppointments.find(a => a.id === editingId) : undefined}
+          onClose={() => { setIsAdding(false); setEditingId(null); resetForm(); }}
+        />
       )}
       {/* --- DETAIL PANEL (clic sur un RDV dans la grille) --- */}
       {detailAppointment && (

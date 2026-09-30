@@ -290,3 +290,13 @@ export const setAppointmentStatus = async (app: Appointment, status: Appointment
   await dataService.saveAppointment(updated);
   return updated;
 };
+
+// ─── Teinte de la pastille de capacité : vert < 70 %, orange < 100 %, rouge = complet ───
+export type CapacityTone = 'ok' | 'warn' | 'full';
+export const capacityTone = (active: number, max: number): CapacityTone =>
+  active >= max ? 'full' : active / max >= 0.7 ? 'warn' : 'ok';
+export const TONE_STYLE: Record<CapacityTone, { bg: string; fg: string; dot: string }> = {
+  ok: { bg: 'var(--color-secondary-50)', fg: '#1F7A5C', dot: 'var(--color-secondary)' },
+  warn: { bg: 'var(--color-warning-50)', fg: 'var(--color-warning-800)', dot: 'var(--color-warning-hover)' },
+  full: { bg: 'var(--color-danger-50)', fg: 'var(--color-danger-700)', dot: 'var(--color-danger)' },
+};
