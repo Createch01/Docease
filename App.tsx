@@ -5,7 +5,8 @@ import {
   LayoutDashboard, Users, FileText, Settings, BarChart3, PlusCircle,
   FolderOpen, CheckSquare, CalendarRange, Activity,
   ChevronLeft, ChevronRight, Menu, X, Bell, Database, Search,
-  PanelLeftClose, PanelLeftOpen, User, Building2, Shield,
+  PanelLeftClose, PanelLeftOpen, Building2, Shield,
+  Palette, Receipt, CalendarClock, Scale, User,
 } from 'lucide-react';
 import LoadingIndicator from './components/LoadingIndicator';
 import WaveBackground from './components/WaveBackground';
@@ -65,6 +66,7 @@ const AppContent: React.FC = () => {
   const [securityUnlocked, setSecurityUnlocked] = useState(false);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
   const [activeSettingsTab, setActiveSettingsTab] = useState<string>('profile');
+
   // SettingsPanel asks to switch category (e.g. "Modifier dans Cabinet" from
   // the ordonnance editor) — keep this sub-menu, which owns the tab, in sync.
   useEffect(() => {
@@ -75,14 +77,42 @@ const AppContent: React.FC = () => {
 
   const activeUser = dataService.getActiveUser();
 
-  // Settings sub-menu configuration
-  const settingsSubItems = [
-    { id: 'profile', label: 'Mon profil', icon: User },
-    { id: 'cabinet', label: 'Cabinet', icon: Building2 },
-    { id: 'prescription', label: 'Documents', icon: FileText },
-    { id: 'security', label: 'Sécurité', icon: Shield },
-    { id: 'users', label: 'Collaborateurs', icon: Users },
-    { id: 'database', label: 'Base de données', icon: Database },
+  // Settings sub-menu configuration — single source of truth for navigating
+  // between Paramètres categories (SettingsPanel no longer has its own nav
+  // for these). "Mon profil" (identité du médecin) and "Cabinet" (identité de
+  // la structure) are separate entries — several médecins can share one
+  // cabinet — even though both still read/write the same DoctorInfo record.
+  // Grouped by how often each category is touched, not by data type:
+  // "Identité" = how the médecin and the cabinet present themselves,
+  // "Exercice" = how the day-to-day work is configured, "Sécurité" = access
+  // and data. Comptabilité stays a top-level nav item (it's consulted daily)
+  // — Facturation & Tarifs here is config, not the financial dashboard itself.
+  const settingsGroups: { title: string; items: { id: string; label: string; icon: any }[] }[] = [
+    {
+      title: 'Identité & présentation',
+      items: [
+        { id: 'profile', label: 'Mon profil', icon: User },
+        { id: 'cabinet', label: 'Cabinet', icon: Building2 },
+        { id: 'prescription', label: 'Documents', icon: FileText },
+        { id: 'appearance', label: 'Apparence', icon: Palette },
+      ],
+    },
+    {
+      title: 'Exercice & organisation',
+      items: [
+        { id: 'agenda', label: 'Rendez-vous', icon: CalendarClock },
+        { id: 'billing', label: 'Facturation & Tarifs', icon: Receipt },
+        { id: 'legal', label: 'Conformité légale', icon: Scale },
+      ],
+    },
+    {
+      title: 'Sécurité & données',
+      items: [
+        { id: 'security', label: 'Sécurité', icon: Shield },
+        { id: 'users', label: 'Collaborateurs', icon: Users },
+        { id: 'database', label: 'Base de données', icon: Database },
+      ],
+    },
   ];
   const doctor = securityUnlocked ? dataService.getDoctorInfo() : ({} as any);
 
@@ -445,45 +475,55 @@ const AppContent: React.FC = () => {
 
                 {/* Settings sub-menu */}
                 {isSettingsItem && isSettingsExpanded && !isCollapsed && (
-                  <div style={{ overflow: 'hidden', maxHeight: isSettingsExpanded ? '400px' : '0px', transition: 'max-height var(--transition-base)' }}>
-                    {settingsSubItems.map((subItem) => (
-                      <button
-                        key={subItem.id}
-                        onClick={() => {
-                          setCurrentView('settings');
-                          setActiveSettingsTab(subItem.id);
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className="relative w-full flex items-center rounded-lg text-left transition-all"
-                        style={{
-                          gap: '8px',
-                          padding: '8px 12px 8px 40px',
-                          background: activeSettingsTab === subItem.id && currentView === 'settings' ? 'var(--color-primary-50)' : 'transparent',
-                          color: activeSettingsTab === subItem.id && currentView === 'settings' ? 'var(--color-primary)' : 'var(--color-text-muted)',
-                          fontWeight: activeSettingsTab === subItem.id && currentView === 'settings' ? 600 : 500,
-                          fontSize: '13px',
-                          transition: 'all var(--transition-base)',
-                        }}
-                        onMouseEnter={e => {
-                          if (!(activeSettingsTab === subItem.id && currentView === 'settings')) {
-                            (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
-                          }
-                        }}
-                        onMouseLeave={e => {
-                          if (!(activeSettingsTab === subItem.id && currentView === 'settings')) {
-                            (e.currentTarget as HTMLElement).style.background = 'transparent';
-                          }
-                        }}
-                      >
-                        {activeSettingsTab === subItem.id && currentView === 'settings' && (
-                          <span
-                            className="absolute left-0 rounded-r"
-                            style={{ top: '6px', bottom: '6px', width: '3px', background: 'var(--color-primary)', borderRadius: '0 3px 3px 0' }}
-                          />
-                        )}
-                        <subItem.icon size={16} className="shrink-0" />
-                        <span className="truncate flex-1" title={subItem.label}>{subItem.label}</span>
-                      </button>
+                  <div style={{ overflow: 'hidden', maxHeight: isSettingsExpanded ? '760px' : '0px', transition: 'max-height var(--transition-base)' }}>
+                    {settingsGroups.map((group, groupIndex) => (
+                      <div key={group.title} style={{ marginTop: groupIndex === 0 ? 0 : '6px' }}>
+                        <div
+                          className="truncate"
+                          style={{ padding: '6px 12px 4px 40px', fontSize: '10px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--color-text-faint)' }}
+                        >
+                          {group.title}
+                        </div>
+                        {group.items.map((subItem) => (
+                          <button
+                            key={subItem.id}
+                            onClick={() => {
+                              setCurrentView('settings');
+                              setActiveSettingsTab(subItem.id);
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className="relative w-full flex items-center rounded-lg text-left transition-all"
+                            style={{
+                              gap: '8px',
+                              padding: '8px 12px 8px 40px',
+                              background: activeSettingsTab === subItem.id && currentView === 'settings' ? 'var(--color-primary-50)' : 'transparent',
+                              color: activeSettingsTab === subItem.id && currentView === 'settings' ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                              fontWeight: activeSettingsTab === subItem.id && currentView === 'settings' ? 600 : 500,
+                              fontSize: '13px',
+                              transition: 'all var(--transition-base)',
+                            }}
+                            onMouseEnter={e => {
+                              if (!(activeSettingsTab === subItem.id && currentView === 'settings')) {
+                                (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
+                              }
+                            }}
+                            onMouseLeave={e => {
+                              if (!(activeSettingsTab === subItem.id && currentView === 'settings')) {
+                                (e.currentTarget as HTMLElement).style.background = 'transparent';
+                              }
+                            }}
+                          >
+                            {activeSettingsTab === subItem.id && currentView === 'settings' && (
+                              <span
+                                className="absolute left-0 rounded-r"
+                                style={{ top: '6px', bottom: '6px', width: '3px', background: 'var(--color-primary)', borderRadius: '0 3px 3px 0' }}
+                              />
+                            )}
+                            <subItem.icon size={16} className="shrink-0" />
+                            <span className="truncate flex-1" title={subItem.label}>{subItem.label}</span>
+                          </button>
+                        ))}
+                      </div>
                     ))}
                   </div>
                 )}

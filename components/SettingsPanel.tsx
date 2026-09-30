@@ -27,7 +27,7 @@ import packageJson from '../package.json';
 import { AppUser, UserRole, Permission } from '../types';
 import { useI18n, Language } from '../i18n';
 
-type SettingsTab = 'cabinet' | 'templates' | 'prescription' | 'impression' | 'security' | 'users' | 'database';
+type SettingsTab = 'profile' | 'cabinet' | 'templates' | 'prescription' | 'impression' | 'security' | 'users' | 'database';
 
 interface SettingsPanelProps {
   activeTab?: SettingsTab;
@@ -46,7 +46,7 @@ const iconInputWrap = 'flex items-center gap-2.5 px-3 h-10 rounded-md border bg-
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp }) => {
   const { t, lang, changeLanguage } = useI18n();
-  const [activeTab, setActiveTab] = useState<SettingsTab>(activeTabProp || 'cabinet');
+  const [activeTab, setActiveTab] = useState<SettingsTab>(activeTabProp || 'profile');
 
   // Keep in sync with the outer Paramètres sub-nav in App.tsx, which owns its own
   // activeSettingsTab state and re-mounts this lazily — without this, clicking a
@@ -309,6 +309,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
   );
 
   const menuItems = [
+    { id: 'profile', label: 'Profil Médecin', icon: User, color: 'text-blue-600', bg: 'bg-blue-50' },
     { id: 'cabinet', label: 'Informations cabinet', icon: Building2, color: 'text-emerald-600', bg: 'bg-emerald-50' },
     { id: 'templates', label: 'Modèles', icon: LayoutGrid, color: 'text-blue-600', bg: 'bg-blue-50' },
     { id: 'prescription', label: 'Mon design', icon: FileText, color: 'text-purple-600', bg: 'bg-purple-50' },
@@ -320,6 +321,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
 
   // Nav items rendered in the settings sub-sidebar — token-aligned, single accent color
   const navTabs: { id: SettingsTab; label: string; icon: any }[] = [
+    { id: 'profile', label: 'Mon profil', icon: User },
     { id: 'cabinet', label: 'Informations cabinet', icon: Building2 },
     { id: 'templates', label: 'Modèles', icon: LayoutGrid },
     { id: 'prescription', label: 'Mon design', icon: FileText },
@@ -397,17 +399,17 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
           <AdminLock />
         ) : (
           <>
-            {/* ═══════════ CABINET TAB (fusion Profil + Cabinet) ═══════════ */}
-            {activeTab === 'cabinet' && (
+            {/* ═══════════ PROFILE TAB ═══════════ */}
+            {activeTab === 'profile' && (
               <div className="space-y-6 max-w-4xl mx-auto animate-in">
                 <div className="flex items-center justify-between flex-wrap gap-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
-                      <Building2 size={19} />
+                      <User size={19} />
                     </div>
                     <div>
-                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Informations du cabinet</h3>
-                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Vos informations professionnelles, réutilisées automatiquement sur tous les documents.</p>
+                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Profil professionnel</h3>
+                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Vos informations personnelles affichées sur les documents.</p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
@@ -511,6 +513,30 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ activeTab: activeTabProp 
                       </div>
                     </div>
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* ═══════════ CABINET TAB ═══════════ */}
+            {activeTab === 'cabinet' && (
+              <div className="space-y-6 max-w-4xl mx-auto animate-in">
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ background: 'var(--color-primary-50)', color: 'var(--color-primary)' }}>
+                      <Building2 size={19} />
+                    </div>
+                    <div>
+                      <h3 className="text-[20px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>Informations du cabinet</h3>
+                      <p className="text-[13px] mt-0.5" style={{ color: 'var(--color-text-muted)' }}>Coordonnées et identifiants légaux.</p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={handleSaveInfo}
+                    className="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white transition-all shadow-soft hover:shadow-card active:scale-[0.98]"
+                    style={{ background: 'var(--color-primary)' }}
+                  >
+                    <Save size={15} /> Enregistrer
+                  </button>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
