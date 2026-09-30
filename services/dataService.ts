@@ -800,8 +800,12 @@ export const dataService = {
   // L'ancien meddoc_capacities est repris comme surcharges par date, sans être supprimé.
   getAppointmentSettings: (): AppointmentSettings => {
     const raw = cache[STORAGE_KEYS.APPOINTMENT_SETTINGS];
-    if (raw && raw.version === 1) return raw as AppointmentSettings;
-    return normalizeAppointmentSettings(raw, cache[STORAGE_KEYS.CAPACITIES]);
+    const legacy = cache[STORAGE_KEYS.CAPACITIES];
+    // Toujours complété (fichier partiel ou ancien) ; résultat mémorisé pour garder une référence stable.
+    if (!cache.__apptSettingsMemo || cache.__apptSettingsMemo.raw !== raw || cache.__apptSettingsMemo.legacy !== legacy) {
+      cache.__apptSettingsMemo = { raw, legacy, out: normalizeAppointmentSettings(raw, legacy) };
+    }
+    return cache.__apptSettingsMemo.out as AppointmentSettings;
   },
 
   saveAppointmentSettings: async (settings: AppointmentSettings) => {
@@ -821,6 +825,15 @@ export const dataService = {
     await dataService.saveAppointmentSettings({
       ...s, dayOverrides: { ...s.dayOverrides, [date]: { maxPerDay: Math.max(1, limit) } },
     });
+  },
+
+  // Fin de consultation : le RDV du jour du patient passe à « Terminé ».
+  markAppointmentDone: async (patientId: string) => {
+    const d = new Date();
+    const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    const app = dataService.getAppointments().find(a =>
+      a.patientId === patientId && a.date === today && (a.status === 'IN_CONSULTATION' || a.status === 'ARRIVED'));
+    if (app) await dataService.saveAppointment({ ...app, status: 'DONE' });
   },
 
   findPatientsByPhone: (phone: string): Patient[] => {

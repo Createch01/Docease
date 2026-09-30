@@ -55,6 +55,7 @@ const QuickBookingModal: React.FC<Props> = ({ appointments, settings, initialDat
   const [forcedTime, setForcedTime] = useState('');
   const [saving, setSaving] = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
+  const submitRef = useRef<HTMLButtonElement>(null);
   const datePicked = useRef(!!(editing || initialDate));
 
   const others = useMemo(() => editing ? appointments.filter(a => a.id !== editing.id) : appointments, [appointments, editing]);
@@ -106,7 +107,8 @@ const QuickBookingModal: React.FC<Props> = ({ appointments, settings, initialDat
   const matches = useMemo(() => patient || creating ? [] : searchPatients(term), [term, patient, creating]);
   useEffect(() => setHi(0), [term]);
 
-  const pickPatient = (p: Patient) => { setPatient(p); setTerm(''); setCreating(false); };
+  // Le champ de recherche disparaît : le focus passe sur « Enregistrer » pour que Entrée valide aussitôt.
+  const pickPatient = (p: Patient) => { setPatient(p); setTerm(''); setCreating(false); setTimeout(() => submitRef.current?.focus(), 0); };
   const startCreating = () => {
     const digits = term.replace(/\D/g, '');
     const isPhone = digits.length >= 4 && /^[\d\s+().-]+$/.test(term.trim());
@@ -409,7 +411,7 @@ const QuickBookingModal: React.FC<Props> = ({ appointments, settings, initialDat
           </span>
           <div className="flex gap-2">
             <button type="button" onClick={onClose} className="h-10 px-4 rounded-lg border text-[13px] font-medium bg-white" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>Annuler</button>
-            <button type="submit" disabled={!canSubmit || saving} className="h-10 px-5 rounded-lg text-[13px] font-medium text-white disabled:opacity-40 disabled:cursor-not-allowed"
+            <button ref={submitRef} type="submit" disabled={!canSubmit || saving} className="h-10 px-5 rounded-lg text-[13px] font-medium text-white disabled:opacity-40 disabled:cursor-not-allowed"
                     style={{ background: forced ? 'var(--color-danger)' : 'var(--color-primary)' }}>
               {editing ? 'Enregistrer' : forced ? 'Enregistrer l\'urgence' : 'Enregistrer'}
             </button>

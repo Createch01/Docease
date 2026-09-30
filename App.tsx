@@ -32,6 +32,9 @@ const SettingsPanel = React.lazy(() => import('./components/SettingsPanel')) as 
 const Analytics = React.lazy(() => import('./components/Analytics'));
 const PatientDossier = React.lazy(() => import('./components/PatientDossier'));
 const TaskManager = React.lazy(() => import('./components/TaskManager'));
+// Raccourci de recherche affiché selon la plateforme (Ctrl K sous Windows et Linux).
+const SEARCH_SHORTCUT = /Mac|iPhone|iPad/i.test(typeof navigator !== 'undefined' ? (navigator.platform || navigator.userAgent) : '') ? '⌘K' : 'Ctrl K';
+
 const AppointmentManager = React.lazy(() => import('./components/AppointmentManager'));
 const DrugCompatibility = React.lazy(() => import('./components/DrugCompatibility'));
 const NotificationCenter = React.lazy(() => import('./components/NotificationCenter'));
@@ -226,7 +229,12 @@ const AppContent: React.FC = () => {
         />
       );
       case 'patients': return <PatientManager onConsult={handleStartConsultation} />;
-      case 'appointments': return <AppointmentManager />;
+      case 'appointments': return (
+        <AppointmentManager
+          onOpenDossier={(p) => { setActivePatient(p); setCurrentView('dossier'); }}
+          onStartConsultation={handleStartConsultation}
+        />
+      );
       case 'dossier': return <PatientDossier initialPatient={activePatient} onNavigate={(view, data) => {
         if (view === 'smart-doc') setCurrentView('smart-doc');
         if (view === 'prescriptions' && data?.prescription) {
@@ -431,6 +439,8 @@ const AppContent: React.FC = () => {
             const isActive = currentView === item.id;
             const isSettingsExpanded = expandedMenu === 'settings';
             const isSettingsItem = item.id === 'settings';
+            // Seul l'élément Paramètres porte l'état « déplié » : les autres ne doivent pas s'afficher actifs.
+            const isItemExpanded = isSettingsItem && isSettingsExpanded;
 
             return (
               <div key={item.id}>
@@ -439,7 +449,7 @@ const AppContent: React.FC = () => {
                   onClick={() => {
                     if (isSettingsItem) {
                       // Toggle settings menu expansion
-                      setExpandedMenu(isSettingsExpanded ? null : 'settings');
+                      setExpandedMenu(isItemExpanded ? null : 'settings');
                     } else {
                       if (!goToView(item.id as View)) return;
                       if (item.id !== 'new-prescription') setActivePatient(null);
@@ -452,34 +462,34 @@ const AppContent: React.FC = () => {
                     gap: isCollapsed ? 0 : '10px',
                     padding: isCollapsed ? '10px' : '10px 12px',
                     justifyContent: isCollapsed ? 'center' : 'space-between',
-                    background: isActive || isSettingsExpanded ? 'var(--color-primary-50)' : 'transparent',
-                    color: isActive || isSettingsExpanded ? 'var(--color-primary)' : 'var(--color-text-muted)',
-                    fontWeight: isActive || isSettingsExpanded ? 600 : 500,
+                    background: isActive || isItemExpanded ? 'var(--color-primary-50)' : 'transparent',
+                    color: isActive || isItemExpanded ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                    fontWeight: isActive || isItemExpanded ? 600 : 500,
                     fontSize: '14px',
                     transition: 'all var(--transition-base)',
                   }}
                   onMouseEnter={e => {
-                    if (!isActive && !isSettingsExpanded) (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
+                    if (!isActive && !isItemExpanded) (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
                   }}
                   onMouseLeave={e => {
-                    if (!isActive && !isSettingsExpanded) (e.currentTarget as HTMLElement).style.background = 'transparent';
+                    if (!isActive && !isItemExpanded) (e.currentTarget as HTMLElement).style.background = 'transparent';
                   }}
                 >
                   <div className="flex items-center" style={{ gap: isCollapsed ? 0 : '10px' }}>
-                    {(isActive || isSettingsExpanded) && (
+                    {(isActive || isItemExpanded) && (
                       <span
                         className="absolute left-0 rounded-r"
                         style={{ top: '8px', bottom: '8px', width: '3px', background: 'var(--color-primary)', borderRadius: '0 3px 3px 0' }}
                       />
                     )}
-                    <item.icon size={18} strokeWidth={isActive || isSettingsExpanded ? 2.25 : 2} className="shrink-0" />
+                    <item.icon size={18} strokeWidth={isActive || isItemExpanded ? 2.25 : 2} className="shrink-0" />
                     {!isCollapsed && <span className="truncate flex-1" title={item.label}>{item.label}</span>}
                   </div>
                   {isSettingsItem && !isCollapsed && (
                     <ChevronRight
                       size={16}
                       style={{
-                        transform: isSettingsExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
+                        transform: isItemExpanded ? 'rotate(90deg)' : 'rotate(0deg)',
                         transition: 'transform var(--transition-base)',
                       }}
                     />
@@ -562,12 +572,12 @@ const AppContent: React.FC = () => {
             <Search size={16} className="shrink-0" />
             {!isCollapsed && (
               <>
-                <span className="flex-1 text-left">{t('search_patient')}</span>
+                <span className="flex-1 min-w-0 truncate text-left">{t('search_patient')}</span>
                 <kbd
-                  className="text-[10px] px-1.5 py-0.5 rounded border"
+                  className="text-[10px] px-1.5 py-0.5 rounded border shrink-0 whitespace-nowrap"
                   style={{ color: 'var(--color-text-faint)', borderColor: 'var(--color-border)', background: 'var(--color-surface)', fontFamily: 'var(--font-mono)' }}
                 >
-                  ⌘K
+                  {SEARCH_SHORTCUT}
                 </kbd>
               </>
             )}
@@ -588,7 +598,7 @@ const AppContent: React.FC = () => {
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
             >
               <LogOut size={16} />
-              <span>{t('logout') || 'Déconnexion'}</span>
+              <span>{t('logout')}</span>
             </button>
           )}
 
@@ -647,7 +657,7 @@ const AppContent: React.FC = () => {
               readOnly
               onClick={() => setIsSearchOpen(true)}
               placeholder="Rechercher un patient, médicament, ordonnance…"
-              className="w-full h-10 pl-9 pr-14 rounded-lg border text-[14px] cursor-pointer transition-all"
+              className="w-full h-10 pl-9 pr-20 rounded-lg border text-[14px] cursor-pointer text-ellipsis transition-all"
               style={{
                 borderColor: 'var(--color-border)',
                 background: 'var(--color-surface-alt)',
@@ -658,7 +668,7 @@ const AppContent: React.FC = () => {
               className="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-[11px] rounded border"
               style={{ color: 'var(--color-text-subtle)', borderColor: 'var(--color-border)', background: 'var(--color-surface)', fontFamily: 'var(--font-mono)' }}
             >
-              ⌘K
+              {SEARCH_SHORTCUT}
             </kbd>
           </div>
 

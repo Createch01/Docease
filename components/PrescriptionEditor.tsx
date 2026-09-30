@@ -329,7 +329,10 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         title: 'Bilan Consultation', tests: selectedTests, status: 'REQUESTED',
       });
     }
-    if (selectedPatientId) dataService.deleteFromQueue(selectedPatientId);
+    if (selectedPatientId) {
+      dataService.deleteFromQueue(selectedPatientId);
+      dataService.markAppointmentDone(selectedPatientId);
+    }
     onFinish();
   };
 

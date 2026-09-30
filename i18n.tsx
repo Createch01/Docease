@@ -6,7 +6,7 @@ export type Language = 'fr' | 'ar';
 export const translations = {
     fr: {
         // Nav
-        dashboard: 'Tableau de Bord',
+        dashboard: 'Tableau de bord',
         patients: 'Patients',
         appointments: 'Rendez-vous',
         prescriptions: 'Ordonnances',
@@ -15,14 +15,15 @@ export const translations = {
         tasks: 'Tâches',
         smart_doc: 'SmartDoc',
         notifications: 'Notifications',
+        logout: 'Déconnexion',
 
         // Dashboard
         welcome: 'Bienvenue',
         todays_revenue: 'Recettes du jour',
-        waiting_room: 'Salle d\'Attente',
+        waiting_room: 'Salle d\'attente',
         recent_activity: 'Activité Récente',
-        new_consultation: 'Nouvelle Consultation',
-        end_of_day: 'Fin de Journée',
+        new_consultation: 'Nouvelle consultation',
+        end_of_day: 'Fin de journée',
         in_waiting: 'EN ATTENTE',
         open_dossier: 'Ouvrir Dossier',
         consultations: 'Consultations',
@@ -262,6 +263,7 @@ export const translations = {
         tasks: 'المهام',
         smart_doc: 'SmartDoc',
         notifications: 'الإشعارات',
+        logout: 'تسجيل الخروج',
 
         // Dashboard
         welcome: 'مرحباً',
