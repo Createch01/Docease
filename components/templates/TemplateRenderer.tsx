@@ -53,7 +53,7 @@ const buildQrValue = (doctor: DoctorInfo, appearance: PrescriptionAppearance): s
         `BEGIN:VCARD\nVERSION:3.0\nN:${doctor.nameFr}\nFN:Dr ${doctor.nameFr}\n` +
         `TEL:${doctor.phone || ''}\nEMAIL:${doctor.email || ''}\nADR:;;${doctor.addressFr || ''}\nEND:VCARD`;
     const whatsapp = () => doctor.phone ? `https://wa.me/${digitsOnly(doctor.phone)}` : '';
-    const url = () => doctor.mapsUrl || appearance.website || '';
+    const url = () => doctor.mapsUrl || doctor.website || appearance.website || '';
 
     switch (appearance.qrCodeType) {
         case 'VCARD': return vCard();

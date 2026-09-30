@@ -134,6 +134,7 @@ export interface OrdonnanceControlsProps {
   onBodyLogoFile: (f: File) => void;
   onClearBodyLogo: () => void;
   onEditCabinet?: () => void;
+  onEditProfile?: () => void;
 }
 
 const EditCabinetLink: React.FC<{ onClick?: () => void; label?: string }> = ({ onClick, label = 'Modifier dans Cabinet' }) =>
@@ -144,7 +145,7 @@ const EditCabinetLink: React.FC<{ onClick?: () => void; label?: string }> = ({ o
     </button>
   ) : null;
 
-const OrdonnanceControls: React.FC<OrdonnanceControlsProps> = ({ appearance: A, set, doctor, onLogoFile, onClearLogo, onBodyLogoFile, onClearBodyLogo, onEditCabinet }) => {
+const OrdonnanceControls: React.FC<OrdonnanceControlsProps> = ({ appearance: A, set, doctor, onLogoFile, onClearLogo, onBodyLogoFile, onClearBodyLogo, onEditCabinet, onEditProfile }) => {
   const applyTheme = (t: Pick<OrdTheme, 'badge' | 'accent' | 'footerBg' | 'footerText' | 'nameColor'>) => {
     set('badge.bg', t.badge);
     set('drugList.accentColor', t.accent);
@@ -169,8 +170,8 @@ const OrdonnanceControls: React.FC<OrdonnanceControlsProps> = ({ appearance: A, 
           </svg>
           <div className="min-w-0">
             <div style={{ fontSize: 12, fontWeight: 600, color: '#9C4221' }}>INPE manquant — obligatoire sur l'ordonnance</div>
-            <div style={{ fontSize: 10.5, color: '#9C4221', opacity: 0.85, margin: '2px 0 4px' }}>La feuille affiche « — » tant qu'il n'est pas renseigné (Identifiants légaux).</div>
-            <EditCabinetLink onClick={onEditCabinet} label="Renseigner l'INPE" />
+            <div style={{ fontSize: 10.5, color: '#9C4221', opacity: 0.85, margin: '2px 0 4px' }}>La feuille affiche « — » tant qu'il n'est pas renseigné (Mon profil › Identifiants professionnels).</div>
+            <EditCabinetLink onClick={onEditProfile} label="Renseigner l'INPE" />
           </div>
         </div>
       )}
@@ -394,7 +395,10 @@ const OrdonnanceControls: React.FC<OrdonnanceControlsProps> = ({ appearance: A, 
       <Section title="Coordonnées du cabinet" defaultOpen={false} icon={<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" /></svg>}>
         <div className="flex items-center justify-between gap-2" style={{ marginTop: -2, marginBottom: 10 }}>
           <p style={{ fontSize: 10.5, color: T.faint }}>Lecture seule — issues de votre profil et du cabinet.</p>
-          <EditCabinetLink onClick={onEditCabinet} />
+          <span className="flex items-center gap-3 shrink-0">
+            <EditCabinetLink onClick={onEditProfile} label="Mon profil" />
+            <EditCabinetLink onClick={onEditCabinet} />
+          </span>
         </div>
         <dl className="space-y-1.5" style={{ margin: 0 }}>
           {DOCTOR_FIELDS.map(([k, label, dir]) => (

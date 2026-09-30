@@ -112,6 +112,9 @@ export interface DoctorInfo {
   email: string;
   gsm?: string;
   fax?: string;
+  // Site web du cabinet. Anciennement dans PrescriptionAppearance.website, qui
+  // reste lu en secours tant que ce champ n'a pas été enregistré (Cabinet).
+  website?: string;
   logoUrl?: string;
   logoOpacity: number;
   logoScale: number;

@@ -1,12 +1,11 @@
 
-import React, { useState, Suspense, useEffect } from 'react';
+import React, { useState, Suspense, useEffect, useRef } from 'react';
 import { I18nProvider, useI18n } from './i18n';
 import {
   LayoutDashboard, Users, FileText, Settings, BarChart3, PlusCircle,
   FolderOpen, CheckSquare, CalendarRange, Activity,
   ChevronLeft, ChevronRight, Menu, X, Bell, Database, Search,
-  PanelLeftClose, PanelLeftOpen, Building2, Shield,
-  Palette, Receipt, CalendarClock, Scale, User,
+  PanelLeftClose, PanelLeftOpen,
 } from 'lucide-react';
 import LoadingIndicator from './components/LoadingIndicator';
 import WaveBackground from './components/WaveBackground';
@@ -19,6 +18,11 @@ import { autoImportService } from './services/autoImportService';
 import { securityService } from './services/securityService';
 import { Patient, AppUser, Permission, PrescriptionDraft } from './types';
 import { LogOut, BookOpen } from 'lucide-react';
+import {
+  SettingsRoute, DEFAULT_SETTINGS_ROUTE, getSection, isSettingsHash, normalizeRoute,
+  parseSettingsHash, sameRoute, settingsHash, visibleSettingsGroups,
+} from './components/settings/settingsRoutes';
+import { unsavedChanges } from './components/settings/unsavedChanges';
 
 // Lazy loading components for code splitting
 const Dashboard = React.lazy(() => import('./components/Dashboard')) as React.LazyExoticComponent<React.ComponentType<any>>;
@@ -48,7 +52,10 @@ const App: React.FC = () => {
 
 const AppContent: React.FC = () => {
   const { t, lang, dir } = useI18n();
-  const [currentView, setCurrentView] = useState<View>('dashboard');
+  // Un lien #/settings/... ouvre directement la bonne page des Paramètres
+  // (route invalide → Mon profil).
+  const initialSettingsHash = isSettingsHash(window.location.hash);
+  const [currentView, setCurrentView] = useState<View>(initialSettingsHash ? 'settings' : 'dashboard');
   const [activePatient, setActivePatient] = useState<Patient | null>(null);
   const [activePrescription, setActivePrescription] = useState<any | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -64,56 +71,68 @@ const AppContent: React.FC = () => {
   const [securityChecked, setSecurityChecked] = useState(false);
   const [securityConfigured, setSecurityConfigured] = useState(false);
   const [securityUnlocked, setSecurityUnlocked] = useState(false);
-  const [expandedMenu, setExpandedMenu] = useState<string | null>(null);
-  const [activeSettingsTab, setActiveSettingsTab] = useState<string>('profile');
-
-  // SettingsPanel asks to switch category (e.g. "Modifier dans Cabinet" from
-  // the ordonnance editor) — keep this sub-menu, which owns the tab, in sync.
-  useEffect(() => {
-    const onTab = (e: Event) => setActiveSettingsTab((e as CustomEvent<string>).detail);
-    window.addEventListener('docease:settings-tab', onTab);
-    return () => window.removeEventListener('docease:settings-tab', onTab);
-  }, []);
+  const [expandedMenu, setExpandedMenu] = useState<string | null>(initialSettingsHash ? 'settings' : null);
+  const [settingsRoute, setSettingsRoute] = useState<SettingsRoute>(
+    () => parseSettingsHash(window.location.hash) || DEFAULT_SETTINGS_ROUTE,
+  );
 
   const activeUser = dataService.getActiveUser();
 
-  // Settings sub-menu configuration — single source of truth for navigating
-  // between Paramètres categories (SettingsPanel no longer has its own nav
-  // for these). "Mon profil" (identité du médecin) and "Cabinet" (identité de
-  // la structure) are separate entries — several médecins can share one
-  // cabinet — even though both still read/write the same DoctorInfo record.
-  // Grouped by how often each category is touched, not by data type:
-  // "Identité" = how the médecin and the cabinet present themselves,
-  // "Exercice" = how the day-to-day work is configured, "Sécurité" = access
-  // and data. Comptabilité stays a top-level nav item (it's consulted daily)
-  // — Facturation & Tarifs here is config, not the financial dashboard itself.
-  const settingsGroups: { title: string; items: { id: string; label: string; icon: any }[] }[] = [
-    {
-      title: 'Identité & présentation',
-      items: [
-        { id: 'profile', label: 'Mon profil', icon: User },
-        { id: 'cabinet', label: 'Cabinet', icon: Building2 },
-        { id: 'prescription', label: 'Documents', icon: FileText },
-        { id: 'appearance', label: 'Apparence', icon: Palette },
-      ],
-    },
-    {
-      title: 'Exercice & organisation',
-      items: [
-        { id: 'agenda', label: 'Rendez-vous', icon: CalendarClock },
-        { id: 'billing', label: 'Facturation & Tarifs', icon: Receipt },
-        { id: 'legal', label: 'Conformité légale', icon: Scale },
-      ],
-    },
-    {
-      title: 'Sécurité & données',
-      items: [
-        { id: 'security', label: 'Sécurité', icon: Shield },
-        { id: 'users', label: 'Collaborateurs', icon: Users },
-        { id: 'database', label: 'Base de données', icon: Database },
-      ],
-    },
-  ];
+  // ─── Navigation guardée ───
+  // Toute navigation qui ferait perdre un brouillon des Paramètres (autre vue,
+  // autre section, autre onglet dont l'état n'est pas partagé) demande
+  // confirmation. Les onglets de Cabinet partagent un brouillon : pas d'alerte.
+  const leavesSettingsDraft = (to: SettingsRoute) => {
+    if (currentView !== 'settings') return false;
+    const from = normalizeRoute(settingsRoute);
+    const next = normalizeRoute(to);
+    if (sameRoute(from, next)) return false;
+    return !(from.section === next.section && getSection(from.section).sharedDraft);
+  };
+
+  const goToView = (view: View): boolean => {
+    if (currentView === 'settings' && view !== 'settings' && !unsavedChanges.confirmLeave()) return false;
+    setCurrentView(view);
+    return true;
+  };
+
+  const openSettings = (to: SettingsRoute): boolean => {
+    if (leavesSettingsDraft(to) && !unsavedChanges.confirmLeave()) return false;
+    setSettingsRoute(normalizeRoute(to));
+    setCurrentView('settings');
+    return true;
+  };
+
+  // L'URL reflète la page des Paramètres affichée (#/settings/documents/design…)
+  // et disparaît hors des Paramètres. replaceState : ne déclenche pas hashchange.
+  useEffect(() => {
+    const target = currentView === 'settings' ? settingsHash(settingsRoute) : '';
+    if (window.location.hash === target) return;
+    window.history.replaceState(null, '', target || window.location.pathname + window.location.search);
+  }, [currentView, settingsRoute]);
+
+  // Liens #/settings/... saisis ou cliqués (href) : même garde que la sidebar.
+  // Refus → l'URL revient sur la page toujours affichée.
+  const openSettingsRef = useRef(openSettings);
+  openSettingsRef.current = openSettings;
+  const settingsRouteRef = useRef(settingsRoute);
+  settingsRouteRef.current = settingsRoute;
+  useEffect(() => {
+    const onHash = () => {
+      const hash = window.location.hash;
+      if (!isSettingsHash(hash)) return;
+      const parsed = parseSettingsHash(hash) || DEFAULT_SETTINGS_ROUTE;
+      const accepted = openSettingsRef.current(parsed);
+      if (accepted) setExpandedMenu('settings');
+      window.history.replaceState(null, '', settingsHash(accepted ? parsed : settingsRouteRef.current));
+    };
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  // Sous-menu Paramètres de la sidebar — généré depuis settingsRoutes.ts, seule
+  // navigation de niveau 1 (les onglets de niveau 2 sont en haut de page).
+  const settingsGroups = visibleSettingsGroups();
   const doctor = securityUnlocked ? dataService.getDoctorInfo() : ({} as any);
 
   useEffect(() => {
@@ -198,7 +217,7 @@ const AppContent: React.FC = () => {
       case 'dashboard': return (
         <Dashboard
           onNewPrescription={handleStartConsultation}
-          onNavigate={setCurrentView}
+          onNavigate={goToView}
           onViewDossier={(patientId) => {
             const p = dataService.getAllPatients().find(pat => pat.id === patientId || pat.name === patientId);
             if (p) setActivePatient(p);
@@ -233,7 +252,7 @@ const AppContent: React.FC = () => {
       case 'compatibility': return <DrugCompatibility />;
       case 'analytics': return <Analytics />;
       case 'tasks': return <TaskManager />;
-      case 'settings': return <SettingsPanel activeTab={activeSettingsTab as any} />;
+      case 'settings': return <SettingsPanel route={settingsRoute} onNavigate={openSettings} />;
       case 'notifications': return <NotificationCenter onNavigate={(view, data) => {
         if (data?.patientId) {
           const allPatients = dataService.getAllPatients();
@@ -422,8 +441,8 @@ const AppContent: React.FC = () => {
                       // Toggle settings menu expansion
                       setExpandedMenu(isSettingsExpanded ? null : 'settings');
                     } else {
+                      if (!goToView(item.id as View)) return;
                       if (item.id !== 'new-prescription') setActivePatient(null);
-                      setCurrentView(item.id as View);
                       setExpandedMenu(null); // Close settings menu when switching views
                       setIsMobileMenuOpen(false);
                     }
@@ -484,36 +503,28 @@ const AppContent: React.FC = () => {
                         >
                           {group.title}
                         </div>
-                        {group.items.map((subItem) => (
+                        {group.sections.map((subItem) => {
+                          const isSubActive = currentView === 'settings' && settingsRoute.section === subItem.id;
+                          return (
                           <button
                             key={subItem.id}
+                            aria-current={isSubActive ? 'page' : undefined}
                             onClick={() => {
-                              setCurrentView('settings');
-                              setActiveSettingsTab(subItem.id);
-                              setIsMobileMenuOpen(false);
+                              if (openSettings({ section: subItem.id })) setIsMobileMenuOpen(false);
                             }}
-                            className="relative w-full flex items-center rounded-lg text-left transition-all"
+                            // Survol en CSS : un style posé à la main au survol restait
+                            // collé après un changement de section (fond actif perdu).
+                            className={`relative w-full flex items-center rounded-lg text-left transition-all ${isSubActive ? 'bg-[var(--color-primary-50)]' : 'hover:bg-[var(--color-surface-alt)]'}`}
                             style={{
                               gap: '8px',
                               padding: '8px 12px 8px 40px',
-                              background: activeSettingsTab === subItem.id && currentView === 'settings' ? 'var(--color-primary-50)' : 'transparent',
-                              color: activeSettingsTab === subItem.id && currentView === 'settings' ? 'var(--color-primary)' : 'var(--color-text-muted)',
-                              fontWeight: activeSettingsTab === subItem.id && currentView === 'settings' ? 600 : 500,
+                              color: isSubActive ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                              fontWeight: isSubActive ? 600 : 500,
                               fontSize: '13px',
                               transition: 'all var(--transition-base)',
                             }}
-                            onMouseEnter={e => {
-                              if (!(activeSettingsTab === subItem.id && currentView === 'settings')) {
-                                (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)';
-                              }
-                            }}
-                            onMouseLeave={e => {
-                              if (!(activeSettingsTab === subItem.id && currentView === 'settings')) {
-                                (e.currentTarget as HTMLElement).style.background = 'transparent';
-                              }
-                            }}
                           >
-                            {activeSettingsTab === subItem.id && currentView === 'settings' && (
+                            {isSubActive && (
                               <span
                                 className="absolute left-0 rounded-r"
                                 style={{ top: '6px', bottom: '6px', width: '3px', background: 'var(--color-primary)', borderRadius: '0 3px 3px 0' }}
@@ -522,7 +533,8 @@ const AppContent: React.FC = () => {
                             <subItem.icon size={16} className="shrink-0" />
                             <span className="truncate flex-1" title={subItem.label}>{subItem.label}</span>
                           </button>
-                        ))}
+                          );
+                        })}
                       </div>
                     ))}
                   </div>
@@ -677,7 +689,7 @@ const AppContent: React.FC = () => {
 
             {/* Notifications */}
             <button
-              onClick={() => setCurrentView('notifications')}
+              onClick={() => goToView('notifications')}
               className="relative w-10 h-10 rounded-lg flex items-center justify-center transition-all"
               style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
@@ -694,7 +706,7 @@ const AppContent: React.FC = () => {
 
             {/* User avatar */}
             <button
-              onClick={() => setCurrentView('settings')}
+              onClick={() => { setExpandedMenu('settings'); goToView('settings'); }}
               className="flex items-center gap-2 h-10 px-2 rounded-lg transition-all"
               style={{ transition: 'all var(--transition-base)' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
@@ -716,7 +728,11 @@ const AppContent: React.FC = () => {
           className="flex-1 overflow-y-auto scrollbar-hide"
           style={{ padding: '24px 28px' }}
         >
-          <div style={{ maxWidth: 'var(--max-content-width)', margin: '0 auto' }}>
+          <div style={{
+            maxWidth: currentView === 'settings' && settingsRoute.section === 'documents' && normalizeRoute(settingsRoute).tab === 'design'
+              ? 'none' : 'var(--max-content-width)',
+            margin: '0 auto',
+          }}>
             <Suspense fallback={
               <div className="flex items-center justify-center py-20">
                 <LoadingIndicator />
@@ -731,13 +747,14 @@ const AppContent: React.FC = () => {
               <GlobalSearch
                 onClose={() => setIsSearchOpen(false)}
                 onSelectPatient={(p) => {
-                  setActivePatient(p);
-                  setCurrentView('dossier');
                   setIsSearchOpen(false);
+                  if (!goToView('dossier')) return;
+                  setActivePatient(p);
                 }}
                 onConsult={(p) => {
-                  handleStartConsultation(p);
                   setIsSearchOpen(false);
+                  if (currentView === 'settings' && !unsavedChanges.confirmLeave()) return;
+                  handleStartConsultation(p);
                 }}
               />
             </Suspense>

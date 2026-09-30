@@ -296,7 +296,8 @@ export function toOrdDoctor(d: DoctorInfo, website?: string): OrdDoctor {
     phone: d.phone || '',
     gsm: d.gsm || '',
     fax: d.fax || '',
-    website: website || '',
+    // DoctorInfo.website (Cabinet) ; l'ancien appearance.website reste le secours.
+    website: d.website || website || '',
     email: d.email || '',
     registrationNumber: d.ordreNumber || '',
     inpe: d.inpe || '',

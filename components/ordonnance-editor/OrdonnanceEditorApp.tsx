@@ -4,7 +4,7 @@
    config out. Never writes DoctorInfo — coordinates are edited in Cabinet.
 */
 
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CustomTemplateConfig, DoctorInfo } from '../../types';
 import { DEFAULT_CUSTOM_TEMPLATE_CONFIG } from '../templates/CustomTemplate';
@@ -35,8 +35,18 @@ interface OrdonnanceEditorAppProps {
   paperSize?: PaperSize;
   initialConfig?: CustomTemplateConfig;
   onSave: (result: OrdonnanceSaveResult) => void;
-  /* "Modifier dans Cabinet" / "Renseigner l'INPE" links. */
+  /* "Modifier dans Cabinet" (coordonnées) / "Mon profil" (INPE, N° d'ordre) links. */
   onEditCabinet?: () => void;
+  onEditProfile?: () => void;
+  /* Reports whether the design differs from the last saved one. */
+  onDirtyChange?: (dirty: boolean) => void;
+  /* The host page owns the Save button (via the ref): the toolbar only shows
+     its own while in full screen, where the host header is hidden. */
+  externalSave?: boolean;
+}
+
+export interface OrdonnanceEditorHandle {
+  save: () => void;
 }
 
 const ToolBtn: React.FC<{ onClick: () => void; title: string; children: React.ReactNode }> = ({ onClick, title, children }) => (
@@ -47,7 +57,7 @@ const ToolBtn: React.FC<{ onClick: () => void; title: string; children: React.Re
   </button>
 );
 
-const OrdonnanceEditorApp: React.FC<OrdonnanceEditorAppProps> = ({ doctor: doctorInfo, website, paperSize, initialConfig, onSave, onEditCabinet }) => {
+const OrdonnanceEditorApp = forwardRef<OrdonnanceEditorHandle, OrdonnanceEditorAppProps>(({ doctor: doctorInfo, website, paperSize, initialConfig, onSave, onEditCabinet, onEditProfile, onDirtyChange, externalSave = false }, ref) => {
   const [appearance, setAppearance] = useState<OrdonnanceAppearance>(() => {
     const a = resolveOrdonnanceAppearance(initialConfig);
     return paperSize ? { ...a, paperSize } : a;
@@ -71,6 +81,10 @@ const OrdonnanceEditorApp: React.FC<OrdonnanceEditorAppProps> = ({ doctor: docto
   useEffect(() => () => window.clearTimeout(toastTimer.current), []);
 
   const set = useCallback((path: string, value: unknown) => setAppearance(prev => setPath(prev, path, value)), []);
+
+  const [savedJson, setSavedJson] = useState(() => JSON.stringify(appearance));
+  const dirty = JSON.stringify(appearance) !== savedJson;
+  useEffect(() => { onDirtyChange?.(dirty); }, [dirty, onDirtyChange]);
 
   const page = ORD_PAGE[appearance.paperSize] || ORD_PAGE.A4;
   const date = useMemo(() => new Date().toLocaleDateString('fr-FR'), []);
@@ -121,8 +135,10 @@ const OrdonnanceEditorApp: React.FC<OrdonnanceEditorAppProps> = ({ doctor: docto
   const save = () => {
     const base: CustomTemplateConfig = { ...DEFAULT_CUSTOM_TEMPLATE_CONFIG, ...initialConfig };
     onSave({ config: { ...base, ordonnance: appearance }, paperSize: appearance.paperSize });
+    setSavedJson(JSON.stringify(appearance));
     flash('Design enregistré');
   };
+  useImperativeHandle(ref, () => ({ save }));
 
   const download = () => {
     const blob = new Blob([json], { type: 'application/json' });
@@ -218,12 +234,14 @@ const OrdonnanceEditorApp: React.FC<OrdonnanceEditorAppProps> = ({ doctor: docto
             Test d'impression
           </button>
 
-          <button type="button" onClick={save}
-                  className="rounded-md px-4 flex items-center gap-2 text-white transition-all"
-                  style={{ height: 34, background: T.primary, fontSize: 12, fontWeight: 500 }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" /><path d="M17 21v-8H7v8M7 3v5h8" /></svg>
-            Enregistrer le design
-          </button>
+          {(!externalSave || fullscreen) && (
+            <button type="button" onClick={save}
+                    className="rounded-md px-4 flex items-center gap-2 text-white transition-all"
+                    style={{ height: 34, background: T.primary, fontSize: 12, fontWeight: 500 }}>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" /><path d="M17 21v-8H7v8M7 3v5h8" /></svg>
+              Enregistrer le design
+            </button>
+          )}
         </div>
       </div>
 
@@ -232,7 +250,7 @@ const OrdonnanceEditorApp: React.FC<OrdonnanceEditorAppProps> = ({ doctor: docto
           <OrdonnanceControls appearance={appearance} set={set} doctor={doctor}
                               onLogoFile={onLogoFile} onClearLogo={onClearLogo}
                               onBodyLogoFile={onBodyLogoFile} onClearBodyLogo={onClearBodyLogo}
-                              onEditCabinet={onEditCabinet} />
+                              onEditCabinet={onEditCabinet} onEditProfile={onEditProfile} />
         </div>
 
         <div ref={mainRef} className="ed-scroll flex-1 min-w-0 overflow-auto" style={{ padding: 32 }}>
@@ -302,6 +320,7 @@ const OrdonnanceEditorApp: React.FC<OrdonnanceEditorAppProps> = ({ doctor: docto
       )}
     </div>
   );
-};
+});
+OrdonnanceEditorApp.displayName = 'OrdonnanceEditorApp';
 
 export default OrdonnanceEditorApp;
