@@ -37,6 +37,9 @@
     "dist",
     "docease-app",
     "ordonnance",
-    "components/templates/preview-bundle.tsx"
+    "components/templates/preview-bundle.tsx",
+    "DD",
+    "_temp_export_claude_design",
+    "_design_ref"
   ]
 }
