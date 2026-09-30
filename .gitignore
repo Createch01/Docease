@@ -42,3 +42,13 @@ keys*.txt
 *.pem
 *.p12
 *.pfx
+
+# Fichiers hors application (exports, archives, sorties d'outils)
+DD/
+*.zip
+*.msix
+ts_errors*.txt
+tmp_*
+vite_build_output.txt
+dev-server.log
+atc_diagnostic_output.txt
