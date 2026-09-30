@@ -452,7 +452,9 @@ export interface PrescriptionItem {
 
 export interface Patient {
   id: string;
-  name: string;
+  name: string; // « NOM Prénom » — calculé depuis lastName/firstName quand ils existent
+  lastName?: string;
+  firstName?: string;
   age: number;
   dateOfBirth?: string;
   cin?: string;
@@ -507,8 +509,10 @@ export interface VitalSign {
 export type AppointmentPriority = 'URGENT' | 'INITIAL' | 'ROUTINE';
 // PENDING/CONFIRMED = planifié (en attente ou confirmé par le cabinet) — statuts d'origine, conservés pour compat.
 // ARRIVED/IN_CONSULTATION/DONE = cycle de vie salle d'attente ajouté pour l'agenda. REJECTED = annulé.
-export type AppointmentStatus = 'PENDING' | 'CONFIRMED' | 'ARRIVED' | 'IN_CONSULTATION' | 'DONE' | 'REJECTED';
-export type AppointmentType = 'Consultation' | 'Contrôle' | 'Urgence' | 'Vaccination' | 'Autre';
+// NO_SHOW = patient absent. PENDING et CONFIRMED s'affichent tous deux « Prévu ».
+export type AppointmentStatus = 'PENDING' | 'CONFIRMED' | 'ARRIVED' | 'IN_CONSULTATION' | 'DONE' | 'NO_SHOW' | 'REJECTED';
+// Libellé du type de consultation (nom libre depuis les paramètres ; anciennes valeurs conservées).
+export type AppointmentType = string;
 
 export interface Appointment {
   id: string;
@@ -524,6 +528,30 @@ export interface Appointment {
   status: AppointmentStatus;
   aiClassification?: string;
   bookedByDoctor?: boolean; // Indique si le médecin a pris le RDV lui-même
+  typeId?: string; // Référence vers AppointmentTypeDef (consultationType garde le libellé en copie)
+  period?: 'morning' | 'afternoon'; // Demi-journée
+  queueNumber?: number; // Mode « ordre d'arrivée » : numéro du jour, jamais réattribué
+  isEmergency?: boolean; // RDV forcé ou pris sur une place réservée
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface TimeRange { start: string; end: string } // "08:30"
+export interface DaySchedule { closed: boolean; morning: TimeRange | null; afternoon: TimeRange | null }
+export interface AppointmentTypeDef { id: string; name: string; duration: number; color: string }
+export interface ClosurePeriod { id: string; from: string; to: string; label: string } // from = to : un seul jour
+
+export interface AppointmentSettings {
+  version: 1;
+  mode: 'time' | 'order';
+  weekly: DaySchedule[]; // indices 0 (dimanche) à 6
+  slotStep: number; // pas de la grille, en minutes
+  maxPerDay: number;
+  maxPerHalfDay: { morning: number | null; afternoon: number | null };
+  reservedPerDay: number; // places urgences / sans rendez-vous, non proposées en prise de RDV normale
+  types: AppointmentTypeDef[];
+  closures: ClosurePeriod[];
+  dayOverrides: Record<string, { maxPerDay: number }>; // repris de l'ancien meddoc_capacities
 }
 
 export interface DailyCapacity {

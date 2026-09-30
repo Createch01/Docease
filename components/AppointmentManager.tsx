@@ -86,6 +86,7 @@ const STATUS_META: Record<AppointmentStatus, { label: string; color: string; bg:
   IN_CONSULTATION: { label: 'En consultation', color: '#d97706', bg: '#fffbeb', border: '#fcd34d' },
   DONE: { label: 'Terminé', color: '#6b7280', bg: '#f3f4f6', border: '#d1d5db' },
   REJECTED: { label: 'Annulé', color: '#dc2626', bg: '#fef2f2', border: '#fca5a5' },
+  NO_SHOW: { label: 'Absent', color: '#9a3412', bg: '#fff7ed', border: '#fdba74' },
 };
 
 const CONSULTATION_TYPES: AppointmentType[] = ['Consultation', 'Contrôle', 'Urgence', 'Vaccination', 'Autre'];

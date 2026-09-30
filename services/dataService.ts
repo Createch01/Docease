@@ -1,7 +1,8 @@
-import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
+import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
 import { GoogleGenAI, Type } from "@google/genai";
 import { storageService } from './storageService';
 import { cryptoService } from './cryptoService';
+import { normalizeAppointmentSettings } from './appointmentDefaults';
 
 const STORAGE_KEYS = {
   DOCTOR_INFO: 'meddoc_doctor_info',
@@ -13,6 +14,7 @@ const STORAGE_KEYS = {
   TASKS: 'meddoc_tasks',
   APPOINTMENTS: 'meddoc_appointments',
   CAPACITIES: 'meddoc_capacities',
+  APPOINTMENT_SETTINGS: 'meddoc_appointment_settings',
   EXPENSES: 'meddoc_expenses',
   LAST_BACKUP: 'meddoc_last_backup',
   MEDICAL_RESOURCES: 'meddoc_medical_resources',
@@ -109,7 +111,8 @@ export const dataService = {
           key === 'PRESCRIPTIONS' ? [] :
             key === 'QUEUE' ? [] :
               key === 'DOCTOR_INFO' ? DEFAULT_DOCTOR_INFO :
-                [];
+                key === 'APPOINTMENT_SETTINGS' ? null :
+                  [];
         cache[storageKey] = await storageService.load(storageKey, defaultValue);
       });
 
@@ -613,9 +616,12 @@ export const dataService = {
 
   saveAppointment: async (appointment: Appointment) => {
     const storageKey = STORAGE_KEYS.APPOINTMENTS;
-    const all = dataService.getAppointments();
-    const idx = all.findIndex(a => a.id === appointment.id);
-    if (idx !== -1) all[idx] = appointment; else all.push(appointment);
+    const current = dataService.getAppointments();
+    const now = new Date().toISOString();
+    const idx = current.findIndex(a => a.id === appointment.id);
+    const all = idx !== -1
+      ? current.map((a, i) => i === idx ? { ...appointment, createdAt: a.createdAt || appointment.createdAt, updatedAt: now } : a)
+      : [...current, { ...appointment, createdAt: appointment.createdAt || now, updatedAt: now }];
     cache[storageKey] = all;
     await storageService.save(storageKey, all);
     notifyUpdate(storageKey);
@@ -790,19 +796,37 @@ export const dataService = {
     notifyUpdate(storageKey);
   },
 
+  // Réglages du module Rendez-vous (horaires, mode, capacité, types, fermetures).
+  // L'ancien meddoc_capacities est repris comme surcharges par date, sans être supprimé.
+  getAppointmentSettings: (): AppointmentSettings => {
+    const raw = cache[STORAGE_KEYS.APPOINTMENT_SETTINGS];
+    if (raw && raw.version === 1) return raw as AppointmentSettings;
+    return normalizeAppointmentSettings(raw, cache[STORAGE_KEYS.CAPACITIES]);
+  },
+
+  saveAppointmentSettings: async (settings: AppointmentSettings) => {
+    const storageKey = STORAGE_KEYS.APPOINTMENT_SETTINGS;
+    cache[storageKey] = settings;
+    await storageService.save(storageKey, settings);
+    notifyUpdate(storageKey);
+  },
+
   getDailyCapacity: (date: string): number => {
-    const data = localStorage.getItem(STORAGE_KEYS.CAPACITIES);
-    const capacities = data ? JSON.parse(data) : {};
-    return capacities[date] || 15; // Default 15
+    const s = dataService.getAppointmentSettings();
+    return s.dayOverrides[date]?.maxPerDay ?? s.maxPerDay;
   },
 
   setDailyCapacity: async (date: string, limit: number) => {
-    const storageKey = STORAGE_KEYS.CAPACITIES;
-    const capacities = cache[storageKey] || {};
-    capacities[date] = limit;
-    cache[storageKey] = capacities;
-    await storageService.save(storageKey, capacities);
-    notifyUpdate(storageKey);
+    const s = dataService.getAppointmentSettings();
+    await dataService.saveAppointmentSettings({
+      ...s, dayOverrides: { ...s.dayOverrides, [date]: { maxPerDay: Math.max(1, limit) } },
+    });
+  },
+
+  findPatientsByPhone: (phone: string): Patient[] => {
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length < 6) return [];
+    return dataService.getAllPatients().filter(p => (p.phone || '').replace(/\D/g, '') === digits);
   },
 
   classifyAppointmentPriority: async (note: string): Promise<{ priority: AppointmentPriority; reason: string }> => {

@@ -16,6 +16,7 @@ import ProfileSettings from './settings/ProfileSettings';
 import CabinetSettings from './settings/CabinetSettings';
 import DocumentsSettings from './settings/DocumentsSettings';
 import { AppearanceSettings, BillingSettings, PendingSectionSettings } from './settings/GeneralSettings';
+import AppointmentSettingsPage from './settings/AppointmentSettingsPage';
 import { AdminLock, SecuritySettings, UsersSettings, DatabaseSettings } from './settings/AdminSettings';
 
 interface SettingsPanelProps {
@@ -47,7 +48,7 @@ const SettingsPanel: React.FC<SettingsPanelProps> = ({ route: rawRoute, onNaviga
       case 'security': return <SecuritySettings {...page} onUnlocked={() => setAdminUnlocked(true)} />;
       case 'users': return <UsersSettings {...page} />;
       case 'database': return <DatabaseSettings {...page} />;
-      case 'agenda':
+      case 'agenda': return <AppointmentSettingsPage {...page} />;
       case 'legal':
         return <PendingSectionSettings {...page} />;
     }

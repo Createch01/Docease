@@ -13,7 +13,7 @@ import {
 // Sections sans contenu pour l'instant : routes et composants conservés, mais
 // masqués de la sidebar et inaccessibles tant que le flag est à false.
 export const SETTINGS_FEATURES = {
-  agendaSettings: false,
+  agendaSettings: true,
   legalSettings: false,
 };
 
@@ -67,8 +67,14 @@ export const SETTINGS_GROUPS: SettingsGroupDef[] = [
   {
     title: 'Exercice & organisation',
     sections: [
-      { id: 'agenda', label: 'Rendez-vous', icon: CalendarClock, enabled: SETTINGS_FEATURES.agendaSettings,
-        description: 'Configuration de l\'agenda et des rendez-vous.' },
+      { id: 'agenda', label: 'Rendez-vous', icon: CalendarClock, sharedDraft: true, enabled: SETTINGS_FEATURES.agendaSettings,
+        description: 'Horaires, mode de fonctionnement, capacité, types de consultation et fermetures.',
+        tabs: [
+          { id: 'horaires', label: 'Horaires' },
+          { id: 'capacite', label: 'Mode et capacité' },
+          { id: 'types', label: 'Types de consultation' },
+          { id: 'fermetures', label: 'Fermetures' },
+        ] },
       { id: 'billing', label: 'Facturation & Tarifs', icon: Receipt,
         description: 'Devise et tarif de consultation appliqués par défaut.' },
       { id: 'legal', label: 'Conformité légale', icon: Scale, enabled: SETTINGS_FEATURES.legalSettings,
