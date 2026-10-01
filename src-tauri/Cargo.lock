@@ -120,6 +120,7 @@ dependencies = [
  "bip39",
  "log",
  "rand 0.8.5",
+ "reqwest",
  "serde",
  "serde_json",
  "tauri",

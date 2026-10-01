@@ -1,4 +1,3 @@
-import { Video } from '@google/genai';
 import type { OrdonnanceAppearance } from './components/ordonnance-editor/ordonnanceModel';
 
 
@@ -695,7 +694,7 @@ export interface GenerateVideoParams {
   referenceImages: ImageFile[];
   styleImage: ImageFile | null;
   inputVideo: VideoFile | null;
-  inputVideoObject: Video | null;
+  inputVideoObject: unknown | null;
   isLooping: boolean;
   duration?: number;
   fps?: number;

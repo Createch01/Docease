@@ -186,11 +186,6 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
   const handleSmartParse = async () => {
     if (!smartPrompt.trim()) return;
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-    if (!apiKey || apiKey === 'undefined' || apiKey === '') {
-      alert("⚠️ Configuration manquante\n\nLa clé API Gemini n'est pas configurée.\n\nVeuillez redémarrer l'application après avoir configuré le fichier .env.local");
-      return;
-    }
     setIsParsing(true);
     setPediatricAlerts([]);
     try {
@@ -209,15 +204,9 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       setSmartPrompt('');
       runSafetyChecks(newItems);
     } catch (error: any) {
-      console.error('Smart Parse Error:', error);
-      const errorMessage = error?.message || 'Erreur inconnue';
-      if (errorMessage.includes('API key') || errorMessage.includes('401') || errorMessage.includes('403')) {
-        alert("🔑 Erreur d'authentification\n\nLa clé API Gemini est invalide ou expirée.\n\nVeuillez vérifier votre configuration dans .env.local");
-      } else if (errorMessage.includes('network') || errorMessage.includes('fetch')) {
-        alert("🌐 Erreur de connexion\n\nImpossible de se connecter au service Gemini AI.\n\nVérifiez votre connexion internet.");
-      } else {
-        alert(`❌ Erreur lors de l'analyse intelligente\n\n${errorMessage}\n\nVeuillez réessayer ou contacter le support.`);
-      }
+      // Messages en français fournis par le backend (IA désactivée, pas de clé,
+      // clé invalide, quota, réseau…). Le texte de l'ordonnance n'est pas journalisé.
+      alert('Analyse intelligente indisponible\n\n' + (error?.message || 'Erreur inconnue'));
     } finally {
       setIsParsing(false);
     }

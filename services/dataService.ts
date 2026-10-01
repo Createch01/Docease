@@ -1,7 +1,7 @@
 import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
-import { GoogleGenAI, Type } from "@google/genai";
 import { storageService } from './storageService';
 import { cryptoService } from './cryptoService';
+import { aiService } from './aiService';
 import { normalizeAppointmentSettings } from './appointmentDefaults';
 
 const STORAGE_KEYS = {
@@ -842,38 +842,15 @@ export const dataService = {
     return dataService.getAllPatients().filter(p => (p.phone || '').replace(/\D/g, '') === digits);
   },
 
+  // Suggestion IA facultative : sans IA activée ou en cas d'échec, priorité ROUTINE.
   classifyAppointmentPriority: async (note: string): Promise<{ priority: AppointmentPriority; reason: string }> => {
-    const genAI = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY || '', apiVersion: 'v1' });
-
-    const prompt = `
-      Analyse ce motif de rendez-vous médical et détermine la priorité :
-      Motif: "${note}"
-      
-      Priorités possibles : 
-      - URGENT : Menace vitale, douleur intense, détresse respiratoire, etc.
-      - INITIAL : Premier rendez-hui ou nouveau problème.
-      - ROUTINE : Suivi, renouvellement, contrôle.
-      
-      Réponds au format JSON strict :
-      { "priority": "URGENT" | "INITIAL" | "ROUTINE", "reason": "Bref raisonnement en français" }
-    `;
-
     try {
-      const response = await genAI.models.generateContent({
-        model: "gemini-2.0-flash",
-        contents: [{ role: "user", parts: [{ text: prompt }] }],
-        config: {
-          responseMimeType: "application/json"
-        }
-      });
-
-      let text = response.text || "{}";
-      text = text.replace(/```json/g, '').replace(/```/g, '').trim();
-      return JSON.parse(text);
-    } catch (error) {
-      console.error("AI Priority Error:", error);
-      return { priority: 'ROUTINE', reason: "Analyse automatique indisponible" };
-    }
+      const r = await aiService.classifyPriority(note);
+      if (['URGENT', 'INITIAL', 'ROUTINE'].includes(r.priority)) {
+        return { priority: r.priority as AppointmentPriority, reason: r.reason || '' };
+      }
+    } catch { /* IA désactivée ou indisponible */ }
+    return { priority: 'ROUTINE', reason: "Analyse automatique indisponible" };
   }
 };
 

@@ -1,3 +1,5 @@
+mod ai;
+
 use std::fs;
 use std::path::PathBuf;
 use std::sync::Mutex;
@@ -570,7 +572,16 @@ pub fn run() {
         migrate_to_recovery,
         change_master_pin,
         recover_with_phrase,
-        regenerate_recovery
+        regenerate_recovery,
+        ai::ai_status,
+        ai::ai_set_enabled,
+        ai::ai_save_key,
+        ai::ai_delete_key,
+        ai::ai_test_key,
+        ai::ai_parse_prescription,
+        ai::ai_analyze_consultation,
+        ai::ai_analyze_document,
+        ai::ai_classify_priority
     ])
     .setup(|app| {
       // Ensure data directory exists on startup
