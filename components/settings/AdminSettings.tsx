@@ -1,11 +1,11 @@
 /** Sécurité & données : Sécurité (mot de passe), Collaborateurs, Base de données. */
 import React, { useEffect, useRef, useState } from 'react';
-import { Database, Download, Eye, EyeOff, KeyRound, Lock, Plus, RefreshCw, Trash2, Upload, Users, X, Info } from 'lucide-react';
+import { Database, Download, Eye, EyeOff, KeyRound, ScrollText, Lock, Plus, RefreshCw, Trash2, Upload, Users, X, Info } from 'lucide-react';
 import { invoke } from '@tauri-apps/api/core';
 import packageJson from '../../package.json';
 import { AppUser, UserRole } from '../../types';
 import { dataService } from '../../services/dataService';
-import { securityService } from '../../services/securityService';
+import { securityService, AuditEntry } from '../../services/securityService';
 import { sessionService } from '../../services/sessionService';
 import { minPasswordLength, validatePassword } from '../../services/passwordPolicy';
 import { toastService } from '../../services/toastService';
@@ -15,6 +15,57 @@ import { AiSettingsCard } from './AiSettingsCard';
 
 const errText = (e: unknown) => (typeof e === 'string' ? e : (e as any)?.message || 'Opération impossible.');
 const ROLE_LABEL: Record<UserRole, string> = { Medecin: 'Médecin', Assistant: 'Assistante' };
+
+// ═══════════ Journal d'accès ═══════════
+const ACTION_LABEL: Record<string, string> = {
+  login: 'Connexion', login_failed: 'Connexion refusée', login_blocked: 'Connexion bloquée (trop d\'essais)',
+  lock: 'Verrouillage', access_denied: 'Accès refusé', setup: 'Installation', migration: 'Migration',
+  recover_with_phrase: 'Récupération par phrase', recovery_phrase_regenerated: 'Nouvelle phrase de récupération',
+  password_changed: 'Mot de passe changé', password_change_failed: 'Changement de mot de passe refusé',
+  password_check_failed: 'Mot de passe incorrect',
+  create_user: 'Compte créé', delete_user: 'Compte supprimé', set_user_role: 'Rôle modifié', reset_user_password: 'Mot de passe réinitialisé',
+  patients_save_identity: 'Patients modifiés', queue_save_identity: "Salle d'attente modifiée", billing_today_save: 'Encaissement saisi',
+  ai_parse_prescription: 'IA : ordonnance', ai_analyze_consultation: 'IA : consultation', ai_analyze_document: 'IA : document', ai_classify_priority: 'IA : priorité',
+};
+
+const AccessLogCard: React.FC = () => {
+  const [entries, setEntries] = useState<AuditEntry[] | null>(null);
+  const [error, setError] = useState('');
+  const load = () => securityService.auditLog(300).then(e => { setEntries(e); setError(''); }).catch(e => setError(errText(e)));
+  useEffect(() => { void load(); }, []);
+
+  return (
+    <SettingsCard title="Journal d'accès" icon={<ScrollText size={16} />}
+                  description="Qui a fait quoi et quand : connexions, refus d'accès, comptes, écritures de l'assistante. Aucun contenu patient."
+                  actions={<button type="button" onClick={load} className="text-[12px] font-medium flex items-center gap-1.5" style={{ color: 'var(--color-text-muted)' }}><RefreshCw size={13} /> Actualiser</button>}>
+      {error && <p role="alert" className="text-[12px]" style={{ color: 'var(--color-danger)' }}>{error}</p>}
+      <div className="max-h-80 overflow-y-auto rounded-lg border" style={{ borderColor: 'var(--color-border)' }}>
+        <table className="w-full text-left text-[12px]">
+          <thead style={{ background: 'var(--color-surface-alt)' }}>
+            <tr>
+              {['Date', 'Utilisateur', 'Action', 'Détail'].map(h => (
+                <th key={h} className="px-3 py-2 text-[11px] font-medium uppercase" style={{ color: 'var(--color-text-subtle)' }}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {(entries ?? []).map((e, i) => (
+              <tr key={i} style={{ borderTop: '1px solid var(--color-border)', color: e.ok ? 'var(--color-text)' : 'var(--color-danger)' }}>
+                <td className="px-3 py-1.5 whitespace-nowrap tabular-nums">{new Date(e.t).toLocaleString('fr-FR', { dateStyle: 'short', timeStyle: 'medium' })}</td>
+                <td className="px-3 py-1.5">{e.user}{e.role ? <span className="ml-1" style={{ color: 'var(--color-text-faint)' }}>({e.role === 'Medecin' ? 'médecin' : 'assistante'})</span> : null}</td>
+                <td className="px-3 py-1.5">{ACTION_LABEL[e.action] || e.action}</td>
+                <td className="px-3 py-1.5" style={{ color: 'var(--color-text-subtle)' }}>{e.detail}</td>
+              </tr>
+            ))}
+            {entries && entries.length === 0 && (
+              <tr><td colSpan={4} className="px-3 py-8 text-center italic" style={{ color: 'var(--color-text-faint)' }}>Aucun événement.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </SettingsCard>
+  );
+};
 
 // ═══════════ Sécurité ═══════════
 export const SecuritySettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => {
@@ -48,7 +99,7 @@ export const SecuritySettings: React.FC<SettingsPageProps> = ({ route, onNavigat
 
   return (
     <SettingsPageFrame route={route} onNavigate={onNavigate}>
-      <div className="max-w-2xl space-y-6">
+      <div className="max-w-3xl space-y-6">
         <SettingsCard title="Mon mot de passe" icon={<KeyRound size={16} />}
                       description={`Chaque utilisateur a son propre mot de passe (${minPasswordLength(role)} caractères minimum).`}>
           <div className="space-y-3 max-w-sm">
@@ -65,6 +116,7 @@ export const SecuritySettings: React.FC<SettingsPageProps> = ({ route, onNavigat
           </div>
         </SettingsCard>
         <AiSettingsCard />
+        <AccessLogCard />
       </div>
     </SettingsPageFrame>
   );

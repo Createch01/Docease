@@ -51,6 +51,18 @@ l'interface :
 L'interface (menus masqués, routes redirigées, `#/settings/…` effacé) n'est qu'un reflet :
 masquer un bouton ne protège rien, c'est Rust qui refuse.
 
+## Journal d'accès
+
+`audit_log.jsonl` (dossier de données) : une ligne par événement — qui, quoi, quand, réussi ou non. Il
+consigne connexions et échecs, verrouillages, **tout refus d'accès** (commande ou fichier hors liste blanche),
+gestion des comptes, changements de mot de passe, écritures de l'assistante (patients, salle d'attente,
+encaissement) et usages de l'IA. Jamais de contenu patient ni de mot de passe. Le médecin le consulte dans
+Paramètres › Sécurité (`audit_log_list`, réservé au médecin) ; rotation au-delà de 1 Mo.
+
+Il n'est **ni chiffré** (il doit enregistrer les échecs de connexion, donc sans clé de données) **ni
+infalsifiable** : quelqu'un qui a accès aux fichiers du poste peut le modifier ou le supprimer. Les simples
+lectures de données par le médecin ne sont pas journalisées.
+
 ## Limites connues
 
 - **Supprimer un compte ne révoque pas une clé déjà copiée.** La clé de données ne change

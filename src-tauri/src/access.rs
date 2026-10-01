@@ -18,6 +18,15 @@ pub enum Role {
     Assistant,
 }
 
+impl Role {
+    pub fn label(&self) -> &'static str {
+        match self {
+            Role::Medecin => "Medecin",
+            Role::Assistant => "Assistant",
+        }
+    }
+}
+
 #[derive(Clone, Debug, Serialize)]
 pub struct Session {
     pub user_id: String,
@@ -67,6 +76,8 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("billing_today_save", Rule::AnySession),
     ("clinic_public_info", Rule::AnySession),
     ("kiosk_queue", Rule::AnySession),
+    // Journal d'accès : médecin uniquement
+    ("audit_log_list", Rule::Medecin),
     // IA : médecin uniquement
     ("ai_status", Rule::Medecin),
     ("ai_set_enabled", Rule::Medecin),
@@ -115,12 +126,23 @@ pub fn check(rule: Option<Rule>, role: Option<Role>) -> Result<(), Denial> {
 
 /// Point d'entrée obligatoire de chaque commande. Renvoie la session courante
 /// (None pour une commande publique appelée sans session).
-pub fn gate(_app: &tauri::AppHandle, state: &AppState, command: &str) -> Result<Option<Session>, String> {
+pub fn gate(app: &tauri::AppHandle, state: &AppState, command: &str) -> Result<Option<Session>, String> {
     let session = state.session.lock().map_err(|e| e.to_string())?.clone();
     match check(rule_for(command), session.as_ref().map(|s| s.role)) {
         Ok(()) => Ok(session),
-        Err(d) => Err(denial_message(&d).to_string()),
+        Err(d) => {
+            // Tout refus est journalisé (qui, quelle commande).
+            super::audit::log(app, session.as_ref(), "access_denied", command, false);
+            Err(denial_message(&d).to_string())
+        }
     }
+}
+
+/// Refus d'un fichier hors liste blanche (journalisé).
+pub fn deny_file(app: &tauri::AppHandle, session: &Session, filename: &str, mode: FileMode) -> String {
+    let m = if mode == FileMode::Write { "écriture" } else { "lecture" };
+    super::audit::log(app, Some(session), "access_denied", &format!("{m} de {filename}"), false);
+    denial_message(&Denial::WrongRole).to_string()
 }
 
 /// Session obligatoire (commandes non publiques).
@@ -178,7 +200,7 @@ mod tests {
 
     const MEDECIN_ONLY: &[&str] = &[
         "migrate_to_recovery", "regenerate_recovery", "list_users", "create_user", "delete_user",
-        "set_user_role", "reset_user_password", "scan_json_files", "ai_status", "ai_set_enabled",
+        "set_user_role", "reset_user_password", "scan_json_files", "audit_log_list", "ai_status", "ai_set_enabled",
         "ai_save_key", "ai_delete_key", "ai_test_key", "ai_parse_prescription",
         "ai_analyze_consultation", "ai_analyze_document", "ai_classify_priority",
     ];
@@ -275,6 +297,7 @@ mod tests {
             include_str!("lib.rs"),
             include_str!("ai.rs"),
             include_str!("users.rs"),
+            include_str!("audit.rs"),
             include_str!("scoped.rs"),
         ];
         let mut seen = Vec::new();

@@ -1,5 +1,6 @@
 mod access;
 mod ai;
+mod audit;
 mod scoped;
 mod users;
 mod util;
@@ -236,7 +237,7 @@ fn collect_encrypted_files(dir: &PathBuf, out: &mut Vec<PathBuf>) {
 /// install is on the current wrapped-key scheme and `key_salt` is gone for good.
 #[tauri::command]
 fn migrate_to_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin: String) -> Result<String, String> {
-    access::gate(&app, &state, "migrate_to_recovery")?;
+    let session = access::gate(&app, &state, "migrate_to_recovery")?;
     let dir = data_dir(&app)?;
     let (path, meta) = read_meta_in(&dir)?;
     let key_salt = meta.key_salt.clone().ok_or("Cette installation est déjà migrée.".to_string())?;
@@ -278,6 +279,7 @@ fn migrate_to_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin
 
     *state.key.lock().map_err(|e| e.to_string())? = Some(data_key);
 
+    audit::log(&app, session.as_ref(), "migration", "clé de récupération", true);
     // Passage au schéma « un compte par utilisateur » (non bloquant : réessayé au
     // prochain déverrouillage si cela échoue).
     match users::migrate_to_users(&dir, &data_key, users::DoctorSeed::LegacyMeta) {
@@ -305,6 +307,7 @@ fn regenerate_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin
     let (entropy, phrase) = generate_recovery_phrase()?;
     meta.wrapped_key_recovery = Some(wrap_key(&entropy, &data_key)?);
     write_meta(&path, &meta)?;
+    audit::log(&app, Some(&session), "recovery_phrase_regenerated", "", true);
     Ok(phrase)
 }
 
@@ -349,7 +352,7 @@ fn scan_json_files(app: tauri::AppHandle, state: tauri::State<AppState>) -> Vec<
 fn save_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: String, data: Value) -> Result<(), String> {
     let session = access::require_session(access::gate(&app, &state, "save_json")?)?;
     if !access::file_allowed(session.role, &filename, access::FileMode::Write) {
-        return Err(access::denial_message(&access::Denial::WrongRole).to_string());
+        return Err(access::deny_file(&app, &session, &filename, access::FileMode::Write));
     }
     let key = state.key.lock().map_err(|e| e.to_string())?
         .ok_or_else(|| "Locked: no encryption key set".to_string())?;
@@ -376,7 +379,7 @@ fn save_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: Str
 fn load_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: String) -> Result<Value, String> {
     let session = access::require_session(access::gate(&app, &state, "load_json")?)?;
     if !access::file_allowed(session.role, &filename, access::FileMode::Read) {
-        return Err(access::denial_message(&access::Denial::WrongRole).to_string());
+        return Err(access::deny_file(&app, &session, &filename, access::FileMode::Read));
     }
     let key = state.key.lock().map_err(|e| e.to_string())?
         .ok_or_else(|| "Locked: no encryption key set".to_string())?;
@@ -480,6 +483,7 @@ pub fn run() {
         save_json,
         load_json,
         security_status,
+        audit::audit_log_list,
         users::setup_pin,
         users::list_profiles,
         users::unlock,

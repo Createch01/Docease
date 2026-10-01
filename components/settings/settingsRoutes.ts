@@ -85,7 +85,7 @@ export const SETTINGS_GROUPS: SettingsGroupDef[] = [
     title: 'Sécurité & données',
     sections: [
       { id: 'security', label: 'Sécurité', icon: Shield, sensitive: true,
-        description: 'Mot de passe de votre compte et fonctions IA.' },
+        description: 'Mot de passe de votre compte, fonctions IA et journal d\'accès.' },
       { id: 'users', label: 'Collaborateurs', icon: Users, sensitive: true,
         description: 'Comptes des personnes qui utilisent DocEase au cabinet.' },
       { id: 'database', label: 'Base de données', icon: Database, sensitive: true,

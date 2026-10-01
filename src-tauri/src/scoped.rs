@@ -15,6 +15,7 @@ use std::path::Path;
 use serde_json::{json, Map, Value};
 
 use super::access::{gate, require_session};
+use super::audit;
 use super::users::data_key_of;
 use super::util;
 use super::{data_dir, read_enc_json_in, write_enc_json_in, AppState};
@@ -263,11 +264,12 @@ pub fn patients_list_identity(app: tauri::AppHandle, state: tauri::State<AppStat
 
 #[tauri::command]
 pub fn patients_save_identity(app: tauri::AppHandle, state: tauri::State<AppState>, patients: Vec<Value>) -> Result<Vec<Value>, String> {
-    gate(&app, &state, "patients_save_identity")?;
+    let session = gate(&app, &state, "patients_save_identity")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
     let merged = merge_patients(read_list(&dir, &key, PATIENTS_FILE)?, &patients)?;
     write_enc_json_in(&dir, &key, PATIENTS_FILE, &Value::Array(merged.clone()))?;
+    audit::log(&app, session.as_ref(), "patients_save_identity", &format!("{} fiche(s) reçue(s)", patients.len()), true);
     Ok(merged.iter().map(identity_only).collect())
 }
 
@@ -280,11 +282,12 @@ pub fn queue_list_identity(app: tauri::AppHandle, state: tauri::State<AppState>)
 
 #[tauri::command]
 pub fn queue_save_identity(app: tauri::AppHandle, state: tauri::State<AppState>, queue: Vec<Value>) -> Result<Vec<Value>, String> {
-    gate(&app, &state, "queue_save_identity")?;
+    let session = gate(&app, &state, "queue_save_identity")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
     let merged = merge_queue(&read_list(&dir, &key, QUEUE_FILE)?, &read_list(&dir, &key, PATIENTS_FILE)?, &queue)?;
     write_enc_json_in(&dir, &key, QUEUE_FILE, &Value::Array(merged.clone()))?;
+    audit::log(&app, session.as_ref(), "queue_save_identity", &format!("{} patient(s) en salle d'attente", queue.len()), true);
     Ok(merged.iter().map(identity_only).collect())
 }
 
@@ -297,13 +300,14 @@ pub fn billing_today_list(app: tauri::AppHandle, state: tauri::State<AppState>) 
 
 #[tauri::command]
 pub fn billing_today_save(app: tauri::AppHandle, state: tauri::State<AppState>, payment: Value) -> Result<Value, String> {
-    gate(&app, &state, "billing_today_save")?;
+    let session = gate(&app, &state, "billing_today_save")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
     let mut notes = read_list(&dir, &key, NOTES_FILE)?;
     let patients = read_list(&dir, &key, PATIENTS_FILE)?;
     let view = apply_payment(&mut notes, &patients, &payment, &util::today_utc(), &random_note_id())?;
     write_enc_json_in(&dir, &key, NOTES_FILE, &Value::Array(notes))?;
+    audit::log(&app, session.as_ref(), "billing_today_save", view.get("status").and_then(|s| s.as_str()).unwrap_or(""), true);
     Ok(view)
 }
 

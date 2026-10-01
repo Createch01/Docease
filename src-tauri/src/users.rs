@@ -19,6 +19,7 @@ use serde::{Deserialize, Serialize};
 use argon2::password_hash::rand_core::OsRng;
 
 use super::access::{gate, require_session, Role, Session};
+use super::audit;
 use super::util;
 use super::{
     data_dir, derive_key_from_pin, hash_pin, parse_recovery_phrase,
@@ -497,7 +498,10 @@ pub fn current_session(app: tauri::AppHandle, state: tauri::State<AppState>) -> 
 
 #[tauri::command]
 pub fn lock(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<(), String> {
-    gate(&app, &state, "lock")?;
+    let session = gate(&app, &state, "lock")?;
+    if session.is_some() {
+        audit::log(&app, session.as_ref(), "lock", "", true);
+    }
     *state.key.lock().map_err(|e| e.to_string())? = None;
     *state.session.lock().map_err(|e| e.to_string())? = None;
     Ok(())
@@ -509,19 +513,25 @@ pub fn unlock(app: tauri::AppHandle, state: tauri::State<AppState>, user_id: Opt
     let dir = data_dir(&app)?;
 
     let Some(file) = load_users(&dir)? else {
-        return unlock_legacy(&state, &dir, &password);
+        return unlock_legacy(&app, &state, &dir, &password);
     };
 
     let id = user_id.ok_or("Choisissez un profil.")?;
+    let known = file.users.iter().find(|u| u.id == id);
+    let who = known.map(|u| u.name.as_str()).unwrap_or("(profil inconnu)");
+    let who_role = known.map(|u| u.role.label());
     if let Some(wait) = throttle_check(&state, &id)? {
+        audit::log_as(&app, who, who_role, "login_blocked", &format!("délai {wait} s"), false);
         return Ok(refused(Some(wait)));
     }
-    let Some(rec) = file.users.iter().find(|u| u.id == id) else {
+    let Some(rec) = known else {
         state.throttle.lock().map_err(|e| e.to_string())?.fail(&id, util::now_secs());
+        audit::log_as(&app, who, None, "login_failed", "", false);
         return Ok(refused(None));
     };
     match authenticate(rec, &password)? {
         None => {
+            audit::log_as(&app, who, who_role, "login_failed", "", false);
             let mut t = state.throttle.lock().map_err(|e| e.to_string())?;
             t.fail(&id, util::now_secs());
             Ok(refused(t.remaining(&id, util::now_secs())))
@@ -535,13 +545,14 @@ pub fn unlock(app: tauri::AppHandle, state: tauri::State<AppState>, user_id: Opt
             }
             let session = session_of(rec);
             open_session(&state, key, session.clone())?;
+            audit::log(&app, Some(&session), "login", "", true);
             Ok(UnlockResult { ok: true, needs_migration: false, retry_after_secs: None, session: Some(session) })
         }
     }
 }
 
 /// Installation sans `users_meta.json` : seul le mot de passe maître existe (médecin).
-fn unlock_legacy(state: &AppState, dir: &Path, password: &str) -> Result<UnlockResult, String> {
+fn unlock_legacy(app: &tauri::AppHandle, state: &AppState, dir: &Path, password: &str) -> Result<UnlockResult, String> {
     const LEGACY: &str = "legacy";
     if let Some(wait) = throttle_check(state, LEGACY)? {
         return Ok(refused(Some(wait)));
@@ -550,6 +561,7 @@ fn unlock_legacy(state: &AppState, dir: &Path, password: &str) -> Result<UnlockR
     if meta.pin_hash.is_empty() || !verify_pin(password, &meta.pin_hash)? {
         let mut t = state.throttle.lock().map_err(|e| e.to_string())?;
         t.fail(LEGACY, util::now_secs());
+        audit::log_as(app, "Médecin (ancien accès)", Some("Medecin"), "login_failed", "", false);
         return Ok(refused(t.remaining(LEGACY, util::now_secs())));
     }
     state.throttle.lock().map_err(|e| e.to_string())?.reset(LEGACY);
@@ -573,6 +585,7 @@ fn unlock_legacy(state: &AppState, dir: &Path, password: &str) -> Result<UnlockR
             Err(e) => log::error!("migration vers les comptes utilisateurs : {e}"),
         }
         open_session(state, key, session.clone())?;
+        audit::log(app, Some(&session), "login", "après migration des comptes", true);
         return Ok(UnlockResult { ok: true, needs_migration: false, retry_after_secs: None, session: Some(session) });
     }
 
@@ -581,6 +594,7 @@ fn unlock_legacy(state: &AppState, dir: &Path, password: &str) -> Result<UnlockR
     let key_salt = meta.key_salt.ok_or("Security metadata is corrupt".to_string())?;
     let legacy_key = derive_key_from_pin(password, &key_salt)?;
     open_session(state, legacy_key, temp_session.clone())?;
+    audit::log(app, Some(&temp_session), "login", "ancien schéma", true);
     Ok(UnlockResult { ok: true, needs_migration: true, retry_after_secs: None, session: Some(temp_session) })
 }
 
@@ -606,6 +620,9 @@ pub fn verify_password(app: tauri::AppHandle, state: tauri::State<AppState>, pas
         return Err(format!("Trop d'essais. Réessayez dans {wait} s."));
     }
     let ok = password_matches(&dir, &session.user_id, &password)?;
+    if !ok {
+        audit::log(&app, Some(&session), "password_check_failed", "sortie du mode salle d'attente", false);
+    }
     let mut t = state.throttle.lock().map_err(|e| e.to_string())?;
     if ok { t.reset(&session.user_id) } else { t.fail(&session.user_id, util::now_secs()) }
     Ok(ok)
@@ -616,8 +633,12 @@ pub fn change_own_password(app: tauri::AppHandle, state: tauri::State<AppState>,
     let session = require_session(gate(&app, &state, "change_own_password")?)?;
     let dir = data_dir(&app)?;
     let mut file = load_users(&dir)?.ok_or("Comptes non initialisés : verrouillez puis déverrouillez DocEase.")?;
-    change_password(&mut file, &session.user_id, &old_password, &new_password)?;
+    if let Err(e) = change_password(&mut file, &session.user_id, &old_password, &new_password) {
+        audit::log(&app, Some(&session), "password_change_failed", "", false);
+        return Err(e);
+    }
     save_users(&dir, &file)?;
+    audit::log(&app, Some(&session), "password_changed", "", true);
     if let Some(s) = state.session.lock().map_err(|e| e.to_string())?.as_mut() {
         s.must_change_password = false;
     }
@@ -633,12 +654,13 @@ pub fn list_users(app: tauri::AppHandle, state: tauri::State<AppState>) -> Resul
 
 #[tauri::command]
 pub fn create_user(app: tauri::AppHandle, state: tauri::State<AppState>, name: String, role: Role, password: String) -> Result<UserSummary, String> {
-    gate(&app, &state, "create_user")?;
+    let session = gate(&app, &state, "create_user")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
     let mut file = load_users(&dir)?.ok_or("Comptes non initialisés : verrouillez puis déverrouillez DocEase.")?;
     let rec = add_user(&mut file, &name, role, &password, &key, true)?;
     save_users(&dir, &file)?;
+    audit::log(&app, session.as_ref(), "create_user", &format!("{} ({})", rec.name, rec.role.label()), true);
     Ok(summary(&rec))
 }
 
@@ -647,8 +669,11 @@ pub fn delete_user(app: tauri::AppHandle, state: tauri::State<AppState>, id: Str
     let session = require_session(gate(&app, &state, "delete_user")?)?;
     let dir = data_dir(&app)?;
     let mut file = load_users(&dir)?.ok_or("Comptes non initialisés.")?;
+    let target = file.users.iter().find(|u| u.id == id).map(|u| u.name.clone()).unwrap_or_default();
     remove_user(&mut file, &id, &session.user_id)?;
-    save_users(&dir, &file)
+    save_users(&dir, &file)?;
+    audit::log(&app, Some(&session), "delete_user", &target, true);
+    Ok(())
 }
 
 #[tauri::command]
@@ -656,18 +681,23 @@ pub fn set_user_role(app: tauri::AppHandle, state: tauri::State<AppState>, id: S
     let session = require_session(gate(&app, &state, "set_user_role")?)?;
     let dir = data_dir(&app)?;
     let mut file = load_users(&dir)?.ok_or("Comptes non initialisés.")?;
+    let target = file.users.iter().find(|u| u.id == id).map(|u| u.name.clone()).unwrap_or_default();
     change_role(&mut file, &id, role, &session.user_id)?;
-    save_users(&dir, &file)
+    save_users(&dir, &file)?;
+    audit::log(&app, Some(&session), "set_user_role", &format!("{target} → {}", role.label()), true);
+    Ok(())
 }
 
 #[tauri::command]
 pub fn reset_user_password(app: tauri::AppHandle, state: tauri::State<AppState>, id: String, new_password: String) -> Result<(), String> {
-    gate(&app, &state, "reset_user_password")?;
+    let session = gate(&app, &state, "reset_user_password")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
     let mut file = load_users(&dir)?.ok_or("Comptes non initialisés.")?;
+    let target = file.users.iter().find(|u| u.id == id).map(|u| u.name.clone()).unwrap_or_default();
     reset_password(&mut file, &id, &new_password, &key)?;
     save_users(&dir, &file)?;
+    audit::log(&app, session.as_ref(), "reset_user_password", &target, true);
     state.throttle.lock().map_err(|e| e.to_string())?.reset(&id);
     Ok(())
 }
@@ -693,6 +723,7 @@ pub fn setup_pin(app: tauri::AppHandle, state: tauri::State<AppState>, pin: Stri
     save_users(&dir, &UsersFile { version: 1, users: vec![doctor.clone()] })?;
 
     open_session(&state, data_key, session_of(&doctor))?;
+    audit::log(&app, Some(&session_of(&doctor)), "setup", "création du compte médecin", true);
     Ok(phrase)
 }
 
@@ -740,6 +771,7 @@ pub fn recover_with_phrase(app: tauri::AppHandle, state: tauri::State<AppState>,
     meta.wrapped_key_recovery = Some(wrap_key(&new_entropy, &data_key)?);
     write_meta(&meta_path, &meta)?;
 
+    audit::log(&app, Some(&session), "recover_with_phrase", "accès rétabli par la phrase de récupération", true);
     open_session(&state, data_key, session)?;
     Ok(new_phrase)
 }

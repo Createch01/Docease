@@ -18,6 +18,15 @@ export interface UnlockResult {
     error?: string;
 }
 
+export interface AuditEntry {
+    t: string;
+    user: string;
+    role: UserRole | null;
+    action: string;
+    detail: string;
+    ok: boolean;
+}
+
 const errorText = (e: unknown): string => (typeof e === 'string' ? e : (e as any)?.message || 'Erreur inconnue');
 
 // Aperçu navigateur (npm run dev sans Tauri) : pas de Rust, donc pas de vraie
@@ -117,6 +126,12 @@ export const securityService = {
 
     regenerateRecovery: async (password: string): Promise<string> => {
         return invoke<string>('regenerate_recovery', { pin: password });
+    },
+
+    // Journal d'accès (médecin uniquement) : du plus récent au plus ancien.
+    auditLog: async (limit = 500): Promise<AuditEntry[]> => {
+        if (!isTauri()) return [];
+        return invoke<AuditEntry[]>('audit_log_list', { limit });
     },
 
     // ── Gestion des comptes (médecin uniquement, contrôlé côté Rust) ──

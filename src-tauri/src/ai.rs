@@ -356,7 +356,8 @@ pub async fn ai_parse_prescription(
     patient: PatientContext,
     redact: Vec<String>,
 ) -> Result<Value, String> {
-    gate(&app, &state, "ai_parse_prescription")?;
+    let session = gate(&app, &state, "ai_parse_prescription")?;
+    super::audit::log(&app, session.as_ref(), "ai_parse_prescription", "", true);
     let key = require_ready(&app, &state)?;
     let prompt = format!(
         r#"TON RÔLE :
@@ -397,7 +398,8 @@ pub async fn ai_analyze_consultation(
     patient: Option<PatientContext>,
     redact: Vec<String>,
 ) -> Result<Value, String> {
-    gate(&app, &state, "ai_analyze_consultation")?;
+    let session = gate(&app, &state, "ai_analyze_consultation")?;
+    super::audit::log(&app, session.as_ref(), "ai_analyze_consultation", "", true);
     let key = require_ready(&app, &state)?;
     let ctx = patient.as_ref().map(patient_line).unwrap_or_else(|| "Non précisé".to_string());
     let prompt = format!(
@@ -427,7 +429,8 @@ pub async fn ai_analyze_document(
     data_base64: String,
     mime_type: String,
 ) -> Result<Value, String> {
-    gate(&app, &state, "ai_analyze_document")?;
+    let session = gate(&app, &state, "ai_analyze_document")?;
+    super::audit::log(&app, session.as_ref(), "ai_analyze_document", "", true);
     let key = require_ready(&app, &state)?;
     if !matches!(mime_type.as_str(), "application/pdf" | "image/png" | "image/jpeg" | "image/webp") {
         return Err("Format non pris en charge (PDF, PNG, JPEG ou WebP).".to_string());
@@ -464,7 +467,8 @@ pub async fn ai_classify_priority(
     note: String,
     redact: Vec<String>,
 ) -> Result<Value, String> {
-    gate(&app, &state, "ai_classify_priority")?;
+    let session = gate(&app, &state, "ai_classify_priority")?;
+    super::audit::log(&app, session.as_ref(), "ai_classify_priority", "", true);
     let key = require_ready(&app, &state)?;
     let prompt = format!(
         r#"Analyse ce motif de rendez-vous médical et détermine la priorité.
