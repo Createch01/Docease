@@ -63,6 +63,14 @@ Il n'est **ni chiffré** (il doit enregistrer les échecs de connexion, donc san
 infalsifiable** : quelqu'un qui a accès aux fichiers du poste peut le modifier ou le supprimer. Les simples
 lectures de données par le médecin ne sont pas journalisées.
 
+## Verrouillage automatique
+
+Après 10 minutes d'inactivité par défaut (réglable par le médecin dans Paramètres › Sécurité, de 5 min à
+« jamais »), la session est fermée : la clé de données et le rôle sont effacés de la mémoire et l'écran de
+verrouillage réapparaît. Le délai est **appliqué par Rust** (`access::gate` ferme une session inactive à
+l'appel de commande suivant) ; l'interface signale seulement l'activité réelle (`session_touch`) et affiche
+l'écran de verrouillage. Désactivé dans les builds de développement. Suspendu pendant l'écran salle d'attente.
+
 ## Limites connues
 
 - **Supprimer un compte ne révoque pas une clé déjà copiée.** La clé de données ne change

@@ -2,6 +2,7 @@ mod access;
 mod ai;
 mod audit;
 mod scoped;
+mod settings;
 mod users;
 mod util;
 
@@ -37,6 +38,10 @@ struct AppState {
     /// vérité pour le contrôle d'accès (voir `access::gate`).
     session: Mutex<Option<access::Session>>,
     throttle: Mutex<users::Throttle>,
+    /// Dernière activité réelle (secondes Unix) et délai d'inactivité configuré (minutes) :
+    /// voir settings.rs.
+    last_activity: Mutex<u64>,
+    inactivity_minutes: Mutex<u32>,
 }
 
 /// The data key never changes on its own — a PIN change or a recovery-phrase rotation
@@ -477,13 +482,16 @@ mod tests {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
-    .manage(AppState { key: Mutex::new(None), session: Mutex::new(None), throttle: Mutex::new(users::Throttle::default()) })
+    .manage(AppState { key: Mutex::new(None), session: Mutex::new(None), throttle: Mutex::new(users::Throttle::default()), last_activity: Mutex::new(0), inactivity_minutes: Mutex::new(settings::DEFAULT_MINUTES) })
     .invoke_handler(tauri::generate_handler![
         scan_json_files,
         save_json,
         load_json,
         security_status,
         audit::audit_log_list,
+        settings::get_security_settings,
+        settings::set_inactivity_minutes,
+        settings::session_touch,
         users::setup_pin,
         users::list_profiles,
         users::unlock,

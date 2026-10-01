@@ -16,6 +16,7 @@ import { dataService } from './services/dataService';
 import { autoImportService } from './services/autoImportService';
 import { securityService } from './services/securityService';
 import { sessionService } from './services/sessionService';
+import { useInactivityLock } from './services/useInactivityLock';
 import { Patient, Permission, PrescriptionDraft } from './types';
 import { LogOut, BookOpen, Wallet, Lock, Monitor } from 'lucide-react';
 import {
@@ -88,6 +89,8 @@ const AppContent: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [kioskMode, setKioskMode] = useState(false);
+  // Verrouillage automatique (minutes ; 0 = désactivé, toujours le cas en développement).
+  const [autoLockMinutes, setAutoLockMinutes] = useState(0);
   const [prescriptionDraft, setPrescriptionDraft] = useState<PrescriptionDraft | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   // Mandatory master-PIN gate — nothing below can load before this resolves, since
@@ -190,6 +193,9 @@ const AppContent: React.FC = () => {
         setCurrentView(v => (canOpen(v) ? v : 'dashboard'));
         if (isSettingsHash(window.location.hash)) window.history.replaceState(null, '', window.location.pathname + window.location.search);
       }
+      securityService.getSettings()
+        .then(s => setAutoLockMinutes(s.enforced ? s.inactivityMinutes : 0))
+        .catch(() => setAutoLockMinutes(0));
       setIsDataLoaded(true);
     };
 
@@ -245,8 +251,12 @@ const AppContent: React.FC = () => {
     setExpandedMenu(null);
     setKioskMode(false);
     setIsSearchOpen(false);
+    setAutoLockMinutes(0);
     window.history.replaceState(null, '', window.location.pathname + window.location.search);
   };
+
+  // Pas de verrouillage automatique pendant l'écran salle d'attente : on n'en sort qu'avec le mot de passe.
+  useInactivityLock(securityUnlocked && isDataLoaded && !kioskMode, autoLockMinutes, handleLock);
 
   const renderView = () => {
     // Liste blanche : tout écran non autorisé pour ce rôle est refusé.

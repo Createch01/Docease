@@ -1,6 +1,6 @@
 /** Sécurité & données : Sécurité (mot de passe), Collaborateurs, Base de données. */
 import React, { useEffect, useRef, useState } from 'react';
-import { Database, Download, Eye, EyeOff, KeyRound, ScrollText, Lock, Plus, RefreshCw, Trash2, Upload, Users, X, Info } from 'lucide-react';
+import { Database, Download, Eye, EyeOff, KeyRound, ScrollText, Timer, Lock, Plus, RefreshCw, Trash2, Upload, Users, X, Info } from 'lucide-react';
 import { invoke } from '@tauri-apps/api/core';
 import packageJson from '../../package.json';
 import { AppUser, UserRole } from '../../types';
@@ -67,6 +67,43 @@ const AccessLogCard: React.FC = () => {
   );
 };
 
+// ═══════════ Verrouillage automatique ═══════════
+const DELAYS = [5, 10, 15, 30, 60];
+
+const AutoLockCard: React.FC = () => {
+  const [minutes, setMinutes] = useState<number | null>(null);
+  const [enforced, setEnforced] = useState(true);
+  const [error, setError] = useState('');
+  useEffect(() => {
+    securityService.getSettings().then(s => { setMinutes(s.inactivityMinutes); setEnforced(s.enforced); }).catch(e => setError(errText(e)));
+  }, []);
+
+  const change = async (value: number) => {
+    const previous = minutes;
+    setMinutes(value);
+    try {
+      await securityService.setInactivityMinutes(value);
+      toastService.success(value === 0 ? 'Verrouillage automatique désactivé' : `Verrouillage après ${value} min d'inactivité`);
+    } catch (e) { setMinutes(previous); setError(errText(e)); }
+  };
+
+  return (
+    <SettingsCard title="Verrouillage automatique" icon={<Timer size={16} />}
+                  description="DocEase se verrouille seul après ce délai sans activité ; il faut ressaisir son mot de passe. Appliqué à tous les comptes.">
+      <div className="flex flex-wrap items-center gap-3">
+        <select value={minutes ?? ''} onChange={e => change(Number(e.target.value))} disabled={minutes === null}
+                aria-label="Délai d'inactivité" className={`${input40} max-w-[220px]`} style={inputStyle}>
+          {DELAYS.map(m => <option key={m} value={m}>{m} minutes</option>)}
+          {minutes !== null && !DELAYS.includes(minutes) && minutes !== 0 && <option value={minutes}>{minutes} minutes</option>}
+          <option value={0}>Jamais (déconseillé)</option>
+        </select>
+        {!enforced && <span className="text-[12px]" style={{ color: 'var(--color-text-subtle)' }}>Désactivé en développement.</span>}
+      </div>
+      {error && <p role="alert" className="text-[12px] mt-2" style={{ color: 'var(--color-danger)' }}>{error}</p>}
+    </SettingsCard>
+  );
+};
+
 // ═══════════ Sécurité ═══════════
 export const SecuritySettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => {
   const role = sessionService.role() ?? 'Medecin';
@@ -115,6 +152,7 @@ export const SecuritySettings: React.FC<SettingsPageProps> = ({ route, onNavigat
             </button>
           </div>
         </SettingsCard>
+        <AutoLockCard />
         <AiSettingsCard />
         <AccessLogCard />
       </div>

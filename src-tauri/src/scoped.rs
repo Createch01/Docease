@@ -322,6 +322,8 @@ pub fn clinic_public_info(app: tauri::AppHandle, state: tauri::State<AppState>) 
 #[tauri::command]
 pub fn kiosk_queue(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
     require_session(gate(&app, &state, "kiosk_queue")?)?;
+    // Le mode salle d'attente suspend le verrouillage automatique : en sortir exige le mot de passe.
+    super::settings::touch(&state);
     let key = data_key_of(&state)?;
     Ok(kiosk_entries(&read_list(&data_dir(&app)?, &key, QUEUE_FILE)?))
 }

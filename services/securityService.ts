@@ -128,6 +128,23 @@ export const securityService = {
         return invoke<string>('regenerate_recovery', { pin: password });
     },
 
+    // Verrouillage automatique : délai en minutes (0 = désactivé) et s'il est appliqué
+    // (jamais en développement). Le délai se règle côté médecin ; Rust l'applique.
+    getSettings: async (): Promise<{ inactivityMinutes: number; enforced: boolean }> => {
+        if (!isTauri()) return { inactivityMinutes: 10, enforced: false };
+        const s = await invoke<{ inactivity_minutes: number; enforced: boolean }>('get_security_settings');
+        return { inactivityMinutes: s.inactivity_minutes, enforced: s.enforced };
+    },
+    setInactivityMinutes: async (minutes: number): Promise<void> => {
+        if (!isTauri()) return;
+        await invoke('set_inactivity_minutes', { minutes });
+    },
+    // Signale une activité réelle de l'utilisateur (repousse le verrouillage côté Rust).
+    touch: async (): Promise<void> => {
+        if (!isTauri()) return;
+        try { await invoke('session_touch'); } catch { /* session déjà fermée */ }
+    },
+
     // Journal d'accès (médecin uniquement) : du plus récent au plus ancien.
     auditLog: async (limit = 500): Promise<AuditEntry[]> => {
         if (!isTauri()) return [];

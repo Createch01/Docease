@@ -76,6 +76,10 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("billing_today_save", Rule::AnySession),
     ("clinic_public_info", Rule::AnySession),
     ("kiosk_queue", Rule::AnySession),
+    // Verrouillage automatique
+    ("get_security_settings", Rule::AnySession),
+    ("set_inactivity_minutes", Rule::Medecin),
+    ("session_touch", Rule::AnySession),
     // Journal d'accès : médecin uniquement
     ("audit_log_list", Rule::Medecin),
     // IA : médecin uniquement
@@ -127,7 +131,16 @@ pub fn check(rule: Option<Rule>, role: Option<Role>) -> Result<(), Denial> {
 /// Point d'entrée obligatoire de chaque commande. Renvoie la session courante
 /// (None pour une commande publique appelée sans session).
 pub fn gate(app: &tauri::AppHandle, state: &AppState, command: &str) -> Result<Option<Session>, String> {
+    // Inactivité : une session trop longtemps inactive est fermée côté Rust (clé et rôle
+    // effacés), même si l'interface ne le fait pas.
+    let had_session = state.session.lock().map_err(|e| e.to_string())?.is_some();
+    if had_session && super::settings::expire_if_idle(state) {
+        super::audit::log_as(app, "(session)", None, "auto_lock", "inactivité", true);
+    }
     let session = state.session.lock().map_err(|e| e.to_string())?.clone();
+    if session.is_some() && command == "session_touch" {
+        super::settings::touch(state);
+    }
     match check(rule_for(command), session.as_ref().map(|s| s.role)) {
         Ok(()) => Ok(session),
         Err(d) => {
@@ -200,7 +213,7 @@ mod tests {
 
     const MEDECIN_ONLY: &[&str] = &[
         "migrate_to_recovery", "regenerate_recovery", "list_users", "create_user", "delete_user",
-        "set_user_role", "reset_user_password", "scan_json_files", "audit_log_list", "ai_status", "ai_set_enabled",
+        "set_user_role", "reset_user_password", "scan_json_files", "audit_log_list", "set_inactivity_minutes", "ai_status", "ai_set_enabled",
         "ai_save_key", "ai_delete_key", "ai_test_key", "ai_parse_prescription",
         "ai_analyze_consultation", "ai_analyze_document", "ai_classify_priority",
     ];
@@ -298,6 +311,7 @@ mod tests {
             include_str!("ai.rs"),
             include_str!("users.rs"),
             include_str!("audit.rs"),
+            include_str!("settings.rs"),
             include_str!("scoped.rs"),
         ];
         let mut seen = Vec::new();

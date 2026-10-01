@@ -457,9 +457,10 @@ pub(crate) fn session_of(rec: &UserRecord) -> Session {
     Session { user_id: rec.id.clone(), name: rec.name.clone(), role: rec.role, must_change_password: rec.must_change_password }
 }
 
-fn open_session(state: &AppState, key: [u8; KEY_LEN], session: Session) -> Result<(), String> {
+fn open_session(state: &AppState, dir: &Path, key: [u8; KEY_LEN], session: Session) -> Result<(), String> {
     *state.key.lock().map_err(|e| e.to_string())? = Some(key);
     *state.session.lock().map_err(|e| e.to_string())? = Some(session);
+    super::settings::on_session_open(state, dir);
     Ok(())
 }
 
@@ -544,7 +545,7 @@ pub fn unlock(app: tauri::AppHandle, state: tauri::State<AppState>, user_id: Opt
                 }
             }
             let session = session_of(rec);
-            open_session(&state, key, session.clone())?;
+            open_session(&state, &dir, key, session.clone())?;
             audit::log(&app, Some(&session), "login", "", true);
             Ok(UnlockResult { ok: true, needs_migration: false, retry_after_secs: None, session: Some(session) })
         }
@@ -584,7 +585,7 @@ fn unlock_legacy(app: &tauri::AppHandle, state: &AppState, dir: &Path, password:
             // au prochain déverrouillage.
             Err(e) => log::error!("migration vers les comptes utilisateurs : {e}"),
         }
-        open_session(state, key, session.clone())?;
+        open_session(state, dir, key, session.clone())?;
         audit::log(app, Some(&session), "login", "après migration des comptes", true);
         return Ok(UnlockResult { ok: true, needs_migration: false, retry_after_secs: None, session: Some(session) });
     }
@@ -593,7 +594,7 @@ fn unlock_legacy(app: &tauri::AppHandle, state: &AppState, dir: &Path, password:
     // (`migrate_to_recovery`) suit immédiatement côté interface.
     let key_salt = meta.key_salt.ok_or("Security metadata is corrupt".to_string())?;
     let legacy_key = derive_key_from_pin(password, &key_salt)?;
-    open_session(state, legacy_key, temp_session.clone())?;
+    open_session(state, dir, legacy_key, temp_session.clone())?;
     audit::log(app, Some(&temp_session), "login", "ancien schéma", true);
     Ok(UnlockResult { ok: true, needs_migration: true, retry_after_secs: None, session: Some(temp_session) })
 }
@@ -722,7 +723,7 @@ pub fn setup_pin(app: tauri::AppHandle, state: tauri::State<AppState>, pin: Stri
     write_meta(&dir.join(SECURITY_FILE), &meta)?;
     save_users(&dir, &UsersFile { version: 1, users: vec![doctor.clone()] })?;
 
-    open_session(&state, data_key, session_of(&doctor))?;
+    open_session(&state, &dir, data_key, session_of(&doctor))?;
     audit::log(&app, Some(&session_of(&doctor)), "setup", "création du compte médecin", true);
     Ok(phrase)
 }
@@ -772,7 +773,7 @@ pub fn recover_with_phrase(app: tauri::AppHandle, state: tauri::State<AppState>,
     write_meta(&meta_path, &meta)?;
 
     audit::log(&app, Some(&session), "recover_with_phrase", "accès rétabli par la phrase de récupération", true);
-    open_session(&state, data_key, session)?;
+    open_session(&state, &dir, data_key, session)?;
     Ok(new_phrase)
 }
 
