@@ -1,5 +1,6 @@
 mod access;
 mod ai;
+mod scoped;
 mod users;
 mod util;
 
@@ -494,6 +495,14 @@ pub fn run() {
         users::delete_user,
         users::set_user_role,
         users::reset_user_password,
+        scoped::patients_list_identity,
+        scoped::patients_save_identity,
+        scoped::queue_list_identity,
+        scoped::queue_save_identity,
+        scoped::billing_today_list,
+        scoped::billing_today_save,
+        scoped::clinic_public_info,
+        scoped::kiosk_queue,
         ai::ai_status,
         ai::ai_set_enabled,
         ai::ai_save_key,

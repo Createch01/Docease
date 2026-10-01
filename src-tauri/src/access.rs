@@ -58,6 +58,15 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("load_json", Rule::AnySession),
     ("save_json", Rule::AnySession),
     ("scan_json_files", Rule::Medecin),
+    // Commandes typées accessibles à l'assistante (filtrées côté Rust)
+    ("patients_list_identity", Rule::AnySession),
+    ("patients_save_identity", Rule::AnySession),
+    ("queue_list_identity", Rule::AnySession),
+    ("queue_save_identity", Rule::AnySession),
+    ("billing_today_list", Rule::AnySession),
+    ("billing_today_save", Rule::AnySession),
+    ("clinic_public_info", Rule::AnySession),
+    ("kiosk_queue", Rule::AnySession),
     // IA : médecin uniquement
     ("ai_status", Rule::Medecin),
     ("ai_set_enabled", Rule::Medecin),
@@ -266,6 +275,7 @@ mod tests {
             include_str!("lib.rs"),
             include_str!("ai.rs"),
             include_str!("users.rs"),
+            include_str!("scoped.rs"),
         ];
         let mut seen = Vec::new();
         for src in sources {
