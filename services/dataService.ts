@@ -1,3 +1,4 @@
+import { sessionService } from './sessionService';
 import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
 import { storageService } from './storageService';
 import { cryptoService } from './cryptoService';
@@ -67,16 +68,12 @@ const DEFAULT_DOCTOR_INFO: DoctorInfo = {
   barcodeContent: 'DocEase-SECURE-ID',
   barcodePosition: 'bottom-left',
   barcodeSize: 80,
-  pinEnabled: false,
-  pin: '',
   qrCodeContent: 'https://docease.pro',
   qrCodePosition: 'top-right',
   showQRCode: true,
   ordreNumber: '',
   hours: '',
-  mapsUrl: '',
-  users: [],
-  activeUser: undefined
+  mapsUrl: ''
 };
 
 const notifyUpdate = (key: string) => {
@@ -98,6 +95,14 @@ let isInitialized = false;
 let initPromise: Promise<void> | null = null;
 
 export const dataService = {
+  // Verrouillage / changement d'utilisateur : plus aucune donnée du compte précédent
+  // ne doit rester en mémoire côté interface.
+  reset: () => {
+    cache = {};
+    isInitialized = false;
+    initPromise = null;
+  },
+
   initialize: async () => {
     if (isInitialized) return;
     if (initPromise) return initPromise;
@@ -113,7 +118,12 @@ export const dataService = {
               key === 'DOCTOR_INFO' ? DEFAULT_DOCTOR_INFO :
                 key === 'APPOINTMENT_SETTINGS' ? null :
                   [];
-        cache[storageKey] = await storageService.load(storageKey, defaultValue);
+        const loaded = await storageService.load(storageKey, defaultValue);
+        // L'assistante ne reçoit qu'un sous-ensemble de la fiche cabinet : on le complète
+        // avec les valeurs par défaut pour que l'affichage ne rencontre pas de champ absent.
+        cache[storageKey] = key === 'DOCTOR_INFO' && sessionService.isAssistant()
+          ? { ...DEFAULT_DOCTOR_INFO, ...(loaded as object) }
+          : loaded;
       });
 
       await Promise.all(loadPromises);
@@ -373,74 +383,6 @@ export const dataService = {
   },
 
   getAllPatients: (): Patient[] => cache[STORAGE_KEYS.PATIENTS] || [],
-
-  // --- USER MANAGEMENT ---
-  getUsers: (): AppUser[] => {
-    const info = dataService.getDoctorInfo();
-    return info.users || [];
-  },
-
-  saveUser: async (user: AppUser) => {
-    const info = dataService.getDoctorInfo();
-    const users = [...(info.users || [])];
-    const index = users.findIndex(u => u.id === user.id);
-    if (index !== -1) users[index] = user;
-    else users.push({ ...user, id: user.id || Date.now().toString() });
-    await dataService.saveDoctorInfo({ ...info, users });
-  },
-
-  deleteUser: async (id: string) => {
-    const info = dataService.getDoctorInfo();
-    const users = (info.users || []).filter(u => u.id !== id);
-    await dataService.saveDoctorInfo({ ...info, users });
-  },
-
-  getActiveUser: (): AppUser | undefined => {
-    const info = dataService.getDoctorInfo();
-    return info.activeUser;
-  },
-
-  setActiveUser: async (user: AppUser | undefined) => {
-    const info = dataService.getDoctorInfo();
-    await dataService.saveDoctorInfo({ ...info, activeUser: user });
-  },
-
-  // Clears the identification PIN layer (admin PIN + all collaborator accounts)
-  // without touching the master encryption PIN or any patient data. Used as the
-  // "forgot PIN" recovery path from the lock screen — safe because it only ever
-  // removes an access gate, never data, and re-enabling it requires setting a
-  // fresh PIN from Settings again.
-  resetIdentificationPins: async () => {
-    const info = dataService.getDoctorInfo();
-    await dataService.saveDoctorInfo({ ...info, pinEnabled: false, pin: '', users: [], activeUser: undefined });
-  },
-
-  // Self-service: change the currently signed-in user's own PIN. Works for the
-  // admin (stored on DoctorInfo.pin) as well as any collaborator (stored on their
-  // AppUser record). Requires the correct current PIN.
-  changeOwnPin: async (currentPin: string, newPin: string): Promise<boolean> => {
-    const info = dataService.getDoctorInfo();
-    const active = info.activeUser;
-    if (!active || active.id === 'admin') {
-      if (info.pin && currentPin !== info.pin) return false;
-      await dataService.saveDoctorInfo({ ...info, pin: newPin });
-      return true;
-    }
-    const users = info.users || [];
-    const target = users.find(u => u.id === active.id);
-    if (!target || target.pin !== currentPin) return false;
-    await dataService.saveUser({ ...target, pin: newPin });
-    if (info.activeUser) await dataService.setActiveUser({ ...info.activeUser, pin: newPin });
-    return true;
-  },
-
-  // Admin-only: reset another collaborator's PIN without knowing their old one.
-  resetUserPin: async (userId: string, newPin: string) => {
-    const info = dataService.getDoctorInfo();
-    const target = (info.users || []).find(u => u.id === userId);
-    if (!target) return;
-    await dataService.saveUser({ ...target, pin: newPin });
-  },
 
   searchPatients: (term: string): Patient[] => {
     const patients = dataService.getAllPatients();

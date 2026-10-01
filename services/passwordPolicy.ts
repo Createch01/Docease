@@ -1,24 +1,25 @@
-// Shared complexity rule for every credential in the app (master password and
-// per-user identification passwords): at least one letter, at least one digit,
-// minimum length below. Enforced client-side only — the Rust backend (see
-// src-tauri/src/lib.rs) hashes whatever string it's given and has no format
-// opinion, so this is the single source of truth for the rule.
-export const MIN_PASSWORD_LENGTH = 6;
+import { UserRole } from '../types';
+
+// Longueurs minimales : 12 pour le médecin, 8 pour l'assistante. Elles s'appliquent
+// aux NOUVEAUX mots de passe et aux changements seulement, jamais au déverrouillage
+// (un mot de passe existant plus court n'est pas bloqué). Rust applique la même règle
+// (users::validate_password) : celle-ci n'est qu'un retour immédiat dans l'interface.
+export const MAX_PASSWORD_LENGTH = 64;
+
+export const minPasswordLength = (role: UserRole): number => (role === 'Medecin' ? 12 : 8);
 
 export interface PasswordCheck {
   valid: boolean;
   error?: string;
 }
 
-export const validatePassword = (password: string): PasswordCheck => {
-  if (password.length < MIN_PASSWORD_LENGTH) {
-    return { valid: false, error: `Le mot de passe doit contenir au moins ${MIN_PASSWORD_LENGTH} caractères.` };
+export const validatePassword = (password: string, role: UserRole = 'Medecin'): PasswordCheck => {
+  const min = minPasswordLength(role);
+  if ([...password].length < min) {
+    return { valid: false, error: `Le mot de passe doit contenir au moins ${min} caractères.` };
   }
-  if (!/[a-zA-Z]/.test(password)) {
-    return { valid: false, error: 'Le mot de passe doit contenir au moins une lettre.' };
-  }
-  if (!/[0-9]/.test(password)) {
-    return { valid: false, error: 'Le mot de passe doit contenir au moins un chiffre.' };
+  if ([...password].length > MAX_PASSWORD_LENGTH) {
+    return { valid: false, error: `Le mot de passe ne doit pas dépasser ${MAX_PASSWORD_LENGTH} caractères.` };
   }
   return { valid: true };
 };

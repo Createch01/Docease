@@ -33,7 +33,7 @@ export interface SettingsSectionDef {
   // Tous les onglets éditent le même brouillon : passer d'un onglet à l'autre
   // ne perd rien, donc pas d'alerte « modifications non enregistrées ».
   sharedDraft?: boolean;
-  // Protégée par le PIN administrateur quand le verrouillage est actif.
+  // Section sensible (réservée au médecin, comme tous les Paramètres).
   sensitive?: boolean;
   enabled?: boolean;
 }
@@ -85,7 +85,7 @@ export const SETTINGS_GROUPS: SettingsGroupDef[] = [
     title: 'Sécurité & données',
     sections: [
       { id: 'security', label: 'Sécurité', icon: Shield, sensitive: true,
-        description: 'Code PIN d\'accès aux sections sensibles et au démarrage.' },
+        description: 'Mot de passe de votre compte et fonctions IA.' },
       { id: 'users', label: 'Collaborateurs', icon: Users, sensitive: true,
         description: 'Comptes des personnes qui utilisent DocEase au cabinet.' },
       { id: 'database', label: 'Base de données', icon: Database, sensitive: true,

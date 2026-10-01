@@ -1,64 +1,132 @@
 import { invoke } from '@tauri-apps/api/core';
+import { AppUser, UserRole } from '../types';
+import { Session, sessionFromRust, sessionService } from './sessionService';
 
 const isTauri = (): boolean => typeof (window as any).__TAURI_INTERNALS__ !== 'undefined';
 
-interface UnlockResult {
-    ok: boolean;
-    needsMigration: boolean;
+export interface Profile {
+    id: string;
+    name: string;
+    role: UserRole;
 }
 
-// Gates access to the encrypted local store (see src-tauri/src/lib.rs). A master PIN
-// is mandatory: nothing in dataService can load until this reports unlocked, because
-// save_json/load_json refuse to run without an in-memory encryption key.
+export interface UnlockResult {
+    ok: boolean;
+    needsMigration: boolean;
+    retryAfterSecs?: number;
+    session?: Session;
+    error?: string;
+}
+
+const errorText = (e: unknown): string => (typeof e === 'string' ? e : (e as any)?.message || 'Erreur inconnue');
+
+// Aperçu navigateur (npm run dev sans Tauri) : pas de Rust, donc pas de vraie
+// sécurité. Le rôle peut être simulé en développement avec localStorage
+// `docease_dev_role` = Assistant, uniquement pour vérifier l'interface.
+const devPreviewSession = (): Session => {
+    let role: UserRole = 'Medecin';
+    try {
+        if (import.meta.env.DEV && localStorage.getItem('docease_dev_role') === 'Assistant') role = 'Assistant';
+    } catch { /* stockage indisponible */ }
+    return { userId: 'dev-preview', name: role === 'Medecin' ? 'Médecin (aperçu)' : 'Assistante (aperçu)', role, mustChangePassword: false };
+};
+
+// Gates access to the encrypted local store (see src-tauri/src/lib.rs, users.rs).
+// Chaque utilisateur déverrouille avec SON mot de passe ; la clé de données et le
+// rôle de la session restent côté Rust.
 export const securityService = {
     isTauri,
 
-    // Whether a master PIN has ever been configured on this install.
     isConfigured: async (): Promise<boolean> => {
         if (!isTauri()) return true; // Browser-only dev preview: nothing to encrypt, skip the gate.
         try { return await invoke<boolean>('security_status'); } catch { return false; }
     },
 
-    // Creates the master PIN and returns the 24-word recovery phrase, which must be
-    // shown to the user once — it is never persisted anywhere by the backend.
-    setupPin: async (pin: string): Promise<string | null> => {
-        if (!isTauri()) return null;
-        return invoke<string>('setup_pin', { pin });
+    // Profils affichés sur l'écran de verrouillage (nom + rôle, jamais de secret).
+    listProfiles: async (): Promise<Profile[]> => {
+        if (!isTauri()) {
+            const s = devPreviewSession();
+            return [{ id: s.userId, name: s.name, role: s.role }];
+        }
+        try { return await invoke<Profile[]>('list_profiles'); } catch { return []; }
     },
 
-    unlock: async (pin: string): Promise<UnlockResult> => {
-        if (!isTauri()) return { ok: true, needsMigration: false };
+    // Crée le compte médecin et renvoie la phrase de récupération à afficher une fois.
+    setupPin: async (password: string, name?: string): Promise<string | null> => {
+        if (!isTauri()) return null;
+        const phrase = await invoke<string>('setup_pin', { pin: password, name: name ?? null });
+        sessionService.set(await securityService.currentSession());
+        return phrase;
+    },
+
+    unlock: async (userId: string | null, password: string): Promise<UnlockResult> => {
+        if (!isTauri()) {
+            const session = devPreviewSession();
+            sessionService.set(session);
+            return { ok: true, needsMigration: false, session };
+        }
         try {
-            const res = await invoke<{ ok: boolean; needs_migration: boolean }>('unlock', { pin });
-            return { ok: res.ok, needsMigration: res.needs_migration };
-        } catch {
-            return { ok: false, needsMigration: false };
+            const res = await invoke<{ ok: boolean; needs_migration: boolean; retry_after_secs: number | null; session: any }>('unlock', { userId, password });
+            const session = res.session ? sessionFromRust(res.session) : undefined;
+            if (res.ok && session) sessionService.set(session);
+            return { ok: res.ok, needsMigration: res.needs_migration, retryAfterSecs: res.retry_after_secs ?? undefined, session };
+        } catch (e) {
+            return { ok: false, needsMigration: false, error: errorText(e) };
         }
     },
 
-    // One-time migration for installs created before the recovery-key feature
-    // existed. Returns the newly generated recovery phrase to display.
-    migrateToRecovery: async (pin: string): Promise<string> => {
-        return invoke<string>('migrate_to_recovery', { pin });
+    currentSession: async (): Promise<Session | null> => {
+        if (!isTauri()) return sessionService.get();
+        const s = await invoke<any>('current_session');
+        return s ? sessionFromRust(s) : null;
     },
 
-    // Rotates the master PIN. On the current scheme this only re-wraps the data key
-    // (patient files are untouched). Throws with a user-facing message
-    // (e.g. "Ancien PIN incorrect") on failure; nothing is changed on disk if it fails.
-    changeMasterPin: async (oldPin: string, newPin: string): Promise<void> => {
+    // Verrouille : la clé et la session sont effacées côté Rust.
+    lock: async (): Promise<void> => {
+        sessionService.clear();
         if (!isTauri()) return;
-        await invoke('change_master_pin', { oldPin, newPin });
+        try { await invoke('lock'); } catch { /* déjà verrouillé */ }
     },
 
-    // Recovers access using the 24-word phrase and sets a new master PIN in the same
-    // step. Returns a freshly generated recovery phrase (the one just used is retired).
-    recoverWithPhrase: async (phrase: string, newPin: string): Promise<string> => {
-        return invoke<string>('recover_with_phrase', { phrase, newPin });
+    // Re-vérifie le mot de passe de la session (sortie du mode salle d'attente).
+    verifyPassword: async (password: string): Promise<boolean> => {
+        if (!isTauri()) return true;
+        return invoke<boolean>('verify_password', { password });
     },
 
-    // Regenerates the recovery phrase without changing the PIN (e.g. the doctor
-    // suspects the previous phrase was seen by someone else).
-    regenerateRecovery: async (pin: string): Promise<string> => {
-        return invoke<string>('regenerate_recovery', { pin });
+    changeOwnPassword: async (oldPassword: string, newPassword: string): Promise<void> => {
+        if (!isTauri()) return;
+        await invoke('change_own_password', { oldPassword, newPassword });
+        const s = sessionService.get();
+        if (s) sessionService.set({ ...s, mustChangePassword: false });
     },
+
+    // Migration unique des très anciennes installations (avant la phrase de récupération).
+    migrateToRecovery: async (password: string): Promise<string> => {
+        const phrase = await invoke<string>('migrate_to_recovery', { pin: password });
+        sessionService.set(await securityService.currentSession());
+        return phrase;
+    },
+
+    // « Mot de passe oublié » du médecin : phrase de 24 mots + nouveau mot de passe.
+    recoverWithPhrase: async (phrase: string, newPassword: string, userId?: string): Promise<string> => {
+        const newPhrase = await invoke<string>('recover_with_phrase', { phrase, newPin: newPassword, userId: userId ?? null });
+        sessionService.set(await securityService.currentSession());
+        return newPhrase;
+    },
+
+    regenerateRecovery: async (password: string): Promise<string> => {
+        return invoke<string>('regenerate_recovery', { pin: password });
+    },
+
+    // ── Gestion des comptes (médecin uniquement, contrôlé côté Rust) ──
+    listUsers: async (): Promise<AppUser[]> => {
+        if (!isTauri()) return [];
+        const rows = await invoke<any[]>('list_users');
+        return rows.map(r => ({ id: r.id, name: r.name, role: r.role, createdAt: r.created_at, mustChangePassword: r.must_change_password }));
+    },
+    createUser: (name: string, role: UserRole, password: string) => invoke('create_user', { name, role, password }),
+    deleteUser: (id: string) => invoke('delete_user', { id }),
+    setUserRole: (id: string, role: UserRole) => invoke('set_user_role', { id, role }),
+    resetUserPassword: (id: string, newPassword: string) => invoke('reset_user_password', { id, newPassword }),
 };

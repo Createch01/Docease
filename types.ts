@@ -4,24 +4,25 @@ import type { OrdonnanceAppearance } from './components/ordonnance-editor/ordonn
 export type MedicineCategory = string;
 export type MealTiming = 'Avant repas' | 'Pendant repas' | 'Après repas' | 'Indifférent';
 export type PatientType = 'Adult' | 'Child' | 'Woman';
-export type UserRole = 'Admin' | 'Medecin' | 'Assistant' | 'User';
+// Deux rôles seulement. Le rôle d'une session est décidé et contrôlé côté Rust
+// (src-tauri/src/access.rs) ; l'interface n'en fait que le reflet.
+export type UserRole = 'Medecin' | 'Assistant';
 export type Permission =
   | 'ACCESS_DASHBOARD'
-  | 'MANAGE_PATIENTS' // Salle d'attente + informations administratives (rôle Assistant/Accueil)
-  | 'MANAGE_MEDICAL_RECORDS' // Dossier médical : pathologies, allergies, historique (rôle Médecin)
-  | 'CREATE_PRESCRIPTION'
+  | 'MANAGE_PATIENTS' // Salle d'attente + identité/contact des patients
   | 'MANAGE_APPOINTMENTS'
+  | 'COLLECT_PAYMENTS' // Encaissement des visites du jour
+  | 'MANAGE_MEDICAL_RECORDS' // Dossier médical, consultations, documents
+  | 'CREATE_PRESCRIPTION'
   | 'VIEW_FINANCES'
-  | 'MANAGE_SETTINGS'
-  | 'USE_AI_ASSISTANT';
+  | 'MANAGE_SETTINGS' // Paramètres, sauvegardes, collaborateurs
+  | 'USE_AI_ASSISTANT'
+  | 'DOCTOR_TOOLS'; // Tâches, répertoire des médicaments, notifications
 
-// Permissions par défaut proposées selon le rôle choisi à la création d'un collaborateur
-// (§9 du cahier des charges : séparation Assistant/Accueil vs Médecin).
-export const ROLE_DEFAULT_PERMISSIONS: Record<UserRole, Permission[]> = {
-  Admin: ['ACCESS_DASHBOARD', 'MANAGE_PATIENTS', 'MANAGE_MEDICAL_RECORDS', 'CREATE_PRESCRIPTION', 'MANAGE_APPOINTMENTS', 'VIEW_FINANCES', 'MANAGE_SETTINGS', 'USE_AI_ASSISTANT'],
-  Medecin: ['ACCESS_DASHBOARD', 'MANAGE_PATIENTS', 'MANAGE_MEDICAL_RECORDS', 'CREATE_PRESCRIPTION', 'MANAGE_APPOINTMENTS', 'VIEW_FINANCES', 'USE_AI_ASSISTANT'],
-  Assistant: ['ACCESS_DASHBOARD', 'MANAGE_PATIENTS', 'MANAGE_APPOINTMENTS'],
-  User: [],
+// Permissions DÉRIVÉES du rôle (plus stockées par compte).
+export const ROLE_PERMISSIONS: Record<UserRole, Permission[]> = {
+  Medecin: ['ACCESS_DASHBOARD', 'MANAGE_PATIENTS', 'MANAGE_APPOINTMENTS', 'COLLECT_PAYMENTS', 'MANAGE_MEDICAL_RECORDS', 'CREATE_PRESCRIPTION', 'VIEW_FINANCES', 'MANAGE_SETTINGS', 'USE_AI_ASSISTANT', 'DOCTOR_TOOLS'],
+  Assistant: ['ACCESS_DASHBOARD', 'MANAGE_PATIENTS', 'MANAGE_APPOINTMENTS', 'COLLECT_PAYMENTS'],
 };
 
 export type LabRequestStatus = 'DRAFT' | 'REQUESTED' | 'RECEIVED' | 'INTERPRETED' | 'CLOSED';
@@ -30,10 +31,9 @@ export type MedicalResultType = 'biologie' | 'imagerie' | 'autre';
 export interface AppUser {
   id: string;
   name: string;
-  pin: string;
   role: UserRole;
-  permissions: Permission[];
   createdAt: string;
+  mustChangePassword?: boolean;
 }
 
 export interface MedicineRestriction {
@@ -130,9 +130,6 @@ export interface DoctorInfo {
   barcodePosition: 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right' | 'center-right';
   barcodeSize: number;
   showQRCode?: boolean;
-  // Security
-  pinEnabled: boolean;
-  pin?: string;
   // QR Code
   qrCodeContent: string;
   qrCodePosition: 'top-right' | 'bottom-right' | 'none';
@@ -149,10 +146,6 @@ export interface DoctorInfo {
   hours?: string;
   mapsUrl?: string;
   standardConsultationFee?: number;
-
-  // Multi-user
-  users?: AppUser[];
-  activeUser?: AppUser;
 
 }
 

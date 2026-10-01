@@ -13,6 +13,7 @@
 // Every write also appends one audit-log row per changed field — never a
 // silent overwrite (see AuditEntry below).
 
+import { sessionService } from './sessionService';
 import { storageService } from './storageService';
 import { dataService } from './dataService';
 import type { Medicament } from './drugCatalogService';
@@ -135,7 +136,7 @@ function diffFields(oldRecord: Partial<Medicament> | undefined, newRecord: Medic
 }
 
 function getChangedBy(): string {
-    const user = dataService.getActiveUser();
+    const user = sessionService.get();
     if (user?.name) return user.name;
     const doctor = dataService.getDoctorInfo();
     return doctor?.nameFr || 'Utilisateur inconnu';

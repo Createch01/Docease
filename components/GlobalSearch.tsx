@@ -6,7 +6,7 @@ import { Patient } from '../types';
 
 interface GlobalSearchProps {
     onSelectPatient: (patient: Patient) => void;
-    onConsult: (patient: Patient) => void;
+    onConsult?: (patient: Patient) => void;
     onClose: () => void;
 }
 
@@ -130,7 +130,7 @@ const GlobalSearch: React.FC<GlobalSearchProps> = ({ onSelectPatient, onConsult,
                                     </div>
 
                                     <div className="flex items-center gap-3">
-                                        <button
+                                        {onConsult && <button
                                             onClick={(e) => { e.stopPropagation(); onConsult(p); }}
                                             className={`px-5 py-2.5 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all flex items-center gap-2 ${selectedIndex === index
                                                 ? 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-lg shadow-emerald-500/20'
@@ -138,7 +138,7 @@ const GlobalSearch: React.FC<GlobalSearchProps> = ({ onSelectPatient, onConsult,
                                                 }`}
                                         >
                                             <Plus size={14} /> CONSULTER
-                                        </button>
+                                        </button>}
                                         <div className={`p-2 transition-transform duration-500 ${selectedIndex === index ? 'text-emerald-400 translate-x-1' : 'text-slate-200'}`}>
                                             <ArrowRight size={20} />
                                         </div>

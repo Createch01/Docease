@@ -29,6 +29,8 @@ import {
   CheckSquare
 } from 'lucide-react';
 import { dataService } from '../services/dataService';
+import { securityService } from '../services/securityService';
+import { sessionService } from '../services/sessionService';
 import { Task, TaskPriority, TaskCategory, AppUser } from '../types';
 import ConfirmModal from './ConfirmModal';
 
@@ -79,7 +81,7 @@ const TaskManager: React.FC = () => {
 
   useEffect(() => {
     setTasks(dataService.getTasks());
-    setUsers(dataService.getUsers());
+    securityService.listUsers().then(setUsers).catch(() => setUsers([]));
 
     const handleUpdate = (e: any) => {
       if (e.detail?.key === 'meddoc_tasks') setTasks(dataService.getTasks());
@@ -92,8 +94,8 @@ const TaskManager: React.FC = () => {
     if (!newTask.title) return;
 
     // Auto-assign to current user if not selected
-    const currentUser = dataService.getActiveUser();
-    const assigned = newTask.assignedTo || (currentUser ? currentUser.id : '');
+    const currentUser = sessionService.get();
+    const assigned = newTask.assignedTo || (currentUser ? currentUser.userId : '');
 
     const task: Task = {
       id: Date.now().toString(),

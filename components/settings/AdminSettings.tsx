@@ -1,127 +1,68 @@
-/** Sécurité & données : Sécurité (PIN), Collaborateurs, Base de données. */
-import React, { useRef, useState } from 'react';
-import { Database, Download, Eye, EyeOff, Lock, Plus, RefreshCw, Trash2, Upload, Users, X, Info } from 'lucide-react';
+/** Sécurité & données : Sécurité (mot de passe), Collaborateurs, Base de données. */
+import React, { useEffect, useRef, useState } from 'react';
+import { Database, Download, Eye, EyeOff, KeyRound, Lock, Plus, RefreshCw, Trash2, Upload, Users, X, Info } from 'lucide-react';
 import { invoke } from '@tauri-apps/api/core';
 import packageJson from '../../package.json';
 import { AppUser, UserRole } from '../../types';
 import { dataService } from '../../services/dataService';
+import { securityService } from '../../services/securityService';
+import { sessionService } from '../../services/sessionService';
+import { minPasswordLength, validatePassword } from '../../services/passwordPolicy';
 import { toastService } from '../../services/toastService';
-import { SettingsPageFrame, SettingsCard, Toggle, input40, inputStyle, cardStyle, primaryButton } from './SettingsUI';
+import { SettingsPageFrame, SettingsCard, input40, inputStyle, cardStyle, primaryButton } from './SettingsUI';
 import { SettingsPageProps } from './ProfileSettings';
 import { AiSettingsCard } from './AiSettingsCard';
 
-const pinInputClass = 'w-full h-14 px-5 rounded-lg border text-center text-[20px] font-semibold outline-none transition-all';
-const pinInputStyle = { borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' } as React.CSSProperties;
-const digits = (v: string) => v.replace(/\D/g, '').slice(0, 6);
-
-// ═══════════ Zone sécurisée ═══════════
-export const AdminLock: React.FC<{ onUnlock: () => void }> = ({ onUnlock }) => {
-  const [value, setValue] = useState('');
-  const verify = () => {
-    if (value === dataService.getDoctorInfo().pin) { onUnlock(); return; }
-    alert('Code PIN incorrect.');
-    setValue('');
-  };
-  return (
-    <div className="flex flex-col items-center justify-center py-20 animate-in">
-      <div className="w-16 h-16 rounded-xl flex items-center justify-center mb-5" style={{ background: 'var(--color-warning-50)', color: 'var(--color-warning-hover)' }}>
-        <Lock size={28} />
-      </div>
-      <h3 className="text-[18px] font-semibold" style={{ color: 'var(--color-text)' }}>Zone sécurisée</h3>
-      <p className="mt-1.5 text-[13px] text-center max-w-xs" style={{ color: 'var(--color-text-subtle)' }}>
-        Cette section contient des paramètres sensibles. Veuillez saisir votre code PIN administrateur.
-      </p>
-      <div className="mt-7 space-y-3 w-full max-w-xs">
-        <input
-          type="password" inputMode="numeric" autoFocus aria-label="Code PIN administrateur"
-          value={value} onChange={e => setValue(digits(e.target.value))} placeholder="••••••"
-          onKeyDown={e => e.key === 'Enter' && verify()}
-          className="w-full h-14 px-5 rounded-lg border text-center text-[22px] font-semibold tracking-[0.5em] outline-none transition-all"
-          style={{ ...pinInputStyle, fontFamily: 'var(--font-mono)' }}
-        />
-        <button type="button" onClick={verify} className="w-full h-11 rounded-lg text-white font-medium text-[13px] transition-all active:scale-[0.98]" style={{ background: 'var(--color-text)' }}>
-          Déverrouiller
-        </button>
-      </div>
-    </div>
-  );
-};
+const errText = (e: unknown) => (typeof e === 'string' ? e : (e as any)?.message || 'Opération impossible.');
+const ROLE_LABEL: Record<UserRole, string> = { Medecin: 'Médecin', Assistant: 'Assistante' };
 
 // ═══════════ Sécurité ═══════════
-export const SecuritySettings: React.FC<SettingsPageProps & { onUnlocked: () => void }> = ({ route, onNavigate, onUnlocked }) => {
-  const [pinEnabled, setPinEnabled] = useState(() => !!dataService.getDoctorInfo().pinEnabled);
-  const [hasPin, setHasPin] = useState(() => !!dataService.getDoctorInfo().pin);
-  // Création demandée sans PIN existant : le verrou n'est activé qu'une fois le
-  // PIN créé et confirmé, sinon les sections sensibles se verrouilleraient sans
-  // code permettant de les rouvrir.
-  const [setupOpen, setSetupOpen] = useState(false);
-  const [currentPin, setCurrentPin] = useState('');
-  const [newPin, setNewPin] = useState('');
-  const [confirmPin, setConfirmPin] = useState('');
-  const [showPins, setShowPins] = useState(false);
+export const SecuritySettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => {
+  const role = sessionService.role() ?? 'Medecin';
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
+  const [show, setShow] = useState(false);
   const [error, setError] = useState('');
 
-  const resetForm = () => { setCurrentPin(''); setNewPin(''); setConfirmPin(''); setError(''); };
-
-  const toggle = async () => {
-    const saved = dataService.getDoctorInfo();
-    if (pinEnabled) {
-      await dataService.saveDoctorInfo({ ...saved, pinEnabled: false });
-      setPinEnabled(false); setSetupOpen(false); resetForm();
-    } else if (saved.pin) {
-      await dataService.saveDoctorInfo({ ...saved, pinEnabled: true });
-      setPinEnabled(true); onUnlocked();
-    } else {
-      setSetupOpen(o => !o); resetForm();
+  const save = async () => {
+    const check = validatePassword(newPassword, role);
+    if (!check.valid) { setError(check.error!); return; }
+    if (newPassword !== confirm) { setError('La confirmation ne correspond pas au nouveau mot de passe.'); return; }
+    try {
+      await securityService.changeOwnPassword(oldPassword, newPassword);
+      setOldPassword(''); setNewPassword(''); setConfirm(''); setError('');
+      toastService.success('Mot de passe mis à jour');
+    } catch (e) {
+      setError(errText(e));
     }
   };
 
-  const savePin = async () => {
-    const saved = dataService.getDoctorInfo();
-    if (saved.pin && currentPin !== saved.pin) { setError('Ancien PIN incorrect.'); return; }
-    if (!/^\d{4,6}$/.test(newPin)) { setError('Le PIN doit contenir 4 à 6 chiffres.'); return; }
-    if (newPin !== confirmPin) { setError('La confirmation ne correspond pas au nouveau PIN.'); return; }
-    const created = !saved.pin;
-    await dataService.saveDoctorInfo({ ...saved, pin: newPin, pinEnabled: true });
-    setHasPin(true); setPinEnabled(true); setSetupOpen(false); resetForm();
-    onUnlocked();
-    toastService.success(created ? 'PIN créé et verrouillage activé' : 'PIN mis à jour');
-  };
-
-  const pinField = (value: string, set: (v: string) => void, placeholder: string, onEnter?: () => void) => (
+  const field = (value: string, set: (v: string) => void, placeholder: string) => (
     <input
-      type={showPins ? 'text' : 'password'} inputMode="numeric" aria-label={placeholder}
-      value={value} onChange={e => { set(digits(e.target.value)); setError(''); }} placeholder={placeholder}
-      onKeyDown={onEnter ? e => e.key === 'Enter' && onEnter() : undefined}
-      className={pinInputClass} style={pinInputStyle}
+      type={show ? 'text' : 'password'} aria-label={placeholder} maxLength={64}
+      value={value} onChange={e => { set(e.target.value); setError(''); }} placeholder={placeholder}
+      className={input40} style={inputStyle}
     />
   );
 
   return (
     <SettingsPageFrame route={route} onNavigate={onNavigate}>
       <div className="max-w-2xl space-y-6">
-        <SettingsCard title="Verrouillage par code PIN" icon={<Lock size={16} />}
-                      description="Demandé au démarrage et pour ouvrir Sécurité, Collaborateurs et Base de données."
-                      actions={<Toggle danger label="Verrouillage par code PIN" checked={pinEnabled} onChange={toggle} />}>
-          {(pinEnabled || setupOpen) && (
-            <div className="space-y-4 max-w-sm">
-              <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
-                {hasPin ? 'Modifier le code PIN (4 à 6 chiffres).' : 'Créez un code PIN de 4 à 6 chiffres pour activer le verrouillage.'}
-              </p>
-              <div className="space-y-3">
-                {hasPin && pinField(currentPin, setCurrentPin, 'Ancien PIN')}
-                {pinField(newPin, setNewPin, 'Nouveau PIN')}
-                {pinField(confirmPin, setConfirmPin, 'Confirmer le nouveau PIN', savePin)}
-                <button type="button" onClick={() => setShowPins(v => !v)} className="text-[12px] font-medium flex items-center gap-1.5" style={{ color: 'var(--color-text-muted)' }}>
-                  {showPins ? <EyeOff size={14} /> : <Eye size={14} />} {showPins ? 'Masquer les codes' : 'Afficher les codes'}
-                </button>
-                {error && <p role="alert" className="text-[12px] font-medium" style={{ color: 'var(--color-danger)' }}>{error}</p>}
-              </div>
-              <button type="button" onClick={savePin} className="w-full h-11 rounded-lg text-white font-medium text-[13px] transition-all active:scale-[0.98]" style={{ background: 'var(--color-danger)' }}>
-                {hasPin ? 'Sauvegarder le PIN' : 'Créer le PIN'}
-              </button>
-            </div>
-          )}
+        <SettingsCard title="Mon mot de passe" icon={<KeyRound size={16} />}
+                      description={`Chaque utilisateur a son propre mot de passe (${minPasswordLength(role)} caractères minimum).`}>
+          <div className="space-y-3 max-w-sm">
+            {field(oldPassword, setOldPassword, 'Mot de passe actuel')}
+            {field(newPassword, setNewPassword, 'Nouveau mot de passe')}
+            {field(confirm, setConfirm, 'Confirmer le nouveau mot de passe')}
+            <button type="button" onClick={() => setShow(v => !v)} className="text-[12px] font-medium flex items-center gap-1.5" style={{ color: 'var(--color-text-muted)' }}>
+              {show ? <EyeOff size={14} /> : <Eye size={14} />} {show ? 'Masquer' : 'Afficher'}
+            </button>
+            {error && <p role="alert" className="text-[12px] font-medium" style={{ color: 'var(--color-danger)' }}>{error}</p>}
+            <button type="button" onClick={save} disabled={!oldPassword || !newPassword} className={primaryButton} style={{ background: 'var(--color-primary)' }}>
+              <Lock size={15} /> Changer le mot de passe
+            </button>
+          </div>
         </SettingsCard>
         <AiSettingsCard />
       </div>
@@ -130,51 +71,79 @@ export const SecuritySettings: React.FC<SettingsPageProps & { onUnlocked: () => 
 };
 
 // ═══════════ Collaborateurs ═══════════
+// Seul le médecin crée/supprime des comptes, change les rôles et réinitialise le mot
+// de passe d'une assistante — contrôlé côté Rust (commandes réservées au médecin).
 export const UsersSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => {
-  const [users, setUsers] = useState<AppUser[]>(() => dataService.getUsers());
+  const [users, setUsers] = useState<AppUser[]>([]);
   const [showForm, setShowForm] = useState(false);
-  const [newUser, setNewUser] = useState<Partial<AppUser>>({ name: '', pin: '', role: 'User', permissions: [] });
+  const [name, setName] = useState('');
+  const [role, setRole] = useState<UserRole>('Assistant');
+  const [password, setPassword] = useState('');
+  const [resetFor, setResetFor] = useState<string | null>(null);
+  const [resetPassword, setResetPassword] = useState('');
+  const [error, setError] = useState('');
+  const selfId = sessionService.get()?.userId;
+
+  const refresh = () => securityService.listUsers().then(setUsers).catch(e => setError(errText(e)));
+  useEffect(() => { void refresh(); }, []);
 
   const add = async () => {
-    if (!newUser.name || !newUser.pin || newUser.pin.length < 4) {
-      alert("Veuillez remplir le nom et un PIN d'au moins 4 chiffres.");
-      return;
-    }
-    await dataService.saveUser({
-      id: Date.now().toString(),
-      name: newUser.name,
-      pin: newUser.pin,
-      role: (newUser.role as UserRole) || 'User',
-      permissions: newUser.permissions || [],
-      createdAt: new Date().toISOString(),
-    });
-    setUsers(dataService.getUsers());
-    setNewUser({ name: '', pin: '', role: 'User', permissions: [] });
-    setShowForm(false);
+    const check = validatePassword(password, role);
+    if (!name.trim()) { setError('Le nom est requis.'); return; }
+    if (!check.valid) { setError(check.error!); return; }
+    try {
+      await securityService.createUser(name.trim(), role, password);
+      setName(''); setPassword(''); setRole('Assistant'); setShowForm(false); setError('');
+      toastService.success('Compte créé : le mot de passe devra être changé à la première connexion');
+      await refresh();
+    } catch (e) { setError(errText(e)); }
   };
 
-  const remove = async (id: string) => {
-    if (!window.confirm('Supprimer cet utilisateur ?')) return;
-    await dataService.deleteUser(id);
-    setUsers(dataService.getUsers());
+  const remove = async (u: AppUser) => {
+    if (!window.confirm(`Supprimer le compte de ${u.name} ?`)) return;
+    try { await securityService.deleteUser(u.id); await refresh(); } catch (e) { setError(errText(e)); }
+  };
+
+  const changeRole = async (u: AppUser, next: UserRole) => {
+    if (next === u.role) return;
+    try { await securityService.setUserRole(u.id, next); await refresh(); } catch (e) { setError(errText(e)); }
+  };
+
+  const doReset = async (u: AppUser) => {
+    const check = validatePassword(resetPassword, 'Assistant');
+    if (!check.valid) { setError(check.error!); return; }
+    try {
+      await securityService.resetUserPassword(u.id, resetPassword);
+      setResetFor(null); setResetPassword(''); setError('');
+      toastService.success(`Mot de passe de ${u.name} réinitialisé`);
+      await refresh();
+    } catch (e) { setError(errText(e)); }
   };
 
   return (
     <SettingsPageFrame route={route} onNavigate={onNavigate}
       actions={
         <button type="button" onClick={() => setShowForm(s => !s)} className={primaryButton} style={{ background: 'var(--color-primary)' }}>
-          {showForm ? <X size={15} /> : <Plus size={15} />} {showForm ? 'Annuler' : 'Nouveau collaborateur'}
+          {showForm ? <X size={15} /> : <Plus size={15} />} {showForm ? 'Annuler' : 'Nouveau compte'}
         </button>
       }>
       <div className="space-y-5 max-w-4xl">
+        {error && <p role="alert" className="text-[13px] font-medium" style={{ color: 'var(--color-danger)' }}>{error}</p>}
+
         {showForm && (
-          <SettingsCard title="Nouveau collaborateur" icon={<Users size={16} />}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <input value={newUser.name} onChange={e => setNewUser({ ...newUser, name: e.target.value })} placeholder="Nom" aria-label="Nom" className={input40} style={inputStyle} />
-              <input type="password" inputMode="numeric" value={newUser.pin} onChange={e => setNewUser({ ...newUser, pin: e.target.value })} placeholder="PIN" aria-label="PIN" className={input40} style={inputStyle} />
+          <SettingsCard title="Nouveau compte" icon={<Users size={16} />}
+                        description="L'utilisateur choisira son propre mot de passe à sa première connexion.">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <input value={name} onChange={e => { setName(e.target.value); setError(''); }} placeholder="Nom" aria-label="Nom" maxLength={80} className={input40} style={inputStyle} />
+              <select value={role} onChange={e => setRole(e.target.value as UserRole)} aria-label="Rôle" className={input40} style={inputStyle}>
+                <option value="Assistant">Assistante</option>
+                <option value="Medecin">Médecin</option>
+              </select>
+              <input type="password" value={password} onChange={e => { setPassword(e.target.value); setError(''); }} maxLength={64}
+                     placeholder={`Mot de passe provisoire (${minPasswordLength(role)} car. min.)`} aria-label="Mot de passe provisoire" className={input40} style={inputStyle} />
             </div>
             <button type="button" onClick={add} className={primaryButton} style={{ background: 'var(--color-primary)' }}>
-              <Plus size={15} /> Ajouter
+              <Plus size={15} /> Créer le compte
             </button>
           </SettingsCard>
         )}
@@ -190,19 +159,54 @@ export const UsersSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }
             </thead>
             <tbody>
               {users.map(u => (
-                <tr key={u.id} style={{ borderTop: '1px solid var(--color-border)' }}>
-                  <td className="px-5 py-3 font-medium" style={{ color: 'var(--color-text)' }}>{u.name}</td>
-                  <td className="px-5 py-3 text-[11px] font-medium uppercase" style={{ color: 'var(--color-text-muted)' }}>{u.role}</td>
-                  <td className="px-5 py-3 text-right">
-                    <button type="button" onClick={() => remove(u.id)} aria-label={`Supprimer ${u.name}`} className="p-1.5 rounded-md transition-colors" style={{ color: 'var(--color-text-faint)' }}>
-                      <Trash2 size={16} />
-                    </button>
-                  </td>
-                </tr>
+                <React.Fragment key={u.id}>
+                  <tr style={{ borderTop: '1px solid var(--color-border)' }}>
+                    <td className="px-5 py-3 font-medium" style={{ color: 'var(--color-text)' }}>
+                      {u.name}{u.id === selfId && <span className="ml-2 text-[11px] font-normal" style={{ color: 'var(--color-text-faint)' }}>(vous)</span>}
+                      {u.mustChangePassword && <span className="ml-2 text-[11px] font-normal" style={{ color: 'var(--color-warning-hover)' }}>mot de passe à changer</span>}
+                    </td>
+                    <td className="px-5 py-3">
+                      {u.id === selfId ? (
+                        <span className="text-[12px] font-medium" style={{ color: 'var(--color-text-muted)' }}>{ROLE_LABEL[u.role]}</span>
+                      ) : (
+                        <select value={u.role} onChange={e => changeRole(u, e.target.value as UserRole)} aria-label={`Rôle de ${u.name}`}
+                                className="h-8 px-2 rounded-md border text-[12px] bg-white" style={{ borderColor: 'var(--color-border)' }}>
+                          <option value="Assistant">Assistante</option>
+                          <option value="Medecin">Médecin</option>
+                        </select>
+                      )}
+                    </td>
+                    <td className="px-5 py-3 text-right whitespace-nowrap">
+                      {u.role === 'Assistant' && (
+                        <button type="button" onClick={() => { setResetFor(resetFor === u.id ? null : u.id); setResetPassword(''); setError(''); }}
+                                className="text-[12px] font-medium px-2 py-1 rounded-md mr-1" style={{ color: 'var(--color-text-muted)' }}>
+                          Réinitialiser le mot de passe
+                        </button>
+                      )}
+                      {u.id !== selfId && (
+                        <button type="button" onClick={() => remove(u)} aria-label={`Supprimer ${u.name}`} className="p-1.5 rounded-md transition-colors" style={{ color: 'var(--color-text-faint)' }}>
+                          <Trash2 size={16} />
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                  {resetFor === u.id && (
+                    <tr>
+                      <td colSpan={3} className="px-5 pb-4">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <input type="password" value={resetPassword} onChange={e => { setResetPassword(e.target.value); setError(''); }} maxLength={64}
+                                 placeholder={`Nouveau mot de passe provisoire (${minPasswordLength('Assistant')} car. min.)`} aria-label="Nouveau mot de passe provisoire"
+                                 className={`${input40} max-w-xs`} style={inputStyle} />
+                          <button type="button" onClick={() => doReset(u)} className={primaryButton} style={{ background: 'var(--color-primary)' }}>Valider</button>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
               ))}
               {users.length === 0 && (
                 <tr>
-                  <td colSpan={3} className="px-5 py-12 text-center text-[13px] italic" style={{ color: 'var(--color-text-faint)' }}>Aucun collaborateur ajouté.</td>
+                  <td colSpan={3} className="px-5 py-12 text-center text-[13px] italic" style={{ color: 'var(--color-text-faint)' }}>Aucun compte.</td>
                 </tr>
               )}
             </tbody>
@@ -218,9 +222,12 @@ export const DatabaseSettings: React.FC<SettingsPageProps> = ({ route, onNavigat
   const [stats, setStats] = useState(() => dataService.getDatabaseStats());
   const [checking, setChecking] = useState(false);
   const backupInputRef = useRef<HTMLInputElement>(null);
-  const passphrase = () => dataService.getDoctorInfo().pin || 'backup-key';
+  // Mot de passe de la sauvegarde : saisi à chaque fois (il n'est plus dérivé d'un PIN stocké).
+  const [backupPassphrase, setBackupPassphrase] = useState('');
+  const passphrase = () => backupPassphrase;
 
   const exportBackup = async () => {
+    if (backupPassphrase.length < 8) { toastService.error('Saisissez un mot de passe de sauvegarde (8 caractères minimum).'); return; }
     await dataService.exportFullBackup(passphrase());
     setStats(dataService.getDatabaseStats());
   };
@@ -229,6 +236,7 @@ export const DatabaseSettings: React.FC<SettingsPageProps> = ({ route, onNavigat
     const file = e.target.files?.[0];
     e.target.value = '';
     if (!file) return;
+    if (!backupPassphrase) { toastService.error('Saisissez le mot de passe de la sauvegarde à importer.'); return; }
     if (!window.confirm('ATTENTION : Cette action remplacera toutes vos données actuelles. Continuer ?')) return;
     const reader = new FileReader();
     reader.onload = async (event) => {
@@ -275,6 +283,8 @@ export const DatabaseSettings: React.FC<SettingsPageProps> = ({ route, onNavigat
 
         <SettingsCard title="Sauvegardes" icon={<Download size={16} />} description="Fichier chiffré contenant toutes vos données.">
           <div className="flex flex-col gap-3">
+            <input type="password" value={backupPassphrase} onChange={e => setBackupPassphrase(e.target.value)} maxLength={64}
+                   placeholder="Mot de passe de la sauvegarde" aria-label="Mot de passe de la sauvegarde" className={input40} style={inputStyle} />
             <button type="button" onClick={exportBackup} className="w-full h-11 rounded-lg text-white font-medium text-[13px] flex items-center justify-center gap-2 transition-all active:scale-[0.98]" style={{ background: 'var(--color-primary)' }}>
               <Download size={15} /> Exporter la sauvegarde
             </button>

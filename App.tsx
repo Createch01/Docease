@@ -9,15 +9,15 @@ import {
 } from 'lucide-react';
 import LoadingIndicator from './components/LoadingIndicator';
 import WaveBackground from './components/WaveBackground';
-import PinDialog from './components/PinDialog';
 import AppLockScreen from './components/AppLockScreen';
 import WaitingRoomKiosk from './components/WaitingRoomKiosk';
 import ToastContainer from './components/ToastContainer';
 import { dataService } from './services/dataService';
 import { autoImportService } from './services/autoImportService';
 import { securityService } from './services/securityService';
-import { Patient, AppUser, Permission, PrescriptionDraft } from './types';
-import { LogOut, BookOpen } from 'lucide-react';
+import { sessionService } from './services/sessionService';
+import { Patient, Permission, PrescriptionDraft } from './types';
+import { LogOut, BookOpen, Wallet, Lock, Monitor } from 'lucide-react';
 import {
   SettingsRoute, DEFAULT_SETTINGS_ROUTE, getSection, isSettingsHash, normalizeRoute,
   parseSettingsHash, sameRoute, settingsHash, visibleSettingsGroups,
@@ -32,6 +32,8 @@ const SettingsPanel = React.lazy(() => import('./components/SettingsPanel')) as 
 const Analytics = React.lazy(() => import('./components/Analytics'));
 const PatientDossier = React.lazy(() => import('./components/PatientDossier'));
 const TaskManager = React.lazy(() => import('./components/TaskManager'));
+const AssistantDashboard = React.lazy(() => import('./components/AssistantDashboard'));
+const CashierView = React.lazy(() => import('./components/CashierView'));
 // Raccourci de recherche affiché selon la plateforme (Ctrl K sous Windows et Linux).
 const SEARCH_SHORTCUT = /Mac|iPhone|iPad/i.test(typeof navigator !== 'undefined' ? (navigator.platform || navigator.userAgent) : '') ? '⌘K' : 'Ctrl K';
 
@@ -43,7 +45,28 @@ const GlobalSearch = React.lazy(() => import('./components/GlobalSearch'));
 const PharmaDirectory = React.lazy(() => import('./components/PharmaDirectory'));
 const MedicamentManagement = React.lazy(() => import('./components/admin/MedicamentManagement'));
 
-type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc' | 'repertoire' | 'medicament-management';
+type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc' | 'repertoire' | 'medicament-management' | 'cashier';
+
+// Permission requise par écran. Un écran absent de cette table est refusé (liste blanche).
+// Même règle que côté Rust : l'interface ne fait que la refléter.
+const VIEW_PERMISSION: Record<View, Permission> = {
+  dashboard: 'ACCESS_DASHBOARD',
+  patients: 'MANAGE_PATIENTS',
+  appointments: 'MANAGE_APPOINTMENTS',
+  cashier: 'COLLECT_PAYMENTS',
+  dossier: 'MANAGE_MEDICAL_RECORDS',
+  'new-prescription': 'CREATE_PRESCRIPTION',
+  compatibility: 'CREATE_PRESCRIPTION',
+  analytics: 'VIEW_FINANCES',
+  settings: 'MANAGE_SETTINGS',
+  'medicament-management': 'MANAGE_SETTINGS',
+  'smart-doc': 'USE_AI_ASSISTANT',
+  tasks: 'DOCTOR_TOOLS',
+  notifications: 'DOCTOR_TOOLS',
+  'medical-directory': 'DOCTOR_TOOLS',
+  repertoire: 'DOCTOR_TOOLS',
+};
+const canOpen = (view: View) => !!VIEW_PERMISSION[view] && sessionService.can(VIEW_PERMISSION[view]);
 
 const App: React.FC = () => {
   return (
@@ -64,7 +87,6 @@ const AppContent: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
-  const [authenticated, setAuthenticated] = useState(false);
   const [kioskMode, setKioskMode] = useState(false);
   const [prescriptionDraft, setPrescriptionDraft] = useState<PrescriptionDraft | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -79,7 +101,7 @@ const AppContent: React.FC = () => {
     () => parseSettingsHash(window.location.hash) || DEFAULT_SETTINGS_ROUTE,
   );
 
-  const activeUser = dataService.getActiveUser();
+  const activeUser = sessionService.get();
 
   // ─── Navigation guardée ───
   // Toute navigation qui ferait perdre un brouillon des Paramètres (autre vue,
@@ -94,12 +116,14 @@ const AppContent: React.FC = () => {
   };
 
   const goToView = (view: View): boolean => {
+    if (!canOpen(view)) return false;
     if (currentView === 'settings' && view !== 'settings' && !unsavedChanges.confirmLeave()) return false;
     setCurrentView(view);
     return true;
   };
 
   const openSettings = (to: SettingsRoute): boolean => {
+    if (!sessionService.can('MANAGE_SETTINGS')) return false;
     if (leavesSettingsDraft(to) && !unsavedChanges.confirmLeave()) return false;
     setSettingsRoute(normalizeRoute(to));
     setCurrentView('settings');
@@ -124,6 +148,11 @@ const AppContent: React.FC = () => {
     const onHash = () => {
       const hash = window.location.hash;
       if (!isSettingsHash(hash)) return;
+      // Paramètres : médecin uniquement. Une URL #/settings/... saisie par une assistante est effacée.
+      if (!sessionService.can('MANAGE_SETTINGS')) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.search);
+        return;
+      }
       const parsed = parseSettingsHash(hash) || DEFAULT_SETTINGS_ROUTE;
       const accepted = openSettingsRef.current(parsed);
       if (accepted) setExpandedMenu('settings');
@@ -153,9 +182,14 @@ const AppContent: React.FC = () => {
   useEffect(() => {
     if (!securityUnlocked) return;
     const init = async () => {
-      await autoImportService.runAutoImport();
+      // Import automatique de fichiers déposés : médecin seulement (commande Rust réservée).
+      if (sessionService.isMedecin()) await autoImportService.runAutoImport();
       await dataService.initialize();
-      setAuthenticated(!!dataService.getActiveUser());
+      // L'écran initial doit être autorisé pour ce rôle (URL #/settings/... comprise).
+      if (!sessionService.can('MANAGE_SETTINGS')) {
+        setCurrentView(v => (canOpen(v) ? v : 'dashboard'));
+        if (isSettingsHash(window.location.hash)) window.history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
       setIsDataLoaded(true);
     };
 
@@ -163,10 +197,6 @@ const AppContent: React.FC = () => {
 
     const handleResize = () => {
       if (window.innerWidth >= 1024) setIsMobileMenuOpen(false);
-    };
-
-    const handleUpdate = () => {
-      setAuthenticated(!!dataService.getActiveUser());
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -183,11 +213,9 @@ const AppContent: React.FC = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    window.addEventListener('meddoc_data_update', handleUpdate);
     window.addEventListener('keydown', handleKeyDown);
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('meddoc_data_update', handleUpdate);
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [securityUnlocked]);
@@ -201,23 +229,33 @@ const AppContent: React.FC = () => {
     setCurrentView('new-prescription');
   };
 
-  const hasPermission = (permission: string) => {
-    if (!activeUser) return true;
-    if (activeUser.role === 'Admin') return true;
-    return activeUser.permissions?.includes(permission as Permission);
+  const hasPermission = (permission: string) => sessionService.can(permission as Permission);
+
+  // Verrouillage / changement d'utilisateur : Rust efface la clé et la session, et
+  // plus rien du compte précédent ne reste en mémoire côté interface.
+  const handleLock = async () => {
+    await securityService.lock();
+    dataService.reset();
+    setIsDataLoaded(false);
+    setSecurityUnlocked(false);
+    setCurrentView('dashboard');
+    setActivePatient(null);
+    setActivePrescription(null);
+    setPrescriptionDraft(null);
+    setExpandedMenu(null);
+    setKioskMode(false);
+    setIsSearchOpen(false);
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
   };
 
   const renderView = () => {
-    if (currentView === 'patients' && !hasPermission('MANAGE_PATIENTS')) return <AccessDenied />;
-    if (currentView === 'dossier' && !hasPermission('MANAGE_MEDICAL_RECORDS')) return <AccessDenied />;
-    if (currentView === 'appointments' && !hasPermission('MANAGE_APPOINTMENTS')) return <AccessDenied />;
-    if (currentView === 'new-prescription' && !hasPermission('CREATE_PRESCRIPTION')) return <AccessDenied />;
-    if (currentView === 'analytics' && !hasPermission('VIEW_FINANCES')) return <AccessDenied />;
-    if (currentView === 'settings' && !hasPermission('MANAGE_SETTINGS')) return <AccessDenied />;
-    if (currentView === 'medicament-management' && !hasPermission('MANAGE_SETTINGS')) return <AccessDenied />;
+    // Liste blanche : tout écran non autorisé pour ce rôle est refusé.
+    if (!canOpen(currentView)) return <AccessDenied />;
+    const isMedecin = sessionService.isMedecin();
 
     switch (currentView) {
-      case 'dashboard': return (
+      case 'cashier': return <CashierView />;
+      case 'dashboard': return !isMedecin ? <AssistantDashboard onNavigate={goToView} /> : (
         <Dashboard
           onNewPrescription={handleStartConsultation}
           onNavigate={goToView}
@@ -228,11 +266,11 @@ const AppContent: React.FC = () => {
           }}
         />
       );
-      case 'patients': return <PatientManager onConsult={handleStartConsultation} />;
+      case 'patients': return <PatientManager onConsult={isMedecin ? handleStartConsultation : undefined} />;
       case 'appointments': return (
         <AppointmentManager
-          onOpenDossier={(p) => { setActivePatient(p); setCurrentView('dossier'); }}
-          onStartConsultation={handleStartConsultation}
+          onOpenDossier={isMedecin ? (p) => { setActivePatient(p); setCurrentView('dossier'); } : undefined}
+          onStartConsultation={isMedecin ? handleStartConsultation : undefined}
         />
       );
       case 'dossier': return <PatientDossier initialPatient={activePatient} onNavigate={(view, data) => {
@@ -294,17 +332,18 @@ const AppContent: React.FC = () => {
     { id: 'dashboard', label: t('dashboard'), icon: LayoutDashboard, requiredPermission: 'ACCESS_DASHBOARD' },
     { id: 'patients', label: t('waiting_room'), icon: Users, requiredPermission: 'MANAGE_PATIENTS' },
     { id: 'appointments', label: t('appointments'), icon: CalendarRange, requiredPermission: 'MANAGE_APPOINTMENTS' },
-    { id: 'tasks', label: t('tasks'), icon: CheckSquare, requiredPermission: 'ACCESS_DASHBOARD' },
+    { id: 'cashier', label: 'Encaissement', icon: Wallet, requiredPermission: 'COLLECT_PAYMENTS' },
+    { id: 'tasks', label: t('tasks'), icon: CheckSquare, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'new-prescription', label: t('new_consultation'), icon: PlusCircle, requiredPermission: 'CREATE_PRESCRIPTION' },
     { id: 'dossier', label: t('patients'), icon: FolderOpen, requiredPermission: 'MANAGE_MEDICAL_RECORDS' },
     { id: 'smart-doc', label: t('smart_doc'), icon: FileText, highlight: true, requiredPermission: 'USE_AI_ASSISTANT' },
     // Clinical, daily-use tools
-    { id: 'medical-directory', label: 'Médicaments', icon: BookOpen, requiredPermission: 'ACCESS_DASHBOARD' },
+    { id: 'medical-directory', label: 'Médicaments', icon: BookOpen, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'compatibility', label: 'Vérifier interactions', icon: Activity, requiredPermission: 'CREATE_PRESCRIPTION' },
     // Administrative, occasional-use tools
     { id: 'medicament-management', label: 'Gestion des médicaments', icon: Database, requiredPermission: 'MANAGE_SETTINGS' },
     { id: 'analytics', label: 'Comptabilité', icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
-    { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'ACCESS_DASHBOARD' },
+    { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'settings', label: t('settings'), icon: Settings, requiredPermission: 'MANAGE_SETTINGS' },
   ].filter(item => !item.requiredPermission || hasPermission(item.requiredPermission));
 
@@ -331,17 +370,10 @@ const AppContent: React.FC = () => {
     );
   }
 
-  // Read-only queue display, reachable without identifying as any user — it shows
-  // patient names/order only, never medical data, so gating it behind a PIN is
-  // pure friction for reception staff glancing at who's waiting.
+  // Affichage de la salle d'attente : lancé depuis une session ouverte, il n'affiche
+  // que « numéro — Prénom I. » et demande le mot de passe pour en sortir.
   if (kioskMode) {
     return <WaitingRoomKiosk onExit={() => setKioskMode(false)} />;
-  }
-
-  // Secondary, optional step: identify WHICH collaborator is using the app now
-  // (multi-user permission context) — no longer the encryption gate, that's above.
-  if (doctor.pinEnabled && !authenticated) {
-    return <PinDialog onAuthenticated={() => setAuthenticated(true)} onKiosk={() => setKioskMode(true)} />;
   }
 
   const userInitials = (activeUser?.name || doctor.nameFr || 'D').substring(0, 2).toUpperCase();
@@ -417,7 +449,7 @@ const AppContent: React.FC = () => {
                 </div>
                 <div className="text-[11px] truncate flex items-center gap-1" style={{ color: 'var(--color-text-subtle)' }}>
                   <span className="w-1.5 h-1.5 rounded-full dot-pulse" style={{ background: 'var(--color-secondary)' }} />
-                  {doctor.specialtyFr || t('doctor')}
+                  {sessionService.isMedecin() ? (doctor.specialtyFr || t('doctor')) : 'Assistante'}
                 </div>
               </div>
             </div>
@@ -589,17 +621,29 @@ const AppContent: React.FC = () => {
           className="shrink-0 p-3"
           style={{ borderTop: '1px solid var(--color-border)' }}
         >
-          {!isCollapsed && activeUser && (
-            <button
-              onClick={() => { dataService.setActiveUser(undefined); setAuthenticated(false); }}
-              className="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all mb-2 text-[13px]"
-              style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
-              onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
-              onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
-            >
-              <LogOut size={16} />
-              <span>{t('logout')}</span>
-            </button>
+          {!isCollapsed && (
+            <>
+              <button
+                onClick={() => setKioskMode(true)}
+                className="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all mb-1 text-[13px]"
+                style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+              >
+                <Monitor size={16} />
+                <span>Écran salle d'attente</span>
+              </button>
+              <button
+                onClick={handleLock}
+                className="w-full flex items-center gap-2 px-3 py-2 rounded-lg transition-all mb-2 text-[13px]"
+                style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
+              >
+                <Lock size={16} />
+                <span>Verrouiller / changer d'utilisateur</span>
+              </button>
+            </>
           )}
 
           <button
@@ -674,7 +718,7 @@ const AppContent: React.FC = () => {
 
           <div className="ml-auto flex items-center gap-2">
             {/* End-of-day */}
-            <button
+            {sessionService.isMedecin() && <button
               onClick={async () => {
                 if (window.confirm("Voulez-vous effectuer la sauvegarde et archiver la journée ?")) {
                   const passphrase = window.prompt("Mot de passe pour protéger cette sauvegarde :");
@@ -695,10 +739,10 @@ const AppContent: React.FC = () => {
             >
               <Database size={15} />
               {t('end_of_day')}
-            </button>
+            </button>}
 
             {/* Notifications */}
-            <button
+            {hasPermission('DOCTOR_TOOLS') && <button
               onClick={() => goToView('notifications')}
               className="relative w-10 h-10 rounded-lg flex items-center justify-center transition-all"
               style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
@@ -710,13 +754,14 @@ const AppContent: React.FC = () => {
                 className="absolute top-2 right-2 w-2 h-2 rounded-full"
                 style={{ background: 'var(--color-danger)' }}
               />
-            </button>
+            </button>}
 
             <div className="w-px h-6 mx-1" style={{ background: 'var(--color-border)' }} />
 
-            {/* User avatar */}
+            {/* Utilisateur : nom en haut ; le médecin accède aux Paramètres, l'assistante verrouille */}
             <button
-              onClick={() => { setExpandedMenu('settings'); goToView('settings'); }}
+              title={activeUser ? `${activeUser.name} — ${activeUser.role === 'Medecin' ? 'Médecin' : 'Assistante'}` : undefined}
+              onClick={() => { if (hasPermission('MANAGE_SETTINGS')) { setExpandedMenu('settings'); goToView('settings'); } else { void handleLock(); } }}
               className="flex items-center gap-2 h-10 px-2 rounded-lg transition-all"
               style={{ transition: 'all var(--transition-base)' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
@@ -728,6 +773,7 @@ const AppContent: React.FC = () => {
               >
                 {userInitials}
               </div>
+              <span className="hidden md:inline text-[13px] font-medium" style={{ color: 'var(--color-text)' }}>{activeUser?.name}</span>
               <ChevronRight size={14} style={{ color: 'var(--color-text-subtle)' }} />
             </button>
           </div>
@@ -758,14 +804,14 @@ const AppContent: React.FC = () => {
                 onClose={() => setIsSearchOpen(false)}
                 onSelectPatient={(p) => {
                   setIsSearchOpen(false);
-                  if (!goToView('dossier')) return;
+                  if (!goToView(sessionService.isMedecin() ? 'dossier' : 'patients')) return;
                   setActivePatient(p);
                 }}
-                onConsult={(p) => {
+                onConsult={sessionService.isMedecin() ? (p) => {
                   setIsSearchOpen(false);
                   if (currentView === 'settings' && !unsavedChanges.confirmLeave()) return;
                   handleStartConsultation(p);
-                }}
+                } : undefined}
               />
             </Suspense>
           )}

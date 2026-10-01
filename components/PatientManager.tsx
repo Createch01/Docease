@@ -2,6 +2,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Search, UserPlus, FileText, X, Users, Scale, Clock, Wallet, Edit2, Phone, UserCircle, Baby, Heart, ArrowRight, Plus, CreditCard, MapPin, LayoutList, LayoutGrid, User } from 'lucide-react';
 import { useI18n } from '../i18n';
 import { dataService } from '../services/dataService';
+import { sessionService } from '../services/sessionService';
 import { Patient, PatientType } from '../types';
 import { formatAge, formatDate, calculateAgeYears, getAgeCategory } from '../utils/formatters';
 
@@ -16,6 +17,8 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
   const [localSearch, setLocalSearch] = useState('');
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
 
+  // L'assistante ne voit et ne saisit que l'identité et le contact (Rust filtre aussi).
+  const restricted = !sessionService.isMedecin();
   const doctor = dataService.getDoctorInfo();
   const blankPatient: Partial<Patient> = {
     name: '',
@@ -302,7 +305,7 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
               </div>
             </div>
 
-            {newPatient.sex === 'F' && (
+            {!restricted && newPatient.sex === 'F' && (
               <div className="md:col-span-3 space-y-4 bg-rose-50/40 border border-rose-100 rounded-[2rem] p-6">
                 <div className="flex flex-wrap items-center gap-4">
                   <button
@@ -379,7 +382,7 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
               </div>
             </div>
 
-            <div className="space-y-3">
+            {!restricted && <div className="space-y-3">
               <label className="text-gray-900 font-bold text-sm tracking-wide uppercase ml-1">Adresse / Quartier (optionnel)</label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none group-focus-within:text-emerald-500 transition-colors">
@@ -393,7 +396,7 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
                   className="w-full pl-14 pr-6 py-5 bg-slate-50/50 border border-slate-300 rounded-[1.5rem] focus:ring-8 focus:ring-emerald-500/5 focus:border-emerald-500/30 outline-none font-semibold text-gray-900 placeholder:text-gray-300 placeholder:font-normal transition-all"
                 />
               </div>
-            </div>
+            </div>}
 
             {isChild ? (
               <>
@@ -481,7 +484,7 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
               </>
             )}
 
-            <div className="space-y-3">
+            {!restricted && <div className="space-y-3">
               <label className="text-gray-900 font-bold text-sm tracking-wide uppercase ml-1">{t('weight_child')}</label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none group-focus-within:text-emerald-500 transition-colors">
@@ -495,9 +498,9 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
                   className="w-full pl-14 pr-6 py-5 bg-slate-50/50 border border-slate-300 rounded-[1.5rem] focus:ring-8 focus:ring-emerald-500/5 focus:border-emerald-500/30 outline-none font-semibold text-gray-900 placeholder:text-gray-300 placeholder:font-normal transition-all"
                 />
               </div>
-            </div>
+            </div>}
 
-            {!isChild && (
+            {!restricted && !isChild && (
               <div className="space-y-3">
                 <label className="text-gray-900 font-bold text-sm tracking-wide uppercase ml-1">Numéro de Carte Nationale (CIN)</label>
                 <div className="relative group">
@@ -515,7 +518,7 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
               </div>
             )}
 
-            <div className="space-y-3">
+            {!restricted && <div className="space-y-3">
               <label className="text-gray-900 font-bold text-sm tracking-wide uppercase ml-1">{t('consultation_fee')} ({doctor.currency})</label>
               <div className="relative group">
                 <div className="absolute inset-y-0 left-5 flex items-center pointer-events-none group-focus-within:text-emerald-500 transition-colors">
@@ -529,7 +532,7 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
                   className="w-full pl-14 pr-6 py-5 bg-emerald-50/30 border border-emerald-300 rounded-[1.5rem] focus:ring-8 focus:ring-emerald-500/5 focus:border-emerald-500/30 outline-none font-semibold text-gray-900 placeholder:text-gray-300 placeholder:font-normal transition-all"
                 />
               </div>
-            </div>
+            </div>}
 
             <div className="md:col-span-3 pt-6">
               <button
@@ -659,14 +662,14 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
                       >
                         <Edit2 size={16} />
                       </button>
-                      <button
+                      {!restricted && <button
                         onClick={(e) => { e.stopPropagation(); onConsult && onConsult(p); }}
                         className="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-lg shadow-sm transition-all flex items-center gap-1"
                         title="Consulter"
                       >
                         <span>{t('consult')}</span>
                         <ArrowRight size={12} className={dir === 'rtl' ? 'rotate-180' : ''} />
-                      </button>
+                      </button>}
                       <button
                         onClick={(e) => { e.stopPropagation(); deletePatient(p.id); }}
                         className="p-1.5 text-slate-300 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
@@ -732,12 +735,12 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
                   <button onClick={() => startEdit(p)} className="w-12 h-12 bg-white border border-slate-100 text-slate-400 rounded-2xl hover:bg-slate-50 hover:text-blue-600 transition-all flex items-center justify-center shadow-sm active:scale-90">
                     <Edit2 size={18} />
                   </button>
-                  <button
+                  {!restricted && <button
                     onClick={() => onConsult && onConsult(p)}
                     className="flex-1 py-4 gradient-emerald-teal text-white font-black rounded-2xl shadow-soft hover:shadow-premium transition-all text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-2 active:scale-95 translate-y-0"
                   >
                     {t('consult')} <ArrowRight size={14} className={`transform ${dir === 'rtl' ? 'rotate-180' : ''}`} />
-                  </button>
+                  </button>}
                   <button onClick={() => deletePatient(p.id)} className="w-12 h-12 bg-white border border-slate-100 text-slate-300 hover:text-rose-600 hover:bg-rose-50 rounded-2xl transition-all flex items-center justify-center shadow-sm active:scale-90">
                     <X size={18} />
                   </button>

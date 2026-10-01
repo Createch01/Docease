@@ -8,8 +8,8 @@
  * unique de l'identité du médecin et du cabinet).
  */
 
-import React, { useState } from 'react';
-import { dataService } from '../services/dataService';
+import React from 'react';
+import { sessionService } from '../services/sessionService';
 import { SettingsRoute, getSection, normalizeRoute } from './settings/settingsRoutes';
 import { SettingsPageFrame } from './settings/SettingsUI';
 import ProfileSettings from './settings/ProfileSettings';
@@ -17,7 +17,7 @@ import CabinetSettings from './settings/CabinetSettings';
 import DocumentsSettings from './settings/DocumentsSettings';
 import { AppearanceSettings, BillingSettings, PendingSectionSettings } from './settings/GeneralSettings';
 import AppointmentSettingsPage from './settings/AppointmentSettingsPage';
-import { AdminLock, SecuritySettings, UsersSettings, DatabaseSettings } from './settings/AdminSettings';
+import { SecuritySettings, UsersSettings, DatabaseSettings } from './settings/AdminSettings';
 
 interface SettingsPanelProps {
   route: SettingsRoute;
@@ -25,27 +25,24 @@ interface SettingsPanelProps {
 }
 
 const SettingsPanel: React.FC<SettingsPanelProps> = ({ route: rawRoute, onNavigate }) => {
-  // Déverrouillage des sections sensibles, valable tant qu'on reste dans Paramètres.
-  const [adminUnlocked, setAdminUnlocked] = useState(false);
+  // Garde de sécurité : les Paramètres (sauvegardes, comptes, IA…) sont réservés au médecin.
+  // Même règle côté Rust ; ici c'est le dernier filet si l'écran était atteint par erreur.
+  if (!sessionService.can('MANAGE_SETTINGS')) return null;
   const route = normalizeRoute(rawRoute);
   const section = getSection(route.section);
   const page = { route, onNavigate };
-
-  const info = dataService.getDoctorInfo();
-  const locked = !!section.sensitive && info.pinEnabled && !!info.pin && !adminUnlocked;
 
   // Mon design occupe toute la hauteur de la zone de contenu.
   const fill = route.section === 'documents' && route.tab === 'design';
 
   const content = (() => {
-    if (locked) return <SettingsPageFrame {...page}><AdminLock onUnlock={() => setAdminUnlocked(true)} /></SettingsPageFrame>;
     switch (route.section) {
       case 'profile': return <ProfileSettings {...page} />;
       case 'cabinet': return <CabinetSettings {...page} />;
       case 'documents': return <DocumentsSettings {...page} />;
       case 'appearance': return <AppearanceSettings {...page} />;
       case 'billing': return <BillingSettings {...page} />;
-      case 'security': return <SecuritySettings {...page} onUnlocked={() => setAdminUnlocked(true)} />;
+      case 'security': return <SecuritySettings {...page} />;
       case 'users': return <UsersSettings {...page} />;
       case 'database': return <DatabaseSettings {...page} />;
       case 'agenda': return <AppointmentSettingsPage {...page} />;

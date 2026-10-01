@@ -1,6 +1,23 @@
 import { invoke } from '@tauri-apps/api/core';
+import { sessionService } from './sessionService';
 
 const isTauri = (): boolean => typeof (window as any).__TAURI_INTERNALS__ !== 'undefined';
+
+// Pour l'assistante, les fichiers sensibles ne passent JAMAIS par load_json/save_json
+// (refusés côté Rust) mais par des commandes typées qui filtrent les champs.
+// Tout fichier absent de ces tables est ignoré : pas d'appel, valeur par défaut.
+const ASSISTANT_TYPED_LOAD: Record<string, string> = {
+    meddoc_patients: 'patients_list_identity',
+    meddoc_today_queue: 'queue_list_identity',
+    meddoc_honorary_notes: 'billing_today_list',
+    meddoc_doctor_info: 'clinic_public_info',
+};
+const ASSISTANT_TYPED_SAVE: Record<string, { command: string; arg: string }> = {
+    meddoc_patients: { command: 'patients_save_identity', arg: 'patients' },
+    meddoc_today_queue: { command: 'queue_save_identity', arg: 'queue' },
+};
+const ASSISTANT_FILE_READ = new Set(['meddoc_appointments', 'meddoc_appointment_settings']);
+const ASSISTANT_FILE_WRITE = new Set(['meddoc_appointments']);
 
 export const storageService = {
     /**
@@ -16,6 +33,13 @@ export const storageService = {
             return;
         }
         try {
+            if (sessionService.isAssistant()) {
+                const typed = ASSISTANT_TYPED_SAVE[filename];
+                if (typed) await invoke(typed.command, { [typed.arg]: data });
+                else if (ASSISTANT_FILE_WRITE.has(filename)) await invoke('save_json', { filename: `${filename}.json`, data });
+                // Autres fichiers : écriture non autorisée pour ce rôle, ignorée.
+                return;
+            }
             await invoke('save_json', { filename: `${filename}.json`, data });
             console.log(`💾 Data saved to ${filename}.json`);
         } catch (error) {
@@ -42,6 +66,11 @@ export const storageService = {
             return localData ? JSON.parse(localData) : defaultValue;
         }
         try {
+            if (sessionService.isAssistant()) {
+                const typed = ASSISTANT_TYPED_LOAD[filename];
+                if (typed) return await invoke<T>(typed);
+                if (!ASSISTANT_FILE_READ.has(filename)) return defaultValue;
+            }
             const data = await invoke<T>('load_json', { filename: `${filename}.json` });
             console.log(`📖 Data loaded from ${filename}.json`);
             return data;

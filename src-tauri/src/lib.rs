@@ -1,7 +1,10 @@
+mod access;
 mod ai;
+mod users;
+mod util;
 
 use std::fs;
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::sync::Mutex;
 use log;
 use serde::{Deserialize, Serialize};
@@ -28,6 +31,10 @@ const RECOVERY_ENTROPY_LEN: usize = 32;
 /// encrypts/decrypts through it.
 struct AppState {
     key: Mutex<Option<[u8; KEY_LEN]>>,
+    /// Utilisateur connecté et son rôle : posé par `users::unlock`, seule source de
+    /// vérité pour le contrôle d'accès (voir `access::gate`).
+    session: Mutex<Option<access::Session>>,
+    throttle: Mutex<users::Throttle>,
 }
 
 /// The data key never changes on its own — a PIN change or a recovery-phrase rotation
@@ -35,7 +42,9 @@ struct AppState {
 /// one-time legacy migration below.
 #[derive(Serialize, Deserialize, Default)]
 struct SecurityMeta {
-    // Argon2 PHC string, used only to verify the PIN typed at unlock time.
+    // Ancien schéma : hash Argon2 du mot de passe maître. Vide une fois les comptes
+    // utilisateurs créés (voir users::finalize_legacy_cleanup).
+    #[serde(default)]
     pin_hash: String,
 
     // Legacy pre-recovery-key scheme: the data key used to be derived directly from
@@ -57,23 +66,19 @@ struct SecurityMeta {
     wrapped_key_recovery: Option<String>,
 }
 
-#[derive(Serialize)]
-struct UnlockResult {
-    ok: bool,
-    needs_migration: bool,
+fn write_meta(path: &PathBuf, meta: &SecurityMeta) -> Result<(), String> {
+    let json_str = serde_json::to_string_pretty(meta).map_err(|e| e.to_string())?;
+    fs::write(path, json_str).map_err(|e| e.to_string())
 }
 
-fn security_meta_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
-    let mut path = app.path().app_local_data_dir().map_err(|e| e.to_string())?;
-    if !path.exists() {
-        fs::create_dir_all(&path).map_err(|e| e.to_string())?;
-    }
-    path.push(SECURITY_FILE);
+fn data_dir(app: &tauri::AppHandle) -> Result<PathBuf, String> {
+    let path = app.path().app_local_data_dir().map_err(|e| e.to_string())?;
+    fs::create_dir_all(&path).map_err(|e| e.to_string())?;
     Ok(path)
 }
 
-fn read_meta(app: &tauri::AppHandle) -> Result<(PathBuf, SecurityMeta), String> {
-    let path = security_meta_path(app)?;
+fn read_meta_in(dir: &Path) -> Result<(PathBuf, SecurityMeta), String> {
+    let path = dir.join(SECURITY_FILE);
     if !path.exists() {
         return Err("Security not configured".to_string());
     }
@@ -82,9 +87,20 @@ fn read_meta(app: &tauri::AppHandle) -> Result<(PathBuf, SecurityMeta), String> 
     Ok((path, meta))
 }
 
-fn write_meta(path: &PathBuf, meta: &SecurityMeta) -> Result<(), String> {
-    let json_str = serde_json::to_string_pretty(meta).map_err(|e| e.to_string())?;
-    fs::write(path, json_str).map_err(|e| e.to_string())
+/// Lit un JSON chiffré par la clé de données. `Ok(None)` : fichier absent.
+fn read_enc_json_in(dir: &Path, key: &[u8; KEY_LEN], filename: &str) -> Result<Option<Value>, String> {
+    let p = dir.join(filename);
+    if !p.exists() {
+        return Ok(None);
+    }
+    let bytes = fs::read(&p).map_err(|e| e.to_string())?;
+    let plain = decrypt(key, &bytes)?;
+    serde_json::from_slice(&plain).map(Some).map_err(|e| e.to_string())
+}
+
+fn write_enc_json_in(dir: &Path, key: &[u8; KEY_LEN], filename: &str, value: &Value) -> Result<(), String> {
+    let json = serde_json::to_vec(value).map_err(|e| e.to_string())?;
+    users::write_atomic(&dir.join(filename), &encrypt(key, &json)?)
 }
 
 fn verify_pin(pin: &str, pin_hash: &str) -> Result<bool, String> {
@@ -182,67 +198,13 @@ fn parse_recovery_phrase(phrase: &str) -> Result<[u8; RECOVERY_ENTROPY_LEN], Str
 }
 
 #[tauri::command]
-fn security_status(app: tauri::AppHandle) -> bool {
-    security_meta_path(&app).map(|p| p.exists()).unwrap_or(false)
-}
-
-/// First-run: creates the master PIN and a random data key, wraps the data key with
-/// both the PIN and a freshly generated recovery phrase, and returns the phrase so
-/// the frontend can force a one-time "write this down" screen. The phrase itself is
-/// never written to disk.
-#[tauri::command]
-fn setup_pin(app: tauri::AppHandle, state: tauri::State<AppState>, pin: String) -> Result<String, String> {
-    let pin_hash = hash_pin(&pin)?;
-
-    let pin_wrap_salt = random_salt_b64();
-    let pin_wrap_key = derive_key_from_pin(&pin, &pin_wrap_salt)?;
-
-    let data_key = random_data_key();
-    let wrapped_key_pin = wrap_key(&pin_wrap_key, &data_key)?;
-
-    let (entropy, phrase) = generate_recovery_phrase()?;
-    let wrapped_key_recovery = wrap_key(&entropy, &data_key)?;
-
-    let meta = SecurityMeta {
-        pin_hash,
-        key_salt: None,
-        pin_wrap_salt: Some(pin_wrap_salt),
-        wrapped_key_pin: Some(wrapped_key_pin),
-        wrapped_key_recovery: Some(wrapped_key_recovery),
-    };
-    let path = security_meta_path(&app)?;
-    write_meta(&path, &meta)?;
-
-    *state.key.lock().map_err(|e| e.to_string())? = Some(data_key);
-    Ok(phrase)
-}
-
-/// Verifies the PIN against the stored hash and, on success, unwraps (or, on a
-/// legacy install, directly re-derives) the data key and keeps it for the session.
-/// `needs_migration` tells the frontend to call `migrate_to_recovery` once so this
-/// install gains a recovery phrase.
-#[tauri::command]
-fn unlock(app: tauri::AppHandle, state: tauri::State<AppState>, pin: String) -> Result<UnlockResult, String> {
-    let (_, meta) = read_meta(&app)?;
-
-    if !verify_pin(&pin, &meta.pin_hash)? {
-        return Ok(UnlockResult { ok: false, needs_migration: false });
+fn security_status(app: tauri::AppHandle, state: tauri::State<AppState>) -> bool {
+    if access::gate(&app, &state, "security_status").is_err() {
+        return false;
     }
-
-    if let (Some(pin_wrap_salt), Some(wrapped_key_pin)) = (&meta.pin_wrap_salt, &meta.wrapped_key_pin) {
-        let pin_wrap_key = derive_key_from_pin(&pin, pin_wrap_salt)?;
-        let data_key = unwrap_key(&pin_wrap_key, wrapped_key_pin)?;
-        *state.key.lock().map_err(|e| e.to_string())? = Some(data_key);
-        return Ok(UnlockResult { ok: true, needs_migration: false });
-    }
-
-    // Legacy pre-recovery-key install: the "data key" was derived directly from the
-    // PIN. Unlock still works so the app is usable immediately; migration to the
-    // wrapped-key scheme (and generation of a recovery phrase) happens right after.
-    let key_salt = meta.key_salt.ok_or("Security metadata is corrupt".to_string())?;
-    let legacy_key = derive_key_from_pin(&pin, &key_salt)?;
-    *state.key.lock().map_err(|e| e.to_string())? = Some(legacy_key);
-    Ok(UnlockResult { ok: true, needs_migration: true })
+    data_dir(&app)
+        .map(|d| d.join(SECURITY_FILE).exists() || users::users_path(&d).exists())
+        .unwrap_or(false)
 }
 
 /// Recursively collects every encrypted data file under the app's local data
@@ -252,9 +214,13 @@ fn collect_encrypted_files(dir: &PathBuf, out: &mut Vec<PathBuf>) {
     for entry in entries.flatten() {
         let path = entry.path();
         if path.is_dir() {
+            if path.file_name().and_then(|s| s.to_str()) == Some(users::MIGRATION_BACKUPS_DIR) {
+                continue;
+            }
             collect_encrypted_files(&path, out);
         } else if path.is_file() {
-            if path.file_name().and_then(|s| s.to_str()) == Some(SECURITY_FILE) {
+            let name = path.file_name().and_then(|s| s.to_str());
+            if name == Some(SECURITY_FILE) || name == Some(users::USERS_FILE) {
                 continue;
             }
             out.push(path);
@@ -269,19 +235,23 @@ fn collect_encrypted_files(dir: &PathBuf, out: &mut Vec<PathBuf>) {
 /// install is on the current wrapped-key scheme and `key_salt` is gone for good.
 #[tauri::command]
 fn migrate_to_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin: String) -> Result<String, String> {
-    let (path, meta) = read_meta(&app)?;
+    access::gate(&app, &state, "migrate_to_recovery")?;
+    let dir = data_dir(&app)?;
+    let (path, meta) = read_meta_in(&dir)?;
     let key_salt = meta.key_salt.clone().ok_or("Cette installation est déjà migrée.".to_string())?;
 
     if !verify_pin(&pin, &meta.pin_hash)? {
         return Err("Mot de passe incorrect".to_string());
     }
 
+    // Sauvegarde datée AVANT de réécrire quoi que ce soit.
+    users::backup_data_dir(&dir)?;
+
     let legacy_key = derive_key_from_pin(&pin, &key_salt)?;
     let data_key = random_data_key();
 
-    let data_dir = app.path().app_local_data_dir().map_err(|e| e.to_string())?;
     let mut files = Vec::new();
-    collect_encrypted_files(&data_dir, &mut files);
+    collect_encrypted_files(&dir, &mut files);
     for file in &files {
         let Ok(encrypted) = fs::read(file) else { continue };
         let Ok(decrypted) = decrypt(&legacy_key, &encrypted) else { continue };
@@ -306,110 +276,43 @@ fn migrate_to_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin
     write_meta(&path, &new_meta)?;
 
     *state.key.lock().map_err(|e| e.to_string())? = Some(data_key);
+
+    // Passage au schéma « un compte par utilisateur » (non bloquant : réessayé au
+    // prochain déverrouillage si cela échoue).
+    match users::migrate_to_users(&dir, &data_key, users::DoctorSeed::LegacyMeta) {
+        Ok(_) => {
+            if let Some(doc) = users::load_users(&dir)?.and_then(|f| f.users.into_iter().find(|u| u.role == access::Role::Medecin)) {
+                *state.session.lock().map_err(|e| e.to_string())? = Some(users::session_of(&doc));
+            }
+        }
+        Err(e) => log::error!("migration vers les comptes utilisateurs : {e}"),
+    }
     Ok(phrase)
 }
 
-/// Changes the master PIN. On the current wrapped-key scheme this only re-wraps the
-/// data key under a new PIN — patient files are never touched, since the data key
-/// itself doesn't change.
-#[tauri::command]
-fn change_master_pin(app: tauri::AppHandle, state: tauri::State<AppState>, old_pin: String, new_pin: String) -> Result<(), String> {
-    let (path, meta) = read_meta(&app)?;
-
-    if !verify_pin(&old_pin, &meta.pin_hash)? {
-        return Err("Ancien mot de passe incorrect".to_string());
-    }
-
-    let pin_wrap_salt = meta.pin_wrap_salt.ok_or("Migration de sécurité requise avant de changer le mot de passe.".to_string())?;
-    let wrapped_key_pin = meta.wrapped_key_pin.ok_or("Métadonnées de sécurité corrompues".to_string())?;
-    let old_pin_wrap_key = derive_key_from_pin(&old_pin, &pin_wrap_salt)?;
-    let data_key = unwrap_key(&old_pin_wrap_key, &wrapped_key_pin)?;
-
-    let new_pin_hash = hash_pin(&new_pin)?;
-    let new_pin_wrap_salt = random_salt_b64();
-    let new_pin_wrap_key = derive_key_from_pin(&new_pin, &new_pin_wrap_salt)?;
-    let new_wrapped_key_pin = wrap_key(&new_pin_wrap_key, &data_key)?;
-
-    let new_meta = SecurityMeta {
-        pin_hash: new_pin_hash,
-        key_salt: None,
-        pin_wrap_salt: Some(new_pin_wrap_salt),
-        wrapped_key_pin: Some(new_wrapped_key_pin),
-        wrapped_key_recovery: meta.wrapped_key_recovery,
-    };
-    write_meta(&path, &new_meta)?;
-
-    *state.key.lock().map_err(|e| e.to_string())? = Some(data_key);
-    Ok(())
-}
-
-/// Recovers access using the 24-word phrase shown at setup time, and sets a new
-/// master PIN in the same step. For hygiene, the phrase just used is retired: a
-/// fresh recovery phrase is generated and returned for the frontend to display again.
-#[tauri::command]
-fn recover_with_phrase(app: tauri::AppHandle, state: tauri::State<AppState>, phrase: String, new_pin: String) -> Result<String, String> {
-    let (path, meta) = read_meta(&app)?;
-    let wrapped_key_recovery = meta.wrapped_key_recovery.ok_or("Aucune clé de récupération n'est configurée pour cette installation.".to_string())?;
-
-    let entropy = parse_recovery_phrase(&phrase)?;
-    let data_key = unwrap_key(&entropy, &wrapped_key_recovery)
-        .map_err(|_| "Cette phrase de récupération ne correspond pas à cette installation.".to_string())?;
-
-    let new_pin_hash = hash_pin(&new_pin)?;
-    let new_pin_wrap_salt = random_salt_b64();
-    let new_pin_wrap_key = derive_key_from_pin(&new_pin, &new_pin_wrap_salt)?;
-    let new_wrapped_key_pin = wrap_key(&new_pin_wrap_key, &data_key)?;
-
-    let (new_entropy, new_phrase) = generate_recovery_phrase()?;
-    let new_wrapped_key_recovery = wrap_key(&new_entropy, &data_key)?;
-
-    let new_meta = SecurityMeta {
-        pin_hash: new_pin_hash,
-        key_salt: None,
-        pin_wrap_salt: Some(new_pin_wrap_salt),
-        wrapped_key_pin: Some(new_wrapped_key_pin),
-        wrapped_key_recovery: Some(new_wrapped_key_recovery),
-    };
-    write_meta(&path, &new_meta)?;
-
-    *state.key.lock().map_err(|e| e.to_string())? = Some(data_key);
-    Ok(new_phrase)
-}
-
-/// Lets the doctor regenerate their recovery phrase (e.g. if they suspect the
-/// previous one was seen) without changing the PIN. Requires the current PIN.
+/// Régénère la phrase de récupération (ex. : le médecin pense que l'ancienne a été
+/// vue) sans changer de mot de passe. Demande le mot de passe du compte connecté.
 #[tauri::command]
 fn regenerate_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin: String) -> Result<String, String> {
-    let (path, meta) = read_meta(&app)?;
-
-    if !verify_pin(&pin, &meta.pin_hash)? {
+    let session = access::require_session(access::gate(&app, &state, "regenerate_recovery")?)?;
+    let dir = data_dir(&app)?;
+    if !users::password_matches(&dir, &session.user_id, &pin)? {
         return Err("Mot de passe incorrect".to_string());
     }
-
-    let pin_wrap_salt = meta.pin_wrap_salt.ok_or("Migration de sécurité requise.".to_string())?;
-    let wrapped_key_pin = meta.wrapped_key_pin.clone().ok_or("Métadonnées de sécurité corrompues".to_string())?;
-    let pin_wrap_key = derive_key_from_pin(&pin, &pin_wrap_salt)?;
-    let data_key = unwrap_key(&pin_wrap_key, &wrapped_key_pin)?;
-
+    let data_key = users::data_key_of(&state)?;
+    let (path, mut meta) = read_meta_in(&dir)?;
     let (entropy, phrase) = generate_recovery_phrase()?;
-    let wrapped_key_recovery = wrap_key(&entropy, &data_key)?;
-
-    let new_meta = SecurityMeta {
-        pin_hash: meta.pin_hash,
-        key_salt: None,
-        pin_wrap_salt: Some(pin_wrap_salt),
-        wrapped_key_pin: Some(wrapped_key_pin),
-        wrapped_key_recovery: Some(wrapped_key_recovery),
-    };
-    write_meta(&path, &new_meta)?;
-
-    *state.key.lock().map_err(|e| e.to_string())? = Some(data_key);
+    meta.wrapped_key_recovery = Some(wrap_key(&entropy, &data_key)?);
+    write_meta(&path, &meta)?;
     Ok(phrase)
 }
 
 #[tauri::command]
-fn scan_json_files(app: tauri::AppHandle) -> Vec<(String, String)> {
+fn scan_json_files(app: tauri::AppHandle, state: tauri::State<AppState>) -> Vec<(String, String)> {
     let mut results = Vec::new();
+    if access::gate(&app, &state, "scan_json_files").is_err() {
+        return results;
+    }
     let data_dir = app.path().app_local_data_dir().unwrap_or_else(|_| PathBuf::from("."));
 
     if let Ok(entries) = fs::read_dir(data_dir) {
@@ -426,7 +329,8 @@ fn scan_json_files(app: tauri::AppHandle) -> Vec<(String, String)> {
                        // Our own encrypted store / security marker — not an externally
                        // dropped file, and not valid UTF-8 JSON any more.
                        lower_name.starts_with("meddoc_") ||
-                       lower_name == SECURITY_FILE {
+                       lower_name == SECURITY_FILE ||
+                       lower_name == users::USERS_FILE {
                         continue;
                     }
 
@@ -442,6 +346,10 @@ fn scan_json_files(app: tauri::AppHandle) -> Vec<(String, String)> {
 
 #[tauri::command]
 fn save_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: String, data: Value) -> Result<(), String> {
+    let session = access::require_session(access::gate(&app, &state, "save_json")?)?;
+    if !access::file_allowed(session.role, &filename, access::FileMode::Write) {
+        return Err(access::denial_message(&access::Denial::WrongRole).to_string());
+    }
     let key = state.key.lock().map_err(|e| e.to_string())?
         .ok_or_else(|| "Locked: no encryption key set".to_string())?;
 
@@ -465,6 +373,10 @@ fn save_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: Str
 
 #[tauri::command]
 fn load_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: String) -> Result<Value, String> {
+    let session = access::require_session(access::gate(&app, &state, "load_json")?)?;
+    if !access::file_allowed(session.role, &filename, access::FileMode::Read) {
+        return Err(access::denial_message(&access::Denial::WrongRole).to_string());
+    }
     let key = state.key.lock().map_err(|e| e.to_string())?
         .ok_or_else(|| "Locked: no encryption key set".to_string())?;
 
@@ -561,18 +473,27 @@ mod tests {
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
-    .manage(AppState { key: Mutex::new(None) })
+    .manage(AppState { key: Mutex::new(None), session: Mutex::new(None), throttle: Mutex::new(users::Throttle::default()) })
     .invoke_handler(tauri::generate_handler![
         scan_json_files,
         save_json,
         load_json,
         security_status,
-        setup_pin,
-        unlock,
+        users::setup_pin,
+        users::list_profiles,
+        users::unlock,
+        users::lock,
+        users::current_session,
+        users::recover_with_phrase,
         migrate_to_recovery,
-        change_master_pin,
-        recover_with_phrase,
         regenerate_recovery,
+        users::change_own_password,
+        users::verify_password,
+        users::list_users,
+        users::create_user,
+        users::delete_user,
+        users::set_user_role,
+        users::reset_user_password,
         ai::ai_status,
         ai::ai_set_enabled,
         ai::ai_save_key,

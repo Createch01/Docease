@@ -15,6 +15,7 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use tauri::Manager;
 
+use super::access::gate;
 use super::{decrypt, encrypt, AppState, KEY_LEN};
 
 const AI_FILE: &str = "meddoc_ai.bin";
@@ -290,12 +291,14 @@ async fn generate(key: &str, parts: Vec<Value>) -> Result<Value, String> {
 
 #[tauri::command]
 pub fn ai_status(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<AiStatus, String> {
+    gate(&app, &state, "ai_status")?;
     let dk = data_key(&state)?;
     Ok(status_of(&load_cfg(&app, &dk)?))
 }
 
 #[tauri::command]
 pub fn ai_set_enabled(app: tauri::AppHandle, state: tauri::State<AppState>, enabled: bool) -> Result<AiStatus, String> {
+    gate(&app, &state, "ai_set_enabled")?;
     let dk = data_key(&state)?;
     let mut cfg = load_cfg(&app, &dk)?;
     cfg.enabled = enabled;
@@ -305,6 +308,7 @@ pub fn ai_set_enabled(app: tauri::AppHandle, state: tauri::State<AppState>, enab
 
 #[tauri::command]
 pub fn ai_save_key(app: tauri::AppHandle, state: tauri::State<AppState>, api_key: String) -> Result<AiStatus, String> {
+    gate(&app, &state, "ai_save_key")?;
     let k = api_key.trim();
     if k.len() < 20 || k.chars().any(char::is_whitespace) {
         return Err("Cette clé ne ressemble pas à une clé API Gemini.".to_string());
@@ -318,6 +322,7 @@ pub fn ai_save_key(app: tauri::AppHandle, state: tauri::State<AppState>, api_key
 
 #[tauri::command]
 pub fn ai_delete_key(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<AiStatus, String> {
+    gate(&app, &state, "ai_delete_key")?;
     let dk = data_key(&state)?;
     let mut cfg = load_cfg(&app, &dk)?;
     cfg.api_key = None;
@@ -330,6 +335,7 @@ pub fn ai_delete_key(app: tauri::AppHandle, state: tauri::State<AppState>) -> Re
 /// quand l'interrupteur est désactivé.
 #[tauri::command]
 pub async fn ai_test_key(app: tauri::AppHandle, state: tauri::State<'_, AppState>) -> Result<(), String> {
+    gate(&app, &state, "ai_test_key")?;
     let dk = data_key(&state)?;
     let cfg = load_cfg(&app, &dk)?;
     let (key, _) = effective_key(&cfg).ok_or_else(|| MSG_NO_KEY.to_string())?;
@@ -350,6 +356,7 @@ pub async fn ai_parse_prescription(
     patient: PatientContext,
     redact: Vec<String>,
 ) -> Result<Value, String> {
+    gate(&app, &state, "ai_parse_prescription")?;
     let key = require_ready(&app, &state)?;
     let prompt = format!(
         r#"TON RÔLE :
@@ -390,6 +397,7 @@ pub async fn ai_analyze_consultation(
     patient: Option<PatientContext>,
     redact: Vec<String>,
 ) -> Result<Value, String> {
+    gate(&app, &state, "ai_analyze_consultation")?;
     let key = require_ready(&app, &state)?;
     let ctx = patient.as_ref().map(patient_line).unwrap_or_else(|| "Non précisé".to_string());
     let prompt = format!(
@@ -419,6 +427,7 @@ pub async fn ai_analyze_document(
     data_base64: String,
     mime_type: String,
 ) -> Result<Value, String> {
+    gate(&app, &state, "ai_analyze_document")?;
     let key = require_ready(&app, &state)?;
     if !matches!(mime_type.as_str(), "application/pdf" | "image/png" | "image/jpeg" | "image/webp") {
         return Err("Format non pris en charge (PDF, PNG, JPEG ou WebP).".to_string());
@@ -455,6 +464,7 @@ pub async fn ai_classify_priority(
     note: String,
     redact: Vec<String>,
 ) -> Result<Value, String> {
+    gate(&app, &state, "ai_classify_priority")?;
     let key = require_ready(&app, &state)?;
     let prompt = format!(
         r#"Analyse ce motif de rendez-vous médical et détermine la priorité.
