@@ -273,7 +273,7 @@ fn migrate_to_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin
     let key_salt = meta.key_salt.clone().ok_or("Cette installation est déjà migrée.".to_string())?;
 
     if !verify_pin(&pin, &meta.pin_hash)? {
-        return Err("PIN incorrect".to_string());
+        return Err("Mot de passe incorrect".to_string());
     }
 
     let legacy_key = derive_key_from_pin(&pin, &key_salt)?;
@@ -317,10 +317,10 @@ fn change_master_pin(app: tauri::AppHandle, state: tauri::State<AppState>, old_p
     let (path, meta) = read_meta(&app)?;
 
     if !verify_pin(&old_pin, &meta.pin_hash)? {
-        return Err("Ancien PIN incorrect".to_string());
+        return Err("Ancien mot de passe incorrect".to_string());
     }
 
-    let pin_wrap_salt = meta.pin_wrap_salt.ok_or("Migration de sécurité requise avant de changer le PIN.".to_string())?;
+    let pin_wrap_salt = meta.pin_wrap_salt.ok_or("Migration de sécurité requise avant de changer le mot de passe.".to_string())?;
     let wrapped_key_pin = meta.wrapped_key_pin.ok_or("Métadonnées de sécurité corrompues".to_string())?;
     let old_pin_wrap_key = derive_key_from_pin(&old_pin, &pin_wrap_salt)?;
     let data_key = unwrap_key(&old_pin_wrap_key, &wrapped_key_pin)?;
@@ -383,7 +383,7 @@ fn regenerate_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin
     let (path, meta) = read_meta(&app)?;
 
     if !verify_pin(&pin, &meta.pin_hash)? {
-        return Err("PIN incorrect".to_string());
+        return Err("Mot de passe incorrect".to_string());
     }
 
     let pin_wrap_salt = meta.pin_wrap_salt.ok_or("Migration de sécurité requise.".to_string())?;

@@ -37,7 +37,7 @@ const RecoveryKeyDisplay: React.FC<RecoveryKeyDisplayProps> = ({ phrase, rotated
                     {rotated ? 'Nouvelle clé de récupération' : 'Votre clé de récupération'}
                 </h2>
                 <p className="text-gray-500 mb-6 font-bold text-sm text-center">
-                    Ces 24 mots permettent de retrouver l'accès à vos données si vous oubliez votre PIN maître.
+                    Ces 24 mots permettent de retrouver l'accès à vos données si vous oubliez votre mot de passe maître.
                     Ils ne seront plus jamais affichés.
                 </p>
 
@@ -66,7 +66,7 @@ const RecoveryKeyDisplay: React.FC<RecoveryKeyDisplayProps> = ({ phrase, rotated
                         Notez cette phrase sur papier et conservez-la dans un lieu physique sûr (coffre),
                         séparé de cet ordinateur. Ne la sauvegardez jamais dans un fichier ou une capture
                         d'écran sur ce disque : cela annulerait la protection du chiffrement. Si vous perdez
-                        à la fois votre PIN maître ET cette phrase, les données patients seront
+                        à la fois votre mot de passe maître ET cette phrase, les données patients seront
                         définitivement et irrémédiablement perdues — aucune récupération ne sera possible.
                     </p>
                 </div>
