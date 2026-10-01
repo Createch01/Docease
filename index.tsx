@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { ToastProvider } from './components/ui/Toast';
 import { ActiveProfileProvider } from './components/ui/ActiveProfileContext';
+import DevAutoUnlockBadge from './components/DevAutoUnlockBadge';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -19,6 +20,7 @@ root.render(
     <ToastProvider>
       <ActiveProfileProvider>
         <App />
+        <DevAutoUnlockBadge />
       </ActiveProfileProvider>
     </ToastProvider>
   </React.StrictMode>

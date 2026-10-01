@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Lock, ShieldCheck, Eye, EyeOff } from 'lucide-react';
 import { securityService } from '../services/securityService';
 import { validatePassword } from '../services/passwordPolicy';
+import { getDevAutoUnlockPassword } from '../services/devAutoUnlock';
 import RecoveryKeyDisplay from './RecoveryKeyDisplay';
 
 interface AppLockScreenProps {
@@ -53,10 +54,9 @@ const AppLockScreen: React.FC<AppLockScreenProps> = ({ mode, onUnlocked }) => {
         }
     };
 
-    const handleUnlock = async (e: React.FormEvent) => {
-        e.preventDefault();
+    const unlockWith = async (password: string) => {
         setBusy(true);
-        const { ok, needsMigration } = await securityService.unlock(pin);
+        const { ok, needsMigration } = await securityService.unlock(password);
         if (!ok) {
             setError('Mot de passe incorrect.');
             setPin('');
@@ -65,7 +65,7 @@ const AppLockScreen: React.FC<AppLockScreenProps> = ({ mode, onUnlocked }) => {
         }
         if (needsMigration) {
             try {
-                const phrase = await securityService.migrateToRecovery(pin);
+                const phrase = await securityService.migrateToRecovery(password);
                 setRecoveryPhrase(phrase);
                 setRecoveryIsRotation(false);
                 setView('recovery-display');
@@ -79,6 +79,21 @@ const AppLockScreen: React.FC<AppLockScreenProps> = ({ mode, onUnlocked }) => {
         }
         onUnlocked();
     };
+
+    const handleUnlock = (e: React.FormEvent) => {
+        e.preventDefault();
+        return unlockWith(pin);
+    };
+
+    // DEV only (null in production): same unlock path as typing the password.
+    const devAutoTried = useRef(false);
+    useEffect(() => {
+        if (mode !== 'unlock' || devAutoTried.current) return;
+        const devPassword = getDevAutoUnlockPassword();
+        if (!devPassword) return;
+        devAutoTried.current = true;
+        void unlockWith(devPassword);
+    }, [mode]);
 
     const handleRecoverSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
