@@ -14,15 +14,17 @@ const ConsultationAssistant: React.FC<ConsultationAssistantProps> = ({ symptoms,
     const { t, dir } = useI18n();
     const [loading, setLoading] = useState(false);
     const [analysis, setAnalysis] = useState<any>(null);
+    const [error, setError] = useState<string | null>(null);
 
     const handleAnalyze = async () => {
         if (!symptoms && !clinicalExam) return;
         setLoading(true);
+        setError(null);
         try {
             const result = await smartDocService.analyzeConsultation(symptoms, clinicalExam);
             setAnalysis(result);
-        } catch (error) {
-            console.error(error);
+        } catch (err: any) {
+            setError(err?.message || "Analyse IA indisponible.");
         } finally {
             setLoading(false);
         }
@@ -43,6 +45,7 @@ const ConsultationAssistant: React.FC<ConsultationAssistantProps> = ({ symptoms,
 
             {/* Content */}
             <div className={`flex-1 overflow-y-auto p-5 space-y-6 ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
+                {error && (<div role="alert" className="m-4 p-3 rounded-xl bg-red-50 text-red-700 text-xs font-bold">{error}</div>)}
                 {!analysis && !loading && (
                     <div className="text-center py-10 opacity-50">
                         <BrainCircuit size={48} className="mx-auto mb-4 text-indigo-300" />

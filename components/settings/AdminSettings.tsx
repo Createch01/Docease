@@ -8,6 +8,7 @@ import { dataService } from '../../services/dataService';
 import { toastService } from '../../services/toastService';
 import { SettingsPageFrame, SettingsCard, Toggle, input40, inputStyle, cardStyle, primaryButton } from './SettingsUI';
 import { SettingsPageProps } from './ProfileSettings';
+import { AiSettingsCard } from './AiSettingsCard';
 
 const pinInputClass = 'w-full h-14 px-5 rounded-lg border text-center text-[20px] font-semibold outline-none transition-all';
 const pinInputStyle = { borderColor: 'var(--color-border)', background: 'var(--color-surface-alt)' } as React.CSSProperties;
@@ -98,7 +99,7 @@ export const SecuritySettings: React.FC<SettingsPageProps & { onUnlocked: () => 
 
   return (
     <SettingsPageFrame route={route} onNavigate={onNavigate}>
-      <div className="max-w-2xl">
+      <div className="max-w-2xl space-y-6">
         <SettingsCard title="Verrouillage par code PIN" icon={<Lock size={16} />}
                       description="Demandé au démarrage et pour ouvrir Sécurité, Collaborateurs et Base de données."
                       actions={<Toggle danger label="Verrouillage par code PIN" checked={pinEnabled} onChange={toggle} />}>
@@ -122,6 +123,7 @@ export const SecuritySettings: React.FC<SettingsPageProps & { onUnlocked: () => 
             </div>
           )}
         </SettingsCard>
+        <AiSettingsCard />
       </div>
     </SettingsPageFrame>
   );
