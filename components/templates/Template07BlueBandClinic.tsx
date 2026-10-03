@@ -51,7 +51,7 @@ const Template07BlueBandClinic: React.FC<RxTemplateProps> = ({ doctor, patient, 
     {/* Patient line */}
     <div className="absolute flex items-baseline gap-5" style={{ left: '18mm', right: '16mm', top: '40mm', fontSize: '8.5pt' }}>
       <DottedField label="Nom du patient" value={patient.name} grow={5} labelColor={C.ink} lineColor="#bdbec0" />
-      <DottedField label="Âge / Sexe" value={`${patient.age} · ${patient.sex}`} grow={2} minWidth={26} labelColor={C.ink} lineColor="#bdbec0" />
+      <DottedField label="Âge / Sexe" value={[patient.age ? `${patient.age}` : '', patient.sex].filter(Boolean).join(' · ')} grow={2} minWidth={26} labelColor={C.ink} lineColor="#bdbec0" />
       <DottedField label="Date" value={date} grow={2} minWidth={30} labelColor={C.ink} lineColor="#bdbec0" />
     </div>
 

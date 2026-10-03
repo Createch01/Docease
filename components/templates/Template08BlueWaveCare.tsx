@@ -47,7 +47,7 @@ const Template08BlueWaveCare: React.FC<RxTemplateProps> = ({ doctor, patient, da
     <div className="absolute grid grid-cols-2 gap-x-9 gap-y-2.5"
          style={{ left: '18mm', right: '17mm', top: '52mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom" value={patient.name} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Date" value={date} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Diagnostic" labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
     </div>

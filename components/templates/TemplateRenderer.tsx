@@ -149,7 +149,7 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
     const rxPatient: RxPatient = {
         name: patient.name || '',
         age: patient.age ? String(patient.age) : '',
-        sex: patient.sex || (patient.type === 'Child' ? 'Enfant' : 'M/F'),
+        sex: patient.sex || (patient.type === 'Child' ? 'Enfant' : ''),
     };
 
     const rxItems: RxItem[] = items.map(item => ({

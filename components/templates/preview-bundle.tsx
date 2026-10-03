@@ -350,7 +350,7 @@ const Template02NavyCaduceus: React.FC<RxTemplateProps> = ({ doctor, patient, da
     {/* Patient block */}
     <div className="absolute grid grid-cols-2 gap-x-10 gap-y-2.5" style={{ left: '18mm', right: '18mm', top: '70mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom du patient" value={patient.name} labelWidth={82} lineColor="#9fb3cc" />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={82} lineColor="#9fb3cc" />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={82} lineColor="#9fb3cc" />
       <RuledField label="Date" value={date} labelWidth={82} lineColor="#9fb3cc" />
       <RuledField label="N° INPE" value={doctor.registrationNumber} labelWidth={82} lineColor="#9fb3cc" />
     </div>
@@ -446,7 +446,7 @@ const Template03PurpleHeart: React.FC<RxTemplateProps> = ({ doctor, patient, dat
     <div className="absolute" style={{ left: 0, right: 0, top: '40mm', height: '25mm', background: C.lavender }} />
     <div className="absolute grid grid-cols-2 gap-x-10 gap-y-2" style={{ left: '18mm', right: '18mm', top: '44mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom du patient" value={patient.name} labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
       <RuledField label="Date" value={date} labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
       <RuledField label="Diagnostic" labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
     </div>
@@ -814,7 +814,7 @@ const Template07BlueBandClinic: React.FC<RxTemplateProps> = ({ doctor, patient, 
     {/* Patient line */}
     <div className="absolute flex items-baseline gap-5" style={{ left: '18mm', right: '16mm', top: '40mm', fontSize: '8.5pt' }}>
       <DottedField label="Nom du patient" value={patient.name} grow={5} labelColor={C.ink} lineColor="#bdbec0" />
-      <DottedField label="Âge / Sexe" value={`${patient.age} · ${patient.sex}`} grow={2} minWidth={26} labelColor={C.ink} lineColor="#bdbec0" />
+      <DottedField label="Âge / Sexe" value={[patient.age ? `${patient.age}` : '', patient.sex].filter(Boolean).join(' · ')} grow={2} minWidth={26} labelColor={C.ink} lineColor="#bdbec0" />
       <DottedField label="Date" value={date} grow={2} minWidth={30} labelColor={C.ink} lineColor="#bdbec0" />
     </div>
 
@@ -896,7 +896,7 @@ const Template08BlueWaveCare: React.FC<RxTemplateProps> = ({ doctor, patient, da
     <div className="absolute grid grid-cols-2 gap-x-9 gap-y-2.5"
          style={{ left: '18mm', right: '17mm', top: '52mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom" value={patient.name} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Date" value={date} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Diagnostic" labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
     </div>
@@ -987,7 +987,7 @@ const Template09BlueGradientCorner: React.FC<RxTemplateProps> = ({ doctor, patie
     <div className="absolute grid grid-cols-2 gap-x-10 gap-y-2.5"
          style={{ left: '16mm', right: '16mm', top: '64mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom du patient" value={patient.name} labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Date" value={date} labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Diagnostic" labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
     </div>

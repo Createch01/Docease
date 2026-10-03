@@ -39,6 +39,7 @@ import { unsavedChanges, useUnsavedChanges } from './settings/unsavedChanges';
 import { specialtyKey, deriveProfileFlags } from '../services/medicalReferentials';
 import { buildContextFromPatient, buildContextSave, shortcutActive, toggleShortcut, withContext, ShortcutKey } from '../services/patientContext';
 import ContextTagInput from './ui/ContextTagInput';
+import PatientPicker from './ui/PatientPicker';
 
 export interface SafetyNotification {
   id: string;
@@ -81,7 +82,8 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [patient, setPatient] = useState<Partial<Patient>>(draft?.patient || {
     name: initialPatient?.name || '',
     age: initialPatient?.age || 0,
-    sex: initialPatient?.sex || 'M',
+    // Aucun sexe par défaut : la saisie est obligatoire (voir validateForOutput).
+    sex: initialPatient?.sex,
     type: initialPatient?.type || 'Adult',
     weight: initialPatient?.weight || '',
     allergyList: [],
@@ -100,8 +102,10 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [medicineSearch, setMedicineSearch] = useState('');
   const [suggestions, setSuggestions] = useState<Medicine[]>([]);
   const [amount, setAmount] = useState(draft?.amount || 200);
-  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
-  const [patientSuggestions, setPatientSuggestions] = useState<Patient[]>([]);
+  // Un brouillon restauré garde le patient choisi (son id est conservé dans l'état patient).
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(draft?.patient?.id ?? null);
+  // « search » : recherche d'un dossier existant ; « new » : saisie d'un nouveau patient (dossier créé à l'enregistrement).
+  const [patientMode, setPatientMode] = useState<'search' | 'new'>(draft?.patient?.name && !draft.patient.id ? 'new' : 'search');
   const [aiWarnings, setAiWarnings] = useState<SafetyNotification[]>([]);
   const [isAiChecking, setIsAiChecking] = useState(false);
   const [overriddenWarnings, setOverriddenWarnings] = useState<Set<string>>(new Set());
@@ -143,16 +147,6 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     : touched || items.length > 0 || selectedTests.length > 0;
   useUnsavedChanges('consultation', dirty);
 
-  const queueSuggestions = (dataService.getTodayQueue()).map(q => ({
-    id: q.id,
-    name: q.name || (q as any).patientName,
-    age: q.age || 0,
-    sex: q.sex || 'M' as const,
-    type: q.type || 'Adult' as const,
-    phone: q.phone || '',
-    consultationFee: q.consultationFee || 200,
-  }));
-
   // ═══ Effects (UNCHANGED) ═══
   useEffect(() => { setCategories(['Tous', ...dataService.getTherapeuticGroups()]); }, []);
 
@@ -162,7 +156,10 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     }
   }, [patient, items, amount, selectedTests, initialPrescription]);
 
-  useEffect(() => { if (initialPatient) selectFromPatientData(initialPatient); }, [initialPatient]);
+  // Ouverture depuis un RDV ou la salle d'attente : le dossier complet remplace la copie de la file.
+  useEffect(() => {
+    if (initialPatient) selectFromPatientData(dataService.getPatientProfile(initialPatient.id) ?? initialPatient);
+  }, [initialPatient]);
 
   useEffect(() => {
     if (selectedPatientFromQueue) {
@@ -320,9 +317,10 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
   const selectFromPatientData = (p: Patient) => {
     setSelectedPatientId(p.id);
+    setPatientMode('search');
     const { migrated: _migrated, ...context } = buildContextFromPatient(p);
     setPatient({
-      name: p.name, age: p.age, sex: p.sex, phone: p.phone, weight: p.weight, type: p.type,
+      id: p.id, name: p.name, age: p.age, sex: p.sex, phone: p.phone, weight: p.weight, type: p.type,
       consultationFee: p.consultationFee,
       isPregnant: p.isPregnant || false, isBreastfeeding: p.isBreastfeeding || false,
       pregnancyWeeks: p.pregnancyWeeks || 0, lactationMonths: p.lactationMonths || 0,
@@ -330,7 +328,6 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       ...withContext({}, context),
     });
     setAmount(p.consultationFee || 200);
-    setPatientSuggestions([]);
     medInputRef.current?.focus();
   };
 
@@ -364,9 +361,9 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   };
 
   const handleSave = () => {
-    if (justificationPending()) return;
+    if (!validateForOutput() || justificationPending()) return;
     const isEditing = !!initialPrescription;
-    const finalPatientId = selectedPatientId || (patient.name as string);
+    const finalPatientId = ensurePatientRecord();
     const newPrescription: Prescription = {
       id: isEditing ? initialPrescription.id : Date.now().toString(),
       patientId: finalPatientId,
@@ -393,7 +390,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   };
 
   const handleExportPDF = () => {
-    if (justificationPending()) return;
+    if (!validateForOutput() || justificationPending()) return;
     const appearance = settingsService.getAppearance();
     const doctor = dataService.getDoctorInfo();
     const element = document.getElementById('prescription-export-template');
@@ -470,6 +467,88 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       </div>
     );
   };
+
+  // Largeur réelle de la colonne formulaire (avec ou sans sidebar) : décide de la mise en page des blocs.
+  const formRef = useRef<HTMLDivElement>(null);
+  const [formWidth, setFormWidth] = useState(900);
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver(entries => setFormWidth(entries[0].contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const roomy = formWidth >= 640;
+
+  // ─── Choix du patient ───
+  const blankPatient = (name = ''): Partial<Patient> => ({
+    name, age: 0, sex: undefined, type: 'Adult', weight: '', phone: '', consultationFee: 0,
+    isPregnant: false, isBreastfeeding: false, pregnancyWeeks: 0, lactationMonths: 0,
+    ...withContext({}, { allergyList: [], pathologyList: [], noKnownAllergy: undefined, renalStage: undefined }),
+  });
+  const pickPatient = (p: Patient) => {
+    selectFromPatientData(dataService.getPatientProfile(p.id) ?? p);
+    setAmount((dataService.getPatientProfile(p.id) ?? p).consultationFee || 200);
+    medInputRef.current?.focus();
+  };
+  const startNewPatient = (typed: string) => {
+    setSelectedPatientId(null);
+    setPatient(blankPatient(typed));
+    setPatientMode('new');
+    setTouched(true);
+  };
+  const clearPatient = () => {
+    setSelectedPatientId(null);
+    setPatient(blankPatient());
+    setPatientMode('search');
+    setTouched(true);
+  };
+
+  // ─── Champs obligatoires : sexe ; poids en pédiatrie (< 15 ans) ───
+  const ageYears = patient.age || 0;
+  const weightNeeded = (ageYears > 0 && ageYears < 15) || patient.type === 'Child';
+  const weightValue = parseFloat(String(patient.weight || '').replace(',', '.').replace(/[^0-9.]/g, ''));
+  const sexMissing = !patient.sex;
+  const weightMissing = weightNeeded && !(weightValue > 0);
+  const [attempted, setAttempted] = useState(false);
+  const showSexError = attempted && sexMissing;
+  const showWeightError = attempted && weightMissing;
+
+  const duplicateName = patientMode === 'new' && !selectedPatientId && !!(patient.name || '').trim()
+    && !!dataService.getAllPatients().find(p => p.name.trim().toUpperCase() === (patient.name || '').trim().toUpperCase());
+
+  /** Patient sélectionné ; pour un « nouveau patient », son dossier est créé ici (médecin uniquement). */
+  const ensurePatientRecord = (): string => {
+    if (selectedPatientId) return selectedPatientId;
+    const name = (patient.name || '').trim();
+    if (!name || !sessionService.isMedecin()) return name;
+    const record: Patient = {
+      id: Date.now().toString(), name, age: patient.age || 0, sex: patient.sex as 'M' | 'F',
+      type: (patient.type as PatientType) || 'Adult', phone: patient.phone, weight: patient.weight,
+      consultationFee: patient.consultationFee, registeredDate: new Date().toISOString(),
+    };
+    dataService.savePatientProfile(record);
+    return record.id;
+  };
+
+  /** Bloque enregistrement, impression et PDF tant que le sexe (et le poids en pédiatrie) manquent. */
+  const validateForOutput = (): boolean => {
+    const problems: string[] = [];
+    if (sexMissing) problems.push('le sexe du patient');
+    if (weightMissing) problems.push('le poids (obligatoire en pédiatrie)');
+    if (duplicateName) {
+      toastService.error('Un patient de ce nom existe déjà : sélectionnez-le avec la recherche.');
+      return false;
+    }
+    if (problems.length === 0) return true;
+    setAttempted(true);
+    toastService.error(`Renseignez ${problems.join(' et ')}.`);
+    document.getElementById(sexMissing ? 'field-sex' : 'field-weight')?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    (document.getElementById(sexMissing ? 'field-sex' : 'field-weight')?.querySelector('button') as HTMLElement | null)?.focus();
+    return false;
+  };
+
+  const handlePrint = () => { if (validateForOutput()) window.print(); };
 
   // ═══════════════════════════ RENDER ═══════════════════════════
   const criticalWarnings = aiWarnings.filter(w => w.severity === 'CRITIQUE');
@@ -562,7 +641,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <button
-            onClick={() => window.print()}
+            onClick={handlePrint}
             disabled={items.length === 0}
             className="h-10 px-4 rounded-lg text-[13px] font-medium whitespace-nowrap border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
@@ -714,7 +793,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
       {/* ═══════════════ MAIN 2-COL LAYOUT ═══════════════ */}
       <div className="flex flex-col lg:flex-row gap-5">
-        <div className="flex-1 space-y-5 print:hidden min-w-0">
+        <div ref={formRef} className="flex-1 space-y-5 print:hidden min-w-0">
 
           {/* ─── PATIENT CARD ─── */}
           <section className={`${card} p-6 space-y-5`} style={cardStyle}>
@@ -723,77 +802,122 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
               <h2 className="text-[14px] font-semibold" style={{ color: 'var(--color-text)' }}>Contexte patient</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-              <div className="md:col-span-2 relative">
-                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('patient_name')}</label>
-                <input
-                  type="text"
-                  value={patient.name}
-                  onFocus={() => !patient.name && setPatientSuggestions(queueSuggestions as any)}
-                  onChange={e => {
-                    updatePatient({ ...patient, name: e.target.value });
-                    setPatientSuggestions(e.target.value.length > 0 ? dataService.searchPatients(e.target.value) : queueSuggestions as any);
-                  }}
-                  className={input40}
-                  style={inputStyle}
-                  placeholder={t('name')}
-                />
-                {patientSuggestions.length > 0 && (
-                  <div
-                    className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg z-50 overflow-hidden max-h-[400px] overflow-y-auto"
-                    style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-premium)' }}
-                  >
-                    <div className="px-3 py-2 border-b" style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}>
-                      <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>{t('suggestions')}</span>
-                    </div>
-                    {patientSuggestions.map(p => (
-                      <button
-                        key={p.id}
-                        onClick={() => selectFromPatientData(p)}
-                        className="w-full text-left px-3 py-2.5 flex justify-between items-center transition-all hover:bg-[var(--color-row-hover)] border-t"
-                        style={{ borderColor: 'var(--color-border)' }}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-md flex items-center justify-center" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}>
-                            <UserCircle size={18} />
-                          </div>
-                          <div>
-                            <div className="text-[13px] font-medium" style={{ color: 'var(--color-text)' }}>{p.name}</div>
-                            <div className="text-[11px] flex items-center gap-2" style={{ color: 'var(--color-text-subtle)' }}>
-                              <span>ID {p.id}</span><span>·</span><span>{(p as any).phone || p.phone || 'Sans tél.'}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <ChevronRight size={14} className={dir === 'rtl' ? 'rotate-180' : ''} style={{ color: 'var(--color-text-faint)' }} />
-                      </button>
-                    ))}
+            <div className="space-y-3">
+              <div>
+                {patientMode === 'new' && !selectedPatientId ? (
+                  <div>
+                    <label className={labelEyebrow} style={labelEyebrowStyle} htmlFor="new-patient-name">Nouveau patient</label>
+                    <input
+                      id="new-patient-name"
+                      type="text"
+                      value={patient.name || ''}
+                      onChange={e => updatePatient({ ...patient, name: e.target.value })}
+                      className={input40} style={inputStyle}
+                      placeholder="NOM Prénom"
+                      autoFocus
+                    />
+                    <button type="button" onClick={() => setPatientMode('search')}
+                      className="mt-1 text-[11px] font-medium whitespace-nowrap hover:underline" style={{ color: 'var(--color-primary)' }}>
+                      ← Rechercher un patient existant
+                    </button>
                   </div>
+                ) : (
+                  <PatientPicker
+                    label="Patient"
+                    placeholder="Rechercher par nom ou téléphone…"
+                    patients={dataService.getAllPatients()}
+                    queue={dataService.getTodayQueue()}
+                    selected={selectedPatientId ? { id: selectedPatientId, name: patient.name || '', phone: patient.phone } : null}
+                    onSelect={pickPatient}
+                    onNew={startNewPatient}
+                    onClear={clearPatient}
+                  />
                 )}
               </div>
 
+              {patientMode === 'new' && !selectedPatientId && (
+                <div>
+                  <label className={labelEyebrow} style={labelEyebrowStyle} htmlFor="new-patient-phone">Téléphone</label>
+                  <input
+                    id="new-patient-phone"
+                    type="tel"
+                    value={patient.phone || ''}
+                    onChange={e => updatePatient({ ...patient, phone: e.target.value })}
+                    className={input40} style={inputStyle}
+                    placeholder="06 00 00 00 00"
+                  />
+                </div>
+              )}
+
+              <div className="grid gap-3 grid-cols-[88px_minmax(0,1fr)_120px]">
               <div>
-                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('age')}</label>
+                <label className={`${labelEyebrow} whitespace-nowrap`} style={labelEyebrowStyle} htmlFor="patient-age">{t('age')}</label>
                 <input
+                  id="patient-age"
                   type="number"
+                  min={0}
+                  max={120}
                   value={patient.age || ''}
                   onChange={e => updatePatient({ ...patient, age: parseInt(e.target.value) || 0 })}
                   className={input40} style={inputStyle}
                 />
               </div>
+
+              <fieldset className="min-w-0" aria-required="true" aria-invalid={showSexError}>
+                <legend className={labelEyebrow} style={{ ...labelEyebrowStyle, color: showSexError ? 'var(--color-danger-700)' : 'var(--color-text-subtle)' }}>
+                  Sexe <span aria-hidden="true">*</span>
+                </legend>
+                <div id="field-sex" className="flex gap-2" role="radiogroup" aria-label="Sexe">
+                  {([['M', 'Homme'], ['F', 'Femme']] as const).map(([value, text]) => {
+                    const on = patient.sex === value;
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        role="radio"
+                        aria-checked={on}
+                        onClick={() => updatePatient({ ...patient, sex: value })}
+                        className="flex-1 h-10 px-3 rounded-md border text-[13px] font-medium whitespace-nowrap transition-all"
+                        style={on
+                          ? { background: 'var(--color-primary)', color: 'white', borderColor: 'var(--color-primary)' }
+                          : { background: 'white', color: 'var(--color-text-muted)', borderColor: showSexError ? 'var(--color-danger)' : 'var(--color-border)' }}
+                      >
+                        {text}
+                      </button>
+                    );
+                  })}
+                </div>
+                {showSexError && <p className="mt-1 text-[11px] whitespace-nowrap" role="alert" style={{ color: 'var(--color-danger-700)' }}>Sexe obligatoire</p>}
+              </fieldset>
+
               <div>
-                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('weight')}</label>
+                <label className={`${labelEyebrow} whitespace-nowrap`} style={{ ...labelEyebrowStyle, color: showWeightError ? 'var(--color-danger-700)' : weightNeeded ? 'var(--color-warning-hover)' : 'var(--color-text-subtle)' }} htmlFor="field-weight">
+                  Poids (kg){weightNeeded && <span aria-hidden="true"> *</span>}
+                </label>
                 <input
+                  id="field-weight"
                   type="text"
+                  inputMode="decimal"
                   value={patient.weight || ''}
                   onChange={e => updatePatient({ ...patient, weight: e.target.value })}
-                  className={input40} style={inputStyle}
-                  placeholder={t('weight_placeholder')}
+                  className={input40}
+                  style={{ ...inputStyle, borderColor: showWeightError ? 'var(--color-danger)' : weightNeeded ? 'var(--color-warning-hover)' : 'var(--color-border)' }}
+                  placeholder="Ex : 75"
+                  aria-required={weightNeeded}
+                  aria-invalid={showWeightError}
                 />
+                {weightNeeded && (
+                  <p className="mt-1 text-[11px] whitespace-nowrap" role={showWeightError ? 'alert' : undefined} style={{ color: showWeightError ? 'var(--color-danger-700)' : 'var(--color-warning-hover)' }}>
+                    Obligatoire en pédiatrie
+                  </p>
+                )}
+              </div>
+
               </div>
             </div>
 
             {/* Allergies + pathologies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className={`grid gap-3 ${roomy ? 'grid-cols-2' : 'grid-cols-1'}`}>
               {/* Allergies */}
               <div className="p-4 rounded-lg border space-y-3" style={{ background: 'var(--color-danger-50)', borderColor: 'var(--color-danger-100)' }}>
                 <div className="flex items-center justify-between gap-2">
@@ -806,7 +930,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                     disabled={(patient.allergyList || []).length > 0}
                     title={(patient.allergyList || []).length > 0 ? 'Retirez les allergies saisies pour déclarer « aucune »' : undefined}
                     onClick={() => updatePatient(withContext(patient, { noKnownAllergy: !patient.noKnownAllergy }))}
-                    className="h-7 px-2.5 rounded-md text-[11px] font-medium flex items-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                    className="h-7 px-2.5 shrink-0 rounded-md text-[11px] font-medium whitespace-nowrap flex items-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                     style={patient.noKnownAllergy
                       ? { background: 'var(--color-success, #2F855A)', color: 'white' }
                       : { background: 'white', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
