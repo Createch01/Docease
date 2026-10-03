@@ -27,7 +27,8 @@ import { drugRulesService } from '../services/drugRules';
 import { settingsService } from '../services/settingsService';
 import { useI18n } from '../i18n';
 import CombinedConsultationTemplate from './CombinedConsultationTemplate';
-import TemplateRenderer from './templates/TemplateRenderer';
+import TemplateRenderer, { getRxPageMm } from './templates/TemplateRenderer';
+import PrintPreview from './ui/PrintPreview';
 import { usePrintMode } from './usePrintMode';
 import { COMMON_ANALYSES } from '../constants/medicalData';
 // @ts-ignore
@@ -141,7 +142,6 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     mq.addEventListener('change', onChange);
     return () => mq.removeEventListener('change', onChange);
   }, []);
-  const previewScale = wide ? 0.68 : 0.531;
 
   // Modifications non enregistrées : alimente la garde de navigation (même mécanisme que les Paramètres).
   const [touched, setTouched] = useState(false);
@@ -459,17 +459,18 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     const doctor = dataService.getDoctorInfo();
     const id = mode === 'preview' ? 'prescription-preview-template' : mode === 'print' ? 'prescription-print-template' : 'prescription-export-template';
     if (mode === 'preview') {
+      const MM_PX = 96 / 25.4;
+      const mm = getRxPageMm(appearance.selectedTemplate, appearance);
+      const page = useCombinedPrint ? { w: 2480, h: 3508 } : { w: mm.w * MM_PX, h: mm.h * MM_PX };
+      const previewPatient = { name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' };
       return (
-        <div
-          className={`w-full ${wide ? 'lg:w-[540px]' : 'lg:w-[420px]'} shrink-0 lg:sticky lg:top-[76px] h-fit rounded-xl overflow-hidden bg-white border flex justify-center items-start`}
-          style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-soft)' }}
-        >
-          {useCombinedPrint ? (
-            <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} scale={0.17} />
-          ) : (
-            <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={previewScale} />
-          )}
-        </div>
+        <PrintPreview
+          page={page}
+          label="Aperçu de l'ordonnance"
+          render={scale => useCombinedPrint
+            ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} scale={scale} />
+            : <TemplateRenderer templateId={appearance.selectedTemplate} doctor={doctor} appearance={appearance} patient={previewPatient} items={items} scale={scale} />}
+        />
       );
     }
     if (mode === 'export') {
@@ -1601,7 +1602,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
 
         {/* ═══ PREVIEW PANE ═══ */}
-        <div className={`w-full ${wide ? 'lg:w-[560px]' : 'lg:w-[440px]'} shrink-0 print:hidden`}>
+        <div className={`w-full ${wide ? 'lg:w-[560px]' : 'lg:w-[440px]'} shrink-0 lg:sticky lg:top-[76px] lg:self-start print:hidden`}>
           <h3 className="text-[11px] font-medium uppercase tracking-wider mb-3 px-1 flex items-center gap-2" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>
             <FileText size={13} /> {lang === 'ar' ? 'معاينة' : 'Aperçu impression'}
           </h3>

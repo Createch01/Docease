@@ -134,6 +134,18 @@ export const TemplateThumbnail: React.FC<{ component: React.FC<RxTemplateProps>;
     );
 };
 
+const usesOrdonnanceDesign = (templateId: PrescriptionTemplateId | undefined, appearance: PrescriptionAppearance): boolean => {
+    const customConfig = appearance.customTemplateConfig;
+    return templateId === 'custom' && !customConfig?.layoutConfig?.elements?.length
+        && (!!customConfig?.ordonnance || !customConfig || Object.keys(customConfig).length === 0);
+};
+
+/** Dimensions (mm) de la feuille telle que TemplateRenderer la dessine à l'échelle 1. */
+export const getRxPageMm = (templateId: PrescriptionTemplateId | undefined, appearance: PrescriptionAppearance): { w: number; h: number } =>
+    usesOrdonnanceDesign(templateId, appearance)
+        ? ORD_PAGE[appearance.paperSize ?? resolveOrdonnanceAppearance(appearance.customTemplateConfig).paperSize]
+        : ORD_PAGE.A4;
+
 const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items, date, appearance, id, scale: scaleProp, fitPaper }) => {
     const Template = (templateId && templateId !== 'custom' && TEMPLATES[templateId]) || TEMPLATES.letterhead_simple;
 
@@ -174,8 +186,7 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
     // éditeur (config.ordonnance) ou s'il n'existe encore aucun design. Les
     // anciens designs (et la mise en page libre layoutConfig) gardent leur rendu.
     const customConfig = appearance.customTemplateConfig;
-    const useOrdonnance = templateId === 'custom' && !customConfig?.layoutConfig?.elements?.length
-        && (!!customConfig?.ordonnance || !customConfig || Object.keys(customConfig).length === 0);
+    const useOrdonnance = usesOrdonnanceDesign(templateId, appearance);
     const ordAppearance = useOrdonnance
         ? { ...resolveOrdonnanceAppearance(customConfig), ...(appearance.paperSize ? { paperSize: appearance.paperSize } : {}) }
         : null;
