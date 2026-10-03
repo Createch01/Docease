@@ -88,6 +88,15 @@ const AppContent: React.FC = () => {
   const [activePatient, setActivePatient] = useState<Patient | null>(null);
   const [activePrescription, setActivePrescription] = useState<any | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  // Mode concentration : pendant une consultation la sidebar est masquée ; le choix du médecin est mémorisé.
+  const [consultSidebarShown, setConsultSidebarShown] = useState<boolean>(() => {
+    try { return localStorage.getItem('docease_consult_sidebar') === 'shown'; } catch { return false; }
+  });
+  const toggleConsultSidebar = () => setConsultSidebarShown(prev => {
+    const next = !prev;
+    try { localStorage.setItem('docease_consult_sidebar', next ? 'shown' : 'hidden'); } catch { /* préférence non mémorisée */ }
+    return next;
+  });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [kioskMode, setKioskMode] = useState(false);
@@ -120,8 +129,12 @@ const AppContent: React.FC = () => {
     return !(from.section === next.section && getSection(from.section).sharedDraft);
   };
 
+  // Quitter une consultation avec des modifications non enregistrées passe par la même garde que les Paramètres.
+  const leavesConsultation = (to: View) => currentView === 'new-prescription' && to !== 'new-prescription';
+
   const goToView = (view: View): boolean => {
     if (!canOpen(view)) return false;
+    if (leavesConsultation(view) && !unsavedChanges.confirmLeave()) return false;
     if (currentView === 'settings' && view !== 'settings' && !unsavedChanges.confirmLeave()) return false;
     setCurrentView(view);
     return true;
@@ -130,6 +143,7 @@ const AppContent: React.FC = () => {
   const openSettings = (to: SettingsRoute): boolean => {
     if (!sessionService.can('MANAGE_SETTINGS')) return false;
     if (leavesSettingsDraft(to) && !unsavedChanges.confirmLeave()) return false;
+    if (leavesConsultation('settings') && !unsavedChanges.confirmLeave()) return false;
     setSettingsRoute(normalizeRoute(to));
     setCurrentView('settings');
     return true;
@@ -229,6 +243,8 @@ const AppContent: React.FC = () => {
   }, [securityUnlocked]);
 
   const handleStartConsultation = (patient?: Patient) => {
+    // Ouvrir une autre fiche pendant une consultation en cours = quitter celle-ci.
+    if (currentView === 'new-prescription' && patient && patient.id !== activePatient?.id && !unsavedChanges.confirmLeave()) return;
     if (patient) {
       setActivePatient(patient);
       if (prescriptionDraft?.patient?.id !== patient.id) setPrescriptionDraft(null);
@@ -300,6 +316,8 @@ const AppContent: React.FC = () => {
           initialPrescription={activePrescription}
           draft={prescriptionDraft}
           onDraftChange={setPrescriptionDraft}
+          sidebarShown={consultSidebarShown}
+          onToggleSidebar={toggleConsultSidebar}
           onFinish={() => {
             setActivePatient(null);
             setActivePrescription(null);
@@ -392,6 +410,7 @@ const AppContent: React.FC = () => {
   }
 
   const userInitials = (activeUser?.name || doctor.nameFr || 'D').substring(0, 2).toUpperCase();
+  const focusMode = currentView === 'new-prescription' && !consultSidebarShown;
   const sidebarWidth = isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)';
 
   return (
@@ -411,15 +430,18 @@ const AppContent: React.FC = () => {
 
       {/* ═══════════════ SIDEBAR ═══════════════ */}
       <aside
+        aria-hidden={focusMode}
         className={`
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           fixed top-0 left-0 bottom-0 flex flex-col
           transition-all duration-300
         `}
         style={{
-          width: isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)',
+          width: focusMode ? 0 : isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)',
+          visibility: focusMode ? 'hidden' : 'visible',
+          overflow: 'hidden',
           background: 'var(--color-surface)',
-          borderRight: '1px solid var(--color-border)',
+          borderRight: focusMode ? 'none' : '1px solid var(--color-border)',
           height: '100vh',
           zIndex: 30,
           flexShrink: 0,
@@ -679,7 +701,7 @@ const AppContent: React.FC = () => {
       </aside>
 
       {/* ═══════════════ MAIN COLUMN ═══════════════ */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden" style={{ marginLeft: 'var(--sidebar-width)' }}>
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden" style={{ marginLeft: focusMode ? 0 : 'var(--sidebar-width)', transition: 'margin-left var(--transition-base)' }}>
 
         {/* ─── TOPBAR ─── */}
         <header
@@ -691,6 +713,7 @@ const AppContent: React.FC = () => {
             position: 'sticky',
             top: 0,
             zIndex: 'var(--z-topbar)' as any,
+            ...(focusMode ? { display: 'none' } : {}),
           }}
         >
           {/* Mobile menu toggle */}
@@ -800,7 +823,8 @@ const AppContent: React.FC = () => {
           style={{ padding: '24px 28px' }}
         >
           <div style={{
-            maxWidth: currentView === 'settings' && settingsRoute.section === 'documents' && normalizeRoute(settingsRoute).tab === 'design'
+            maxWidth: currentView === 'new-prescription'
+              || (currentView === 'settings' && settingsRoute.section === 'documents' && normalizeRoute(settingsRoute).tab === 'design')
               ? 'none' : 'var(--max-content-width)',
             margin: '0 auto',
           }}>

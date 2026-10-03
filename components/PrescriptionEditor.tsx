@@ -18,7 +18,7 @@ import {
   RefreshCcw, FileDigit, X as CloseX, Loader2,
   Heart, CheckCircle2, Baby, UserCircle,
   ShieldX, AlertCircle, Activity, Zap, BrainCircuit, FlaskConical,
-  ArrowLeft, History, XCircle, ScrollText, ShieldCheck,
+  ArrowLeft, History, XCircle, ScrollText, ShieldCheck, PanelLeftOpen, PanelLeftClose,
 } from 'lucide-react';
 import { Medicine, PrescriptionItem, MedicineCategory, MealTiming, Patient, Prescription, PatientType, PrescriptionDraft, ContextEntry, AllergyReaction, RenalStage } from '../types';
 import { dataService } from '../services/dataService';
@@ -35,6 +35,7 @@ import html2pdf from 'html2pdf.js';
 import * as prescriptionAiService from '../services/prescriptionAiService';
 import { toastService } from '../services/toastService';
 import { sessionService } from '../services/sessionService';
+import { unsavedChanges, useUnsavedChanges } from './settings/unsavedChanges';
 import { specialtyKey, deriveProfileFlags } from '../services/medicalReferentials';
 import { buildContextFromPatient, buildContextSave, shortcutActive, toggleShortcut, withContext, ShortcutKey } from '../services/patientContext';
 import ContextTagInput from './ui/ContextTagInput';
@@ -58,6 +59,9 @@ interface PrescriptionEditorProps {
   initialPrescription?: Prescription | null;
   draft?: PrescriptionDraft | null;
   onDraftChange?: (draft: PrescriptionDraft | null) => void;
+  /** Mode concentration : la sidebar de l'application est-elle affichée ? */
+  sidebarShown?: boolean;
+  onToggleSidebar?: () => void;
 }
 
 // ─── Shared style constants ──────────────────────────────────────────────
@@ -69,7 +73,7 @@ const labelEyebrow = 'block text-[11px] font-medium uppercase tracking-wider mb-
 const labelEyebrowStyle = { color: 'var(--color-text-subtle)', letterSpacing: '0.06em' } as React.CSSProperties;
 
 const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
-  onFinish, selectedPatientFromQueue, initialPatient, initialPrescription, draft, onDraftChange,
+  onFinish, selectedPatientFromQueue, initialPatient, initialPrescription, draft, onDraftChange, sidebarShown, onToggleSidebar,
 }) => {
   const { t, lang, dir } = useI18n();
 
@@ -119,6 +123,25 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
   const medInputRef = useRef<HTMLInputElement>(null);
   const specialty = specialtyKey(dataService.getDoctorInfo()?.specialtyFr);
+
+  // Aperçu d'impression plus grand sur les écrans larges (≥ 1700 px) ; 794 px = largeur A4 à l'échelle 1.
+  const [wide, setWide] = useState(() => typeof window.matchMedia === 'function' && window.matchMedia('(min-width: 1700px)').matches);
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return;
+    const mq = window.matchMedia('(min-width: 1700px)');
+    const onChange = () => setWide(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  const previewScale = wide ? 0.68 : 0.531;
+
+  // Modifications non enregistrées : alimente la garde de navigation (même mécanisme que les Paramètres).
+  const [touched, setTouched] = useState(false);
+  const updatePatient = (next: Partial<Patient>) => { setTouched(true); setPatient(next); };
+  const dirty = initialPrescription
+    ? touched || JSON.stringify(items) !== JSON.stringify(initialPrescription.items)
+    : touched || items.length > 0 || selectedTests.length > 0;
+  useUnsavedChanges('consultation', dirty);
 
   const queueSuggestions = (dataService.getTodayQueue()).map(q => ({
     id: q.id,
@@ -335,6 +358,11 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     if (updated) dataService.savePatientProfile(updated);
   };
 
+  const handleBack = () => {
+    if (!unsavedChanges.confirmLeave()) return;
+    onFinish();
+  };
+
   const handleSave = () => {
     if (justificationPending()) return;
     const isEditing = !!initialPrescription;
@@ -360,6 +388,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       dataService.deleteFromQueue(selectedPatientId);
       dataService.markAppointmentDone(selectedPatientId);
     }
+    unsavedChanges.set('consultation', false);
     onFinish();
   };
 
@@ -405,13 +434,13 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     if (mode === 'preview') {
       return (
         <div
-          className="w-full lg:w-[420px] shrink-0 lg:sticky lg:top-[88px] h-fit rounded-xl overflow-hidden bg-white border flex justify-center items-start"
+          className={`w-full ${wide ? 'lg:w-[540px]' : 'lg:w-[420px]'} shrink-0 lg:sticky lg:top-[76px] h-fit rounded-xl overflow-hidden bg-white border flex justify-center items-start`}
           style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-soft)' }}
         >
           {useCombinedPrint ? (
             <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} scale={0.17} />
           ) : (
-            <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={0.531} />
+            <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={previewScale} />
           )}
         </div>
       );
@@ -451,7 +480,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     !!itemId && attentionWarnings.some(w => w.itemId === itemId);
 
   return (
-    <div className="max-w-[var(--max-content-width)] mx-auto flex flex-col gap-5 pb-10" style={{ color: 'var(--color-text)' }}>
+    <div className="w-full max-w-[1760px] mx-auto flex flex-col gap-5 pb-10" style={{ color: 'var(--color-text)' }}>
       {/* ═══ Override modal ═══ */}
       {overrideModal.isOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ background: 'rgba(15, 23, 42, 0.5)', backdropFilter: 'blur(4px)' }}>
@@ -493,32 +522,49 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
       )}
 
-      {/* ═══ Page header ═══ */}
-      <header className="flex items-center justify-between print:hidden">
-        <div className="flex items-center gap-3">
+      {/* ═══ En-tête compact de consultation ═══ */}
+      <header
+        className="sticky top-0 z-30 -mx-7 -mt-6 px-7 py-2.5 flex items-center justify-between gap-3 border-b print:hidden"
+        style={{ background: 'var(--color-bg)', borderColor: 'var(--color-border)' }}
+      >
+        <div className="flex items-center gap-2 min-w-0">
+          {onToggleSidebar && (
+            <button
+              type="button"
+              onClick={onToggleSidebar}
+              aria-pressed={!!sidebarShown}
+              aria-label={sidebarShown ? 'Masquer le menu' : 'Afficher le menu'}
+              title={sidebarShown ? 'Masquer le menu' : 'Afficher le menu'}
+              className="w-10 h-10 shrink-0 rounded-lg border bg-white flex items-center justify-center hover:bg-slate-50 transition-all"
+              style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+            >
+              {sidebarShown ? <PanelLeftClose size={17} /> : <PanelLeftOpen size={17} />}
+            </button>
+          )}
           <button
-            onClick={onFinish}
-            className="w-10 h-10 rounded-lg border bg-white flex items-center justify-center hover:bg-slate-50 transition-all"
+            type="button"
+            onClick={handleBack}
+            className="h-10 px-3 shrink-0 rounded-lg border bg-white flex items-center gap-1.5 text-[13px] font-medium whitespace-nowrap hover:bg-slate-50 transition-all"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
-            aria-label="Retour"
           >
-            <ArrowLeft size={18} className={dir === 'rtl' ? 'rotate-180' : ''} />
+            <ArrowLeft size={15} className={dir === 'rtl' ? 'rotate-180' : ''} /> Retour
           </button>
-          <div>
-            <div className="text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-              {initialPrescription ? 'Modification' : 'Nouvelle consultation'}
-            </div>
-            <h1 className="text-[22px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>
-              Ordonnance médicale
-              {patient.name && <> — <span style={{ color: 'var(--color-text-muted)' }}>{patient.name}</span></>}
+          <div className="min-w-0 pl-1">
+            <h1 className="text-[16px] font-semibold tracking-tight truncate" style={{ color: 'var(--color-text)' }} title={patient.name || undefined}>
+              {patient.name || (initialPrescription ? 'Modification' : 'Nouvelle consultation')}
             </h1>
+            {patient.name && (
+              <div className="text-[11px] truncate" style={{ color: 'var(--color-text-subtle)' }}>
+                {initialPrescription ? 'Modification' : 'Nouvelle consultation'}
+              </div>
+            )}
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => window.print()}
             disabled={items.length === 0}
-            className="h-10 px-4 rounded-lg text-[13px] font-medium border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="h-10 px-4 rounded-lg text-[13px] font-medium whitespace-nowrap border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
           >
             <Printer size={15} /> {t('print')}
@@ -526,14 +572,14 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
           <button
             onClick={handleExportPDF}
             disabled={items.length === 0}
-            className="h-10 px-4 rounded-lg text-[13px] font-medium border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="h-10 px-4 rounded-lg text-[13px] font-medium whitespace-nowrap border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
           >
             <FileDigit size={15} /> PDF
           </button>
           <button
             onClick={handleSave}
-            className="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white shadow-soft transition-all hover:shadow-card active:scale-[0.98]"
+            className="h-10 px-5 rounded-lg text-[13px] font-medium whitespace-nowrap flex items-center gap-2 text-white shadow-soft transition-all hover:shadow-card active:scale-[0.98]"
             style={{ background: 'var(--color-primary)' }}
           >
             <Save size={15} /> {t('save')}
@@ -685,7 +731,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                   value={patient.name}
                   onFocus={() => !patient.name && setPatientSuggestions(queueSuggestions as any)}
                   onChange={e => {
-                    setPatient({ ...patient, name: e.target.value });
+                    updatePatient({ ...patient, name: e.target.value });
                     setPatientSuggestions(e.target.value.length > 0 ? dataService.searchPatients(e.target.value) : queueSuggestions as any);
                   }}
                   className={input40}
@@ -730,7 +776,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                 <input
                   type="number"
                   value={patient.age || ''}
-                  onChange={e => setPatient({ ...patient, age: parseInt(e.target.value) || 0 })}
+                  onChange={e => updatePatient({ ...patient, age: parseInt(e.target.value) || 0 })}
                   className={input40} style={inputStyle}
                 />
               </div>
@@ -739,7 +785,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                 <input
                   type="text"
                   value={patient.weight || ''}
-                  onChange={e => setPatient({ ...patient, weight: e.target.value })}
+                  onChange={e => updatePatient({ ...patient, weight: e.target.value })}
                   className={input40} style={inputStyle}
                   placeholder={t('weight_placeholder')}
                 />
@@ -759,7 +805,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                     aria-pressed={!!patient.noKnownAllergy}
                     disabled={(patient.allergyList || []).length > 0}
                     title={(patient.allergyList || []).length > 0 ? 'Retirez les allergies saisies pour déclarer « aucune »' : undefined}
-                    onClick={() => setPatient(withContext(patient, { noKnownAllergy: !patient.noKnownAllergy }))}
+                    onClick={() => updatePatient(withContext(patient, { noKnownAllergy: !patient.noKnownAllergy }))}
                     className="h-7 px-2.5 rounded-md text-[11px] font-medium flex items-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                     style={patient.noKnownAllergy
                       ? { background: 'var(--color-success, #2F855A)', color: 'white' }
@@ -775,12 +821,12 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                   placeholder="Pénicilline, AINS, latex…"
                   specialty={specialty}
                   entries={patient.allergyList || []}
-                  onChange={(list: ContextEntry[]) => setPatient(withContext(patient, { allergyList: list }))}
+                  onChange={(list: ContextEntry[]) => updatePatient(withContext(patient, { allergyList: list }))}
                   renderChipExtra={(entry: ContextEntry, index: number) => (
                     <select
                       aria-label={`Réaction à ${entry.label}`}
                       value={entry.reaction || ''}
-                      onChange={e => setPatient(withContext(patient, {
+                      onChange={e => updatePatient(withContext(patient, {
                         allergyList: (patient.allergyList || []).map((a, i) => i === index ? { ...a, reaction: (e.target.value || undefined) as AllergyReaction | undefined } : a),
                       }))}
                       className="h-5 rounded border text-[11px] bg-white outline-none"
@@ -803,7 +849,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                   <div className="flex flex-wrap gap-2 pt-1">
                     <div className="flex items-center gap-1.5">
                       <button
-                        onClick={() => { const next = { ...patient, isPregnant: !patient.isPregnant }; setPatient(next); runSafetyChecks(items, next); }}
+                        onClick={() => { const next = { ...patient, isPregnant: !patient.isPregnant }; updatePatient(next); runSafetyChecks(items, next); }}
                         className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
                         style={patient.isPregnant
                           ? { background: 'var(--color-warning-hover)', color: 'white' }
@@ -814,7 +860,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                       {patient.isPregnant && (
                         <input
                           type="number" value={patient.pregnancyWeeks || ''}
-                          onChange={e => { const next = { ...patient, pregnancyWeeks: parseInt(e.target.value) || 0 }; setPatient(next); runSafetyChecks(items, next); }}
+                          onChange={e => { const next = { ...patient, pregnancyWeeks: parseInt(e.target.value) || 0 }; updatePatient(next); runSafetyChecks(items, next); }}
                           placeholder="sem."
                           className="w-14 h-8 px-2 rounded-md border text-[12px] font-medium outline-none bg-white"
                           style={{ borderColor: 'var(--color-warning-100)' }}
@@ -823,7 +869,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                     </div>
                     <div className="flex items-center gap-1.5">
                       <button
-                        onClick={() => { const next = { ...patient, isBreastfeeding: !patient.isBreastfeeding }; setPatient(next); runSafetyChecks(items, next); }}
+                        onClick={() => { const next = { ...patient, isBreastfeeding: !patient.isBreastfeeding }; updatePatient(next); runSafetyChecks(items, next); }}
                         className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
                         style={patient.isBreastfeeding
                           ? { background: 'var(--color-warning-hover)', color: 'white' }
@@ -834,7 +880,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                       {patient.isBreastfeeding && (
                         <input
                           type="number" value={patient.lactationMonths || ''}
-                          onChange={e => { const next = { ...patient, lactationMonths: parseInt(e.target.value) || 0 }; setPatient(next); runSafetyChecks(items, next); }}
+                          onChange={e => { const next = { ...patient, lactationMonths: parseInt(e.target.value) || 0 }; updatePatient(next); runSafetyChecks(items, next); }}
                           placeholder="mois"
                           className="w-14 h-8 px-2 rounded-md border text-[12px] font-medium outline-none bg-white"
                           style={{ borderColor: 'var(--color-warning-100)' }}
@@ -856,7 +902,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                   placeholder="HTA, diabète, insuffisance cardiaque…"
                   specialty={specialty}
                   entries={patient.pathologyList || []}
-                  onChange={(list: ContextEntry[]) => setPatient(withContext(patient, { pathologyList: list }))}
+                  onChange={(list: ContextEntry[]) => updatePatient(withContext(patient, { pathologyList: list }))}
                 />
                 <div className="flex flex-wrap gap-1.5">
                   {([
@@ -870,7 +916,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                         key={key}
                         type="button"
                         aria-pressed={isOn}
-                        onClick={() => setPatient(toggleShortcut(patient, key))}
+                        onClick={() => updatePatient(toggleShortcut(patient, key))}
                         className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
                         style={isOn
                           ? { background: 'var(--color-primary)', color: 'white' }
@@ -890,7 +936,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                         key={value}
                         type="button"
                         aria-pressed={patient.renalStage === value}
-                        onClick={() => setPatient(withContext(patient, { renalStage: patient.renalStage === value ? undefined : value }))}
+                        onClick={() => updatePatient(withContext(patient, { renalStage: patient.renalStage === value ? undefined : value }))}
                         className="h-7 px-2.5 rounded-md text-[11px] font-medium transition-all"
                         style={patient.renalStage === value
                           ? { background: 'var(--color-primary)', color: 'white' }
@@ -1381,7 +1427,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
 
         {/* ═══ PREVIEW PANE ═══ */}
-        <div className="w-full lg:w-[440px] shrink-0 print:hidden">
+        <div className={`w-full ${wide ? 'lg:w-[560px]' : 'lg:w-[440px]'} shrink-0 print:hidden`}>
           <h3 className="text-[11px] font-medium uppercase tracking-wider mb-3 px-1 flex items-center gap-2" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>
             <FileText size={13} /> {lang === 'ar' ? 'معاينة' : 'Aperçu impression'}
           </h3>
