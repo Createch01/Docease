@@ -2,6 +2,7 @@
   "version": "1.0.0",
   "updated": "2026-10-03",
   "note": "Référentiel local hors ligne. match.atc = préfixes ATC ; match.dci / match.brands = débuts de mots cherchés dans nom commercial + DCI + composition ; match.text = termes cherchés dans les contre-indications de la fiche (alerte ATTENTION, jamais CRITIQUE). Aucun lien implicite entre entrées : seuls les liens déclarés dans crossReactivity existent.",
+  "frequent": ["ALG_PENICILLINES", "ALG_AINS", "ALG_ASPIRINE", "ALG_SULFAMIDES", "ALG_CEPHALOSPORINES", "ALG_IODE_CONTRASTE", "ALG_OPIOIDES", "ALG_LATEX", "ALG_MACROLIDES", "ALG_QUINOLONES"],
   "items": [
     {
       "id": "ALG_PENICILLINES", "label": "Pénicillines", "kind": "drug",
@@ -30,7 +31,7 @@
       ]
     },
     {
-      "id": "ALG_SULFAMIDES", "label": "Sulfamides antibactériens", "kind": "drug",
+      "id": "ALG_SULFAMIDES", "label": "Sulfamides antibactériens", "short": "Sulfamides", "kind": "drug",
       "synonyms": ["sulfamide", "sulfamides", "cotrimoxazole", "co-trimoxazole", "bactrim", "sulfaméthoxazole", "sulfamethoxazole", "triméthoprime-sulfaméthoxazole"],
       "match": {
         "atc": ["J01E"],
@@ -40,7 +41,7 @@
       }
     },
     {
-      "id": "ALG_ASPIRINE", "label": "Aspirine (acide acétylsalicylique)", "kind": "drug",
+      "id": "ALG_ASPIRINE", "label": "Aspirine (acide acétylsalicylique)", "short": "Aspirine", "kind": "drug",
       "synonyms": ["aspirine", "acide acétylsalicylique", "acide acetylsalicylique", "aspégic", "aspegic", "kardégic", "kardegic"],
       "match": {
         "atc": ["N02BA", "B01AC06"],
@@ -53,7 +54,7 @@
       ]
     },
     {
-      "id": "ALG_AINS", "label": "AINS (anti-inflammatoires non stéroïdiens)", "kind": "drug",
+      "id": "ALG_AINS", "label": "AINS (anti-inflammatoires non stéroïdiens)", "short": "AINS", "kind": "drug",
       "synonyms": ["ains", "anti-inflammatoire", "anti inflammatoire", "ibuprofène", "ibuprofene", "diclofénac", "diclofenac", "kétoprofène", "ketoprofene", "naproxène", "méloxicam", "voltarène", "profénid", "advil"],
       "match": {
         "atc": ["M01AB", "M01AC", "M01AE", "M01AG", "M01AH", "M02AA", "S01BC"],
@@ -106,7 +107,7 @@
       }
     },
     {
-      "id": "ALG_QUINOLONES", "label": "Quinolones / fluoroquinolones", "kind": "drug",
+      "id": "ALG_QUINOLONES", "label": "Quinolones / fluoroquinolones", "short": "Quinolones", "kind": "drug",
       "synonyms": ["quinolone", "quinolones", "fluoroquinolone", "ciprofloxacine", "lévofloxacine", "levofloxacine", "ofloxacine"],
       "match": {
         "atc": ["J01M"],
@@ -116,7 +117,7 @@
       }
     },
     {
-      "id": "ALG_NITROIMIDAZOLES", "label": "Métronidazole / nitro-imidazolés", "kind": "drug",
+      "id": "ALG_NITROIMIDAZOLES", "label": "Métronidazole / nitro-imidazolés", "short": "Métronidazole", "kind": "drug",
       "synonyms": ["métronidazole", "metronidazole", "flagyl", "nitro-imidazolé", "ornidazole", "tinidazole", "secnidazole"],
       "match": {
         "atc": ["J01XD", "P01AB"],
@@ -146,7 +147,7 @@
       }
     },
     {
-      "id": "ALG_IEC", "label": "IEC (inhibiteurs de l'enzyme de conversion)", "kind": "drug",
+      "id": "ALG_IEC", "label": "IEC (inhibiteurs de l'enzyme de conversion)", "short": "IEC", "kind": "drug",
       "synonyms": ["iec", "captopril", "énalapril", "enalapril", "ramipril", "périndopril", "perindopril", "lisinopril", "angio-œdème", "angioedeme"],
       "match": {
         "atc": ["C09A", "C09B"],
@@ -270,7 +271,7 @@
       "match": { "atc": [], "dci": [], "brands": [], "text": ["arachide", "cacahuete"] }
     },
     {
-      "id": "ALG_CRUSTACES", "label": "Crustacés / fruits de mer", "kind": "non_drug",
+      "id": "ALG_CRUSTACES", "label": "Crustacés / fruits de mer", "short": "Crustacés", "kind": "non_drug",
       "synonyms": ["crustacés", "crustaces", "fruits de mer", "crevette", "crevettes", "crabe", "langouste"],
       "match": { "atc": [], "dci": [], "brands": [], "text": ["crustace", "fruits de mer"] }
     },
@@ -285,7 +286,7 @@
       "match": { "atc": [], "dci": [], "brands": [], "text": ["oeuf", "ovalbumin"] }
     },
     {
-      "id": "ALG_LAIT", "label": "Lait de vache (protéines)", "kind": "non_drug",
+      "id": "ALG_LAIT", "label": "Lait de vache (protéines)", "short": "Lait de vache", "kind": "non_drug",
       "synonyms": ["lait", "lait de vache", "protéines de lait", "caséine", "lactoprotéines"],
       "match": { "atc": [], "dci": [], "brands": [], "text": ["lait de vache", "proteines de lait", "proteines du lait", "caseine", "lactoproteine"] }
     },

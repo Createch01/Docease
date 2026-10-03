@@ -480,6 +480,13 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   }, []);
   const roomy = formWidth >= 640;
 
+  // Couleur du bloc Allergies selon l'état : neutre / vert discret / rouge.
+  const allergyTone = (patient.allergyList || []).length > 0
+    ? { box: { background: 'var(--color-danger-50)', borderColor: 'var(--color-danger-100)' }, label: 'var(--color-danger-700)' }
+    : patient.noKnownAllergy
+      ? { box: { background: 'var(--color-secondary-50)', borderColor: 'var(--color-secondary-100)' }, label: 'var(--color-secondary-hover)' }
+      : { box: { background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }, label: 'var(--color-text-muted)' };
+
   // ─── Choix du patient ───
   const blankPatient = (name = ''): Partial<Patient> => ({
     name, age: 0, sex: undefined, type: 'Adult', weight: '', phone: '', consultationFee: 0,
@@ -918,32 +925,18 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
             {/* Allergies + pathologies */}
             <div className={`grid gap-3 ${roomy ? 'grid-cols-2' : 'grid-cols-1'}`}>
-              {/* Allergies */}
-              <div className="p-4 rounded-lg border space-y-3" style={{ background: 'var(--color-danger-50)', borderColor: 'var(--color-danger-100)' }}>
-                <div className="flex items-center justify-between gap-2">
-                  <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--color-danger-700)', letterSpacing: '0.06em' }}>
-                    <AlertCircle size={11} /> {t('allergies')}
-                  </label>
-                  <button
-                    type="button"
-                    aria-pressed={!!patient.noKnownAllergy}
-                    disabled={(patient.allergyList || []).length > 0}
-                    title={(patient.allergyList || []).length > 0 ? 'Retirez les allergies saisies pour déclarer « aucune »' : undefined}
-                    onClick={() => updatePatient(withContext(patient, { noKnownAllergy: !patient.noKnownAllergy }))}
-                    className="h-7 px-2.5 shrink-0 rounded-md text-[11px] font-medium whitespace-nowrap flex items-center gap-1.5 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
-                    style={patient.noKnownAllergy
-                      ? { background: 'var(--color-success, #2F855A)', color: 'white' }
-                      : { background: 'white', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
-                  >
-                    <ShieldCheck size={11} /> Aucune allergie connue
-                  </button>
-                </div>
+              {/* Allergies : neutre (non renseigné) · vert discret (aucune allergie connue) · rouge (au moins une allergie) */}
+              <div className="p-4 rounded-lg border space-y-3" style={allergyTone.box}>
+                <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: allergyTone.label, letterSpacing: '0.06em' }}>
+                  {patient.noKnownAllergy ? <ShieldCheck size={11} /> : <AlertCircle size={11} />} {t('allergies')}
+                </label>
                 <ContextTagInput
                   kind="allergy"
                   tone="danger"
                   ariaLabel={t('allergies')}
-                  placeholder="Pénicilline, AINS, latex…"
+                  placeholder={patient.noKnownAllergy ? 'Décochez « Aucune allergie connue »' : 'Cliquez pour choisir : pénicilline, AINS, latex…'}
                   specialty={specialty}
+                  disabled={!!patient.noKnownAllergy}
                   entries={patient.allergyList || []}
                   onChange={(list: ContextEntry[]) => updatePatient(withContext(patient, { allergyList: list }))}
                   renderChipExtra={(entry: ContextEntry, index: number) => (
@@ -964,11 +957,28 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                     </select>
                   )}
                 />
-                <p className="text-[11px]" style={{ color: 'var(--color-text-subtle)' }}>
-                  {patient.noKnownAllergy
-                    ? 'Aucune allergie connue (déclaré).'
-                    : (patient.allergyList || []).length === 0 ? 'Non renseigné.' : 'Réaction anaphylactique : toute prescription de la même famille exige une justification.'}
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <label className="flex items-center gap-2 text-[13px] whitespace-nowrap cursor-pointer select-none"
+                    style={{ color: (patient.allergyList || []).length > 0 ? 'var(--color-text-subtle)' : 'var(--color-text)' }}
+                    title={(patient.allergyList || []).length > 0 ? 'Retirez les allergies saisies pour déclarer « aucune »' : undefined}>
+                    <input
+                      type="checkbox"
+                      checked={!!patient.noKnownAllergy}
+                      disabled={(patient.allergyList || []).length > 0}
+                      onChange={e => updatePatient(withContext(patient, { noKnownAllergy: e.target.checked }))}
+                      className="w-4 h-4 accent-emerald-600 disabled:cursor-not-allowed"
+                    />
+                    Aucune allergie connue
+                  </label>
+                  {(patient.allergyList || []).length === 0 && !patient.noKnownAllergy && (
+                    <span className="text-[11px] whitespace-nowrap" style={{ color: 'var(--color-text-subtle)' }}>Non renseigné</span>
+                  )}
+                </div>
+                {(patient.allergyList || []).some(a => a.reaction === 'anaphylaxie') && (
+                  <p className="text-[11px]" style={{ color: 'var(--color-danger-700)' }}>
+                    Anaphylaxie : toute prescription de la même famille exige une justification.
+                  </p>
+                )}
                 {patient.sex === 'F' && (
                   <div className="flex flex-wrap gap-2 pt-1">
                     <div className="flex items-center gap-1.5">
@@ -1023,7 +1033,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                 <ContextTagInput
                   kind="pathology"
                   ariaLabel={t('pathologies')}
-                  placeholder="HTA, diabète, insuffisance cardiaque…"
+                  placeholder="Cliquez pour choisir : HTA, diabète, insuffisance cardiaque…"
                   specialty={specialty}
                   entries={patient.pathologyList || []}
                   onChange={(list: ContextEntry[]) => updatePatient(withContext(patient, { pathologyList: list }))}

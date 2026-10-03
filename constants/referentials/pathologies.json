@@ -2,11 +2,38 @@
   "version": "1.0.0",
   "updated": "2026-10-03",
   "note": "Référentiel local hors ligne. rules.profile = indicateurs du profil de sécurité (drugSafetyCheck) ; rules.flags = smart_flags du catalogue effectivement présents (vérifié par tests/referentials.test.ts). Aucun lien inventé : une pathologie sans règle reste simplement enregistrée.",
+  "frequent": {
+    "default": [
+      "I10",
+      "E11",
+      "E78",
+      "J45",
+      "J44",
+      "K21",
+      "N18.9",
+      "I50",
+      "E03",
+      "F32"
+    ],
+    "cardiologie": [
+      "I10",
+      "E11",
+      "I50",
+      "I48",
+      "I25",
+      "E78",
+      "I05-I09",
+      "J45",
+      "I20",
+      "Z79.01"
+    ]
+  },
   "items": [
     {
       "id": "I10",
       "code": "I10",
       "label": "Hypertension artérielle (HTA)",
+      "short": "HTA",
       "category": "cardio",
       "synonyms": [
         "hta",
@@ -71,6 +98,7 @@
       "id": "I51.9",
       "code": "I51.9",
       "label": "Cardiopathie (sans précision)",
+      "short": "Cardiopathie",
       "category": "cardio",
       "synonyms": [
         "cardiaque",
@@ -93,6 +121,7 @@
       "id": "I25",
       "code": "I25",
       "label": "Cardiopathie ischémique / coronaropathie",
+      "short": "Cardiopathie ischémique",
       "category": "cardio",
       "synonyms": [
         "coronarien",
@@ -119,6 +148,7 @@
       "id": "I20",
       "code": "I20",
       "label": "Angor (angine de poitrine)",
+      "short": "Angor",
       "category": "cardio",
       "synonyms": [
         "angor",
@@ -145,6 +175,7 @@
       "id": "I25.2",
       "code": "I25.2",
       "label": "Infarctus du myocarde (ATCD)",
+      "short": "Infarctus (ATCD)",
       "category": "cardio",
       "synonyms": [
         "infarctus",
@@ -214,6 +245,7 @@
       "id": "I45.81",
       "code": "I45.81",
       "label": "QT long (syndrome du QT long)",
+      "short": "QT long",
       "category": "cardio",
       "synonyms": [
         "qt long",
@@ -285,6 +317,7 @@
       "id": "I44",
       "code": "I44",
       "label": "Bloc auriculo-ventriculaire (BAV)",
+      "short": "BAV",
       "category": "cardio",
       "synonyms": [
         "bav",
@@ -312,6 +345,7 @@
       "id": "I01",
       "code": "I01",
       "label": "Rhumatisme articulaire aigu (RAA)",
+      "short": "RAA",
       "category": "cardio",
       "synonyms": [
         "raa",
@@ -354,6 +388,7 @@
       "id": "I38",
       "code": "I38",
       "label": "Valvulopathie (non rhumatismale)",
+      "short": "Valvulopathie",
       "category": "cardio",
       "synonyms": [
         "valvulopathie",
@@ -420,6 +455,7 @@
       "id": "Z95.0",
       "code": "Z95.0",
       "label": "Pacemaker / défibrillateur implantable",
+      "short": "Pacemaker / DAI",
       "category": "cardio",
       "synonyms": [
         "pacemaker",
@@ -443,6 +479,7 @@
       "id": "Z79.01",
       "code": "Z79.01",
       "label": "Anticoagulation au long cours",
+      "short": "Anticoagulation",
       "category": "cardio",
       "synonyms": [
         "anticoagulant",
@@ -516,6 +553,7 @@
       "id": "I73.9",
       "code": "I73.9",
       "label": "Artériopathie des membres inférieurs",
+      "short": "AOMI",
       "category": "cardio",
       "synonyms": [
         "aomi",
@@ -539,6 +577,7 @@
       "id": "I82",
       "code": "I82",
       "label": "Thrombose veineuse profonde / embolie (ATCD)",
+      "short": "TVP / embolie",
       "category": "cardio",
       "synonyms": [
         "tvp",
@@ -814,6 +853,7 @@
       "id": "N40",
       "code": "N40",
       "label": "Hypertrophie bénigne de la prostate",
+      "short": "HBP",
       "category": "renal",
       "synonyms": [
         "hbp",
@@ -987,6 +1027,7 @@
       "id": "G47.3",
       "code": "G47.3",
       "label": "Syndrome d'apnée du sommeil",
+      "short": "Apnée du sommeil",
       "category": "respiratoire",
       "synonyms": [
         "sas",
@@ -1012,6 +1053,7 @@
       "id": "K21",
       "code": "K21",
       "label": "Reflux gastro-œsophagien (RGO)",
+      "short": "RGO",
       "category": "digestif",
       "synonyms": [
         "rgo",
@@ -1086,6 +1128,7 @@
       "id": "K50-K51",
       "code": "K50-K51",
       "label": "Maladie inflammatoire chronique de l'intestin",
+      "short": "MICI",
       "category": "digestif",
       "synonyms": [
         "mici",
@@ -1131,6 +1174,7 @@
       "id": "G20",
       "code": "G20",
       "label": "Maladie de Parkinson",
+      "short": "Parkinson",
       "category": "neuro",
       "synonyms": [
         "parkinson"

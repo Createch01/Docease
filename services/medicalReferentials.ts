@@ -20,6 +20,8 @@ export interface CrossReactivity {
 export interface AllergyRef {
     id: string;
     label: string;
+    /** Libellé court pour les pastilles du panneau de suggestions. */
+    short?: string;
     kind: 'drug' | 'non_drug';
     synonyms: string[];
     match: { atc: string[]; dci: string[]; brands: string[]; text: string[] };
@@ -30,6 +32,7 @@ export interface PathologyRef {
     id: string;
     code: string;
     label: string;
+    short?: string;
     category: string;
     synonyms: string[];
     specialtyRank?: Record<string, number>;
@@ -72,6 +75,7 @@ export function normalizeText(s: string): string {
 export interface SuggestItem {
     id: string;
     label: string;
+    short?: string;
     code?: string;
     terms: string[];            // libellé + synonymes + code, déjà normalisés
     category?: string;
@@ -83,12 +87,12 @@ export const MIN_QUERY_LENGTH = 2;
 export function toSuggestItems(kind: ContextKind): SuggestItem[] {
     if (kind === 'allergy') {
         return ALLERGY_REFS.map(a => ({
-            id: a.id, label: a.label, category: a.kind,
+            id: a.id, label: a.label, short: a.short, category: a.kind,
             terms: [a.label, ...a.synonyms].map(normalizeText),
         }));
     }
     return PATHOLOGY_REFS.map(p => ({
-        id: p.id, label: p.label, code: p.code, category: p.category, specialtyRank: p.specialtyRank,
+        id: p.id, label: p.label, short: p.short, code: p.code, category: p.category, specialtyRank: p.specialtyRank,
         terms: [p.label, ...p.synonyms, p.code].map(normalizeText),
     }));
 }
@@ -130,6 +134,61 @@ export function searchSuggestions(
             return a.label.localeCompare(b.label, 'fr');
         })
         .slice(0, limit);
+}
+
+// ─── Suggestions au clic (sans saisie) ───────────────────────────────────────
+
+const ALLERGY_FREQUENT: string[] = (allergiesData as { frequent?: string[] }).frequent ?? [];
+const PATHOLOGY_FREQUENT: Record<string, string[]> = (pathologiesData as { frequent?: Record<string, string[]> }).frequent ?? {};
+
+export const CATEGORY_LABELS: Record<string, string> = {
+    drug: 'Médicamenteuses', non_drug: 'Non médicamenteuses',
+    cardio: 'Cardio', renal: 'Rénal', hepatique: 'Hépatique', endocrino: 'Endocrino', respiratoire: 'Respiratoire',
+    digestif: 'Digestif', neuro: 'Neuro / psy', hematologie: 'Hématologie', ophtalmo: 'Ophtalmo', addictologie: 'Addictologie',
+};
+const CATEGORY_ORDER: Record<ContextKind, string[]> = {
+    allergy: ['drug', 'non_drug'],
+    pathology: ['cardio', 'endocrino', 'renal', 'hepatique', 'respiratoire', 'digestif', 'neuro', 'hematologie', 'ophtalmo', 'addictologie'],
+};
+
+/** Identifiants proposés d'emblée : les plus fréquents (selon la spécialité pour les pathologies). */
+export function frequentIds(kind: ContextKind, specialty?: string): string[] {
+    if (kind === 'allergy') return ALLERGY_FREQUENT;
+    return (specialty && PATHOLOGY_FREQUENT[specialty]) || PATHOLOGY_FREQUENT.default || [];
+}
+
+const byUsageThenLabel = (usage: UsageCounts) => (a: SuggestItem, b: SuggestItem) =>
+    (usage[b.id] || 0) - (usage[a.id] || 0) || a.label.localeCompare(b.label, 'fr');
+
+/**
+ * 8 à 10 éléments cliquables sans taper : ceux que ce médecin utilise le plus, complétés par la liste
+ * des plus fréquents (ordre de la liste). Les éléments déjà choisis restent affichés (cochés).
+ */
+export function suggestedItems(items: SuggestItem[], kind: ContextKind, usage: UsageCounts = {}, specialty?: string, limit = 10): SuggestItem[] {
+    const freq = frequentIds(kind, specialty);
+    const byId = new Map(items.map(i => [i.id, i]));
+    const used = items.filter(i => (usage[i.id] || 0) > 0).sort(byUsageThenLabel(usage));
+    const out: SuggestItem[] = [];
+    for (const i of [...used, ...freq.map(id => byId.get(id)).filter((i): i is SuggestItem => !!i)]) {
+        if (!out.includes(i)) out.push(i);
+        if (out.length >= limit) break;
+    }
+    return out;
+}
+
+export interface ItemGroup { key: string; label: string; items: SuggestItem[] }
+
+/** « Voir tout » : tous les éléments groupés par catégorie, les plus utilisés d'abord dans chaque groupe. */
+export function groupItems(items: SuggestItem[], kind: ContextKind, usage: UsageCounts = {}): ItemGroup[] {
+    const order = CATEGORY_ORDER[kind];
+    const groups = new Map<string, SuggestItem[]>();
+    for (const i of items) {
+        const key = i.category && order.includes(i.category) ? i.category : 'autre';
+        groups.set(key, [...(groups.get(key) ?? []), i]);
+    }
+    return [...order, 'autre']
+        .filter(k => groups.has(k))
+        .map(k => ({ key: k, label: CATEGORY_LABELS[k] ?? 'Autres', items: groups.get(k)!.sort(byUsageThenLabel(usage)) }));
 }
 
 // ─── Compteurs d'usage (localStorage — aucune donnée patient) ────────────────
