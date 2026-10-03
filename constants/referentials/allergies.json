@@ -10,7 +10,7 @@
         "atc": ["J01C"],
         "dci": ["penicillin", "amoxicillin", "ampicillin", "clavulan", "cloxacillin", "flucloxacillin", "oxacillin", "piperacillin", "ticarcillin", "phenoxymethylpenicillin", "benzathine benzylpenicillin"],
         "brands": ["augmentin", "aclav", "clavulin", "amoxil", "alfamox", "almoxel", "clamoxyl", "oracilline", "extencilline", "bristopen", "orbenine"],
-        "text": ["penicillin", "amoxicillin", "betalactamin", "beta-lactamin", "beta lactamin"]
+        "text": ["penicillin", "amoxicillin", "betalactam", "beta-lactam", "beta lactam"]
       },
       "crossReactivity": [
         { "label": "Céphalosporines", "ref": "ALG_CEPHALOSPORINES", "note": "réactivité croisée possible (~2 %)" }
@@ -34,8 +34,8 @@
       "synonyms": ["sulfamide", "sulfamides", "cotrimoxazole", "co-trimoxazole", "bactrim", "sulfaméthoxazole", "sulfamethoxazole", "triméthoprime-sulfaméthoxazole"],
       "match": {
         "atc": ["J01E"],
-        "dci": ["sulfamid", "sulfamethoxazol", "sulfadiazin", "cotrimoxazol", "co-trimoxazol", "sulfa"],
-        "brands": ["bactrim", "eusaprim", "sulfa"],
+        "dci": ["sulfamid", "sulfamethoxazol", "sulfadiazin", "cotrimoxazol", "co-trimoxazol"],
+        "brands": ["bactrim", "eusaprim"],
         "text": ["sulfamid", "cotrimoxazol", "sulfaméthoxazol", "sulfamethoxazol"]
       }
     },
