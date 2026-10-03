@@ -130,7 +130,7 @@ pub fn check(rule: Option<Rule>, role: Option<Role>) -> Result<(), Denial> {
 
 /// Point d'entrée obligatoire de chaque commande. Renvoie la session courante
 /// (None pour une commande publique appelée sans session).
-pub fn gate(app: &tauri::AppHandle, state: &AppState, command: &str) -> Result<Option<Session>, String> {
+pub fn gate<R: tauri::Runtime>(app: &tauri::AppHandle<R>, state: &AppState, command: &str) -> Result<Option<Session>, String> {
     // Inactivité : une session trop longtemps inactive est fermée côté Rust (clé et rôle
     // effacés), même si l'interface ne le fait pas.
     let had_session = state.session.lock().map_err(|e| e.to_string())?.is_some();
@@ -152,7 +152,7 @@ pub fn gate(app: &tauri::AppHandle, state: &AppState, command: &str) -> Result<O
 }
 
 /// Refus d'un fichier hors liste blanche (journalisé).
-pub fn deny_file(app: &tauri::AppHandle, session: &Session, filename: &str, mode: FileMode) -> String {
+pub fn deny_file<R: tauri::Runtime>(app: &tauri::AppHandle<R>, session: &Session, filename: &str, mode: FileMode) -> String {
     let m = if mode == FileMode::Write { "écriture" } else { "lecture" };
     super::audit::log(app, Some(session), "access_denied", &format!("{m} de {filename}"), false);
     denial_message(&Denial::WrongRole).to_string()
@@ -294,7 +294,7 @@ mod tests {
         let end = start + lib[start..].find(']').unwrap();
         let registered: Vec<String> = lib[start..end]
             .split(',')
-            .map(|s| s.trim().rsplit("::").next().unwrap().to_string())
+            .map(|s| s.trim().split("::<").next().unwrap().rsplit("::").next().unwrap().to_string())
             .filter(|s| !s.is_empty())
             .collect();
         assert!(registered.len() > 20, "liste de commandes suspecte : {registered:?}");

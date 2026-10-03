@@ -35,6 +35,7 @@ const PatientDossier = React.lazy(() => import('./components/PatientDossier'));
 const TaskManager = React.lazy(() => import('./components/TaskManager'));
 const AssistantDashboard = React.lazy(() => import('./components/AssistantDashboard'));
 const CashierView = React.lazy(() => import('./components/CashierView'));
+const PatientDirectory = React.lazy(() => import('./components/PatientDirectory'));
 // Raccourci de recherche affiché selon la plateforme (Ctrl K sous Windows et Linux).
 const SEARCH_SHORTCUT = /Mac|iPhone|iPad/i.test(typeof navigator !== 'undefined' ? (navigator.platform || navigator.userAgent) : '') ? '⌘K' : 'Ctrl K';
 
@@ -46,7 +47,7 @@ const GlobalSearch = React.lazy(() => import('./components/GlobalSearch'));
 const PharmaDirectory = React.lazy(() => import('./components/PharmaDirectory'));
 const MedicamentManagement = React.lazy(() => import('./components/admin/MedicamentManagement'));
 
-type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc' | 'repertoire' | 'medicament-management' | 'cashier';
+type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc' | 'repertoire' | 'medicament-management' | 'cashier' | 'patient-directory';
 
 // Permission requise par écran. Un écran absent de cette table est refusé (liste blanche).
 // Même règle que côté Rust : l'interface ne fait que la refléter.
@@ -55,6 +56,7 @@ const VIEW_PERMISSION: Record<View, Permission> = {
   patients: 'MANAGE_PATIENTS',
   appointments: 'MANAGE_APPOINTMENTS',
   cashier: 'COLLECT_PAYMENTS',
+  'patient-directory': 'MANAGE_PATIENTS',
   dossier: 'MANAGE_MEDICAL_RECORDS',
   'new-prescription': 'CREATE_PRESCRIPTION',
   compatibility: 'CREATE_PRESCRIPTION',
@@ -265,6 +267,7 @@ const AppContent: React.FC = () => {
 
     switch (currentView) {
       case 'cashier': return <CashierView />;
+      case 'patient-directory': return <PatientDirectory />;
       case 'dashboard': return !isMedecin ? <AssistantDashboard onNavigate={goToView} /> : (
         <Dashboard
           onNewPrescription={handleStartConsultation}
@@ -342,6 +345,8 @@ const AppContent: React.FC = () => {
     { id: 'dashboard', label: t('dashboard'), icon: LayoutDashboard, requiredPermission: 'ACCESS_DASHBOARD' },
     { id: 'patients', label: t('waiting_room'), icon: Users, requiredPermission: 'MANAGE_PATIENTS' },
     { id: 'appointments', label: t('appointments'), icon: CalendarRange, requiredPermission: 'MANAGE_APPOINTMENTS' },
+    // Page Patients de l'assistante (identité uniquement) ; le médecin a le dossier complet ci-dessous.
+    { id: 'patient-directory', label: 'Patients', icon: FolderOpen, requiredPermission: 'MANAGE_PATIENTS', assistantOnly: true },
     { id: 'cashier', label: 'Encaissement', icon: Wallet, requiredPermission: 'COLLECT_PAYMENTS' },
     { id: 'tasks', label: t('tasks'), icon: CheckSquare, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'new-prescription', label: t('new_consultation'), icon: PlusCircle, requiredPermission: 'CREATE_PRESCRIPTION' },
@@ -355,7 +360,7 @@ const AppContent: React.FC = () => {
     { id: 'analytics', label: 'Comptabilité', icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
     { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'settings', label: t('settings'), icon: Settings, requiredPermission: 'MANAGE_SETTINGS' },
-  ].filter(item => !item.requiredPermission || hasPermission(item.requiredPermission));
+  ].filter(item => (!item.requiredPermission || hasPermission(item.requiredPermission)) && !((item as any).assistantOnly && sessionService.isMedecin()));
 
   // ─── Loading & Auth gates ───
   if (!securityChecked) {

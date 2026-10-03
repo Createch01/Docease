@@ -80,7 +80,7 @@ pub fn read_entries(dir: &Path, limit: usize) -> Vec<AuditEntry> {
 }
 
 /// Enregistre un événement ; une erreur d'écriture ne doit jamais bloquer l'action elle-même.
-pub fn log(app: &tauri::AppHandle, session: Option<&Session>, action: &str, detail: &str, ok: bool) {
+pub fn log<R: tauri::Runtime>(app: &tauri::AppHandle<R>, session: Option<&Session>, action: &str, detail: &str, ok: bool) {
     let (user, role) = match session {
         Some(s) => (s.name.as_str(), Some(s.role.label())),
         None => ("(non connecté)", None),
@@ -88,7 +88,7 @@ pub fn log(app: &tauri::AppHandle, session: Option<&Session>, action: &str, deta
     log_as(app, user, role, action, detail, ok);
 }
 
-pub fn log_as(app: &tauri::AppHandle, user: &str, role: Option<&str>, action: &str, detail: &str, ok: bool) {
+pub fn log_as<R: tauri::Runtime>(app: &tauri::AppHandle<R>, user: &str, role: Option<&str>, action: &str, detail: &str, ok: bool) {
     if let Ok(dir) = data_dir(app) {
         if let Err(e) = append_entry(&dir, &make_entry(user, role, action, detail, ok)) {
             log::warn!("journal d'accès : {e}");
@@ -97,7 +97,7 @@ pub fn log_as(app: &tauri::AppHandle, user: &str, role: Option<&str>, action: &s
 }
 
 #[tauri::command]
-pub fn audit_log_list(app: tauri::AppHandle, state: tauri::State<AppState>, limit: Option<usize>) -> Result<Vec<AuditEntry>, String> {
+pub fn audit_log_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, limit: Option<usize>) -> Result<Vec<AuditEntry>, String> {
     gate(&app, &state, "audit_log_list")?;
     Ok(read_entries(&data_dir(&app)?, limit.unwrap_or(DEFAULT_LIMIT)))
 }

@@ -71,6 +71,16 @@ verrouillage réapparaît. Le délai est **appliqué par Rust** (`access::gate` 
 l'appel de commande suivant) ; l'interface signale seulement l'activité réelle (`session_touch`) et affiche
 l'écran de verrouillage. Désactivé dans les builds de développement. Suspendu pendant l'écran salle d'attente.
 
+## Tests
+
+- `cargo test` (depuis `src-tauri`) : règles de rôle, filtres de champs, migration, journal, verrouillage.
+- `src/access_integration.rs` : sessions Assistant, verrouillée et Médecin (témoin) sur une application
+  Tauri simulée ; appelle **chaque** commande enregistrée avec des arguments valides et vérifie les refus.
+  Sous Windows, ce test a besoin du manifeste Common-Controls :
+  `$env:DOCEASE_TEST_MANIFEST = "1"; cargo test` (sans cette variable le binaire de test ne démarre pas ;
+  elle ne doit pas être définie pour construire l'application).
+- Test de migration sur une copie des vraies données, mot de passe saisi au clavier : voir `migration_on_real_data_copy`.
+
 ## Limites connues
 
 - **Supprimer un compte ne révoque pas une clé déjà copiée.** La clé de données ne change

@@ -99,14 +99,14 @@ pub struct SecuritySettings {
 }
 
 #[tauri::command]
-pub fn get_security_settings(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<SecuritySettings, String> {
+pub fn get_security_settings<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<SecuritySettings, String> {
     gate(&app, &state, "get_security_settings")?;
     let minutes = load_minutes(&data_dir(&app)?);
     Ok(SecuritySettings { inactivity_minutes: minutes, enforced: effective_minutes(minutes) > 0 })
 }
 
 #[tauri::command]
-pub fn set_inactivity_minutes(app: tauri::AppHandle, state: tauri::State<AppState>, minutes: u32) -> Result<(), String> {
+pub fn set_inactivity_minutes<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, minutes: u32) -> Result<(), String> {
     let session = require_session(gate(&app, &state, "set_inactivity_minutes")?)?;
     save_minutes(&data_dir(&app)?, minutes)?;
     *state.inactivity_minutes.lock().map_err(|e| e.to_string())? = minutes;
@@ -116,7 +116,7 @@ pub fn set_inactivity_minutes(app: tauri::AppHandle, state: tauri::State<AppStat
 
 /// Signale une activité réelle de l'utilisateur (clavier, souris) : repousse le verrouillage.
 #[tauri::command]
-pub fn session_touch(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<(), String> {
+pub fn session_touch<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<(), String> {
     gate(&app, &state, "session_touch")?;
     Ok(())
 }

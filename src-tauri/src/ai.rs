@@ -59,7 +59,7 @@ pub struct PatientContext {
 
 // ─── Stockage chiffré ────────────────────────────────────────────────────────
 
-fn ai_path(app: &tauri::AppHandle) -> Result<PathBuf, String> {
+fn ai_path<R: tauri::Runtime>(app: &tauri::AppHandle<R>) -> Result<PathBuf, String> {
     let mut p = app.path().app_local_data_dir().map_err(|e| e.to_string())?;
     fs::create_dir_all(&p).map_err(|e| e.to_string())?;
     p.push(AI_FILE);
@@ -71,7 +71,7 @@ fn data_key(state: &tauri::State<AppState>) -> Result<[u8; KEY_LEN], String> {
         .ok_or_else(|| MSG_LOCKED.to_string())
 }
 
-fn load_cfg(app: &tauri::AppHandle, key: &[u8; KEY_LEN]) -> Result<AiConfig, String> {
+fn load_cfg<R: tauri::Runtime>(app: &tauri::AppHandle<R>, key: &[u8; KEY_LEN]) -> Result<AiConfig, String> {
     let path = ai_path(app)?;
     if !path.exists() {
         return Ok(AiConfig::default());
@@ -81,7 +81,7 @@ fn load_cfg(app: &tauri::AppHandle, key: &[u8; KEY_LEN]) -> Result<AiConfig, Str
     serde_json::from_slice(&plain).map_err(|e| e.to_string())
 }
 
-fn save_cfg(app: &tauri::AppHandle, key: &[u8; KEY_LEN], cfg: &AiConfig) -> Result<(), String> {
+fn save_cfg<R: tauri::Runtime>(app: &tauri::AppHandle<R>, key: &[u8; KEY_LEN], cfg: &AiConfig) -> Result<(), String> {
     let json = serde_json::to_vec(cfg).map_err(|e| e.to_string())?;
     fs::write(ai_path(app)?, encrypt(key, &json)?).map_err(|e| e.to_string())
 }
@@ -126,7 +126,7 @@ fn status_of(cfg: &AiConfig) -> AiStatus {
 
 /// Garde commune de tous les appels qui envoient des données : verrou ouvert,
 /// interrupteur activé, clé présente.
-fn require_ready(app: &tauri::AppHandle, state: &tauri::State<AppState>) -> Result<String, String> {
+fn require_ready<R: tauri::Runtime>(app: &tauri::AppHandle<R>, state: &tauri::State<AppState>) -> Result<String, String> {
     let dk = data_key(state)?;
     let cfg = load_cfg(app, &dk)?;
     if !cfg.enabled {
@@ -290,14 +290,14 @@ async fn generate(key: &str, parts: Vec<Value>) -> Result<Value, String> {
 // ─── Commandes ───────────────────────────────────────────────────────────────
 
 #[tauri::command]
-pub fn ai_status(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<AiStatus, String> {
+pub fn ai_status<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<AiStatus, String> {
     gate(&app, &state, "ai_status")?;
     let dk = data_key(&state)?;
     Ok(status_of(&load_cfg(&app, &dk)?))
 }
 
 #[tauri::command]
-pub fn ai_set_enabled(app: tauri::AppHandle, state: tauri::State<AppState>, enabled: bool) -> Result<AiStatus, String> {
+pub fn ai_set_enabled<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, enabled: bool) -> Result<AiStatus, String> {
     gate(&app, &state, "ai_set_enabled")?;
     let dk = data_key(&state)?;
     let mut cfg = load_cfg(&app, &dk)?;
@@ -307,7 +307,7 @@ pub fn ai_set_enabled(app: tauri::AppHandle, state: tauri::State<AppState>, enab
 }
 
 #[tauri::command]
-pub fn ai_save_key(app: tauri::AppHandle, state: tauri::State<AppState>, api_key: String) -> Result<AiStatus, String> {
+pub fn ai_save_key<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, api_key: String) -> Result<AiStatus, String> {
     gate(&app, &state, "ai_save_key")?;
     let k = api_key.trim();
     if k.len() < 20 || k.chars().any(char::is_whitespace) {
@@ -321,7 +321,7 @@ pub fn ai_save_key(app: tauri::AppHandle, state: tauri::State<AppState>, api_key
 }
 
 #[tauri::command]
-pub fn ai_delete_key(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<AiStatus, String> {
+pub fn ai_delete_key<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<AiStatus, String> {
     gate(&app, &state, "ai_delete_key")?;
     let dk = data_key(&state)?;
     let mut cfg = load_cfg(&app, &dk)?;
@@ -334,7 +334,7 @@ pub fn ai_delete_key(app: tauri::AppHandle, state: tauri::State<AppState>) -> Re
 /// donnée médicale : simple lecture de la liste des modèles. Fonctionne même
 /// quand l'interrupteur est désactivé.
 #[tauri::command]
-pub async fn ai_test_key(app: tauri::AppHandle, state: tauri::State<'_, AppState>) -> Result<(), String> {
+pub async fn ai_test_key<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>) -> Result<(), String> {
     gate(&app, &state, "ai_test_key")?;
     let dk = data_key(&state)?;
     let cfg = load_cfg(&app, &dk)?;
@@ -349,8 +349,8 @@ pub async fn ai_test_key(app: tauri::AppHandle, state: tauri::State<'_, AppState
 }
 
 #[tauri::command]
-pub async fn ai_parse_prescription(
-    app: tauri::AppHandle,
+pub async fn ai_parse_prescription<R: tauri::Runtime>(
+    app: tauri::AppHandle<R>,
     state: tauri::State<'_, AppState>,
     text: String,
     patient: PatientContext,
@@ -390,8 +390,8 @@ LANGUE : français (arabe accepté si le texte source est en arabe)."#,
 }
 
 #[tauri::command]
-pub async fn ai_analyze_consultation(
-    app: tauri::AppHandle,
+pub async fn ai_analyze_consultation<R: tauri::Runtime>(
+    app: tauri::AppHandle<R>,
     state: tauri::State<'_, AppState>,
     symptoms: String,
     clinical_exam: String,
@@ -423,8 +423,8 @@ FORMAT DE RÉPONSE (JSON) :
 /// Le document est envoyé tel quel (image/PDF) : il ne peut pas être minimisé
 /// côté Rust. L'interface avertit le médecin. Le nom du patient n'est pas demandé.
 #[tauri::command]
-pub async fn ai_analyze_document(
-    app: tauri::AppHandle,
+pub async fn ai_analyze_document<R: tauri::Runtime>(
+    app: tauri::AppHandle<R>,
     state: tauri::State<'_, AppState>,
     data_base64: String,
     mime_type: String,
@@ -461,8 +461,8 @@ Si le document est illisible ou non médical, indique-le dans le résumé avec u
 }
 
 #[tauri::command]
-pub async fn ai_classify_priority(
-    app: tauri::AppHandle,
+pub async fn ai_classify_priority<R: tauri::Runtime>(
+    app: tauri::AppHandle<R>,
     state: tauri::State<'_, AppState>,
     note: String,
     redact: Vec<String>,

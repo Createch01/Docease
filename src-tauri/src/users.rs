@@ -287,17 +287,22 @@ pub fn change_password(file: &mut UsersFile, id: &str, old: &str, new: &str) -> 
 
 // ─── Sauvegarde avant migration ──────────────────────────────────────────────
 
-fn copy_dir_filtered(src: &Path, dst: &Path) -> Result<(), String> {
+/// Sous-dossiers de données de l'application, seuls copiés avec les fichiers du dossier
+/// racine. Le dossier de données contient aussi le profil WebView2 (`EBWebView`, fichiers
+/// verrouillés par l'application en cours) et les journaux : ils ne font pas partie des
+/// données et ne doivent jamais bloquer ni alourdir la sauvegarde.
+const BACKED_UP_SUBDIRS: &[&str] = &["backups"];
+
+fn copy_dir_filtered(src: &Path, dst: &Path, root: bool) -> Result<(), String> {
     fs::create_dir_all(dst).map_err(|e| e.to_string())?;
     for entry in fs::read_dir(src).map_err(|e| e.to_string())?.flatten() {
         let path = entry.path();
         let name = entry.file_name();
-        if name == MIGRATION_BACKUPS_DIR {
-            continue;
-        }
         let target = dst.join(&name);
         if path.is_dir() {
-            copy_dir_filtered(&path, &target)?;
+            if root && BACKED_UP_SUBDIRS.iter().any(|d| name == *d) {
+                copy_dir_filtered(&path, &target, false)?;
+            }
         } else if path.is_file() {
             fs::copy(&path, &target).map_err(|e| format!("copie de {:?} : {e}", name))?;
         }
@@ -305,9 +310,9 @@ fn copy_dir_filtered(src: &Path, dst: &Path) -> Result<(), String> {
     Ok(())
 }
 
-/// Copie `security_meta.json` et tous les fichiers de données dans
-/// `migration_backups/pre-migration-<date>/`. Les copies restent chiffrées comme
-/// l'original ; le dossier de sauvegardes n'est jamais copié dans lui-même.
+/// Copie `security_meta.json` et tous les fichiers de données (racine + `backups/`) dans
+/// `migration_backups/pre-migration-<date>/`. Les copies restent chiffrées comme l'original.
+/// Le profil WebView2, les journaux et les anciennes sauvegardes de migration sont exclus.
 pub fn backup_data_dir(data_dir: &Path) -> Result<PathBuf, String> {
     let dest = data_dir.join(MIGRATION_BACKUPS_DIR).join(format!("pre-migration-{}", util::stamp_utc(util::now_secs())));
     let mut dest = dest;
@@ -316,7 +321,10 @@ pub fn backup_data_dir(data_dir: &Path) -> Result<PathBuf, String> {
         n += 1;
         dest = data_dir.join(MIGRATION_BACKUPS_DIR).join(format!("pre-migration-{}-{n}", util::stamp_utc(util::now_secs())));
     }
-    copy_dir_filtered(data_dir, &dest)?;
+    if let Err(e) = copy_dir_filtered(data_dir, &dest, true) {
+        let _ = fs::remove_dir_all(&dest); // pas de sauvegarde partielle qui ferait croire à une copie complète
+        return Err(e);
+    }
     Ok(dest)
 }
 
@@ -347,7 +355,12 @@ fn legacy_role(raw: &str) -> Role {
 /// sauvegarde → écriture de `users_meta.json` → nettoyage. Une interruption avant
 /// l'écriture des comptes laisse l'ancien schéma intact ; une interruption après est
 /// terminée par `finalize_legacy_cleanup` au prochain déverrouillage du médecin.
+/// Une seule migration à la fois : deux déverrouillages simultanés (double déclenchement
+/// côté interface) ne doivent pas créer deux sauvegardes ni écrire les comptes deux fois.
+static MIGRATION_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
 pub fn migrate_to_users(data_dir: &Path, data_key: &[u8; KEY_LEN], seed: DoctorSeed) -> Result<MigrationReport, String> {
+    let _guard = MIGRATION_LOCK.lock().unwrap_or_else(|e| e.into_inner());
     if load_users(data_dir)?.is_some() {
         return Ok(MigrationReport { already_migrated: true, ..Default::default() });
     }
@@ -479,7 +492,7 @@ fn refused(retry: Option<u64>) -> UnlockResult {
 // ─── Commandes ───────────────────────────────────────────────────────────────
 
 #[tauri::command]
-pub fn list_profiles(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Vec<Profile>, String> {
+pub fn list_profiles<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<Profile>, String> {
     gate(&app, &state, "list_profiles")?;
     let dir = data_dir(&app)?;
     if let Some(file) = load_users(&dir)? {
@@ -493,12 +506,12 @@ pub fn list_profiles(app: tauri::AppHandle, state: tauri::State<AppState>) -> Re
 }
 
 #[tauri::command]
-pub fn current_session(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Option<Session>, String> {
+pub fn current_session<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Option<Session>, String> {
     gate(&app, &state, "current_session")
 }
 
 #[tauri::command]
-pub fn lock(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<(), String> {
+pub fn lock<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<(), String> {
     let session = gate(&app, &state, "lock")?;
     if session.is_some() {
         audit::log(&app, session.as_ref(), "lock", "", true);
@@ -509,7 +522,7 @@ pub fn lock(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<(), 
 }
 
 #[tauri::command]
-pub fn unlock(app: tauri::AppHandle, state: tauri::State<AppState>, user_id: Option<String>, password: String) -> Result<UnlockResult, String> {
+pub fn unlock<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, user_id: Option<String>, password: String) -> Result<UnlockResult, String> {
     gate(&app, &state, "unlock")?;
     let dir = data_dir(&app)?;
 
@@ -553,7 +566,7 @@ pub fn unlock(app: tauri::AppHandle, state: tauri::State<AppState>, user_id: Opt
 }
 
 /// Installation sans `users_meta.json` : seul le mot de passe maître existe (médecin).
-fn unlock_legacy(app: &tauri::AppHandle, state: &AppState, dir: &Path, password: &str) -> Result<UnlockResult, String> {
+fn unlock_legacy<R: tauri::Runtime>(app: &tauri::AppHandle<R>, state: &AppState, dir: &Path, password: &str) -> Result<UnlockResult, String> {
     const LEGACY: &str = "legacy";
     if let Some(wait) = throttle_check(state, LEGACY)? {
         return Ok(refused(Some(wait)));
@@ -614,7 +627,7 @@ pub(crate) fn password_matches(dir: &Path, user_id: &str, password: &str) -> Res
 }
 
 #[tauri::command]
-pub fn verify_password(app: tauri::AppHandle, state: tauri::State<AppState>, password: String) -> Result<bool, String> {
+pub fn verify_password<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, password: String) -> Result<bool, String> {
     let session = require_session(gate(&app, &state, "verify_password")?)?;
     let dir = data_dir(&app)?;
     if let Some(wait) = throttle_check(&state, &session.user_id)? {
@@ -630,7 +643,7 @@ pub fn verify_password(app: tauri::AppHandle, state: tauri::State<AppState>, pas
 }
 
 #[tauri::command]
-pub fn change_own_password(app: tauri::AppHandle, state: tauri::State<AppState>, old_password: String, new_password: String) -> Result<(), String> {
+pub fn change_own_password<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, old_password: String, new_password: String) -> Result<(), String> {
     let session = require_session(gate(&app, &state, "change_own_password")?)?;
     let dir = data_dir(&app)?;
     let mut file = load_users(&dir)?.ok_or("Comptes non initialisés : verrouillez puis déverrouillez DocEase.")?;
@@ -647,14 +660,14 @@ pub fn change_own_password(app: tauri::AppHandle, state: tauri::State<AppState>,
 }
 
 #[tauri::command]
-pub fn list_users(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Vec<UserSummary>, String> {
+pub fn list_users<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<UserSummary>, String> {
     gate(&app, &state, "list_users")?;
     let file = load_users(&data_dir(&app)?)?.unwrap_or_default();
     Ok(file.users.iter().map(summary).collect())
 }
 
 #[tauri::command]
-pub fn create_user(app: tauri::AppHandle, state: tauri::State<AppState>, name: String, role: Role, password: String) -> Result<UserSummary, String> {
+pub fn create_user<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, name: String, role: Role, password: String) -> Result<UserSummary, String> {
     let session = gate(&app, &state, "create_user")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
@@ -666,7 +679,7 @@ pub fn create_user(app: tauri::AppHandle, state: tauri::State<AppState>, name: S
 }
 
 #[tauri::command]
-pub fn delete_user(app: tauri::AppHandle, state: tauri::State<AppState>, id: String) -> Result<(), String> {
+pub fn delete_user<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String) -> Result<(), String> {
     let session = require_session(gate(&app, &state, "delete_user")?)?;
     let dir = data_dir(&app)?;
     let mut file = load_users(&dir)?.ok_or("Comptes non initialisés.")?;
@@ -678,7 +691,7 @@ pub fn delete_user(app: tauri::AppHandle, state: tauri::State<AppState>, id: Str
 }
 
 #[tauri::command]
-pub fn set_user_role(app: tauri::AppHandle, state: tauri::State<AppState>, id: String, role: Role) -> Result<(), String> {
+pub fn set_user_role<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String, role: Role) -> Result<(), String> {
     let session = require_session(gate(&app, &state, "set_user_role")?)?;
     let dir = data_dir(&app)?;
     let mut file = load_users(&dir)?.ok_or("Comptes non initialisés.")?;
@@ -690,7 +703,7 @@ pub fn set_user_role(app: tauri::AppHandle, state: tauri::State<AppState>, id: S
 }
 
 #[tauri::command]
-pub fn reset_user_password(app: tauri::AppHandle, state: tauri::State<AppState>, id: String, new_password: String) -> Result<(), String> {
+pub fn reset_user_password<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String, new_password: String) -> Result<(), String> {
     let session = gate(&app, &state, "reset_user_password")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
@@ -707,7 +720,7 @@ pub fn reset_user_password(app: tauri::AppHandle, state: tauri::State<AppState>,
 
 /// Première installation : crée le compte médecin et la phrase de récupération.
 #[tauri::command]
-pub fn setup_pin(app: tauri::AppHandle, state: tauri::State<AppState>, pin: String, name: Option<String>) -> Result<String, String> {
+pub fn setup_pin<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, pin: String, name: Option<String>) -> Result<String, String> {
     gate(&app, &state, "setup_pin")?;
     let dir = data_dir(&app)?;
     if dir.join(SECURITY_FILE).exists() || users_path(&dir).exists() {
@@ -732,7 +745,7 @@ pub fn setup_pin(app: tauri::AppHandle, state: tauri::State<AppState>, pin: Stri
 /// définit un nouveau mot de passe pour un compte médecin. Une assistante qui oublie
 /// son mot de passe passe par `reset_user_password` (médecin connecté).
 #[tauri::command]
-pub fn recover_with_phrase(app: tauri::AppHandle, state: tauri::State<AppState>, phrase: String, new_pin: String, user_id: Option<String>) -> Result<String, String> {
+pub fn recover_with_phrase<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, phrase: String, new_pin: String, user_id: Option<String>) -> Result<String, String> {
     gate(&app, &state, "recover_with_phrase")?;
     let dir = data_dir(&app)?;
     let (meta_path, mut meta) = read_meta_in(&dir)?;
@@ -984,36 +997,125 @@ mod tests {
     }
 
     #[test]
-    fn backup_never_copies_itself() {
+    fn backup_copies_data_only_and_never_itself() {
         let dir = temp_dir("bak");
         fs::write(dir.join("a.json"), b"1").unwrap();
         fs::create_dir_all(dir.join("backups")).unwrap();
         fs::write(dir.join("backups/b.json"), b"2").unwrap();
+        // profil WebView2 et journaux : exclus (fichiers verrouillés en conditions réelles)
+        fs::create_dir_all(dir.join("EBWebView/Default")).unwrap();
+        fs::write(dir.join("EBWebView/Default/Cookies"), b"x").unwrap();
+        fs::create_dir_all(dir.join("logs")).unwrap();
+        fs::write(dir.join("logs/Docease.log"), b"x").unwrap();
         let b1 = backup_data_dir(&dir).unwrap();
         let b2 = backup_data_dir(&dir).unwrap();
         assert_ne!(b1, b2);
         assert!(b1.join("a.json").exists() && b1.join("backups/b.json").exists());
-        assert!(!b2.join(MIGRATION_BACKUPS_DIR).exists());
+        for b in [&b1, &b2] {
+            assert!(!b.join(MIGRATION_BACKUPS_DIR).exists() && !b.join("EBWebView").exists() && !b.join("logs").exists());
+        }
         let _ = fs::remove_dir_all(&dir);
     }
 
-    /// À lancer à la main sur une COPIE des vraies données :
-    /// DOCEASE_COPY_DIR=<copie> DOCEASE_COPY_PASSWORD=<mdp maître> cargo test migration_on_real_data_copy -- --ignored
+    // ── Saisie masquée du mot de passe (sans dépendance : pas de crate `rpassword` ici) ──
+
+    #[cfg(windows)]
+    struct HiddenInput {
+        handle: isize,
+        old_mode: Option<u32>,
+    }
+
+    #[cfg(windows)]
+    extern "system" {
+        fn GetStdHandle(n: u32) -> isize;
+        fn GetConsoleMode(h: isize, mode: *mut u32) -> i32;
+        fn SetConsoleMode(h: isize, mode: u32) -> i32;
+    }
+
+    #[cfg(windows)]
+    impl HiddenInput {
+        fn new() -> Self {
+            const STD_INPUT_HANDLE: u32 = -10i32 as u32;
+            const ENABLE_ECHO_INPUT: u32 = 0x0004;
+            unsafe {
+                let handle = GetStdHandle(STD_INPUT_HANDLE);
+                let mut mode = 0u32;
+                if GetConsoleMode(handle, &mut mode) != 0 {
+                    SetConsoleMode(handle, mode & !ENABLE_ECHO_INPUT);
+                    return HiddenInput { handle, old_mode: Some(mode) };
+                }
+                HiddenInput { handle, old_mode: None }
+            }
+        }
+    }
+
+    #[cfg(windows)]
+    impl Drop for HiddenInput {
+        fn drop(&mut self) {
+            if let Some(m) = self.old_mode {
+                unsafe { SetConsoleMode(self.handle, m) };
+            }
+        }
+    }
+
+    #[cfg(not(windows))]
+    struct HiddenInput;
+
+    #[cfg(not(windows))]
+    impl HiddenInput {
+        fn new() -> Self {
+            let _ = std::process::Command::new("stty").arg("-echo").status();
+            HiddenInput
+        }
+    }
+
+    #[cfg(not(windows))]
+    impl Drop for HiddenInput {
+        fn drop(&mut self) {
+            let _ = std::process::Command::new("stty").arg("echo").status();
+        }
+    }
+
+    /// Demande le mot de passe au clavier, sans l'afficher ni le laisser dans l'historique.
+    fn prompt_password(prompt: &str) -> String {
+        use std::io::{BufRead, Write};
+        eprint!("{prompt}");
+        let _ = std::io::stderr().flush();
+        let mut line = String::new();
+        {
+            let _hidden = HiddenInput::new();
+            std::io::stdin().lock().read_line(&mut line).expect("lecture du mot de passe");
+        }
+        eprintln!();
+        line.trim_end_matches(['\r', '\n']).to_string()
+    }
+
+    /// À lancer à la main sur une COPIE des vraies données (jamais le dossier réel) :
+    ///   $env:DOCEASE_COPY_DIR = "C:\\chemin\\de\\la\\copie"
+    ///   cargo test migration_on_real_data_copy -- --ignored --nocapture
+    /// Le mot de passe maître est demandé au clavier (non affiché, absent de l'historique).
     #[test]
     #[ignore]
     fn migration_on_real_data_copy() {
-        let dir = PathBuf::from(std::env::var("DOCEASE_COPY_DIR").expect("DOCEASE_COPY_DIR"));
-        let password = std::env::var("DOCEASE_COPY_PASSWORD").expect("DOCEASE_COPY_PASSWORD");
+        let dir = PathBuf::from(std::env::var("DOCEASE_COPY_DIR").expect("DOCEASE_COPY_DIR (dossier de la COPIE)"));
+        assert!(
+            !dir.components().any(|c| c.as_os_str() == "com.docease.desktop"),
+            "refus : ceci semble être le dossier réel de l'application, utilisez une copie"
+        );
+        let password = prompt_password("Mot de passe maître (non affiché) : ");
         let (_, meta) = read_meta_in(&dir).unwrap();
-        let (salt, wrapped) = (meta.pin_wrap_salt.clone().unwrap(), meta.wrapped_key_pin.clone().unwrap());
-        assert!(verify_pin(&password, &meta.pin_hash).unwrap());
+        let (salt, wrapped) = (meta.pin_wrap_salt.clone().expect("copie déjà migrée ?"), meta.wrapped_key_pin.clone().unwrap());
+        assert!(verify_pin(&password, &meta.pin_hash).unwrap(), "mot de passe incorrect");
         let k = unwrap_key(&derive_key_from_pin(&password, &salt).unwrap(), &wrapped).unwrap();
-        let before = read_enc_json(&dir, &k, "meddoc_patients.json").unwrap();
+        let patients_before = read_enc_json(&dir, &k, "meddoc_patients.json").unwrap();
         let r = migrate_to_users(&dir, &k, DoctorSeed::LegacyMeta).unwrap();
         println!("{r:?}");
-        assert_eq!(read_enc_json(&dir, &k, "meddoc_patients.json").unwrap(), before);
+        assert_eq!(read_enc_json(&dir, &k, "meddoc_patients.json").unwrap(), patients_before, "données patients inchangées");
         let f = load_users(&dir).unwrap().unwrap();
-        assert_eq!(authenticate(f.users.iter().find(|u| u.role == Role::Medecin).unwrap(), &password).unwrap().unwrap(), k);
-        migrate_to_users(&dir, &k, DoctorSeed::LegacyMeta).unwrap();
+        println!("{} compte(s) : {:?}", f.users.len(), f.users.iter().map(|u| (&u.name, u.role)).collect::<Vec<_>>());
+        let doctor = f.users.iter().find(|u| u.role == Role::Medecin).expect("compte médecin");
+        assert_eq!(authenticate(doctor, &password).unwrap().unwrap(), k, "le mot de passe maître ouvre le compte médecin");
+        let again = migrate_to_users(&dir, &k, DoctorSeed::LegacyMeta).unwrap();
+        assert!(again.already_migrated, "relance sans dégât");
     }
 }

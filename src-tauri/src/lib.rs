@@ -5,6 +5,8 @@ mod scoped;
 mod settings;
 mod users;
 mod util;
+#[cfg(test)]
+mod access_integration;
 
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -78,7 +80,16 @@ fn write_meta(path: &PathBuf, meta: &SecurityMeta) -> Result<(), String> {
     fs::write(path, json_str).map_err(|e| e.to_string())
 }
 
-fn data_dir(app: &tauri::AppHandle) -> Result<PathBuf, String> {
+/// Tests : dossier de données temporaire à la place du vrai (jamais lu ni écrit).
+#[cfg(test)]
+pub(crate) static TEST_DATA_DIR: Mutex<Option<PathBuf>> = Mutex::new(None);
+
+fn data_dir<R: tauri::Runtime>(app: &tauri::AppHandle<R>) -> Result<PathBuf, String> {
+    #[cfg(test)]
+    if let Some(p) = TEST_DATA_DIR.lock().unwrap().clone() {
+        fs::create_dir_all(&p).map_err(|e| e.to_string())?;
+        return Ok(p);
+    }
     let path = app.path().app_local_data_dir().map_err(|e| e.to_string())?;
     fs::create_dir_all(&path).map_err(|e| e.to_string())?;
     Ok(path)
@@ -205,7 +216,7 @@ fn parse_recovery_phrase(phrase: &str) -> Result<[u8; RECOVERY_ENTROPY_LEN], Str
 }
 
 #[tauri::command]
-fn security_status(app: tauri::AppHandle, state: tauri::State<AppState>) -> bool {
+fn security_status<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> bool {
     if access::gate(&app, &state, "security_status").is_err() {
         return false;
     }
@@ -241,7 +252,7 @@ fn collect_encrypted_files(dir: &PathBuf, out: &mut Vec<PathBuf>) {
 /// a freshly generated recovery phrase (returned for display). After this call the
 /// install is on the current wrapped-key scheme and `key_salt` is gone for good.
 #[tauri::command]
-fn migrate_to_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin: String) -> Result<String, String> {
+fn migrate_to_recovery<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, pin: String) -> Result<String, String> {
     let session = access::gate(&app, &state, "migrate_to_recovery")?;
     let dir = data_dir(&app)?;
     let (path, meta) = read_meta_in(&dir)?;
@@ -301,7 +312,7 @@ fn migrate_to_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin
 /// Régénère la phrase de récupération (ex. : le médecin pense que l'ancienne a été
 /// vue) sans changer de mot de passe. Demande le mot de passe du compte connecté.
 #[tauri::command]
-fn regenerate_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin: String) -> Result<String, String> {
+fn regenerate_recovery<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, pin: String) -> Result<String, String> {
     let session = access::require_session(access::gate(&app, &state, "regenerate_recovery")?)?;
     let dir = data_dir(&app)?;
     if !users::password_matches(&dir, &session.user_id, &pin)? {
@@ -317,11 +328,9 @@ fn regenerate_recovery(app: tauri::AppHandle, state: tauri::State<AppState>, pin
 }
 
 #[tauri::command]
-fn scan_json_files(app: tauri::AppHandle, state: tauri::State<AppState>) -> Vec<(String, String)> {
+fn scan_json_files<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<(String, String)>, String> {
     let mut results = Vec::new();
-    if access::gate(&app, &state, "scan_json_files").is_err() {
-        return results;
-    }
+    access::gate(&app, &state, "scan_json_files")?;
     let data_dir = app.path().app_local_data_dir().unwrap_or_else(|_| PathBuf::from("."));
 
     if let Ok(entries) = fs::read_dir(data_dir) {
@@ -350,11 +359,11 @@ fn scan_json_files(app: tauri::AppHandle, state: tauri::State<AppState>) -> Vec<
             }
         }
     }
-    results
+    Ok(results)
 }
 
 #[tauri::command]
-fn save_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: String, data: Value) -> Result<(), String> {
+fn save_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, filename: String, data: Value) -> Result<(), String> {
     let session = access::require_session(access::gate(&app, &state, "save_json")?)?;
     if !access::file_allowed(session.role, &filename, access::FileMode::Write) {
         return Err(access::deny_file(&app, &session, &filename, access::FileMode::Write));
@@ -381,7 +390,7 @@ fn save_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: Str
 }
 
 #[tauri::command]
-fn load_json(app: tauri::AppHandle, state: tauri::State<AppState>, filename: String) -> Result<Value, String> {
+fn load_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, filename: String) -> Result<Value, String> {
     let session = access::require_session(access::gate(&app, &state, "load_json")?)?;
     if !access::file_allowed(session.role, &filename, access::FileMode::Read) {
         return Err(access::deny_file(&app, &session, &filename, access::FileMode::Read));

@@ -256,14 +256,14 @@ fn random_note_id() -> String {
 }
 
 #[tauri::command]
-pub fn patients_list_identity(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
+pub fn patients_list_identity<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
     gate(&app, &state, "patients_list_identity")?;
     let key = data_key_of(&state)?;
     Ok(read_list(&data_dir(&app)?, &key, PATIENTS_FILE)?.iter().map(identity_only).collect())
 }
 
 #[tauri::command]
-pub fn patients_save_identity(app: tauri::AppHandle, state: tauri::State<AppState>, patients: Vec<Value>) -> Result<Vec<Value>, String> {
+pub fn patients_save_identity<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, patients: Vec<Value>) -> Result<Vec<Value>, String> {
     let session = gate(&app, &state, "patients_save_identity")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
@@ -274,14 +274,14 @@ pub fn patients_save_identity(app: tauri::AppHandle, state: tauri::State<AppStat
 }
 
 #[tauri::command]
-pub fn queue_list_identity(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
+pub fn queue_list_identity<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
     gate(&app, &state, "queue_list_identity")?;
     let key = data_key_of(&state)?;
     Ok(read_list(&data_dir(&app)?, &key, QUEUE_FILE)?.iter().map(identity_only).collect())
 }
 
 #[tauri::command]
-pub fn queue_save_identity(app: tauri::AppHandle, state: tauri::State<AppState>, queue: Vec<Value>) -> Result<Vec<Value>, String> {
+pub fn queue_save_identity<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, queue: Vec<Value>) -> Result<Vec<Value>, String> {
     let session = gate(&app, &state, "queue_save_identity")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
@@ -292,14 +292,14 @@ pub fn queue_save_identity(app: tauri::AppHandle, state: tauri::State<AppState>,
 }
 
 #[tauri::command]
-pub fn billing_today_list(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
+pub fn billing_today_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
     gate(&app, &state, "billing_today_list")?;
     let key = data_key_of(&state)?;
     Ok(payments_today(&read_list(&data_dir(&app)?, &key, NOTES_FILE)?, &util::today_utc()))
 }
 
 #[tauri::command]
-pub fn billing_today_save(app: tauri::AppHandle, state: tauri::State<AppState>, payment: Value) -> Result<Value, String> {
+pub fn billing_today_save<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, payment: Value) -> Result<Value, String> {
     let session = gate(&app, &state, "billing_today_save")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
@@ -312,7 +312,7 @@ pub fn billing_today_save(app: tauri::AppHandle, state: tauri::State<AppState>, 
 }
 
 #[tauri::command]
-pub fn clinic_public_info(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Value, String> {
+pub fn clinic_public_info<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Value, String> {
     gate(&app, &state, "clinic_public_info")?;
     let key = data_key_of(&state)?;
     let info = read_enc_json_in(&data_dir(&app)?, &key, DOCTOR_INFO_FILE)?.unwrap_or_else(|| json!({}));
@@ -320,7 +320,7 @@ pub fn clinic_public_info(app: tauri::AppHandle, state: tauri::State<AppState>) 
 }
 
 #[tauri::command]
-pub fn kiosk_queue(app: tauri::AppHandle, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
+pub fn kiosk_queue<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
     require_session(gate(&app, &state, "kiosk_queue")?)?;
     // Le mode salle d'attente suspend le verrouillage automatique : en sortir exige le mot de passe.
     super::settings::touch(&state);
