@@ -91,6 +91,10 @@ l'écran de verrouillage. Désactivé dans les builds de développement. Suspend
 - **Dossier de sauvegarde de migration** : `migration_backups/pre-migration-<date>/` (dans
   le dossier de données de l'application) contient l'ancien `security_meta.json`, donc
   l'ancien mot de passe maître enveloppé. Après vérification que tout fonctionne, supprimez-le.
+  - **Installation du cabinet** : `pre-migration-20261003-195136` (migration réelle du 03/10/2026)
+    contient l'ancien mot de passe maître enveloppé. **À supprimer après une semaine de
+    fonctionnement sans problème, vers le 10/10/2026.** Tant qu'il existe, quelqu'un qui obtiendrait
+    ce dossier et l'ancien mot de passe pourrait déverrouiller les données.
 - **Anciens collaborateurs** : leur ancien PIN (en clair, court) devient leur mot de passe
   provisoire, avec changement imposé à la première connexion, jusqu'à ce moment-là il reste
   faible.
