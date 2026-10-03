@@ -40,6 +40,7 @@ import { specialtyKey, deriveProfileFlags } from '../services/medicalReferential
 import { buildContextFromPatient, buildContextSave, shortcutActive, toggleShortcut, withContext, ShortcutKey } from '../services/patientContext';
 import ContextTagInput from './ui/ContextTagInput';
 import PatientPicker from './ui/PatientPicker';
+import { calculateAgeYears, formatDate } from '../utils/formatters';
 
 export interface SafetyNotification {
   id: string;
@@ -106,6 +107,9 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(draft?.patient?.id ?? null);
   // « search » : recherche d'un dossier existant ; « new » : saisie d'un nouveau patient (dossier créé à l'enregistrement).
   const [patientMode, setPatientMode] = useState<'search' | 'new'>(draft?.patient?.name && !draft.patient.id ? 'new' : 'search');
+  // Sexe / âge repris du dossier : lecture seule, « Modifier » rouvre la saisie.
+  const [editSex, setEditSex] = useState(false);
+  const [lastWeightInfo, setLastWeightInfo] = useState<string | null>(null);
   const [aiWarnings, setAiWarnings] = useState<SafetyNotification[]>([]);
   const [isAiChecking, setIsAiChecking] = useState(false);
   const [overriddenWarnings, setOverriddenWarnings] = useState<Set<string>>(new Set());
@@ -319,8 +323,13 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     setSelectedPatientId(p.id);
     setPatientMode('search');
     const { migrated: _migrated, ...context } = buildContextFromPatient(p);
+    setEditSex(false);
+    const lastVital = [...(p.vitalSigns || [])].filter(v => v.weight).sort((a, b) => b.date.localeCompare(a.date))[0];
+    const lastWeight = lastVital?.weight ? String(lastVital.weight) : p.weight;
+    setLastWeightInfo(lastWeight ? `${lastWeight} kg${lastVital ? ` · ${formatDate(lastVital.date)}` : ''}` : null);
     setPatient({
-      id: p.id, name: p.name, age: p.age, sex: p.sex, phone: p.phone, weight: p.weight, type: p.type,
+      id: p.id, name: p.name, age: calculateAgeYears(p.dateOfBirth) ?? p.age, dateOfBirth: p.dateOfBirth,
+      sex: p.sex, phone: p.phone, weight: lastWeight, type: p.type,
       consultationFee: p.consultationFee,
       isPregnant: p.isPregnant || false, isBreastfeeding: p.isBreastfeeding || false,
       pregnancyWeeks: p.pregnancyWeeks || 0, lactationMonths: p.lactationMonths || 0,
@@ -355,6 +364,26 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     if (updated) dataService.savePatientProfile(updated);
   };
 
+  /** Sexe (saisi ici ou corrigé) et poids du jour reportés dans le dossier — médecin uniquement. */
+  const persistIdentity = (patientId: string) => {
+    if (!sessionService.isMedecin()) return;
+    const profile = dataService.getPatientProfile(patientId);
+    if (!profile) return;
+    const next: Patient = { ...profile };
+    let changed = false;
+    if (patient.sex && patient.sex !== profile.sex) { next.sex = patient.sex; changed = true; }
+    const kg = weightValue > 0 ? weightValue : undefined;
+    if (kg) {
+      const last = [...(profile.vitalSigns || [])].filter(v => v.weight).sort((a, b) => b.date.localeCompare(a.date))[0];
+      if (!last || last.weight !== kg) {
+        next.weight = String(kg);
+        next.vitalSigns = [...(profile.vitalSigns || []), { date: new Date().toISOString(), weight: kg }];
+        changed = true;
+      }
+    }
+    if (changed) dataService.savePatientProfile(next);
+  };
+
   const handleBack = () => {
     if (!unsavedChanges.confirmLeave()) return;
     onFinish();
@@ -372,6 +401,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       patientType: patient.type as PatientType,
       patientAge: patient.age, patientWeight: patient.weight,
     };
+    persistIdentity(finalPatientId);
     persistContext(finalPatientId);
     if (isEditing) dataService.updatePrescription(newPrescription);
     else dataService.savePrescription(newPrescription);
@@ -500,18 +530,23 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   };
   const startNewPatient = (typed: string) => {
     setSelectedPatientId(null);
+    setEditSex(false); setLastWeightInfo(null);
     setPatient(blankPatient(typed));
     setPatientMode('new');
     setTouched(true);
   };
   const clearPatient = () => {
     setSelectedPatientId(null);
+    setEditSex(false); setLastWeightInfo(null);
     setPatient(blankPatient());
     setPatientMode('search');
     setTouched(true);
   };
 
   // ─── Champs obligatoires : sexe ; poids en pédiatrie (< 15 ans) ───
+  const record = selectedPatientId ? dataService.getPatientProfile(selectedPatientId) : undefined;
+  const sexKnown = !!record?.sex && !editSex;
+  const ageKnown = !!record?.dateOfBirth;
   const ageYears = patient.age || 0;
   const weightNeeded = (ageYears > 0 && ageYears < 15) || patient.type === 'Child';
   const weightValue = parseFloat(String(patient.weight || '').replace(',', '.').replace(/[^0-9.]/g, ''));
@@ -834,7 +869,11 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                     placeholder="Rechercher par nom ou téléphone…"
                     patients={dataService.getAllPatients()}
                     queue={dataService.getTodayQueue()}
-                    selected={selectedPatientId ? { id: selectedPatientId, name: patient.name || '', phone: patient.phone } : null}
+                    selected={selectedPatientId ? {
+                      id: selectedPatientId, name: patient.name || '', phone: patient.phone,
+                      meta: [sexKnown ? (patient.sex === 'F' ? 'Femme' : 'Homme') : null, ageKnown && ageYears ? `${ageYears} ans` : null].filter(Boolean).join(' · ') || undefined,
+                      metaAction: sexKnown ? { label: 'Modifier', onClick: () => setEditSex(true) } : undefined,
+                    } : null}
                     onSelect={pickPatient}
                     onNew={startNewPatient}
                     onClear={clearPatient}
@@ -856,8 +895,8 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                 </div>
               )}
 
-              <div className="grid gap-3 grid-cols-[88px_minmax(0,1fr)_120px]">
-              <div>
+              <div className="grid gap-3" style={{ gridTemplateColumns: [ageKnown ? null : '88px', sexKnown ? null : 'minmax(0,1fr)', '160px'].filter(Boolean).join(' ') }}>
+              {!ageKnown && <div>
                 <label className={`${labelEyebrow} whitespace-nowrap`} style={labelEyebrowStyle} htmlFor="patient-age">{t('age')}</label>
                 <input
                   id="patient-age"
@@ -868,9 +907,9 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                   onChange={e => updatePatient({ ...patient, age: parseInt(e.target.value) || 0 })}
                   className={input40} style={inputStyle}
                 />
-              </div>
+              </div>}
 
-              <fieldset className="min-w-0" aria-required="true" aria-invalid={showSexError}>
+              {!sexKnown && <fieldset className="min-w-0" aria-required="true" aria-invalid={showSexError}>
                 <legend className={labelEyebrow} style={{ ...labelEyebrowStyle, color: showSexError ? 'var(--color-danger-700)' : 'var(--color-text-subtle)' }}>
                   Sexe <span aria-hidden="true">*</span>
                 </legend>
@@ -895,7 +934,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                   })}
                 </div>
                 {showSexError && <p className="mt-1 text-[11px] whitespace-nowrap" role="alert" style={{ color: 'var(--color-danger-700)' }}>Sexe obligatoire</p>}
-              </fieldset>
+              </fieldset>}
 
               <div>
                 <label className={`${labelEyebrow} whitespace-nowrap`} style={{ ...labelEyebrowStyle, color: showWeightError ? 'var(--color-danger-700)' : weightNeeded ? 'var(--color-warning-hover)' : 'var(--color-text-subtle)' }} htmlFor="field-weight">
@@ -913,6 +952,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                   aria-required={weightNeeded}
                   aria-invalid={showWeightError}
                 />
+                {lastWeightInfo && <p className="mt-1 text-[11px] whitespace-nowrap" style={{ color: 'var(--color-text-subtle)' }}>Dernier : {lastWeightInfo}</p>}
                 {weightNeeded && (
                   <p className="mt-1 text-[11px] whitespace-nowrap" role={showWeightError ? 'alert' : undefined} style={{ color: showWeightError ? 'var(--color-danger-700)' : 'var(--color-warning-hover)' }}>
                     Obligatoire en pédiatrie

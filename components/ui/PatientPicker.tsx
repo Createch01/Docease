@@ -9,7 +9,7 @@ interface PatientPickerProps {
     /** Patients de la salle d'attente, proposés avant toute saisie. */
     queue?: Patient[];
     /** Patient actuellement choisi (affiche la carte à la place de la recherche). */
-    selected?: { id: string; name: string; phone?: string } | null;
+    selected?: { id: string; name: string; phone?: string; /** ex. « Homme · 27 ans » */ meta?: string; metaAction?: { label: string; onClick: () => void } } | null;
     onSelect: (patient: Patient) => void;
     /** « + Nouveau patient » : reçoit le texte déjà saisi (nom). */
     onNew: (typed: string) => void;
@@ -80,7 +80,8 @@ const PatientPicker: React.FC<PatientPickerProps> = ({ patients, queue = [], sel
                     <span className="flex items-center gap-2 min-w-0 text-[14px]" style={{ color: 'var(--color-text)' }}>
                         <UserCircle size={16} style={{ color: 'var(--color-text-subtle)' }} />
                         <span className="truncate font-medium" title={selected.name}>{selected.name}</span>
-                        {selected.phone && <span className="text-[12px] shrink-0" style={{ color: 'var(--color-text-subtle)' }}>{selected.phone}</span>}
+                        {[selected.phone, selected.meta].filter(Boolean).map((x, i) => <span key={i} className="text-[12px] shrink-0" style={{ color: 'var(--color-text-subtle)' }}>· {x}</span>)}
+                        {selected.metaAction && <button type="button" onClick={selected.metaAction.onClick} className="text-[11px] font-medium hover:underline shrink-0" style={{ color: 'var(--color-primary)' }}>{selected.metaAction.label}</button>}
                     </span>
                     <button type="button" onClick={onClear} aria-label="Changer de patient" title="Changer de patient"
                         className="h-8 px-2 rounded-md text-[12px] font-medium whitespace-nowrap flex items-center gap-1 hover:bg-slate-50"
