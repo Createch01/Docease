@@ -481,6 +481,8 @@ export interface Patient {
   renalStage?: RenalStage;
   contextUpdatedAt?: string;
   contextUpdatedBy?: string;
+  /** Copie des champs texte/tags d'origine, prise une seule fois à la première migration. */
+  legacyContext?: Partial<Pick<Patient, 'allergies' | 'pathologies' | 'allergyTags' | 'allergiesOtherTags' | 'pathologyTags' | 'pathologiesOtherTags' | 'chronicDiseases'>>;
   chronicDiseases?: string[];
   consultationFee?: number;
   registeredDate?: string;

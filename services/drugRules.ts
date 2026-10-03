@@ -40,6 +40,12 @@ export interface DrugAlert {
     title: string;
     message: string;
     type: 'REGLE_SYSTEME' | 'INTERACTION' | 'CONTRE_INDICATION' | 'DOUBLON' | 'ENFANT_INTERDIT' | 'DONNEE_MANQUANTE';
+    /** Identifiant stable (sinon dérivé de la position) : une alerte déjà justifiée ne réapparaît pas quand la liste change. */
+    id?: string;
+    /** Ligne d'ordonnance concernée (permet « Retirer le médicament »). */
+    itemId?: string;
+    /** L'ordonnance ne peut être enregistrée qu'après justification (allergie anaphylactique). */
+    requiresJustification?: boolean;
 }
 
 /**
