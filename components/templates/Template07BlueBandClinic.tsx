@@ -45,7 +45,7 @@ const Template07BlueBandClinic: React.FC<RxTemplateProps> = ({ doctor, patient, 
     <div className="absolute text-right" style={{ right: '16mm', top: '8mm', color: '#fff' }}>
       <div className="font-semibold" style={{ fontSize: '11pt' }}>{doctor.name}</div>
       <div style={{ fontSize: '7.5pt', opacity: 0.9 }}>{doctor.speciality}</div>
-      <div style={{ fontSize: '7pt', opacity: 0.75 }}>INPE : {doctor.registrationNumber}</div>
+      {doctor.registrationNumber && <div style={{ fontSize: '7pt', opacity: 0.75 }}>INPE : {doctor.registrationNumber}</div>}
     </div>
 
     {/* Patient line */}
@@ -79,9 +79,9 @@ const Template07BlueBandClinic: React.FC<RxTemplateProps> = ({ doctor, patient, 
       <div className="flex items-center gap-1.5">
         <span className="opacity-90"><IconMail size={8} /></span><span>{doctor.email}</span>
       </div>
-      <div className="flex items-center gap-1.5">
+      {doctor.registrationNumber && <div className="flex items-center gap-1.5">
         <span className="opacity-90"><IconGlobe size={8} /></span><span>INPE {doctor.registrationNumber}</span>
-      </div>
+      </div>}
     </div>
   </A4Page>
 );

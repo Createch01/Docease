@@ -20,6 +20,7 @@ import React from 'react';
 import { DoctorInfo, PrescriptionAppearance } from '../types';
 import { QRCodeSVG } from 'qrcode.react';
 import { resolveCabinetLogo } from '../utils/cabinetLogo';
+import { civility } from '../utils/patientIdentity';
 import { resolveOrdonnanceAppearance } from './ordonnance-editor/ordonnanceModel';
 
 // Canevas A4 de 2480 px pour 210 mm.
@@ -76,10 +77,8 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
   const qrValue = propQrValue
     || `Dr ${doctor.nameFr}\nPatient: ${patient.name || 'N/A'}\nDate: ${date}\n${title}`;
 
-  const honorific =
-    patient.sex === 'F' ? 'Mme'
-    : patient.type === 'Child' ? 'Enfant'
-    : 'M.';
+  const footerIds = [['INPE', doctor.inpe], ['ICE', doctor.ice], ['IF', doctor.taxId]].filter(([, v]) => v).map(([k, v]) => `${k} ${v}`).join('  ·  ');
+  const honorific = civility(patient.sex, patient.age, patient.type);
 
   return (
     <>
@@ -221,7 +220,7 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
           {/* ─────────── 4. PATIENT INFO ─────────── */}
           <div style={{ position: 'absolute', left: '160px', top: '1100px', width: '2160px', textAlign: 'center' }}>
             <h2 style={{ fontSize: '64px', fontWeight: 700, color: '#0F172A', display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '24px', letterSpacing: '-0.5px' }}>
-              <span style={{ color: secondaryColor, fontSize: '44px', fontWeight: 500 }}>{honorific}</span>
+              {honorific && <span style={{ color: secondaryColor, fontSize: '44px', fontWeight: 500 }}>{honorific}</span>}
               {patient.name || '................................................'}
             </h2>
             {patient.age ? (
@@ -282,9 +281,11 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
                 <span style={{ marginRight: '36px' }}>{doctor.phone}</span>
                 {doctor.email && ` | ${doctor.email}`}
               </div>
-              <div style={{ fontSize: '22px', fontWeight: 400, opacity: 0.55, textTransform: 'uppercase', letterSpacing: '2px', marginTop: '4px' }}>
-                INPE&nbsp;{doctor.inpe} &nbsp;·&nbsp; ICE&nbsp;{doctor.ice} &nbsp;·&nbsp; IF&nbsp;{doctor.taxId}
-              </div>
+              {footerIds && (
+                <div style={{ fontSize: '22px', fontWeight: 400, opacity: 0.55, textTransform: 'uppercase', letterSpacing: '2px', marginTop: '4px' }}>
+                  {footerIds}
+                </div>
+              )}
             </div>
           </div>
         </div>

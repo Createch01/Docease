@@ -46,7 +46,7 @@ const Template01OrangeCurve: React.FC<RxTemplateProps> = ({ doctor, patient, dat
       </div>
       <div className="text-right">
         <div className="font-semibold leading-none" style={{ color: C.orange, fontSize: '16pt' }}>Cabinet Médical</div>
-        <div className="mt-1" style={{ color: C.grey, fontSize: '9pt' }}>INPE {doctor.registrationNumber}</div>
+        {doctor.registrationNumber && <div className="mt-1" style={{ color: C.grey, fontSize: '9pt' }}>INPE {doctor.registrationNumber}</div>}
       </div>
     </div>
 

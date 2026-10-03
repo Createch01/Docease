@@ -14,6 +14,7 @@ import Template09BlueGradientCorner from './Template09BlueGradientCorner';
 import CustomTemplate, { DEFAULT_CUSTOM_TEMPLATE_CONFIG } from './CustomTemplate';
 import OrdonnanceTemplate from '../ordonnance-editor/OrdonnanceTemplate';
 import { ORD_PAGE, resolveOrdonnanceAppearance, toOrdDoctor } from '../ordonnance-editor/ordonnanceModel';
+import { civility, sexLetter } from '../../utils/patientIdentity';
 import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 
 export type PrescriptionTemplateId =
@@ -155,13 +156,13 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
         phone: doctor.phone || '',
         address: doctor.addressFr || '',
         email: doctor.email || '',
-        registrationNumber: doctor.inpe || doctor.ordreNumber || '',
+        registrationNumber: doctor.inpe || '',
     };
 
     const rxPatient: RxPatient = {
         name: patient.name || '',
         age: patient.age ? String(patient.age) : '',
-        sex: patient.sex || (patient.type === 'Child' ? 'Enfant' : ''),
+        sex: sexLetter(patient.sex),
     };
 
     const rxItems: RxItem[] = items.map(item => ({
@@ -217,7 +218,7 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
                     <OrdonnanceTemplate
                         appearance={ordAppearance}
                         doctor={toOrdDoctor(doctor, appearance.website, appearance)}
-                        patient={{ name: rxPatient.name, age: patient.age ? `${patient.age} ans` : '', sex: patient.sex || '' }}
+                        patient={{ name: rxPatient.name, age: patient.age ? `${patient.age} ans` : '', sex: sexLetter(patient.sex), honorific: civility(patient.sex, patient.age, patient.type) }}
                         date={date || new Date().toLocaleDateString('fr-FR')}
                         items={rxItems.map(it => ({ drugName: it.drugName, strength: it.strength, form: it.form, dosage: it.dosage, duration: it.duration, timing: it.timing }))}
                     />

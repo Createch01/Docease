@@ -92,7 +92,7 @@ export interface OrdDoctor {
   logoUrl: string;
 }
 
-export interface OrdPatient { name?: string; age?: string | number; sex?: string; weight?: string }
+export interface OrdPatient { name?: string; age?: string | number; sex?: string; weight?: string; /** Civilité imprimée (« M. », « Mme », « Enfant ») ; vide si inconnue. */ honorific?: string }
 
 export interface OrdItem {
   drugName: string;

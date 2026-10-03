@@ -49,7 +49,7 @@ const Template03PurpleHeart: React.FC<RxTemplateProps> = ({ doctor, patient, dat
       <div className="text-left">
         <div className="font-bold leading-tight" style={{ color: C.ink, fontSize: '19pt' }}>{doctor.name}</div>
         <div className="text-right" style={{ color: C.purple, fontSize: '9pt' }}>{doctor.speciality}</div>
-        <div className="text-right italic" style={{ color: C.grey, fontSize: '8.5pt' }}>INPE {doctor.registrationNumber}</div>
+        {doctor.registrationNumber && <div className="text-right italic" style={{ color: C.grey, fontSize: '8.5pt' }}>INPE {doctor.registrationNumber}</div>}
       </div>
     </div>
 

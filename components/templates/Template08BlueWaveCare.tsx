@@ -40,7 +40,7 @@ const Template08BlueWaveCare: React.FC<RxTemplateProps> = ({ doctor, patient, da
 
     <div className="absolute text-right" style={{ right: '17mm', top: '22mm' }}>
       <div style={{ color: C.blue, fontSize: '8.5pt', letterSpacing: '0.18em' }}>ORDONNANCE</div>
-      <div style={{ color: C.grey, fontSize: '7.5pt' }}>INPE {doctor.registrationNumber}</div>
+      {doctor.registrationNumber && <div style={{ color: C.grey, fontSize: '7.5pt' }}>INPE {doctor.registrationNumber}</div>}
     </div>
 
     {/* Patient block */}

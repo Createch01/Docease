@@ -45,7 +45,7 @@ const Template09BlueGradientCorner: React.FC<RxTemplateProps> = ({ doctor, patie
 
     <div className="absolute text-right" style={{ right: '16mm', top: '14mm' }}>
       <div className="font-semibold" style={{ color: C.blueDeep, fontSize: '12pt', letterSpacing: '0.2em' }}>ORDONNANCE</div>
-      <div style={{ color: C.grey, fontSize: '7.5pt' }}>INPE {doctor.registrationNumber}</div>
+      {doctor.registrationNumber && <div style={{ color: C.grey, fontSize: '7.5pt' }}>INPE {doctor.registrationNumber}</div>}
     </div>
 
     {/* Accent rules */}

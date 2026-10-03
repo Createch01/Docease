@@ -27,7 +27,7 @@ const Template05RedEcg: React.FC<RxTemplateProps> = ({ doctor, patient, date, it
     {/* Masthead */}
     <div className="absolute" style={{ left: '18mm', top: '14mm' }}>
       <div className="font-semibold" style={{ color: C.red, fontSize: '15pt', letterSpacing: '0.02em' }}>CABINET MÉDICAL</div>
-      <div style={{ color: C.grey, fontSize: '8.5pt', letterSpacing: '0.14em' }}>INPE {doctor.registrationNumber}</div>
+      {doctor.registrationNumber && <div style={{ color: C.grey, fontSize: '8.5pt', letterSpacing: '0.14em' }}>INPE {doctor.registrationNumber}</div>}
     </div>
 
     <div className="absolute text-right" style={{ right: '52mm', top: '16mm' }}>
