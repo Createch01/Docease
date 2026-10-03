@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { X, ZoomIn } from 'lucide-react';
 
 interface PrintPreviewProps {
@@ -63,9 +64,9 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ page, render, label = 'Aper
                     </div>
                 )}
             </div>
-            {zoomed && (
+            {zoomed && createPortal(
                 <div
-                    className="fixed inset-0 z-[100] flex items-center justify-center print:hidden"
+                    className="fixed inset-0 z-[1000] flex items-center justify-center print:hidden"
                     style={{ background: 'rgba(15, 23, 42, 0.72)' }}
                     role="dialog" aria-modal="true" aria-label={label}
                     onClick={() => setZoomed(false)}
@@ -78,7 +79,8 @@ const PrintPreview: React.FC<PrintPreviewProps> = ({ page, render, label = 'Aper
                         style={{ width: page.w * modalScale, height: page.h * modalScale, boxShadow: SHEET_SHADOW, background: 'white' }}>
                         {render(modalScale)}
                     </div>
-                </div>
+                </div>,
+                document.body,
             )}
         </>
     );
