@@ -6,6 +6,7 @@ import {
 } from '../../services/backupService';
 import { dataService } from '../../services/dataService';
 import { toastService } from '../../services/toastService';
+import RecoverySheetModal from './RecoverySheetModal';
 import { SettingsCard, input40, inputStyle, primaryButton } from './SettingsUI';
 
 const secondaryButton = 'h-10 px-4 rounded-lg border text-[13px] font-medium flex items-center gap-2 bg-white transition-all disabled:opacity-40 disabled:cursor-not-allowed';
@@ -55,6 +56,8 @@ const BackupSettings: React.FC = () => {
   const [status, setStatus] = useState<BackupStatus | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  // Phrase tout juste saisie, gardée en mémoire le temps de proposer la fiche de secours.
+  const [sheetPhrase, setSheetPhrase] = useState<string | null>(null);
 
   const refresh = useCallback(async () => {
     try { setStatus(await backupService.status()); setLoadError(null); }
@@ -108,17 +111,18 @@ const BackupSettings: React.FC = () => {
         </p>
       </SettingsCard>
 
-      {!status.has_passphrase ? <PassphraseCard busy={busy} run={run} /> : <ChangePassphraseCard busy={busy} run={run} />}
+      {!status.has_passphrase ? <PassphraseCard busy={busy} run={run} onSaved={setSheetPhrase} /> : <ChangePassphraseCard busy={busy} run={run} onSaved={setSheetPhrase} />}
 
       <DestinationsCard status={status} busy={busy} run={run} disabled={!status.has_passphrase} />
       <RestoreCard status={status} />
+      {sheetPhrase && <RecoverySheetModal phrase={sheetPhrase} onClose={() => setSheetPhrase(null)} />}
     </div>
   );
 };
 
 type RunFn = (fn: () => Promise<void>) => Promise<void>;
 
-const PassphraseCard: React.FC<{ busy: boolean; run: RunFn }> = ({ busy, run }) => {
+const PassphraseCard: React.FC<{ busy: boolean; run: RunFn; onSaved: (phrase: string) => void }> = ({ busy, run, onSaved }) => {
   const [pass, setPass] = useState('');
   const [again, setAgain] = useState('');
   const [noted, setNoted] = useState(false);
@@ -141,14 +145,14 @@ const PassphraseCard: React.FC<{ busy: boolean; run: RunFn }> = ({ busy, run }) 
         J'ai noté ma phrase de passe et je la conserve hors du cabinet. Je comprends que sans elle mes sauvegardes sont irrécupérables.
       </label>
       <button type="button" className={primaryButton} style={{ background: 'var(--color-primary)' }} disabled={!ok || busy}
-              onClick={() => run(async () => { await backupService.setPassphrase(pass); setPass(''); setAgain(''); setNoted(false); toastService.success('Phrase de passe définie.'); })}>
+              onClick={() => run(async () => { await backupService.setPassphrase(pass); onSaved(pass); setPass(''); setAgain(''); setNoted(false); toastService.success('Phrase de passe définie.'); })}>
         Définir la phrase de passe
       </button>
     </SettingsCard>
   );
 };
 
-const ChangePassphraseCard: React.FC<{ busy: boolean; run: RunFn }> = ({ busy, run }) => {
+const ChangePassphraseCard: React.FC<{ busy: boolean; run: RunFn; onSaved: (phrase: string) => void }> = ({ busy, run, onSaved }) => {
   const [open, setOpen] = useState(false);
   const [oldPass, setOldPass] = useState('');
   const [pass, setPass] = useState('');
@@ -191,7 +195,7 @@ const ChangePassphraseCard: React.FC<{ busy: boolean; run: RunFn }> = ({ busy, r
           <div className="flex gap-2">
             <button type="button" className={secondaryButton} style={secondaryStyle} disabled={busy} onClick={close}>Annuler</button>
             <button type="button" className={primaryButton} style={{ background: 'var(--color-primary)' }} disabled={!ok || busy}
-                    onClick={() => run(async () => { await backupService.changePassphrase(oldPass, pass); close(); toastService.success("Phrase de passe changée. Les prochaines sauvegardes l'utilisent."); })}>
+                    onClick={() => run(async () => { await backupService.changePassphrase(oldPass, pass); onSaved(pass); close(); toastService.success("Phrase de passe changée. Les prochaines sauvegardes l'utilisent."); })}>
               Changer la phrase de passe
             </button>
           </div>
