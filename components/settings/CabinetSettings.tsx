@@ -1,6 +1,7 @@
 import React from 'react';
-import { Syringe, Clock, CreditCard, Globe, Image as ImageIcon, Info, Mail, MapPin, Phone, Printer, Smartphone } from 'lucide-react';
+import { AlertTriangle, Syringe, Clock, CreditCard, Globe, Image as ImageIcon, Info, Mail, MapPin, Phone, Printer, Smartphone } from 'lucide-react';
 import { settingsService } from '../../services/settingsService';
+import { isCalendarVerified, CALENDAR_UNVERIFIED_MESSAGE } from '../../services/vaccinationService';
 import { normalizeRoute } from './settingsRoutes';
 import { SettingsPageFrame, SettingsCard, TextField, TextAreaField, ImageField, SettingsLink, Toggle } from './SettingsUI';
 import { useDoctorDraft } from './useDoctorDraft';
@@ -132,6 +133,12 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
             <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
               Les alertes ne concernent que les patients dont le suivi est activé sur le dossier et dont la date de naissance est renseignée.
             </p>
+            {!isCalendarVerified() && (
+              <div role="note" className="p-3.5 rounded-md flex gap-2.5" style={{ background: 'var(--color-warning-50)' }}>
+                <AlertTriangle size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-warning-800)' }} />
+                <p className="text-[12px] leading-relaxed" style={{ color: 'var(--color-warning-800)' }}>{CALENDAR_UNVERIFIED_MESSAGE}</p>
+              </div>
+            )}
           </SettingsCard>
         </div>
       )}

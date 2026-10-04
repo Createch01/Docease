@@ -34,7 +34,7 @@ describe('suivi vaccinal', () => {
         expect(ids).not.toContain('hb1');
         expect(ids).toContain('dtcp1');
         expect(ids).not.toContain('rougeole');
-        expect(ids).not.toContain('rota1'); // vaccin non obligatoire : jamais en retard
+        expect(ids).toContain('rota1'); // le rotavirus fait partie du PNI : jamais exclu des alertes
     });
 
     it('au-delà de la limite de rattrapage (6 ans) : plus aucune alerte', () => {
@@ -46,5 +46,14 @@ describe('suivi vaccinal', () => {
         const ids = overdue(patient({ dateOfBirth: monthsAgo(8) }));
         expect(ids).not.toContain('bcg');
         expect(ids).toContain('dtcp1');
+    });
+});
+
+describe('vérification du calendrier', () => {
+    it("tant qu'une valeur n'est pas vérifiée, le calendrier est signalé « en cours de vérification »", async () => {
+        const m = await import('../services/vaccinationService');
+        expect(m.isCalendarVerified()).toBe(false);
+        expect(m.CALENDAR_UNVERIFIED_MESSAGE).toContain('en cours de vérification avec le PNI officiel');
+        expect(Object.values(m.CATCHUP_WINDOWS).some(w => !w.verified)).toBe(true);
     });
 });

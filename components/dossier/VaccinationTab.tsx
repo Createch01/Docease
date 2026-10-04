@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Patient, VaccinationRecord, Vaccine } from '../../types';
-import { vaccinationService } from '../../services/vaccinationService';
+import { vaccinationService, isCalendarVerified, CALENDAR_UNVERIFIED_MESSAGE } from '../../services/vaccinationService';
 import { CheckCircle, AlertCircle, Clock, Calendar, Syringe, Save, Trash2, Printer, X } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import { useI18n } from '../../i18n';
@@ -96,6 +96,11 @@ const VaccinationTab: React.FC<VaccinationTabProps> = ({ patient }) => {
                 </button>
             </div>
 
+            {!isCalendarVerified() && (
+                <p role="note" className="text-[12px] rounded-lg px-4 py-2" style={{ background: 'var(--color-warning-50)', color: 'var(--color-warning-800)' }}>
+                    {CALENDAR_UNVERIFIED_MESSAGE}
+                </p>
+            )}
             {!hasBirthDate && (
                 <p className="text-[13px] rounded-lg border px-4 py-3" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
                     Date de naissance requise pour le suivi vaccinal.

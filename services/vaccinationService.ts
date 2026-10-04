@@ -52,6 +52,20 @@ export const CATCHUP_WINDOWS: Record<string, { untilMonths: number; verified: bo
     bcg: { untilMonths: 72, verified: false },
 };
 export const DEFAULT_CATCHUP = { untilMonths: 72, verified: false };
+
+/**
+ * Les âges cibles de `VACCINES` (1,5 / 2,5 / 3,5 mois, rotavirus, rappels…) n'ont PAS été
+ * confrontés au calendrier officiel du PNI (carnet de santé de l'enfant) : à passer à `true`
+ * seulement après cette vérification. Le rotavirus fait partie du PNI selon le médecin : il
+ * n'est donc jamais exclu des alertes, et sa limite de rattrapage reste un repli non vérifié.
+ */
+export const CALENDAR_VERIFIED = false;
+
+/** Vrai seulement si le calendrier ET toutes les fenêtres de rattrapage sont vérifiés. */
+export const isCalendarVerified = (): boolean =>
+    CALENDAR_VERIFIED && DEFAULT_CATCHUP.verified && Object.values(CATCHUP_WINDOWS).every(w => w.verified);
+
+export const CALENDAR_UNVERIFIED_MESSAGE = 'Calendrier en cours de vérification avec le PNI officiel — vérifiez avant de vous y fier.';
 /** Délai de grâce avant de parler de retard (conserve l'ancien comportement). */
 const OVERDUE_GRACE_MONTHS = 2;
 const MONTH_MS = 30.4375 * 86400000;
@@ -115,7 +129,7 @@ export const vaccinationService = {
             if (record) status = 'DONE';
             else if (ageMonths < vaccine.targetAgeMonths) status = 'UPCOMING';
             else if (ageMonths > window.untilMonths) status = 'MISSED'; // fenêtre close : aucune alerte
-            else if (vaccine.mandatory && ageMonths - vaccine.targetAgeMonths > OVERDUE_GRACE_MONTHS && window.untilMonths > OVERDUE_GRACE_MONTHS + vaccine.targetAgeMonths) status = 'OVERDUE';
+            else if (ageMonths - vaccine.targetAgeMonths > OVERDUE_GRACE_MONTHS && window.untilMonths > OVERDUE_GRACE_MONTHS + vaccine.targetAgeMonths) status = 'OVERDUE';
             else status = 'DUE';
             return { vaccine, record, status };
         });
