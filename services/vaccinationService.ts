@@ -1,4 +1,5 @@
 import { Vaccine, VaccinationRecord, Patient } from "../types";
+import { dataService } from "./dataService";
 
 // Programme National d'Immunisation (Maroc) & Recommandations
 const VACCINES: Vaccine[] = [
@@ -32,6 +33,33 @@ const VACCINES: Vaccine[] = [
     { id: 'vpo_rap2', name: 'VPO Rappel 2', targetAgeMonths: 60, mandatory: true, diseasePrevented: 'Poliomyélite' },
 ];
 
+/**
+ * Fenêtres d'alerte « en retard » (en mois d'âge).
+ *
+ * Source visée : calendrier du Programme National d'Immunisation (PNI), Ministère de la
+ * Santé et de la Protection sociale du Maroc. Consultation tentée le 2026-10-04 : le site
+ * officiel et les guides PNI n'étaient pas accessibles ; seules des sources secondaires
+ * ont été lues (HB 1 « pendant le premier mois si non faite dans les 24 h »). Les valeurs
+ * ci-dessous marquées `verified: false` sont des REPLIS PRUDENTS À VALIDER par le médecin
+ * ou à remplacer par la valeur officielle ; elles ne doivent pas être lues comme le PNI.
+ *  - Doses de naissance (VPO 0, HB 1) : pas de rattrapage après la fenêtre ; la série continue.
+ *  - BCG : limite d'âge de rattrapage non trouvée -> repli 6 ans.
+ *  - Autres vaccins : limite de rattrapage non trouvée -> repli 6 ans.
+ */
+export const CATCHUP_WINDOWS: Record<string, { untilMonths: number; verified: boolean }> = {
+    vpo0: { untilMonths: 1, verified: false },
+    hb1: { untilMonths: 1, verified: false },
+    bcg: { untilMonths: 72, verified: false },
+};
+export const DEFAULT_CATCHUP = { untilMonths: 72, verified: false };
+/** Délai de grâce avant de parler de retard (conserve l'ancien comportement). */
+const OVERDUE_GRACE_MONTHS = 2;
+const MONTH_MS = 30.4375 * 86400000;
+
+export type VaccineStatus = 'DONE' | 'OVERDUE' | 'DUE' | 'UPCOMING' | 'MISSED';
+
+const catchupOf = (id: string) => CATCHUP_WINDOWS[id] ?? DEFAULT_CATCHUP;
+
 export const vaccinationService = {
     getSchedule: () => VACCINES,
 
@@ -61,22 +89,47 @@ export const vaccinationService = {
         window.dispatchEvent(new Event('meddoc_data_update'));
     },
 
-    getVaccinationStatus: (patient: Patient) => {
+    /** Module activé dans Paramètres (désactivé par défaut, sans déduction depuis la spécialité). */
+    isModuleEnabled: (): boolean => dataService.getDoctorInfo()?.vaccinationEnabled === true,
+
+    /** Suivi activé explicitement sur le dossier, ou au moins un enregistrement. */
+    isTracked: (patient: Patient): boolean =>
+        patient.vaccinationTracking === true || vaccinationService.getPatientRecords(patient.id).length > 0,
+
+    /** Âge en mois depuis la date de naissance ; null si absente ou invalide. Jamais `age × 12`. */
+    ageInMonths: (patient: Pick<Patient, 'dateOfBirth'>, now: Date = new Date()): number | null => {
+        if (!patient.dateOfBirth) return null;
+        const born = new Date(patient.dateOfBirth);
+        if (Number.isNaN(born.getTime()) || born.getTime() > now.getTime()) return null;
+        return (now.getTime() - born.getTime()) / MONTH_MS;
+    },
+
+    /** Alertes autorisées : module actif + suivi du patient + date de naissance connue. */
+    isActionable: (patient: Patient): boolean =>
+        vaccinationService.isModuleEnabled() && vaccinationService.isTracked(patient) && vaccinationService.ageInMonths(patient) !== null,
+
+    /**
+     * Statut de chaque vaccin. `gated` (défaut) : liste vide si les alertes ne sont pas autorisées
+     * (module désactivé, patient non suivi, date de naissance absente). Sans date de naissance,
+     * la liste est vide dans tous les cas : aucun calcul n'est fait depuis l'âge en années.
+     */
+    getVaccinationStatus: (patient: Patient, opts: { gated?: boolean; now?: Date } = {}) => {
+        const { gated = true, now } = opts;
+        const ageMonths = vaccinationService.ageInMonths(patient, now);
+        if (ageMonths === null) return [];
+        if (gated && !(vaccinationService.isModuleEnabled() && vaccinationService.isTracked(patient))) return [];
         const records = vaccinationService.getPatientRecords(patient.id);
-        const ageMonths = patient.age * 12; // Approximation simplifiée, idéalement utiliser date naissance précise
 
-        const status = VACCINES.map(vaccine => {
+        return VACCINES.map(vaccine => {
             const record = records.find(r => r.vaccineId === vaccine.id);
-            const isDue = !record && ageMonths >= vaccine.targetAgeMonths;
-            const isOverdue = isDue && (ageMonths - vaccine.targetAgeMonths > 2); // 2 mois de retard = overdue
-
-            return {
-                vaccine,
-                record,
-                status: record ? 'DONE' : isOverdue ? 'OVERDUE' : isDue ? 'DUE' : 'UPCOMING'
-            };
+            const window = catchupOf(vaccine.id);
+            let status: VaccineStatus;
+            if (record) status = 'DONE';
+            else if (ageMonths < vaccine.targetAgeMonths) status = 'UPCOMING';
+            else if (ageMonths > window.untilMonths) status = 'MISSED'; // fenêtre close : aucune alerte
+            else if (ageMonths - vaccine.targetAgeMonths > OVERDUE_GRACE_MONTHS && window.untilMonths > OVERDUE_GRACE_MONTHS + vaccine.targetAgeMonths) status = 'OVERDUE';
+            else status = 'DUE';
+            return { vaccine, record, status };
         });
-
-        return status;
-    }
+    },
 };

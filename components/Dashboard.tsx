@@ -126,7 +126,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNewPrescription, onNavigate, on
   const overdueVaccinations = useMemo(() => {
     const alerts: { patientName: string; patientId: string; vaccineName: string }[] = [];
     allPatients.forEach(patient => {
-      const status = vaccinationService.getVaccinationStatus(patient);
+      const status = vaccinationService.getVaccinationStatus(patient); // vide si module désactivé / patient non suivi / sans date de naissance
       status.filter(s => s.status === 'OVERDUE').forEach(item => {
         alerts.push({
           patientId: patient.id,

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Patient, VaccinationRecord, Vaccine } from '../../types';
 import { vaccinationService } from '../../services/vaccinationService';
 import { CheckCircle, AlertCircle, Clock, Calendar, Syringe, Save, Trash2, Printer, X } from 'lucide-react';
+import { dataService } from '../../services/dataService';
 import { useI18n } from '../../i18n';
 
 interface VaccinationTabProps {
@@ -16,34 +17,19 @@ const VaccinationTab: React.FC<VaccinationTabProps> = ({ patient }) => {
     const [editingId, setEditingId] = useState<string | null>(null);
     const [editDate, setEditDate] = useState<string>('');
     const [editBatch, setEditBatch] = useState<string>('');
+    const [tracked, setTracked] = useState(() => vaccinationService.isTracked(patient));
+    const hasBirthDate = vaccinationService.ageInMonths(patient) !== null;
 
     useEffect(() => {
         loadSchedule();
+        setTracked(vaccinationService.isTracked(patient));
         window.addEventListener('meddoc_data_update', loadSchedule);
         return () => window.removeEventListener('meddoc_data_update', loadSchedule);
-    }, [patient.id]);
+    }, [patient.id, patient.dateOfBirth, patient.vaccinationTracking]);
 
     const loadSchedule = () => {
-        const allVaccines = vaccinationService.getSchedule();
-        const records = vaccinationService.getPatientRecords(patient.id);
-
-        // Simple age calculation (in months)
-        const patientAgeMonths = (patient.age || 0) * 12;
-
-        const mapped: ScheduleItem[] = allVaccines.map(v => {
-            const record = records.find(r => r.vaccineId === v.id);
-            let status = 'UPCOMING';
-
-            if (record) {
-                status = 'DONE';
-            } else if (patientAgeMonths > v.targetAgeMonths + 2) {
-                status = 'OVERDUE';
-            } else if (patientAgeMonths >= v.targetAgeMonths) {
-                status = 'DUE';
-            }
-
-            return { vaccine: v, record, status };
-        });
+        // Âge calculé depuis la date de naissance (jamais age × 12) ; sans elle, aucun statut.
+        const mapped: ScheduleItem[] = vaccinationService.getVaccinationStatus(patient, { gated: false });
 
         setSchedule(mapped);
     };
@@ -109,6 +95,19 @@ const VaccinationTab: React.FC<VaccinationTabProps> = ({ patient }) => {
                     <Printer size={18} />
                 </button>
             </div>
+
+            {!hasBirthDate && (
+                <p className="text-[13px] rounded-lg border px-4 py-3" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
+                    Date de naissance requise pour le suivi vaccinal.
+                </p>
+            )}
+            {hasBirthDate && vaccinationService.isModuleEnabled() && (
+                <label className="flex items-center gap-2 text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
+                    <input type="checkbox" checked={tracked} disabled={vaccinationService.getPatientRecords(patient.id).length > 0}
+                        onChange={e => { void dataService.savePatientProfile({ ...patient, vaccinationTracking: e.target.checked }); setTracked(e.target.checked); }} />
+                    Suivre la vaccination de ce patient (alertes dans « À faire »)
+                </label>
+            )}
 
             {/* Timeline */}
             <div className="flex-1 overflow-y-auto pr-2 space-y-8 pb-10">

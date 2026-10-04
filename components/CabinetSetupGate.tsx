@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { CheckCircle2, Circle, Image, Building2, User } from 'lucide-react';
+import { CheckCircle2, Circle, Image, Building2, User, Syringe } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { sessionService } from '../services/sessionService';
 import { cabinetSetupState } from '../services/cabinetSetup';
@@ -37,6 +37,9 @@ const CabinetSetupGate: React.FC<Props> = ({ onOpenSettings, children }) => {
     { n: 3, icon: <Image size={16} />, title: 'Logo', done: state.hasLogo, required: false,
       text: 'Votre logo, repris sur vos documents (facultatif).',
       go: () => onOpenSettings({ section: 'cabinet', tab: 'logo' }) },
+    { n: 4, icon: <Syringe size={16} />, title: 'Suivi de la vaccination', done: dataService.getDoctorInfo().vaccinationEnabled === true, required: false,
+      text: 'Suivez-vous la vaccination de vos patients ? Désactivé par défaut ; modifiable dans Paramètres › Cabinet › Modules.',
+      go: () => onOpenSettings({ section: 'cabinet', tab: 'modules' }) },
   ];
 
   return (

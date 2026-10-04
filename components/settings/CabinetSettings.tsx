@@ -1,8 +1,8 @@
 import React from 'react';
-import { Clock, CreditCard, Globe, Image as ImageIcon, Info, Mail, MapPin, Phone, Printer, Smartphone } from 'lucide-react';
+import { Syringe, Clock, CreditCard, Globe, Image as ImageIcon, Info, Mail, MapPin, Phone, Printer, Smartphone } from 'lucide-react';
 import { settingsService } from '../../services/settingsService';
 import { normalizeRoute } from './settingsRoutes';
-import { SettingsPageFrame, SettingsCard, TextField, TextAreaField, ImageField, SettingsLink } from './SettingsUI';
+import { SettingsPageFrame, SettingsCard, TextField, TextAreaField, ImageField, SettingsLink, Toggle } from './SettingsUI';
 import { useDoctorDraft } from './useDoctorDraft';
 import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 import { SettingsPageProps } from './ProfileSettings';
@@ -14,6 +14,7 @@ const CABINET_FIELDS = [
   'ice', 'patente', 'taxId', 'rc',
   'logoUrl',
   'hours',
+  'vaccinationEnabled',
 ] as const;
 
 const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => {
@@ -113,6 +114,24 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
           >
             <TextAreaField label="Horaires" rows={6} value={draft.hours} onChange={v => update({ hours: v })}
                            placeholder={'Lun–Ven 9h–13h / 15h–19h\nSam 9h–13h'} />
+          </SettingsCard>
+        </div>
+      )}
+
+      {tab === 'modules' && (
+        <div className="max-w-2xl">
+          <SettingsCard
+            title="Suivi vaccinal"
+            icon={<Syringe size={16} />}
+            description="Calendrier vaccinal, alertes de vaccins en retard et suivi par patient. Désactivé par défaut."
+          >
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-[13px]" style={{ color: 'var(--color-text)' }}>Suivre la vaccination de mes patients</p>
+              <Toggle checked={draft.vaccinationEnabled === true} onChange={v => update({ vaccinationEnabled: v })} label="Suivre la vaccination de mes patients" />
+            </div>
+            <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>
+              Les alertes ne concernent que les patients dont le suivi est activé sur le dossier et dont la date de naissance est renseignée.
+            </p>
           </SettingsCard>
         </div>
       )}
