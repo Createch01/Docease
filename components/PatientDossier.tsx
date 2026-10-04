@@ -25,6 +25,7 @@ import { getActiveTreatment } from '../utils/activeTreatment';
 import { EMPTY_STATES } from '../constants/emptyStates';
 // @ts-ignore
 import { toastService } from '../services/toastService';
+import { canOutput } from '../services/cabinetSetup';
 import { settingsService } from '../services/settingsService';
 import { formatAge, formatNom } from '../utils/formatters';
 import PatientsList from './PatientsList';
@@ -143,6 +144,7 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
       pagebreak: { mode: 'avoid-all' }
     };
 
+    if (!canOutput()) return;
     toastService.info("Génération du certificat PDF...");
     const html2pdf = (await import('html2pdf.js')).default;
     html2pdf().set(opt).from(element).save().then(() => toastService.success("Certificat enregistré !"));
@@ -161,6 +163,7 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
       pagebreak: { mode: 'avoid-all' }
     };
 
+    if (!canOutput()) return;
     toastService.info("Génération de la note PDF...");
     const html2pdf = (await import('html2pdf.js')).default;
     html2pdf().set(opt).from(element).save().then(() => toastService.success("Note enregistrée !"));

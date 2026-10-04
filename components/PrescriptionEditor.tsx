@@ -35,6 +35,7 @@ import { COMMON_ANALYSES } from '../constants/medicalData';
 import html2pdf from 'html2pdf.js';
 import * as prescriptionAiService from '../services/prescriptionAiService';
 import { toastService } from '../services/toastService';
+import { canOutput } from '../services/cabinetSetup';
 import { sessionService } from '../services/sessionService';
 import { unsavedChanges, useUnsavedChanges } from './settings/unsavedChanges';
 import { specialtyKey, deriveProfileFlags } from '../services/medicalReferentials';
@@ -433,6 +434,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
       pagebreak: { mode: 'avoid-all' },
     };
+    if (!canOutput()) return;
     toastService.info("Génération de l'ordonnance PDF...");
     html2pdf().set(opt).from(element).save()
       .then(() => {

@@ -5,6 +5,7 @@ import { dataService } from '../../services/dataService';
 import { LabRequest, Patient } from '../../types';
 import { printService } from '../../services/printService';
 import { toastService } from '../../services/toastService';
+import { canOutput } from '../../services/cabinetSetup';
 import { settingsService } from '../../services/settingsService';
 import AnalysisPrescriptionTemplate from '../AnalysisPrescriptionTemplate';
 import { COMMON_ANALYSES } from '../../constants/medicalData';
@@ -126,6 +127,7 @@ const AnalysesSection: React.FC<AnalysesSectionProps> = ({ patientId, patientNam
             pagebreak: { mode: 'avoid-all' }
         };
 
+        if (!canOutput()) return;
         toastService.info(t('generating_pdf'));
         const html2pdf = (await import('html2pdf.js')).default;
         html2pdf()
@@ -176,6 +178,7 @@ const AnalysesSection: React.FC<AnalysesSectionProps> = ({ patientId, patientNam
                                 onClick={async () => {
                                     const element = document.getElementById('preview-sheet-creation');
                                     if (element) {
+                                        if (!canOutput()) return;
                                         toastService.info(t('preparing_pdf'));
                                         const opt = {
                                             margin: 0,

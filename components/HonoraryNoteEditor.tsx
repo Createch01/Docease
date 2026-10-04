@@ -8,6 +8,7 @@ import HonoraryNoteTemplate from './HonoraryNoteTemplate';
 import { usePrintMode } from './usePrintMode';
 // @ts-ignore
 import { toastService } from '../services/toastService';
+import { canOutput } from '../services/cabinetSetup';
 import { settingsService } from '../services/settingsService';
 
 interface HonoraryNoteEditorProps {
@@ -129,6 +130,7 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
             pagebreak: { mode: 'avoid-all' }
         };
 
+        if (!canOutput()) return;
         toastService.info("Génération de la note PDF...");
         const html2pdf = (await import('html2pdf.js')).default;
         html2pdf()
