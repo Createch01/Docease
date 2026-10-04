@@ -43,14 +43,12 @@ const PatientDirectory = React.lazy(() => import('./components/PatientDirectory'
 const SEARCH_SHORTCUT = /Mac|iPhone|iPad/i.test(typeof navigator !== 'undefined' ? (navigator.platform || navigator.userAgent) : '') ? '⌘K' : 'Ctrl K';
 
 const AppointmentManager = React.lazy(() => import('./components/AppointmentManager'));
-const DrugCompatibility = React.lazy(() => import('./components/DrugCompatibility'));
 const NotificationCenter = React.lazy(() => import('./components/NotificationCenter'));
 const SmartDocInterface = React.lazy(() => import('./components/SmartDoc/SmartDocInterface'));
 const GlobalSearch = React.lazy(() => import('./components/GlobalSearch'));
-const PharmaDirectory = React.lazy(() => import('./components/PharmaDirectory'));
-const MedicamentManagement = React.lazy(() => import('./components/admin/MedicamentManagement'));
+const MedicamentsPage = React.lazy(() => import('./components/MedicamentsPage'));
 
-type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc' | 'repertoire' | 'medicament-management' | 'cashier' | 'patient-directory';
+type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'notifications' | 'medical-directory' | 'smart-doc' | 'cashier' | 'patient-directory';
 
 // Permission requise par écran. Un écran absent de cette table est refusé (liste blanche).
 // Même règle que côté Rust : l'interface ne fait que la refléter.
@@ -62,15 +60,12 @@ const VIEW_PERMISSION: Record<View, Permission> = {
   'patient-directory': 'MANAGE_PATIENTS',
   dossier: 'MANAGE_MEDICAL_RECORDS',
   'new-prescription': 'CREATE_PRESCRIPTION',
-  compatibility: 'CREATE_PRESCRIPTION',
   analytics: 'VIEW_FINANCES',
   settings: 'MANAGE_SETTINGS',
-  'medicament-management': 'MANAGE_SETTINGS',
   'smart-doc': 'USE_AI_ASSISTANT',
   tasks: 'DOCTOR_TOOLS',
   notifications: 'DOCTOR_TOOLS',
   'medical-directory': 'DOCTOR_TOOLS',
-  repertoire: 'DOCTOR_TOOLS',
 };
 const canOpen = (view: View) => !!VIEW_PERMISSION[view] && sessionService.can(VIEW_PERMISSION[view]);
 
@@ -337,7 +332,6 @@ const AppContent: React.FC = () => {
         />
         </CabinetSetupGate>
       );
-      case 'compatibility': return <DrugCompatibility />;
       case 'analytics': return <Analytics />;
       case 'tasks': return <TaskManager />;
       case 'settings': return <SettingsPanel route={settingsRoute} onNavigate={openSettings} />;
@@ -350,9 +344,7 @@ const AppContent: React.FC = () => {
         setCurrentView(view as View);
       }} />;
       case 'smart-doc': return <SmartDocInterface />;
-      case 'repertoire': return <PharmaDirectory />;
-      case 'medical-directory': return <PharmaDirectory />;
-      case 'medicament-management': return <MedicamentManagement />;
+      case 'medical-directory': return <MedicamentsPage />;
       default: return <Dashboard onNewPrescription={handleStartConsultation} />;
     }
   };
@@ -383,9 +375,7 @@ const AppContent: React.FC = () => {
     { id: 'smart-doc', label: t('smart_doc'), icon: FileText, highlight: true, requiredPermission: 'USE_AI_ASSISTANT' },
     // Clinical, daily-use tools
     { id: 'medical-directory', label: 'Médicaments', icon: BookOpen, requiredPermission: 'DOCTOR_TOOLS' },
-    { id: 'compatibility', label: 'Vérifier interactions', icon: Activity, requiredPermission: 'CREATE_PRESCRIPTION' },
-    // Administrative, occasional-use tools
-    { id: 'medicament-management', label: 'Gestion des médicaments', icon: Database, requiredPermission: 'MANAGE_SETTINGS' },
+    // Outils administratifs
     { id: 'analytics', label: 'Comptabilité', icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
     { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'settings', label: t('settings'), icon: Settings, requiredPermission: 'MANAGE_SETTINGS' },
