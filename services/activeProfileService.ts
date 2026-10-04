@@ -31,27 +31,16 @@ export const EMPTY_PROFILE: ActivePatientProfile = {
     isDiabetic: false,
 };
 
-const STORAGE_KEY = 'docease_active_patient_profile';
+// Profil gardé en mémoire uniquement (jamais écrit sur disque ni dans le localStorage) :
+// il décrit l'état de santé du patient en consultation (grossesse, enfant, rénal…).
+// Il est remis à zéro à chaque changement de patient et au verrouillage (voir App.tsx).
+const LEGACY_STORAGE_KEY = 'docease_active_patient_profile';
 
-export function loadActiveProfile(): ActivePatientProfile {
-    try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        if (!raw) return { ...EMPTY_PROFILE };
-        return { ...EMPTY_PROFILE, ...JSON.parse(raw) };
-    } catch {
-        return { ...EMPTY_PROFILE };
-    }
+/** Supprime l'ancienne copie persistée du profil (à appeler au démarrage). */
+export function purgeLegacyActiveProfile(): void {
+    try { localStorage.removeItem(LEGACY_STORAGE_KEY); } catch { /* stockage indisponible */ }
 }
 
-export function saveActiveProfile(profile: ActivePatientProfile): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
-}
-
-export function clearActiveProfile(): void {
-    localStorage.removeItem(STORAGE_KEY);
-}
-
-/** True if any safety-relevant flag is set (used to decide whether to show the safety UI at all). */
 export function isProfileActive(profile: ActivePatientProfile): boolean {
     return (
         profile.isChild || profile.isPregnant || profile.isBreastfeeding ||

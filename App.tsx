@@ -24,6 +24,7 @@ import {
   parseSettingsHash, sameRoute, settingsHash, visibleSettingsGroups,
 } from './components/settings/settingsRoutes';
 import { unsavedChanges } from './components/settings/unsavedChanges';
+import { useActiveProfile } from './components/ui/ActiveProfileContext';
 
 // Lazy loading components for code splitting
 const Dashboard = React.lazy(() => import('./components/Dashboard')) as React.LazyExoticComponent<React.ComponentType<any>>;
@@ -86,6 +87,9 @@ const AppContent: React.FC = () => {
   const initialSettingsHash = isSettingsHash(window.location.hash);
   const [currentView, setCurrentView] = useState<View>(initialSettingsHash ? 'settings' : 'dashboard');
   const [activePatient, setActivePatient] = useState<Patient | null>(null);
+  // Profil de sécurité du catalogue : en mémoire seulement, remis à zéro à chaque changement de patient.
+  const { resetProfile } = useActiveProfile();
+  useEffect(() => { resetProfile(); }, [activePatient?.id, resetProfile]);
   const [activePrescription, setActivePrescription] = useState<any | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   // Mode concentration : pendant une consultation la sidebar est masquée ; le choix du médecin est mémorisé.
@@ -260,6 +264,7 @@ const AppContent: React.FC = () => {
   const handleLock = async () => {
     await securityService.lock();
     dataService.reset();
+    resetProfile();
     setIsDataLoaded(false);
     setSecurityUnlocked(false);
     setCurrentView('dashboard');
