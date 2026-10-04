@@ -357,18 +357,11 @@ export const dataService = {
     await storageService.save(STORAGE_KEYS.LAST_BACKUP, new Date().toISOString());
   },
 
-  importFullBackup: async (encryptedText: string, passphrase: string): Promise<boolean> => {
-    try {
-      const backup = await cryptoService.decryptJSON(encryptedText, passphrase);
-      Object.keys(backup).forEach(key => {
-        localStorage.setItem(key, JSON.stringify(backup[key]));
-      });
-      notifyUpdate('all');
-      return true;
-    } catch (e) {
-      console.error('Backup import failed:', e);
-      return false;
-    }
+  // Désactivée : l'ancienne version écrivait les données dans le localStorage, que le
+  // store chiffré ne lit jamais (restauration silencieusement sans effet, données
+  // médicales en clair). La restauration est en cours de refonte (module Rust dédié).
+  importFullBackup: async (_encryptedText: string, _passphrase: string): Promise<boolean> => {
+    return false;
   },
 
   getDoctorInfo: (): DoctorInfo => {

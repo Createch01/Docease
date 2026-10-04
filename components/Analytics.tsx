@@ -27,6 +27,7 @@ import { dataService } from '../services/dataService';
 import { Expense, ExpenseCategory, EXPENSE_CATEGORIES, Patient } from '../types';
 // @ts-ignore
 import { toastService } from '../services/toastService';
+import { canOutput } from '../services/cabinetSetup';
 
 type TimeRange = 'Jour' | 'Semaine' | 'Mois' | 'Année';
 
@@ -381,6 +382,7 @@ const Analytics: React.FC = () => {
       pagebreak: { mode: 'avoid-all' }
     };
 
+    if (!canOutput()) return;
     toastService.info('Génération du récapitulatif PDF...');
     const html2pdf = (await import('html2pdf.js')).default;
     html2pdf()

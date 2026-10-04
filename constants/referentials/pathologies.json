@@ -1,0 +1,1304 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-10-03",
+  "note": "Référentiel local hors ligne. rules.profile = indicateurs du profil de sécurité (drugSafetyCheck) ; rules.flags = smart_flags du catalogue effectivement présents (vérifié par tests/referentials.test.ts). Aucun lien inventé : une pathologie sans règle reste simplement enregistrée.",
+  "frequent": {
+    "default": [
+      "I10",
+      "E11",
+      "E78",
+      "J45",
+      "J44",
+      "K21",
+      "N18.9",
+      "I50",
+      "E03",
+      "F32"
+    ],
+    "cardiologie": [
+      "I10",
+      "E11",
+      "I50",
+      "I48",
+      "I25",
+      "E78",
+      "I05-I09",
+      "J45",
+      "I20",
+      "Z79.01"
+    ]
+  },
+  "items": [
+    {
+      "id": "I10",
+      "code": "I10",
+      "label": "Hypertension artérielle (HTA)",
+      "short": "HTA",
+      "category": "cardio",
+      "synonyms": [
+        "hta",
+        "hypertension",
+        "tension",
+        "tension artérielle",
+        "hypertension essentielle"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "HTA_RISQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I50",
+      "code": "I50",
+      "label": "Insuffisance cardiaque",
+      "category": "cardio",
+      "synonyms": [
+        "ic",
+        "icc",
+        "insuffisance cardiaque congestive",
+        "décompensation cardiaque",
+        "fevg altérée"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": [
+          {
+            "flag": "INSUFFISANCE_CARDIAQUE_CI",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "SURCHARGE_SODEE_RISQUE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "CARDIOTOXIQUE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "CARDIOVASCULAIRE_RISQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I51.9",
+      "code": "I51.9",
+      "label": "Cardiopathie (sans précision)",
+      "short": "Cardiopathie",
+      "category": "cardio",
+      "synonyms": [
+        "cardiaque",
+        "cardiopathie",
+        "problème de coeur",
+        "maladie du coeur",
+        "coeur"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "I25",
+      "code": "I25",
+      "label": "Cardiopathie ischémique / coronaropathie",
+      "short": "Cardiopathie ischémique",
+      "category": "cardio",
+      "synonyms": [
+        "coronarien",
+        "coronaropathie",
+        "insuffisance coronarienne",
+        "cardiopathie ischémique"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": [
+          {
+            "flag": "CARDIOVASCULAIRE_RISQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I20",
+      "code": "I20",
+      "label": "Angor (angine de poitrine)",
+      "short": "Angor",
+      "category": "cardio",
+      "synonyms": [
+        "angor",
+        "angine de poitrine",
+        "angor stable",
+        "angor instable"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": [
+          {
+            "flag": "CARDIOVASCULAIRE_RISQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I25.2",
+      "code": "I25.2",
+      "label": "Infarctus du myocarde (ATCD)",
+      "short": "Infarctus (ATCD)",
+      "category": "cardio",
+      "synonyms": [
+        "infarctus",
+        "idm",
+        "sca",
+        "crise cardiaque",
+        "syndrome coronarien"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": [
+          {
+            "flag": "CARDIOVASCULAIRE_RISQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I48",
+      "code": "I48",
+      "label": "Fibrillation auriculaire",
+      "category": "cardio",
+      "synonyms": [
+        "fa",
+        "acfa",
+        "arythmie complète",
+        "flutter"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "I49",
+      "code": "I49",
+      "label": "Troubles du rythme",
+      "category": "cardio",
+      "synonyms": [
+        "arythmie",
+        "palpitations",
+        "extrasystoles",
+        "tachycardie"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "I45.81",
+      "code": "I45.81",
+      "label": "QT long (syndrome du QT long)",
+      "short": "QT long",
+      "category": "cardio",
+      "synonyms": [
+        "qt long",
+        "allongement du qt",
+        "qtc long",
+        "syndrome du qt long"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": [
+          {
+            "flag": "ALLONGEMENT_QT",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "QTC_RISQUE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "QT_RISQUE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "ALLONGEMENT_QT_RISQUE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "QT_SURVEILLER",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "SUIVI_ECG_QT",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "R00.1",
+      "code": "R00.1",
+      "label": "Bradycardie",
+      "category": "cardio",
+      "synonyms": [
+        "bradycardie",
+        "pouls lent",
+        "fréquence cardiaque basse"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": [
+          {
+            "flag": "BRADYCARDIE_SURVEILLER",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I44",
+      "code": "I44",
+      "label": "Bloc auriculo-ventriculaire (BAV)",
+      "short": "BAV",
+      "category": "cardio",
+      "synonyms": [
+        "bav",
+        "bloc av",
+        "bloc auriculoventriculaire",
+        "bloc de branche",
+        "trouble de conduction"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": [
+          {
+            "flag": "CI_BAV",
+            "severity": "CRITIQUE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I01",
+      "code": "I01",
+      "label": "Rhumatisme articulaire aigu (RAA)",
+      "short": "RAA",
+      "category": "cardio",
+      "synonyms": [
+        "raa",
+        "rhumatisme articulaire aigu",
+        "rhumatisme cardiaque"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "I05-I09",
+      "code": "I05-I09",
+      "label": "Cardiopathie rhumatismale",
+      "category": "cardio",
+      "synonyms": [
+        "cardiopathie rhumatismale",
+        "rétrécissement mitral",
+        "rm rhumatismal",
+        "valvulopathie rhumatismale",
+        "raa chronique"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "I38",
+      "code": "I38",
+      "label": "Valvulopathie (non rhumatismale)",
+      "short": "Valvulopathie",
+      "category": "cardio",
+      "synonyms": [
+        "valvulopathie",
+        "insuffisance mitrale",
+        "insuffisance aortique",
+        "rétrécissement aortique",
+        "ra serré"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "Q20-Q26",
+      "code": "Q20-Q26",
+      "label": "Cardiopathie congénitale",
+      "category": "cardio",
+      "synonyms": [
+        "cardiopathie congénitale",
+        "cia",
+        "civ",
+        "tétralogie de fallot",
+        "canal artériel",
+        "coarctation"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "Z95.2",
+      "code": "Z95.2",
+      "label": "Prothèse valvulaire mécanique",
+      "category": "cardio",
+      "synonyms": [
+        "prothèse valvulaire",
+        "valve mécanique",
+        "prothèse mécanique",
+        "remplacement valvulaire"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "Z95.0",
+      "code": "Z95.0",
+      "label": "Pacemaker / défibrillateur implantable",
+      "short": "Pacemaker / DAI",
+      "category": "cardio",
+      "synonyms": [
+        "pacemaker",
+        "stimulateur cardiaque",
+        "dai",
+        "défibrillateur",
+        "dsc",
+        "pm"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [
+          "isCardiac"
+        ],
+        "flags": []
+      }
+    },
+    {
+      "id": "Z79.01",
+      "code": "Z79.01",
+      "label": "Anticoagulation au long cours",
+      "short": "Anticoagulation",
+      "category": "cardio",
+      "synonyms": [
+        "anticoagulant",
+        "avk",
+        "sintrom",
+        "previscan",
+        "warfarine",
+        "aod",
+        "anticoagulation",
+        "inr"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "ANTICOAGULANTS_CI",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "CI_AVK",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "RISQUE_HEMORRAGIE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "RISQUE_HEMORRAGIQUE_MAJEUR",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I63",
+      "code": "I63",
+      "label": "AVC (ATCD)",
+      "category": "cardio",
+      "synonyms": [
+        "avc",
+        "accident vasculaire cérébral",
+        "ait",
+        "hémiplégie",
+        "accident ischémique transitoire"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "THROMBOSE_RISQUE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "RISQUE_THROMBOEMBOLI",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "CARDIOVASCULAIRE_RISQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I73.9",
+      "code": "I73.9",
+      "label": "Artériopathie des membres inférieurs",
+      "short": "AOMI",
+      "category": "cardio",
+      "synonyms": [
+        "aomi",
+        "artériopathie",
+        "claudication"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "CARDIOVASCULAIRE_RISQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "I82",
+      "code": "I82",
+      "label": "Thrombose veineuse profonde / embolie (ATCD)",
+      "short": "TVP / embolie",
+      "category": "cardio",
+      "synonyms": [
+        "tvp",
+        "phlébite",
+        "embolie pulmonaire",
+        "ep",
+        "thrombose"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "THROMBOSE_RISQUE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "RISQUE_THROMBOEMBOLI",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E78",
+      "code": "E78",
+      "label": "Dyslipidémie",
+      "category": "endocrino",
+      "synonyms": [
+        "cholestérol",
+        "hypercholestérolémie",
+        "hypertriglycéridémie",
+        "dyslipidémie"
+      ],
+      "specialtyRank": {
+        "cardiologie": 1
+      },
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "E11",
+      "code": "E11",
+      "label": "Diabète de type 2",
+      "category": "endocrino",
+      "synonyms": [
+        "diabète",
+        "diabete",
+        "sucre",
+        "dt2",
+        "diabète type 2",
+        "glycémie"
+      ],
+      "specialtyRank": {
+        "cardiologie": 2
+      },
+      "rules": {
+        "profile": [
+          "isDiabetic"
+        ],
+        "flags": [
+          {
+            "flag": "DIABETE_MASQUAGE_HYPO",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "GLYCEMIE_SURVEILLER",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E10",
+      "code": "E10",
+      "label": "Diabète de type 1",
+      "category": "endocrino",
+      "synonyms": [
+        "diabète type 1",
+        "dt1",
+        "diabète insulinodépendant",
+        "sucre"
+      ],
+      "specialtyRank": {
+        "cardiologie": 2
+      },
+      "rules": {
+        "profile": [
+          "isDiabetic"
+        ],
+        "flags": [
+          {
+            "flag": "DIABETE_MASQUAGE_HYPO",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "GLYCEMIE_SURVEILLER",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E03",
+      "code": "E03",
+      "label": "Hypothyroïdie",
+      "category": "endocrino",
+      "synonyms": [
+        "hypothyroïdie",
+        "thyroïde",
+        "myxoedème"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "IODE_THYROIDE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E05",
+      "code": "E05",
+      "label": "Hyperthyroïdie",
+      "category": "endocrino",
+      "synonyms": [
+        "hyperthyroïdie",
+        "basedow",
+        "thyroïde"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "IODE_THYROIDE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "E66",
+      "code": "E66",
+      "label": "Obésité",
+      "category": "endocrino",
+      "synonyms": [
+        "obésité",
+        "surpoids",
+        "imc élevé"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "PRISE_POIDS",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "M10",
+      "code": "M10",
+      "label": "Goutte",
+      "category": "endocrino",
+      "synonyms": [
+        "goutte",
+        "hyperuricémie",
+        "acide urique"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "N18.9",
+      "code": "N18.9",
+      "label": "Maladie rénale chronique",
+      "category": "renal",
+      "synonyms": [
+        "irc",
+        "insuffisance rénale",
+        "insuffisance rénale chronique",
+        "mrc",
+        "rein",
+        "dialyse"
+      ],
+      "specialtyRank": {
+        "cardiologie": 2
+      },
+      "rules": {
+        "profile": [
+          "isRenalImpaired"
+        ],
+        "flags": [
+          {
+            "flag": "INSUFFISANCE_RENALE_PRUDENCE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "INSUFFISANCE_RENALE_CI_SI_DFG_LT_45",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "AJUSTEMENT_RENAL_SI_DFG_LT_50",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "NEPHROTOXIQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N17",
+      "code": "N17",
+      "label": "Insuffisance rénale aiguë",
+      "category": "renal",
+      "synonyms": [
+        "ira",
+        "insuffisance rénale aiguë",
+        "atn"
+      ],
+      "rules": {
+        "profile": [
+          "isRenalImpaired"
+        ],
+        "flags": [
+          {
+            "flag": "INSUFFISANCE_RENALE_PRUDENCE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "INSUFFISANCE_RENALE_CI_SI_DFG_LT_45",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "AJUSTEMENT_RENAL_SI_DFG_LT_50",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "NEPHROTOXIQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "N20",
+      "code": "N20",
+      "label": "Lithiase urinaire",
+      "category": "renal",
+      "synonyms": [
+        "calcul rénal",
+        "colique néphrétique",
+        "lithiase",
+        "calculs"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "N40",
+      "code": "N40",
+      "label": "Hypertrophie bénigne de la prostate",
+      "short": "HBP",
+      "category": "renal",
+      "synonyms": [
+        "hbp",
+        "adénome de la prostate",
+        "prostate",
+        "rétention urinaire"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "CI_RETENTION_URINAIRE",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "RETENTION_URINAIRE_OBSTRUCTIVE_CI",
+            "severity": "CRITIQUE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "K72.9",
+      "code": "K72.9",
+      "label": "Insuffisance hépatique",
+      "category": "hepatique",
+      "synonyms": [
+        "insuffisance hépatique",
+        "foie",
+        "ih",
+        "hépatopathie"
+      ],
+      "rules": {
+        "profile": [
+          "isHepaticImpaired"
+        ],
+        "flags": [
+          {
+            "flag": "INSUFFISANCE_HEPATIQUE_PRUDENCE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "HEPATOTOXICITE_POSSIBLE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "K74",
+      "code": "K74",
+      "label": "Cirrhose",
+      "category": "hepatique",
+      "synonyms": [
+        "cirrhose",
+        "cirrhose hépatique"
+      ],
+      "rules": {
+        "profile": [
+          "isHepaticImpaired"
+        ],
+        "flags": [
+          {
+            "flag": "INSUFFISANCE_HEPATIQUE_PRUDENCE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "HEPATOTOXICITE_POSSIBLE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B18",
+      "code": "B18",
+      "label": "Hépatite virale chronique",
+      "category": "hepatique",
+      "synonyms": [
+        "hépatite b",
+        "hépatite c",
+        "hépatite chronique",
+        "vhb",
+        "vhc"
+      ],
+      "rules": {
+        "profile": [
+          "isHepaticImpaired"
+        ],
+        "flags": [
+          {
+            "flag": "INSUFFISANCE_HEPATIQUE_PRUDENCE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "HEPATOTOXICITE_POSSIBLE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "J45",
+      "code": "J45",
+      "label": "Asthme",
+      "category": "respiratoire",
+      "synonyms": [
+        "asthme",
+        "asthmatique",
+        "asthme de l'enfant"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "CI_ASTHME",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "CI_ASTHME_BPCO",
+            "severity": "CRITIQUE"
+          }
+        ]
+      }
+    },
+    {
+      "id": "J44",
+      "code": "J44",
+      "label": "BPCO",
+      "category": "respiratoire",
+      "synonyms": [
+        "bpco",
+        "bronchite chronique",
+        "emphysème"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "CI_ASTHME_BPCO",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "DEPRESSION_RESPIRATOIRE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "J96",
+      "code": "J96",
+      "label": "Insuffisance respiratoire",
+      "category": "respiratoire",
+      "synonyms": [
+        "insuffisance respiratoire",
+        "oxygénothérapie",
+        "ir chronique"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "DEPRESSION_RESPIRATOIRE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "G47.3",
+      "code": "G47.3",
+      "label": "Syndrome d'apnée du sommeil",
+      "short": "Apnée du sommeil",
+      "category": "respiratoire",
+      "synonyms": [
+        "sas",
+        "apnée du sommeil",
+        "apnées",
+        "ronflement"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "DEPRESSION_RESPIRATOIRE",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "SEDATION_MAJEURE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "K21",
+      "code": "K21",
+      "label": "Reflux gastro-œsophagien (RGO)",
+      "short": "RGO",
+      "category": "digestif",
+      "synonyms": [
+        "rgo",
+        "reflux",
+        "brûlures d'estomac",
+        "pyrosis"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "RISQUE_DIGESTIF",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "K27",
+      "code": "K27",
+      "label": "Ulcère gastro-duodénal",
+      "category": "digestif",
+      "synonyms": [
+        "ulcère",
+        "ulcère gastrique",
+        "ulcère duodénal",
+        "ugd"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "ULCERE_ACTIF_CI",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "RISQUE_ULCERE_GI",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "RISQUE_DIGESTIF",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "K29",
+      "code": "K29",
+      "label": "Gastrite",
+      "category": "digestif",
+      "synonyms": [
+        "gastrite",
+        "estomac",
+        "gastrite chronique"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "RISQUE_ULCERE_GI",
+            "severity": "ATTENTION"
+          },
+          {
+            "flag": "RISQUE_DIGESTIF",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "K50-K51",
+      "code": "K50-K51",
+      "label": "Maladie inflammatoire chronique de l'intestin",
+      "short": "MICI",
+      "category": "digestif",
+      "synonyms": [
+        "mici",
+        "crohn",
+        "rectocolite",
+        "rch"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "G40",
+      "code": "G40",
+      "label": "Épilepsie",
+      "category": "neuro",
+      "synonyms": [
+        "épilepsie",
+        "convulsions",
+        "crises comitiales"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "G43",
+      "code": "G43",
+      "label": "Migraine",
+      "category": "neuro",
+      "synonyms": [
+        "migraine",
+        "céphalées"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "G20",
+      "code": "G20",
+      "label": "Maladie de Parkinson",
+      "short": "Parkinson",
+      "category": "neuro",
+      "synonyms": [
+        "parkinson"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "F32",
+      "code": "F32",
+      "label": "Dépression",
+      "category": "neuro",
+      "synonyms": [
+        "dépression",
+        "depression",
+        "état dépressif"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "DEPRESSION_RISQUE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "F41",
+      "code": "F41",
+      "label": "Anxiété",
+      "category": "neuro",
+      "synonyms": [
+        "anxiété",
+        "anxiete",
+        "angoisse",
+        "trouble anxieux"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "D64",
+      "code": "D64",
+      "label": "Anémie",
+      "category": "hematologie",
+      "synonyms": [
+        "anémie",
+        "anemie",
+        "carence en fer"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "H40",
+      "code": "H40",
+      "label": "Glaucome",
+      "category": "ophtalmo",
+      "synonyms": [
+        "glaucome",
+        "tension oculaire",
+        "glaucome à angle fermé"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "CI_GLAUCOME_ANGLE_FERME",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "GLAUCOME_CI",
+            "severity": "CRITIQUE"
+          },
+          {
+            "flag": "GLAUCOME_PRUDENCE",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Z72.0",
+      "code": "Z72.0",
+      "label": "Tabagisme",
+      "category": "addictologie",
+      "synonyms": [
+        "tabac",
+        "fumeur",
+        "tabagisme",
+        "cigarette"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": []
+      }
+    },
+    {
+      "id": "F10",
+      "code": "F10",
+      "label": "Alcoolisme",
+      "category": "addictologie",
+      "synonyms": [
+        "alcool",
+        "alcoolisme",
+        "éthylisme",
+        "alcoolique"
+      ],
+      "rules": {
+        "profile": [],
+        "flags": [
+          {
+            "flag": "CI_ALCOOL",
+            "severity": "ATTENTION"
+          }
+        ]
+      }
+    }
+  ]
+}

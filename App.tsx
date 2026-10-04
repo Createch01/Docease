@@ -24,8 +24,12 @@ import {
   parseSettingsHash, sameRoute, settingsHash, visibleSettingsGroups,
 } from './components/settings/settingsRoutes';
 import { unsavedChanges } from './components/settings/unsavedChanges';
+import { FEATURES } from './features';
+import { aiService } from './services/aiService';
+import { useAiEnabled } from './services/useAiEnabled';
 import CabinetSetupGate from './components/CabinetSetupGate';
 import { installPrintGuard } from './services/cabinetSetup';
+import { useActiveProfile } from './components/ui/ActiveProfileContext';
 
 // Lazy loading components for code splitting
 const Dashboard = React.lazy(() => import('./components/Dashboard')) as React.LazyExoticComponent<React.ComponentType<any>>;
@@ -42,14 +46,12 @@ const PatientDirectory = React.lazy(() => import('./components/PatientDirectory'
 const SEARCH_SHORTCUT = /Mac|iPhone|iPad/i.test(typeof navigator !== 'undefined' ? (navigator.platform || navigator.userAgent) : '') ? '⌘K' : 'Ctrl K';
 
 const AppointmentManager = React.lazy(() => import('./components/AppointmentManager'));
-const DrugCompatibility = React.lazy(() => import('./components/DrugCompatibility'));
 const NotificationCenter = React.lazy(() => import('./components/NotificationCenter'));
 const SmartDocInterface = React.lazy(() => import('./components/SmartDoc/SmartDocInterface'));
 const GlobalSearch = React.lazy(() => import('./components/GlobalSearch'));
-const PharmaDirectory = React.lazy(() => import('./components/PharmaDirectory'));
-const MedicamentManagement = React.lazy(() => import('./components/admin/MedicamentManagement'));
+const MedicamentsPage = React.lazy(() => import('./components/MedicamentsPage'));
 
-type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'compatibility' | 'notifications' | 'medical-directory' | 'smart-doc' | 'repertoire' | 'medicament-management' | 'cashier' | 'patient-directory';
+type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'notifications' | 'medical-directory' | 'smart-doc' | 'cashier' | 'patient-directory';
 
 // Permission requise par écran. Un écran absent de cette table est refusé (liste blanche).
 // Même règle que côté Rust : l'interface ne fait que la refléter.
@@ -61,17 +63,17 @@ const VIEW_PERMISSION: Record<View, Permission> = {
   'patient-directory': 'MANAGE_PATIENTS',
   dossier: 'MANAGE_MEDICAL_RECORDS',
   'new-prescription': 'CREATE_PRESCRIPTION',
-  compatibility: 'CREATE_PRESCRIPTION',
   analytics: 'VIEW_FINANCES',
   settings: 'MANAGE_SETTINGS',
-  'medicament-management': 'MANAGE_SETTINGS',
   'smart-doc': 'USE_AI_ASSISTANT',
   tasks: 'DOCTOR_TOOLS',
   notifications: 'DOCTOR_TOOLS',
   'medical-directory': 'DOCTOR_TOOLS',
-  repertoire: 'DOCTOR_TOOLS',
 };
-const canOpen = (view: View) => !!VIEW_PERMISSION[view] && sessionService.can(VIEW_PERMISSION[view]);
+// Fonctions masquées (features.ts) ou dépendantes de « Fonctions IA » : refusées comme un écran non autorisé.
+const featureVisible = (view: View) =>
+  (view !== 'tasks' || FEATURES.tasks) && (view !== 'smart-doc' || aiService.isEnabledCached());
+const canOpen = (view: View) => !!VIEW_PERMISSION[view] && sessionService.can(VIEW_PERMISSION[view]) && featureVisible(view);
 
 const App: React.FC = () => {
   return (
@@ -88,10 +90,22 @@ const AppContent: React.FC = () => {
   const initialSettingsHash = isSettingsHash(window.location.hash);
   const [currentView, setCurrentView] = useState<View>(initialSettingsHash ? 'settings' : 'dashboard');
   const [activePatient, setActivePatient] = useState<Patient | null>(null);
+  // Profil de sécurité du catalogue : en mémoire seulement, remis à zéro à chaque changement de patient.
+  const { resetProfile } = useActiveProfile();
+  useEffect(() => { resetProfile(); }, [activePatient?.id, resetProfile]);
   // Impression bloquée tant que le nom ou l'INPE du médecin est vide.
   useEffect(() => installPrintGuard(), []);
   const [activePrescription, setActivePrescription] = useState<any | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
+  // Mode concentration : pendant une consultation la sidebar est masquée ; le choix du médecin est mémorisé.
+  const [consultSidebarShown, setConsultSidebarShown] = useState<boolean>(() => {
+    try { return localStorage.getItem('docease_consult_sidebar') === 'shown'; } catch { return false; }
+  });
+  const toggleConsultSidebar = () => setConsultSidebarShown(prev => {
+    const next = !prev;
+    try { localStorage.setItem('docease_consult_sidebar', next ? 'shown' : 'hidden'); } catch { /* préférence non mémorisée */ }
+    return next;
+  });
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [kioskMode, setKioskMode] = useState(false);
@@ -105,6 +119,8 @@ const AppContent: React.FC = () => {
   const [securityChecked, setSecurityChecked] = useState(false);
   const [securityConfigured, setSecurityConfigured] = useState(false);
   const [securityUnlocked, setSecurityUnlocked] = useState(false);
+  // Relit « Fonctions IA » à chaque changement : SmartDoc n'apparaît que s'il est activé.
+  useAiEnabled(securityUnlocked);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(initialSettingsHash ? 'settings' : null);
   const [settingsRoute, setSettingsRoute] = useState<SettingsRoute>(
     () => parseSettingsHash(window.location.hash) || DEFAULT_SETTINGS_ROUTE,
@@ -124,8 +140,12 @@ const AppContent: React.FC = () => {
     return !(from.section === next.section && getSection(from.section).sharedDraft);
   };
 
+  // Quitter une consultation avec des modifications non enregistrées passe par la même garde que les Paramètres.
+  const leavesConsultation = (to: View) => currentView === 'new-prescription' && to !== 'new-prescription';
+
   const goToView = (view: View): boolean => {
     if (!canOpen(view)) return false;
+    if (leavesConsultation(view) && !unsavedChanges.confirmLeave()) return false;
     if (currentView === 'settings' && view !== 'settings' && !unsavedChanges.confirmLeave()) return false;
     setCurrentView(view);
     return true;
@@ -134,6 +154,7 @@ const AppContent: React.FC = () => {
   const openSettings = (to: SettingsRoute): boolean => {
     if (!sessionService.can('MANAGE_SETTINGS')) return false;
     if (leavesSettingsDraft(to) && !unsavedChanges.confirmLeave()) return false;
+    if (leavesConsultation('settings') && !unsavedChanges.confirmLeave()) return false;
     setSettingsRoute(normalizeRoute(to));
     setCurrentView('settings');
     return true;
@@ -233,6 +254,8 @@ const AppContent: React.FC = () => {
   }, [securityUnlocked]);
 
   const handleStartConsultation = (patient?: Patient) => {
+    // Ouvrir une autre fiche pendant une consultation en cours = quitter celle-ci.
+    if (currentView === 'new-prescription' && patient && patient.id !== activePatient?.id && !unsavedChanges.confirmLeave()) return;
     if (patient) {
       setActivePatient(patient);
       if (prescriptionDraft?.patient?.id !== patient.id) setPrescriptionDraft(null);
@@ -248,6 +271,7 @@ const AppContent: React.FC = () => {
   const handleLock = async () => {
     await securityService.lock();
     dataService.reset();
+    resetProfile();
     setIsDataLoaded(false);
     setSecurityUnlocked(false);
     setCurrentView('dashboard');
@@ -305,6 +329,8 @@ const AppContent: React.FC = () => {
           initialPrescription={activePrescription}
           draft={prescriptionDraft}
           onDraftChange={setPrescriptionDraft}
+          sidebarShown={consultSidebarShown}
+          onToggleSidebar={toggleConsultSidebar}
           onFinish={() => {
             setActivePatient(null);
             setActivePrescription(null);
@@ -314,7 +340,6 @@ const AppContent: React.FC = () => {
         />
         </CabinetSetupGate>
       );
-      case 'compatibility': return <DrugCompatibility />;
       case 'analytics': return <Analytics />;
       case 'tasks': return <TaskManager />;
       case 'settings': return <SettingsPanel route={settingsRoute} onNavigate={openSettings} />;
@@ -327,9 +352,7 @@ const AppContent: React.FC = () => {
         setCurrentView(view as View);
       }} />;
       case 'smart-doc': return <SmartDocInterface />;
-      case 'repertoire': return <PharmaDirectory />;
-      case 'medical-directory': return <PharmaDirectory />;
-      case 'medicament-management': return <MedicamentManagement />;
+      case 'medical-directory': return <MedicamentsPage />;
       default: return <Dashboard onNewPrescription={handleStartConsultation} />;
     }
   };
@@ -360,13 +383,11 @@ const AppContent: React.FC = () => {
     { id: 'smart-doc', label: t('smart_doc'), icon: FileText, highlight: true, requiredPermission: 'USE_AI_ASSISTANT' },
     // Clinical, daily-use tools
     { id: 'medical-directory', label: 'Médicaments', icon: BookOpen, requiredPermission: 'DOCTOR_TOOLS' },
-    { id: 'compatibility', label: 'Vérifier interactions', icon: Activity, requiredPermission: 'CREATE_PRESCRIPTION' },
-    // Administrative, occasional-use tools
-    { id: 'medicament-management', label: 'Gestion des médicaments', icon: Database, requiredPermission: 'MANAGE_SETTINGS' },
+    // Outils administratifs
     { id: 'analytics', label: 'Comptabilité', icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
     { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'settings', label: t('settings'), icon: Settings, requiredPermission: 'MANAGE_SETTINGS' },
-  ].filter(item => (!item.requiredPermission || hasPermission(item.requiredPermission)) && !((item as any).assistantOnly && sessionService.isMedecin()));
+  ].filter(item => featureVisible(item.id as View) && (!item.requiredPermission || hasPermission(item.requiredPermission)) && !((item as any).assistantOnly && sessionService.isMedecin()));
 
   // ─── Loading & Auth gates ───
   if (!securityChecked) {
@@ -398,6 +419,7 @@ const AppContent: React.FC = () => {
   }
 
   const userInitials = (activeUser?.name || doctor.nameFr || 'D').substring(0, 2).toUpperCase();
+  const focusMode = currentView === 'new-prescription' && !consultSidebarShown;
   const sidebarWidth = isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)';
 
   return (
@@ -417,15 +439,18 @@ const AppContent: React.FC = () => {
 
       {/* ═══════════════ SIDEBAR ═══════════════ */}
       <aside
+        aria-hidden={focusMode}
         className={`
           ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
           fixed top-0 left-0 bottom-0 flex flex-col
           transition-all duration-300
         `}
         style={{
-          width: isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)',
+          width: focusMode ? 0 : isCollapsed ? 'var(--sidebar-collapsed-width)' : 'var(--sidebar-width)',
+          visibility: focusMode ? 'hidden' : 'visible',
+          overflow: 'hidden',
           background: 'var(--color-surface)',
-          borderRight: '1px solid var(--color-border)',
+          borderRight: focusMode ? 'none' : '1px solid var(--color-border)',
           height: '100vh',
           zIndex: 30,
           flexShrink: 0,
@@ -685,7 +710,7 @@ const AppContent: React.FC = () => {
       </aside>
 
       {/* ═══════════════ MAIN COLUMN ═══════════════ */}
-      <div className="flex-1 flex flex-col min-w-0 overflow-hidden" style={{ marginLeft: 'var(--sidebar-width)' }}>
+      <div className="flex-1 flex flex-col min-w-0 overflow-hidden" style={{ marginLeft: focusMode ? 0 : 'var(--sidebar-width)', transition: 'margin-left var(--transition-base)' }}>
 
         {/* ─── TOPBAR ─── */}
         <header
@@ -697,6 +722,7 @@ const AppContent: React.FC = () => {
             position: 'sticky',
             top: 0,
             zIndex: 'var(--z-topbar)' as any,
+            ...(focusMode ? { display: 'none' } : {}),
           }}
         >
           {/* Mobile menu toggle */}
@@ -806,7 +832,8 @@ const AppContent: React.FC = () => {
           style={{ padding: '24px 28px' }}
         >
           <div style={{
-            maxWidth: currentView === 'settings' && settingsRoute.section === 'documents' && normalizeRoute(settingsRoute).tab === 'design'
+            maxWidth: currentView === 'new-prescription'
+              || (currentView === 'settings' && settingsRoute.section === 'documents' && normalizeRoute(settingsRoute).tab === 'design')
               ? 'none' : 'var(--max-content-width)',
             margin: '0 auto',
           }}>

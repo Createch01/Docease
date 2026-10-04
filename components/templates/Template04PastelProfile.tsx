@@ -34,7 +34,7 @@ const Template04PastelProfile: React.FC<RxTemplateProps> = ({ doctor, patient, d
     <div className="absolute" style={{ left: '25mm', top: '16mm' }}>
       <div className="font-serif" style={{ color: C.ink, fontSize: '17pt', letterSpacing: '0.005em' }}>{doctor.name}</div>
       <div className="mt-1.5" style={{ color: C.grey, fontSize: '9.5pt' }}>{doctor.speciality}</div>
-      <div style={{ color: C.grey, fontSize: '9.5pt' }}>INPE {doctor.registrationNumber}</div>
+      {doctor.registrationNumber && <div style={{ color: C.grey, fontSize: '9.5pt' }}>INPE {doctor.registrationNumber}</div>}
     </div>
 
     {/* Overlapping silhouettes, top-right */}

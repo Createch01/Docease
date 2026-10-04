@@ -14,6 +14,7 @@ import Template09BlueGradientCorner from './Template09BlueGradientCorner';
 import CustomTemplate, { DEFAULT_CUSTOM_TEMPLATE_CONFIG } from './CustomTemplate';
 import OrdonnanceTemplate from '../ordonnance-editor/OrdonnanceTemplate';
 import { ORD_PAGE, resolveOrdonnanceAppearance, toOrdDoctor } from '../ordonnance-editor/ordonnanceModel';
+import { civility, sexLetter } from '../../utils/patientIdentity';
 import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 
 export type PrescriptionTemplateId =
@@ -134,6 +135,18 @@ export const TemplateThumbnail: React.FC<{ component: React.FC<RxTemplateProps>;
     );
 };
 
+const usesOrdonnanceDesign = (templateId: PrescriptionTemplateId | undefined, appearance: PrescriptionAppearance): boolean => {
+    const customConfig = appearance.customTemplateConfig;
+    return templateId === 'custom' && !customConfig?.layoutConfig?.elements?.length
+        && (!!customConfig?.ordonnance || !customConfig || Object.keys(customConfig).length === 0);
+};
+
+/** Dimensions (mm) de la feuille telle que TemplateRenderer la dessine à l'échelle 1. */
+export const getRxPageMm = (templateId: PrescriptionTemplateId | undefined, appearance: PrescriptionAppearance): { w: number; h: number } =>
+    usesOrdonnanceDesign(templateId, appearance)
+        ? ORD_PAGE[appearance.paperSize ?? resolveOrdonnanceAppearance(appearance.customTemplateConfig).paperSize]
+        : ORD_PAGE.A4;
+
 const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items, date, appearance, id, scale: scaleProp, fitPaper }) => {
     const Template = (templateId && templateId !== 'custom' && TEMPLATES[templateId]) || TEMPLATES.letterhead_simple;
 
@@ -143,13 +156,13 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
         phone: doctor.phone || '',
         address: doctor.addressFr || '',
         email: doctor.email || '',
-        registrationNumber: doctor.inpe || doctor.ordreNumber || '',
+        registrationNumber: doctor.inpe || '',
     };
 
     const rxPatient: RxPatient = {
         name: patient.name || '',
         age: patient.age ? String(patient.age) : '',
-        sex: patient.sex || (patient.type === 'Child' ? 'Enfant' : 'M/F'),
+        sex: sexLetter(patient.sex),
     };
 
     const rxItems: RxItem[] = items.map(item => ({
@@ -174,8 +187,7 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
     // éditeur (config.ordonnance) ou s'il n'existe encore aucun design. Les
     // anciens designs (et la mise en page libre layoutConfig) gardent leur rendu.
     const customConfig = appearance.customTemplateConfig;
-    const useOrdonnance = templateId === 'custom' && !customConfig?.layoutConfig?.elements?.length
-        && (!!customConfig?.ordonnance || !customConfig || Object.keys(customConfig).length === 0);
+    const useOrdonnance = usesOrdonnanceDesign(templateId, appearance);
     const ordAppearance = useOrdonnance
         ? { ...resolveOrdonnanceAppearance(customConfig), ...(appearance.paperSize ? { paperSize: appearance.paperSize } : {}) }
         : null;
@@ -206,7 +218,7 @@ const TemplateRenderer: React.FC<Props> = ({ templateId, doctor, patient, items,
                     <OrdonnanceTemplate
                         appearance={ordAppearance}
                         doctor={toOrdDoctor(doctor, appearance.website, appearance)}
-                        patient={{ name: rxPatient.name, age: patient.age ? `${patient.age} ans` : '', sex: patient.sex || '' }}
+                        patient={{ name: rxPatient.name, age: patient.age ? `${patient.age} ans` : '', sex: sexLetter(patient.sex), honorific: civility(patient.sex, patient.age, patient.type) }}
                         date={date || new Date().toLocaleDateString('fr-FR')}
                         items={rxItems.map(it => ({ drugName: it.drugName, strength: it.strength, form: it.form, dosage: it.dosage, duration: it.duration, timing: it.timing }))}
                     />

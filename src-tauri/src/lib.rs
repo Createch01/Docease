@@ -77,7 +77,7 @@ struct SecurityMeta {
 
 fn write_meta(path: &PathBuf, meta: &SecurityMeta) -> Result<(), String> {
     let json_str = serde_json::to_string_pretty(meta).map_err(|e| e.to_string())?;
-    fs::write(path, json_str).map_err(|e| e.to_string())
+    users::write_atomic(path, json_str.as_bytes())
 }
 
 /// Tests : dossier de données temporaire à la place du vrai (jamais lu ni écrit).
@@ -274,7 +274,7 @@ fn migrate_to_recovery<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri
         let Ok(encrypted) = fs::read(file) else { continue };
         let Ok(decrypted) = decrypt(&legacy_key, &encrypted) else { continue };
         let reencrypted = encrypt(&data_key, &decrypted)?;
-        fs::write(file, reencrypted).map_err(|e| e.to_string())?;
+        users::write_atomic(file, &reencrypted)?;
     }
 
     let pin_wrap_salt = random_salt_b64();
@@ -385,8 +385,7 @@ fn save_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<Ap
 
     let json_str = serde_json::to_string(&data).map_err(|e| e.to_string())?;
     let encrypted = encrypt(&key, json_str.as_bytes())?;
-    fs::write(path, encrypted).map_err(|e| e.to_string())?;
-    Ok(())
+    users::write_atomic(&path, &encrypted)
 }
 
 #[tauri::command]

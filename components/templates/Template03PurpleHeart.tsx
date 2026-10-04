@@ -49,7 +49,7 @@ const Template03PurpleHeart: React.FC<RxTemplateProps> = ({ doctor, patient, dat
       <div className="text-left">
         <div className="font-bold leading-tight" style={{ color: C.ink, fontSize: '19pt' }}>{doctor.name}</div>
         <div className="text-right" style={{ color: C.purple, fontSize: '9pt' }}>{doctor.speciality}</div>
-        <div className="text-right italic" style={{ color: C.grey, fontSize: '8.5pt' }}>INPE {doctor.registrationNumber}</div>
+        {doctor.registrationNumber && <div className="text-right italic" style={{ color: C.grey, fontSize: '8.5pt' }}>INPE {doctor.registrationNumber}</div>}
       </div>
     </div>
 
@@ -57,7 +57,7 @@ const Template03PurpleHeart: React.FC<RxTemplateProps> = ({ doctor, patient, dat
     <div className="absolute" style={{ left: 0, right: 0, top: '40mm', height: '25mm', background: C.lavender }} />
     <div className="absolute grid grid-cols-2 gap-x-10 gap-y-2" style={{ left: '18mm', right: '18mm', top: '44mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom du patient" value={patient.name} labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
       <RuledField label="Date" value={date} labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
       <RuledField label="Diagnostic" labelWidth={80} lineColor={C.lineLav} labelColor="#4B4A63" />
     </div>

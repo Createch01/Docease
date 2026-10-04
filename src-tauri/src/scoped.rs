@@ -468,4 +468,71 @@ mod tests {
         assert_eq!(e[2]["label"], "S.");
         assert_eq!(e[0].as_object().unwrap().len(), 2, "pas de motif ni d'heure");
     }
+
+    // Contexte patient codé (allergies / pathologies / stade rénal…) : réservé au médecin.
+    const CONTEXT_FIELDS: [&str; 10] = [
+        "allergyList", "pathologyList", "noKnownAllergy", "renalStage", "contextUpdatedAt", "contextUpdatedBy",
+        "legacyContext", "allergyTags", "pathologyTags", "isHeartPatient",
+    ];
+
+    fn context_patient() -> Value {
+        let mut p = full_patient();
+        let o = p.as_object_mut().unwrap();
+        o.insert("allergyList".into(), json!([{"ref": "ALG_PENICILLINES", "label": "Pénicillines", "coded": true, "reaction": "anaphylaxie", "addedAt": "2026-10-03"}]));
+        o.insert("pathologyList".into(), json!([{"ref": "N18.9", "label": "Maladie rénale chronique", "coded": true, "addedAt": "2026-10-03"}]));
+        o.insert("noKnownAllergy".into(), json!(false));
+        o.insert("renalStage".into(), json!("30-59"));
+        o.insert("contextUpdatedAt".into(), json!("2026-10-03T10:00:00.000Z"));
+        o.insert("contextUpdatedBy".into(), json!("Dr Alami"));
+        o.insert("legacyContext".into(), json!({"allergies": "pénicilline"}));
+        o.insert("allergyTags".into(), json!(["Pénicillines"]));
+        o.insert("pathologyTags".into(), json!(["Maladie rénale chronique"]));
+        o.insert("isHeartPatient".into(), json!(true));
+        p
+    }
+
+    #[test]
+    fn context_fields_are_not_identity_fields() {
+        for k in CONTEXT_FIELDS {
+            assert!(!IDENTITY_FIELDS.contains(&k), "{k} ne doit jamais entrer dans la liste blanche d'identité");
+        }
+    }
+
+    #[test]
+    fn identity_view_hides_the_coded_context() {
+        let v = identity_only(&context_patient());
+        let obj = v.as_object().unwrap();
+        for k in CONTEXT_FIELDS {
+            assert!(!obj.contains_key(k), "{k} ne doit pas être exposé à l'assistante");
+        }
+    }
+
+    #[test]
+    fn assistant_cannot_write_or_erase_the_coded_context() {
+        let stored = vec![context_patient()];
+        let incoming = vec![json!({
+            "id": "p1", "phone": "0611111111",
+            "allergyList": [], "pathologyList": [], "noKnownAllergy": true, "renalStage": "ge60",
+            "contextUpdatedAt": "1999-01-01", "contextUpdatedBy": "assistante", "legacyContext": {},
+            "allergyTags": [], "pathologyTags": [], "isHeartPatient": false
+        })];
+        let out = merge_patients(stored.clone(), &incoming).unwrap();
+        assert_eq!(out[0]["phone"], "0611111111");
+        for k in CONTEXT_FIELDS {
+            assert_eq!(out[0][k], context_patient()[k], "{k} doit rester inchangé");
+        }
+        // un nouveau patient créé par l'assistante n'embarque aucun champ de contexte
+        let out = merge_patients(stored, &[json!({"id": "p9", "name": "NOUVEAU Test", "allergyList": [{"label": "x"}], "renalStage": "lt15"})]).unwrap();
+        for k in CONTEXT_FIELDS {
+            assert!(out[1].get(k).is_none(), "{k} ignoré à la création");
+        }
+    }
+
+    #[test]
+    fn queue_for_assistant_keeps_context_server_side() {
+        let patients = vec![context_patient()];
+        let out = merge_queue(&[], &patients, &[json!({"id": "p1", "allergyList": [], "renalStage": "lt15"})]).unwrap();
+        assert_eq!(out[0]["allergyList"], context_patient()["allergyList"]);
+        assert_eq!(out[0]["renalStage"], "30-59");
+    }
 }

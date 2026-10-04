@@ -1,3 +1,4 @@
+import { useAiEnabled } from '../../services/useAiEnabled';
 import React, { useState, useMemo, useRef } from 'react';
 import { Plus, ShieldCheck, Paperclip, X, Eye, Layers, List, FlaskConical, Radio, FileQuestion } from 'lucide-react';
 import { dataService } from '../../services/dataService';
@@ -31,6 +32,7 @@ const readFileAsDataUrl = (file: File): Promise<string> => new Promise((resolve,
 });
 
 const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName, refreshTrigger, onNavigate }) => {
+    const aiEnabled = useAiEnabled();
     const { t, dir } = useI18n();
     const [isAddingResult, setIsAddingResult] = useState(false);
     const [newResult, setNewResult] = useState<{ title: string; interpretation: string; resultType: MedicalResultType; prescriberName: string; analysisId: string }>({
@@ -113,7 +115,7 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
                         </span>
                     </div>
                 </div>
-                {onNavigate && (
+                {onNavigate && aiEnabled && (
                     <button
                         onClick={() => onNavigate('smart-doc', { patientId: patientName })}
                         className="px-3 py-1 bg-emerald-50 text-emerald-600 rounded-lg text-[9px] font-black uppercase tracking-widest flex items-center gap-1 hover:bg-emerald-100 transition-colors"

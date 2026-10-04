@@ -1,8 +1,5 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import {
-    ActivePatientProfile, EMPTY_PROFILE,
-    loadActiveProfile, saveActiveProfile, clearActiveProfile,
-} from '../../services/activeProfileService';
+import React, { createContext, useContext, useState, useCallback } from 'react';
+import { ActivePatientProfile, EMPTY_PROFILE } from '../../services/activeProfileService';
 
 interface ActiveProfileContextType {
     profile: ActivePatientProfile;
@@ -15,16 +12,12 @@ const ActiveProfileContext = createContext<ActiveProfileContextType | undefined>
 export const ActiveProfileProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [profile, setProfileState] = useState<ActivePatientProfile>(EMPTY_PROFILE);
 
-    useEffect(() => { setProfileState(loadActiveProfile()); }, []);
-
     const setProfile = useCallback((next: ActivePatientProfile) => {
         setProfileState(next);
-        saveActiveProfile(next);
     }, []);
 
     const resetProfile = useCallback(() => {
         setProfileState(EMPTY_PROFILE);
-        clearActiveProfile();
     }, []);
 
     return (

@@ -1,0 +1,304 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-10-03",
+  "note": "Référentiel local hors ligne. match.atc = préfixes ATC ; match.dci / match.brands = débuts de mots cherchés dans nom commercial + DCI + composition ; match.text = termes cherchés dans les contre-indications de la fiche (alerte ATTENTION, jamais CRITIQUE). Aucun lien implicite entre entrées : seuls les liens déclarés dans crossReactivity existent.",
+  "frequent": ["ALG_PENICILLINES", "ALG_AINS", "ALG_ASPIRINE", "ALG_SULFAMIDES", "ALG_CEPHALOSPORINES", "ALG_IODE_CONTRASTE", "ALG_OPIOIDES", "ALG_LATEX", "ALG_MACROLIDES", "ALG_QUINOLONES"],
+  "items": [
+    {
+      "id": "ALG_PENICILLINES", "label": "Pénicillines", "kind": "drug",
+      "synonyms": ["pénicilline", "penicilline", "amoxicilline", "ampicilline", "augmentin", "amoxil", "bêta-lactamines", "beta-lactamines", "flucloxacilline", "oxacilline"],
+      "match": {
+        "atc": ["J01C"],
+        "dci": ["penicillin", "amoxicillin", "ampicillin", "clavulan", "cloxacillin", "flucloxacillin", "oxacillin", "piperacillin", "ticarcillin", "phenoxymethylpenicillin", "benzathine benzylpenicillin"],
+        "brands": ["augmentin", "aclav", "clavulin", "amoxil", "alfamox", "almoxel", "clamoxyl", "oracilline", "extencilline", "bristopen", "orbenine"],
+        "text": ["penicillin", "amoxicillin", "betalactam", "beta-lactam", "beta lactam"]
+      },
+      "crossReactivity": [
+        { "label": "Céphalosporines", "ref": "ALG_CEPHALOSPORINES", "note": "réactivité croisée possible (~2 %)" }
+      ]
+    },
+    {
+      "id": "ALG_CEPHALOSPORINES", "label": "Céphalosporines", "kind": "drug",
+      "synonyms": ["céphalosporine", "cephalosporine", "ceftriaxone", "céfixime", "cefixime", "céfuroxime", "cefuroxime", "céfaclor", "cephalexine", "céfalexine"],
+      "match": {
+        "atc": ["J01D"],
+        "dci": ["cef", "ceph", "ceftriaxon", "cefixim", "cefuroxim", "cefaclor", "cefalexin", "cefadroxil", "cefpodoxim", "cefotaxim"],
+        "brands": ["rocephine", "oroken", "zinnat"],
+        "text": ["cephalosporin", "cefalosporin"]
+      },
+      "crossReactivity": [
+        { "label": "Pénicillines", "ref": "ALG_PENICILLINES", "note": "réactivité croisée possible" }
+      ]
+    },
+    {
+      "id": "ALG_SULFAMIDES", "label": "Sulfamides antibactériens", "short": "Sulfamides", "kind": "drug",
+      "synonyms": ["sulfamide", "sulfamides", "cotrimoxazole", "co-trimoxazole", "bactrim", "sulfaméthoxazole", "sulfamethoxazole", "triméthoprime-sulfaméthoxazole"],
+      "match": {
+        "atc": ["J01E"],
+        "dci": ["sulfamid", "sulfamethoxazol", "sulfadiazin", "cotrimoxazol", "co-trimoxazol"],
+        "brands": ["bactrim", "eusaprim"],
+        "text": ["sulfamid", "cotrimoxazol", "sulfaméthoxazol", "sulfamethoxazol"]
+      }
+    },
+    {
+      "id": "ALG_ASPIRINE", "label": "Aspirine (acide acétylsalicylique)", "short": "Aspirine", "kind": "drug",
+      "synonyms": ["aspirine", "acide acétylsalicylique", "acide acetylsalicylique", "aspégic", "aspegic", "kardégic", "kardegic"],
+      "match": {
+        "atc": ["N02BA", "B01AC06"],
+        "dci": ["aspirin", "acide acetylsalicylique", "acetylsalicylate", "acetylsalicyl"],
+        "brands": ["aspirine", "aspegic", "kardegic", "acard"],
+        "text": ["aspirin", "acide acetylsalicylique", "salicyle", "salicylate"]
+      },
+      "crossReactivity": [
+        { "label": "AINS", "ref": "ALG_AINS", "note": "réactivité croisée (intolérance aux AINS)" }
+      ]
+    },
+    {
+      "id": "ALG_AINS", "label": "AINS (anti-inflammatoires non stéroïdiens)", "short": "AINS", "kind": "drug",
+      "synonyms": ["ains", "anti-inflammatoire", "anti inflammatoire", "ibuprofène", "ibuprofene", "diclofénac", "diclofenac", "kétoprofène", "ketoprofene", "naproxène", "méloxicam", "voltarène", "profénid", "advil"],
+      "match": {
+        "atc": ["M01AB", "M01AC", "M01AE", "M01AG", "M01AH", "M02AA", "S01BC"],
+        "dci": ["diclofenac", "ibuprofen", "meloxicam", "naproxen", "celecoxib", "ketoprofen", "piroxicam", "etoricoxib", "indometacin", "nimesulid", "acide mefenamique", "flurbiprofen", "tenoxicam", "acide niflumique", "ketorolac"],
+        "brands": ["aflamic", "voltarene", "advil", "surgam", "profenid", "nurofen", "brufen", "mobic", "feldene"],
+        "text": ["ains", "anti-inflammatoire non steroidien", "anti inflammatoires non steroidiens"]
+      },
+      "crossReactivity": [
+        { "label": "Aspirine", "ref": "ALG_ASPIRINE", "note": "réactivité croisée (intolérance à l'aspirine)" }
+      ]
+    },
+    {
+      "id": "ALG_IODE_CONTRASTE", "label": "Produits de contraste iodés", "kind": "drug",
+      "synonyms": ["produit de contraste", "produits de contraste iodés", "contraste iodé", "iohexol", "iopromide", "iodixanol", "ultravist", "visipaque", "scanner injecté"],
+      "match": {
+        "atc": ["V08A"],
+        "dci": ["iohexol", "iopromid", "iodixanol", "ioversol", "iopamidol", "iomeprol", "diatrizoate", "ioxaglate", "produit de contraste", "contraste iode"],
+        "brands": ["ultravist", "visipaque", "omnipaque", "iomeron", "optiray", "xenetix", "iopamiron"],
+        "text": ["produit de contraste", "contraste iode"]
+      }
+    },
+    {
+      "id": "ALG_POVIDONE_IODEE", "label": "Povidone iodée (Bétadine)", "kind": "drug",
+      "synonyms": ["povidone iodée", "povidone iodee", "bétadine", "betadine", "antiseptique iodé"],
+      "match": {
+        "atc": ["D08AG"],
+        "dci": ["povidone iodee", "povidone"],
+        "brands": ["betadine", "imizine"],
+        "text": ["povidone iodee"]
+      }
+    },
+    {
+      "id": "ALG_OPIOIDES", "label": "Codéine / opioïdes", "kind": "drug",
+      "synonyms": ["codéine", "codeine", "morphine", "tramadol", "opioïdes", "opioides", "opiacés", "fentanyl", "dafalgan codéine"],
+      "match": {
+        "atc": ["N02A", "R05DA04"],
+        "dci": ["codein", "morphin", "tramadol", "fentanyl", "oxycod", "opium", "pethidin", "buprenorphin", "nalbuphin", "dihydrocodein", "hydromorphon"],
+        "brands": ["codalipra", "codaliprane", "klipal", "efferalgan codeine", "dafalgan codeine", "topalgic", "contramal"],
+        "text": ["codein", "opioide", "opiace", "morphin"]
+      }
+    },
+    {
+      "id": "ALG_MACROLIDES", "label": "Macrolides", "kind": "drug",
+      "synonyms": ["macrolide", "macrolides", "clarithromycine", "érythromycine", "erythromycine", "azithromycine", "spiramycine", "josamycine"],
+      "match": {
+        "atc": ["J01FA"],
+        "dci": ["clarithromycin", "erythromycin", "azithromycin", "spiramycin", "josamycin", "midecamycin", "roxithromycin", "telithromycin", "macrolide"],
+        "brands": ["zeclar", "klacid", "pyostacine", "zithromax", "rovamycine"],
+        "text": ["macrolide"]
+      }
+    },
+    {
+      "id": "ALG_QUINOLONES", "label": "Quinolones / fluoroquinolones", "short": "Quinolones", "kind": "drug",
+      "synonyms": ["quinolone", "quinolones", "fluoroquinolone", "ciprofloxacine", "lévofloxacine", "levofloxacine", "ofloxacine"],
+      "match": {
+        "atc": ["J01M"],
+        "dci": ["ciprofloxacin", "levofloxacin", "ofloxacin", "moxifloxacin", "norfloxacin", "quinolone"],
+        "brands": ["ciflox", "tavanic", "oflocet", "avelox", "tifloxine"],
+        "text": ["quinolone"]
+      }
+    },
+    {
+      "id": "ALG_NITROIMIDAZOLES", "label": "Métronidazole / nitro-imidazolés", "short": "Métronidazole", "kind": "drug",
+      "synonyms": ["métronidazole", "metronidazole", "flagyl", "nitro-imidazolé", "ornidazole", "tinidazole", "secnidazole"],
+      "match": {
+        "atc": ["J01XD", "P01AB"],
+        "dci": ["metronidazol", "ornidazol", "tinidazol", "secnidazol", "nitro-imidazol"],
+        "brands": ["flagyl"],
+        "text": ["nitro-imidazol", "nitroimidazol", "metronidazol"]
+      }
+    },
+    {
+      "id": "ALG_TETRACYCLINES", "label": "Tétracyclines", "kind": "drug",
+      "synonyms": ["tétracycline", "tetracycline", "doxycycline", "minocycline"],
+      "match": {
+        "atc": ["J01A"],
+        "dci": ["doxycyclin", "tetracyclin", "lymecyclin", "minocyclin", "tigecyclin"],
+        "brands": ["vibramycine", "granudoxy"],
+        "text": ["tetracyclin"]
+      }
+    },
+    {
+      "id": "ALG_AMINOSIDES", "label": "Aminosides", "kind": "drug",
+      "synonyms": ["aminoside", "aminosides", "gentamicine", "amikacine", "tobramycine"],
+      "match": {
+        "atc": ["J01G"],
+        "dci": ["gentamicin", "amikacin", "tobramycin", "streptomycin", "neomycin", "kanamycin", "aminoside"],
+        "brands": [],
+        "text": ["aminoside"]
+      }
+    },
+    {
+      "id": "ALG_IEC", "label": "IEC (inhibiteurs de l'enzyme de conversion)", "short": "IEC", "kind": "drug",
+      "synonyms": ["iec", "captopril", "énalapril", "enalapril", "ramipril", "périndopril", "perindopril", "lisinopril", "angio-œdème", "angioedeme"],
+      "match": {
+        "atc": ["C09A", "C09B"],
+        "dci": ["captopril", "enalapril", "lisinopril", "ramipril", "perindopril", "cilazapril", "zofenopril", "quinapril", "benazepril", "fosinopril", "trandolapril", "iec"],
+        "brands": ["triatec", "zestril", "coversyl", "lopril"],
+        "text": ["inhibiteur de l'enzyme de conversion", "iec "]
+      },
+      "crossReactivity": [
+        { "label": "Sartans", "atc": ["C09C", "C09D"], "note": "risque d'angio-œdème" },
+        { "label": "Sacubitril", "atc": ["C09DX04"], "dci": ["sacubitril"], "note": "risque d'angio-œdème" }
+      ]
+    },
+    {
+      "id": "ALG_STATINES", "label": "Statines (intolérance)", "kind": "drug",
+      "synonyms": ["statine", "statines", "atorvastatine", "simvastatine", "rosuvastatine", "myalgies aux statines"],
+      "match": {
+        "atc": ["C10AA", "C10BA", "C10BX"],
+        "dci": ["atorvastatin", "simvastatin", "rosuvastatin", "pravastatin", "fluvastatin", "pitavastatin"],
+        "brands": ["tahor", "zocor", "crestor", "lipitor"],
+        "text": ["statine"]
+      }
+    },
+    {
+      "id": "ALG_PARACETAMOL", "label": "Paracétamol", "kind": "drug",
+      "synonyms": ["paracétamol", "paracetamol", "acétaminophène", "doliprane", "dafalgan", "efferalgan"],
+      "match": {
+        "atc": ["N02BE"],
+        "dci": ["paracetamol", "acetaminophen"],
+        "brands": ["doliprane", "dafalgan", "efferalgan"],
+        "text": ["paracetamol", "acetaminophen"]
+      }
+    },
+    {
+      "id": "ALG_ANESTHESIQUES_LOCAUX", "label": "Anesthésiques locaux", "kind": "drug",
+      "synonyms": ["anesthésique local", "lidocaïne", "lidocaine", "xylocaïne", "articaïne", "bupivacaïne"],
+      "match": {
+        "atc": ["N01B"],
+        "dci": ["lidocain", "bupivacain", "articain", "mepivacain", "procain", "ropivacain"],
+        "brands": ["xylocaine"],
+        "text": ["anesthesique local"]
+      }
+    },
+    {
+      "id": "ALG_HEPARINES_TIH", "label": "Héparines (TIH)", "kind": "drug",
+      "synonyms": ["héparine", "heparine", "énoxaparine", "enoxaparine", "lovenox", "HBPM", "thrombopénie induite par l'héparine", "TIH"],
+      "match": {
+        "atc": ["B01AB"],
+        "dci": ["heparin", "enoxaparin", "nadroparin", "dalteparin", "tinzaparin", "bemiparin", "sulodexid"],
+        "brands": ["lovenox", "fraxiparine", "innohep", "clexane"],
+        "text": ["heparin", "thrombopenie induite"]
+      }
+    },
+    {
+      "id": "ALG_ALLOPURINOL", "label": "Allopurinol", "kind": "drug",
+      "synonyms": ["allopurinol", "zyloric"],
+      "match": {
+        "atc": ["M04AA01"],
+        "dci": ["allopurinol"],
+        "brands": ["zyloric"],
+        "text": ["allopurinol"]
+      }
+    },
+    {
+      "id": "ALG_AMIODARONE", "label": "Amiodarone", "kind": "drug",
+      "synonyms": ["amiodarone", "cordarone"],
+      "match": {
+        "atc": ["C01BD01"],
+        "dci": ["amiodaron"],
+        "brands": ["cordarone", "mekard"],
+        "text": ["amiodaron"]
+      }
+    },
+    {
+      "id": "ALG_BETABLOQUANTS", "label": "Bêta-bloquants", "kind": "drug",
+      "synonyms": ["bêta-bloquant", "beta-bloquant", "bêtabloquants", "betabloquants", "bisoprolol", "aténolol", "metoprolol", "propranolol", "carvédilol"],
+      "match": {
+        "atc": ["C07", "S01ED"],
+        "dci": ["bisoprolol", "atenolol", "metoprolol", "propranolol", "carvedilol", "nebivolol", "betaxolol", "timolol", "sotalol", "labetalol", "betabloquant", "beta-bloquant"],
+        "brands": ["concor", "seloken", "tenormine", "detensic"],
+        "text": ["betabloquant", "beta-bloquant", "beta bloquant"]
+      }
+    },
+    {
+      "id": "ALG_AVK", "label": "Warfarine / AVK", "kind": "drug",
+      "synonyms": ["warfarine", "coumadine", "acénocoumarol", "acenocoumarol", "sintrom", "previscan", "fluindione", "avk"],
+      "match": {
+        "atc": ["B01AA"],
+        "dci": ["warfarin", "acenocoumarol", "fluindion", "phenprocoumon"],
+        "brands": ["coumadine", "sintrom", "previscan"],
+        "text": ["warfarin", "antivitamine k"]
+      }
+    },
+    {
+      "id": "ALG_METFORMINE", "label": "Métformine", "kind": "drug",
+      "synonyms": ["métformine", "metformine", "glucophage"],
+      "match": {
+        "atc": ["A10BA02", "A10BD"],
+        "dci": ["metformin"],
+        "brands": ["glucophage"],
+        "text": ["metformin"]
+      }
+    },
+    {
+      "id": "ALG_INSULINE", "label": "Insuline", "kind": "drug",
+      "synonyms": ["insuline", "lantus", "novorapid"],
+      "match": {
+        "atc": ["A10A"],
+        "dci": ["insulin"],
+        "brands": ["lantus", "novorapid", "humalog"],
+        "text": ["insulin"]
+      }
+    },
+    {
+      "id": "ALG_LATEX", "label": "Latex", "kind": "non_drug",
+      "synonyms": ["latex", "caoutchouc", "gants en latex"],
+      "match": { "atc": [], "dci": [], "brands": [], "text": ["latex"] }
+    },
+    {
+      "id": "ALG_ARACHIDES", "label": "Arachides", "kind": "non_drug",
+      "synonyms": ["arachide", "arachides", "cacahuète", "cacahuete", "huile d'arachide"],
+      "match": { "atc": [], "dci": [], "brands": [], "text": ["arachide", "cacahuete"] }
+    },
+    {
+      "id": "ALG_CRUSTACES", "label": "Crustacés / fruits de mer", "short": "Crustacés", "kind": "non_drug",
+      "synonyms": ["crustacés", "crustaces", "fruits de mer", "crevette", "crevettes", "crabe", "langouste"],
+      "match": { "atc": [], "dci": [], "brands": [], "text": ["crustace", "fruits de mer"] }
+    },
+    {
+      "id": "ALG_POISSONS", "label": "Poissons", "kind": "non_drug",
+      "synonyms": ["poisson", "poissons"],
+      "match": { "atc": [], "dci": [], "brands": [], "text": ["poisson"] }
+    },
+    {
+      "id": "ALG_OEUFS", "label": "Œufs", "kind": "non_drug",
+      "synonyms": ["oeuf", "oeufs", "œuf", "œufs", "ovalbumine"],
+      "match": { "atc": [], "dci": [], "brands": [], "text": ["oeuf", "ovalbumin"] }
+    },
+    {
+      "id": "ALG_LAIT", "label": "Lait de vache (protéines)", "short": "Lait de vache", "kind": "non_drug",
+      "synonyms": ["lait", "lait de vache", "protéines de lait", "caséine", "lactoprotéines"],
+      "match": { "atc": [], "dci": [], "brands": [], "text": ["lait de vache", "proteines de lait", "proteines du lait", "caseine", "lactoproteine"] }
+    },
+    {
+      "id": "ALG_POLLENS", "label": "Pollens", "kind": "non_drug",
+      "synonyms": ["pollen", "pollens", "rhume des foins"],
+      "match": { "atc": [], "dci": [], "brands": [], "text": ["pollen"] }
+    },
+    {
+      "id": "ALG_ACARIENS", "label": "Acariens / poussières", "kind": "non_drug",
+      "synonyms": ["acariens", "acarien", "poussière", "poussières", "poussiere", "poussieres"],
+      "match": { "atc": [], "dci": [], "brands": [], "text": ["acarien", "poussiere"] }
+    }
+  ]
+}

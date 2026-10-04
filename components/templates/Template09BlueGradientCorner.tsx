@@ -45,7 +45,7 @@ const Template09BlueGradientCorner: React.FC<RxTemplateProps> = ({ doctor, patie
 
     <div className="absolute text-right" style={{ right: '16mm', top: '14mm' }}>
       <div className="font-semibold" style={{ color: C.blueDeep, fontSize: '12pt', letterSpacing: '0.2em' }}>ORDONNANCE</div>
-      <div style={{ color: C.grey, fontSize: '7.5pt' }}>INPE {doctor.registrationNumber}</div>
+      {doctor.registrationNumber && <div style={{ color: C.grey, fontSize: '7.5pt' }}>INPE {doctor.registrationNumber}</div>}
     </div>
 
     {/* Accent rules */}
@@ -56,7 +56,7 @@ const Template09BlueGradientCorner: React.FC<RxTemplateProps> = ({ doctor, patie
     <div className="absolute grid grid-cols-2 gap-x-10 gap-y-2.5"
          style={{ left: '16mm', right: '16mm', top: '64mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom du patient" value={patient.name} labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Date" value={date} labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Diagnostic" labelWidth={78} lineColor="#a9c2d4" labelColor={C.grey} valueColor={C.ink} />
     </div>

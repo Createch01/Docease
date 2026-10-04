@@ -18,22 +18,31 @@ import {
   RefreshCcw, FileDigit, X as CloseX, Loader2,
   Heart, CheckCircle2, Baby, UserCircle,
   ShieldX, AlertCircle, Activity, Zap, BrainCircuit, FlaskConical,
-  ArrowLeft, History, XCircle, ScrollText,
+  ArrowLeft, History, XCircle, ScrollText, ShieldCheck, PanelLeftOpen, PanelLeftClose,
 } from 'lucide-react';
-import { Medicine, PrescriptionItem, MedicineCategory, MealTiming, Patient, Prescription, PatientType, PrescriptionDraft } from '../types';
+import { Medicine, PrescriptionItem, MedicineCategory, MealTiming, Patient, Prescription, PatientType, PrescriptionDraft, ContextEntry, AllergyReaction, RenalStage } from '../types';
 import { dataService } from '../services/dataService';
 import { searchDrugsGlobal, mapMedicamentToMedicine } from '../services/drugCatalogService';
 import { drugRulesService } from '../services/drugRules';
 import { settingsService } from '../services/settingsService';
 import { useI18n } from '../i18n';
 import CombinedConsultationTemplate from './CombinedConsultationTemplate';
-import TemplateRenderer from './templates/TemplateRenderer';
+import TemplateRenderer, { getRxPageMm } from './templates/TemplateRenderer';
+import PrintPreview from './ui/PrintPreview';
 import { usePrintMode } from './usePrintMode';
 import { COMMON_ANALYSES } from '../constants/medicalData';
 // @ts-ignore
 import html2pdf from 'html2pdf.js';
 import * as prescriptionAiService from '../services/prescriptionAiService';
 import { toastService } from '../services/toastService';
+import { canOutput } from '../services/cabinetSetup';
+import { sessionService } from '../services/sessionService';
+import { unsavedChanges, useUnsavedChanges } from './settings/unsavedChanges';
+import { specialtyKey, deriveProfileFlags } from '../services/medicalReferentials';
+import { buildContextFromPatient, buildContextSave, shortcutActive, toggleShortcut, withContext, ShortcutKey } from '../services/patientContext';
+import ContextTagInput from './ui/ContextTagInput';
+import PatientPicker from './ui/PatientPicker';
+import { calculateAgeYears, formatDate } from '../utils/formatters';
 
 export interface SafetyNotification {
   id: string;
@@ -43,6 +52,8 @@ export interface SafetyNotification {
   type: 'INTERACTION' | 'CONTRE_INDICATION' | 'DOUBLON' | 'ENFANT_INTERDIT' | 'REGLE_SYSTEME' | 'DONNEE_MANQUANTE';
   canOverride?: boolean;
   itemId?: string;
+  /** Allergie à réaction anaphylactique : l'ordonnance ne peut être enregistrée qu'après justification. */
+  requiresJustification?: boolean;
 }
 
 interface PrescriptionEditorProps {
@@ -52,6 +63,9 @@ interface PrescriptionEditorProps {
   initialPrescription?: Prescription | null;
   draft?: PrescriptionDraft | null;
   onDraftChange?: (draft: PrescriptionDraft | null) => void;
+  /** Mode concentration : la sidebar de l'application est-elle affichée ? */
+  sidebarShown?: boolean;
+  onToggleSidebar?: () => void;
 }
 
 // ─── Shared style constants ──────────────────────────────────────────────
@@ -63,7 +77,7 @@ const labelEyebrow = 'block text-[11px] font-medium uppercase tracking-wider mb-
 const labelEyebrowStyle = { color: 'var(--color-text-subtle)', letterSpacing: '0.06em' } as React.CSSProperties;
 
 const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
-  onFinish, selectedPatientFromQueue, initialPatient, initialPrescription, draft, onDraftChange,
+  onFinish, selectedPatientFromQueue, initialPatient, initialPrescription, draft, onDraftChange, sidebarShown, onToggleSidebar,
 }) => {
   const { t, lang, dir } = useI18n();
 
@@ -71,11 +85,12 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [patient, setPatient] = useState<Partial<Patient>>(draft?.patient || {
     name: initialPatient?.name || '',
     age: initialPatient?.age || 0,
-    sex: initialPatient?.sex || 'M',
+    // Aucun sexe par défaut : la saisie est obligatoire (voir validateForOutput).
+    sex: initialPatient?.sex,
     type: initialPatient?.type || 'Adult',
     weight: initialPatient?.weight || '',
-    allergies: initialPatient?.allergies || '',
-    pathologies: initialPatient?.pathologies || '',
+    allergyList: [],
+    pathologyList: [],
     consultationFee: initialPatient?.consultationFee || 0,
     isPregnant: initialPatient?.isPregnant || false,
     isBreastfeeding: initialPatient?.isBreastfeeding || false,
@@ -90,8 +105,13 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const [medicineSearch, setMedicineSearch] = useState('');
   const [suggestions, setSuggestions] = useState<Medicine[]>([]);
   const [amount, setAmount] = useState(draft?.amount || 200);
-  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
-  const [patientSuggestions, setPatientSuggestions] = useState<Patient[]>([]);
+  // Un brouillon restauré garde le patient choisi (son id est conservé dans l'état patient).
+  const [selectedPatientId, setSelectedPatientId] = useState<string | null>(draft?.patient?.id ?? null);
+  // « search » : recherche d'un dossier existant ; « new » : saisie d'un nouveau patient (dossier créé à l'enregistrement).
+  const [patientMode, setPatientMode] = useState<'search' | 'new'>(draft?.patient?.name && !draft.patient.id ? 'new' : 'search');
+  // Sexe / âge repris du dossier : lecture seule, « Modifier » rouvre la saisie.
+  const [editSex, setEditSex] = useState(false);
+  const [lastWeightInfo, setLastWeightInfo] = useState<string | null>(null);
   const [aiWarnings, setAiWarnings] = useState<SafetyNotification[]>([]);
   const [isAiChecking, setIsAiChecking] = useState(false);
   const [overriddenWarnings, setOverriddenWarnings] = useState<Set<string>>(new Set());
@@ -112,16 +132,25 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
   const printing = usePrintMode();
 
   const medInputRef = useRef<HTMLInputElement>(null);
+  const specialty = specialtyKey(dataService.getDoctorInfo()?.specialtyFr);
 
-  const queueSuggestions = (dataService.getTodayQueue()).map(q => ({
-    id: q.id,
-    name: q.name || (q as any).patientName,
-    age: q.age || 0,
-    sex: q.sex || 'M' as const,
-    type: q.type || 'Adult' as const,
-    phone: q.phone || '',
-    consultationFee: q.consultationFee || 200,
-  }));
+  // Aperçu d'impression plus grand sur les écrans larges (≥ 1700 px) ; 794 px = largeur A4 à l'échelle 1.
+  const [wide, setWide] = useState(() => typeof window.matchMedia === 'function' && window.matchMedia('(min-width: 1700px)').matches);
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return;
+    const mq = window.matchMedia('(min-width: 1700px)');
+    const onChange = () => setWide(mq.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  // Modifications non enregistrées : alimente la garde de navigation (même mécanisme que les Paramètres).
+  const [touched, setTouched] = useState(false);
+  const updatePatient = (next: Partial<Patient>) => { setTouched(true); setPatient(next); };
+  const dirty = initialPrescription
+    ? touched || JSON.stringify(items) !== JSON.stringify(initialPrescription.items)
+    : touched || items.length > 0 || selectedTests.length > 0;
+  useUnsavedChanges('consultation', dirty);
 
   // ═══ Effects (UNCHANGED) ═══
   useEffect(() => { setCategories(['Tous', ...dataService.getTherapeuticGroups()]); }, []);
@@ -132,7 +161,10 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     }
   }, [patient, items, amount, selectedTests, initialPrescription]);
 
-  useEffect(() => { if (initialPatient) selectFromPatientData(initialPatient); }, [initialPatient]);
+  // Ouverture depuis un RDV ou la salle d'attente : le dossier complet remplace la copie de la file.
+  useEffect(() => {
+    if (initialPatient) selectFromPatientData(dataService.getPatientProfile(initialPatient.id) ?? initialPatient);
+  }, [initialPatient]);
 
   useEffect(() => {
     if (selectedPatientFromQueue) {
@@ -158,8 +190,14 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     }
   }, [initialPrescription]);
 
+  // Toute modification du contexte (allergie, pathologie, stade rénal, indicateurs) relance
+  // immédiatement la vérification des médicaments déjà prescrits.
+  useEffect(() => { runSafetyChecks(items); },
+    [patient.allergyList, patient.pathologyList, patient.noKnownAllergy, patient.renalStage,
+      patient.isHeartPatient, patient.isKidneyPatient, patient.isLiverPatient]);
+
   // ═══ Handlers (UNCHANGED) ═══
-  const runSafetyChecks = (currentItems: PrescriptionItem[]) => {
+  const runSafetyChecks = (currentItems: PrescriptionItem[], currentPatient: Partial<Patient> = patient) => {
     const newLocalWarnings: SafetyNotification[] = [];
     const seenMeds = new Set<string>();
     currentItems.forEach(item => {
@@ -174,11 +212,11 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       }
       seenMeds.add(nameNorm);
     });
-    const systemAlerts = drugRulesService.checkRules(patient as Patient, currentItems);
+    const systemAlerts = drugRulesService.checkRules(currentPatient as Patient, currentItems);
     systemAlerts.forEach((alert, idx) => {
-      const alertId = `rule-${idx}-${alert.type}-${alert.message.length}`;
+      const alertId = alert.id ?? `rule-${idx}-${alert.type}-${alert.message.length}`;
       if (!overriddenWarnings.has(alertId)) {
-        newLocalWarnings.push({ id: alertId, ...alert, canOverride: true });
+        newLocalWarnings.push({ ...alert, id: alertId, canOverride: true });
       }
     });
     setAiWarnings(newLocalWarnings);
@@ -284,24 +322,78 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
   const selectFromPatientData = (p: Patient) => {
     setSelectedPatientId(p.id);
+    setPatientMode('search');
+    const { migrated: _migrated, ...context } = buildContextFromPatient(p);
+    setEditSex(false);
+    const lastVital = [...(p.vitalSigns || [])].filter(v => v.weight).sort((a, b) => b.date.localeCompare(a.date))[0];
+    const lastWeight = lastVital?.weight ? String(lastVital.weight) : p.weight;
+    setLastWeightInfo(lastWeight ? `${lastWeight} kg${lastVital ? ` · ${formatDate(lastVital.date)}` : ''}` : null);
     setPatient({
-      name: p.name, age: p.age, sex: p.sex, phone: p.phone, weight: p.weight, type: p.type,
-      allergies: p.allergies || '',
-      pathologies: (p.pathologies || '') + (p.chronicDiseases ? ' ' + p.chronicDiseases.join(', ') : ''),
+      id: p.id, name: p.name, age: calculateAgeYears(p.dateOfBirth) ?? p.age, dateOfBirth: p.dateOfBirth,
+      sex: p.sex, phone: p.phone, weight: lastWeight, type: p.type,
       consultationFee: p.consultationFee,
       isPregnant: p.isPregnant || false, isBreastfeeding: p.isBreastfeeding || false,
-      isHeartPatient: p.isHeartPatient || false, isKidneyPatient: p.isKidneyPatient || false,
-      isLiverPatient: p.isLiverPatient || false,
       pregnancyWeeks: p.pregnancyWeeks || 0, lactationMonths: p.lactationMonths || 0,
+      contextUpdatedAt: p.contextUpdatedAt, contextUpdatedBy: p.contextUpdatedBy,
+      ...withContext({}, context),
     });
     setAmount(p.consultationFee || 200);
-    setPatientSuggestions([]);
     medInputRef.current?.focus();
   };
 
+  // Une allergie à réaction anaphylactique impose une justification avant tout enregistrement.
+  const justificationPending = () => {
+    const pending = aiWarnings.filter(w => w.requiresJustification);
+    if (pending.length === 0) return false;
+    toastService.error(`Justification requise : ${pending[0].message}`);
+    return true;
+  };
+
+  /** Enregistre le contexte (allergies, pathologies…) dans le dossier — médecin uniquement. */
+  const persistContext = (patientId: string) => {
+    if (!sessionService.isMedecin()) return;
+    const profile = dataService.getPatientProfile(patientId);
+    if (!profile) return;
+    const updated = buildContextSave(
+      profile,
+      {
+        allergyList: patient.allergyList || [], pathologyList: patient.pathologyList || [],
+        noKnownAllergy: patient.noKnownAllergy, renalStage: patient.renalStage,
+      },
+      sessionService.get()?.name || sessionService.get()?.userId || 'médecin',
+    );
+    if (updated) dataService.savePatientProfile(updated);
+  };
+
+  /** Sexe (saisi ici ou corrigé) et poids du jour reportés dans le dossier — médecin uniquement. */
+  const persistIdentity = (patientId: string) => {
+    if (!sessionService.isMedecin()) return;
+    const profile = dataService.getPatientProfile(patientId);
+    if (!profile) return;
+    const next: Patient = { ...profile };
+    let changed = false;
+    if (patient.sex && patient.sex !== profile.sex) { next.sex = patient.sex; changed = true; }
+    const kg = weightValue > 0 ? weightValue : undefined;
+    if (kg) {
+      const last = [...(profile.vitalSigns || [])].filter(v => v.weight).sort((a, b) => b.date.localeCompare(a.date))[0];
+      if (!last || last.weight !== kg) {
+        next.weight = String(kg);
+        next.vitalSigns = [...(profile.vitalSigns || []), { date: new Date().toISOString(), weight: kg }];
+        changed = true;
+      }
+    }
+    if (changed) dataService.savePatientProfile(next);
+  };
+
+  const handleBack = () => {
+    if (!unsavedChanges.confirmLeave()) return;
+    onFinish();
+  };
+
   const handleSave = () => {
+    if (!validateForOutput() || justificationPending()) return;
     const isEditing = !!initialPrescription;
-    const finalPatientId = selectedPatientId || (patient.name as string);
+    const finalPatientId = ensurePatientRecord();
     const newPrescription: Prescription = {
       id: isEditing ? initialPrescription.id : Date.now().toString(),
       patientId: finalPatientId,
@@ -310,6 +402,8 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       patientType: patient.type as PatientType,
       patientAge: patient.age, patientWeight: patient.weight,
     };
+    persistIdentity(finalPatientId);
+    persistContext(finalPatientId);
     if (isEditing) dataService.updatePrescription(newPrescription);
     else dataService.savePrescription(newPrescription);
     if (selectedTests.length > 0) {
@@ -322,10 +416,12 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       dataService.deleteFromQueue(selectedPatientId);
       dataService.markAppointmentDone(selectedPatientId);
     }
+    unsavedChanges.set('consultation', false);
     onFinish();
   };
 
   const handleExportPDF = () => {
+    if (!validateForOutput() || justificationPending()) return;
     const appearance = settingsService.getAppearance();
     const doctor = dataService.getDoctorInfo();
     const element = document.getElementById('prescription-export-template');
@@ -338,6 +434,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
       pagebreak: { mode: 'avoid-all' },
     };
+    if (!canOutput()) return;
     toastService.info("Génération de l'ordonnance PDF...");
     html2pdf().set(opt).from(element).save()
       .then(() => {
@@ -364,17 +461,18 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     const doctor = dataService.getDoctorInfo();
     const id = mode === 'preview' ? 'prescription-preview-template' : mode === 'print' ? 'prescription-print-template' : 'prescription-export-template';
     if (mode === 'preview') {
+      const MM_PX = 96 / 25.4;
+      const mm = getRxPageMm(appearance.selectedTemplate, appearance);
+      const page = useCombinedPrint ? { w: 2480, h: 3508 } : { w: mm.w * MM_PX, h: mm.h * MM_PX };
+      const previewPatient = { name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' };
       return (
-        <div
-          className="w-full lg:w-[420px] shrink-0 lg:sticky lg:top-[88px] h-fit rounded-xl overflow-hidden bg-white border flex justify-center items-start"
-          style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-soft)' }}
-        >
-          {useCombinedPrint ? (
-            <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} scale={0.17} />
-          ) : (
-            <TemplateRenderer templateId={appearance.selectedTemplate} id={id} doctor={doctor} appearance={appearance} patient={{ name: patient.name || '', age: patient.age || 0, sex: (patient as any).sex, type: (patient.type as PatientType) || 'Adult' }} items={items} scale={0.531} />
-          )}
-        </div>
+        <PrintPreview
+          page={page}
+          label="Aperçu de l'ordonnance"
+          render={scale => useCombinedPrint
+            ? <CombinedConsultationTemplate doctor={doctor} appearance={appearance} patient={patient} items={items} tests={getGroupedTests()} scale={scale} />
+            : <TemplateRenderer templateId={appearance.selectedTemplate} doctor={doctor} appearance={appearance} patient={previewPatient} items={items} scale={scale} />}
+        />
       );
     }
     if (mode === 'export') {
@@ -403,6 +501,100 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     );
   };
 
+  // Largeur réelle de la colonne formulaire (avec ou sans sidebar) : décide de la mise en page des blocs.
+  const formRef = useRef<HTMLDivElement>(null);
+  const [formWidth, setFormWidth] = useState(900);
+  useEffect(() => {
+    const el = formRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver(entries => setFormWidth(entries[0].contentRect.width));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  const roomy = formWidth >= 640;
+
+  // Couleur du bloc Allergies selon l'état : neutre / vert discret / rouge.
+  const allergyTone = (patient.allergyList || []).length > 0
+    ? { box: { background: 'var(--color-danger-50)', borderColor: 'var(--color-danger-100)' }, label: 'var(--color-danger-700)' }
+    : patient.noKnownAllergy
+      ? { box: { background: 'var(--color-secondary-50)', borderColor: 'var(--color-secondary-100)' }, label: 'var(--color-secondary-hover)' }
+      : { box: { background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }, label: 'var(--color-text-muted)' };
+
+  // ─── Choix du patient ───
+  const blankPatient = (name = ''): Partial<Patient> => ({
+    name, age: 0, sex: undefined, type: 'Adult', weight: '', phone: '', consultationFee: 0,
+    isPregnant: false, isBreastfeeding: false, pregnancyWeeks: 0, lactationMonths: 0,
+    ...withContext({}, { allergyList: [], pathologyList: [], noKnownAllergy: undefined, renalStage: undefined }),
+  });
+  const pickPatient = (p: Patient) => {
+    selectFromPatientData(dataService.getPatientProfile(p.id) ?? p);
+    setAmount((dataService.getPatientProfile(p.id) ?? p).consultationFee || 200);
+    medInputRef.current?.focus();
+  };
+  const startNewPatient = (typed: string) => {
+    setSelectedPatientId(null);
+    setEditSex(false); setLastWeightInfo(null);
+    setPatient(blankPatient(typed));
+    setPatientMode('new');
+    setTouched(true);
+  };
+  const clearPatient = () => {
+    setSelectedPatientId(null);
+    setEditSex(false); setLastWeightInfo(null);
+    setPatient(blankPatient());
+    setPatientMode('search');
+    setTouched(true);
+  };
+
+  // ─── Champs obligatoires : sexe ; poids en pédiatrie (< 15 ans) ───
+  const record = selectedPatientId ? dataService.getPatientProfile(selectedPatientId) : undefined;
+  const sexKnown = !!record?.sex && !editSex;
+  const ageKnown = !!record?.dateOfBirth;
+  const ageYears = patient.age || 0;
+  const weightNeeded = (ageYears > 0 && ageYears < 15) || patient.type === 'Child';
+  const weightValue = parseFloat(String(patient.weight || '').replace(',', '.').replace(/[^0-9.]/g, ''));
+  const sexMissing = !patient.sex;
+  const weightMissing = weightNeeded && !(weightValue > 0);
+  const [attempted, setAttempted] = useState(false);
+  const showSexError = attempted && sexMissing;
+  const showWeightError = attempted && weightMissing;
+
+  const duplicateName = patientMode === 'new' && !selectedPatientId && !!(patient.name || '').trim()
+    && !!dataService.getAllPatients().find(p => p.name.trim().toUpperCase() === (patient.name || '').trim().toUpperCase());
+
+  /** Patient sélectionné ; pour un « nouveau patient », son dossier est créé ici (médecin uniquement). */
+  const ensurePatientRecord = (): string => {
+    if (selectedPatientId) return selectedPatientId;
+    const name = (patient.name || '').trim();
+    if (!name || !sessionService.isMedecin()) return name;
+    const record: Patient = {
+      id: Date.now().toString(), name, age: patient.age || 0, sex: patient.sex as 'M' | 'F',
+      type: (patient.type as PatientType) || 'Adult', phone: patient.phone, weight: patient.weight,
+      consultationFee: patient.consultationFee, registeredDate: new Date().toISOString(),
+    };
+    dataService.savePatientProfile(record);
+    return record.id;
+  };
+
+  /** Bloque enregistrement, impression et PDF tant que le sexe (et le poids en pédiatrie) manquent. */
+  const validateForOutput = (): boolean => {
+    const problems: string[] = [];
+    if (sexMissing) problems.push('le sexe du patient');
+    if (weightMissing) problems.push('le poids (obligatoire en pédiatrie)');
+    if (duplicateName) {
+      toastService.error('Un patient de ce nom existe déjà : sélectionnez-le avec la recherche.');
+      return false;
+    }
+    if (problems.length === 0) return true;
+    setAttempted(true);
+    toastService.error(`Renseignez ${problems.join(' et ')}.`);
+    document.getElementById(sexMissing ? 'field-sex' : 'field-weight')?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    (document.getElementById(sexMissing ? 'field-sex' : 'field-weight')?.querySelector('button') as HTMLElement | null)?.focus();
+    return false;
+  };
+
+  const handlePrint = () => { if (validateForOutput()) window.print(); };
+
   // ═══════════════════════════ RENDER ═══════════════════════════
   const criticalWarnings = aiWarnings.filter(w => w.severity === 'CRITIQUE');
   const attentionWarnings = aiWarnings.filter(w => w.severity === 'ATTENTION');
@@ -412,7 +604,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     !!itemId && attentionWarnings.some(w => w.itemId === itemId);
 
   return (
-    <div className="max-w-[var(--max-content-width)] mx-auto flex flex-col gap-5 pb-10" style={{ color: 'var(--color-text)' }}>
+    <div className="w-full max-w-[1760px] mx-auto flex flex-col gap-5 pb-10" style={{ color: 'var(--color-text)' }}>
       {/* ═══ Override modal ═══ */}
       {overrideModal.isOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center p-4" style={{ background: 'rgba(15, 23, 42, 0.5)', backdropFilter: 'blur(4px)' }}>
@@ -454,32 +646,49 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
       )}
 
-      {/* ═══ Page header ═══ */}
-      <header className="flex items-center justify-between print:hidden">
-        <div className="flex items-center gap-3">
+      {/* ═══ En-tête compact de consultation ═══ */}
+      <header
+        className="sticky top-0 z-30 -mx-7 -mt-6 px-7 py-2.5 flex items-center justify-between gap-3 border-b print:hidden"
+        style={{ background: 'var(--color-bg)', borderColor: 'var(--color-border)' }}
+      >
+        <div className="flex items-center gap-2 min-w-0">
+          {onToggleSidebar && (
+            <button
+              type="button"
+              onClick={onToggleSidebar}
+              aria-pressed={!!sidebarShown}
+              aria-label={sidebarShown ? 'Masquer le menu' : 'Afficher le menu'}
+              title={sidebarShown ? 'Masquer le menu' : 'Afficher le menu'}
+              className="w-10 h-10 shrink-0 rounded-lg border bg-white flex items-center justify-center hover:bg-slate-50 transition-all"
+              style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
+            >
+              {sidebarShown ? <PanelLeftClose size={17} /> : <PanelLeftOpen size={17} />}
+            </button>
+          )}
           <button
-            onClick={onFinish}
-            className="w-10 h-10 rounded-lg border bg-white flex items-center justify-center hover:bg-slate-50 transition-all"
+            type="button"
+            onClick={handleBack}
+            className="h-10 px-3 shrink-0 rounded-lg border bg-white flex items-center gap-1.5 text-[13px] font-medium whitespace-nowrap hover:bg-slate-50 transition-all"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
-            aria-label="Retour"
           >
-            <ArrowLeft size={18} className={dir === 'rtl' ? 'rotate-180' : ''} />
+            <ArrowLeft size={15} className={dir === 'rtl' ? 'rotate-180' : ''} /> Retour
           </button>
-          <div>
-            <div className="text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-              {initialPrescription ? 'Modification' : 'Nouvelle consultation'}
-            </div>
-            <h1 className="text-[22px] font-semibold tracking-tight" style={{ color: 'var(--color-text)' }}>
-              Ordonnance médicale
-              {patient.name && <> — <span style={{ color: 'var(--color-text-muted)' }}>{patient.name}</span></>}
+          <div className="min-w-0 pl-1">
+            <h1 className="text-[16px] font-semibold tracking-tight truncate" style={{ color: 'var(--color-text)' }} title={patient.name || undefined}>
+              {patient.name || (initialPrescription ? 'Modification' : 'Nouvelle consultation')}
             </h1>
+            {patient.name && (
+              <div className="text-[11px] truncate" style={{ color: 'var(--color-text-subtle)' }}>
+                {initialPrescription ? 'Modification' : 'Nouvelle consultation'}
+              </div>
+            )}
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <button
-            onClick={() => window.print()}
+            onClick={handlePrint}
             disabled={items.length === 0}
-            className="h-10 px-4 rounded-lg text-[13px] font-medium border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="h-10 px-4 rounded-lg text-[13px] font-medium whitespace-nowrap border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
           >
             <Printer size={15} /> {t('print')}
@@ -487,14 +696,14 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
           <button
             onClick={handleExportPDF}
             disabled={items.length === 0}
-            className="h-10 px-4 rounded-lg text-[13px] font-medium border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
+            className="h-10 px-4 rounded-lg text-[13px] font-medium whitespace-nowrap border bg-white flex items-center gap-2 transition-all hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
           >
             <FileDigit size={15} /> PDF
           </button>
           <button
             onClick={handleSave}
-            className="h-10 px-5 rounded-lg text-[13px] font-medium flex items-center gap-2 text-white shadow-soft transition-all hover:shadow-card active:scale-[0.98]"
+            className="h-10 px-5 rounded-lg text-[13px] font-medium whitespace-nowrap flex items-center gap-2 text-white shadow-soft transition-all hover:shadow-card active:scale-[0.98]"
             style={{ background: 'var(--color-primary)' }}
           >
             <Save size={15} /> {t('save')}
@@ -629,7 +838,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
 
       {/* ═══════════════ MAIN 2-COL LAYOUT ═══════════════ */}
       <div className="flex flex-col lg:flex-row gap-5">
-        <div className="flex-1 space-y-5 print:hidden min-w-0">
+        <div ref={formRef} className="flex-1 space-y-5 print:hidden min-w-0">
 
           {/* ─── PATIENT CARD ─── */}
           <section className={`${card} p-6 space-y-5`} style={cardStyle}>
@@ -638,95 +847,186 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
               <h2 className="text-[14px] font-semibold" style={{ color: 'var(--color-text)' }}>Contexte patient</h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
-              <div className="md:col-span-2 relative">
-                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('patient_name')}</label>
-                <input
-                  type="text"
-                  value={patient.name}
-                  onFocus={() => !patient.name && setPatientSuggestions(queueSuggestions as any)}
-                  onChange={e => {
-                    setPatient({ ...patient, name: e.target.value });
-                    setPatientSuggestions(e.target.value.length > 0 ? dataService.searchPatients(e.target.value) : queueSuggestions as any);
-                  }}
-                  className={input40}
-                  style={inputStyle}
-                  placeholder={t('name')}
-                />
-                {patientSuggestions.length > 0 && (
-                  <div
-                    className="absolute top-full left-0 right-0 mt-2 bg-white border rounded-lg z-50 overflow-hidden max-h-[400px] overflow-y-auto"
-                    style={{ borderColor: 'var(--color-border)', boxShadow: 'var(--shadow-premium)' }}
-                  >
-                    <div className="px-3 py-2 border-b" style={{ background: 'var(--color-surface-alt)', borderColor: 'var(--color-border)' }}>
-                      <span className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>{t('suggestions')}</span>
-                    </div>
-                    {patientSuggestions.map(p => (
-                      <button
-                        key={p.id}
-                        onClick={() => selectFromPatientData(p)}
-                        className="w-full text-left px-3 py-2.5 flex justify-between items-center transition-all hover:bg-[var(--color-row-hover)] border-t"
-                        style={{ borderColor: 'var(--color-border)' }}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-md flex items-center justify-center" style={{ background: 'var(--color-surface-alt)', color: 'var(--color-text-subtle)' }}>
-                            <UserCircle size={18} />
-                          </div>
-                          <div>
-                            <div className="text-[13px] font-medium" style={{ color: 'var(--color-text)' }}>{p.name}</div>
-                            <div className="text-[11px] flex items-center gap-2" style={{ color: 'var(--color-text-subtle)' }}>
-                              <span>ID {p.id}</span><span>·</span><span>{(p as any).phone || p.phone || 'Sans tél.'}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <ChevronRight size={14} className={dir === 'rtl' ? 'rotate-180' : ''} style={{ color: 'var(--color-text-faint)' }} />
-                      </button>
-                    ))}
+            <div className="space-y-3">
+              <div>
+                {patientMode === 'new' && !selectedPatientId ? (
+                  <div>
+                    <label className={labelEyebrow} style={labelEyebrowStyle} htmlFor="new-patient-name">Nouveau patient</label>
+                    <input
+                      id="new-patient-name"
+                      type="text"
+                      value={patient.name || ''}
+                      onChange={e => updatePatient({ ...patient, name: e.target.value })}
+                      className={input40} style={inputStyle}
+                      placeholder="NOM Prénom"
+                      autoFocus
+                    />
+                    <button type="button" onClick={() => setPatientMode('search')}
+                      className="mt-1 text-[11px] font-medium whitespace-nowrap hover:underline" style={{ color: 'var(--color-primary)' }}>
+                      ← Rechercher un patient existant
+                    </button>
                   </div>
+                ) : (
+                  <PatientPicker
+                    label="Patient"
+                    placeholder="Rechercher par nom ou téléphone…"
+                    patients={dataService.getAllPatients()}
+                    queue={dataService.getTodayQueue()}
+                    selected={selectedPatientId ? {
+                      id: selectedPatientId, name: patient.name || '', phone: patient.phone,
+                      meta: [sexKnown ? (patient.sex === 'F' ? 'Femme' : 'Homme') : null, ageKnown && ageYears ? `${ageYears} ans` : null].filter(Boolean).join(' · ') || undefined,
+                      metaAction: sexKnown ? { label: 'Modifier', onClick: () => setEditSex(true) } : undefined,
+                    } : null}
+                    onSelect={pickPatient}
+                    onNew={startNewPatient}
+                    onClear={clearPatient}
+                  />
                 )}
               </div>
 
-              <div>
-                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('age')}</label>
+              {patientMode === 'new' && !selectedPatientId && (
+                <div>
+                  <label className={labelEyebrow} style={labelEyebrowStyle} htmlFor="new-patient-phone">Téléphone</label>
+                  <input
+                    id="new-patient-phone"
+                    type="tel"
+                    value={patient.phone || ''}
+                    onChange={e => updatePatient({ ...patient, phone: e.target.value })}
+                    className={input40} style={inputStyle}
+                    placeholder="06 00 00 00 00"
+                  />
+                </div>
+              )}
+
+              <div className="grid gap-3" style={{ gridTemplateColumns: [ageKnown ? null : '88px', sexKnown ? null : 'minmax(0,1fr)', '160px'].filter(Boolean).join(' ') }}>
+              {!ageKnown && <div>
+                <label className={`${labelEyebrow} whitespace-nowrap`} style={labelEyebrowStyle} htmlFor="patient-age">{t('age')}</label>
                 <input
+                  id="patient-age"
                   type="number"
+                  min={0}
+                  max={120}
                   value={patient.age || ''}
-                  onChange={e => setPatient({ ...patient, age: parseInt(e.target.value) || 0 })}
+                  onChange={e => updatePatient({ ...patient, age: parseInt(e.target.value) || 0 })}
                   className={input40} style={inputStyle}
                 />
-              </div>
+              </div>}
+
+              {!sexKnown && <fieldset className="min-w-0" aria-required="true" aria-invalid={showSexError}>
+                <legend className={labelEyebrow} style={{ ...labelEyebrowStyle, color: showSexError ? 'var(--color-danger-700)' : 'var(--color-text-subtle)' }}>
+                  Sexe <span aria-hidden="true">*</span>
+                </legend>
+                <div id="field-sex" className="flex gap-2" role="radiogroup" aria-label="Sexe">
+                  {([['M', 'Homme'], ['F', 'Femme']] as const).map(([value, text]) => {
+                    const on = patient.sex === value;
+                    return (
+                      <button
+                        key={value}
+                        type="button"
+                        role="radio"
+                        aria-checked={on}
+                        onClick={() => updatePatient({ ...patient, sex: value })}
+                        className="flex-1 h-10 px-3 rounded-md border text-[13px] font-medium whitespace-nowrap transition-all"
+                        style={on
+                          ? { background: 'var(--color-primary)', color: 'white', borderColor: 'var(--color-primary)' }
+                          : { background: 'white', color: 'var(--color-text-muted)', borderColor: showSexError ? 'var(--color-danger)' : 'var(--color-border)' }}
+                      >
+                        {text}
+                      </button>
+                    );
+                  })}
+                </div>
+                {showSexError && <p className="mt-1 text-[11px] whitespace-nowrap" role="alert" style={{ color: 'var(--color-danger-700)' }}>Sexe obligatoire</p>}
+              </fieldset>}
+
               <div>
-                <label className={labelEyebrow} style={labelEyebrowStyle}>{t('weight')}</label>
+                <label className={`${labelEyebrow} whitespace-nowrap`} style={{ ...labelEyebrowStyle, color: showWeightError ? 'var(--color-danger-700)' : weightNeeded ? 'var(--color-warning-hover)' : 'var(--color-text-subtle)' }} htmlFor="field-weight">
+                  Poids (kg){weightNeeded && <span aria-hidden="true"> *</span>}
+                </label>
                 <input
+                  id="field-weight"
                   type="text"
+                  inputMode="decimal"
                   value={patient.weight || ''}
-                  onChange={e => setPatient({ ...patient, weight: e.target.value })}
-                  className={input40} style={inputStyle}
-                  placeholder={t('weight_placeholder')}
+                  onChange={e => updatePatient({ ...patient, weight: e.target.value })}
+                  className={input40}
+                  style={{ ...inputStyle, borderColor: showWeightError ? 'var(--color-danger)' : weightNeeded ? 'var(--color-warning-hover)' : 'var(--color-border)' }}
+                  placeholder="Ex : 75"
+                  aria-required={weightNeeded}
+                  aria-invalid={showWeightError}
                 />
+                {lastWeightInfo && <p className="mt-1 text-[11px] whitespace-nowrap" style={{ color: 'var(--color-text-subtle)' }}>Dernier : {lastWeightInfo}</p>}
+                {weightNeeded && (
+                  <p className="mt-1 text-[11px] whitespace-nowrap" role={showWeightError ? 'alert' : undefined} style={{ color: showWeightError ? 'var(--color-danger-700)' : 'var(--color-warning-hover)' }}>
+                    Obligatoire en pédiatrie
+                  </p>
+                )}
+              </div>
+
               </div>
             </div>
 
             {/* Allergies + pathologies */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              {/* Allergies */}
-              <div className="p-4 rounded-lg border space-y-3" style={{ background: 'var(--color-danger-50)', borderColor: 'var(--color-danger-100)' }}>
-                <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--color-danger-700)', letterSpacing: '0.06em' }}>
-                  <AlertCircle size={11} /> {t('allergies')}
+            <div className={`grid gap-3 ${roomy ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {/* Allergies : neutre (non renseigné) · vert discret (aucune allergie connue) · rouge (au moins une allergie) */}
+              <div className="p-4 rounded-lg border space-y-3" style={allergyTone.box}>
+                <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: allergyTone.label, letterSpacing: '0.06em' }}>
+                  {patient.noKnownAllergy ? <ShieldCheck size={11} /> : <AlertCircle size={11} />} {t('allergies')}
                 </label>
-                <input
-                  type="text"
-                  value={patient.allergies}
-                  onChange={e => setPatient({ ...patient, allergies: e.target.value })}
-                  placeholder={t('allergies_placeholder')}
-                  className="w-full h-10 px-3 rounded-md border text-[13px] outline-none bg-white"
-                  style={{ borderColor: 'var(--color-danger-100)' }}
+                <ContextTagInput
+                  kind="allergy"
+                  tone="danger"
+                  ariaLabel={t('allergies')}
+                  placeholder={patient.noKnownAllergy ? 'Décochez « Aucune allergie connue »' : 'Cliquez pour choisir : pénicilline, AINS, latex…'}
+                  specialty={specialty}
+                  disabled={!!patient.noKnownAllergy}
+                  entries={patient.allergyList || []}
+                  onChange={(list: ContextEntry[]) => updatePatient(withContext(patient, { allergyList: list }))}
+                  renderChipExtra={(entry: ContextEntry, index: number) => (
+                    <select
+                      aria-label={`Réaction à ${entry.label}`}
+                      value={entry.reaction || ''}
+                      onChange={e => updatePatient(withContext(patient, {
+                        allergyList: (patient.allergyList || []).map((a, i) => i === index ? { ...a, reaction: (e.target.value || undefined) as AllergyReaction | undefined } : a),
+                      }))}
+                      className="h-5 rounded border text-[11px] bg-white outline-none"
+                      style={{ borderColor: 'var(--color-danger-100)', color: 'var(--color-text-muted)' }}
+                    >
+                      <option value="">réaction ?</option>
+                      <option value="eruption">éruption</option>
+                      <option value="oedeme">œdème</option>
+                      <option value="anaphylaxie">anaphylaxie</option>
+                      <option value="inconnue">inconnue</option>
+                    </select>
+                  )}
                 />
+                <div className="flex items-center justify-between gap-3">
+                  <label className="flex items-center gap-2 text-[13px] whitespace-nowrap cursor-pointer select-none"
+                    style={{ color: (patient.allergyList || []).length > 0 ? 'var(--color-text-subtle)' : 'var(--color-text)' }}
+                    title={(patient.allergyList || []).length > 0 ? 'Retirez les allergies saisies pour déclarer « aucune »' : undefined}>
+                    <input
+                      type="checkbox"
+                      checked={!!patient.noKnownAllergy}
+                      disabled={(patient.allergyList || []).length > 0}
+                      onChange={e => updatePatient(withContext(patient, { noKnownAllergy: e.target.checked }))}
+                      className="w-4 h-4 accent-emerald-600 disabled:cursor-not-allowed"
+                    />
+                    Aucune allergie connue
+                  </label>
+                  {(patient.allergyList || []).length === 0 && !patient.noKnownAllergy && (
+                    <span className="text-[11px] whitespace-nowrap" style={{ color: 'var(--color-text-subtle)' }}>Non renseigné</span>
+                  )}
+                </div>
+                {(patient.allergyList || []).some(a => a.reaction === 'anaphylaxie') && (
+                  <p className="text-[11px]" style={{ color: 'var(--color-danger-700)' }}>
+                    Anaphylaxie : toute prescription de la même famille exige une justification.
+                  </p>
+                )}
                 {patient.sex === 'F' && (
                   <div className="flex flex-wrap gap-2 pt-1">
                     <div className="flex items-center gap-1.5">
                       <button
-                        onClick={() => { const v = !patient.isPregnant; setPatient({ ...patient, isPregnant: v }); runSafetyChecks(items); }}
+                        onClick={() => { const next = { ...patient, isPregnant: !patient.isPregnant }; updatePatient(next); runSafetyChecks(items, next); }}
                         className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
                         style={patient.isPregnant
                           ? { background: 'var(--color-warning-hover)', color: 'white' }
@@ -737,7 +1037,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                       {patient.isPregnant && (
                         <input
                           type="number" value={patient.pregnancyWeeks || ''}
-                          onChange={e => { setPatient({ ...patient, pregnancyWeeks: parseInt(e.target.value) || 0 }); runSafetyChecks(items); }}
+                          onChange={e => { const next = { ...patient, pregnancyWeeks: parseInt(e.target.value) || 0 }; updatePatient(next); runSafetyChecks(items, next); }}
                           placeholder="sem."
                           className="w-14 h-8 px-2 rounded-md border text-[12px] font-medium outline-none bg-white"
                           style={{ borderColor: 'var(--color-warning-100)' }}
@@ -746,7 +1046,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                     </div>
                     <div className="flex items-center gap-1.5">
                       <button
-                        onClick={() => { const v = !patient.isBreastfeeding; setPatient({ ...patient, isBreastfeeding: v }); runSafetyChecks(items); }}
+                        onClick={() => { const next = { ...patient, isBreastfeeding: !patient.isBreastfeeding }; updatePatient(next); runSafetyChecks(items, next); }}
                         className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
                         style={patient.isBreastfeeding
                           ? { background: 'var(--color-warning-hover)', color: 'white' }
@@ -757,7 +1057,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                       {patient.isBreastfeeding && (
                         <input
                           type="number" value={patient.lactationMonths || ''}
-                          onChange={e => { setPatient({ ...patient, lactationMonths: parseInt(e.target.value) || 0 }); runSafetyChecks(items); }}
+                          onChange={e => { const next = { ...patient, lactationMonths: parseInt(e.target.value) || 0 }; updatePatient(next); runSafetyChecks(items, next); }}
                           placeholder="mois"
                           className="w-14 h-8 px-2 rounded-md border text-[12px] font-medium outline-none bg-white"
                           style={{ borderColor: 'var(--color-warning-100)' }}
@@ -773,27 +1073,29 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                 <label className="text-[11px] font-medium uppercase tracking-wider flex items-center gap-1.5" style={{ color: 'var(--color-text-muted)', letterSpacing: '0.06em' }}>
                   <Activity size={11} /> {t('pathologies')}
                 </label>
-                <input
-                  type="text"
-                  value={patient.pathologies}
-                  onChange={e => setPatient({ ...patient, pathologies: e.target.value })}
-                  placeholder={t('antecedents_placeholder')}
-                  className="w-full h-10 px-3 rounded-md border text-[13px] outline-none bg-white"
-                  style={{ borderColor: 'var(--color-border)' }}
+                <ContextTagInput
+                  kind="pathology"
+                  ariaLabel={t('pathologies')}
+                  placeholder="Cliquez pour choisir : HTA, diabète, insuffisance cardiaque…"
+                  specialty={specialty}
+                  entries={patient.pathologyList || []}
+                  onChange={(list: ContextEntry[]) => updatePatient(withContext(patient, { pathologyList: list }))}
                 />
                 <div className="flex flex-wrap gap-1.5">
-                  {[
-                    { key: 'isHeartPatient' as const, icon: Heart, label: t('heart_patient') },
-                    { key: 'isKidneyPatient' as const, icon: FlaskConical, label: t('kidney_patient') },
-                    { key: 'isLiverPatient' as const, icon: Activity, label: t('liver_patient') },
-                  ].map(({ key, icon: Icon, label }) => {
-                    const active = !!patient[key];
+                  {([
+                    { key: 'cardiac', icon: Heart, label: t('heart_patient') },
+                    { key: 'renal', icon: FlaskConical, label: t('kidney_patient') },
+                    { key: 'hepatic', icon: Activity, label: t('liver_patient') },
+                  ] as Array<{ key: ShortcutKey; icon: typeof Heart; label: string }>).map(({ key, icon: Icon, label }) => {
+                    const isOn = shortcutActive(patient, key);
                     return (
                       <button
                         key={key}
-                        onClick={() => { const v = !patient[key]; setPatient({ ...patient, [key]: v }); runSafetyChecks(items); }}
+                        type="button"
+                        aria-pressed={isOn}
+                        onClick={() => updatePatient(toggleShortcut(patient, key))}
                         className="h-8 px-3 rounded-md text-[12px] font-medium flex items-center gap-1.5 transition-all"
-                        style={active
+                        style={isOn
                           ? { background: 'var(--color-primary)', color: 'white' }
                           : { background: 'white', color: 'var(--color-text-muted)', border: `1px solid var(--color-border)` }}
                       >
@@ -802,8 +1104,35 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
                     );
                   })}
                 </div>
+                {deriveProfileFlags(patient.pathologyList).isKidneyPatient && (
+                  <fieldset className="flex flex-wrap items-center gap-1.5">
+                    <legend className="sr-only">Stade rénal (DFG)</legend>
+                    <span className="text-[11px] font-medium" style={{ color: 'var(--color-text-muted)' }}>DFG (mL/min) :</span>
+                    {([['ge60', '≥ 60'], ['30-59', '30–59'], ['15-29', '15–29'], ['lt15', '< 15']] as Array<[RenalStage, string]>).map(([value, text]) => (
+                      <button
+                        key={value}
+                        type="button"
+                        aria-pressed={patient.renalStage === value}
+                        onClick={() => updatePatient(withContext(patient, { renalStage: patient.renalStage === value ? undefined : value }))}
+                        className="h-7 px-2.5 rounded-md text-[11px] font-medium transition-all"
+                        style={patient.renalStage === value
+                          ? { background: 'var(--color-primary)', color: 'white' }
+                          : { background: 'white', color: 'var(--color-text-muted)', border: '1px solid var(--color-border)' }}
+                      >
+                        {text}
+                      </button>
+                    ))}
+                    {!patient.renalStage && <span className="text-[11px]" style={{ color: 'var(--color-warning-hover)' }}>stade à préciser</span>}
+                  </fieldset>
+                )}
               </div>
             </div>
+            {patient.contextUpdatedAt && (
+              <p className="text-[11px]" style={{ color: 'var(--color-text-subtle)' }}>
+                Allergies et pathologies mis à jour le {new Date(patient.contextUpdatedAt).toLocaleDateString('fr-FR')}
+                {patient.contextUpdatedBy ? ` par ${patient.contextUpdatedBy}` : ''}.
+              </p>
+            )}
           </section>
 
           {/* ─── MEDICATION CARD ─── */}
@@ -1275,7 +1604,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
         </div>
 
         {/* ═══ PREVIEW PANE ═══ */}
-        <div className="w-full lg:w-[440px] shrink-0 print:hidden">
+        <div className={`w-full ${wide ? 'lg:w-[560px]' : 'lg:w-[440px]'} shrink-0 lg:sticky lg:top-[76px] lg:self-start print:hidden`}>
           <h3 className="text-[11px] font-medium uppercase tracking-wider mb-3 px-1 flex items-center gap-2" style={{ color: 'var(--color-text-subtle)', letterSpacing: '0.06em' }}>
             <FileText size={13} /> {lang === 'ar' ? 'معاينة' : 'Aperçu impression'}
           </h3>

@@ -40,14 +40,14 @@ const Template08BlueWaveCare: React.FC<RxTemplateProps> = ({ doctor, patient, da
 
     <div className="absolute text-right" style={{ right: '17mm', top: '22mm' }}>
       <div style={{ color: C.blue, fontSize: '8.5pt', letterSpacing: '0.18em' }}>ORDONNANCE</div>
-      <div style={{ color: C.grey, fontSize: '7.5pt' }}>INPE {doctor.registrationNumber}</div>
+      {doctor.registrationNumber && <div style={{ color: C.grey, fontSize: '7.5pt' }}>INPE {doctor.registrationNumber}</div>}
     </div>
 
     {/* Patient block */}
     <div className="absolute grid grid-cols-2 gap-x-9 gap-y-2.5"
          style={{ left: '18mm', right: '17mm', top: '52mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom" value={patient.name} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Date" value={date} labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
       <RuledField label="Diagnostic" labelWidth={62} lineColor={C.cyanPale} labelColor={C.grey} valueColor={C.ink} />
     </div>

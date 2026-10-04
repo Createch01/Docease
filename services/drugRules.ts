@@ -2,6 +2,9 @@ import { Patient, PrescriptionItem } from '../types';
 import { getAllLoadedMedicines, mapMedicamentToMedicine, type Medicament } from './drugCatalogService';
 import { checkGroupAgainstProfile, getDocumentedSafetyCategories, type SafetyCategory } from './drugSafetyCheck';
 import type { ActivePatientProfile } from './activeProfileService';
+import { buildContextFromPatient } from './patientContext';
+import { deriveProfileFlags } from './medicalReferentials';
+import { checkAllergies, checkPathologyFlags, identityFromMedicament, uncodedLabels, RENAL_STAGE_LABEL, type DrugIdentity } from './contextSafety';
 
 // Finds, for a set of prescribed items, which patient-status categories (renal/hepatic/
 // cardiac/pregnancy/breastfeeding/diabete) at least one of them actually documents safety
@@ -40,6 +43,12 @@ export interface DrugAlert {
     title: string;
     message: string;
     type: 'REGLE_SYSTEME' | 'INTERACTION' | 'CONTRE_INDICATION' | 'DOUBLON' | 'ENFANT_INTERDIT' | 'DONNEE_MANQUANTE';
+    /** Identifiant stable (sinon dérivé de la position) : une alerte déjà justifiée ne réapparaît pas quand la liste change. */
+    id?: string;
+    /** Ligne d'ordonnance concernée (permet « Retirer le médicament »). */
+    itemId?: string;
+    /** L'ordonnance ne peut être enregistrée qu'après justification (allergie anaphylactique). */
+    requiresJustification?: boolean;
 }
 
 /**
@@ -49,16 +58,18 @@ export interface DrugAlert {
  * relying on its own weaker, partial flag checks.
  */
 function patientToActiveProfile(patient: Patient, isChild: boolean, ptAge: number): ActivePatientProfile {
+    // Le contexte codé (pathologies du référentiel) s'ajoute aux anciens indicateurs, sans les remplacer.
+    const derived = deriveProfileFlags(buildContextFromPatient(patient).pathologyList, patient.renalStage);
     return {
         isChild,
         childAgeYears: ptAge > 0 ? ptAge : undefined,
         isPregnant: patient.isPregnant,
         pregnancyWeeks: patient.pregnancyWeeks,
         isBreastfeeding: patient.isBreastfeeding,
-        isRenalImpaired: patient.isKidneyPatient,
-        isHepaticImpaired: patient.isLiverPatient,
-        isCardiac: patient.isHeartPatient,
-        isDiabetic: !!(patient.pathologyTags?.some(t => t.toUpperCase().startsWith('DIABÈTE')) || patient.pathologiesOtherTags?.some(t => t.toUpperCase().includes('DIABÈTE'))),
+        isRenalImpaired: patient.isKidneyPatient || derived.isKidneyPatient,
+        isHepaticImpaired: patient.isLiverPatient || derived.isLiverPatient,
+        isCardiac: patient.isHeartPatient || derived.isHeartPatient,
+        isDiabetic: derived.isDiabetic || !!(patient.pathologyTags?.some(t => t.toUpperCase().startsWith('DIABÈTE')) || patient.pathologiesOtherTags?.some(t => t.toUpperCase().includes('DIABÈTE'))),
     };
 }
 
@@ -108,21 +119,8 @@ const INTERACTION_GROUPS = {
     LITHIUM: ['LITHIUM', 'TERALITHE']
 };
 
-// Maps each structured allergy tag (from constants/medicalData.ts COMMON_ALLERGIES) to
-// keywords matched against the medicine name/active ingredient/category/interaction group
-// and its free-text contraindication notes. Food/contact allergies have no drug-name
-// equivalent, so they only match via contraindicationNotes.
-const ALLERGY_KEYWORDS: Record<string, string[]> = {
-    'Pénicilline': ['PENICILLIN', 'PÉNICILLINE', 'AMOXICILLIN', 'AMOXICILLINE', 'AUGMENTIN', 'ACLAV', 'CLAVULIN', 'AMOXIL', 'ALFAMOX', 'ALMOXEL', 'BETALACTAM', 'BÊTA-LACTAM', 'BETA-LACTAM'],
-    'Amoxicilline': ['AMOXICILLIN', 'AMOXICILLINE', 'AUGMENTIN', 'ACLAV', 'CLAVULIN', 'AMOXIL', 'ALFAMOX'],
-    'Aspirine': INTERACTION_GROUPS.ASPIRINE,
-    'AINS': INTERACTION_GROUPS.AINS,
-    'Sulfamides': ['SULFAMIDE', 'SULFAMETHOXAZOLE', 'COTRIMOXAZOLE', 'BACTRIM', 'SULFA'],
-    'Iode': ['IODE', 'IODÉ', 'PRODUIT DE CONTRASTE', 'CONTRASTE IODÉ'],
-};
-// Tags without a keyword entry above (food/contact allergies like Latex, Arachides...)
-// fall back to a plain substring match against the haystack — mainly useful when the
-// catalog's free-text contraindicationNotes mention them explicitly.
+// Les allergies sont vérifiées par services/contextSafety.ts (codes ATC / DCI des référentiels
+// constants/referentials) ; l'ancienne table de mots-clés par libellé a été supprimée.
 
 const DRUG_RULES: DrugRule[] = [
     {
@@ -242,14 +240,10 @@ export const drugRulesService = {
         const alerts: DrugAlert[] = [];
         if (!patient || !items.length) return alerts;
 
-        const unstructuredAllergies = [
-            ...(patient.allergiesOtherTags || []),
-            ...((!patient.allergyTags?.length && !patient.allergiesOtherTags?.length && patient.allergies) ? [patient.allergies] : [])
-        ];
-        const unstructuredPathologies = [
-            ...(patient.pathologiesOtherTags || []),
-            ...((!patient.pathologyTags?.length && !patient.pathologiesOtherTags?.length && patient.pathologies) ? [patient.pathologies] : [])
-        ];
+        // Contexte codé (ou ancien format converti à la volée) : seules les entrées « non codées » restent à vérifier à la main.
+        const context = buildContextFromPatient(patient);
+        const unstructuredAllergies = uncodedLabels(context.allergyList);
+        const unstructuredPathologies = uncodedLabels(context.pathologyList);
 
         if (unstructuredAllergies.length) {
             alerts.push({
@@ -318,16 +312,37 @@ export const drugRulesService = {
         // writing directly in PrescriptionEditor gets the identical pregnancy/breastfeeding/
         // renal/hepatic/cardiac/diabetic alerts, not just the narrower legacy flag checks below.
         const activeProfile = patientToActiveProfile(patient, isChild, ptAge);
+        const renalStageNote = patient.renalStage ? ` [${RENAL_STAGE_LABEL[patient.renalStage]}]` : '';
         itemsWithMedData.forEach(({ item, rawMed }) => {
             if (!rawMed) return;
             checkGroupAgainstProfile(rawMed, activeProfile).forEach(safetyAlert => {
                 alerts.push({
                     severity: safetyAlert.severity,
                     title: SAFETY_CATEGORY_TITLES[safetyAlert.category] || 'CONTRE-INDICATION',
-                    message: `${item.medicineName} : ${safetyAlert.message}`,
+                    message: `${item.medicineName} : ${safetyAlert.message}${safetyAlert.category === 'renal' ? renalStageNote : ''}`,
                     type: safetyAlert.severity === 'INFO' ? 'DONNEE_MANQUANTE' : 'CONTRE_INDICATION',
+                    itemId: item.id,
                 });
             });
+        });
+
+        // 0b. Contexte patient codé (allergies / pathologies des référentiels locaux) : lien par code ATC / DCI
+        // pour les allergies, par smart_flags documentées pour les pathologies. Un patient dont le contexte n'est
+        // pas encore converti (ancien texte libre / tags) est converti à la volée, sans rien enregistrer.
+        const context = buildContextFromPatient(patient);
+        itemsWithMedData.forEach(({ item, dbMed, rawMed }) => {
+            const drug: DrugIdentity = rawMed
+                ? identityFromMedicament(rawMed, item.medicineName)
+                : {
+                    name: item.medicineName,
+                    genericName: dbMed?.active_ingredient,
+                    atcCode: dbMed?.atcCode,
+                    classText: dbMed?.category ? [dbMed.category] : [],
+                    contraindications: dbMed?.contraindicationNotes,
+                };
+            const reported = alerts.filter(a => a.itemId === item.id).map(a => a.message);
+            [...checkAllergies(context.allergyList, drug), ...checkPathologyFlags(context.pathologyList, drug, reported)]
+                .forEach(a => alerts.push({ ...a, itemId: item.id }));
         });
 
         // 1. Check for Duplicate Active Ingredients
@@ -495,39 +510,6 @@ export const drugRulesService = {
                     });
                 }
 
-                // Structured allergy tags vs. medicine identity/composition/contraindication notes
-                // Enhanced to check: brand name, active ingredient (DCI), composition, interaction group, contraindication notes
-                (patient.allergyTags || []).forEach(tag => {
-                    const haystackParts = [
-                        item.medicineName,
-                        dbMed.active_ingredient,
-                        dbMed.category,
-                        dbMed.interactionGroup,
-                        ...(dbMed.contraindicationNotes || [])
-                    ];
-
-                    // Add composition from raw medicament if available
-                    if (rawMed?.composition && Array.isArray(rawMed.composition)) {
-                        haystackParts.push(...rawMed.composition);
-                    }
-
-                    const haystack = haystackParts.filter(Boolean).join(' ').toUpperCase();
-
-                    const keywords = ALLERGY_KEYWORDS[tag];
-                    const matched = keywords
-                        ? keywords.some(k => haystack.includes(k))
-                        : haystack.includes(tag.toUpperCase());
-
-                    if (matched) {
-                        alerts.push({
-                            severity: 'CRITIQUE',
-                            title: `CONTRE-INDICATION ALLERGIE : ${tag.toUpperCase()}`,
-                            message: `${item.medicineName} : patient allergique à ${tag}, ce médicament appartient à cette famille ou la contient.`,
-                            type: 'CONTRE_INDICATION'
-                        });
-                    }
-                });
-
                 // Contraindications from Array
                 if (dbMed.contraindications) {
                     dbMed.contraindications.forEach((c: any) => {
@@ -552,31 +534,6 @@ export const drugRulesService = {
                         }
                     });
                 }
-
-                // Structured allergy tags vs. medicine identity/contraindication notes
-                (patient.allergyTags || []).forEach(tag => {
-                    const haystack = [
-                        item.medicineName,
-                        dbMed.active_ingredient,
-                        dbMed.category,
-                        dbMed.interactionGroup,
-                        ...(dbMed.contraindicationNotes || [])
-                    ].filter(Boolean).join(' ').toUpperCase();
-
-                    const keywords = ALLERGY_KEYWORDS[tag];
-                    const matched = keywords
-                        ? keywords.some(k => haystack.includes(k))
-                        : haystack.includes(tag.toUpperCase());
-
-                    if (matched) {
-                        alerts.push({
-                            severity: 'CRITIQUE',
-                            title: `CONTRE-INDICATION ALLERGIE : ${tag.toUpperCase()}`,
-                            message: `${item.medicineName} : patient allergique à ${tag}, ce médicament appartient à cette famille ou la contient.`,
-                            type: 'CONTRE_INDICATION'
-                        });
-                    }
-                });
 
                 // Legacy Boolean Flags (Redundancy check)
                 if (dbMed.isAdultOnly && isChild) {

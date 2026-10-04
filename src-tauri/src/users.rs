@@ -12,6 +12,7 @@
 
 use std::collections::HashMap;
 use std::fs;
+use std::io::Write;
 use std::path::{Path, PathBuf};
 
 use rand::RngCore;
@@ -198,12 +199,31 @@ pub fn load_users(dir: &Path) -> Result<Option<UsersFile>, String> {
     serde_json::from_str(&content).map(Some).map_err(|e| format!("users_meta.json corrompu : {e}"))
 }
 
-/// Écriture atomique (fichier temporaire puis renommage) : un arrêt en cours
-/// d'écriture ne peut pas laisser des comptes tronqués.
+/// Écriture atomique : fichier temporaire dans le même dossier, `fsync`, puis renommage.
+/// Un arrêt (plantage, coupure de courant) en cours d'écriture laisse l'ancien fichier
+/// intact ; au pire un `.tmp` orphelin, supprimé ici en cas d'échec.
 pub fn write_atomic(path: &Path, bytes: &[u8]) -> Result<(), String> {
-    let tmp = path.with_extension("tmp");
-    fs::write(&tmp, bytes).map_err(|e| e.to_string())?;
-    fs::rename(&tmp, path).map_err(|e| e.to_string())
+    write_atomic_with(path, |f| f.write_all(bytes))
+}
+
+/// Variante où l'appelant produit le contenu (permet de simuler une écriture interrompue).
+pub(crate) fn write_atomic_with(path: &Path, write: impl FnOnce(&mut fs::File) -> std::io::Result<()>) -> Result<(), String> {
+    static SEQ: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+    let mut name = path.file_name().ok_or("Chemin invalide")?.to_os_string();
+    name.push(format!(".{}.tmp", SEQ.fetch_add(1, std::sync::atomic::Ordering::Relaxed)));
+    let tmp = path.with_file_name(name);
+    let result = (|| {
+        let mut f = fs::File::create(&tmp)?;
+        write(&mut f)?;
+        f.sync_all()?;
+        drop(f);
+        fs::rename(&tmp, path)
+    })();
+    if let Err(e) = result {
+        let _ = fs::remove_file(&tmp);
+        return Err(e.to_string());
+    }
+    Ok(())
 }
 
 pub fn save_users(dir: &Path, file: &UsersFile) -> Result<(), String> {
@@ -1117,5 +1137,37 @@ mod tests {
         assert_eq!(authenticate(doctor, &password).unwrap().unwrap(), k, "le mot de passe maître ouvre le compte médecin");
         let again = migrate_to_users(&dir, &k, DoctorSeed::LegacyMeta).unwrap();
         assert!(again.already_migrated, "relance sans dégât");
+    }
+
+    fn tmp_dir(tag: &str) -> PathBuf {
+        let d = std::env::temp_dir().join(format!("docease-atomic-{tag}-{}", util::now_secs()));
+        let _ = fs::remove_dir_all(&d);
+        fs::create_dir_all(&d).unwrap();
+        d
+    }
+
+    #[test]
+    fn atomic_write_replaces_content_and_leaves_no_tmp() {
+        let d = tmp_dir("ok");
+        let f = d.join("meddoc_patients.json");
+        write_atomic(&f, b"v1").unwrap();
+        write_atomic(&f, b"v2").unwrap();
+        assert_eq!(fs::read(&f).unwrap(), b"v2");
+        assert_eq!(fs::read_dir(&d).unwrap().count(), 1, "aucun .tmp résiduel");
+    }
+
+    #[test]
+    fn interrupted_write_keeps_previous_file_intact() {
+        let d = tmp_dir("interrupt");
+        let f = d.join("meddoc_patients.json");
+        write_atomic(&f, b"ANCIEN").unwrap();
+        // Écriture interrompue à mi-parcours (disque plein, plantage simulé par une erreur).
+        let r = write_atomic_with(&f, |file| {
+            file.write_all(b"NOUV")?;
+            Err(std::io::Error::new(std::io::ErrorKind::Other, "interrompu"))
+        });
+        assert!(r.is_err());
+        assert_eq!(fs::read(&f).unwrap(), b"ANCIEN", "l'ancien fichier reste intact");
+        assert_eq!(fs::read_dir(&d).unwrap().count(), 1, "le .tmp partiel est supprimé");
     }
 }

@@ -49,9 +49,9 @@ const Template02NavyCaduceus: React.FC<RxTemplateProps> = ({ doctor, patient, da
     {/* Patient block */}
     <div className="absolute grid grid-cols-2 gap-x-10 gap-y-2.5" style={{ left: '18mm', right: '18mm', top: '70mm', fontSize: '9.5pt' }}>
       <RuledField label="Nom du patient" value={patient.name} labelWidth={82} lineColor="#9fb3cc" />
-      <RuledField label="Âge / Sexe" value={`${patient.age} ans · ${patient.sex}`} labelWidth={82} lineColor="#9fb3cc" />
+      <RuledField label="Âge / Sexe" value={[patient.age ? `${patient.age} ans` : '', patient.sex].filter(Boolean).join(' · ')} labelWidth={82} lineColor="#9fb3cc" />
       <RuledField label="Date" value={date} labelWidth={82} lineColor="#9fb3cc" />
-      <RuledField label="N° INPE" value={doctor.registrationNumber} labelWidth={82} lineColor="#9fb3cc" />
+      {doctor.registrationNumber && <RuledField label="N° INPE" value={doctor.registrationNumber} labelWidth={82} lineColor="#9fb3cc" />}
     </div>
 
     {/* Watermark */}

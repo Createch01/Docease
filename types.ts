@@ -442,6 +442,19 @@ export interface PrescriptionItem {
   overrideReason?: string;
 }
 
+export type AllergyReaction = 'eruption' | 'oedeme' | 'anaphylaxie' | 'inconnue';
+export type RenalStage = 'ge60' | '30-59' | '15-29' | 'lt15';
+
+/** Une allergie ou une pathologie du contexte patient. Sans `ref` = « non codé » (non vérifié automatiquement). */
+export interface ContextEntry {
+  ref?: string;               // id du référentiel (ALG_… ou code CIM-10) ; absent = texte libre
+  label: string;
+  coded: boolean;
+  reaction?: AllergyReaction; // allergies uniquement
+  addedAt: string;            // date ISO (AAAA-MM-JJ)
+  note?: string;              // texte d'origine conservé lors de la migration
+}
+
 export interface Patient {
   id: string;
   name: string; // « NOM Prénom » — calculé depuis lastName/firstName quand ils existent
@@ -461,6 +474,15 @@ export interface Patient {
   pathologiesOtherTags?: string[];
   allergyTags?: string[];
   allergiesOtherTags?: string[];
+  // Contexte codé (référentiels constants/referentials). Les champs texte/tags ci-dessus sont conservés (migration non destructive).
+  allergyList?: ContextEntry[];
+  pathologyList?: ContextEntry[];
+  noKnownAllergy?: boolean;     // true = « aucune allergie connue » ; undefined = non renseigné
+  renalStage?: RenalStage;
+  contextUpdatedAt?: string;
+  contextUpdatedBy?: string;
+  /** Copie des champs texte/tags d'origine, prise une seule fois à la première migration. */
+  legacyContext?: Partial<Pick<Patient, 'allergies' | 'pathologies' | 'allergyTags' | 'allergiesOtherTags' | 'pathologyTags' | 'pathologiesOtherTags' | 'chronicDiseases'>>;
   chronicDiseases?: string[];
   consultationFee?: number;
   registeredDate?: string;

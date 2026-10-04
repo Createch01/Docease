@@ -132,7 +132,7 @@ const OrdonnanceTemplate: React.FC<OrdonnanceTemplateProps> = ({ doctor, patient
     <div dir="rtl" style={{ textAlign: 'right', flex: 1, minWidth: 0 }}>
       {doctor.nameAr && (
         <div style={{ fontSize: A.header.arabic.nameFontSize, color: A.header.name.color, fontWeight: 700, fontFamily: ORD_FONTS.arabic, lineHeight: 1.3 }}>
-          الدكتور {doctor.nameAr}
+          {/^\s*(ال)?دكتور/.test(doctor.nameAr) ? '' : 'الدكتور '}{doctor.nameAr}
         </div>
       )}
       {doctor.specialityAr && (
@@ -168,9 +168,9 @@ const OrdonnanceTemplate: React.FC<OrdonnanceTemplateProps> = ({ doctor, patient
     .map(k => ({ key: k, text: contactValues[k] }));
   const icon = (key: FooterField) => A.footer.showIcons ? <FooterIcon name={A.footer.icons.map[key]} cfg={A.footer.icons} textColor={A.footer.textColor} /> : null;
 
-  const ids = `INPE ${doctor.inpe || '—'} · ICE ${doctor.ice || '—'} · IF ${doctor.taxId || '—'}`;
+  const ids = [['INPE', doctor.inpe], ['ICE', doctor.ice], ['IF', doctor.taxId]].filter(([, v]) => v).map(([k, v]) => `${k} ${v}`).join(' · ');
 
-  const honorific = /^f/i.test(patient.sex || '') ? 'Mme' : 'M.';
+  const honorific = patient.honorific ?? '';
   const SZ = A.signatureZone;
 
   return (
@@ -217,7 +217,7 @@ const OrdonnanceTemplate: React.FC<OrdonnanceTemplateProps> = ({ doctor, patient
       )}
 
       <div className="relative flex items-baseline shrink-0" style={{ zIndex: 1, padding: `5mm ${mx}mm 0`, gap: 6, fontSize: 9.5 }}>
-        <span>{honorific} </span>
+        {honorific && <span>{honorific} </span>}
         <span style={{ flex: 1, borderBottom: lineStyle === 'none' ? 'none' : `1px ${lineStyle} #94A3B8`, minHeight: 12, paddingBottom: 1 }}>
           {patient.name}
         </span>
@@ -304,9 +304,11 @@ const OrdonnanceTemplate: React.FC<OrdonnanceTemplateProps> = ({ doctor, patient
               </span>
             ))}
           </div>
-          <div style={{ fontSize: 6.5, opacity: 0.7, textAlign: 'center', marginTop: 2, textTransform: 'uppercase', letterSpacing: '1px' }}>
-            {ids}
-          </div>
+          {ids && (
+            <div style={{ fontSize: 6.5, opacity: 0.7, textAlign: 'center', marginTop: 2, textTransform: 'uppercase', letterSpacing: '1px' }}>
+              {ids}
+            </div>
+          )}
         </div>
         {rightExtras.length > 0 && (
           <div className="flex items-center justify-center bg-white rounded shrink-0 gap-1.5" style={{ padding: 4 }}>{rightExtras}</div>

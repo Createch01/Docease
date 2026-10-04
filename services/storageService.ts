@@ -1,7 +1,31 @@
 import { invoke } from '@tauri-apps/api/core';
 import { sessionService } from './sessionService';
+import { toastService } from './toastService';
 
 const isTauri = (): boolean => typeof (window as any).__TAURI_INTERNALS__ !== 'undefined';
+
+// Aucune donnée médicale ne doit vivre dans le localStorage du WebView (en clair, hors du
+// store chiffré). Seule exception : l'aperçu navigateur en développement (`vite dev`),
+// sans backend Tauri et sans vraies données. En production hors Tauri : mémoire seulement.
+const devBrowserStore = (): Storage | null => (import.meta.env.DEV ? localStorage : null);
+
+/**
+ * Supprime les anciennes copies de données médicales laissées dans le localStorage
+ * (anciens replis d'écriture, ancien import de sauvegarde). À appeler au démarrage sous Tauri.
+ */
+const purgeLegacyLocalData = (): number => {
+    if (!isTauri()) return 0;
+    let removed = 0;
+    try {
+        const doomed: string[] = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const k = localStorage.key(i);
+            if (k && (k.startsWith('meddoc_') || k.startsWith('doc_ease_meddoc_'))) doomed.push(k);
+        }
+        doomed.forEach(k => { localStorage.removeItem(k); removed++; });
+    } catch { /* stockage indisponible : rien à purger */ }
+    return removed;
+};
 
 // Pour l'assistante, les fichiers sensibles ne passent JAMAIS par load_json/save_json
 // (refusés côté Rust) mais par des commandes typées qui filtrent les champs.
@@ -20,6 +44,8 @@ const ASSISTANT_FILE_READ = new Set(['meddoc_appointments', 'meddoc_appointment_
 const ASSISTANT_FILE_WRITE = new Set(['meddoc_appointments']);
 
 export const storageService = {
+    purgeLegacyLocalData,
+
     /**
      * Saves data to a JSON file via custom Tauri command (encrypted at rest — see
      * save_json/load_json in src-tauri/src/lib.rs). localStorage is written to ONLY
@@ -29,7 +55,7 @@ export const storageService = {
      */
     save: async (filename: string, data: any): Promise<void> => {
         if (!isTauri()) {
-            localStorage.setItem(filename, JSON.stringify(data));
+            devBrowserStore()?.setItem(filename, JSON.stringify(data));
             return;
         }
         try {
@@ -43,8 +69,9 @@ export const storageService = {
             await invoke('save_json', { filename: `${filename}.json`, data });
             console.log(`💾 Data saved to ${filename}.json`);
         } catch (error) {
+            // Pas de repli en clair : l'échec est signalé, jamais masqué.
             console.error(`❌ Error saving ${filename}:`, error);
-            localStorage.setItem(filename, JSON.stringify(data));
+            toastService.error("Échec de l'enregistrement : les dernières modifications n'ont pas été sauvegardées.");
         }
     },
 
@@ -62,7 +89,8 @@ export const storageService = {
      */
     load: async <T>(filename: string, defaultValue: T): Promise<T> => {
         if (!isTauri()) {
-            const localData = localStorage.getItem(filename) || localStorage.getItem(`doc_ease_${filename}`);
+            const store = devBrowserStore();
+            const localData = store && (store.getItem(filename) || store.getItem(`doc_ease_${filename}`));
             return localData ? JSON.parse(localData) : defaultValue;
         }
         try {

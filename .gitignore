@@ -59,3 +59,16 @@ migration_backups/
 security_meta.json
 users_meta.json
 audit_log*.jsonl
+
+# Captures d'écran (peuvent contenir des données)
+docs/captures/
+
+# Captures et aperçus de test : jamais commités (peuvent contenir des données)
+docs/verification/
+docs/screenshots/
+docs/**/*.png
+docs/**/*.jpg
+docs/**/*.jpeg
+docs/**/*.pdf
+!docs/assets/
+!docs/assets/**

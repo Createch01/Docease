@@ -27,7 +27,16 @@ export function cabinetSetupState(doctor: Partial<DoctorInfo>): CabinetSetupStat
 }
 
 export const SETUP_BLOCKED_MESSAGE =
-    "Impression bloquée : renseignez votre nom et votre INPE dans Paramètres › Mon profil.";
+    "Impression et export PDF bloqués : renseignez votre nom et votre INPE dans Paramètres › Mon profil.";
+
+/** Faux (avec message) tant que le nom ou l'INPE du médecin est vide : impression et export PDF. */
+export function canOutput(): boolean {
+    if (sessionService.isMedecin() && !cabinetSetupState(dataService.getDoctorInfo()).complete) {
+        toastService.error(SETUP_BLOCKED_MESSAGE);
+        return false;
+    }
+    return true;
+}
 
 /**
  * Remplace window.print par une version gardée : tant que le nom ou l'INPE du médecin
@@ -37,12 +46,6 @@ export const SETUP_BLOCKED_MESSAGE =
  */
 export function installPrintGuard(): () => void {
     const original = window.print.bind(window);
-    window.print = () => {
-        if (sessionService.isMedecin() && !cabinetSetupState(dataService.getDoctorInfo()).complete) {
-            toastService.error(SETUP_BLOCKED_MESSAGE);
-            return;
-        }
-        original();
-    };
+    window.print = () => { if (canOutput()) original(); };
     return () => { window.print = original; };
 }

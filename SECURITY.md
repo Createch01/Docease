@@ -95,6 +95,10 @@ l'écran de verrouillage. Désactivé dans les builds de développement. Suspend
     contient l'ancien mot de passe maître enveloppé. **À supprimer après une semaine de
     fonctionnement sans problème, vers le 10/10/2026.** Tant qu'il existe, quelqu'un qui obtiendrait
     ce dossier et l'ancien mot de passe pourrait déverrouiller les données.
+  - **Rappel — à supprimer le 10/10/2026** : `pre-migration-20261003-195136` et la sauvegarde
+    volontaire `docease_backup_2026-10-03` (copie des données de l'application, hors dépôt,
+    `C:\src\docease_backup_2026-10-03`). Elles contiennent des données de santé et l'ancien mot de
+    passe maître enveloppé ; ne pas les conserver au-delà de cette date.
 - **Anciens collaborateurs** : leur ancien PIN (en clair, court) devient leur mot de passe
   provisoire, avec changement imposé à la première connexion, jusqu'à ce moment-là il reste
   faible.

@@ -65,7 +65,7 @@ const Template06PinkArc: React.FC<RxTemplateProps> = ({ doctor, patient, date, i
     {/* Footer masthead */}
     <div className="absolute" style={{ left: '20mm', bottom: '16mm' }}>
       <div className="font-serif" style={{ color: C.pink, fontSize: '13pt' }}>Cabinet Médical</div>
-      <div className="italic" style={{ color: C.grey, fontSize: '8pt' }}>INPE {doctor.registrationNumber}</div>
+      {doctor.registrationNumber && <div className="italic" style={{ color: C.grey, fontSize: '8pt' }}>INPE {doctor.registrationNumber}</div>}
       <div className="mt-1.5 space-y-0.5" style={{ color: C.ink, fontSize: '7.5pt' }}>
         <div>{doctor.address}</div>
         <div>Tél : {doctor.phone}</div>
