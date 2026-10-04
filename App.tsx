@@ -24,6 +24,9 @@ import {
   parseSettingsHash, sameRoute, settingsHash, visibleSettingsGroups,
 } from './components/settings/settingsRoutes';
 import { unsavedChanges } from './components/settings/unsavedChanges';
+import { FEATURES } from './features';
+import { aiService } from './services/aiService';
+import { useAiEnabled } from './services/useAiEnabled';
 import CabinetSetupGate from './components/CabinetSetupGate';
 import { installPrintGuard } from './services/cabinetSetup';
 import { useActiveProfile } from './components/ui/ActiveProfileContext';
@@ -67,7 +70,10 @@ const VIEW_PERMISSION: Record<View, Permission> = {
   notifications: 'DOCTOR_TOOLS',
   'medical-directory': 'DOCTOR_TOOLS',
 };
-const canOpen = (view: View) => !!VIEW_PERMISSION[view] && sessionService.can(VIEW_PERMISSION[view]);
+// Fonctions masquées (features.ts) ou dépendantes de « Fonctions IA » : refusées comme un écran non autorisé.
+const featureVisible = (view: View) =>
+  (view !== 'tasks' || FEATURES.tasks) && (view !== 'smart-doc' || aiService.isEnabledCached());
+const canOpen = (view: View) => !!VIEW_PERMISSION[view] && sessionService.can(VIEW_PERMISSION[view]) && featureVisible(view);
 
 const App: React.FC = () => {
   return (
@@ -113,6 +119,8 @@ const AppContent: React.FC = () => {
   const [securityChecked, setSecurityChecked] = useState(false);
   const [securityConfigured, setSecurityConfigured] = useState(false);
   const [securityUnlocked, setSecurityUnlocked] = useState(false);
+  // Relit « Fonctions IA » à chaque changement : SmartDoc n'apparaît que s'il est activé.
+  useAiEnabled(securityUnlocked);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(initialSettingsHash ? 'settings' : null);
   const [settingsRoute, setSettingsRoute] = useState<SettingsRoute>(
     () => parseSettingsHash(window.location.hash) || DEFAULT_SETTINGS_ROUTE,
@@ -379,7 +387,7 @@ const AppContent: React.FC = () => {
     { id: 'analytics', label: 'Comptabilité', icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
     { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'settings', label: t('settings'), icon: Settings, requiredPermission: 'MANAGE_SETTINGS' },
-  ].filter(item => (!item.requiredPermission || hasPermission(item.requiredPermission)) && !((item as any).assistantOnly && sessionService.isMedecin()));
+  ].filter(item => featureVisible(item.id as View) && (!item.requiredPermission || hasPermission(item.requiredPermission)) && !((item as any).assistantOnly && sessionService.isMedecin()));
 
   // ─── Loading & Auth gates ───
   if (!securityChecked) {

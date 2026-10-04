@@ -33,9 +33,16 @@ const call = async <T>(cmd: string, args?: Record<string, unknown>): Promise<T> 
     }
 };
 
-const toStatus = (r: RawStatus): AiStatus => ({
-    enabled: r.enabled, hasKey: r.has_key, keySuffix: r.key_suffix, fromDev: r.from_dev,
-});
+// Dernier état connu de l'interrupteur « Fonctions IA » (faux tant que non lu) : les écrans
+// qui dépendent de l'IA (SmartDoc) ne s'affichent que s'il est activé.
+export const AI_STATUS_EVENT = 'docease_ai_status';
+let enabledCache = false;
+
+const toStatus = (r: RawStatus): AiStatus => {
+    enabledCache = r.enabled;
+    window.dispatchEvent(new CustomEvent(AI_STATUS_EVENT, { detail: { enabled: r.enabled } }));
+    return { enabled: r.enabled, hasKey: r.has_key, keySuffix: r.key_suffix, fromDev: r.from_dev };
+};
 
 // Identifiants du patient que le Rust doit retirer des textes libres avant envoi.
 // Ils restent sur la machine : ils servent uniquement à les masquer.
@@ -48,6 +55,7 @@ const patientContext = (p?: Partial<Patient> | null) =>
 
 export const aiService = {
     isTauri,
+    isEnabledCached: (): boolean => enabledCache,
 
     getStatus: async (): Promise<AiStatus> => toStatus(await call<RawStatus>('ai_status')),
     setEnabled: async (enabled: boolean): Promise<AiStatus> => toStatus(await call<RawStatus>('ai_set_enabled', { enabled })),

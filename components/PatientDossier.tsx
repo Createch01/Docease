@@ -26,6 +26,7 @@ import { EMPTY_STATES } from '../constants/emptyStates';
 // @ts-ignore
 import { toastService } from '../services/toastService';
 import { canOutput } from '../services/cabinetSetup';
+import { useAiEnabled } from '../services/useAiEnabled';
 import { settingsService } from '../services/settingsService';
 import { formatAge, formatNom } from '../utils/formatters';
 import PatientsList from './PatientsList';
@@ -33,6 +34,7 @@ import PatientsList from './PatientsList';
 type DossierTab = 'overview' | 'consultation' | 'ordonnance' | 'analyses' | 'resultats' | 'vaccination' | 'antecedents' | 'constantes' | 'documents' | 'facture' | 'certificats';
 
 const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void, initialPatient?: Patient | null }> = ({ onNavigate, initialPatient }) => {
+  const aiEnabled = useAiEnabled();
   const { t, dir } = useI18n();
   // Navigation & Filter State
   const [selectedPatientId, setSelectedPatientId] = useState<string | null>(null);
@@ -423,7 +425,7 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
                   { id: 'antecedents', label: 'Antécédents', icon: <ClipboardList size={13} /> },
                   { id: 'constantes', label: 'Constantes', icon: <HeartPulse size={13} /> },
                   { id: 'certificats', label: t('certificates'), icon: <FileTextIcon size={13} /> },
-                  { id: 'documents', label: 'SmartDoc', icon: <History size={13} /> }
+                  ...(aiEnabled ? [{ id: 'documents', label: 'SmartDoc', icon: <History size={13} /> }] : [])
                 ].map(tab => (
                   <button
                     key={tab.id}
@@ -607,7 +609,7 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
                 />
               )}
 
-              {activeTab === 'documents' && (
+              {activeTab === 'documents' && aiEnabled && (
                 <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-2 h-full">
                   <SmartDocInterface />
                 </div>
