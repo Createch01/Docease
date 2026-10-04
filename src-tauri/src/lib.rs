@@ -1,6 +1,7 @@
 mod access;
 mod ai;
 mod audit;
+mod backup;
 mod scoped;
 mod settings;
 mod users;

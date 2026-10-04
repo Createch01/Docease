@@ -20,6 +20,17 @@ fn civil_from_days(z: i64) -> (i64, u32, u32) {
     (if m <= 2 { y + 1 } else { y }, m, d)
 }
 
+/// Inverse de `civil_from_days` : (année, mois, jour) → jours depuis 1970-01-01.
+pub fn days_from_civil(y: i64, m: u32, d: u32) -> i64 {
+    let y = if m <= 2 { y - 1 } else { y };
+    let era = y.div_euclid(400);
+    let yoe = y - era * 400;
+    let mp = (m as i64 + 9) % 12;
+    let doy = (153 * mp + 2) / 5 + d as i64 - 1;
+    let doe = yoe * 365 + yoe / 4 - yoe / 100 + doy;
+    era * 146_097 + doe - 719_468
+}
+
 pub fn date_utc(secs: u64) -> String {
     let (y, m, d) = civil_from_days((secs / 86_400) as i64);
     format!("{y:04}-{m:02}-{d:02}")
@@ -54,5 +65,8 @@ mod tests {
         assert_eq!(iso_utc(951_782_400), "2000-02-29T00:00:00Z"); // année bissextile
         assert_eq!(iso_utc(1_790_000_000 - 1_790_000_000 % 86_400 + 3_661), "2026-09-21T01:01:01Z");
         assert_eq!(stamp_utc(1_000_000_000), "20010909-014640");
+        assert_eq!(days_from_civil(1970, 1, 1), 0);
+        assert_eq!(days_from_civil(2000, 2, 29), 11_016);
+        assert_eq!(days_from_civil(2026, 10, 4), 20_730);
     }
 }
