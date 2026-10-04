@@ -562,11 +562,11 @@ pub fn run() {
     .plugin(tauri_plugin_updater::Builder::new().build())
     .plugin(tauri_plugin_fs::init())
     .plugin(tauri_plugin_dialog::init())
-    // Fermeture de la fenêtre : sauvegarde si la dernière date de plus de 24 h (session médecin ouverte).
+    // Fermeture de la fenêtre : si une sauvegarde est due (session médecin ouverte), elle tourne
+    // en arrière-plan avec un indicateur, puis la fenêtre se ferme (30 s au plus).
     .on_window_event(|window, event| {
-        if let tauri::WindowEvent::CloseRequested { .. } = event {
-            let app = window.app_handle();
-            backup::auto_backup_on_exit(app, &app.state::<AppState>());
+        if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+            backup::on_close_requested(window, api);
         }
     })
     .run(tauri::generate_context!())

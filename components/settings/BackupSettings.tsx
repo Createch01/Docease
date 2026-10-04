@@ -119,7 +119,7 @@ const BackupSettings: React.FC = () => {
           <AlertTriangle size={14} className="mt-0.5 shrink-0" />
           <span>
             La sauvegarde automatique ne s'exécute que lorsque DocEase est <strong>ouvert et déverrouillé</strong> : au déverrouillage
-            si la dernière date de plus de 24 h, puis toutes les 24 h pendant la session, au verrouillage et à la fermeture.
+            si la dernière date de plus de 24 h, puis toutes les 24 h pendant la session, au verrouillage et à la fermeture (la fenêtre attend alors la fin de la sauvegarde, 30 s au plus, avec l'indicateur « Sauvegarde en cours… »).
             <strong> Aucune sauvegarde n'a lieu application fermée.</strong> Conservation : 7 quotidiennes, 4 hebdomadaires, 12 mensuelles.
           </span>
         </p>

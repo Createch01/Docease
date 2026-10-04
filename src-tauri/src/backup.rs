@@ -23,7 +23,9 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::sync::Mutex;
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::{mpsc, Mutex};
+use std::time::Duration;
 
 use aes_gcm::aead::{Aead, KeyInit, Payload};
 use aes_gcm::{Aes256Gcm, Key, Nonce};
@@ -59,6 +61,12 @@ const KDF_T: u32 = 3;
 const KDF_P: u32 = 1;
 
 static OP_LOCK: Mutex<()> = Mutex::new(());
+
+/// Délai maximal de la sauvegarde de fermeture : au-delà, la fenêtre se ferme quand même.
+const EXIT_BACKUP_TIMEOUT: Duration = Duration::from_secs(30);
+/// Événement envoyé à l'interface pour afficher « Sauvegarde en cours… » pendant la fermeture.
+pub const CLOSING_EVENT: &str = "backup-closing";
+static CLOSING: AtomicBool = AtomicBool::new(false);
 
 #[cfg(test)]
 pub(crate) static TEST_KDF: Mutex<Option<(u32, u32, u32)>> = Mutex::new(None);
@@ -975,6 +983,91 @@ pub fn auto_backup_on_exit<R: tauri::Runtime>(app: &tauri::AppHandle<R>, state: 
     }
 }
 
+/// Exécute `f` dans un thread et attend au plus `timeout` ; `None` si elle n'est pas finie
+/// (le thread continue : l'écriture est atomique, un fichier partiel n'est jamais visible).
+pub fn run_bounded<T: Send + 'static>(timeout: Duration, f: impl FnOnce() -> T + Send + 'static) -> Option<T> {
+    let (tx, rx) = mpsc::channel();
+    std::thread::spawn(move || {
+        let _ = tx.send(f());
+    });
+    rx.recv_timeout(timeout).ok()
+}
+
+#[derive(Debug)]
+pub enum ExitBackup {
+    /// Pas de sauvegarde due (ou rien à sauvegarder).
+    Skipped,
+    Done(RunReport),
+    /// Code d'erreur de la sauvegarde.
+    Failed(String),
+    TimedOut,
+}
+
+/// Sauvegarde de fermeture : seulement si elle est due, bornée par `timeout`.
+pub fn exit_backup(dir: &Path, key: &[u8; KEY_LEN], now: u64, timeout: Duration) -> ExitBackup {
+    if !matches!(load_meta(dir), Ok(m) if is_due(&m, now)) {
+        return ExitBackup::Skipped;
+    }
+    let (d, k) = (dir.to_path_buf(), *key);
+    match run_bounded(timeout, move || run_if_due(&d, &k, now)) {
+        None => ExitBackup::TimedOut,
+        Some(Ok(Some(r))) => ExitBackup::Done(r),
+        Some(Ok(None)) => ExitBackup::Skipped,
+        Some(Err(e)) => ExitBackup::Failed(e.code().to_string()),
+    }
+}
+
+/// Fermeture de la fenêtre. Si une sauvegarde est due (session médecin ouverte), la fermeture
+/// est suspendue : l'interface affiche « Sauvegarde en cours… », la sauvegarde tourne en
+/// arrière-plan (30 s au plus), puis la fenêtre se ferme. Sinon la fermeture est immédiate.
+pub fn on_close_requested<R: tauri::Runtime>(window: &tauri::Window<R>, api: &tauri::CloseRequestApi) {
+    use tauri::{Emitter, Manager};
+    if CLOSING.load(Ordering::SeqCst) {
+        api.prevent_close();
+        return;
+    }
+    let app = window.app_handle().clone();
+    let (session, key) = {
+        let state = app.state::<AppState>();
+        let session = state.session.lock().ok().and_then(|s| s.clone());
+        let key = state.key.lock().ok().and_then(|k| *k);
+        (session, key)
+    };
+    let (Some(session), Some(key)) = (session, key) else { return };
+    if session.role != Role::Medecin {
+        return;
+    }
+    let Ok(dir) = data_dir(&app) else { return };
+    let now = util::now_secs();
+    if !matches!(load_meta(&dir), Ok(m) if is_due(&m, now)) {
+        return;
+    }
+    CLOSING.store(true, Ordering::SeqCst);
+    api.prevent_close();
+    let _ = window.emit(CLOSING_EVENT, ());
+    let window = window.clone();
+    std::thread::spawn(move || {
+        log_exit_backup(&app, &session, &exit_backup(&dir, &key, now, EXIT_BACKUP_TIMEOUT));
+        // `destroy` ne repasse pas par CloseRequested.
+        let _ = window.destroy();
+    });
+}
+
+fn log_exit_backup<R: tauri::Runtime>(app: &tauri::AppHandle<R>, session: &Session, outcome: &ExitBackup) {
+    match outcome {
+        ExitBackup::Skipped => {}
+        ExitBackup::Done(r) => audit::log(app, Some(session), "backup_auto", &format!("fermeture : {} fichier(s), {} emplacement(s)", r.files, r.destinations.len()), true),
+        ExitBackup::Failed(code) => audit::log(app, Some(session), "backup_auto", &format!("fermeture : échec ({code})"), false),
+        ExitBackup::TimedOut => audit::log(
+            app,
+            Some(session),
+            "backup_auto",
+            &format!("fermeture : sauvegarde non terminée après {} s, fenêtre fermée quand même", EXIT_BACKUP_TIMEOUT.as_secs()),
+            false,
+        ),
+    }
+}
+
 // ─── Commandes ───────────────────────────────────────────────────────────────
 
 /// Clé de données et dossier de données (la session a déjà été contrôlée par `gate`).
@@ -1264,6 +1357,34 @@ mod tests {
         let prefix = |p: &'static str| win_prefix(Path::new(p));
         assert_ne!(prefix(r"\\?\C:\a"), prefix(r"\\?\E:\a"));
         assert_eq!(prefix(r"\\?\C:\a"), prefix(r"\\?\C:\b\c"));
+    }
+
+    #[test]
+    fn run_bounded_returns_result_or_gives_up_at_the_deadline() {
+        assert_eq!(run_bounded(Duration::from_secs(5), || 41 + 1), Some(42));
+        let slow = run_bounded(Duration::from_millis(50), || {
+            std::thread::sleep(Duration::from_millis(600));
+            1
+        });
+        assert_eq!(slow, None);
+    }
+
+    #[test]
+    fn exit_backup_runs_only_when_due_and_reports_each_outcome() {
+        fast_kdf();
+        let d = data_dir_with_files();
+        // Non configurée : rien à faire, fermeture immédiate.
+        assert!(matches!(exit_backup(&d, &KEY, 1_790_000_000, Duration::from_secs(30)), ExitBackup::Skipped));
+        let (a, _b) = configured(&d);
+        let first = exit_backup(&d, &KEY, 1_790_000_000, Duration::from_secs(30));
+        assert!(matches!(first, ExitBackup::Done(ref r) if r.files == 4), "{first:?}");
+        assert!(a.join(SUBDIR).read_dir().unwrap().count() == 1);
+        // Faite il y a 3 h : pas due, rien n'est écrit.
+        assert!(matches!(exit_backup(&d, &KEY, 1_790_000_000 + 3 * 3600, Duration::from_secs(30)), ExitBackup::Skipped));
+        assert_eq!(a.join(SUBDIR).read_dir().unwrap().count(), 1);
+        // Due de nouveau, mais délai nul : la fermeture n'attend pas.
+        let late = exit_backup(&d, &KEY, 1_790_000_000 + 2 * 86_400, Duration::ZERO);
+        assert!(matches!(late, ExitBackup::TimedOut | ExitBackup::Done(_)), "{late:?}");
     }
 
     #[test]

@@ -69,6 +69,8 @@ const call = async <T>(cmd: string, args?: Record<string, unknown>): Promise<T> 
     }
 };
 
+/** Événement Rust : la fenêtre est en cours de fermeture le temps d'une sauvegarde (voir `backup.rs`). */
+export const BACKUP_CLOSING_EVENT = 'backup-closing';
 export const BACKUP_STATUS_EVENT = 'docease_backup_status';
 const changed = () => window.dispatchEvent(new CustomEvent(BACKUP_STATUS_EVENT));
 
