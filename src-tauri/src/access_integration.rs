@@ -140,7 +140,7 @@ fn all_files() -> Vec<String> {
         "doctor_info", "patients", "prescriptions", "daily_reports", "medicines", "today_queue", "tasks",
         "appointments", "capacities", "appointment_settings", "expenses", "last_backup", "medical_resources",
         "consultations", "lab_requests", "medical_results", "honorary_notes", "honorary_master_services",
-        "medical_certificates", "notification_state",
+        "medical_certificates", "notification_state", "vaccinations",
     ]
     .iter()
     .map(|k| format!("meddoc_{k}.json"))
@@ -228,7 +228,7 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     for f in fs::read_dir(&dir).unwrap().flatten().map(|e| e.file_name().to_string_lossy().to_string()) {
         assert!(allowed_written.contains(&f.as_str()) || f.ends_with(".tmp"), "fichier inattendu écrit par l'assistante : {f}");
     }
-    for forbidden in ["meddoc_consultations.json", "meddoc_prescriptions.json", "meddoc_medical_certificates.json", "meddoc_doctor_info.json", "users_meta.json", "app_settings.json", "backup_meta.json"] {
+    for forbidden in ["meddoc_vaccinations.json", "meddoc_consultations.json", "meddoc_prescriptions.json", "meddoc_medical_certificates.json", "meddoc_doctor_info.json", "users_meta.json", "app_settings.json", "backup_meta.json"] {
         assert!(!dir.join(forbidden).exists(), "{forbidden} ne doit pas exister");
     }
 

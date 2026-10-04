@@ -273,7 +273,7 @@ mod tests {
             "meddoc_patients.json", "meddoc_today_queue.json", "meddoc_honorary_notes.json",
             "meddoc_honorary_master_services.json", "meddoc_expenses.json", "meddoc_daily_reports.json",
             "meddoc_doctor_info.json", "meddoc_tasks.json", "meddoc_medicines.json",
-            "meddoc_last_backup.json", "backups/meddoc_patients_2026.json", "fichier_inconnu.json",
+            "meddoc_vaccinations.json", "meddoc_last_backup.json", "backups/meddoc_patients_2026.json", "fichier_inconnu.json",
         ] {
             assert!(!file_allowed(a, f, FileMode::Read), "lecture de {f} doit être refusée");
             assert!(!file_allowed(a, f, FileMode::Write), "écriture de {f} doit être refusée");

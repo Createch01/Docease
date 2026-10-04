@@ -63,31 +63,19 @@ const catchupOf = (id: string) => CATCHUP_WINDOWS[id] ?? DEFAULT_CATCHUP;
 export const vaccinationService = {
     getSchedule: () => VACCINES,
 
-    getPatientRecords: (patientId: string): VaccinationRecord[] => {
-        const stored = localStorage.getItem(`vaccinations_${patientId}`);
-        return stored ? JSON.parse(stored) : [];
+    /** Carnet d'un patient, lu dans le stockage chiffré (médecin seulement ; vide pour l'assistante). */
+    getPatientRecords: (patientId: string): VaccinationRecord[] =>
+        dataService.getVaccinationRecords().filter(r => r.patientId === patientId),
+
+    saveRecord: (record: VaccinationRecord): Promise<void> => {
+        const all = dataService.getVaccinationRecords();
+        const idx = all.findIndex(r => r.patientId === record.patientId && r.vaccineId === record.vaccineId);
+        const next = idx >= 0 ? all.map((r, i) => (i === idx ? record : r)) : [...all, record];
+        return dataService.saveVaccinationRecords(next);
     },
 
-    saveRecord: (record: VaccinationRecord) => {
-        const records = vaccinationService.getPatientRecords(record.patientId);
-        const existingIndex = records.findIndex(r => r.vaccineId === record.vaccineId);
-
-        if (existingIndex >= 0) {
-            records[existingIndex] = record;
-        } else {
-            records.push(record);
-        }
-
-        localStorage.setItem(`vaccinations_${record.patientId}`, JSON.stringify(records));
-        window.dispatchEvent(new Event('meddoc_data_update'));
-    },
-
-    deleteRecord: (patientId: string, vaccineId: string) => {
-        const records = vaccinationService.getPatientRecords(patientId);
-        const filtered = records.filter(r => r.vaccineId !== vaccineId);
-        localStorage.setItem(`vaccinations_${patientId}`, JSON.stringify(filtered));
-        window.dispatchEvent(new Event('meddoc_data_update'));
-    },
+    deleteRecord: (patientId: string, vaccineId: string): Promise<void> =>
+        dataService.saveVaccinationRecords(dataService.getVaccinationRecords().filter(r => !(r.patientId === patientId && r.vaccineId === vaccineId))),
 
     /** Module activé dans Paramètres (désactivé par défaut, sans déduction depuis la spécialité). */
     isModuleEnabled: (): boolean => dataService.getDoctorInfo()?.vaccinationEnabled === true,

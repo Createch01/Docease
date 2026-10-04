@@ -1,8 +1,9 @@
 import { sessionService } from './sessionService';
-import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
+import { VaccinationRecord, DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
 import { storageService } from './storageService';
 import { aiService } from './aiService';
 import { normalizeAppointmentSettings } from './appointmentDefaults';
+import { migrateLegacyVaccinations } from './vaccinationMigration';
 
 const STORAGE_KEYS = {
   DOCTOR_INFO: 'meddoc_doctor_info',
@@ -22,7 +23,9 @@ const STORAGE_KEYS = {
   MEDICAL_RESULTS: 'meddoc_medical_results',
   HONORARY_NOTES: 'meddoc_honorary_notes',
   HONORARY_MASTER_SERVICES: 'meddoc_honorary_master_services',
-  MEDICAL_CERTIFICATES: 'meddoc_medical_certificates'
+  MEDICAL_CERTIFICATES: 'meddoc_medical_certificates',
+  // Carnets de vaccination (médecin seulement : absent de la liste blanche de l'assistante côté Rust).
+  VACCINATIONS: 'meddoc_vaccinations'
 };
 
 const DEFAULT_HONORARY_SERVICES: HonoraryMasterService[] = [
@@ -146,6 +149,23 @@ export const dataService = {
           cache[medKey] = uniqueMeds;
           await storageService.save(medKey, uniqueMeds);
           console.log(`🧹 Cleaned up ${originalCount - uniqueMeds.length} duplicate medications from storage.`);
+        }
+      }
+
+      // Anciens carnets (localStorage, en clair, hors sauvegarde) → stockage chiffré. Médecin seulement :
+      // l'assistante n'a ni accès au fichier ni raison de toucher aux anciennes clés.
+      if (sessionService.isMedecin()) {
+        try {
+          const report = await migrateLegacyVaccinations({
+            legacy: localStorage,
+            current: cache[STORAGE_KEYS.VACCINATIONS] || [],
+            save: records => storageService.save(STORAGE_KEYS.VACCINATIONS, records),
+            load: () => storageService.load<VaccinationRecord[] | null>(STORAGE_KEYS.VACCINATIONS, null),
+          });
+          cache[STORAGE_KEYS.VACCINATIONS] = report.records;
+          if (report.migrated || report.kept.length) console.log(`💉 Carnets de vaccination : ${report.migrated} repris, ${report.removedKeys} ancienne(s) clé(s) supprimée(s), ${report.kept.length} conservée(s).`);
+        } catch (error) {
+          console.error('Migration des carnets de vaccination : anciennes clés conservées.', error);
         }
       }
 
@@ -495,6 +515,16 @@ export const dataService = {
   },
 
   getDailyReports: (): DailyReport[] => cache[STORAGE_KEYS.DAILY_REPORTS] || [],
+
+  getVaccinationRecords: (): VaccinationRecord[] => cache[STORAGE_KEYS.VACCINATIONS] || [],
+
+  /** Remplace la liste complète des carnets (mémoire immédiate, puis écriture chiffrée). */
+  saveVaccinationRecords: async (records: VaccinationRecord[]) => {
+    const storageKey = STORAGE_KEYS.VACCINATIONS;
+    cache[storageKey] = records;
+    notifyUpdate(storageKey);
+    await storageService.save(storageKey, records);
+  },
 
   getTasks: (): Task[] => cache[STORAGE_KEYS.TASKS] || [],
 

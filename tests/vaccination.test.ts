@@ -2,7 +2,8 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import type { Patient } from '../types';
 
 let enabled = true;
-vi.mock('../services/dataService', () => ({ dataService: { getDoctorInfo: () => ({ vaccinationEnabled: enabled }) } }));
+let records: any[] = [];
+vi.mock('../services/dataService', () => ({ dataService: { getDoctorInfo: () => ({ vaccinationEnabled: enabled }), getVaccinationRecords: () => records, saveVaccinationRecords: async (r: any[]) => { records = r; } } }));
 import { vaccinationService } from '../services/vaccinationService';
 
 const NOW = new Date('2026-10-04T12:00:00Z');
@@ -11,7 +12,7 @@ const patient = (over: Partial<Patient> = {}): Patient => ({ id: 'p1', name: 'X'
 const overdue = (p: Patient) => vaccinationService.getVaccinationStatus(p, { now: NOW }).filter(s => s.status === 'OVERDUE').map(s => s.vaccine.id);
 
 describe('suivi vaccinal', () => {
-    beforeEach(() => { enabled = true; localStorage.clear(); });
+    beforeEach(() => { enabled = true; records = []; });
 
     it("adulte sans suivi : aucune alerte, même avec date de naissance", () => {
         expect(overdue(patient({ dateOfBirth: '1990-01-01' }))).toEqual([]);
@@ -41,7 +42,7 @@ describe('suivi vaccinal', () => {
     });
 
     it('un enregistrement suffit à activer le suivi', () => {
-        localStorage.setItem('vaccinations_p1', JSON.stringify([{ id: 'r', patientId: 'p1', vaccineId: 'bcg', dateAdministered: '2026-01-01', status: 'DONE' }]));
+        records = [{ id: 'r', patientId: 'p1', vaccineId: 'bcg', dateAdministered: '2026-01-01', status: 'DONE' }];
         const ids = overdue(patient({ dateOfBirth: monthsAgo(8) }));
         expect(ids).not.toContain('bcg');
         expect(ids).toContain('dtcp1');

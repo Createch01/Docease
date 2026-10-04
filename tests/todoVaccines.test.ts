@@ -3,7 +3,7 @@ import type { Patient } from '../types';
 
 let enabled = true;
 let medecin = true;
-vi.mock('../services/dataService', () => ({ dataService: { getDoctorInfo: () => ({ vaccinationEnabled: enabled }) } }));
+vi.mock('../services/dataService', () => ({ dataService: { getDoctorInfo: () => ({ vaccinationEnabled: enabled }), getVaccinationRecords: () => [] } }));
 vi.mock('../services/sessionService', () => ({ sessionService: { isMedecin: () => medecin } }));
 vi.mock('@tauri-apps/api/core', () => ({ invoke: vi.fn() }));
 import { vaccineItems } from '../services/notificationsService';
@@ -13,7 +13,7 @@ const child = { id: 'c1', name: 'HAYAT Salma', age: 0, sex: 'F', type: 'Child', 
 const adult = { id: 'a1', name: 'DUPONT Jean', age: 40, sex: 'M', type: 'Adult', dateOfBirth: '1986-01-01' } as Patient;
 
 describe('alertes vaccins du panneau À faire', () => {
-    beforeEach(() => { enabled = true; medecin = true; localStorage.clear(); });
+    beforeEach(() => { enabled = true; medecin = true; });
 
     it('adulte sans calendrier vaccinal : aucune alerte', () => {
         expect(vaccineItems([adult])).toEqual([]);
