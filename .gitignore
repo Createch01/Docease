@@ -59,3 +59,6 @@ migration_backups/
 security_meta.json
 users_meta.json
 audit_log*.jsonl
+
+# Captures d'écran (peuvent contenir des données)
+docs/captures/
