@@ -47,16 +47,16 @@ const DEFAULT_HONORARY_SERVICES: HonoraryMasterService[] = [
 // load of the encrypted store) therefore made every PIN comparison fail — the
 // exact "PIN incorrect" symptom reported after a rebuild.
 const DEFAULT_DOCTOR_INFO: DoctorInfo = {
-  nameAr: '***SUPPRIME***',
-  specialtyAr: '***SUPPRIME***',
-  diplomasAr: '***SUPPRIME***',
-  nameFr: '***SUPPRIME***',
-  specialtyFr: '***SUPPRIME***',
-  diplomasFr: '***SUPPRIME***',
-  addressAr: '***SUPPRIME***',
-  addressFr: '***SUPPRIME***',
-  phone: '***SUPPRIME***',
-  email: '***SUPPRIME***',
+  nameAr: '',
+  specialtyAr: '',
+  diplomasAr: '',
+  nameFr: '',
+  specialtyFr: '',
+  diplomasFr: '',
+  addressAr: '',
+  addressFr: '',
+  phone: '',
+  email: '',
   // Vide par défaut : aucun document n'affiche le logo DocEase.
   logoUrl: undefined,
   logoOpacity: 0.1,
@@ -72,6 +72,7 @@ const DEFAULT_DOCTOR_INFO: DoctorInfo = {
   qrCodePosition: 'top-right',
   showQRCode: true,
   ordreNumber: '',
+  inpe: '',
   hours: '',
   mapsUrl: ''
 };
