@@ -50,3 +50,12 @@ tmp_*
 vite_build_output.txt
 dev-server.log
 atc_diagnostic_output.txt
+
+# Données patients / sécurité (ne jamais versionner)
+src-tauri/meddoc_*.json
+meddoc_*.json
+*.bin
+migration_backups/
+security_meta.json
+users_meta.json
+audit_log*.jsonl
