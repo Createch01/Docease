@@ -82,6 +82,15 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("session_touch", Rule::AnySession),
     // Journal d'accès : médecin uniquement
     ("audit_log_list", Rule::Medecin),
+    // Sauvegarde / restauration : médecin uniquement
+    ("backup_status", Rule::Medecin),
+    ("backup_set_passphrase", Rule::Medecin),
+    ("backup_set_destinations", Rule::Medecin),
+    ("backup_run_now", Rule::Medecin),
+    ("backup_run_if_due", Rule::Medecin),
+    ("backup_list", Rule::Medecin),
+    ("backup_inspect", Rule::Medecin),
+    ("backup_restore", Rule::Medecin),
     // IA : médecin uniquement
     ("ai_status", Rule::Medecin),
     ("ai_set_enabled", Rule::Medecin),
@@ -173,7 +182,7 @@ pub enum FileMode {
 
 /// Fichiers internes que `load_json`/`save_json` ne doivent jamais toucher, quel que
 /// soit le rôle (comptes, métadonnées de sécurité).
-const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings"];
+const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta"];
 
 /// Fichiers lisibles/écrivables par l'assistante via `load_json`/`save_json`.
 /// Tout le reste (patients, file d'attente, honoraires, fiche cabinet…) passe par des
@@ -216,6 +225,8 @@ mod tests {
         "set_user_role", "reset_user_password", "scan_json_files", "audit_log_list", "set_inactivity_minutes", "ai_status", "ai_set_enabled",
         "ai_save_key", "ai_delete_key", "ai_test_key", "ai_parse_prescription",
         "ai_analyze_consultation", "ai_analyze_document", "ai_classify_priority",
+        "backup_status", "backup_set_passphrase", "backup_set_destinations", "backup_run_now",
+        "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
     ];
 
     #[test]
@@ -313,6 +324,7 @@ mod tests {
             include_str!("audit.rs"),
             include_str!("settings.rs"),
             include_str!("scoped.rs"),
+            include_str!("backup.rs"),
         ];
         let mut seen = Vec::new();
         for src in sources {

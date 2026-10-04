@@ -498,6 +498,14 @@ pub fn run() {
         load_json,
         security_status,
         audit::audit_log_list,
+        backup::backup_status,
+        backup::backup_set_passphrase,
+        backup::backup_set_destinations,
+        backup::backup_run_now,
+        backup::backup_run_if_due,
+        backup::backup_list,
+        backup::backup_inspect,
+        backup::backup_restore,
         settings::get_security_settings,
         settings::set_inactivity_minutes,
         settings::session_touch,
@@ -552,6 +560,14 @@ pub fn run() {
     })
     .plugin(tauri_plugin_updater::Builder::new().build())
     .plugin(tauri_plugin_fs::init())
+    .plugin(tauri_plugin_dialog::init())
+    // Fermeture de la fenêtre : sauvegarde si la dernière date de plus de 24 h (session médecin ouverte).
+    .on_window_event(|window, event| {
+        if let tauri::WindowEvent::CloseRequested { .. } = event {
+            let app = window.app_handle();
+            backup::auto_backup_on_exit(app, &app.state::<AppState>());
+        }
+    })
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }

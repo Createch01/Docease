@@ -534,6 +534,8 @@ pub fn current_session<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri
 pub fn lock<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<(), String> {
     let session = gate(&app, &state, "lock")?;
     if session.is_some() {
+        // Dernière chance de sauvegarder avant l'effacement de la clé (si la dernière a plus de 24 h).
+        super::backup::auto_backup_on_exit(&app, &state);
         audit::log(&app, session.as_ref(), "lock", "", true);
     }
     *state.key.lock().map_err(|e| e.to_string())? = None;

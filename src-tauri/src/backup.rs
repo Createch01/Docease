@@ -903,9 +903,9 @@ pub fn auto_backup_on_exit<R: tauri::Runtime>(app: &tauri::AppHandle<R>, state: 
 
 // ─── Commandes ───────────────────────────────────────────────────────────────
 
-fn ctx<R: tauri::Runtime>(app: &tauri::AppHandle<R>, state: &AppState, command: &str) -> Result<(Option<Session>, [u8; KEY_LEN], PathBuf), String> {
-    let session = gate(app, state, command)?;
-    Ok((session, data_key_of(state)?, data_dir(app)?))
+/// Clé de données et dossier de données (la session a déjà été contrôlée par `gate`).
+fn parts<R: tauri::Runtime>(app: &tauri::AppHandle<R>, state: &AppState) -> Result<([u8; KEY_LEN], PathBuf), String> {
+    Ok((data_key_of(state)?, data_dir(app)?))
 }
 
 async fn blocking<T: Send + 'static>(f: impl FnOnce() -> Res<T> + Send + 'static) -> Result<T, String> {
@@ -917,13 +917,15 @@ async fn blocking<T: Send + 'static>(f: impl FnOnce() -> Res<T> + Send + 'static
 
 #[tauri::command]
 pub async fn backup_status<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>) -> Result<Status, String> {
-    let (_, _, dir) = ctx(&app, &state, "backup_status")?;
+    gate(&app, &state, "backup_status")?;
+    let (_, dir) = parts(&app, &state)?;
     blocking(move || status(&dir, util::now_secs())).await
 }
 
 #[tauri::command]
 pub async fn backup_set_passphrase<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>, passphrase: String) -> Result<(), String> {
-    let (session, key, dir) = ctx(&app, &state, "backup_set_passphrase")?;
+    let session = gate(&app, &state, "backup_set_passphrase")?;
+    let (key, dir) = parts(&app, &state)?;
     let r = blocking(move || set_passphrase(&dir, &key, &passphrase)).await;
     audit::log(&app, session.as_ref(), "backup_set_passphrase", "", r.is_ok());
     r
@@ -931,7 +933,8 @@ pub async fn backup_set_passphrase<R: tauri::Runtime>(app: tauri::AppHandle<R>, 
 
 #[tauri::command]
 pub async fn backup_set_destinations<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>, primary: Option<String>, secondary: Option<String>) -> Result<(), String> {
-    let (session, _, dir) = ctx(&app, &state, "backup_set_destinations")?;
+    let session = gate(&app, &state, "backup_set_destinations")?;
+    let (_, dir) = parts(&app, &state)?;
     let r = blocking(move || set_destinations(&dir, primary.as_deref(), secondary.as_deref()).map(|_| ())).await;
     audit::log(&app, session.as_ref(), "backup_set_destinations", "", r.is_ok());
     r
@@ -939,7 +942,8 @@ pub async fn backup_set_destinations<R: tauri::Runtime>(app: tauri::AppHandle<R>
 
 #[tauri::command]
 pub async fn backup_run_now<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>) -> Result<RunReport, String> {
-    let (session, key, dir) = ctx(&app, &state, "backup_run_now")?;
+    let session = gate(&app, &state, "backup_run_now")?;
+    let (key, dir) = parts(&app, &state)?;
     let r = blocking(move || run_backup(&dir, &key, util::now_secs())).await;
     audit::log(&app, session.as_ref(), "backup_run", &r.as_ref().map(|x| format!("{} fichier(s)", x.files)).unwrap_or_else(|e| e.split('|').next().unwrap_or("").to_string()), r.is_ok());
     r
@@ -947,7 +951,8 @@ pub async fn backup_run_now<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: 
 
 #[tauri::command]
 pub async fn backup_run_if_due<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>) -> Result<Option<RunReport>, String> {
-    let (session, key, dir) = ctx(&app, &state, "backup_run_if_due")?;
+    let session = gate(&app, &state, "backup_run_if_due")?;
+    let (key, dir) = parts(&app, &state)?;
     let r = blocking(move || run_if_due(&dir, &key, util::now_secs())).await;
     if let Ok(Some(rep)) = &r {
         audit::log(&app, session.as_ref(), "backup_auto", &format!("{} fichier(s)", rep.files), true);
@@ -959,19 +964,22 @@ pub async fn backup_run_if_due<R: tauri::Runtime>(app: tauri::AppHandle<R>, stat
 
 #[tauri::command]
 pub async fn backup_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>) -> Result<Vec<Entry>, String> {
-    let (_, _, dir) = ctx(&app, &state, "backup_list")?;
+    gate(&app, &state, "backup_list")?;
+    let (_, dir) = parts(&app, &state)?;
     blocking(move || list(&dir)).await
 }
 
 #[tauri::command]
 pub async fn backup_inspect<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>, path: String, passphrase: String) -> Result<Preview, String> {
-    ctx(&app, &state, "backup_inspect")?;
+    gate(&app, &state, "backup_inspect")?;
+    parts(&app, &state)?;
     blocking(move || inspect(Path::new(&path), &passphrase)).await
 }
 
 #[tauri::command]
 pub async fn backup_restore<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>, path: String, passphrase: String) -> Result<RestoreReport, String> {
-    let (session, key, dir) = ctx(&app, &state, "backup_restore")?;
+    let session = gate(&app, &state, "backup_restore")?;
+    let (key, dir) = parts(&app, &state)?;
     let r = blocking(move || restore(&dir, &key, Path::new(&path), &passphrase, util::now_secs())).await;
     audit::log(&app, session.as_ref(), "backup_restore", &r.as_ref().map(|x| format!("{} fichier(s)", x.restored)).unwrap_or_else(|e| e.split('|').next().unwrap_or("").to_string()), r.is_ok());
     r

@@ -108,6 +108,15 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "get_security_settings" => done(settings::get_security_settings(a(), st!())),
         "set_inactivity_minutes" => done(settings::set_inactivity_minutes(a(), st!(), 15)),
         "session_touch" => done(settings::session_touch(a(), st!())),
+        // Sauvegarde (asynchrones, médecin)
+        "backup_status" => done(tauri::async_runtime::block_on(super::backup::backup_status(a(), st!()))),
+        "backup_set_passphrase" => done(tauri::async_runtime::block_on(super::backup::backup_set_passphrase(a(), st!(), "une phrase de passe solide".into()))),
+        "backup_set_destinations" => done(tauri::async_runtime::block_on(super::backup::backup_set_destinations(a(), st!(), Some("relatif".into()), None))),
+        "backup_run_now" => done(tauri::async_runtime::block_on(super::backup::backup_run_now(a(), st!()))),
+        "backup_run_if_due" => done(tauri::async_runtime::block_on(super::backup::backup_run_if_due(a(), st!()))),
+        "backup_list" => done(tauri::async_runtime::block_on(super::backup::backup_list(a(), st!()))),
+        "backup_inspect" => done(tauri::async_runtime::block_on(super::backup::backup_inspect(a(), st!(), "absent.dcb".into(), "une phrase de passe solide".into()))),
+        "backup_restore" => done(tauri::async_runtime::block_on(super::backup::backup_restore(a(), st!(), "absent.dcb".into(), "une phrase de passe solide".into()))),
         // IA (asynchrones)
         "ai_status" => done(ai::ai_status(a(), st!())),
         "ai_set_enabled" => done(ai::ai_set_enabled(a(), st!(), true)),
@@ -135,7 +144,7 @@ fn all_files() -> Vec<String> {
     .collect();
     v.extend(
         [
-            "backups/meddoc_patients_2026.json", "users_meta.json", "security_meta.json", "app_settings.json",
+            "backups/meddoc_patients_2026.json", "users_meta.json", "security_meta.json", "app_settings.json", "backup_meta.json",
             "audit_log.jsonl", "audit_log.json", "../hors_dossier.json", "backups/../meddoc_patients.json",
             "/etc/passwd", "C:\\Windows\\win.ini", "meddoc_patients.json\\..\\x", "inconnu.json", "",
         ]
@@ -216,7 +225,7 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     for f in fs::read_dir(&dir).unwrap().flatten().map(|e| e.file_name().to_string_lossy().to_string()) {
         assert!(allowed_written.contains(&f.as_str()) || f.ends_with(".tmp"), "fichier inattendu écrit par l'assistante : {f}");
     }
-    for forbidden in ["meddoc_consultations.json", "meddoc_prescriptions.json", "meddoc_medical_certificates.json", "meddoc_doctor_info.json", "users_meta.json", "app_settings.json"] {
+    for forbidden in ["meddoc_consultations.json", "meddoc_prescriptions.json", "meddoc_medical_certificates.json", "meddoc_doctor_info.json", "users_meta.json", "app_settings.json", "backup_meta.json"] {
         assert!(!dir.join(forbidden).exists(), "{forbidden} ne doit pas exister");
     }
 
@@ -246,6 +255,7 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     // ── 4. Témoin : le MÉDECIN n'est pas refusé sur les mêmes appels ─────────
     for (cmd, file) in [
         ("list_users", ""), ("scan_json_files", ""), ("audit_log_list", ""), ("set_inactivity_minutes", ""),
+        ("backup_status", ""), ("backup_list", ""), ("backup_run_if_due", ""),
         ("load_json", "meddoc_patients.json"), ("save_json", "meddoc_patients.json"), ("load_json", "meddoc_consultations.json"),
     ] {
         open(&h, Some(Role::Medecin));
