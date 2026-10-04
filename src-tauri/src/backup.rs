@@ -719,6 +719,47 @@ pub struct Status {
     /// `ok` (≤ 24 h) · `warning` (24-48 h) · `alert` (> 48 h, jamais, non configurée ou emplacement inaccessible).
     pub level: &'static str,
     pub reason: Option<String>,
+    /// Alerte permanente (orange) tant que les sauvegardes ne sont pas sur deux supports :
+    /// `no_secondary` (aucun second emplacement) ou `same_disk` (les deux sur le même disque).
+    pub redundancy: Option<&'static str>,
+}
+
+#[cfg(windows)]
+fn win_prefix(p: &Path) -> Option<std::path::Prefix<'_>> {
+    match p.components().next() {
+        Some(std::path::Component::Prefix(x)) => Some(x.kind()),
+        _ => None,
+    }
+}
+
+/// Vrai si les deux dossiers sont sur le même volume (lettre de lecteur / partage sous
+/// Windows, numéro de périphérique ailleurs). Un chemin illisible n'est jamais « le même ».
+pub fn same_volume(a: &Path, b: &Path) -> bool {
+    let (Ok(ca), Ok(cb)) = (fs::canonicalize(a), fs::canonicalize(b)) else { return false };
+    #[cfg(windows)]
+    {
+        matches!((win_prefix(&ca), win_prefix(&cb)), (Some(x), Some(y)) if x == y)
+    }
+    #[cfg(unix)]
+    {
+        use std::os::unix::fs::MetadataExt;
+        matches!((fs::metadata(&ca), fs::metadata(&cb)), (Ok(x), Ok(y)) if x.dev() == y.dev())
+    }
+    #[cfg(not(any(windows, unix)))]
+    {
+        let _ = (ca, cb);
+        false
+    }
+}
+
+fn redundancy_of(meta: &Meta) -> Option<&'static str> {
+    let primary = meta.primary.as_ref()?;
+    meta.wrapped_passphrase.as_ref()?;
+    match &meta.secondary {
+        None => Some("no_secondary"),
+        Some(second) if same_volume(Path::new(primary), Path::new(second)) => Some("same_disk"),
+        Some(_) => None,
+    }
 }
 
 pub fn status(dir: &Path, now: u64) -> Res<Status> {
@@ -745,7 +786,8 @@ pub fn status(dir: &Path, now: u64) -> Res<Status> {
             Some(_) => ("ok", None),
         }
     };
-    Ok(Status { has_passphrase, configured, last_success_at: meta.last_success_at, age_secs: age, last_error: meta.last_error, destinations, level, reason })
+    let redundancy = redundancy_of(&meta);
+    Ok(Status { has_passphrase, configured, last_success_at: meta.last_success_at, age_secs: age, last_error: meta.last_error, destinations, level, reason, redundancy })
 }
 
 // ─── Liste, aperçu, restauration ─────────────────────────────────────────────
@@ -1193,6 +1235,35 @@ mod tests {
         assert_eq!(open(&new_file, PASS).err(), Some(BackupError::WrongPassphrase));
         // Une autre clé de données (autre session) ne peut pas changer la phrase.
         assert!(change_passphrase(&d, &[9u8; KEY_LEN], NEW, "encore une autre phrase").is_err());
+    }
+
+    #[test]
+    fn redundancy_alert_until_a_second_disk_is_configured() {
+        fast_kdf();
+        let d = data_dir_with_files();
+        let a = tmp("redA");
+        let b = tmp("redB");
+        // Rien de configuré : l'alerte rouge « non configurée » suffit, pas d'alerte orange.
+        assert_eq!(status(&d, 1).unwrap().redundancy, None);
+        set_passphrase(&d, &KEY, PASS).unwrap();
+        set_destinations(&d, Some(a.to_str().unwrap()), None).unwrap();
+        assert_eq!(status(&d, 1).unwrap().redundancy, Some("no_secondary"));
+        // Deux dossiers du même volume (ici : deux dossiers temporaires du même disque).
+        set_destinations(&d, Some(a.to_str().unwrap()), Some(b.to_str().unwrap())).unwrap();
+        assert!(same_volume(&a, &b));
+        assert_eq!(status(&d, 1).unwrap().redundancy, Some("same_disk"));
+        // Un chemin introuvable n'est jamais déclaré « même disque » (l'alerte rouge d'accès le couvre).
+        assert!(!same_volume(&a, &b.join("absent")));
+        fs::remove_dir_all(&b).unwrap();
+        assert_eq!(status(&d, 1).unwrap().redundancy, None);
+    }
+
+    #[cfg(windows)]
+    #[test]
+    fn same_volume_compares_drive_prefixes() {
+        let prefix = |p: &'static str| win_prefix(Path::new(p));
+        assert_ne!(prefix(r"\\?\C:\a"), prefix(r"\\?\E:\a"));
+        assert_eq!(prefix(r"\\?\C:\a"), prefix(r"\\?\C:\b\c"));
     }
 
     #[test]

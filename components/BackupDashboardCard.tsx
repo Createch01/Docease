@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { BACKUP_STATUS_EVENT, BackupStatus, backupService, isTauri } from '../services/backupService';
-import { BackupBanner } from './settings/BackupSettings';
+import { BackupBanner, RedundancyAlert } from './settings/BackupSettings';
 
 const REFRESH_MS = 5 * 60 * 1000;
 
@@ -22,7 +22,8 @@ const BackupDashboardCard: React.FC<{ onOpenSettings: () => void }> = ({ onOpenS
   return (
     <div className="space-y-2">
       <BackupBanner status={status} />
-      {status.level !== 'ok' && (
+      <RedundancyAlert status={status} />
+      {(status.level !== 'ok' || status.redundancy) && (
         <button type="button" onClick={onOpenSettings} className="text-[13px] font-medium underline" style={{ color: 'var(--color-primary)' }}>
           Ouvrir Paramètres › Base de données
         </button>

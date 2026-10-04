@@ -5,6 +5,9 @@ import { invoke } from '@tauri-apps/api/core';
 
 export type BackupLevel = 'ok' | 'warning' | 'alert';
 
+/** Alerte orange permanente : pas de second emplacement, ou second emplacement sur le même disque. */
+export type BackupRedundancy = 'no_secondary' | 'same_disk';
+
 export interface BackupDestStatus { role: 'principal' | 'secours'; path: string; accessible: boolean; error: string | null }
 
 export interface BackupStatus {
@@ -16,6 +19,7 @@ export interface BackupStatus {
     destinations: BackupDestStatus[];
     level: BackupLevel;
     reason: string | null;
+    redundancy: BackupRedundancy | null;
 }
 
 export interface BackupEntry { path: string; name: string; role: 'principal' | 'secours'; stamp: string; size: number }
@@ -107,3 +111,9 @@ export const formatStamp = (stamp: string): string => {
 };
 
 export const MIN_PASSPHRASE = 12;
+
+export const redundancyMessage = (r: BackupRedundancy | null): string | null => {
+    if (r === 'no_secondary') return "Aucun second emplacement : si le disque de l'ordinateur ou du dossier de sauvegarde tombe en panne, vous perdez tout. Ajoutez une clé USB, un disque externe ou un dossier synchronisé.";
+    if (r === 'same_disk') return "Le second emplacement est sur le même disque que le premier : une panne de ce disque détruirait les deux copies. Choisissez un autre disque, une clé USB ou un dossier synchronisé.";
+    return null;
+};

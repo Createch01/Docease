@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { AlertTriangle, CheckCircle2, FolderOpen, HardDriveDownload, KeyRound, RotateCcw, ShieldAlert, X } from 'lucide-react';
 import {
   BACKUP_STATUS_EVENT, BackupEntry, BackupError, BackupPreview, BackupStatus, MIN_PASSPHRASE,
-  backupService, formatAge, formatStamp, isTauri,
+  backupService, formatAge, formatStamp, isTauri, redundancyMessage,
 } from '../../services/backupService';
 import { dataService } from '../../services/dataService';
 import { toastService } from '../../services/toastService';
@@ -52,6 +52,19 @@ export const BackupBanner: React.FC<{ status: BackupStatus }> = ({ status }) => 
   );
 };
 
+/** Alerte orange permanente (non fermable) tant que les sauvegardes ne sont pas sur deux disques distincts. */
+export const RedundancyAlert: React.FC<{ status: BackupStatus }> = ({ status }) => {
+  const text = redundancyMessage(status.redundancy);
+  if (!text) return null;
+  const st = LEVEL_STYLE.warning;
+  return (
+    <div role="status" className="flex items-start gap-3 p-4 rounded-lg" style={{ background: st.bg, color: st.fg }}>
+      <AlertTriangle size={20} className="shrink-0" />
+      <p className="text-[13px] font-medium">{text}</p>
+    </div>
+  );
+};
+
 const BackupSettings: React.FC = () => {
   const [status, setStatus] = useState<BackupStatus | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -92,6 +105,7 @@ const BackupSettings: React.FC = () => {
         description="Fichiers chiffrés (AES-256, clé dérivée de votre phrase de passe de sauvegarde) contenant toutes vos données."
       >
         <BackupBanner status={status} />
+        <RedundancyAlert status={status} />
         <button type="button" className={primaryButton} style={{ background: 'var(--color-primary)' }} disabled={busy || !status.configured}
                 onClick={() => run(async () => {
                   const r = await backupService.runNow();
