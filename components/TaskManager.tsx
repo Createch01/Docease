@@ -132,19 +132,7 @@ const TaskManager: React.FC = () => {
       message: "Êtes-vous sûr de vouloir supprimer cette tâche ?",
       type: 'danger',
       onConfirm: () => {
-        const remaining = tasks.filter(t => t.id !== id);
-        // Use dataService to save all (simulated by re-saving list manually or add delete method)
-        // dataService doesn't have delete multiple, so we iterate or add a delete method.
-        // Actually dataService has deleteTask method? Let's check. 
-        // It does not have explicit delete. We need to implement it or use raw localStorage update.
-        // Wait, dataService usually has it. Let's assume we need to add it or do it manually.
-        // To be safe, let's just save the filtered list if needed, but dataService should handle.
-        // CHECK: dataService.ts might NOT have deleteTask. 
-        // Let's implement manual delete here for safety as I recall viewing it didn't show one properly or I missed it.
-        // Ah, checked file: dataService.ts showing saveTask but no delete explicitly in the snippet?
-        // Let's just update the list.
-        localStorage.setItem('meddoc_tasks', JSON.stringify(remaining));
-        window.dispatchEvent(new CustomEvent('meddoc_data_update', { detail: { key: 'meddoc_tasks' } }));
+        void dataService.deleteTask(id);
         setConfirmModal(prev => ({ ...prev, isOpen: false }));
       }
     });

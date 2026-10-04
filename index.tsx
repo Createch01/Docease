@@ -8,6 +8,10 @@ import App from './App';
 import { ToastProvider } from './components/ui/Toast';
 import { ActiveProfileProvider } from './components/ui/ActiveProfileContext';
 import DevAutoUnlockBadge from './components/DevAutoUnlockBadge';
+import { storageService } from './services/storageService';
+
+// Anciennes copies de données médicales en clair dans le localStorage (sous Tauri).
+storageService.purgeLegacyLocalData();
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

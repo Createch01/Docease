@@ -311,7 +311,6 @@ export const UsersSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }
 export const DatabaseSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => {
   const [stats, setStats] = useState(() => dataService.getDatabaseStats());
   const [checking, setChecking] = useState(false);
-  const backupInputRef = useRef<HTMLInputElement>(null);
   // Mot de passe de la sauvegarde : saisi à chaque fois (il n'est plus dérivé d'un PIN stocké).
   const [backupPassphrase, setBackupPassphrase] = useState('');
   const passphrase = () => backupPassphrase;
@@ -320,25 +319,6 @@ export const DatabaseSettings: React.FC<SettingsPageProps> = ({ route, onNavigat
     if (backupPassphrase.length < 8) { toastService.error('Saisissez un mot de passe de sauvegarde (8 caractères minimum).'); return; }
     await dataService.exportFullBackup(passphrase());
     setStats(dataService.getDatabaseStats());
-  };
-
-  const importBackup = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    e.target.value = '';
-    if (!file) return;
-    if (!backupPassphrase) { toastService.error('Saisissez le mot de passe de la sauvegarde à importer.'); return; }
-    if (!window.confirm('ATTENTION : Cette action remplacera toutes vos données actuelles. Continuer ?')) return;
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      if (typeof event.target?.result !== 'string') return;
-      if (await dataService.importFullBackup(event.target.result, passphrase())) {
-        alert('Restauration réussie !');
-        window.location.reload();
-      } else {
-        alert('Fichier de sauvegarde invalide.');
-      }
-    };
-    reader.readAsText(file);
   };
 
   const checkUpdate = async () => {
@@ -378,10 +358,11 @@ export const DatabaseSettings: React.FC<SettingsPageProps> = ({ route, onNavigat
             <button type="button" onClick={exportBackup} className="w-full h-11 rounded-lg text-white font-medium text-[13px] flex items-center justify-center gap-2 transition-all active:scale-[0.98]" style={{ background: 'var(--color-primary)' }}>
               <Download size={15} /> Exporter la sauvegarde
             </button>
-            <button type="button" onClick={() => backupInputRef.current?.click()} className="w-full h-11 rounded-lg border-2 border-dashed font-medium text-[13px] flex items-center justify-center gap-2 transition-all bg-white" style={{ borderColor: 'var(--color-border-strong)', color: 'var(--color-text-subtle)' }}>
+            <button type="button" disabled aria-disabled="true" title="Restauration en cours de refonte"
+                    className="w-full h-11 rounded-lg border-2 border-dashed font-medium text-[13px] flex items-center justify-center gap-2 bg-white opacity-60 cursor-not-allowed" style={{ borderColor: 'var(--color-border-strong)', color: 'var(--color-text-subtle)' }}>
               <Upload size={15} /> Importer une sauvegarde
             </button>
-            <input type="file" ref={backupInputRef} onChange={importBackup} accept=".json" className="hidden" />
+            <p className="text-[12px]" style={{ color: 'var(--color-text-subtle)' }}>Restauration en cours de refonte.</p>
           </div>
         </SettingsCard>
 

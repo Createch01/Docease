@@ -42,19 +42,15 @@ const OVERRIDES_FILE = 'medicament_overrides';
 const AUDIT_LOG_FILE = 'medicament_audit_log';
 
 /**
- * storageService.save() (services/storageService.ts) always writes the
- * localStorage fallback before re-throwing whatever error `invoke('save_json', …)`
- * produced — including "Tauri unavailable" when running in a plain browser
- * (e.g. `vite dev` outside the desktop shell). Every dataService.ts method
- * has this same shape and none of them guard against it either; the data is
- * already durably written by the time the throw happens, so treat it as
- * non-fatal here rather than leaving the editor UI stuck as if nothing saved.
+ * storageService.save() n'écrit plus jamais dans le localStorage : en cas d'échec il
+ * signale l'erreur à l'utilisateur (toast) et ne lève pas. Cette enveloppe reste pour
+ * ne pas figer l'éditeur si une sauvegarde lève malgré tout.
  */
 async function safeSave(filename: string, data: unknown): Promise<void> {
     try {
         await storageService.save(filename, data);
     } catch (err) {
-        console.warn(`[medicamentAdminService] save('${filename}') fell back to local storage:`, err);
+        console.warn(`[medicamentAdminService] save('${filename}') failed:`, err);
     }
 }
 
