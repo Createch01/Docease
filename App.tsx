@@ -24,6 +24,8 @@ import {
   parseSettingsHash, sameRoute, settingsHash, visibleSettingsGroups,
 } from './components/settings/settingsRoutes';
 import { unsavedChanges } from './components/settings/unsavedChanges';
+import CabinetSetupGate from './components/CabinetSetupGate';
+import { installPrintGuard } from './services/cabinetSetup';
 import { useActiveProfile } from './components/ui/ActiveProfileContext';
 
 // Lazy loading components for code splitting
@@ -90,6 +92,8 @@ const AppContent: React.FC = () => {
   // Profil de sécurité du catalogue : en mémoire seulement, remis à zéro à chaque changement de patient.
   const { resetProfile } = useActiveProfile();
   useEffect(() => { resetProfile(); }, [activePatient?.id, resetProfile]);
+  // Impression bloquée tant que le nom ou l'INPE du médecin est vide.
+  useEffect(() => installPrintGuard(), []);
   const [activePrescription, setActivePrescription] = useState<any | null>(null);
   const [isCollapsed, setIsCollapsed] = useState(false);
   // Mode concentration : pendant une consultation la sidebar est masquée ; le choix du médecin est mémorisé.
@@ -316,6 +320,7 @@ const AppContent: React.FC = () => {
         if (view === 'new-prescription') handleStartConsultation(data?.patient);
       }} />;
       case 'new-prescription': return (
+        <CabinetSetupGate onOpenSettings={openSettings}>
         <PrescriptionEditor
           initialPatient={activePatient}
           initialPrescription={activePrescription}
@@ -330,6 +335,7 @@ const AppContent: React.FC = () => {
             setCurrentView('dashboard');
           }}
         />
+        </CabinetSetupGate>
       );
       case 'compatibility': return <DrugCompatibility />;
       case 'analytics': return <Analytics />;

@@ -50,13 +50,13 @@ const DEFAULT_DOCTOR_INFO: DoctorInfo = {
   nameAr: '',
   specialtyAr: '',
   diplomasAr: '',
-  nameFr: '***SUPPRIME***',
-  specialtyFr: '***SUPPRIME***',
-  diplomasFr: '***SUPPRIME***',
+  nameFr: '',
+  specialtyFr: '',
+  diplomasFr: '',
   addressAr: '',
-  addressFr: '***SUPPRIME***',
-  phone: '***SUPPRIME***',
-  email: '***SUPPRIME***',
+  addressFr: '',
+  phone: '',
+  email: '',
   // Vide par défaut : aucun document n'affiche le logo DocEase.
   logoUrl: undefined,
   logoOpacity: 0.1,
@@ -72,6 +72,7 @@ const DEFAULT_DOCTOR_INFO: DoctorInfo = {
   qrCodePosition: 'top-right',
   showQRCode: true,
   ordreNumber: '',
+  inpe: '',
   hours: '',
   mapsUrl: ''
 };
