@@ -83,7 +83,7 @@ fn load_cfg<R: tauri::Runtime>(app: &tauri::AppHandle<R>, key: &[u8; KEY_LEN]) -
 
 fn save_cfg<R: tauri::Runtime>(app: &tauri::AppHandle<R>, key: &[u8; KEY_LEN], cfg: &AiConfig) -> Result<(), String> {
     let json = serde_json::to_vec(cfg).map_err(|e| e.to_string())?;
-    fs::write(ai_path(app)?, encrypt(key, &json)?).map_err(|e| e.to_string())
+    super::users::write_atomic(&ai_path(app)?, &encrypt(key, &json)?)
 }
 
 /// Développement uniquement : lit DEV_GEMINI_API_KEY dans .env.local. Compilé hors
