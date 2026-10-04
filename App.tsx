@@ -25,8 +25,10 @@ import {
 } from './components/settings/settingsRoutes';
 import { unsavedChanges } from './components/settings/unsavedChanges';
 import { FEATURES } from './features';
+import { endOfDay } from './services/endOfDay';
 import { aiService } from './services/aiService';
 import { useAiEnabled } from './services/useAiEnabled';
+import { useAutoBackup } from './services/useAutoBackup';
 import CabinetSetupGate from './components/CabinetSetupGate';
 import { installPrintGuard } from './services/cabinetSetup';
 import { useActiveProfile } from './components/ui/ActiveProfileContext';
@@ -121,6 +123,8 @@ const AppContent: React.FC = () => {
   const [securityUnlocked, setSecurityUnlocked] = useState(false);
   // Relit « Fonctions IA » à chaque changement : SmartDoc n'apparaît que s'il est activé.
   useAiEnabled(securityUnlocked);
+  // Sauvegarde automatique du médecin (> 24 h) : au déverrouillage puis toutes les 30 min de contrôle.
+  useAutoBackup(securityUnlocked);
   const [expandedMenu, setExpandedMenu] = useState<string | null>(initialSettingsHash ? 'settings' : null);
   const [settingsRoute, setSettingsRoute] = useState<SettingsRoute>(
     () => parseSettingsHash(window.location.hash) || DEFAULT_SETTINGS_ROUTE,
@@ -300,6 +304,7 @@ const AppContent: React.FC = () => {
         <Dashboard
           onNewPrescription={handleStartConsultation}
           onNavigate={goToView}
+          onOpenBackupSettings={() => openSettings({ section: 'database' })}
           onViewDossier={(patientId) => {
             const p = dataService.getAllPatients().find(pat => pat.id === patientId || pat.name === patientId);
             if (p) setActivePatient(p);
@@ -766,14 +771,7 @@ const AppContent: React.FC = () => {
           <div className="ml-auto flex items-center gap-2">
             {/* End-of-day */}
             {sessionService.isMedecin() && <button
-              onClick={async () => {
-                if (window.confirm("Voulez-vous effectuer la sauvegarde et archiver la journée ?")) {
-                  const passphrase = window.prompt("Mot de passe pour protéger cette sauvegarde :");
-                  if (!passphrase) return;
-                  await dataService.exportFullBackup(passphrase);
-                  dataService.archiveDay();
-                }
-              }}
+              onClick={() => { void endOfDay(); }}
               className="hidden md:flex h-10 px-4 rounded-lg text-[13px] font-medium items-center gap-2 border transition-all"
               style={{
                 borderColor: 'var(--color-border)',

@@ -8,6 +8,7 @@ import App from './App';
 import { ToastProvider } from './components/ui/Toast';
 import { ActiveProfileProvider } from './components/ui/ActiveProfileContext';
 import DevAutoUnlockBadge from './components/DevAutoUnlockBadge';
+import ClosingBackupOverlay from './components/ClosingBackupOverlay';
 import { storageService } from './services/storageService';
 import { purgeLegacyActiveProfile } from './services/activeProfileService';
 
@@ -27,6 +28,7 @@ root.render(
       <ActiveProfileProvider>
         <App />
         <DevAutoUnlockBadge />
+        <ClosingBackupOverlay />
       </ActiveProfileProvider>
     </ToastProvider>
   </React.StrictMode>

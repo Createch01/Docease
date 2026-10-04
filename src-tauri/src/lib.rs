@@ -1,6 +1,7 @@
 mod access;
 mod ai;
 mod audit;
+mod backup;
 mod scoped;
 mod settings;
 mod users;
@@ -497,6 +498,15 @@ pub fn run() {
         load_json,
         security_status,
         audit::audit_log_list,
+        backup::backup_status,
+        backup::backup_set_passphrase,
+        backup::backup_change_passphrase,
+        backup::backup_set_destinations,
+        backup::backup_run_now,
+        backup::backup_run_if_due,
+        backup::backup_list,
+        backup::backup_inspect,
+        backup::backup_restore,
         settings::get_security_settings,
         settings::set_inactivity_minutes,
         settings::session_touch,
@@ -551,6 +561,14 @@ pub fn run() {
     })
     .plugin(tauri_plugin_updater::Builder::new().build())
     .plugin(tauri_plugin_fs::init())
+    .plugin(tauri_plugin_dialog::init())
+    // Fermeture de la fenêtre : si une sauvegarde est due (session médecin ouverte), elle tourne
+    // en arrière-plan avec un indicateur, puis la fenêtre se ferme (30 s au plus).
+    .on_window_event(|window, event| {
+        if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+            backup::on_close_requested(window, api);
+        }
+    })
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
