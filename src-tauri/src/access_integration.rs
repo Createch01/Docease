@@ -111,6 +111,7 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         // Sauvegarde (asynchrones, médecin)
         "backup_status" => done(tauri::async_runtime::block_on(super::backup::backup_status(a(), st!()))),
         "backup_set_passphrase" => done(tauri::async_runtime::block_on(super::backup::backup_set_passphrase(a(), st!(), "une phrase de passe solide".into()))),
+        "backup_change_passphrase" => done(tauri::async_runtime::block_on(super::backup::backup_change_passphrase(a(), st!(), "une phrase de passe solide".into(), "une autre phrase solide".into()))),
         "backup_set_destinations" => done(tauri::async_runtime::block_on(super::backup::backup_set_destinations(a(), st!(), Some("relatif".into()), None))),
         "backup_run_now" => done(tauri::async_runtime::block_on(super::backup::backup_run_now(a(), st!()))),
         "backup_run_if_due" => done(tauri::async_runtime::block_on(super::backup::backup_run_if_due(a(), st!()))),

@@ -83,6 +83,8 @@ pub enum BackupError {
     WrongPassphraseOrCorrupted,
     PassphraseTooShort,
     PassphraseAlreadySet,
+    OldPassphraseIncorrect,
+    PassphraseUnchanged,
     NotConfigured,
     NothingToBackup,
     DestinationUnavailable(String),
@@ -101,6 +103,8 @@ impl BackupError {
             BackupError::WrongPassphraseOrCorrupted => "WRONG_PASSPHRASE_OR_CORRUPTED",
             BackupError::PassphraseTooShort => "PASSPHRASE_TOO_SHORT",
             BackupError::PassphraseAlreadySet => "PASSPHRASE_ALREADY_SET",
+            BackupError::OldPassphraseIncorrect => "OLD_PASSPHRASE_INCORRECT",
+            BackupError::PassphraseUnchanged => "PASSPHRASE_UNCHANGED",
             BackupError::NotConfigured => "NOT_CONFIGURED",
             BackupError::NothingToBackup => "NOTHING_TO_BACKUP",
             BackupError::DestinationUnavailable(_) => "DESTINATION_UNAVAILABLE",
@@ -119,6 +123,8 @@ impl BackupError {
             BackupError::WrongPassphraseOrCorrupted => "Phrase de passe incorrecte ou fichier corrompu (ancien format).".into(),
             BackupError::PassphraseTooShort => format!("La phrase de passe doit contenir au moins {MIN_PASSPHRASE_CHARS} caractères."),
             BackupError::PassphraseAlreadySet => "La phrase de passe de sauvegarde est déjà définie.".into(),
+            BackupError::OldPassphraseIncorrect => "L'ancienne phrase de passe est incorrecte.".into(),
+            BackupError::PassphraseUnchanged => "La nouvelle phrase de passe doit différer de l'ancienne.".into(),
             BackupError::NotConfigured => "La sauvegarde n'est pas configurée (phrase de passe et dossier requis).".into(),
             BackupError::NothingToBackup => "Aucune donnée à sauvegarder.".into(),
             BackupError::DestinationUnavailable(d) => format!("Emplacement inaccessible : {d}"),
@@ -423,6 +429,32 @@ pub fn set_passphrase(dir: &Path, key: &[u8; KEY_LEN], passphrase: &str) -> Res<
     }
     meta.wrapped_passphrase = Some(B64.encode(super::encrypt(key, passphrase.as_bytes()).map_err(BackupError::Io)?));
     save_meta(dir, &meta)
+}
+
+/// Remplace la phrase de passe : l'ancienne doit être saisie et correspondre à celle conservée.
+/// Seules les sauvegardes suivantes utilisent la nouvelle ; les fichiers existants restent
+/// chiffrés avec l'ancienne (ils ne sont ni relus ni réécrits).
+pub fn change_passphrase(dir: &Path, key: &[u8; KEY_LEN], old: &str, new: &str) -> Res<()> {
+    let _guard = OP_LOCK.lock().unwrap_or_else(|e| e.into_inner());
+    let mut meta = load_meta(dir)?;
+    let current = stored_passphrase(&meta, key)?;
+    if !same_secret(current.as_bytes(), old.as_bytes()) {
+        return Err(BackupError::OldPassphraseIncorrect);
+    }
+    if new.chars().count() < MIN_PASSPHRASE_CHARS {
+        return Err(BackupError::PassphraseTooShort);
+    }
+    if same_secret(current.as_bytes(), new.as_bytes()) {
+        return Err(BackupError::PassphraseUnchanged);
+    }
+    meta.wrapped_passphrase = Some(B64.encode(super::encrypt(key, new.as_bytes()).map_err(BackupError::Io)?));
+    save_meta(dir, &meta)
+}
+
+/// Comparaison sans court-circuit sur le contenu.
+fn same_secret(a: &[u8], b: &[u8]) -> bool {
+    let (ha, hb) = (Sha256::digest(a), Sha256::digest(b));
+    ha.iter().zip(hb.iter()).fold(0u8, |acc, (x, y)| acc | (x ^ y)) == 0
 }
 
 fn stored_passphrase(meta: &Meta, key: &[u8; KEY_LEN]) -> Res<String> {
@@ -932,6 +964,15 @@ pub async fn backup_set_passphrase<R: tauri::Runtime>(app: tauri::AppHandle<R>, 
 }
 
 #[tauri::command]
+pub async fn backup_change_passphrase<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>, old_passphrase: String, new_passphrase: String) -> Result<(), String> {
+    let session = gate(&app, &state, "backup_change_passphrase")?;
+    let (key, dir) = parts(&app, &state)?;
+    let r = blocking(move || change_passphrase(&dir, &key, &old_passphrase, &new_passphrase)).await;
+    audit::log(&app, session.as_ref(), "backup_change_passphrase", &r.as_ref().err().map(|e| e.split('|').next().unwrap_or("").to_string()).unwrap_or_default(), r.is_ok());
+    r
+}
+
+#[tauri::command]
 pub async fn backup_set_destinations<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>, primary: Option<String>, secondary: Option<String>) -> Result<(), String> {
     let session = gate(&app, &state, "backup_set_destinations")?;
     let (_, dir) = parts(&app, &state)?;
@@ -1122,6 +1163,36 @@ mod tests {
         assert_eq!(stored_passphrase(&load_meta(&d).unwrap(), &KEY).unwrap(), PASS);
         // Une autre clé de données ne la déchiffre pas.
         assert!(stored_passphrase(&load_meta(&d).unwrap(), &[9u8; KEY_LEN]).is_err());
+    }
+
+    #[test]
+    fn changing_passphrase_keeps_old_backups_readable_with_old_one() {
+        fast_kdf();
+        const NEW: &str = "une toute nouvelle phrase";
+        let d = data_dir_with_files();
+        let (a, _b) = configured(&d);
+        let before = run_backup(&d, &KEY, 1_790_000_000).unwrap();
+
+        // Refus : ancienne incorrecte, nouvelle trop courte ou identique ; rien ne change.
+        assert_eq!(change_passphrase(&d, &KEY, "mauvaise ancienne phrase", NEW).err(), Some(BackupError::OldPassphraseIncorrect));
+        assert_eq!(change_passphrase(&d, &KEY, PASS, "court").err(), Some(BackupError::PassphraseTooShort));
+        assert_eq!(change_passphrase(&d, &KEY, PASS, PASS).err(), Some(BackupError::PassphraseUnchanged));
+        assert_eq!(stored_passphrase(&load_meta(&d).unwrap(), &KEY).unwrap(), PASS);
+
+        change_passphrase(&d, &KEY, PASS, NEW).unwrap();
+        assert_eq!(stored_passphrase(&load_meta(&d).unwrap(), &KEY).unwrap(), NEW);
+        assert!(!fs::read_to_string(d.join(META_FILE)).unwrap().contains(NEW));
+
+        // La nouvelle sauvegarde utilise la nouvelle phrase ; l'ancienne reste lisible avec l'ancienne.
+        let after = run_backup(&d, &KEY, 1_790_000_000 + 2 * 86_400).unwrap();
+        let old_file = fs::read(a.join(SUBDIR).join(&before.file_name)).unwrap();
+        let new_file = fs::read(a.join(SUBDIR).join(&after.file_name)).unwrap();
+        assert!(open(&old_file, PASS).is_ok());
+        assert_eq!(open(&old_file, NEW).err(), Some(BackupError::WrongPassphrase));
+        assert!(open(&new_file, NEW).is_ok());
+        assert_eq!(open(&new_file, PASS).err(), Some(BackupError::WrongPassphrase));
+        // Une autre clé de données (autre session) ne peut pas changer la phrase.
+        assert!(change_passphrase(&d, &[9u8; KEY_LEN], NEW, "encore une autre phrase").is_err());
     }
 
     #[test]

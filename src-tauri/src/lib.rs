@@ -500,6 +500,7 @@ pub fn run() {
         audit::audit_log_list,
         backup::backup_status,
         backup::backup_set_passphrase,
+        backup::backup_change_passphrase,
         backup::backup_set_destinations,
         backup::backup_run_now,
         backup::backup_run_if_due,

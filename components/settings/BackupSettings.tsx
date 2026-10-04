@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { AlertTriangle, CheckCircle2, FolderOpen, HardDriveDownload, RotateCcw, ShieldAlert, X } from 'lucide-react';
+import { AlertTriangle, CheckCircle2, FolderOpen, HardDriveDownload, KeyRound, RotateCcw, ShieldAlert, X } from 'lucide-react';
 import {
   BACKUP_STATUS_EVENT, BackupEntry, BackupError, BackupPreview, BackupStatus, MIN_PASSPHRASE,
   backupService, formatAge, formatStamp, isTauri,
@@ -108,10 +108,7 @@ const BackupSettings: React.FC = () => {
         </p>
       </SettingsCard>
 
-      {!status.has_passphrase ? <PassphraseCard busy={busy} run={run} /> : (
-        <SettingsCard title="Phrase de passe de sauvegarde" icon={<CheckCircle2 size={16} />}
-                      description="Définie. Elle est conservée chiffrée par la clé de vos données : elle ne peut ni s'afficher ni se modifier. Gardez votre copie hors du cabinet : sans elle, vos sauvegardes sont irrécupérables." children={null} />
-      )}
+      {!status.has_passphrase ? <PassphraseCard busy={busy} run={run} /> : <ChangePassphraseCard busy={busy} run={run} />}
 
       <DestinationsCard status={status} busy={busy} run={run} disabled={!status.has_passphrase} />
       <RestoreCard status={status} />
@@ -147,6 +144,59 @@ const PassphraseCard: React.FC<{ busy: boolean; run: RunFn }> = ({ busy, run }) 
               onClick={() => run(async () => { await backupService.setPassphrase(pass); setPass(''); setAgain(''); setNoted(false); toastService.success('Phrase de passe définie.'); })}>
         Définir la phrase de passe
       </button>
+    </SettingsCard>
+  );
+};
+
+const ChangePassphraseCard: React.FC<{ busy: boolean; run: RunFn }> = ({ busy, run }) => {
+  const [open, setOpen] = useState(false);
+  const [oldPass, setOldPass] = useState('');
+  const [pass, setPass] = useState('');
+  const [again, setAgain] = useState('');
+  const [noted, setNoted] = useState(false);
+  const ok = oldPass.length > 0 && pass.length >= MIN_PASSPHRASE && pass === again && pass !== oldPass && noted;
+  const close = () => { setOpen(false); setOldPass(''); setPass(''); setAgain(''); setNoted(false); };
+
+  return (
+    <SettingsCard title="Phrase de passe de sauvegarde" icon={<CheckCircle2 size={16} />}
+                  description="Définie. Elle est conservée chiffrée par la clé de vos données et ne peut pas s'afficher. Gardez votre copie hors du cabinet : sans elle, vos sauvegardes sont irrécupérables.">
+      {!open ? (
+        <div>
+          <button type="button" className={secondaryButton} style={secondaryStyle} disabled={busy} onClick={() => setOpen(true)}>
+            <KeyRound size={15} /> Changer la phrase de passe…
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          <div className="p-3 rounded-lg text-[13px] font-medium" style={{ background: 'var(--color-warning-50, #fffbeb)', color: 'var(--color-warning-700, #b45309)' }}>
+            Les <strong>nouvelles</strong> sauvegardes utiliseront la nouvelle phrase. Les sauvegardes <strong>déjà faites</strong> restent
+            chiffrées avec l'<strong>ancienne</strong> : conservez-la tant que vous pourriez avoir besoin de les restaurer
+            (jusqu'à 12 mois d'historique).
+          </div>
+          <input type="password" value={oldPass} onChange={e => setOldPass(e.target.value)} autoComplete="off"
+                 placeholder="Ancienne phrase de passe" aria-label="Ancienne phrase de passe" className={input40} style={inputStyle} />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input type="password" value={pass} onChange={e => setPass(e.target.value)} autoComplete="new-password"
+                   placeholder={`Nouvelle phrase de passe (${MIN_PASSPHRASE} caractères minimum)`} aria-label="Nouvelle phrase de passe" className={input40} style={inputStyle} />
+            <input type="password" value={again} onChange={e => setAgain(e.target.value)} autoComplete="new-password"
+                   placeholder="Confirmer la nouvelle phrase" aria-label="Confirmer la nouvelle phrase de passe" className={input40} style={inputStyle} />
+          </div>
+          {pass.length > 0 && pass.length < MIN_PASSPHRASE && <p className="text-[12px]" style={{ color: 'var(--color-danger-700)' }}>Encore {MIN_PASSPHRASE - pass.length} caractère(s).</p>}
+          {again.length > 0 && pass !== again && <p className="text-[12px]" style={{ color: 'var(--color-danger-700)' }}>Les deux phrases sont différentes.</p>}
+          {pass.length > 0 && pass === oldPass && <p className="text-[12px]" style={{ color: 'var(--color-danger-700)' }}>La nouvelle phrase doit différer de l'ancienne.</p>}
+          <label className="flex items-start gap-2 text-[13px]" style={{ color: 'var(--color-text)' }}>
+            <input type="checkbox" checked={noted} onChange={e => setNoted(e.target.checked)} className="mt-1" />
+            J'ai noté la nouvelle phrase hors du cabinet et je garde l'ancienne pour les sauvegardes existantes.
+          </label>
+          <div className="flex gap-2">
+            <button type="button" className={secondaryButton} style={secondaryStyle} disabled={busy} onClick={close}>Annuler</button>
+            <button type="button" className={primaryButton} style={{ background: 'var(--color-primary)' }} disabled={!ok || busy}
+                    onClick={() => run(async () => { await backupService.changePassphrase(oldPass, pass); close(); toastService.success("Phrase de passe changée. Les prochaines sauvegardes l'utilisent."); })}>
+              Changer la phrase de passe
+            </button>
+          </div>
+        </div>
+      )}
     </SettingsCard>
   );
 };

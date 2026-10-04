@@ -71,6 +71,10 @@ const changed = () => window.dispatchEvent(new CustomEvent(BACKUP_STATUS_EVENT))
 export const backupService = {
     status: () => call<BackupStatus>('backup_status'),
     setPassphrase: async (passphrase: string) => { await call<void>('backup_set_passphrase', { passphrase }); changed(); },
+    changePassphrase: async (oldPassphrase: string, newPassphrase: string) => {
+        await call<void>('backup_change_passphrase', { oldPassphrase, newPassphrase });
+        changed();
+    },
     setDestinations: async (primary: string | null, secondary: string | null) => {
         await call<void>('backup_set_destinations', { primary, secondary });
         changed();

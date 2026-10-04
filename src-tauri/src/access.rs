@@ -85,6 +85,7 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     // Sauvegarde / restauration : médecin uniquement
     ("backup_status", Rule::Medecin),
     ("backup_set_passphrase", Rule::Medecin),
+    ("backup_change_passphrase", Rule::Medecin),
     ("backup_set_destinations", Rule::Medecin),
     ("backup_run_now", Rule::Medecin),
     ("backup_run_if_due", Rule::Medecin),
@@ -225,7 +226,7 @@ mod tests {
         "set_user_role", "reset_user_password", "scan_json_files", "audit_log_list", "set_inactivity_minutes", "ai_status", "ai_set_enabled",
         "ai_save_key", "ai_delete_key", "ai_test_key", "ai_parse_prescription",
         "ai_analyze_consultation", "ai_analyze_document", "ai_classify_priority",
-        "backup_status", "backup_set_passphrase", "backup_set_destinations", "backup_run_now",
+        "backup_status", "backup_set_passphrase", "backup_change_passphrase", "backup_set_destinations", "backup_run_now",
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
     ];
 
