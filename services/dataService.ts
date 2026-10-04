@@ -1,7 +1,6 @@
 import { sessionService } from './sessionService';
 import { DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
 import { storageService } from './storageService';
-import { cryptoService } from './cryptoService';
 import { aiService } from './aiService';
 import { normalizeAppointmentSettings } from './appointmentDefaults';
 
@@ -17,7 +16,6 @@ const STORAGE_KEYS = {
   CAPACITIES: 'meddoc_capacities',
   APPOINTMENT_SETTINGS: 'meddoc_appointment_settings',
   EXPENSES: 'meddoc_expenses',
-  LAST_BACKUP: 'meddoc_last_backup',
   MEDICAL_RESOURCES: 'meddoc_medical_resources',
   CONSULTATIONS: 'meddoc_consultations',
   LAB_REQUESTS: 'meddoc_lab_requests',
@@ -329,40 +327,10 @@ export const dataService = {
       prescriptionCount: prescriptions.length,
       medicineCount: medicines.length,
       appointmentCount: appointments.length,
-      lastBackup: localStorage.getItem(STORAGE_KEYS.LAST_BACKUP)
     };
   },
 
-  // Exported backups contain full medical/financial records, so the file itself is
-  // encrypted (AES-GCM, passphrase-derived) rather than dropped as plaintext JSON —
-  // it will typically land in Downloads or on a USB key, outside the app's own
-  // encrypted storage. The same passphrase is required to re-import it.
-  exportFullBackup: async (passphrase: string) => {
-    const backup: Record<string, any> = {};
-    Object.keys(STORAGE_KEYS).forEach(key => {
-      const storageKey = STORAGE_KEYS[key as keyof typeof STORAGE_KEYS];
-      const data = cache[storageKey];
-      if (data) backup[storageKey] = data;
-    });
-
-    const envelope = await cryptoService.encryptJSON(backup, passphrase);
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const blob = new Blob([envelope], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `DOCEASE_SAUVEGARDE_${timestamp}.json`;
-    link.click();
-
-    await storageService.save(STORAGE_KEYS.LAST_BACKUP, new Date().toISOString());
-  },
-
-  // Désactivée : l'ancienne version écrivait les données dans le localStorage, que le
-  // store chiffré ne lit jamais (restauration silencieusement sans effet, données
-  // médicales en clair). La restauration est en cours de refonte (module Rust dédié).
-  importFullBackup: async (_encryptedText: string, _passphrase: string): Promise<boolean> => {
-    return false;
-  },
+  // Sauvegarde et restauration : voir services/backupService.ts et src-tauri/src/backup.rs.
 
   getDoctorInfo: (): DoctorInfo => {
     const storageKey = STORAGE_KEYS.DOCTOR_INFO;

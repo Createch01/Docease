@@ -277,6 +277,52 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     assert!(denied.iter().any(|e| e.detail.contains("meddoc_patients.json")), "refus de fichier journalisé");
     assert!(denied.iter().any(|e| e.user == "(non connecté)"), "refus en session verrouillée journalisé");
 
+    // ── 6. Sauvegarde de bout en bout par les commandes (médecin) ────────────
+    {
+        use super::backup;
+        *backup::TEST_KDF.lock().unwrap() = Some((256, 1, 1));
+        macro_rules! block {
+            ($f:expr) => {
+                tauri::async_runtime::block_on($f)
+            };
+        }
+        let dest = std::env::temp_dir().join(format!("docease-integration-dest-{}", std::process::id()));
+        let _ = fs::remove_dir_all(&dest);
+        fs::create_dir_all(&dest).unwrap();
+        open(&h, Some(Role::Medecin));
+        super::write_enc_json_in(&dir, &[7u8; 32], "meddoc_patients.json", &json!([{"id": "p1"}, {"id": "p2"}])).unwrap();
+        block!(backup::backup_set_passphrase(h.clone(), h.state::<AppState>(), "une phrase de passe solide".into())).unwrap();
+        block!(backup::backup_set_destinations(h.clone(), h.state::<AppState>(), Some(dest.display().to_string()), None)).unwrap();
+        let rep = block!(backup::backup_run_now(h.clone(), h.state::<AppState>())).unwrap();
+        assert!(rep.files >= 1);
+        let entries = block!(backup::backup_list(h.clone(), h.state::<AppState>())).unwrap();
+        assert_eq!(entries.len(), 1);
+        let preview = block!(backup::backup_inspect(h.clone(), h.state::<AppState>(), entries[0].path.clone(), "une phrase de passe solide".into())).unwrap();
+        assert_eq!(preview.patients, 2);
+        let bad = block!(backup::backup_inspect(h.clone(), h.state::<AppState>(), entries[0].path.clone(), "mauvaise phrase de passe".into())).unwrap_err();
+        assert!(bad.starts_with("WRONG_PASSPHRASE|"), "{bad}");
+        super::write_enc_json_in(&dir, &[7u8; 32], "meddoc_patients.json", &json!([])).unwrap();
+        block!(backup::backup_restore(h.clone(), h.state::<AppState>(), entries[0].path.clone(), "une phrase de passe solide".into())).unwrap();
+        let back = super::read_enc_json_in(&dir, &[7u8; 32], "meddoc_patients.json").unwrap().unwrap();
+        assert_eq!(back.as_array().unwrap().len(), 2);
+        // L'assistante, elle, reste refusée sur le même enchaînement.
+        open(&h, Some(Role::Assistant));
+        for r in [
+            block!(backup::backup_status(h.clone(), h.state::<AppState>())).map(|_| ()),
+            block!(backup::backup_run_now(h.clone(), h.state::<AppState>())).map(|_| ()),
+            block!(backup::backup_restore(h.clone(), h.state::<AppState>(), entries[0].path.clone(), "une phrase de passe solide".into())).map(|_| ()),
+        ] {
+            assert!(is_denial(&r.unwrap_err()));
+        }
+        // Journal : sauvegarde et restauration tracées, sans contenu.
+        let log = audit::read_entries(&dir, 5000);
+        assert!(log.iter().any(|e| e.action == "backup_run" && e.ok));
+        assert!(log.iter().any(|e| e.action == "backup_restore" && e.ok));
+        assert!(log.iter().all(|e| !e.detail.contains("p1")));
+        *backup::TEST_KDF.lock().unwrap() = None;
+        let _ = fs::remove_dir_all(&dest);
+    }
+
     *TEST_DATA_DIR.lock().unwrap() = None;
     let _ = fs::remove_dir_all(&dir);
 }

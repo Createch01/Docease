@@ -51,6 +51,20 @@ l'interface :
 L'interface (menus masqués, routes redirigées, `#/settings/…` effacé) n'est qu'un reflet :
 masquer un bouton ne protège rien, c'est Rust qui refuse.
 
+## Sauvegardes
+
+Réservées au rôle Médecin (commandes `backup_*`, `Rule::Medecin`, contrôle Rust). Code : `src-tauri/src/backup.rs`.
+
+- **Format v2** : Argon2id (64 Mio, 3 passes) + AES-256-GCM, en-tête authentifié, empreinte du texte chiffré pour distinguer « fichier corrompu » de « mauvaise phrase de passe ». L'ancien export v1 (PBKDF2 + AES-GCM) reste lisible.
+- **Contenu** : toutes les données (`meddoc_*.json`) et les surcharges du catalogue. **Jamais** : comptes (`users_meta.json`), métadonnées de sécurité, journal d'accès, réglages de verrouillage, clé API IA, `backup_meta.json`. La liste est unique (`is_backup_data_file`) et testée (`tests/backupCoverage.test.ts`). Sur un nouveau poste : créer son compte, puis restaurer.
+- **Phrase de passe** : définie une fois (12 caractères minimum), conservée dans `backup_meta.json` chiffrée par la clé de données, jamais en clair. Sans elle, les sauvegardes sont irrécupérables : à noter hors du cabinet. Elle ne peut pas être affichée ni modifiée dans l'interface.
+- **Quand** : au déverrouillage et toutes les 24 h pendant la session si la dernière date de plus de 24 h, au verrouillage et à la fermeture de la fenêtre. La clé de données n'existe qu'en session ouverte : **aucune sauvegarde application fermée ou verrouillée**.
+- **Écriture** : fichier temporaire + `fsync` + renommage, relecture octet par octet puis déchiffrement de contrôle. Rotation 7 quotidiennes, 4 hebdomadaires, 12 mensuelles (dates en UTC, seuls les fichiers `docease-*.dcb` sont touchés). Destination principale et second emplacement optionnel, dans un sous-dossier `DocEase-Sauvegardes`.
+- **Alerte** : rouge si la dernière sauvegarde a plus de 48 h, si un emplacement est inaccessible ou si la sauvegarde n'est pas configurée (tableau de bord et Paramètres › Base de données).
+- **Restauration** : aperçu du contenu, confirmation saisie, copie brute de l'état actuel dans `restore_backups/avant-restauration-*` (3 dernières conservées, chiffrées par la clé de données ; à supprimer quand elles ne servent plus), écriture par préparation puis renommage avec retour arrière en cas d'échec.
+- **Sélecteur de dossier** : plugin `dialog`, permission `dialog:allow-open` seulement.
+- **Limites** : le dossier choisi doit être protégé par l'utilisateur ; une clé USB perdue contient des fichiers chiffrés mais attaquables hors ligne si la phrase est faible. Une modification des données pendant une restauration n'est pas bloquée (l'interface est modale et se recharge ensuite).
+
 ## Journal d'accès
 
 `audit_log.jsonl` (dossier de données) : une ligne par événement — qui, quoi, quand, réussi ou non. Il

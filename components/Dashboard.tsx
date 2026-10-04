@@ -21,6 +21,8 @@
  *   --color-primary #1A6B8A · --color-secondary #2ECC9A · 8px grid · Inter
  */
 
+import BackupDashboardCard from './BackupDashboardCard';
+import { endOfDay } from '../services/endOfDay';
 import React, { useState, useEffect, useMemo } from 'react';
 import {
   Plus, Database, Users, ArrowRight,
@@ -38,6 +40,7 @@ import { formatAge } from '../utils/formatters';
 interface DashboardProps {
   onNewPrescription: (patient?: Patient) => void;
   onNavigate: (view: any) => void;
+  onOpenBackupSettings?: () => void;
   onViewDossier: (patientId: string) => void;
 }
 
@@ -67,7 +70,7 @@ const prevMonth = prevMonthDate.toISOString().substring(0, 7);
 
 // ─── Composant principal ───────────────────────────────────────────────────────
 
-const Dashboard: React.FC<DashboardProps> = ({ onNewPrescription, onNavigate, onViewDossier }) => {
+const Dashboard: React.FC<DashboardProps> = ({ onNewPrescription, onNavigate, onViewDossier, onOpenBackupSettings }) => {
   const { t, lang, dir } = useI18n();
 
   // ── Refresh state (réactif aux events dataService) ────────────────────────
@@ -231,17 +234,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNewPrescription, onNavigate, on
         </div>
         <div className="flex items-center gap-2">
           <button
-            onClick={async () => {
-              if (window.confirm(
-                "Voulez-vous effectuer la sauvegarde et archiver la journée ?\n\nCette action téléchargera une sauvegarde de vos données et videra la salle d'attente."
-              )) {
-                const passphrase = window.prompt('Mot de passe pour protéger cette sauvegarde :');
-                if (!passphrase) return;
-                await dataService.exportFullBackup(passphrase);
-                dataService.archiveDay();
-                setQueue([]);
-              }
-            }}
+            onClick={async () => { if (await endOfDay()) setQueue([]); }}
             className="h-10 px-4 rounded-lg text-[13px] font-medium flex items-center gap-2 border bg-white transition-all hover:bg-slate-50 active:scale-[0.98]"
             style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
           >
@@ -258,6 +251,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNewPrescription, onNavigate, on
           </button>
         </div>
       </header>
+
+      {onOpenBackupSettings && <BackupDashboardCard onOpenSettings={onOpenBackupSettings} />}
 
       {/* ─── Ligne KPI (4 cartes) ─── */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
