@@ -13,6 +13,9 @@ import AppLockScreen from './components/AppLockScreen';
 import WaitingRoomKiosk from './components/WaitingRoomKiosk';
 import ToastContainer from './components/ToastContainer';
 import { dataService } from './services/dataService';
+import { notificationsService, TodoItem } from './services/notificationsService';
+import { backupService, BACKUP_STATUS_EVENT } from './services/backupService';
+import { toastService } from './services/toastService';
 import { autoImportService } from './services/autoImportService';
 import { securityService } from './services/securityService';
 import { sessionService } from './services/sessionService';
@@ -48,12 +51,12 @@ const PatientDirectory = React.lazy(() => import('./components/PatientDirectory'
 const SEARCH_SHORTCUT = /Mac|iPhone|iPad/i.test(typeof navigator !== 'undefined' ? (navigator.platform || navigator.userAgent) : '') ? '⌘K' : 'Ctrl K';
 
 const AppointmentManager = React.lazy(() => import('./components/AppointmentManager'));
-const NotificationCenter = React.lazy(() => import('./components/NotificationCenter'));
+const TodoDrawer = React.lazy(() => import('./components/TodoDrawer'));
 const SmartDocInterface = React.lazy(() => import('./components/SmartDoc/SmartDocInterface'));
 const GlobalSearch = React.lazy(() => import('./components/GlobalSearch'));
 const MedicamentsPage = React.lazy(() => import('./components/MedicamentsPage'));
 
-type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'notifications' | 'medical-directory' | 'smart-doc' | 'cashier' | 'patient-directory';
+type View = 'dashboard' | 'patients' | 'appointments' | 'dossier' | 'new-prescription' | 'analytics' | 'settings' | 'tasks' | 'medical-directory' | 'smart-doc' | 'cashier' | 'patient-directory';
 
 // Permission requise par écran. Un écran absent de cette table est refusé (liste blanche).
 // Même règle que côté Rust : l'interface ne fait que la refléter.
@@ -69,7 +72,6 @@ const VIEW_PERMISSION: Record<View, Permission> = {
   settings: 'MANAGE_SETTINGS',
   'smart-doc': 'USE_AI_ASSISTANT',
   tasks: 'DOCTOR_TOOLS',
-  notifications: 'DOCTOR_TOOLS',
   'medical-directory': 'DOCTOR_TOOLS',
 };
 // Fonctions masquées (features.ts) ou dépendantes de « Fonctions IA » : refusées comme un écran non autorisé.
@@ -115,6 +117,9 @@ const AppContent: React.FC = () => {
   const [autoLockMinutes, setAutoLockMinutes] = useState(0);
   const [prescriptionDraft, setPrescriptionDraft] = useState<PrescriptionDraft | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [todoOpen, setTodoOpen] = useState(false);
+  const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
+  const [todoLoading, setTodoLoading] = useState(false);
   // Mandatory master-PIN gate — nothing below can load before this resolves, since
   // the encrypted store requires the AES key derived from this PIN (see
   // services/securityService.ts and src-tauri/src/lib.rs).
@@ -268,6 +273,51 @@ const AppContent: React.FC = () => {
     setCurrentView('new-prescription');
   };
 
+  const refreshTodo = React.useCallback(() => {
+    setTodoLoading(true);
+    notificationsService.list(sessionService.isMedecin() ? dataService.getAllPatients() : [])
+      .then(setTodoItems)
+      .catch(() => setTodoItems([]))
+      .finally(() => setTodoLoading(false));
+  }, []);
+
+  // Rafraîchi à l'ouverture de session, à chaque changement de données, après une sauvegarde et toutes les 5 minutes.
+  useEffect(() => {
+    if (!securityUnlocked) { setTodoItems([]); return; }
+    refreshTodo();
+    const timer = setInterval(refreshTodo, 5 * 60 * 1000);
+    window.addEventListener('meddoc_data_update', refreshTodo);
+    window.addEventListener(BACKUP_STATUS_EVENT, refreshTodo);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('meddoc_data_update', refreshTodo);
+      window.removeEventListener(BACKUP_STATUS_EVENT, refreshTodo);
+    };
+  }, [securityUnlocked, refreshTodo]);
+
+  const runTodoAction = async (item: TodoItem) => {
+    switch (item.action) {
+      case 'backup_now':
+        try { await backupService.runNow(); toastService.success('Sauvegarde effectuée'); } catch (e) { toastService.error(String((e as Error).message || e)); }
+        refreshTodo();
+        return;
+      case 'open_backup_settings':
+        if (openSettings({ section: 'database' })) setTodoOpen(false);
+        return;
+      case 'open_appointments':
+        if (goToView('appointments')) setTodoOpen(false);
+        return;
+      case 'open_billing':
+        if (goToView(canOpen('analytics') ? 'analytics' : 'cashier')) setTodoOpen(false);
+        return;
+      case 'open_dossier': {
+        const patient = item.patientId ? dataService.getAllPatients().find(p => p.id === item.patientId) : undefined;
+        if (goToView('dossier')) { if (patient) setActivePatient(patient); setTodoOpen(false); }
+        return;
+      }
+    }
+  };
+
   const hasPermission = (permission: string) => sessionService.can(permission as Permission);
 
   // Verrouillage / changement d'utilisateur : Rust efface la clé et la session, et
@@ -348,14 +398,6 @@ const AppContent: React.FC = () => {
       case 'analytics': return <Analytics />;
       case 'tasks': return <TaskManager />;
       case 'settings': return <SettingsPanel route={settingsRoute} onNavigate={openSettings} />;
-      case 'notifications': return <NotificationCenter onNavigate={(view, data) => {
-        if (data?.patientId) {
-          const allPatients = dataService.getAllPatients();
-          const targetPatient = allPatients.find(p => p.id === data.patientId);
-          if (targetPatient) setActivePatient(targetPatient);
-        }
-        setCurrentView(view as View);
-      }} />;
       case 'smart-doc': return <SmartDocInterface />;
       case 'medical-directory': return <MedicamentsPage />;
       default: return <Dashboard onNewPrescription={handleStartConsultation} />;
@@ -755,19 +797,24 @@ const AppContent: React.FC = () => {
               {t('end_of_day')}
             </button>}
 
-            {/* Notifications */}
-            {hasPermission('DOCTOR_TOOLS') && <button
-              onClick={() => goToView('notifications')}
+            {/* À faire : la cloche ouvre le panneau ; le badge compte les actions restantes */}
+            {securityUnlocked && <button
+              onClick={() => setTodoOpen(true)}
+              aria-label={todoItems.length > 0 ? `À faire : ${todoItems.length} action${todoItems.length > 1 ? 's' : ''}` : 'À faire'}
               className="relative w-10 h-10 rounded-lg flex items-center justify-center transition-all"
               style={{ color: 'var(--color-text-muted)', transition: 'all var(--transition-base)' }}
               onMouseEnter={e => (e.currentTarget as HTMLElement).style.background = 'var(--color-surface-alt)'}
               onMouseLeave={e => (e.currentTarget as HTMLElement).style.background = 'transparent'}
             >
               <Bell size={18} />
-              <span
-                className="absolute top-2 right-2 w-2 h-2 rounded-full"
-                style={{ background: 'var(--color-danger)' }}
-              />
+              {todoItems.length > 0 && (
+                <span
+                  className="absolute top-1 right-1 min-w-[16px] h-4 px-1 rounded-full text-[10px] font-medium leading-4 text-center text-white"
+                  style={{ background: todoItems.some(i => i.severity === 'critical') ? 'var(--color-danger)' : 'var(--color-warning-hover)' }}
+                >
+                  {todoItems.length > 99 ? '99+' : todoItems.length}
+                </span>
+              )}
             </button>}
 
             <div className="w-px h-6 mx-1" style={{ background: 'var(--color-border)' }} />
@@ -812,6 +859,19 @@ const AppContent: React.FC = () => {
               {renderView()}
             </Suspense>
           </div>
+
+          {todoOpen && (
+            <Suspense fallback={null}>
+              <TodoDrawer
+                items={todoItems}
+                loading={todoLoading}
+                onClose={() => setTodoOpen(false)}
+                onAction={runTodoAction}
+                onSnooze={item => { void notificationsService.snooze(item).then(refreshTodo); }}
+                onDismiss={item => { void notificationsService.dismiss(item).then(refreshTodo); }}
+              />
+            </Suspense>
+          )}
 
           {isSearchOpen && (
             <Suspense fallback={null}>
