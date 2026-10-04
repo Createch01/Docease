@@ -1,10 +1,16 @@
 const fs = require('fs');
 const path = require('path');
 
-// Configuration
-const MASTER_FILE = 'c:\\Users\\hp\\Downloads\\medicament_A_1_300_master.json';
-const TARGET_DIR = path.join(__dirname, '..', 'public', 'medicaments');
-const APP_MEDICINES_FILE = path.join(__dirname, '..', 'src-tauri', 'meddoc_medicines.json');
+// Usage : node tools/catalogue/sync_medicines.cjs <fichier_master.json> [--apply]
+// Sans --apply, simulation seulement (aucune écriture).
+const MASTER_FILE = process.argv[2];
+const APPLY = process.argv.includes('--apply');
+const TARGET_DIR = path.join(__dirname, '..', '..', 'public', 'medicaments');
+
+if (!MASTER_FILE || MASTER_FILE.startsWith('--')) {
+    console.error('Usage : node tools/catalogue/sync_medicines.cjs <fichier_master.json> [--apply]');
+    process.exit(1);
+}
 
 /**
  * Wipe and Reload medications from a master file.
@@ -16,7 +22,7 @@ async function syncMedicines() {
 
     if (!fs.existsSync(MASTER_FILE)) {
         console.error(`Error: Master file not found at ${MASTER_FILE}`);
-        console.log('Please ensure the file exists or update the MASTER_FILE path in this script.');
+        console.log('Vérifiez le chemin passé en argument.');
         process.exit(1);
     }
 
@@ -36,7 +42,7 @@ async function syncMedicines() {
 
         // 2. Process each letter file
         for (const [letter, newMeds] of Object.entries(updatesByLetter)) {
-            const fileName = `medicament_${letter}.json`;
+            const fileName = `medicament_${letter}_final.json`;
             const filePath = path.join(TARGET_DIR, fileName);
 
             if (!fs.existsSync(filePath)) {
@@ -62,7 +68,8 @@ async function syncMedicines() {
             currentMeds.push(...mappedMeds);
 
             // Save back
-            fs.writeFileSync(filePath, JSON.stringify(currentMeds, null, 2));
+            if (APPLY) fs.writeFileSync(filePath, JSON.stringify(currentMeds, null, 2));
+            else console.log('  (simulation : rien écrit)');
             console.log(`  Done. ${initialCount} -> ${currentMeds.length} (Wiped ${initialCount - (currentMeds.length - newMeds.length)} existing, Added ${newMeds.length} new)`);
         }
 

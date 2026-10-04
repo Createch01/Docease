@@ -206,7 +206,8 @@ async function main() {
     console.log(`📊 Unique medications: ${uniqueMeds.length}`);
 
     // Save output
-    const outputPath = path.join(__dirname, '..', 'medicaments', 'medicaments_raw_az.json');
+    // Sortie : 1er argument (défaut : ./medicaments_raw_az.json, dans le dossier courant).
+    const outputPath = path.resolve(process.argv[2] || 'medicaments_raw_az.json');
     const output = {
         scraped_at: new Date().toISOString(),
         source: 'https://medicament.ma',
