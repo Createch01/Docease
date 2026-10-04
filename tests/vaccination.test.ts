@@ -33,6 +33,7 @@ describe('suivi vaccinal', () => {
         expect(ids).not.toContain('hb1');
         expect(ids).toContain('dtcp1');
         expect(ids).not.toContain('rougeole');
+        expect(ids).not.toContain('rota1'); // vaccin non obligatoire : jamais en retard
     });
 
     it('au-delà de la limite de rattrapage (6 ans) : plus aucune alerte', () => {

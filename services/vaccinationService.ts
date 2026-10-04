@@ -127,7 +127,7 @@ export const vaccinationService = {
             if (record) status = 'DONE';
             else if (ageMonths < vaccine.targetAgeMonths) status = 'UPCOMING';
             else if (ageMonths > window.untilMonths) status = 'MISSED'; // fenêtre close : aucune alerte
-            else if (ageMonths - vaccine.targetAgeMonths > OVERDUE_GRACE_MONTHS && window.untilMonths > OVERDUE_GRACE_MONTHS + vaccine.targetAgeMonths) status = 'OVERDUE';
+            else if (vaccine.mandatory && ageMonths - vaccine.targetAgeMonths > OVERDUE_GRACE_MONTHS && window.untilMonths > OVERDUE_GRACE_MONTHS + vaccine.targetAgeMonths) status = 'OVERDUE';
             else status = 'DUE';
             return { vaccine, record, status };
         });
