@@ -390,7 +390,6 @@ const AppContent: React.FC = () => {
     { id: 'medical-directory', label: 'Médicaments', icon: BookOpen, requiredPermission: 'DOCTOR_TOOLS' },
     // Outils administratifs
     { id: 'analytics', label: 'Comptabilité', icon: BarChart3, requiredPermission: 'VIEW_FINANCES' },
-    { id: 'notifications', label: t('notifications') || 'Notifications', icon: Bell, requiredPermission: 'DOCTOR_TOOLS' },
     { id: 'settings', label: t('settings'), icon: Settings, requiredPermission: 'MANAGE_SETTINGS' },
   ].filter(item => featureVisible(item.id as View) && (!item.requiredPermission || hasPermission(item.requiredPermission)) && !((item as any).assistantOnly && sessionService.isMedecin()));
 
@@ -635,36 +634,6 @@ const AppContent: React.FC = () => {
               </div>
             );
           })}
-
-          {/* Search shortcut */}
-          <button
-            onClick={() => setIsSearchOpen(true)}
-            title={isCollapsed ? t('search_patient') : undefined}
-            className="w-full flex items-center rounded-lg transition-all mt-4"
-            style={{
-              gap: isCollapsed ? 0 : '10px',
-              padding: isCollapsed ? '10px' : '10px 12px',
-              justifyContent: isCollapsed ? 'center' : 'flex-start',
-              background: 'var(--color-surface-alt)',
-              color: 'var(--color-text-muted)',
-              border: '1px solid var(--color-border)',
-              fontSize: '13px',
-              transition: 'all var(--transition-base)',
-            }}
-          >
-            <Search size={16} className="shrink-0" />
-            {!isCollapsed && (
-              <>
-                <span className="flex-1 min-w-0 truncate text-left">{t('search_patient')}</span>
-                <kbd
-                  className="text-[10px] px-1.5 py-0.5 rounded border shrink-0 whitespace-nowrap"
-                  style={{ color: 'var(--color-text-faint)', borderColor: 'var(--color-border)', background: 'var(--color-surface)', fontFamily: 'var(--font-mono)' }}
-                >
-                  {SEARCH_SHORTCUT}
-                </kbd>
-              </>
-            )}
-          </button>
         </nav>
 
         {/* ─── Collapse toggle + logout ─── */}
