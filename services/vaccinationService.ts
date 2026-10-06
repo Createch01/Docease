@@ -44,12 +44,16 @@ const VACCINES: Vaccine[] = [
  * ou à remplacer par la valeur officielle ; elles ne doivent pas être lues comme le PNI.
  *  - Doses de naissance (VPO 0, HB 1) : pas de rattrapage après la fenêtre ; la série continue.
  *  - BCG : limite d'âge de rattrapage non trouvée -> repli 6 ans.
+ *  - Rotavirus (rota1-3) : limite non trouvée -> repli 6 ans, explicite (non exclu des alertes).
  *  - Autres vaccins : limite de rattrapage non trouvée -> repli 6 ans.
  */
 export const CATCHUP_WINDOWS: Record<string, { untilMonths: number; verified: boolean }> = {
     vpo0: { untilMonths: 1, verified: false },
     hb1: { untilMonths: 1, verified: false },
     bcg: { untilMonths: 72, verified: false },
+    rota1: { untilMonths: 72, verified: false },
+    rota2: { untilMonths: 72, verified: false },
+    rota3: { untilMonths: 72, verified: false },
 };
 export const DEFAULT_CATCHUP = { untilMonths: 72, verified: false };
 
