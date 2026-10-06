@@ -52,6 +52,7 @@ const SEARCH_SHORTCUT = /Mac|iPhone|iPad/i.test(typeof navigator !== 'undefined'
 
 const AppointmentManager = React.lazy(() => import('./components/AppointmentManager'));
 const TodoDrawer = React.lazy(() => import('./components/TodoDrawer'));
+const RemindersModal = React.lazy(() => import('./components/appointments/RemindersModal'));
 const SmartDocInterface = React.lazy(() => import('./components/SmartDoc/SmartDocInterface'));
 const GlobalSearch = React.lazy(() => import('./components/GlobalSearch'));
 const MedicamentsPage = React.lazy(() => import('./components/MedicamentsPage'));
@@ -118,6 +119,7 @@ const AppContent: React.FC = () => {
   const [prescriptionDraft, setPrescriptionDraft] = useState<PrescriptionDraft | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [todoOpen, setTodoOpen] = useState(false);
+  const [remindersOpen, setRemindersOpen] = useState(false);
   const [todoItems, setTodoItems] = useState<TodoItem[]>([]);
   const [todoLoading, setTodoLoading] = useState(false);
   // Mandatory master-PIN gate — nothing below can load before this resolves, since
@@ -303,6 +305,9 @@ const AppContent: React.FC = () => {
         return;
       case 'open_backup_settings':
         if (openSettings({ section: 'database' })) setTodoOpen(false);
+        return;
+      case 'open_reminders':
+        setRemindersOpen(true);
         return;
       case 'open_appointments':
         if (goToView('appointments')) setTodoOpen(false);
@@ -870,6 +875,12 @@ const AppContent: React.FC = () => {
                 onSnooze={item => { void notificationsService.snooze(item).then(refreshTodo); }}
                 onDismiss={item => { void notificationsService.dismiss(item).then(refreshTodo); }}
               />
+            </Suspense>
+          )}
+
+          {remindersOpen && (
+            <Suspense fallback={null}>
+              <RemindersModal onClose={() => setRemindersOpen(false)} />
             </Suspense>
           )}
 

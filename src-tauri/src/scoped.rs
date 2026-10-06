@@ -358,6 +358,21 @@ mod tests {
     }
 
     #[test]
+    fn identity_view_carries_whatsapp_consent_but_never_its_author() {
+        let mut p = full_patient();
+        p["whatsappConsent"] = json!("yes");
+        p["whatsappConsentAt"] = json!("2026-10-06T09:00:00Z");
+        p["whatsappConsentBy"] = json!("Dr Test");
+        let v = identity_only(&p);
+        assert_eq!(v["whatsappConsent"], "yes");
+        assert_eq!(v["whatsappConsentAt"], "2026-10-06T09:00:00Z");
+        assert!(v.get("whatsappConsentBy").is_none(), "…By est posé par Rust, jamais reçu ni renvoyé comme champ d'identité");
+        // Une écriture d'identité ne peut pas imposer …By.
+        let merged = merge_patients(vec![full_patient()], &[json!({"id": "p1", "whatsappConsent": "yes", "whatsappConsentBy": "FAUX"})]).unwrap();
+        assert!(merged[0].get("whatsappConsentBy").is_none());
+    }
+
+    #[test]
     fn write_merges_identity_without_touching_medical_fields() {
         let stored = vec![full_patient()];
         let incoming = vec![json!({

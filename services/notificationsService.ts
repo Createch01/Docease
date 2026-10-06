@@ -4,7 +4,7 @@ import { sessionService } from './sessionService';
 import { vaccinationService } from './vaccinationService';
 
 export type TodoSeverity = 'critical' | 'todo' | 'info';
-export type TodoAction = 'open_dossier' | 'open_appointments' | 'backup_now' | 'open_backup_settings' | 'open_billing';
+export type TodoAction = 'open_dossier' | 'open_appointments' | 'open_reminders' | 'backup_now' | 'open_backup_settings' | 'open_billing';
 
 /** Élément du panneau « À faire » (construit et filtré par rôle côté Rust : `notifications/mod.rs`). */
 export interface TodoItem {
