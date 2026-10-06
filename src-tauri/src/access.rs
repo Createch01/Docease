@@ -76,6 +76,9 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("billing_today_save", Rule::AnySession),
     ("clinic_public_info", Rule::AnySession),
     ("kiosk_queue", Rule::AnySession),
+    // Panneau « À faire » : éléments filtrés par rôle côté Rust (assistante : RDV uniquement)
+    ("notifications_list", Rule::AnySession),
+    ("notifications_set_state", Rule::AnySession),
     // Verrouillage automatique
     ("get_security_settings", Rule::AnySession),
     ("set_inactivity_minutes", Rule::Medecin),
@@ -270,7 +273,7 @@ mod tests {
             "meddoc_patients.json", "meddoc_today_queue.json", "meddoc_honorary_notes.json",
             "meddoc_honorary_master_services.json", "meddoc_expenses.json", "meddoc_daily_reports.json",
             "meddoc_doctor_info.json", "meddoc_tasks.json", "meddoc_medicines.json",
-            "meddoc_last_backup.json", "backups/meddoc_patients_2026.json", "fichier_inconnu.json",
+            "meddoc_vaccinations.json", "meddoc_last_backup.json", "backups/meddoc_patients_2026.json", "fichier_inconnu.json",
         ] {
             assert!(!file_allowed(a, f, FileMode::Read), "lecture de {f} doit être refusée");
             assert!(!file_allowed(a, f, FileMode::Write), "écriture de {f} doit être refusée");
@@ -326,6 +329,7 @@ mod tests {
             include_str!("settings.rs"),
             include_str!("scoped.rs"),
             include_str!("backup.rs"),
+            include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();
         for src in sources {

@@ -2,6 +2,7 @@ mod access;
 mod ai;
 mod audit;
 mod backup;
+mod notifications;
 mod scoped;
 mod settings;
 mod users;
@@ -533,6 +534,8 @@ pub fn run() {
         scoped::billing_today_save,
         scoped::clinic_public_info,
         scoped::kiosk_queue,
+        notifications::notifications_list,
+        notifications::notifications_set_state,
         ai::ai_status,
         ai::ai_set_enabled,
         ai::ai_save_key,

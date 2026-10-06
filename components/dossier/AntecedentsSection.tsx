@@ -274,6 +274,13 @@ const AntecedentsSection: React.FC<AntecedentsSectionProps> = ({ patient, refres
             Voir le calendrier complet
           </button>
         </div>
+        {vaccineStatus.length === 0 ? (
+          <p className="text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
+            {vaccinationService.ageInMonths(patient) === null
+              ? 'Date de naissance requise pour le suivi vaccinal.'
+              : 'Suivi vaccinal non activé pour ce patient.'}
+          </p>
+        ) : (
         <div className="grid grid-cols-3 gap-4">
           <div className={`p-4 rounded-xl border text-center ${overdueCount > 0 ? 'bg-red-50 border-red-100' : 'bg-gray-50 border-gray-100'}`}>
             <p className={`text-2xl font-black ${overdueCount > 0 ? 'text-red-600' : 'text-gray-300'}`}>{overdueCount}</p>
@@ -288,6 +295,7 @@ const AntecedentsSection: React.FC<AntecedentsSectionProps> = ({ patient, refres
             <p className="text-[9px] font-black uppercase tracking-widest text-gray-400 mt-1">Faites</p>
           </div>
         </div>
+        )}
       </div>
     </div>
   );

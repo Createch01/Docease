@@ -98,6 +98,8 @@ export interface Medicine {
 }
 
 export interface DoctorInfo {
+  /** Module « suivi vaccinal » (Paramètres). Désactivé par défaut. */
+  vaccinationEnabled?: boolean;
   name?: string;
   nameAr: string;
   specialtyAr: string;
@@ -462,6 +464,8 @@ export interface Patient {
   firstName?: string;
   age: number;
   dateOfBirth?: string;
+  /** Suivi vaccinal activé explicitement par le médecin sur le dossier. */
+  vaccinationTracking?: boolean;
   cin?: string;
   sex: 'M' | 'F';
   type: PatientType;

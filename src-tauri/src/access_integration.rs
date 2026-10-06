@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{ai, audit, scoped, settings, users, AppState, TEST_DATA_DIR};
+use super::{ai, audit, notifications, scoped, settings, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -103,6 +103,8 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "billing_today_save" => done(scoped::billing_today_save(a(), st!(), json!({"patientId": "p1", "totalAmount": 300, "amountPaid": 0, "paymentMode": "CASH", "status": "UNPAID"}))),
         "clinic_public_info" => done(scoped::clinic_public_info(a(), st!())),
         "kiosk_queue" => done(scoped::kiosk_queue(a(), st!())),
+        "notifications_list" => done(notifications::notifications_list(a(), st!(), None)),
+        "notifications_set_state" => done(notifications::notifications_set_state(a(), st!(), "appointments_changed:p1".into(), "fp".into(), "dismiss".into())),
         // Journal, réglages
         "audit_log_list" => done(audit::audit_log_list(a(), st!(), Some(1000))),
         "get_security_settings" => done(settings::get_security_settings(a(), st!())),
@@ -138,7 +140,7 @@ fn all_files() -> Vec<String> {
         "doctor_info", "patients", "prescriptions", "daily_reports", "medicines", "today_queue", "tasks",
         "appointments", "capacities", "appointment_settings", "expenses", "last_backup", "medical_resources",
         "consultations", "lab_requests", "medical_results", "honorary_notes", "honorary_master_services",
-        "medical_certificates",
+        "medical_certificates", "notification_state", "vaccinations",
     ]
     .iter()
     .map(|k| format!("meddoc_{k}.json"))
@@ -220,15 +222,22 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     // d'attente, encaissement — filtrés par Rust), les rendez-vous, le journal et le fichier
     // de sécurité de départ. Aucun fichier médical, de comptes ou interne.
     let allowed_written = [
-        "meddoc_appointments.json", "meddoc_patients.json", "meddoc_today_queue.json", "meddoc_honorary_notes.json",
+        "meddoc_appointments.json", "meddoc_patients.json", "meddoc_today_queue.json", "meddoc_honorary_notes.json", notifications::STATE_FILE,
         super::SECURITY_FILE, audit::AUDIT_FILE,
     ];
     for f in fs::read_dir(&dir).unwrap().flatten().map(|e| e.file_name().to_string_lossy().to_string()) {
         assert!(allowed_written.contains(&f.as_str()) || f.ends_with(".tmp"), "fichier inattendu écrit par l'assistante : {f}");
     }
-    for forbidden in ["meddoc_consultations.json", "meddoc_prescriptions.json", "meddoc_medical_certificates.json", "meddoc_doctor_info.json", "users_meta.json", "app_settings.json", "backup_meta.json"] {
+    for forbidden in ["meddoc_vaccinations.json", "meddoc_consultations.json", "meddoc_prescriptions.json", "meddoc_medical_certificates.json", "meddoc_doctor_info.json", "users_meta.json", "app_settings.json", "backup_meta.json"] {
         assert!(!dir.join(forbidden).exists(), "{forbidden} ne doit pas exister");
     }
+
+    // Assistante : ni liste médicale ni état sur un élément médical.
+    open(&h, Some(Role::Assistant));
+    let e = notifications::notifications_set_state(h.clone(), h.state::<AppState>(), "results:p1".into(), "fp".into(), "dismiss".into()).unwrap_err();
+    assert!(is_denial(&e), "{e}");
+    let e = notifications::notifications_set_state(h.clone(), h.state::<AppState>(), "vaccines:p1".into(), "fp".into(), "snooze".into()).unwrap_err();
+    assert!(is_denial(&e), "{e}");
 
     // ── 3. Session VERROUILLÉE : aucune commande de données ne passe ─────────
     for name in &commands {
@@ -256,7 +265,7 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     // ── 4. Témoin : le MÉDECIN n'est pas refusé sur les mêmes appels ─────────
     for (cmd, file) in [
         ("list_users", ""), ("scan_json_files", ""), ("audit_log_list", ""), ("set_inactivity_minutes", ""),
-        ("backup_status", ""), ("backup_list", ""), ("backup_run_if_due", ""),
+        ("backup_status", ""), ("backup_list", ""), ("backup_run_if_due", ""), ("notifications_list", ""),
         ("load_json", "meddoc_patients.json"), ("save_json", "meddoc_patients.json"), ("load_json", "meddoc_consultations.json"),
     ] {
         open(&h, Some(Role::Medecin));

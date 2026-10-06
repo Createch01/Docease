@@ -52,6 +52,7 @@ export const SETTINGS_GROUPS: SettingsGroupDef[] = [
           { id: 'coordonnees', label: 'Coordonnées' },
           { id: 'logo', label: 'Logo' },
           { id: 'horaires', label: 'Horaires' },
+          { id: 'modules', label: 'Modules' },
         ] },
       { id: 'documents', label: 'Documents', icon: FileText,
         description: 'Modèle, design et réglages d\'impression de vos ordonnances et documents.',

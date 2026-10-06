@@ -1165,6 +1165,12 @@ pub async fn backup_restore<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: 
 
 #[cfg(test)]
 mod tests {
+    #[test]
+    fn vaccination_records_are_part_of_the_backup() {
+        assert!(is_backup_data_file("meddoc_vaccinations.json"));
+        assert!(is_backup_data_file("meddoc_notification_state.json"));
+    }
+
     use super::*;
 
     const KEY: [u8; KEY_LEN] = [7u8; KEY_LEN];

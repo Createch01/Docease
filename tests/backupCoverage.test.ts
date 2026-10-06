@@ -34,6 +34,15 @@ describe('couverture de la sauvegarde', () => {
         }
     });
 
+    it('les carnets de vaccination sont un fichier chiffré sauvegardé, plus des clés localStorage', () => {
+        expect(storageKeys).toContain('meddoc_vaccinations');
+        // La seule lecture d'anciennes clés `vaccinations_*` est la migration : plus aucune écriture en clair.
+        const svc = read('services/vaccinationService.ts');
+        expect(svc).not.toMatch(/localStorage\.(setItem|getItem)/);
+        const mig = read('services/vaccinationMigration.ts');
+        expect(mig).not.toContain('setItem');
+    });
+
     it('les surcharges du catalogue sont dans la liste de Rust', () => {
         const admin = read('services/medicamentAdminService.ts');
         const overrides = /OVERRIDES_FILE = '([^']+)'/.exec(admin)![1];
