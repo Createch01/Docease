@@ -161,3 +161,17 @@ describe('provider waLink', () => {
         expect(p.id).toBe('waLink');
     });
 });
+
+describe('réglages : anciens enregistrements', () => {
+    it('normalizeAppointmentSettings complète les modèles manquants sans rien perdre', async () => {
+        const { normalizeAppointmentSettings } = await import('../services/appointmentDefaults');
+        const old = normalizeAppointmentSettings({ version: 1, mode: 'order', maxPerDay: 22 });
+        expect(old.maxPerDay).toBe(22);
+        expect(old.mode).toBe('order');
+        expect(old.messages.confirmation.fr).toContain('{telephone_cabinet}');
+        const partial = normalizeAppointmentSettings({ messages: { reminder: { fr: 'Rappel perso {prenom}' }, defaultLang: 'ar' } });
+        expect(partial.messages.reminder.fr).toBe('Rappel perso {prenom}');
+        expect(partial.messages.reminder.ar).toContain('{telephone_cabinet}');
+        expect(partial.messages.defaultLang).toBe('ar');
+    });
+});

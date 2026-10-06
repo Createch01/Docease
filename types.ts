@@ -1,4 +1,5 @@
 import type { OrdonnanceAppearance } from './components/ordonnance-editor/ordonnanceModel';
+import type { MessageTemplates } from './services/messaging/types';
 
 
 export type MedicineCategory = string;
@@ -98,6 +99,8 @@ export interface Medicine {
 }
 
 export interface DoctorInfo {
+  /** Nom du cabinet utilisé dans les messages WhatsApp (champ neutre : jamais le nom du médecin). */
+  cabinetName?: string;
   /** Module « suivi vaccinal » (Paramètres). Désactivé par défaut. */
   vaccinationEnabled?: boolean;
   name?: string;
@@ -464,6 +467,10 @@ export interface Patient {
   firstName?: string;
   age: number;
   dateOfBirth?: string;
+  /** Consentement WhatsApp : absent = non renseigné. `…By` est posé par Rust depuis la session. */
+  whatsappConsent?: 'yes' | 'no';
+  whatsappConsentAt?: string;
+  whatsappConsentBy?: string;
   /** Suivi vaccinal activé explicitement par le médecin sur le dossier. */
   vaccinationTracking?: boolean;
   cin?: string;
@@ -550,6 +557,11 @@ export interface Appointment {
   period?: 'morning' | 'afternoon'; // Demi-journée
   queueNumber?: number; // Mode « ordre d'arrivée » : numéro du jour, jamais réattribué
   isEmergency?: boolean; // RDV forcé ou pris sur une place réservée
+  // Traçabilité des messages WhatsApp : posée UNIQUEMENT par Rust (appointment_mark_sent) ;
+  // remise à zéro par Rust quand la date ou l'heure change.
+  confirmationSentAt?: string; confirmationSentBy?: string;
+  reminderSentAt?: string; reminderSentBy?: string;
+  changeNoticeSentAt?: string; changeNoticeSentBy?: string;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -570,6 +582,7 @@ export interface AppointmentSettings {
   types: AppointmentTypeDef[];
   closures: ClosurePeriod[];
   dayOverrides: Record<string, { maxPerDay: number }>; // repris de l'ancien meddoc_capacities
+  messages: MessageTemplates; // modèles WhatsApp (confirmation, rappel, changement), FR et AR
 }
 
 export interface DailyCapacity {

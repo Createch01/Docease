@@ -33,7 +33,7 @@ pub const IDENTITY_FIELDS: &[&str] = &[
 ];
 
 const CLINIC_PUBLIC_FIELDS: &[&str] = &[
-    "nameFr", "nameAr", "specialtyFr", "specialtyAr", "currency", "phone", "addressFr", "addressAr", "hours",
+    "cabinetName", "nameFr", "nameAr", "specialtyFr", "specialtyAr", "currency", "phone", "addressFr", "addressAr", "hours",
 ];
 
 const MAX_AMOUNT: f64 = 10_000_000.0;

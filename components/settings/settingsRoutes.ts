@@ -75,6 +75,7 @@ export const SETTINGS_GROUPS: SettingsGroupDef[] = [
           { id: 'capacite', label: 'Mode et capacité' },
           { id: 'types', label: 'Types de consultation' },
           { id: 'fermetures', label: 'Fermetures' },
+          { id: 'messages', label: 'Messages' },
         ] },
       { id: 'billing', label: 'Facturation & Tarifs', icon: Receipt,
         description: 'Devise et tarif de consultation appliqués par défaut.' },
