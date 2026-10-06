@@ -175,3 +175,22 @@ describe('réglages : anciens enregistrements', () => {
         expect(partial.messages.defaultLang).toBe('ar');
     });
 });
+
+describe('contexte de rendu', () => {
+    it("ne copie que la liste blanche : le motif et le type de consultation n'atteignent jamais le rendu", async () => {
+        const { buildMessageContext } = await import('../services/messaging');
+        const appointment = { date: '2026-10-07', time: '09:00', queueNumber: 2, note: 'Douleur thoracique', consultationType: 'ECG', patientName: 'X', doctorName: 'Dr Y' } as any;
+        const c = buildMessageContext(appointment, { name: 'ALAMI Sara', firstName: 'Sara' }, { cabinetName: 'Cabinet Alami', phone: '0522000000', addressFr: '12 rue X\nCasablanca' }, 'time', 'fr');
+        expect(Object.keys(c).sort()).toEqual(['address', 'cabinetName', 'cabinetPhone', 'date', 'firstName', 'mode', 'queueNumber', 'time'].sort());
+        expect(JSON.stringify(c)).not.toMatch(/Douleur|ECG|Dr Y/);
+        expect(c.address).toBe('12 rue X, Casablanca');
+        const text = renderMessage('{prenom} {motif} {adresse}', c, 'fr');
+        expect(text).toBe('Sara 12 rue X, Casablanca');
+    });
+    it("adresse arabe si renseignée, sinon française", async () => {
+        const { buildMessageContext } = await import('../services/messaging');
+        const d = { cabinetName: 'C', phone: '1', addressFr: 'rue', addressAr: 'شارع' };
+        expect(buildMessageContext({ date: '2026-10-07' }, { name: 'A B' }, d, 'time', 'ar').address).toBe('شارع');
+        expect(buildMessageContext({ date: '2026-10-07' }, { name: 'A B' }, { ...d, addressAr: '' }, 'time', 'ar').address).toBe('rue');
+    });
+});

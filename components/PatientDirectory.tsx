@@ -86,7 +86,7 @@ const PatientDirectory: React.FC = () => {
         age: calculateAgeYears(form.dateOfBirth || undefined) ?? existing?.age ?? 0,
         sex: form.sex,
         type,
-        // Le consentement n'est (re)datÃ© que s'il change ; Rust pose la date et l'auteur Ã  l'enregistrement.
+        // Le consentement n'est (re)daté que s'il change ; Rust pose la date et l'auteur à l'enregistrement.
         whatsappConsent: form.whatsappConsent,
         whatsappConsentAt: form.whatsappConsent === existing?.whatsappConsent ? existing?.whatsappConsentAt : form.whatsappConsent ? new Date().toISOString() : undefined,
       } as Patient);

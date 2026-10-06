@@ -77,3 +77,27 @@ export function firstNameOf(p: { name?: string; firstName?: string; lastName?: s
     const parts = name.split(/\s+/);
     return parts.length > 1 ? parts.slice(1).join(' ') : name;
 }
+
+/**
+ * Construit le contexte de rendu à partir d'un RDV, d'un patient et de la fiche cabinet.
+ * Seuls les champs de la liste blanche sont copiés : l'objet RDV (qui porte le motif) n'est
+ * jamais transmis tel quel au rendu.
+ */
+export function buildMessageContext(
+    appointment: { date: string; time?: string; queueNumber?: number },
+    patient: { name?: string; firstName?: string; lastName?: string },
+    doctor: { cabinetName?: string; phone?: string; addressFr?: string; addressAr?: string },
+    mode: 'time' | 'order',
+    lang: MessageLang,
+): MessageContext {
+    return {
+        firstName: firstNameOf(patient),
+        cabinetName: (doctor.cabinetName ?? '').trim(),
+        date: appointment.date,
+        time: appointment.time,
+        queueNumber: appointment.queueNumber,
+        cabinetPhone: (doctor.phone ?? '').trim(),
+        address: ((lang === 'ar' ? doctor.addressAr || doctor.addressFr : doctor.addressFr) ?? '').trim().replace(/\s*\n\s*/g, ', '),
+        mode,
+    };
+}

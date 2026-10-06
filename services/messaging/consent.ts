@@ -36,3 +36,6 @@ export function canSendWhatsApp(patient: ConsentPatient | undefined | null, appo
     if (candidates.length === 0) return { ok: false, reason: 'no_valid_number' };
     return { ok: true, candidates, needsChoice: candidates.length > 1 };
 }
+
+/** Motif de refus, ou undefined si l'envoi est possible. */
+export const refusalOf = (c: SendCheck): SendRefusal | undefined => ('reason' in c ? c.reason : undefined);

@@ -11,6 +11,9 @@ import {
   addDays, capacityTone, formatDayLong, getDayInfo, mondayOf, parseDate, todayStr, TONE_STYLE,
 } from '../services/appointmentService';
 import QuickBookingModal from './appointments/QuickBookingModal';
+import WhatsAppSendModal from './appointments/WhatsAppSendModal';
+import { canSendWhatsApp } from '../services/messaging/consent';
+import { MessageKind } from '../services/messaging/types';
 import AppointmentDetail from './appointments/AppointmentDetail';
 import { MiniCalendar, UpcomingList } from './appointments/MiniCalendar';
 import { DayView, WeekView, ListView } from './appointments/AgendaViews';
@@ -40,6 +43,26 @@ const AppointmentManager: React.FC<Props> = ({ onOpenDossier, onStartConsultatio
   const [settings, setSettings] = useState<AppointmentSettings>(() => dataService.getAppointmentSettings());
   const [modal, setModal] = useState<{ date?: string; time?: string; editing?: Appointment } | null>(null);
   const [detailId, setDetailId] = useState<string | null>(null);
+  const [wa, setWa] = useState<{ appointment: Appointment; kind: MessageKind } | null>(null);
+
+  // Après enregistrement : proposition d'envoi (jamais automatique). Nouveau RDV → confirmation ;
+  // RDV déplacé alors qu'un message avait été envoyé → avis de changement. Consentement « non » : rien.
+  const proposeMessage = (saved: Appointment, previous?: Appointment) => {
+    const a = dataService.getAppointments().find(x => x.id === saved.id) || saved;
+    if (!a.patientId) return;
+    const patient = dataService.getPatientProfile(a.patientId);
+    if (!patient || patient.whatsappConsent === 'no') return;
+    if (previous) {
+      const moved = previous.date !== a.date || previous.time !== a.time;
+      if (!moved || !(previous.confirmationSentAt || previous.reminderSentAt)) return;
+      if (!canSendWhatsApp(patient, a).ok) return;
+      setWa({ appointment: a, kind: 'change' });
+      return;
+    }
+    // Consentement « oui » : proposer si le numéro est valide ; non renseigné : l'écran d'envoi demande le consentement en un clic.
+    if (patient.whatsappConsent === 'yes' && !canSendWhatsApp(patient, a).ok) return;
+    setWa({ appointment: a, kind: 'confirmation' });
+  };
 
   const setView = (v: ViewMode) => {
     setViewState(v);
@@ -153,8 +176,9 @@ const AppointmentManager: React.FC<Props> = ({ onOpenDossier, onStartConsultatio
 
       {modal && (
         <QuickBookingModal appointments={appointments} settings={settings} initialDate={modal.date} initialTime={modal.time} editing={modal.editing}
-                           onClose={() => setModal(null)} onSaved={a => setDate(a.date)} />
+                           onClose={() => setModal(null)} onSaved={a => { setDate(a.date); proposeMessage(a, modal.editing); }} />
       )}
+      {wa && <WhatsAppSendModal appointment={wa.appointment} settings={settings} initialKind={wa.kind} onClose={() => setWa(null)} />}
       {detail && <AppointmentDetail appointment={detail} appointments={appointments} settings={settings} actions={actions} onClose={() => setDetailId(null)} />}
     </div>
   );
