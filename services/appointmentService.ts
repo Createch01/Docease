@@ -220,6 +220,7 @@ export const searchPatients = (term: string): Patient[] => {
 
 export interface NewPatientInput {
   lastName: string; firstName: string; phone: string; dateOfBirth?: string; sex?: 'M' | 'F';
+  whatsappConsent?: 'yes' | 'no';
 }
 
 /** Crée le dossier dans le fichier patients commun (sans l'ajouter à la salle d'attente). */
@@ -239,6 +240,7 @@ export const createPatient = async (input: NewPatientInput): Promise<Patient> =>
     sex,
     type: isMinor ? 'Child' : sex === 'F' ? 'Woman' : 'Adult',
     registeredDate: new Date().toISOString(),
+    ...(input.whatsappConsent ? { whatsappConsent: input.whatsappConsent, whatsappConsentAt: new Date().toISOString() } : {}),
   });
 };
 

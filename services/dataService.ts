@@ -407,6 +407,13 @@ export const dataService = {
     return updatedPatient;
   },
 
+  /** Consentement WhatsApp d'un patient. `whatsappConsentAt` est provisoire ici : Rust pose la date et l'auteur à l'enregistrement. */
+  setWhatsAppConsent: async (patientId: string, value: 'yes' | 'no' | undefined): Promise<Patient | null> => {
+    const p = dataService.getPatientProfile(patientId);
+    if (!p || p.whatsappConsent === value) return p;
+    return dataService.savePatientProfile({ ...p, whatsappConsent: value, whatsappConsentAt: value ? new Date().toISOString() : undefined });
+  },
+
   registerPatient: async (patient: Patient) => {
     // 1. Permanent storage
     const saved = await dataService.savePatientProfile(patient);

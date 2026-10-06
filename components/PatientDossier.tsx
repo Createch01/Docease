@@ -3,6 +3,7 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Calendar, FileText, Printer, Wallet, Activity, Filter, Trash2, ShieldCheck, Plus, X, AlertCircle, Phone, History, Edit2, LayoutDashboard, Syringe, FileText as FileTextIcon, Save, Pill, Droplet, ShieldAlert, ClipboardList, MapPin, HeartPulse, TrendingUp, TrendingDown, ArrowLeft } from 'lucide-react';
 import { useI18n } from '../i18n';
 import { dataService } from '../services/dataService';
+import WhatsAppConsentField from './WhatsAppConsentField';
 import { Prescription, Patient, ClinicalConsultation, HonoraryNote } from '../types';
 import PrescriptionView from './PrescriptionView';
 import HonoraryNoteEditor from './HonoraryNoteEditor';
@@ -260,6 +261,11 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
                           <Calendar size={10} />Depuis {new Date(selectedPatientProfile.registeredDate).toLocaleDateString('fr-FR', { month: 'short', year: 'numeric' })}
                         </span>
                       )}
+                    </div>
+
+                    <div className="mt-2">
+                      <WhatsAppConsentField compact value={selectedPatientProfile.whatsappConsent} at={selectedPatientProfile.whatsappConsentAt}
+                        onChange={v => { void dataService.setWhatsAppConsent(selectedPatientProfile.id, v); }} />
                     </div>
 
                     {/* Medical alert badges */}

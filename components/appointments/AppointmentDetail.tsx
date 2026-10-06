@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { CalendarClock, FolderOpen, Phone, Stethoscope, Trash2, X, Zap } from 'lucide-react';
-import { Appointment, AppointmentSettings } from '../../types';
+import { Appointment, AppointmentSettings, Patient } from '../../types';
+import { dataService } from '../../services/dataService';
+import WhatsAppConsentField from '../WhatsAppConsentField';
 import { formatDayLong, nextStatuses, todayStr } from '../../services/appointmentService';
 import { AgendaActions, STATUS_ACTION, StatusBadge, TypeChip, slotLabel } from './AppointmentBits';
 
@@ -18,6 +20,9 @@ const btnStyle = { borderColor: 'var(--color-border)', color: 'var(--color-text-
 /** Détail d'un rendez-vous : statuts en un clic, dossier, consultation, déplacement. */
 const AppointmentDetail: React.FC<Props> = ({ appointment: a, appointments, settings, actions, onClose }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
+  // Dossier liÃ© (consentement WhatsApp) ; relu aprÃ¨s chaque changement.
+  const [patient, setPatient] = useState<Patient | null>(() => (a.patientId ? dataService.getPatientProfile(a.patientId) : null));
+  const changeConsent = async (v: 'yes' | 'no' | undefined) => { if (patient) setPatient(await dataService.setWhatsAppConsent(patient.id, v)); };
   useEffect(() => {
     const h = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', h);
@@ -52,6 +57,9 @@ const AppointmentDetail: React.FC<Props> = ({ appointment: a, appointments, sett
         <div className="px-6 py-4 space-y-2 text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
           <TypeChip a={a} settings={settings} />
           {a.phone && <p className="flex items-center gap-2"><Phone size={14} style={{ color: 'var(--color-text-faint)' }} />{a.phone}</p>}
+          {patient
+            ? <div className="pt-1"><WhatsAppConsentField compact value={patient.whatsappConsent} at={patient.whatsappConsentAt} onChange={v => void changeConsent(v)} /></div>
+            : <p className="text-[12px]" style={{ color: 'var(--color-text-faint)' }}>Rendez-vous non liÃ© Ã  un dossier : pas de message WhatsApp.</p>}
           {a.note && <p className="italic">« {a.note} »</p>}
         </div>
 

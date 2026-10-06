@@ -3,6 +3,7 @@ import { Search, UserPlus, Edit2, X, Phone, Users, Check } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { toastService } from '../services/toastService';
 import { Patient, PatientType } from '../types';
+import WhatsAppConsentField, { WhatsAppConsent } from './WhatsAppConsentField';
 import { calculateAgeYears, getAgeCategory, formatDate } from '../utils/formatters';
 
 interface Form {
@@ -11,9 +12,11 @@ interface Form {
   phone: string;
   dateOfBirth: string;
   sex: 'M' | 'F' | '';
+  whatsappConsent: WhatsAppConsent;
+  whatsappConsentAt?: string;
 }
 
-const BLANK: Form = { lastName: '', firstName: '', phone: '', dateOfBirth: '', sex: '' };
+const BLANK: Form = { lastName: '', firstName: '', phone: '', dateOfBirth: '', sex: '', whatsappConsent: undefined };
 const MAX_SHOWN = 100;
 
 // Page « Patients » de l'assistante : liste, recherche (nom, prénom, téléphone), création
@@ -54,6 +57,8 @@ const PatientDirectory: React.FC = () => {
       phone: p.phone || '',
       dateOfBirth: p.dateOfBirth || '',
       sex: p.sex || '',
+      whatsappConsent: p.whatsappConsent,
+      whatsappConsentAt: p.whatsappConsentAt,
     });
     setEditingId(p.id);
   };
@@ -81,6 +86,9 @@ const PatientDirectory: React.FC = () => {
         age: calculateAgeYears(form.dateOfBirth || undefined) ?? existing?.age ?? 0,
         sex: form.sex,
         type,
+        // Le consentement n'est (re)datÃ© que s'il change ; Rust pose la date et l'auteur Ã  l'enregistrement.
+        whatsappConsent: form.whatsappConsent,
+        whatsappConsentAt: form.whatsappConsent === existing?.whatsappConsent ? existing?.whatsappConsentAt : form.whatsappConsent ? new Date().toISOString() : undefined,
       } as Patient);
       toastService.success(editingId ? 'Identité mise à jour' : 'Patient créé');
       close();
@@ -141,6 +149,7 @@ const PatientDirectory: React.FC = () => {
               ))}
             </div>
           </div>
+          <WhatsAppConsentField value={form.whatsappConsent} at={form.whatsappConsentAt} onChange={v => set({ whatsappConsent: v })} />
           <div className="flex gap-2">
             <button type="button" disabled={busy} onClick={() => void save()}
               className="h-10 px-4 rounded-lg text-white text-[13px] font-medium flex items-center gap-2 disabled:opacity-50" style={{ background: 'var(--color-primary)' }}>
