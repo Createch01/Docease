@@ -128,3 +128,10 @@ l'écran de verrouillage. Désactivé dans les builds de développement. Suspend
 - **Développement** : le déverrouillage automatique (`VITE_DEV_AUTO_UNLOCK_PASSWORD`) n'existe
   pas dans les builds de production et ouvre en rôle Médecin ; l'aperçu navigateur (`npm run dev`
   sans Tauri) n'a pas de Rust, donc aucune sécurité réelle.
+
+## Messages WhatsApp (lien wa.me)
+
+Code : `src-tauri/src/messaging.rs`. Aucune bibliothèque non officielle ; pas d'API en phase A.
+- **Ouverture** : uniquement par la commande Rust `whatsapp_open` (session requise). Rust valide le numéro (`^\+[1-9]\d{7,14}$`) et le texte (1000 caractères au plus), relit le consentement dans les fichiers chiffrés à chaque envoi (un retrait bloque aussitôt), construit `https://wa.me/…` et l'ouvre via `tauri-plugin-opener`. Le frontend n'a **aucune** permission `opener:*` (`capabilities/default.json`) : il ne peut ouvrir aucune URL.
+- **Traçabilité** : `…SentAt` / `…SentBy` des RDV et `whatsappConsentAt` / `whatsappConsentBy` sont posés par Rust (heure serveur, session). `save_json` ignore toute valeur reçue pour ces champs, quelle que soit la session ; une reprogrammation (date ou heure) remet à zéro confirmation et rappel.
+- **Journal** : id du RDV et type de message seulement — jamais de numéro, de texte ni de motif.

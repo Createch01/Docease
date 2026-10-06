@@ -30,6 +30,7 @@ const DOCTOR_INFO_FILE: &str = "meddoc_doctor_info.json";
 /// catégorie adulte/enfant/femme, date d'inscription).
 pub const IDENTITY_FIELDS: &[&str] = &[
     "id", "name", "lastName", "firstName", "phone", "dateOfBirth", "sex", "age", "type", "registeredDate",
+    "whatsappConsent", "whatsappConsentAt",
 ];
 
 const CLINIC_PUBLIC_FIELDS: &[&str] = &[
@@ -267,7 +268,11 @@ pub fn patients_save_identity<R: tauri::Runtime>(app: tauri::AppHandle<R>, state
     let session = gate(&app, &state, "patients_save_identity")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    let merged = merge_patients(read_list(&dir, &key, PATIENTS_FILE)?, &patients)?;
+    let before = read_list(&dir, &key, PATIENTS_FILE)?;
+    let mut merged = merge_patients(before.clone(), &patients)?;
+    // Consentement WhatsApp : …By et …At posés par Rust depuis la session, jamais reçus du frontend.
+    let by = session.as_ref().map(|s| s.name.clone()).unwrap_or_default();
+    super::messaging::stamp_consent_changes(&before, &mut merged, &by, &util::now_iso());
     write_enc_json_in(&dir, &key, PATIENTS_FILE, &Value::Array(merged.clone()))?;
     audit::log(&app, session.as_ref(), "patients_save_identity", &format!("{} fiche(s) reçue(s)", patients.len()), true);
     Ok(merged.iter().map(identity_only).collect())

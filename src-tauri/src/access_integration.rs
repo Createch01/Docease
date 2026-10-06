@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{ai, audit, notifications, scoped, settings, users, AppState, TEST_DATA_DIR};
+use super::{ai, audit, messaging, notifications, scoped, settings, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -105,6 +105,9 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "kiosk_queue" => done(scoped::kiosk_queue(a(), st!())),
         "notifications_list" => done(notifications::notifications_list(a(), st!(), None)),
         "notifications_set_state" => done(notifications::notifications_set_state(a(), st!(), "appointments_changed:p1".into(), "fp".into(), "dismiss".into())),
+        "appointment_mark_sent" => done(messaging::appointment_mark_sent(a(), st!(), "a-inconnu".into(), "reminder".into())),
+        // Numéro invalide : refusé par la validation AVANT toute ouverture (jamais d'ouverture réelle en test).
+        "whatsapp_open" => done(messaging::whatsapp_open(a(), st!(), "0612345678".into(), "bonjour".into(), "a1".into(), "reminder".into())),
         // Journal, réglages
         "audit_log_list" => done(audit::audit_log_list(a(), st!(), Some(1000))),
         "get_security_settings" => done(settings::get_security_settings(a(), st!())),
@@ -286,6 +289,65 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     assert!(denied.iter().any(|e| e.user == "Testeuse" && e.role.as_deref() == Some("Assistant") && e.detail == "create_user"));
     assert!(denied.iter().any(|e| e.detail.contains("meddoc_patients.json")), "refus de fichier journalisé");
     assert!(denied.iter().any(|e| e.user == "(non connecté)"), "refus en session verrouillée journalisé");
+
+    // ── 5b. WhatsApp : traçabilité et consentement posés par Rust ────────────
+    {
+        let key = [7u8; 32];
+        let read = |file: &str, id: &str| -> serde_json::Value {
+            let list = super::read_enc_json_in(&dir, &key, file).unwrap().unwrap();
+            list.as_array().unwrap().iter().find(|x| x["id"] == id).cloned().expect("élément présent")
+        };
+        // Assistante : consentement saisi avec de fausses valeurs de traçabilité.
+        open(&h, Some(Role::Assistant));
+        scoped::patients_save_identity(h.clone(), h.state::<AppState>(), vec![json!({
+            "id": "p1", "name": "DUPONT Jean", "whatsappConsent": "yes", "whatsappConsentBy": "FAUX", "whatsappConsentAt": "FAUX"
+        })]).unwrap();
+        let p = read("meddoc_patients.json", "p1");
+        assert_eq!(p["whatsappConsent"], "yes");
+        assert_eq!(p["whatsappConsentBy"], "Testeuse", "…By vient de la session Rust");
+        assert_ne!(p["whatsappConsentAt"], "FAUX");
+
+        // RDV écrit par l'assistante avec une trace forgée : ignorée.
+        let appt = |date: &str, extra: serde_json::Value| {
+            let mut a = json!({"id": "a1", "patientId": "p1", "patientName": "DUPONT Jean", "date": date, "time": "10:00", "status": "CONFIRMED"});
+            for (k, v) in extra.as_object().unwrap() {
+                a[k] = v.clone();
+            }
+            a
+        };
+        super::save_json(h.clone(), h.state::<AppState>(), "meddoc_appointments.json".into(), json!([appt("2026-10-07", json!({"reminderSentAt": "FAUX"}))])).unwrap();
+        assert!(read("meddoc_appointments.json", "a1").get("reminderSentAt").is_none());
+
+        // Marquage par Rust : heure serveur + session.
+        messaging::appointment_mark_sent(h.clone(), h.state::<AppState>(), "a1".into(), "reminder".into()).unwrap();
+        let a = read("meddoc_appointments.json", "a1");
+        assert_eq!(a["reminderSentBy"], "Testeuse");
+        assert_ne!(a["reminderSentAt"], "FAUX");
+        // Réécriture sans trace ni changement : la trace stockée revient.
+        super::save_json(h.clone(), h.state::<AppState>(), "meddoc_appointments.json".into(), json!([appt("2026-10-07", json!({}))])).unwrap();
+        assert_eq!(read("meddoc_appointments.json", "a1")["reminderSentBy"], "Testeuse");
+        // Reprogrammation : remise à zéro.
+        super::save_json(h.clone(), h.state::<AppState>(), "meddoc_appointments.json".into(), json!([appt("2026-10-09", json!({"reminderSentAt": "FAUX"}))])).unwrap();
+        let a = read("meddoc_appointments.json", "a1");
+        assert!(a.get("reminderSentAt").is_none() && a.get("reminderSentBy").is_none());
+
+        // Retrait du consentement : whatsapp_open refuse AVANT toute ouverture (numéro pourtant valide).
+        scoped::patients_save_identity(h.clone(), h.state::<AppState>(), vec![json!({"id": "p1", "name": "DUPONT Jean", "whatsappConsent": "no"})]).unwrap();
+        let e = messaging::whatsapp_open(h.clone(), h.state::<AppState>(), "+212612345678".into(), "bonjour".into(), "a1".into(), "reminder".into()).unwrap_err();
+        assert!(e.contains("pas accepté"), "{e}");
+        assert_eq!(read("meddoc_patients.json", "p1")["whatsappConsentBy"], "Testeuse");
+
+        // Médecin : même règle via save_json (…By forgé ignoré).
+        open(&h, Some(Role::Medecin));
+        super::save_json(h.clone(), h.state::<AppState>(), "meddoc_patients.json".into(), json!([{
+            "id": "p1", "name": "DUPONT Jean", "whatsappConsent": "yes", "whatsappConsentBy": "FAUX"
+        }])).unwrap();
+        assert_eq!(read("meddoc_patients.json", "p1")["whatsappConsentBy"], "Testeuse");
+        // Journal : ni numéro ni texte.
+        let log = audit::read_entries(&dir, 5000);
+        assert!(log.iter().any(|e| e.action == "appointment_mark_sent" && e.detail == "a1 reminder"));
+        assert!(log.iter().all(|e| !e.detail.contains("+212") && !e.detail.contains("bonjour")), "journal sans numéro ni texte");
+    }
 
     // ── 6. Sauvegarde de bout en bout par les commandes (médecin) ────────────
     {
