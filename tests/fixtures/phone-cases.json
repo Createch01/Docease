@@ -1,0 +1,33 @@
+{
+  "_doc": "Jeu de cas partagé : lu par tests/messaging.test.ts ET par les tests Rust (notifications/reminders_source.rs). expected = E.164 ou null (refusé).",
+  "cases": [
+    { "input": "0612345678", "expected": "+212612345678" },
+    { "input": "0712345678", "expected": "+212712345678" },
+    { "input": "06 12 34 56 78", "expected": "+212612345678" },
+    { "input": "06.12.34.56.78", "expected": "+212612345678" },
+    { "input": "06-12-34-56-78", "expected": "+212612345678" },
+    { "input": "(06) 12 34 56 78", "expected": "+212612345678" },
+    { "input": "+212 6 12 34 56 78", "expected": "+212612345678" },
+    { "input": "+212612345678", "expected": "+212612345678" },
+    { "input": "00212612345678", "expected": "+212612345678" },
+    { "input": "212612345678", "expected": "+212612345678" },
+    { "input": "212712345678", "expected": "+212712345678" },
+    { "input": "0522123456", "expected": null },
+    { "input": "0537123456", "expected": null },
+    { "input": "0800123456", "expected": null },
+    { "input": "+212522123456", "expected": null },
+    { "input": "+212800123456", "expected": null },
+    { "input": "061234567", "expected": null },
+    { "input": "06123456789", "expected": null },
+    { "input": "+21261234567", "expected": null },
+    { "input": "+33 6 12 34 56 78", "expected": "+33612345678" },
+    { "input": "0033612345678", "expected": "+33612345678" },
+    { "input": "+1 (415) 555-2671", "expected": "+14155552671" },
+    { "input": "+3361234", "expected": null },
+    { "input": "+1234567890123456", "expected": null },
+    { "input": "+0123456789", "expected": null },
+    { "input": "abc", "expected": null },
+    { "input": "", "expected": null },
+    { "input": "   ", "expected": null }
+  ]
+}
