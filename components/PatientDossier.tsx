@@ -1,6 +1,6 @@
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { Calendar, FileText, Printer, Wallet, Activity, Filter, Trash2, ShieldCheck, Plus, X, AlertCircle, Phone, History, Edit2, LayoutDashboard, Syringe, FileText as FileTextIcon, Save, Pill, Droplet, ShieldAlert, ClipboardList, MapPin, HeartPulse, TrendingUp, TrendingDown, ArrowLeft } from 'lucide-react';
+import { Paperclip, Calendar, FileText, Printer, Wallet, Activity, Filter, Trash2, ShieldCheck, Plus, X, AlertCircle, Phone, History, Edit2, LayoutDashboard, Syringe, FileText as FileTextIcon, Save, Pill, Droplet, ShieldAlert, ClipboardList, MapPin, HeartPulse, TrendingUp, TrendingDown, ArrowLeft } from 'lucide-react';
 import { useI18n } from '../i18n';
 import { dataService } from '../services/dataService';
 import WhatsAppConsentField from './WhatsAppConsentField';
@@ -14,6 +14,8 @@ import AnalysesSection from './dossier/AnalysesSection';
 import ResultsSection from './dossier/ResultsSection';
 import FinancesSection from './dossier/FinancesSection';
 import VaccinationTab from './dossier/VaccinationTab';
+import AttachmentsTab from './dossier/AttachmentsTab';
+import { sessionService } from '../services/sessionService';
 import AntecedentsSection from './dossier/AntecedentsSection';
 import VitalsSection from './dossier/VitalsSection';
 import SmartDocInterface from './SmartDoc/SmartDocInterface';
@@ -33,7 +35,7 @@ import { formatAge, formatNom } from '../utils/formatters';
 import PatientsList from './PatientsList';
 import { todayLocal } from '../utils/localDate';
 
-type DossierTab = 'overview' | 'consultation' | 'ordonnance' | 'analyses' | 'resultats' | 'vaccination' | 'antecedents' | 'constantes' | 'documents' | 'facture' | 'certificats';
+type DossierTab = 'overview' | 'consultation' | 'ordonnance' | 'analyses' | 'resultats' | 'pieces' | 'vaccination' | 'antecedents' | 'constantes' | 'documents' | 'facture' | 'certificats';
 
 const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void, initialPatient?: Patient | null }> = ({ onNavigate, initialPatient }) => {
   const aiEnabled = useAiEnabled();
@@ -428,6 +430,7 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
                   { id: 'analyses', label: t('analyses'), icon: <Filter size={13} /> },
                   { id: 'facture', label: t('finance'), icon: <Wallet size={13} /> },
                   { id: 'resultats', label: t('results'), icon: <ShieldCheck size={13} /> },
+                  ...(sessionService.isMedecin() ? [{ id: 'pieces', label: 'Pièces jointes', icon: <Paperclip size={13} /> }] : []),
                   { id: 'vaccination', label: t('vaccines'), icon: <Syringe size={13} /> },
                   { id: 'antecedents', label: 'Antécédents', icon: <ClipboardList size={13} /> },
                   { id: 'constantes', label: 'Constantes', icon: <HeartPulse size={13} /> },
@@ -600,6 +603,8 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
               )}
 
               {activeTab === 'vaccination' && <VaccinationTab patient={selectedPatientProfile} />}
+
+              {activeTab === 'pieces' && sessionService.isMedecin() && <AttachmentsTab patient={selectedPatientProfile} />}
 
               {activeTab === 'antecedents' && (
                 <AntecedentsSection
