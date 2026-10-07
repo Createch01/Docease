@@ -13,7 +13,7 @@ fn tmp(tag: &str) -> PathBuf {
     let _ = fs::remove_dir_all(&d);
     fs::create_dir_all(&d).unwrap();
     write_enc_json_in(&d, &KEY, PATIENTS_FILE, &json!([{"id": "p1", "name": "HAYAT Salma", "diagnosis": "SECRET-DIAG"}, {"id": "p2", "name": "ALAMI Omar"}])).unwrap();
-    write_enc_json_in(&d, &KEY, DOCTOR_INFO_FILE, &json!({"nameFr": "Dr X", "legalIce": "  001234  ", "legalVatNote": "Exonéré de TVA", "legalInpe": ""})).unwrap();
+    write_enc_json_in(&d, &KEY, DOCTOR_INFO_FILE, &json!({"nameFr": "Dr X", "ice": "  001234  ", "vatExemptionNote": "Exonéré de TVA", "inpe": ""})).unwrap();
     d
 }
 
@@ -244,7 +244,7 @@ fn legal_mentions_are_optional_trimmed_and_frozen_on_the_receipt() {
     assert_eq!(r.legal.vat_note.as_deref(), Some("Exonéré de TVA"));
     assert!(r.legal.inpe.is_none() && r.legal.tax_id.is_none() && r.legal.professional_tax.is_none() && r.legal.order_number.is_none(), "rien n'est inventé");
     // Modifier la fiche cabinet ensuite ne change pas le reçu déjà émis.
-    write_enc_json_in(&d, &KEY, DOCTOR_INFO_FILE, &json!({"legalIce": "999"})).unwrap();
+    write_enc_json_in(&d, &KEY, DOCTOR_INFO_FILE, &json!({"ice": "999"})).unwrap();
     assert_eq!(load(&d, &KEY).unwrap()[0].legal.ice.as_deref(), Some("001234"));
     // Fiche sans mentions : aucune mention.
     write_enc_json_in(&d, &KEY, DOCTOR_INFO_FILE, &json!({"nameFr": "Dr"})).unwrap();

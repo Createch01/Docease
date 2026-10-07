@@ -312,15 +312,15 @@ fn clean(v: Option<&Value>, max: usize) -> Option<String> {
     (!t.is_empty()).then(|| t.chars().take(max).collect())
 }
 
-/// Mentions légales saisies dans Paramètres › Cabinet (champs `legal*` de la fiche cabinet).
+/// Mentions légales saisies dans Paramètres › Cabinet (champs inpe, taxId, ice, patente, ordreNumber, vatExemptionNote de la fiche cabinet).
 pub fn legal_from_info(info: &Value) -> Legal {
     Legal {
-        inpe: clean(info.get("legalInpe"), MAX_LEGAL_CHARS),
-        tax_id: clean(info.get("legalIf"), MAX_LEGAL_CHARS),
-        ice: clean(info.get("legalIce"), MAX_LEGAL_CHARS),
-        professional_tax: clean(info.get("legalTp"), MAX_LEGAL_CHARS),
-        order_number: clean(info.get("legalOrder"), MAX_LEGAL_CHARS),
-        vat_note: clean(info.get("legalVatNote"), MAX_VAT_CHARS),
+        inpe: clean(info.get("inpe"), MAX_LEGAL_CHARS),
+        tax_id: clean(info.get("taxId"), MAX_LEGAL_CHARS),
+        ice: clean(info.get("ice"), MAX_LEGAL_CHARS),
+        professional_tax: clean(info.get("patente"), MAX_LEGAL_CHARS),
+        order_number: clean(info.get("ordreNumber"), MAX_LEGAL_CHARS),
+        vat_note: clean(info.get("vatExemptionNote"), MAX_VAT_CHARS),
     }
 }
 
