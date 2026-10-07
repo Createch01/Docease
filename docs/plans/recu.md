@@ -35,7 +35,7 @@ numérotation séquentielle annuelle **attribuée par Rust**, montant **en chiff
 
 | # | Décision | Valeur proposée | Pourquoi |
 |---|---|---|---|
-| D1 | Format du numéro | `REC-AAAA-NNNN` (compteur par année, 4 chiffres, au-delà : 5) | Lisible, distinct du numéro de note (`AAAA-NNNN`). |
+| D1 | Format du numéro | `REC-AAAA-NNNNN` (compteur par année, 5 chiffres, remise à 1 chaque année ; au-delà de 99999 le nombre s'allonge sans erreur) — **validé** | Lisible, distinct du numéro de note (`AAAA-NNNN`). |
 | D2 | Une seule suite pour reçus et reçus d'annulation | **Oui** | La suite reste continue et ordonnée dans le temps ; un trou ne peut venir que d'un défaut, donc se détecte. |
 | D3 | Qui émet / réimprime | Médecin **et** assistante, pour les paiements du **jour** (assistante) ; tout paiement (médecin) | Constat 4. Le reçu ne contient aucune donnée médicale. |
 | D4 | Qui annule | **Médecin seulement**, motif obligatoire | Acte comptable sensible. |
@@ -185,3 +185,20 @@ nom, le montant ni le motif).
 Correction de la numérotation par comptage des **notes d'honoraires** (constat 1 : même allocateur
 Rust à réutiliser, avec une migration qui ne renumérote jamais une note déjà émise) ; envoi du reçu
 par WhatsApp ; reçus pour les remboursements automatiques ; export comptable du registre.
+
+---
+
+## Décisions validées (ajoutées après validation du plan)
+
+1. **Droits** : l'assistante émet et réimprime (duplicata) les reçus **du jour uniquement** ; le
+   médecin a tout ; l'**annulation** (reçu d'annulation) est réservée au médecin. Contrôle côté Rust.
+2. **Mentions légales** (remplacent D8) : champs **optionnels** dans Paramètres › Cabinet — INPE, IF
+   (identifiant fiscal), ICE, n° de taxe professionnelle, n° d'inscription à l'Ordre, et une mention
+   libre d'exonération de TVA (texte saisi par le médecin, **rien par défaut**). Affichés sur le reçu
+   **seulement s'ils sont renseignés**. Aucune mention obligatoire inventée.
+3. **Détail des actes** : désactivé par défaut (libellé « Consultation »). Il devient une **option par
+   reçu, réservée au médecin** (remplace l'option globale de D5) ; l'assistante émet toujours le
+   libellé par défaut.
+4. **Format** `REC-AAAA-NNNNN` (D1 mis à jour).
+5. Étape suivante après le reçu : numérotation des notes d'honoraires par compteur Rust (noté dans
+   `docs/IDEES.md`).
