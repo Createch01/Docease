@@ -422,6 +422,156 @@ pub fn issue(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, detail: bool, who: 
     })
 }
 
+// ─── Annulation, duplicata, consultation ─────────────────────────────────────
+
+/// Entrée + état déduit du registre (le reçu d'origine n'est jamais modifié).
+#[derive(Serialize, Clone, Debug, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct View {
+    #[serde(flatten)]
+    pub entry: Entry,
+    /// `valid` · `cancelled` (reçu annulé) · `cancellation` (reçu d'annulation).
+    pub status: String,
+    pub cancelled_by: Option<String>,
+    /// Nombre de duplicata déjà imprimés.
+    pub duplicates: u32,
+    /// Rang du duplicata qui vient d'être enregistré (réponse de `duplicate` seulement).
+    pub duplicate_rank: Option<u32>,
+}
+
+fn view_of(entries: &[Entry], e: &Entry) -> View {
+    let cancelled_by = entries.iter().find(|c| c.kind == "cancellation" && c.cancels_number.as_deref() == Some(e.number.as_str())).map(|c| c.number.clone());
+    let status = match (e.kind.as_str(), &cancelled_by) {
+        ("cancellation", _) => "cancellation",
+        (_, Some(_)) => "cancelled",
+        _ => "valid",
+    };
+    let duplicates = entries.iter().filter(|d| d.kind == "duplicate" && d.number == e.number).count() as u32;
+    View { entry: e.clone(), status: status.into(), cancelled_by, duplicates, duplicate_rank: None }
+}
+
+fn find<'a>(entries: &'a [Entry], number: &str) -> Result<&'a Entry, String> {
+    entries.iter().find(|e| e.kind != "duplicate" && e.number == number).ok_or_else(|| "Reçu introuvable.".to_string())
+}
+
+const MIN_REASON_CHARS: usize = 3;
+const MAX_REASON_CHARS: usize = 200;
+
+/// Reçu d'annulation : même suite de numéros, montant négatif. Médecin seulement. Le reçu d'origine
+/// reste intact ; il est « annulé » par déduction.
+pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: &str, who: &Actor, now_iso: &str, today: &str) -> Result<Entry, String> {
+    if who.role != Role::Medecin {
+        return Err("Seul le médecin peut annuler un reçu.".into());
+    }
+    let reason = clean(Some(&Value::String(reason.to_string())), MAX_REASON_CHARS + 1).unwrap_or_default();
+    let n = reason.chars().count();
+    if n < MIN_REASON_CHARS {
+        return Err("Le motif de l'annulation est obligatoire.".into());
+    }
+    if n > MAX_REASON_CHARS {
+        return Err(format!("Motif trop long ({MAX_REASON_CHARS} caractères au plus)."));
+    }
+    let _g = lock();
+    let number = number.to_string();
+    let (issued_by, now, date) = (who.name.clone(), now_iso.to_string(), today.to_string());
+    append_numbered(dir, key, today, move |entries, new_number, seq, year| {
+        let orig = find(entries, &number)?;
+        if orig.kind != "receipt" {
+            return Err("Un reçu d'annulation ne peut pas être annulé.".into());
+        }
+        if is_cancelled(entries, &number) {
+            return Err("Ce reçu est déjà annulé.".into());
+        }
+        let amount = -orig.amount_cents;
+        Ok(Entry {
+            kind: "cancellation".into(),
+            number: new_number,
+            seq,
+            year,
+            date,
+            issued_at: now,
+            issued_by,
+            note_id: orig.note_id.clone(),
+            patient_id: orig.patient_id.clone(),
+            patient_name: orig.patient_name.clone(),
+            amount_cents: amount,
+            amount_in_words: amount_in_words(amount),
+            payment_mode: orig.payment_mode.clone(),
+            label: orig.label.clone(),
+            balance_due_cents: 0,
+            legal: orig.legal.clone(),
+            cancels_number: Some(number.clone()),
+            reason: Some(reason),
+            rank: None,
+            prev_hash: String::new(),
+            hash: String::new(),
+        })
+    })
+}
+
+/// Enregistre une réimpression (rang croissant) ; n'attribue AUCUN nouveau numéro. L'assistante :
+/// reçus du jour seulement. Renvoie l'original figé pour l'impression.
+pub fn duplicate(dir: &Path, key: &[u8; KEY_LEN], number: &str, who: &Actor, now_iso: &str, today: &str) -> Result<View, String> {
+    let _g = lock();
+    let mut entries = load(dir, key)?;
+    let orig = find(&entries, number)?.clone();
+    if who.role == Role::Assistant && orig.date != today {
+        return Err("Seuls les reçus du jour peuvent être réimprimés.".into());
+    }
+    let rank = entries.iter().filter(|d| d.kind == "duplicate" && d.number == orig.number).count() as u32 + 1;
+    let dup = Entry {
+        kind: "duplicate".into(),
+        number: orig.number.clone(),
+        seq: 0,
+        year: orig.year,
+        date: today.to_string(),
+        issued_at: now_iso.to_string(),
+        issued_by: who.name.clone(),
+        note_id: String::new(),
+        patient_id: String::new(),
+        patient_name: String::new(),
+        amount_cents: 0,
+        amount_in_words: String::new(),
+        payment_mode: String::new(),
+        label: String::new(),
+        balance_due_cents: 0,
+        legal: Legal::default(),
+        cancels_number: None,
+        reason: None,
+        rank: Some(rank),
+        prev_hash: String::new(),
+        hash: String::new(),
+    };
+    let dup = seal(dup, &entries);
+    entries.push(dup);
+    save(dir, key, &entries)?;
+    let mut v = view_of(&entries, &orig);
+    v.duplicate_rank = Some(rank);
+    Ok(v)
+}
+
+/// Un reçu (ou reçu d'annulation). L'assistante : reçus du jour seulement.
+pub fn get(dir: &Path, key: &[u8; KEY_LEN], number: &str, who: &Actor, today: &str) -> Result<View, String> {
+    let entries = load(dir, key)?;
+    let e = find(&entries, number)?;
+    if who.role == Role::Assistant && e.date != today {
+        return Err("Seuls les reçus du jour sont accessibles.".into());
+    }
+    Ok(view_of(&entries, e))
+}
+
+/// Registre (reçus et reçus d'annulation), du plus récent au plus ancien. `patient_id` : filtre.
+pub fn list(dir: &Path, key: &[u8; KEY_LEN], patient_id: Option<&str>) -> Result<Vec<View>, String> {
+    let entries = load(dir, key)?;
+    Ok(entries.iter().rev().filter(|e| e.kind != "duplicate" && patient_id.map_or(true, |p| e.patient_id == p)).map(|e| view_of(&entries, e)).collect())
+}
+
+/// Reçus émis aujourd'hui (vue de l'assistante : numéro, patient, montant, état).
+pub fn list_today(dir: &Path, key: &[u8; KEY_LEN], today: &str) -> Result<Vec<View>, String> {
+    let entries = load(dir, key)?;
+    Ok(entries.iter().rev().filter(|e| e.kind != "duplicate" && e.date == today).map(|e| view_of(&entries, e)).collect())
+}
+
 // ─── Vérification ────────────────────────────────────────────────────────────
 
 #[derive(Serialize, Debug, Clone, PartialEq)]
@@ -485,6 +635,80 @@ pub fn verify(dir: &Path, key: &[u8; KEY_LEN]) -> Result<VerifyReport, String> {
         last_number: entries.iter().rev().find(|e| e.kind != "duplicate").map(|e| e.number.clone()),
         problems,
     })
+}
+
+// ─── Commandes ───────────────────────────────────────────────────────────────
+
+use super::access::{gate, require_session};
+use super::audit;
+use super::users::data_key_of;
+use super::{data_dir, util, AppState};
+
+fn actor_of(session: &super::access::Session) -> Actor {
+    Actor { name: session.name.clone(), role: session.role }
+}
+
+/// Journal : le NUMÉRO du reçu seulement (jamais le nom, le montant ni le motif).
+#[tauri::command]
+pub fn receipt_issue<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, note_id: String, detail: Option<bool>) -> Result<View, String> {
+    let session = require_session(gate(&app, &state, "receipt_issue")?)?;
+    let key = data_key_of(&state)?;
+    let dir = data_dir(&app)?;
+    let r = issue(&dir, &key, &note_id, detail.unwrap_or(false), &actor_of(&session), &util::now_iso(), &util::today_local());
+    match &r {
+        Ok(e) => audit::log(&app, Some(&session), "receipt_issue", &e.number, true),
+        Err(_) => audit::log(&app, Some(&session), "receipt_issue", "refusé", false),
+    }
+    let e = r?;
+    let entries = load(&dir, &key)?;
+    Ok(view_of(&entries, &e))
+}
+
+#[tauri::command]
+pub fn receipt_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, patient_id: Option<String>) -> Result<Vec<View>, String> {
+    gate(&app, &state, "receipt_list")?;
+    list(&data_dir(&app)?, &data_key_of(&state)?, patient_id.as_deref())
+}
+
+#[tauri::command]
+pub fn receipt_list_today<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<View>, String> {
+    gate(&app, &state, "receipt_list_today")?;
+    list_today(&data_dir(&app)?, &data_key_of(&state)?, &util::today_local())
+}
+
+#[tauri::command]
+pub fn receipt_get<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, number: String) -> Result<View, String> {
+    let session = require_session(gate(&app, &state, "receipt_get")?)?;
+    get(&data_dir(&app)?, &data_key_of(&state)?, &number, &actor_of(&session), &util::today_local())
+}
+
+#[tauri::command]
+pub fn receipt_duplicate<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, number: String) -> Result<View, String> {
+    let session = require_session(gate(&app, &state, "receipt_duplicate")?)?;
+    let r = duplicate(&data_dir(&app)?, &data_key_of(&state)?, &number, &actor_of(&session), &util::now_iso(), &util::today_local());
+    audit::log(&app, Some(&session), "receipt_duplicate", if r.is_ok() { &number } else { "refusé" }, r.is_ok());
+    r
+}
+
+#[tauri::command]
+pub fn receipt_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, number: String, reason: String) -> Result<View, String> {
+    let session = require_session(gate(&app, &state, "receipt_cancel")?)?;
+    let key = data_key_of(&state)?;
+    let dir = data_dir(&app)?;
+    let r = cancel(&dir, &key, &number, &reason, &actor_of(&session), &util::now_iso(), &util::today_local());
+    match &r {
+        Ok(e) => audit::log(&app, Some(&session), "receipt_cancel", &format!("{} annule {}", e.number, number), true),
+        Err(_) => audit::log(&app, Some(&session), "receipt_cancel", "refusé", false),
+    }
+    let e = r?;
+    let entries = load(&dir, &key)?;
+    Ok(view_of(&entries, &e))
+}
+
+#[tauri::command]
+pub fn receipts_verify<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<VerifyReport, String> {
+    gate(&app, &state, "receipts_verify")?;
+    verify(&data_dir(&app)?, &data_key_of(&state)?)
 }
 
 #[cfg(test)]

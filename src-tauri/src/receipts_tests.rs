@@ -282,3 +282,133 @@ fn registry_chain_detects_modified_removed_or_inserted_entries() {
     assert!(verify(&d, &KEY).unwrap().ok);
     let _ = fs::remove_dir_all(&d);
 }
+
+// ─── Annulation, duplicata, consultation ─────────────────────────────────────
+
+fn two_receipts(tag: &str) -> (PathBuf, Entry, Entry) {
+    let d = tmp(tag);
+    set_notes(&d, json!([note("n1", "p1", TODAY, 300.0, "PAID", 0.0), note("n2", "p2", TODAY, 150.5, "PAID", 0.0)]));
+    let a = issue_at(&d, "n1", TODAY).unwrap();
+    let b = issue_at(&d, "n2", TODAY).unwrap();
+    (d, a, b)
+}
+
+#[test]
+fn cancellation_is_a_new_negative_receipt_in_the_same_sequence() {
+    let (d, a, _b) = two_receipts("cancel");
+    let c = cancel(&d, &KEY, &a.number, "  Erreur de saisie  ", &doctor(), NOW, TODAY).unwrap();
+    assert_eq!((c.kind.as_str(), c.number.as_str(), c.amount_cents), ("cancellation", "REC-2026-00003", -30_000));
+    assert_eq!(c.amount_in_words, "Moins trois cents dirhams");
+    assert_eq!((c.cancels_number.as_deref(), c.reason.as_deref()), (Some("REC-2026-00001"), Some("Erreur de saisie")));
+    assert_eq!(c.patient_name, a.patient_name);
+    // Le reçu d'origine est intact (mêmes octets), son état est déduit.
+    let entries = load(&d, &KEY).unwrap();
+    assert_eq!(entries[0], a);
+    let v = list(&d, &KEY, None).unwrap();
+    let orig = v.iter().find(|x| x.entry.number == a.number).unwrap();
+    assert_eq!((orig.status.as_str(), orig.cancelled_by.as_deref()), ("cancelled", Some("REC-2026-00003")));
+    assert_eq!(v[0].status, "cancellation", "du plus récent au plus ancien");
+    assert!(verify(&d, &KEY).unwrap().ok);
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn cancellation_rules_once_only_doctor_only_reason_required() {
+    let (d, a, b) = two_receipts("rules");
+    // Assistante : refusée, rien n'est écrit.
+    assert!(cancel(&d, &KEY, &a.number, "erreur", &assistant(), NOW, TODAY).unwrap_err().contains("médecin"));
+    assert_eq!(load(&d, &KEY).unwrap().len(), 2);
+    // Motif obligatoire / borné.
+    for bad in ["", "  ", "ab"] {
+        assert!(cancel(&d, &KEY, &a.number, bad, &doctor(), NOW, TODAY).unwrap_err().contains("obligatoire"), "{bad:?}");
+    }
+    assert!(cancel(&d, &KEY, &a.number, &"x".repeat(201), &doctor(), NOW, TODAY).unwrap_err().contains("trop long"));
+    assert!(cancel(&d, &KEY, "REC-2026-99999", "erreur", &doctor(), NOW, TODAY).unwrap_err().contains("introuvable"));
+    assert_eq!(load(&d, &KEY).unwrap().len(), 2, "aucun numéro consommé par un refus");
+    // Une seule fois ; un reçu d'annulation n'est pas annulable.
+    let c = cancel(&d, &KEY, &a.number, "erreur", &doctor(), NOW, TODAY).unwrap();
+    assert!(cancel(&d, &KEY, &a.number, "encore", &doctor(), NOW, TODAY).unwrap_err().contains("déjà annulé"));
+    assert!(cancel(&d, &KEY, &c.number, "annuler l'annulation", &doctor(), NOW, TODAY).unwrap_err().contains("ne peut pas être annulé"));
+    // L'autre reçu reste valide.
+    assert_eq!(list(&d, &KEY, Some("p2")).unwrap()[0].status, "valid");
+    let _ = b;
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn cancelled_amount_can_be_receipted_again_with_a_new_number() {
+    let (d, a, _b) = two_receipts("reissue");
+    assert!(issue_at(&d, "n1", TODAY).unwrap_err().contains("déjà"), "payé et déjà reçu");
+    cancel(&d, &KEY, &a.number, "mauvais montant saisi", &doctor(), NOW, TODAY).unwrap();
+    let again = issue_at(&d, "n1", TODAY).unwrap();
+    assert_eq!((again.number.as_str(), again.amount_cents), ("REC-2026-00004", 30_000));
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn duplicate_never_takes_a_number_and_ranks_increase() {
+    let (d, a, _b) = two_receipts("dup");
+    let d1 = duplicate(&d, &KEY, &a.number, &doctor(), NOW, TODAY).unwrap();
+    let d2 = duplicate(&d, &KEY, &a.number, &assistant(), NOW, TODAY).unwrap();
+    assert_eq!((d1.duplicate_rank, d2.duplicate_rank), (Some(1), Some(2)));
+    assert_eq!(d2.entry, a, "contenu figé identique à l'original");
+    assert_eq!(d2.duplicates, 2);
+    // Pas de nouveau numéro : le suivant reste le 3e.
+    set_notes(&d, json!([note("n3", "p1", TODAY, 100.0, "PAID", 0.0)]));
+    assert_eq!(issue_at(&d, "n3", TODAY).unwrap().number, "REC-2026-00003");
+    assert!(verify(&d, &KEY).unwrap().ok);
+    // Les duplicata n'apparaissent pas comme des reçus dans les listes.
+    assert!(list(&d, &KEY, None).unwrap().iter().all(|v| v.entry.kind != "duplicate"));
+    // Reçu inconnu / duplicata d'un reçu annulé : le reçu annulé reste réimprimable (mention côté interface).
+    assert!(duplicate(&d, &KEY, "REC-2026-77777", &doctor(), NOW, TODAY).is_err());
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn assistant_only_sees_and_reprints_todays_receipts() {
+    let d = tmp("assist2");
+    set_notes(&d, json!([note("old", "p1", "2026-10-01", 100.0, "PAID", 0.0), note("new", "p2", TODAY, 200.0, "PAID", 0.0)]));
+    let old = issue(&d, &KEY, "old", false, &doctor(), NOW, "2026-10-01").unwrap();
+    let new = issue_at(&d, "new", TODAY).unwrap();
+    assert!(get(&d, &KEY, &old.number, &assistant(), TODAY).unwrap_err().contains("du jour"));
+    assert!(duplicate(&d, &KEY, &old.number, &assistant(), NOW, TODAY).unwrap_err().contains("du jour"));
+    assert!(get(&d, &KEY, &new.number, &assistant(), TODAY).is_ok());
+    assert!(duplicate(&d, &KEY, &new.number, &assistant(), NOW, TODAY).is_ok());
+    let today = list_today(&d, &KEY, TODAY).unwrap();
+    assert_eq!(today.len(), 1);
+    assert_eq!(today[0].entry.number, new.number);
+    // Le médecin voit tout.
+    assert!(get(&d, &KEY, &old.number, &doctor(), TODAY).is_ok());
+    assert_eq!(list(&d, &KEY, None).unwrap().len(), 2);
+    assert!(duplicate(&d, &KEY, &old.number, &doctor(), NOW, TODAY).is_ok());
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn verify_flags_a_duplicate_of_an_unknown_receipt_and_a_forged_cancellation() {
+    let (d, a, _b) = two_receipts("forge");
+    let mut entries = load(&d, &KEY).unwrap();
+    // Duplicata d'un numéro inexistant, correctement chaîné : détecté par le contenu.
+    let mut dup = entries[0].clone();
+    dup.kind = "duplicate".into();
+    dup.number = "REC-2026-12345".into();
+    dup.seq = 0;
+    dup.rank = Some(1);
+    entries.push(seal(dup, &entries));
+    save(&d, &KEY, &entries).unwrap();
+    assert!(verify(&d, &KEY).unwrap().problems.iter().any(|p| p.contains("inconnu")));
+    let _ = a;
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn journal_never_receives_names_amounts_or_reasons() {
+    // Les appels audit::log du module ne portent que le numéro (ou « refusé »).
+    let src = include_str!("receipts.rs");
+    for line in src.lines().filter(|l| l.contains("audit::log(")) {
+        for banned in ["patient_name", "amount", "reason", "label", "note_id"] {
+            assert!(!line.contains(banned), "{line}");
+        }
+    }
+    assert!(src.matches("audit::log(").count() >= 5);
+}

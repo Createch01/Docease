@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{ai, attachments, audit, messaging, notifications, scoped, settings, users, AppState, TEST_DATA_DIR};
+use super::{ai, attachments, audit, messaging, notifications, receipts, scoped, settings, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -111,6 +111,13 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "attachment_read" => done(attachments::attachment_read(a(), st!(), "pj-0000000000000000".into())),
         "attachment_delete" => done(attachments::attachment_delete(a(), st!(), "pj-0000000000000000".into())),
         "attachments_status" => done(attachments::attachments_status(a(), st!())),
+        "receipt_issue" => done(receipts::receipt_issue(a(), st!(), "n-inconnue".into(), None)),
+        "receipt_list" => done(receipts::receipt_list(a(), st!(), None)),
+        "receipt_list_today" => done(receipts::receipt_list_today(a(), st!())),
+        "receipt_get" => done(receipts::receipt_get(a(), st!(), "REC-2026-00001".into())),
+        "receipt_duplicate" => done(receipts::receipt_duplicate(a(), st!(), "REC-2026-00001".into())),
+        "receipt_cancel" => done(receipts::receipt_cancel(a(), st!(), "REC-2026-00001".into(), "erreur de saisie".into())),
+        "receipts_verify" => done(receipts::receipts_verify(a(), st!())),
         "appointment_mark_sent" => done(messaging::appointment_mark_sent(a(), st!(), "a-inconnu".into(), "reminder".into())),
         // Numéro invalide : refusé par la validation AVANT toute ouverture (jamais d'ouverture réelle en test).
         "whatsapp_open" => done(messaging::whatsapp_open(a(), st!(), "0612345678".into(), "bonjour".into(), "a1".into(), "reminder".into())),

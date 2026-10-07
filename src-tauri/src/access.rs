@@ -84,6 +84,14 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("attachment_read", Rule::Medecin),
     ("attachment_delete", Rule::Medecin),
     ("attachments_status", Rule::Medecin),
+    // Reçus : l'assistante émet / réimprime ceux du jour (contrôlé dans `receipts.rs`) ; le reste est réservé au médecin
+    ("receipt_issue", Rule::AnySession),
+    ("receipt_list_today", Rule::AnySession),
+    ("receipt_get", Rule::AnySession),
+    ("receipt_duplicate", Rule::AnySession),
+    ("receipt_list", Rule::Medecin),
+    ("receipt_cancel", Rule::Medecin),
+    ("receipts_verify", Rule::Medecin),
     ("appointment_mark_sent", Rule::AnySession),
     ("whatsapp_open", Rule::AnySession),
     ("notifications_set_state", Rule::AnySession),
@@ -240,6 +248,7 @@ mod tests {
         "backup_status", "backup_set_passphrase", "backup_change_passphrase", "backup_set_destinations", "backup_run_now",
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
         "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
+        "receipt_list", "receipt_cancel", "receipts_verify",
     ];
 
     #[test]
@@ -340,6 +349,7 @@ mod tests {
             include_str!("backup.rs"),
             include_str!("messaging.rs"),
             include_str!("attachments.rs"),
+            include_str!("receipts.rs"),
             include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();
