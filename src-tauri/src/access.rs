@@ -78,6 +78,12 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("kiosk_queue", Rule::AnySession),
     // Panneau « À faire » : éléments filtrés par rôle côté Rust (assistante : RDV uniquement)
     ("notifications_list", Rule::AnySession),
+    ("attachment_add", Rule::Medecin),
+    ("attachment_list", Rule::Medecin),
+    ("attachment_update", Rule::Medecin),
+    ("attachment_read", Rule::Medecin),
+    ("attachment_delete", Rule::Medecin),
+    ("attachments_status", Rule::Medecin),
     ("appointment_mark_sent", Rule::AnySession),
     ("whatsapp_open", Rule::AnySession),
     ("notifications_set_state", Rule::AnySession),
@@ -188,7 +194,7 @@ pub enum FileMode {
 
 /// Fichiers internes que `load_json`/`save_json` ne doivent jamais toucher, quel que
 /// soit le rôle (comptes, métadonnées de sécurité).
-const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta"];
+const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments"];
 
 /// Fichiers lisibles/écrivables par l'assistante via `load_json`/`save_json`.
 /// Tout le reste (patients, file d'attente, honoraires, fiche cabinet…) passe par des
@@ -233,6 +239,7 @@ mod tests {
         "ai_analyze_consultation", "ai_analyze_document", "ai_classify_priority",
         "backup_status", "backup_set_passphrase", "backup_change_passphrase", "backup_set_destinations", "backup_run_now",
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
+        "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
     ];
 
     #[test]
@@ -332,6 +339,7 @@ mod tests {
             include_str!("scoped.rs"),
             include_str!("backup.rs"),
             include_str!("messaging.rs"),
+            include_str!("attachments.rs"),
             include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();
