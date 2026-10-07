@@ -121,7 +121,7 @@ const AppointmentDetail: React.FC<Props> = ({ appointment: a, appointments, sett
           </div>
         </div>
       </div>
-      {sending && <WhatsAppSendModal appointment={a} settings={settings} onClose={() => setSending(false)} />}
+      {sending && <WhatsAppSendModal appointment={a} settings={settings} onClose={() => setSending(false)} onLeave={() => { setSending(false); onClose(); }} />}
     </div>
   );
 };

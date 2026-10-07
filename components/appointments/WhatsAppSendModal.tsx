@@ -15,12 +15,16 @@ import { buildMessageContext, renderMessage } from '../../services/messaging/tem
 import { KIND_LABEL, SENT_FIELDS, markMessageSent, suggestedKind } from '../../services/messaging/send';
 import { MessageKind, MessageLang } from '../../services/messaging/types';
 import WhatsAppConsentField from '../WhatsAppConsentField';
+import { sessionService } from '../../services/sessionService';
+import { settingsHash } from '../settings/settingsRoutes';
 
 interface Props {
   appointment: Appointment;
   settings: AppointmentSettings;
   initialKind?: MessageKind;
   onClose: () => void;
+  /** Appelé quand l'utilisateur quitte vers les Paramètres (ferme aussi les fenêtres parentes). */
+  onLeave?: () => void;
 }
 
 const KINDS: MessageKind[] = ['confirmation', 'reminder', 'change'];
@@ -33,7 +37,7 @@ const fmtDateTime = (iso?: string) => {
 
 const pretty = (e164: string) => e164.replace(/^(\+212)(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, '$1 $2 $3 $4 $5 $6');
 
-const WhatsAppSendModal: React.FC<Props> = ({ appointment, settings, initialKind, onClose }) => {
+const WhatsAppSendModal: React.FC<Props> = ({ appointment, settings, initialKind, onClose, onLeave }) => {
   // Le RDV et le dossier sont relus à chaque rendu : un retrait de consentement bloque aussitôt.
   const [tick, setTick] = useState(0);
   const appt = dataService.getAppointments().find(x => x.id === appointment.id) || appointment;
@@ -163,7 +167,10 @@ const WhatsAppSendModal: React.FC<Props> = ({ appointment, settings, initialKind
 
               {missingCabinet && (
                 <p role="alert" className="text-[12px] p-2.5 rounded-md" style={{ background: 'var(--color-warning-50)', color: 'var(--color-warning-800)' }}>
-                  Le nom du cabinet n'est pas renseigné (Paramètres › Cabinet, réservé au médecin) : envoi impossible pour le moment.
+                  Le nom du cabinet n'est pas renseigné : envoi impossible pour le moment.{' '}
+                  {sessionService.can('MANAGE_SETTINGS')
+                    ? <a href={settingsHash({ section: 'cabinet', tab: 'coordonnees' })} onClick={() => (onLeave || onClose)()} className="font-semibold underline">Renseigner le nom du cabinet (Paramètres › Cabinet)</a>
+                    : <>Demandez au médecin de le renseigner (Paramètres › Cabinet).</>}
                 </p>
               )}
 

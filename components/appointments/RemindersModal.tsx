@@ -56,7 +56,7 @@ const RemindersModal: React.FC<{ onClose: () => void }> = ({ onClose }) => {
           )}
         </div>
       </div>
-      {sending && <WhatsAppSendModal appointment={sending} settings={dataService.getAppointmentSettings()} initialKind="reminder" onClose={() => setSending(null)} />}
+      {sending && <WhatsAppSendModal appointment={sending} settings={dataService.getAppointmentSettings()} initialKind="reminder" onClose={() => setSending(null)} onLeave={() => { setSending(null); onClose(); }} />}
     </div>
   );
 };

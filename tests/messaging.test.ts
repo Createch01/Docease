@@ -194,3 +194,18 @@ describe('contexte de rendu', () => {
         expect(buildMessageContext({ date: '2026-10-07' }, { name: 'A B' }, { ...d, addressAr: '' }, 'time', 'ar').address).toBe('rue');
     });
 });
+
+describe('lien « nom du cabinet »', () => {
+    it('pointe vers une route des Paramètres valide (Cabinet › Coordonnées)', async () => {
+        const { settingsHash, parseSettingsHash } = await import('../components/settings/settingsRoutes');
+        const hash = settingsHash({ section: 'cabinet', tab: 'coordonnees' });
+        expect(hash).toBe('#/settings/cabinet/coordonnees');
+        expect(parseSettingsHash(hash)).toEqual({ section: 'cabinet', tab: 'coordonnees' });
+    });
+    it('le champ « Nom du cabinet » est bien dans l\'onglet Coordonnées', async () => {
+        const fs = await import('node:fs');
+        const src = fs.readFileSync('components/settings/CabinetSettings.tsx', 'utf8');
+        const coord = src.slice(src.indexOf("tab === 'coordonnees'"), src.indexOf("tab === 'logo'"));
+        expect(coord).toContain('cabinetName');
+    });
+});
