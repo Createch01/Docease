@@ -6,7 +6,7 @@
 //!   `ASSISTANT_KINDS` ; les fichiers médicaux ne sont pas lus pour elle (le fichier patients
 //!   n'est réduit qu'à l'identité et au consentement WhatsApp, pour les rappels).
 //! - Gravité : `critical` (rouge) réservée à la sauvegarde > 48 h / en échec / emplacement
-//!   inaccessible et aux alertes de sécurité ; `todo` (orange) ; `info` (gris).
+//!   inaccessible, à l'intégrité du registre des reçus et aux alertes de sécurité ; `todo` (orange) ; `info` (gris).
 //! - Reporter / Ignorer : état conservé dans `meddoc_notification_state.json`
 //!   (préfixe `meddoc_` : inclus dans les sauvegardes). Un élément ignoré réapparaît si son
 //!   contenu change (`fingerprint`).
@@ -25,6 +25,7 @@ use super::{data_dir, read_enc_json_in, util, write_enc_json_in, AppState, KEY_L
 
 mod appointments_source;
 mod backup_source;
+mod receipts_source;
 mod reminders_source;
 mod results_source;
 mod unpaid_source;
@@ -51,7 +52,7 @@ pub struct Item {
     pub lines: Vec<String>,
     #[serde(default)]
     pub count: usize,
-    /// `open_dossier` · `open_appointments` · `open_reminders` · `backup_now` · `open_backup_settings` · `open_billing`
+    /// `open_dossier` · `open_appointments` · `open_reminders` · `backup_now` · `open_backup_settings` · `open_billing` · `open_receipts_settings`
     pub action: String,
     /// Empreinte du contenu : un élément ignoré réapparaît quand elle change.
     pub fingerprint: String,
@@ -67,6 +68,8 @@ pub struct Inputs<'a> {
     pub results: &'a [Value],
     pub notes: &'a [Value],
     pub backup: Option<&'a super::backup::Status>,
+    /// Contrôle du registre des reçus (médecin seulement).
+    pub receipts: Option<&'a super::receipts::VerifyReport>,
 }
 
 fn rank(severity: &str) -> u8 {
@@ -87,6 +90,9 @@ pub fn build(i: &Inputs) -> Vec<Item> {
     if i.role == Role::Medecin {
         if let Some(b) = i.backup {
             items.extend(backup_source::items(b));
+        }
+        if let Some(r) = i.receipts {
+            items.extend(receipts_source::items(r));
         }
         items.extend(results_source::items(i.results, i.patients));
         items.extend(unpaid_source::items(i.notes));
@@ -199,7 +205,8 @@ pub fn notifications_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     if let Some(b) = backup.as_mut() {
         super::backup::name_altered(b, &patients);
     }
-    let mut items = build(&Inputs { role, today: &today, appointments: &appointments, patients: &patients, results: &results, notes: &notes, backup: backup.as_ref() });
+    let receipts = if role == Role::Medecin { super::receipts::verify(&dir, &key).ok() } else { None };
+    let mut items = build(&Inputs { role, today: &today, appointments: &appointments, patients: &patients, results: &results, notes: &notes, backup: backup.as_ref(), receipts: receipts.as_ref() });
     items.extend(sanitize_extra(role, extra.unwrap_or_default()));
 
     let st = read_state(&dir, &key)?;

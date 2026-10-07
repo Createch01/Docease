@@ -572,6 +572,43 @@ pub fn list_today(dir: &Path, key: &[u8; KEY_LEN], today: &str) -> Result<Vec<Vi
     Ok(entries.iter().rev().filter(|e| e.kind != "duplicate" && e.date == today).map(|e| view_of(&entries, e)).collect())
 }
 
+// ─── Restauration ────────────────────────────────────────────────────────────
+
+/// Résultat de `merge_for_restore`.
+#[derive(Debug, Default, PartialEq)]
+pub struct Merged {
+    /// Reçus (et reçus d'annulation) émis APRÈS la sauvegarde restaurée et conservés.
+    pub kept_after_backup: usize,
+}
+
+/// Le registre et le compteur ne reculent JAMAIS à la restauration : un numéro déjà remis à un patient
+/// ne doit pas être attribué une seconde fois. `files` = contenu de la sauvegarde, modifié en place.
+/// - Registre actuel plus long et dont le registre restauré est un début (mêmes empreintes) : on garde
+///   le registre actuel (les reçus sont des pièces comptables figées, indépendantes des autres données).
+/// - Sinon (poste neuf, ou registres divergents) : registre restauré tel quel ; `verify` signale l'écart.
+/// - Compteur : toujours le plus grand des deux.
+pub fn merge_for_restore(dir: &Path, key: &[u8; KEY_LEN], files: &mut std::collections::BTreeMap<String, Value>) -> Merged {
+    let current = load(dir, key).unwrap_or_default();
+    let restored: Vec<Entry> = files.get(REGISTRY_FILE).and_then(|v| serde_json::from_value(v.clone()).ok()).unwrap_or_default();
+    let mut merged = Merged::default();
+    let is_prefix = restored.len() <= current.len() && restored.iter().zip(&current).all(|(a, b)| a.hash == b.hash);
+    if current.len() > restored.len() && is_prefix {
+        merged.kept_after_backup = current[restored.len()..].iter().filter(|e| e.kind != "duplicate").count();
+        if let Ok(v) = serde_json::to_value(&current) {
+            files.insert(REGISTRY_FILE.to_string(), v);
+        }
+    }
+    let cur = load_counter(dir, key);
+    let res: Counter = files.get(COUNTER_FILE).and_then(|v| serde_json::from_value(v.clone()).ok()).unwrap_or_default();
+    let best = if (cur.year, cur.last) >= (res.year, res.last) { cur } else { res };
+    if best.last > 0 {
+        if let Ok(v) = serde_json::to_value(&best) {
+            files.insert(COUNTER_FILE.to_string(), v);
+        }
+    }
+    merged
+}
+
 // ─── Vérification ────────────────────────────────────────────────────────────
 
 #[derive(Serialize, Debug, Clone, PartialEq)]

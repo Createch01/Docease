@@ -412,3 +412,82 @@ fn journal_never_receives_names_amounts_or_reasons() {
     }
     assert!(src.matches("audit::log(").count() >= 5);
 }
+
+// ─── Restauration ────────────────────────────────────────────────────────────
+
+fn backup_files(d: &Path) -> std::collections::BTreeMap<String, Value> {
+    let mut f = std::collections::BTreeMap::new();
+    for name in [REGISTRY_FILE, COUNTER_FILE] {
+        if let Ok(Some(v)) = read_enc_json_in(d, &KEY, name) {
+            f.insert(name.to_string(), v);
+        }
+    }
+    f
+}
+
+#[test]
+fn restoring_an_older_backup_never_moves_the_registry_or_counter_back() {
+    let d = tmp("restore");
+    set_notes(&d, json!([note("n1", "p1", TODAY, 100.0, "PAID", 0.0), note("n2", "p1", TODAY, 100.0, "PAID", 0.0), note("n3", "p2", TODAY, 100.0, "PAID", 0.0)]));
+    issue_at(&d, "n1", TODAY).unwrap();
+    let mut old = backup_files(&d); // sauvegarde faite après le 1er reçu
+    issue_at(&d, "n2", TODAY).unwrap();
+    issue_at(&d, "n3", TODAY).unwrap();
+    // Restauration de la sauvegarde ancienne sur le même poste.
+    let m = merge_for_restore(&d, &KEY, &mut old);
+    assert_eq!(m.kept_after_backup, 2);
+    assert_eq!(serde_json::from_value::<Vec<Entry>>(old[REGISTRY_FILE].clone()).unwrap().len(), 3, "registre actuel conservé");
+    assert_eq!(old[COUNTER_FILE]["last"], 3);
+    // Appliquons ce contenu : le prochain numéro est le 4e, la chaîne est valide.
+    for (name, v) in &old {
+        write_enc_json_in(&d, &KEY, name, v).unwrap();
+    }
+    assert!(verify(&d, &KEY).unwrap().ok);
+    set_notes(&d, json!([note("n4", "p1", TODAY, 100.0, "PAID", 0.0)]));
+    assert_eq!(issue_at(&d, "n4", TODAY).unwrap().number, "REC-2026-00004");
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn restoring_on_a_fresh_station_takes_the_backup_registry_and_flags_nothing() {
+    let src = tmp("restore-src");
+    set_notes(&src, json!([note("n1", "p1", TODAY, 100.0, "PAID", 0.0), note("n2", "p2", TODAY, 200.0, "PAID", 0.0)]));
+    issue_at(&src, "n1", TODAY).unwrap();
+    issue_at(&src, "n2", TODAY).unwrap();
+    let mut files = backup_files(&src);
+    let fresh = tmp("restore-fresh"); // poste neuf : ni registre ni compteur
+    let m = merge_for_restore(&fresh, &KEY, &mut files);
+    assert_eq!(m.kept_after_backup, 0);
+    for (name, v) in &files {
+        write_enc_json_in(&fresh, &KEY, name, v).unwrap();
+    }
+    assert!(verify(&fresh, &KEY).unwrap().ok);
+    set_notes(&fresh, json!([note("n3", "p1", TODAY, 100.0, "PAID", 0.0)]));
+    assert_eq!(issue_at(&fresh, "n3", TODAY).unwrap().number, "REC-2026-00003");
+    // Sauvegarde d'avant la fonctionnalité (aucun registre) sur un poste qui en a un : rien n'est perdu.
+    let mut empty = std::collections::BTreeMap::new();
+    let m2 = merge_for_restore(&fresh, &KEY, &mut empty);
+    assert_eq!(m2.kept_after_backup, 3);
+    assert_eq!(empty[COUNTER_FILE]["last"], 3);
+    for d in [&src, &fresh] {
+        let _ = fs::remove_dir_all(d);
+    }
+}
+
+#[test]
+fn diverging_registries_keep_the_backup_but_the_counter_never_goes_back() {
+    let a = tmp("div-a");
+    let b = tmp("div-b");
+    set_notes(&a, json!([note("n1", "p1", TODAY, 100.0, "PAID", 0.0), note("n2", "p1", TODAY, 100.0, "PAID", 0.0)]));
+    set_notes(&b, json!([note("n1", "p1", TODAY, 999.0, "PAID", 0.0)]));
+    issue_at(&a, "n1", TODAY).unwrap();
+    issue_at(&a, "n2", TODAY).unwrap();
+    issue_at(&b, "n1", TODAY).unwrap();
+    let mut from_b = backup_files(&b);
+    merge_for_restore(&a, &KEY, &mut from_b);
+    assert_eq!(from_b[COUNTER_FILE]["last"], 2, "compteur : le plus grand des deux");
+    assert_eq!(serde_json::from_value::<Vec<Entry>>(from_b[REGISTRY_FILE].clone()).unwrap().len(), 1, "registres divergents : celui de la sauvegarde");
+    for d in [&a, &b] {
+        let _ = fs::remove_dir_all(d);
+    }
+}

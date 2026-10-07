@@ -44,7 +44,7 @@ fn status(level: &'static str, reason: Option<&str>, redundancy: Option<&'static
 
 fn run(role: Role, backup: Option<&Status>) -> Vec<Item> {
     let (patients, results, appointments, notes) = data();
-    build(&Inputs { role, today: TODAY, appointments: &appointments, patients: &patients, results: &results, notes: &notes, backup })
+    build(&Inputs { role, today: TODAY, appointments: &appointments, patients: &patients, results: &results, notes: &notes, backup, receipts: None })
 }
 
 #[test]
@@ -145,4 +145,18 @@ fn altered_attachment_is_a_critical_doctor_only_backup_alert_without_content() {
     assert_eq!((it.severity.as_str(), it.kind.as_str(), it.dismissible), ("critical", "backup", false));
     assert!(it.title.contains("HAYAT Salma") && it.lines.iter().any(|l| l.contains("a1b2")));
     assert!(run(Role::Assistant, Some(&b)).iter().all(|i| i.kind != "backup"), "jamais pour l'assistante");
+}
+
+#[test]
+fn receipts_integrity_alert_is_critical_doctor_only_and_content_free() {
+    use crate::receipts::VerifyReport;
+    let bad = VerifyReport { ok: false, count: 3, last_number: Some("REC-2026-00003".into()), problems: vec!["Suite interrompue en 2026 : attendu REC-2026-00002, trouvé REC-2026-00003.".into()] };
+    let (patients, results, appointments, notes) = data();
+    let run_with = |role| build(&Inputs { role, today: TODAY, appointments: &appointments, patients: &patients, results: &results, notes: &notes, backup: None, receipts: Some(&bad) });
+    let it = run_with(Role::Medecin).into_iter().find(|i| i.kind == "receipts").expect("alerte");
+    assert_eq!((it.severity.as_str(), it.dismissible, it.action.as_str()), ("critical", false, "open_receipts_settings"));
+    assert!(run_with(Role::Assistant).iter().all(|i| i.kind != "receipts"));
+    let ok = VerifyReport { ok: true, count: 3, last_number: None, problems: vec![] };
+    let none = build(&Inputs { role: Role::Medecin, today: TODAY, appointments: &appointments, patients: &patients, results: &results, notes: &notes, backup: None, receipts: Some(&ok) });
+    assert!(none.iter().all(|i| i.kind != "receipts"));
 }
