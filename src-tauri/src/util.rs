@@ -51,9 +51,30 @@ pub fn now_iso() -> String {
     iso_utc(now_secs())
 }
 
-pub fn today_utc() -> String {
-    date_utc(now_secs())
+/// Décalage du fuseau du poste par rapport à UTC, en secondes (Africa/Casablanca : +3600, ou 0
+/// pendant le Ramadan ; lu dans le système, jamais codé en dur).
+pub fn local_offset_secs() -> i64 {
+    chrono::Local::now().offset().local_minus_utc() as i64
 }
+
+/// Date (AAAA-MM-JJ) à l'instant UTC `secs` pour un fuseau de décalage `offset_secs`.
+pub fn date_local_at(secs: u64, offset_secs: i64) -> String {
+    date_utc((secs as i64 + offset_secs).max(0) as u64)
+}
+
+/// Aujourd'hui, en heure LOCALE du poste : c'est la date que voit le cabinet (agenda, panneau « À faire »).
+pub fn today_local() -> String {
+    date_local_at(now_secs(), local_offset_secs())
+}
+
+/// Lendemain d'une date AAAA-MM-JJ (arithmétique de calendrier, sans heure d'été).
+pub fn next_day(day: &str) -> Option<String> {
+    let mut it = day.split('-');
+    let (y, m, d) = (it.next()?.parse::<i64>().ok()?, it.next()?.parse::<u32>().ok()?, it.next()?.parse::<u32>().ok()?);
+    let secs = days_from_civil(y, m, d) * 86_400 + 86_400;
+    u64::try_from(secs).ok().map(date_utc)
+}
+
 
 #[cfg(test)]
 mod tests {
@@ -69,4 +90,31 @@ mod tests {
         assert_eq!(days_from_civil(2000, 2, 29), 11_016);
         assert_eq!(days_from_civil(2026, 10, 4), 20_730);
     }
+
+    /// 2026-10-06T23:30:00Z.
+    fn t(h: u64, m: u64) -> u64 {
+        days_from_civil(2026, 10, 6) as u64 * 86_400 + h * 3_600 + m * 60
+    }
+
+    #[test]
+    fn local_date_changes_at_local_midnight_not_utc_midnight() {
+        // Casablanca (+01:00) : 23:30 UTC = 00:30 le lendemain, heure locale.
+        assert_eq!(date_local_at(t(23, 30), 3_600), "2026-10-07");
+        assert_eq!(date_local_at(t(23, 30), 0), "2026-10-06", "Ramadan (+00:00) : même jour qu'en UTC");
+        assert_eq!(date_local_at(t(22, 59), 3_600), "2026-10-06");
+        assert_eq!(date_local_at(t(23, 0), 3_600), "2026-10-07");
+        // Fuseau à l'ouest : le jour local peut précéder le jour UTC.
+        assert_eq!(date_local_at(t(0, 30), -3_600), "2026-10-05");
+        // Passage de mois / d'année.
+        assert_eq!(date_local_at(days_from_civil(2026, 12, 31) as u64 * 86_400 + 23 * 3_600 + 1_800, 3_600), "2027-01-01");
+        assert_eq!(next_day("2026-12-31").as_deref(), Some("2027-01-01"));
+    }
+
+    #[test]
+    fn today_local_matches_the_system_clock() {
+        let off = local_offset_secs();
+        assert!(off.abs() <= 14 * 3_600);
+        assert_eq!(today_local(), date_local_at(now_secs(), off));
+    }
+
 }

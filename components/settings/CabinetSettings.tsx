@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, Syringe, Clock, CreditCard, Globe, Image as ImageIcon, Info, Mail, MapPin, Phone, Printer, Smartphone } from 'lucide-react';
+import { AlertTriangle, Building2, Syringe, Clock, CreditCard, Globe, Image as ImageIcon, Info, Mail, MapPin, Phone, Printer, Smartphone } from 'lucide-react';
 import { settingsService } from '../../services/settingsService';
 import { isCalendarVerified, CALENDAR_UNVERIFIED_MESSAGE } from '../../services/vaccinationService';
 import { normalizeRoute } from './settingsRoutes';
@@ -11,7 +11,7 @@ import { SettingsPageProps } from './ProfileSettings';
 // Identité de la structure. Les trois onglets éditent le même brouillon
 // (DoctorInfo) et partagent un seul bouton Enregistrer.
 const CABINET_FIELDS = [
-  'phone', 'gsm', 'email', 'fax', 'website', 'addressFr', 'addressAr',
+  'cabinetName', 'phone', 'gsm', 'email', 'fax', 'website', 'addressFr', 'addressAr',
   'ice', 'patente', 'taxId', 'rc',
   'logoUrl',
   'hours',
@@ -44,6 +44,7 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
             <SettingsCard title="Contact" icon={<Phone size={16} />}>
               <div className="space-y-3.5">
+                <TextField label="Nom du cabinet (utilisé dans les messages)" icon={<Building2 size={16} />} value={draft.cabinetName} onChange={v => update({ cabinetName: v })} placeholder="Cabinet du Dr ..." />
                 <TextField label="Téléphone" icon={<Phone size={16} />} value={draft.phone} onChange={v => update({ phone: v })} placeholder="05..." />
                 <TextField label="GSM" icon={<Smartphone size={16} />} value={draft.gsm} onChange={v => update({ gsm: v })} placeholder="06..." />
                 <TextField label="E-mail" type="email" icon={<Mail size={16} />} value={draft.email} onChange={v => update({ email: v })} placeholder="docteur@exemple.com" />

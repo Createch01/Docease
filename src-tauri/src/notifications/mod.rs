@@ -3,7 +3,8 @@
 //! - Une source = un fichier (`backup_source`, `results_source`, `appointments_source`,
 //!   `unpaid_source`). Ajouter une source = ajouter un fichier et l'appeler dans `build`.
 //! - Le rôle vient de la session Rust. L'assistante ne reçoit que les types de
-//!   `ASSISTANT_KINDS` ; les fichiers médicaux ne sont même pas lus pour elle.
+//!   `ASSISTANT_KINDS` ; les fichiers médicaux ne sont pas lus pour elle (le fichier patients
+//!   n'est réduit qu'à l'identité et au consentement WhatsApp, pour les rappels).
 //! - Gravité : `critical` (rouge) réservée à la sauvegarde > 48 h / en échec / emplacement
 //!   inaccessible et aux alertes de sécurité ; `todo` (orange) ; `info` (gris).
 //! - Reporter / Ignorer : état conservé dans `meddoc_notification_state.json`
@@ -24,12 +25,13 @@ use super::{data_dir, read_enc_json_in, util, write_enc_json_in, AppState, KEY_L
 
 mod appointments_source;
 mod backup_source;
+mod reminders_source;
 mod results_source;
 mod unpaid_source;
 
 pub const STATE_FILE: &str = "meddoc_notification_state.json";
 /// Types d'éléments que l'assistante peut voir et traiter : rien de médical.
-pub const ASSISTANT_KINDS: &[&str] = &["appointments_changed"];
+pub const ASSISTANT_KINDS: &[&str] = &["appointments_changed", "reminders_tomorrow"];
 const MEDECIN_EXTRA_KINDS: &[&str] = &["vaccines"];
 
 #[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
@@ -49,7 +51,7 @@ pub struct Item {
     pub lines: Vec<String>,
     #[serde(default)]
     pub count: usize,
-    /// `open_dossier` · `open_appointments` · `backup_now` · `open_backup_settings` · `open_billing`
+    /// `open_dossier` · `open_appointments` · `open_reminders` · `backup_now` · `open_backup_settings` · `open_billing`
     pub action: String,
     /// Empreinte du contenu : un élément ignoré réapparaît quand elle change.
     pub fingerprint: String,
@@ -79,6 +81,9 @@ fn rank(severity: &str) -> u8 {
 pub fn build(i: &Inputs) -> Vec<Item> {
     let mut items = Vec::new();
     items.extend(appointments_source::items(i.appointments, i.today));
+    // Rappels de demain : médecin et assistante, sans donnée médicale (pour l'assistante, `patients`
+    // ne contient que l'identité et le consentement).
+    items.extend(reminders_source::items(i.appointments, i.patients, i.today));
     if i.role == Role::Medecin {
         if let Some(b) = i.backup {
             items.extend(backup_source::items(b));
@@ -174,10 +179,11 @@ pub fn notifications_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     let role = require_session(session)?.role;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    let today = util::today_utc();
+    let today = util::today_local();
 
     let appointments = read_list(&dir, &key, "meddoc_appointments.json");
     // Fichiers médicaux et financiers : lus seulement pour le médecin.
+    // Pour l'assistante, le fichier patients est réduit à l'identité + consentement dès la lecture.
     let (patients, results, notes, backup) = if role == Role::Medecin {
         (
             read_list(&dir, &key, "meddoc_patients.json"),
@@ -186,7 +192,8 @@ pub fn notifications_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
             super::backup::status(&dir, util::now_secs()).ok(),
         )
     } else {
-        (Vec::new(), Vec::new(), Vec::new(), None)
+        let identity: Vec<Value> = read_list(&dir, &key, "meddoc_patients.json").iter().map(super::scoped::identity_only).collect();
+        (identity, Vec::new(), Vec::new(), None)
     };
     let mut items = build(&Inputs { role, today: &today, appointments: &appointments, patients: &patients, results: &results, notes: &notes, backup: backup.as_ref() });
     items.extend(sanitize_extra(role, extra.unwrap_or_default()));
@@ -208,7 +215,7 @@ pub fn notifications_set_state<R: tauri::Runtime>(app: tauri::AppHandle<R>, stat
     let mut st = read_state(&dir, &key)?;
     match action.as_str() {
         "snooze" => {
-            let tomorrow = util::date_utc(util::now_secs() + 86_400);
+            let tomorrow = util::next_day(&util::today_local()).unwrap_or_default();
             st.insert(id, Entry { fp: fingerprint, mode: "snoozed".into(), until: tomorrow });
         }
         "dismiss" => {

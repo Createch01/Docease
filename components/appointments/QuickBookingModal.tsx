@@ -7,6 +7,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AlertTriangle, CalendarDays, Search, UserPlus, X, Zap } from 'lucide-react';
 import { Appointment, AppointmentSettings, Patient } from '../../types';
+import WhatsAppConsentField, { WhatsAppConsent } from '../WhatsAppConsentField';
 import { dataService } from '../../services/dataService';
 import { toastService } from '../../services/toastService';
 import {
@@ -41,6 +42,9 @@ const QuickBookingModal: React.FC<Props> = ({ appointments, settings, initialDat
   const [hi, setHi] = useState(0);
   const [np, setNp] = useState({ lastName: '', firstName: '', phone: '', dateOfBirth: '', sex: '' as '' | 'M' | 'F' });
   const [dupAccepted, setDupAccepted] = useState(false);
+  // Consentement WhatsApp : celui du dossier choisi, ou à enregistrer avec le nouveau dossier.
+  const [consent, setConsent] = useState<WhatsAppConsent>(patient?.whatsappConsent);
+  useEffect(() => { setConsent(patient?.whatsappConsent); }, [patient?.id]);
 
   // ─── Rendez-vous ───
   const [typeId, setTypeId] = useState(initialType?.id);
@@ -151,7 +155,9 @@ const QuickBookingModal: React.FC<Props> = ({ appointments, settings, initialDat
       if (!target) target = await createPatient({
         lastName: np.lastName, firstName: np.firstName, phone: np.phone,
         dateOfBirth: np.dateOfBirth || undefined, sex: np.sex || undefined,
+        whatsappConsent: consent,
       });
+      else if (consent !== target.whatsappConsent) target = (await dataService.setWhatsAppConsent(target.id, consent)) || target;
       const finalPeriod = forced ? (effTime ? periodOf(effTime, info.schedule) : undefined) : (settings.mode === 'time' && effTime ? periodOf(effTime, info.schedule) : period);
       const needsNumber = forced ? !effTime : settings.mode === 'order';
       const keepNumber = editing && editing.date === date && editing.queueNumber;
@@ -288,6 +294,12 @@ const QuickBookingModal: React.FC<Props> = ({ appointments, settings, initialDat
               </div>
             )}
           </section>
+
+          {(patient || creating) && (
+            <section>
+              <WhatsAppConsentField value={consent} at={patient?.whatsappConsent === consent ? patient?.whatsappConsentAt : undefined} onChange={setConsent} />
+            </section>
+          )}
 
           {/* ── Motif ── */}
           <section>

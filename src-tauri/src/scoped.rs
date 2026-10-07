@@ -30,10 +30,11 @@ const DOCTOR_INFO_FILE: &str = "meddoc_doctor_info.json";
 /// catégorie adulte/enfant/femme, date d'inscription).
 pub const IDENTITY_FIELDS: &[&str] = &[
     "id", "name", "lastName", "firstName", "phone", "dateOfBirth", "sex", "age", "type", "registeredDate",
+    "whatsappConsent", "whatsappConsentAt",
 ];
 
 const CLINIC_PUBLIC_FIELDS: &[&str] = &[
-    "nameFr", "nameAr", "specialtyFr", "specialtyAr", "currency", "phone", "addressFr", "addressAr", "hours",
+    "cabinetName", "nameFr", "nameAr", "specialtyFr", "specialtyAr", "currency", "phone", "addressFr", "addressAr", "hours",
 ];
 
 const MAX_AMOUNT: f64 = 10_000_000.0;
@@ -267,7 +268,11 @@ pub fn patients_save_identity<R: tauri::Runtime>(app: tauri::AppHandle<R>, state
     let session = gate(&app, &state, "patients_save_identity")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    let merged = merge_patients(read_list(&dir, &key, PATIENTS_FILE)?, &patients)?;
+    let before = read_list(&dir, &key, PATIENTS_FILE)?;
+    let mut merged = merge_patients(before.clone(), &patients)?;
+    // Consentement WhatsApp : …By et …At posés par Rust depuis la session, jamais reçus du frontend.
+    let by = session.as_ref().map(|s| s.name.clone()).unwrap_or_default();
+    super::messaging::stamp_consent_changes(&before, &mut merged, &by, &util::now_iso());
     write_enc_json_in(&dir, &key, PATIENTS_FILE, &Value::Array(merged.clone()))?;
     audit::log(&app, session.as_ref(), "patients_save_identity", &format!("{} fiche(s) reçue(s)", patients.len()), true);
     Ok(merged.iter().map(identity_only).collect())
@@ -295,7 +300,7 @@ pub fn queue_save_identity<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: t
 pub fn billing_today_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
     gate(&app, &state, "billing_today_list")?;
     let key = data_key_of(&state)?;
-    Ok(payments_today(&read_list(&data_dir(&app)?, &key, NOTES_FILE)?, &util::today_utc()))
+    Ok(payments_today(&read_list(&data_dir(&app)?, &key, NOTES_FILE)?, &util::today_local()))
 }
 
 #[tauri::command]
@@ -305,7 +310,7 @@ pub fn billing_today_save<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     let dir = data_dir(&app)?;
     let mut notes = read_list(&dir, &key, NOTES_FILE)?;
     let patients = read_list(&dir, &key, PATIENTS_FILE)?;
-    let view = apply_payment(&mut notes, &patients, &payment, &util::today_utc(), &random_note_id())?;
+    let view = apply_payment(&mut notes, &patients, &payment, &util::today_local(), &random_note_id())?;
     write_enc_json_in(&dir, &key, NOTES_FILE, &Value::Array(notes))?;
     audit::log(&app, session.as_ref(), "billing_today_save", view.get("status").and_then(|s| s.as_str()).unwrap_or(""), true);
     Ok(view)
@@ -350,6 +355,21 @@ mod tests {
         }
         assert_eq!(v["firstName"], "Jean");
         assert_eq!(v["phone"], "0600000000");
+    }
+
+    #[test]
+    fn identity_view_carries_whatsapp_consent_but_never_its_author() {
+        let mut p = full_patient();
+        p["whatsappConsent"] = json!("yes");
+        p["whatsappConsentAt"] = json!("2026-10-06T09:00:00Z");
+        p["whatsappConsentBy"] = json!("Dr Test");
+        let v = identity_only(&p);
+        assert_eq!(v["whatsappConsent"], "yes");
+        assert_eq!(v["whatsappConsentAt"], "2026-10-06T09:00:00Z");
+        assert!(v.get("whatsappConsentBy").is_none(), "…By est posé par Rust, jamais reçu ni renvoyé comme champ d'identité");
+        // Une écriture d'identité ne peut pas imposer …By.
+        let merged = merge_patients(vec![full_patient()], &[json!({"id": "p1", "whatsappConsent": "yes", "whatsappConsentBy": "FAUX"})]).unwrap();
+        assert!(merged[0].get("whatsappConsentBy").is_none());
     }
 
     #[test]

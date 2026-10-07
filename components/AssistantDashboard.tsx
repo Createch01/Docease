@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { CalendarRange, Users, Wallet, Clock } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { sessionService } from '../services/sessionService';
+import { todayLocal } from '../utils/localDate';
 
 interface Props {
   onNavigate: (view: any) => void;
@@ -17,7 +18,7 @@ const AssistantDashboard: React.FC<Props> = ({ onNavigate }) => {
     return () => window.removeEventListener('meddoc_data_update', h);
   }, []);
 
-  const today = useMemo(() => new Date().toISOString().split('T')[0], []);
+  const today = useMemo(() => todayLocal(), []);
   const appointments = useMemo(
     () => dataService.getAppointmentsByDate(today)
       .filter(a => a.status !== 'REJECTED' && a.status !== 'NO_SHOW')

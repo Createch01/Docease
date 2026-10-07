@@ -5,6 +5,7 @@ import { dataService } from '../services/dataService';
 import { sessionService } from '../services/sessionService';
 import { Patient, PatientType } from '../types';
 import { formatAge, formatDate, calculateAgeYears, getAgeCategory } from '../utils/formatters';
+import { todayLocal } from '../utils/localDate';
 
 interface PatientManagerProps {
   onConsult?: (p: Patient) => void;
@@ -428,7 +429,7 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
                       type="date"
                       value={newPatient.dateOfBirth || ''}
                       onChange={e => setNewPatient({ ...newPatient, dateOfBirth: e.target.value })}
-                      max={new Date().toISOString().split('T')[0]}
+                      max={todayLocal()}
                       className="w-full pl-14 pr-6 py-5 bg-slate-50/50 border border-slate-300 rounded-[1.5rem] focus:ring-8 focus:ring-emerald-500/5 focus:border-emerald-500/30 outline-none font-semibold text-gray-900 transition-all"
                     />
                   </div>
@@ -455,7 +456,7 @@ const PatientManager: React.FC<PatientManagerProps> = ({ onConsult }) => {
                       type="date"
                       value={newPatient.dateOfBirth || ''}
                       onChange={e => setNewPatient({ ...newPatient, dateOfBirth: e.target.value, age: calculateAgeYears(e.target.value) ?? newPatient.age })}
-                      max={new Date().toISOString().split('T')[0]}
+                      max={todayLocal()}
                       className="w-full pl-14 pr-6 py-5 bg-slate-50/50 border border-slate-300 rounded-[1.5rem] focus:ring-8 focus:ring-emerald-500/5 focus:border-emerald-500/30 outline-none font-semibold text-gray-900 transition-all"
                     />
                   </div>

@@ -1,6 +1,7 @@
 import { invoke } from '@tauri-apps/api/core';
 import { HonoraryNote } from '../types';
 import { dataService } from './dataService';
+import { todayLocal } from '../utils/localDate';
 
 // Encaissement des visites du JOUR, tel que l'assistante le voit : montant dû, montant
 // payé, mode, statut — rien d'autre (ni historique, ni totaux, ni contenu d'ordonnance,
@@ -20,7 +21,7 @@ export interface DayPayment {
 }
 
 const isTauri = (): boolean => typeof (window as any).__TAURI_INTERNALS__ !== 'undefined';
-const todayUtc = () => new Date().toISOString().split('T')[0];
+const todayDate = () => todayLocal();
 
 const fromNote = (n: HonoraryNote): DayPayment => ({
     id: n.id,
@@ -35,7 +36,7 @@ const fromNote = (n: HonoraryNote): DayPayment => ({
 
 export const paymentService = {
     listToday: async (): Promise<DayPayment[]> => {
-        if (!isTauri()) return dataService.getHonoraryNotes().filter(n => n.date === todayUtc()).map(fromNote);
+        if (!isTauri()) return dataService.getHonoraryNotes().filter(n => n.date === todayDate()).map(fromNote);
         return invoke<DayPayment[]>('billing_today_list');
     },
 
@@ -49,7 +50,7 @@ export const paymentService = {
                     id: `pay-${Date.now()}`,
                     patientId: payment.patientId,
                     patientName: payment.patientName || '',
-                    date: todayUtc(),
+                    date: todayDate(),
                     invoiceNumber: '',
                     services: [{ name: 'Consultation', price: payment.totalAmount, checked: true }],
                     totalAmount: payment.totalAmount,

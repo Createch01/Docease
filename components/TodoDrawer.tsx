@@ -11,6 +11,7 @@ const TONE: Record<TodoSeverity, { bar: string; label: string; text: string }> =
 const ACTION_LABEL: Record<TodoItem['action'], string> = {
   open_dossier: 'Ouvrir le dossier',
   open_appointments: 'Ouvrir les rendez-vous',
+  open_reminders: 'Envoyer les rappels',
   backup_now: 'Sauvegarder maintenant',
   open_backup_settings: 'Ouvrir les réglages',
   open_billing: 'Ouvrir la comptabilité',

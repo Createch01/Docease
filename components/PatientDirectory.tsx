@@ -3,7 +3,9 @@ import { Search, UserPlus, Edit2, X, Phone, Users, Check } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { toastService } from '../services/toastService';
 import { Patient, PatientType } from '../types';
+import WhatsAppConsentField, { WhatsAppConsent } from './WhatsAppConsentField';
 import { calculateAgeYears, getAgeCategory, formatDate } from '../utils/formatters';
+import { todayLocal } from '../utils/localDate';
 
 interface Form {
   lastName: string;
@@ -11,9 +13,11 @@ interface Form {
   phone: string;
   dateOfBirth: string;
   sex: 'M' | 'F' | '';
+  whatsappConsent: WhatsAppConsent;
+  whatsappConsentAt?: string;
 }
 
-const BLANK: Form = { lastName: '', firstName: '', phone: '', dateOfBirth: '', sex: '' };
+const BLANK: Form = { lastName: '', firstName: '', phone: '', dateOfBirth: '', sex: '', whatsappConsent: undefined };
 const MAX_SHOWN = 100;
 
 // Page « Patients » de l'assistante : liste, recherche (nom, prénom, téléphone), création
@@ -54,6 +58,8 @@ const PatientDirectory: React.FC = () => {
       phone: p.phone || '',
       dateOfBirth: p.dateOfBirth || '',
       sex: p.sex || '',
+      whatsappConsent: p.whatsappConsent,
+      whatsappConsentAt: p.whatsappConsentAt,
     });
     setEditingId(p.id);
   };
@@ -81,6 +87,9 @@ const PatientDirectory: React.FC = () => {
         age: calculateAgeYears(form.dateOfBirth || undefined) ?? existing?.age ?? 0,
         sex: form.sex,
         type,
+        // Le consentement n'est (re)daté que s'il change ; Rust pose la date et l'auteur à l'enregistrement.
+        whatsappConsent: form.whatsappConsent,
+        whatsappConsentAt: form.whatsappConsent === existing?.whatsappConsent ? existing?.whatsappConsentAt : form.whatsappConsent ? new Date().toISOString() : undefined,
       } as Patient);
       toastService.success(editingId ? 'Identité mise à jour' : 'Patient créé');
       close();
@@ -130,7 +139,7 @@ const PatientDirectory: React.FC = () => {
             <input className={input} style={inputStyle} placeholder="Nom" aria-label="Nom" autoFocus value={form.lastName} onChange={e => set({ lastName: e.target.value })} />
             <input className={input} style={inputStyle} placeholder="Prénom" aria-label="Prénom" value={form.firstName} onChange={e => set({ firstName: e.target.value })} />
             <input className={input} style={inputStyle} placeholder="Téléphone" aria-label="Téléphone" type="tel" value={form.phone} onChange={e => set({ phone: e.target.value })} />
-            <input className={input} style={inputStyle} aria-label="Date de naissance" type="date" max={new Date().toISOString().split('T')[0]} value={form.dateOfBirth} onChange={e => set({ dateOfBirth: e.target.value })} />
+            <input className={input} style={inputStyle} aria-label="Date de naissance" type="date" max={todayLocal()} value={form.dateOfBirth} onChange={e => set({ dateOfBirth: e.target.value })} />
             <div className="flex gap-2 sm:col-span-2" role="radiogroup" aria-label="Sexe">
               {([['M', 'Homme'], ['F', 'Femme']] as const).map(([v, label]) => (
                 <button key={v} type="button" role="radio" aria-checked={form.sex === v} onClick={() => set({ sex: v })}
@@ -141,6 +150,7 @@ const PatientDirectory: React.FC = () => {
               ))}
             </div>
           </div>
+          <WhatsAppConsentField value={form.whatsappConsent} at={form.whatsappConsentAt} onChange={v => set({ whatsappConsent: v })} />
           <div className="flex gap-2">
             <button type="button" disabled={busy} onClick={() => void save()}
               className="h-10 px-4 rounded-lg text-white text-[13px] font-medium flex items-center gap-2 disabled:opacity-50" style={{ background: 'var(--color-primary)' }}>

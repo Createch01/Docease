@@ -3,6 +3,7 @@ import { VaccinationRecord, DoctorInfo, Medicine, Patient, Prescription, DailyRe
 import { storageService } from './storageService';
 import { aiService } from './aiService';
 import { normalizeAppointmentSettings } from './appointmentDefaults';
+import { resetSentOnReschedule } from './messaging/reminders';
 import { migrateLegacyVaccinations } from './vaccinationMigration';
 
 const STORAGE_KEYS = {
@@ -407,6 +408,13 @@ export const dataService = {
     return updatedPatient;
   },
 
+  /** Consentement WhatsApp d'un patient. `whatsappConsentAt` est provisoire ici : Rust pose la date et l'auteur à l'enregistrement. */
+  setWhatsAppConsent: async (patientId: string, value: 'yes' | 'no' | undefined): Promise<Patient | null> => {
+    const p = dataService.getPatientProfile(patientId);
+    if (!p || p.whatsappConsent === value) return p;
+    return dataService.savePatientProfile({ ...p, whatsappConsent: value, whatsappConsentAt: value ? new Date().toISOString() : undefined });
+  },
+
   registerPatient: async (patient: Patient) => {
     // 1. Permanent storage
     const saved = await dataService.savePatientProfile(patient);
@@ -553,11 +561,20 @@ export const dataService = {
     const current = dataService.getAppointments();
     const now = new Date().toISOString();
     const idx = current.findIndex(a => a.id === appointment.id);
+    // Reprogrammation : l'état local suit la règle de Rust (qui fait foi à l'enregistrement).
+    if (idx !== -1) appointment = resetSentOnReschedule(current[idx], appointment);
     const all = idx !== -1
       ? current.map((a, i) => i === idx ? { ...appointment, createdAt: a.createdAt || appointment.createdAt, updatedAt: now } : a)
       : [...current, { ...appointment, createdAt: appointment.createdAt || now, updatedAt: now }];
     cache[storageKey] = all;
     await storageService.save(storageKey, all);
+    notifyUpdate(storageKey);
+  },
+
+  /** Remplace un RDV du cache par la version renvoyée par Rust (traçabilité d'envoi), sans réécrire le fichier. */
+  applyServerAppointment: (updated: Appointment) => {
+    const storageKey = STORAGE_KEYS.APPOINTMENTS;
+    cache[storageKey] = dataService.getAppointments().map(a => a.id === updated.id ? { ...a, ...updated } : a);
     notifyUpdate(storageKey);
   },
 

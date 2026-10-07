@@ -43,6 +43,7 @@ import { buildContextFromPatient, buildContextSave, shortcutActive, toggleShortc
 import ContextTagInput from './ui/ContextTagInput';
 import PatientPicker from './ui/PatientPicker';
 import { calculateAgeYears, formatDate } from '../utils/formatters';
+import { todayLocal } from '../utils/localDate';
 
 export interface SafetyNotification {
   id: string;
@@ -397,7 +398,7 @@ const PrescriptionEditor: React.FC<PrescriptionEditorProps> = ({
     const newPrescription: Prescription = {
       id: isEditing ? initialPrescription.id : Date.now().toString(),
       patientId: finalPatientId,
-      date: isEditing ? initialPrescription.date : new Date().toISOString().split('T')[0],
+      date: isEditing ? initialPrescription.date : todayLocal(),
       items, amount,
       patientType: patient.type as PatientType,
       patientAge: patient.age, patientWeight: patient.weight,

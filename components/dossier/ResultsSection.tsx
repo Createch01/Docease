@@ -4,6 +4,7 @@ import { Plus, ShieldCheck, Paperclip, X, Eye, Layers, List, FlaskConical, Radio
 import { dataService } from '../../services/dataService';
 import { MedicalResult, MedicalResultAttachment, MedicalResultType } from '../../types';
 import { useI18n } from '../../i18n';
+import { todayLocal } from '../../utils/localDate';
 
 interface ResultsSectionProps {
     patientId: string;
@@ -81,8 +82,8 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
         if (!patientId || !newResult.title) return;
         const res: MedicalResult = {
             id: Date.now().toString(),
-            date: new Date().toISOString().split('T')[0],
-            receivedDate: new Date().toISOString().split('T')[0],
+            date: todayLocal(),
+            receivedDate: todayLocal(),
             title: newResult.title,
             interpretation: newResult.interpretation,
             resultType: newResult.resultType,

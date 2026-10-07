@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { CalendarClock, FolderOpen, Phone, Stethoscope, Trash2, X, Zap } from 'lucide-react';
-import { Appointment, AppointmentSettings } from '../../types';
+import { Appointment, AppointmentSettings, Patient } from '../../types';
+import { dataService } from '../../services/dataService';
+import WhatsAppConsentField from '../WhatsAppConsentField';
+import WhatsAppSendModal from './WhatsAppSendModal';
+import { canSendWhatsApp, refusalOf, REFUSAL_MESSAGE } from '../../services/messaging/consent';
+import { KIND_LABEL, SENT_FIELDS } from '../../services/messaging/send';
+import { MessageKind } from '../../services/messaging/types';
 import { formatDayLong, nextStatuses, todayStr } from '../../services/appointmentService';
 import { AgendaActions, STATUS_ACTION, StatusBadge, TypeChip, slotLabel } from './AppointmentBits';
 
@@ -18,6 +24,10 @@ const btnStyle = { borderColor: 'var(--color-border)', color: 'var(--color-text-
 /** Détail d'un rendez-vous : statuts en un clic, dossier, consultation, déplacement. */
 const AppointmentDetail: React.FC<Props> = ({ appointment: a, appointments, settings, actions, onClose }) => {
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [sending, setSending] = useState(false);
+  // Dossier lié (consentement WhatsApp) ; relu après chaque changement.
+  const [patient, setPatient] = useState<Patient | null>(() => (a.patientId ? dataService.getPatientProfile(a.patientId) : null));
+  const changeConsent = async (v: 'yes' | 'no' | undefined) => { if (patient) setPatient(await dataService.setWhatsAppConsent(patient.id, v)); };
   useEffect(() => {
     const h = (e: KeyboardEvent) => { if (e.key === 'Escape') onClose(); };
     window.addEventListener('keydown', h);
@@ -52,6 +62,15 @@ const AppointmentDetail: React.FC<Props> = ({ appointment: a, appointments, sett
         <div className="px-6 py-4 space-y-2 text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
           <TypeChip a={a} settings={settings} />
           {a.phone && <p className="flex items-center gap-2"><Phone size={14} style={{ color: 'var(--color-text-faint)' }} />{a.phone}</p>}
+          {patient
+            ? <div className="pt-1"><WhatsAppConsentField compact value={patient.whatsappConsent} at={patient.whatsappConsentAt} onChange={v => void changeConsent(v)} /></div>
+            : <p className="text-[12px]" style={{ color: 'var(--color-text-faint)' }}>Rendez-vous non lié à un dossier : pas de message WhatsApp.</p>}
+          {(['confirmation', 'reminder', 'change'] as MessageKind[]).filter(k => a[SENT_FIELDS[k].at]).map(k => (
+            <p key={k} className="text-[12px]" style={{ color: 'var(--color-text-subtle)' }}>
+              {KIND_LABEL[k]} envoyé(e) par WhatsApp le {new Date(a[SENT_FIELDS[k].at] as string).toLocaleString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+              {a[SENT_FIELDS[k].by] ? ` · ${a[SENT_FIELDS[k].by]}` : ''}
+            </p>
+          ))}
           {a.note && <p className="italic">« {a.note} »</p>}
         </div>
 
@@ -62,6 +81,18 @@ const AppointmentDetail: React.FC<Props> = ({ appointment: a, appointments, sett
               {STATUS_ACTION[primary].label}
             </button>
           )}
+          {live && a.patientId && (() => {
+            const check = canSendWhatsApp(patient, a);
+            return (
+              <div>
+                <button type="button" disabled={!check.ok} onClick={() => setSending(true)}
+                        className="w-full h-10 rounded-lg border text-[14px] font-medium disabled:opacity-50" style={{ borderColor: 'var(--color-primary)', color: 'var(--color-primary)', background: 'white' }}>
+                  Envoyer sur WhatsApp
+                </button>
+                {refusalOf(check) && <p className="text-[11px] mt-1" style={{ color: 'var(--color-text-faint)' }}>{REFUSAL_MESSAGE[refusalOf(check)!]}</p>}
+              </div>
+            );
+          })()}
           <div className="grid grid-cols-2 gap-2">
             <button type="button" className={btn} style={btnStyle} title="Ouvrir le dossier du patient" onClick={() => { actions.openDossier(a); onClose(); }}><FolderOpen size={15} /> Dossier</button>
             {live && <button type="button" className={btn} style={btnStyle} title="Ouvrir la consultation (passe le patient en consultation)"
@@ -90,6 +121,7 @@ const AppointmentDetail: React.FC<Props> = ({ appointment: a, appointments, sett
           </div>
         </div>
       </div>
+      {sending && <WhatsAppSendModal appointment={a} settings={settings} onClose={() => setSending(false)} onLeave={() => { setSending(false); onClose(); }} />}
     </div>
   );
 };

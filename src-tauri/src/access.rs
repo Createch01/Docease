@@ -78,6 +78,8 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("kiosk_queue", Rule::AnySession),
     // Panneau « À faire » : éléments filtrés par rôle côté Rust (assistante : RDV uniquement)
     ("notifications_list", Rule::AnySession),
+    ("appointment_mark_sent", Rule::AnySession),
+    ("whatsapp_open", Rule::AnySession),
     ("notifications_set_state", Rule::AnySession),
     // Verrouillage automatique
     ("get_security_settings", Rule::AnySession),
@@ -329,6 +331,7 @@ mod tests {
             include_str!("settings.rs"),
             include_str!("scoped.rs"),
             include_str!("backup.rs"),
+            include_str!("messaging.rs"),
             include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();

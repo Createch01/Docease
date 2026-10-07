@@ -14,6 +14,7 @@ import { normalizeRoute } from './settingsRoutes';
 import { SettingsPageFrame, SettingsCard, Field, Toggle, Segmented, input40, inputStyle } from './SettingsUI';
 import { useUnsavedChanges } from './unsavedChanges';
 import { SettingsPageProps } from './ProfileSettings';
+import MessagesSettings, { validateMessages } from './MessagesSettings';
 
 const DAYS: { index: number; label: string }[] = [
   { index: 1, label: 'Lundi' }, { index: 2, label: 'Mardi' }, { index: 3, label: 'Mercredi' },
@@ -40,6 +41,8 @@ const validate = (s: AppointmentSettings): string | null => {
   if (s.types.length === 0) return 'Ajoutez au moins un type de consultation.';
   if (s.types.some(t => !t.name.trim() || !(t.duration >= 5))) return 'Chaque type doit avoir un nom et une durée d\'au moins 5 minutes.';
   if (s.closures.some(c => !c.from || (c.to && c.to < c.from))) return 'Une fermeture a une plage de dates invalide.';
+  const msg = validateMessages(s.messages);
+  if (msg) return msg;
   return null;
 };
 
@@ -311,6 +314,7 @@ const AppointmentSettingsPage: React.FC<SettingsPageProps> = ({ route, onNavigat
           </SettingsCard>
         </div>
       )}
+      {tab === 'messages' && <MessagesSettings draft={draft} patch={patch} />}
     </SettingsPageFrame>
   );
 };

@@ -10,6 +10,7 @@ import { usePrintMode } from './usePrintMode';
 import { toastService } from '../services/toastService';
 import { canOutput } from '../services/cabinetSetup';
 import { settingsService } from '../services/settingsService';
+import { todayLocal } from '../utils/localDate';
 
 interface HonoraryNoteEditorProps {
     patient: Patient;
@@ -20,7 +21,7 @@ interface HonoraryNoteEditorProps {
 
 const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitId, onClose }) => {
     const doctor = dataService.getDoctorInfo();
-    const [date, setDate] = useState(new Date().toISOString().split('T')[0]);
+    const [date, setDate] = useState(todayLocal());
     // While printing, only the dedicated print layer is mounted (see usePrintMode).
     const printing = usePrintMode();
     const [masterServices, setMasterServices] = useState<HonoraryMasterService[]>([]);

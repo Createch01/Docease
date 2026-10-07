@@ -2,6 +2,7 @@ mod access;
 mod ai;
 mod audit;
 mod backup;
+mod messaging;
 mod notifications;
 mod scoped;
 mod settings;
@@ -373,7 +374,7 @@ fn save_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<Ap
     let key = state.key.lock().map_err(|e| e.to_string())?
         .ok_or_else(|| "Locked: no encryption key set".to_string())?;
 
-    let mut path = app.path().app_local_data_dir().map_err(|e| e.to_string())?;
+    let mut path = data_dir(&app)?;
 
     if !path.exists() {
         fs::create_dir_all(&path).map_err(|e| e.to_string())?;
@@ -384,6 +385,14 @@ fn save_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<Ap
     if let Some(parent) = path.parent() {
         fs::create_dir_all(parent).map_err(|e| e.to_string())?;
     }
+
+    // Traçabilité WhatsApp (RDV) et consentement (dossiers) : champs posés par Rust, jamais par le frontend.
+    let data = if filename == messaging::APPOINTMENTS_FILE || filename == messaging::PATIENTS_FILE {
+        let stored = read_enc_json_in(path.parent().unwrap_or(std::path::Path::new("")), &key, &filename).ok().flatten();
+        messaging::filter_on_save(&filename, stored, data, &session.name, &util::now_iso())
+    } else {
+        data
+    };
 
     let json_str = serde_json::to_string(&data).map_err(|e| e.to_string())?;
     let encrypted = encrypt(&key, json_str.as_bytes())?;
@@ -399,7 +408,7 @@ fn load_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<Ap
     let key = state.key.lock().map_err(|e| e.to_string())?
         .ok_or_else(|| "Locked: no encryption key set".to_string())?;
 
-    let mut path = app.path().app_local_data_dir().map_err(|e| e.to_string())?;
+    let mut path = data_dir(&app)?;
     path.push(&filename);
 
     if !path.exists() {
@@ -536,6 +545,8 @@ pub fn run() {
         scoped::kiosk_queue,
         notifications::notifications_list,
         notifications::notifications_set_state,
+        messaging::appointment_mark_sent,
+        messaging::whatsapp_open,
         ai::ai_status,
         ai::ai_set_enabled,
         ai::ai_save_key,
@@ -565,6 +576,7 @@ pub fn run() {
     .plugin(tauri_plugin_updater::Builder::new().build())
     .plugin(tauri_plugin_fs::init())
     .plugin(tauri_plugin_dialog::init())
+    .plugin(tauri_plugin_opener::init())
     // Fermeture de la fenêtre : si une sauvegarde est due (session médecin ouverte), elle tourne
     // en arrière-plan avec un indicateur, puis la fenêtre se ferme (30 s au plus).
     .on_window_event(|window, event| {

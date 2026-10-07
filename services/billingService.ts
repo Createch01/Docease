@@ -1,6 +1,7 @@
 import { HonoraryNote } from '../types';
 import { dataService } from './dataService';
 import { formatCurrencyToWords } from '../utils/numberToWords';
+import { todayLocal } from '../utils/localDate';
 
 const generateInvoiceNumber = (): string => {
     const existingNotes = dataService.getHonoraryNotes();
@@ -32,7 +33,7 @@ export const billingService = {
             patientId: params.patientId,
             patientName: params.patientName,
             prescriptionId: params.prescriptionId,
-            date: new Date().toISOString().split('T')[0],
+            date: todayLocal(),
             invoiceNumber: generateInvoiceNumber(),
             services: [{ name: consultationService.name, price: total, checked: true }],
             totalAmount: total,

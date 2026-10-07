@@ -1,6 +1,7 @@
 import allergiesData from '../constants/referentials/allergies.json';
 import pathologiesData from '../constants/referentials/pathologies.json';
 import type { ContextEntry, RenalStage } from '../types';
+import { todayLocal } from '../utils/localDate';
 
 // ─── Référentiels locaux (allergies / pathologies) ───────────────────────────
 // JSON versionnés, hors ligne, sans IA. Ce module ne contient que la lecture, la
@@ -223,7 +224,7 @@ export function specialtyKey(specialtyText?: string): string | undefined {
 
 // ─── Entrées & migration ─────────────────────────────────────────────────────
 
-const today = () => new Date().toISOString().split('T')[0];
+const today = () => todayLocal();
 
 export function makeEntry(kind: ContextKind, ref: { id: string; label: string }, extra: Partial<ContextEntry> = {}): ContextEntry {
     return { ref: ref.id, label: ref.label, coded: true, addedAt: today(), ...(kind === 'allergy' ? { reaction: extra.reaction } : {}), ...extra };
