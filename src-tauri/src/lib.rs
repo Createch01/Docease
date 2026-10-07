@@ -3,6 +3,7 @@ mod ai;
 mod attachments;
 mod audit;
 mod backup;
+mod backup_pj;
 mod media_clean;
 mod messaging;
 mod notifications;

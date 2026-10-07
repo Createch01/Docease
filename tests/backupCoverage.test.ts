@@ -68,3 +68,30 @@ describe('couverture de la sauvegarde', () => {
         }
     });
 });
+
+describe('pièces jointes dans la sauvegarde', () => {
+    const rust = read('src-tauri/src/backup.rs');
+    const pj = read('src-tauri/src/backup_pj.rs');
+    const att = read('src-tauri/src/attachments.rs');
+
+    it("l'index des pièces est un fichier meddoc_* géré par Rust, donc sauvegardé", () => {
+        expect(att).toContain('pub const INDEX_FILE: &str = "meddoc_attachments.json"');
+        expect(rust).toContain('name.starts_with("meddoc_")');
+        const access = read('src-tauri/src/access.rs');
+        expect(access).toContain('"meddoc_attachments"'); // réservé : jamais lu/écrit par load_json / save_json
+    });
+
+    it('les fichiers des pièces sont copiés à côté du .dcb, hors du .dcb', () => {
+        expect(pj).toContain('pub const SUBDIR: &str = "pieces-jointes"');
+        expect(rust).toContain('attachments');
+        expect(rust).toContain('pj::sync_dest');
+        expect(rust).toContain('pj::stage_restore');
+        // Le dossier local des pièces n'est PAS un fichier racine .json : il est géré par backup_pj, pas par collect().
+        expect(att).toContain('pub const DIR: &str = "pieces_jointes"');
+    });
+
+    it('la sauvegarde ne contourne jamais la copie unique : aucune pièce lue dans collect()', () => {
+        const collect = rust.slice(rust.indexOf('pub fn collect'), rust.indexOf('fn bundle_bytes_with'));
+        expect(collect).not.toContain('pieces_jointes');
+    });
+});
