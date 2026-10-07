@@ -192,3 +192,32 @@ formes tant qu'une ancienne subsiste.
 
 Export / impression d'une pièce, annexes dans l'export PDF du dossier (étape 4 : réutilisera
 `attachment_read`), OCR, recompression des photos, partage par WhatsApp.
+
+---
+
+## Décisions validées (ajoutées après validation du plan)
+
+- **D1** 20 Mo par fichier : validé.
+- **D2** Alerte à 1 Go, sans plafond dur, avec contrôle d'espace libre avant chaque sauvegarde : validé.
+- **D3** Pièces à côté du `.dcb` : validé, avec :
+  - Texte clair dans les réglages de sauvegarde : « Pour copier une sauvegarde à la main, copiez le
+    dossier entier (fichier .dcb + dossier pieces-jointes). »
+  - À la restauration : vérification des pièces référencées ; si certaines manquent, l'aperçu
+    l'indique (« N pièces jointes introuvables ») et la restauration des données reste possible ;
+    les pièces absentes apparaissent « fichier manquant » dans le dossier.
+- **D4** pdf.js : validé, avec : paquet officiel `pdfjs-dist`, version récente corrigée (au minimum
+  postérieure au correctif CVE-2024-4367, donc ≥ 4.2.67), **version figée** ; `isEvalSupported:
+  false` ; ni scripts ni formulaires interactifs ; worker et polices embarqués localement, aucune
+  requête réseau ; rendu canvas uniquement ; chargé à la demande.
+- **D5** Octets envoyés à Rust, jamais de chemin : validé.
+- **D6** Journal (id seulement) : validé.
+- **D7** **MODIFIÉ — pas de conservation des métadonnées.** À l'import, Rust supprime les
+  métadonnées EXIF / XMP des JPEG (localisation GPS, appareil, date…) et les métadonnées textuelles
+  des PNG, **après avoir appliqué l'orientation EXIF** pour que l'image reste à l'endroit.
+  L'empreinte `sha256` est calculée APRÈS nettoyage. Test : une photo avec GPS n'en contient plus
+  après import. Les PDF ne sont pas modifiés.
+  - Méthode (proposée à l'implémentation) : sans orientation (ou orientation 1), les segments de
+    métadonnées sont retirés au niveau des octets (aucune recompression, aucune perte) ; avec une
+    orientation ≠ 1, l'image est décodée, pivotée / retournée, puis réencodée (JPEG qualité 95,
+    PNG sans perte) sans aucune métadonnée. Le profil colorimétrique ICC et les marqueurs
+    nécessaires au décodage sont conservés ; tout octet après la fin de l'image est supprimé.
