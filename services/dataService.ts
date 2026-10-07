@@ -5,6 +5,9 @@ import { aiService } from './aiService';
 import { normalizeAppointmentSettings } from './appointmentDefaults';
 import { resetSentOnReschedule } from './messaging/reminders';
 import { migrateLegacyVaccinations } from './vaccinationMigration';
+import { hasLegacyAttachments, migrateResultAttachments, sha256Hex } from './attachmentMigration';
+import { attachmentService } from './attachmentService';
+import { todayLocal } from '../utils/localDate';
 
 const STORAGE_KEYS = {
   DOCTOR_INFO: 'meddoc_doctor_info',
@@ -167,6 +170,25 @@ export const dataService = {
           if (report.migrated || report.kept.length) console.log(`💉 Carnets de vaccination : ${report.migrated} repris, ${report.removedKeys} ancienne(s) clé(s) supprimée(s), ${report.kept.length} conservée(s).`);
         } catch (error) {
           console.error('Migration des carnets de vaccination : anciennes clés conservées.', error);
+        }
+      }
+
+      // Anciennes pièces des résultats (data: base64 dans le JSON) → stockage chiffré de Rust. Médecin seulement,
+      // application Tauri seulement ; non destructif (relecture de contrôle avant remplacement), relançable.
+      if (sessionService.isMedecin() && typeof (window as any).__TAURI_INTERNALS__ !== 'undefined' && hasLegacyAttachments(cache[STORAGE_KEYS.MEDICAL_RESULTS] || [])) {
+        try {
+          const report = await migrateResultAttachments({
+            results: [...(cache[STORAGE_KEYS.MEDICAL_RESULTS] || [])],
+            today: todayLocal(),
+            list: attachmentService.list,
+            add: attachmentService.add,
+            read: attachmentService.read,
+            sha256: sha256Hex,
+            saveResult: r => dataService.saveMedicalResult(r),
+          });
+          if (report.migrated || report.reused || report.skipped.length) console.log(`📎 Pièces des résultats : ${report.migrated} migrée(s), ${report.reused} déjà présente(s), ${report.skipped.length} laissée(s) en l'état.`);
+        } catch (error) {
+          console.error('Migration des pièces des résultats : anciennes pièces conservées.', error);
         }
       }
 

@@ -2,6 +2,8 @@ import { useAiEnabled } from '../../services/useAiEnabled';
 import React, { useState, useMemo, useRef } from 'react';
 import { Plus, ShieldCheck, Paperclip, X, Eye, Layers, List, FlaskConical, Radio, FileQuestion } from 'lucide-react';
 import { dataService } from '../../services/dataService';
+import { attachmentService, toDataUrl } from '../../services/attachmentService';
+import { toastService } from '../../services/toastService';
 import { MedicalResult, MedicalResultAttachment, MedicalResultType } from '../../types';
 import { useI18n } from '../../i18n';
 import { todayLocal } from '../../utils/localDate';
@@ -64,6 +66,17 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
         });
         return groups;
     }, [filteredResults]);
+
+    // Pièce stockée par Rust : lue déchiffrée en mémoire, affichée depuis une URL data: (aucun fichier temporaire).
+    const openAttachment = async (att: MedicalResultAttachment) => {
+        if (!att.attachmentId) { setPreviewAttachment(att); return; }
+        try {
+            const bytes = await attachmentService.read(att.attachmentId);
+            setPreviewAttachment({ ...att, url: toDataUrl(bytes, att.type) });
+        } catch (e) {
+            toastService.error(typeof e === 'string' ? e : "Le fichier n'a pas pu être ouvert.");
+        }
+    };
 
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
@@ -134,7 +147,7 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
             {res.attachments.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                     {res.attachments.map((att, i) => (
-                        <button key={i} onClick={() => setPreviewAttachment(att)} className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[10px] font-bold hover:bg-blue-100 transition-all">
+                        <button key={i} onClick={() => void openAttachment(att)} className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[10px] font-bold hover:bg-blue-100 transition-all">
                             <Eye size={12} /> {att.name}
                         </button>
                     ))}
