@@ -82,3 +82,34 @@ describe('visionneuse : mémoire seulement', () => {
         expect(src).toContain('journal d\'accès');
     });
 });
+
+describe('sauvegarde et restauration : ce que voit le médecin', () => {
+    const settings = read('components/settings/BackupSettings.tsx');
+
+    it('explique comment copier une sauvegarde à la main', () => {
+        expect(settings).toContain('Pour copier une sauvegarde à la main, copiez le dossier entier (fichier .dcb + dossier pieces-jointes).');
+    });
+
+    it("l'aperçu de restauration signale les pièces introuvables sans bloquer la restauration", () => {
+        expect(settings).toContain('preview.attachments_missing > 0');
+        expect(settings).toContain('introuvable');
+        expect(settings).toContain('La restauration des données reste possible');
+        expect(settings).toContain('« fichier manquant »');
+    });
+
+    it('alerte orange « lourd » dans les réglages et sur le tableau de bord', () => {
+        expect(settings).toContain('export const AttachmentsAlert');
+        expect(read('components/BackupDashboardCard.tsx')).toContain('<AttachmentsAlert status={status} />');
+    });
+
+    it('SECURITY.md documente les pièces jointes', () => {
+        const sec = read('SECURITY.md');
+        for (const k of ['Pièces jointes du dossier patient', 'att_key', 'tant qu\'elles sont conservées', 'pdfjs-dist', 'attachment_open']) expect(sec).toContain(k);
+    });
+
+    it('les nouveaux fichiers ajoutés depuis les résultats passent par le stockage chiffré', () => {
+        const src = read('components/dossier/ResultsSection.tsx');
+        expect(src).toContain('attachmentService.add');
+        expect(src).not.toMatch(/readAsDataURL|readFileAsDataUrl/); // plus de data: URL stockée dans le résultat
+    });
+});
