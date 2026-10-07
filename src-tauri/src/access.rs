@@ -194,7 +194,7 @@ pub enum FileMode {
 
 /// Fichiers internes que `load_json`/`save_json` ne doivent jamais toucher, quel que
 /// soit le rôle (comptes, métadonnées de sécurité).
-const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments"];
+const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments", "meddoc_receipts", "meddoc_receipt_counter"];
 
 /// Fichiers lisibles/écrivables par l'assistante via `load_json`/`save_json`.
 /// Tout le reste (patients, file d'attente, honoraires, fiche cabinet…) passe par des
@@ -282,7 +282,7 @@ mod tests {
             "meddoc_patients.json", "meddoc_today_queue.json", "meddoc_honorary_notes.json",
             "meddoc_honorary_master_services.json", "meddoc_expenses.json", "meddoc_daily_reports.json",
             "meddoc_doctor_info.json", "meddoc_tasks.json", "meddoc_medicines.json",
-            "meddoc_vaccinations.json", "meddoc_last_backup.json", "backups/meddoc_patients_2026.json", "fichier_inconnu.json",
+            "meddoc_vaccinations.json", "meddoc_last_backup.json", "meddoc_receipts.json", "meddoc_receipt_counter.json", "backups/meddoc_patients_2026.json", "fichier_inconnu.json",
         ] {
             assert!(!file_allowed(a, f, FileMode::Read), "lecture de {f} doit être refusée");
             assert!(!file_allowed(a, f, FileMode::Write), "écriture de {f} doit être refusée");
@@ -294,7 +294,7 @@ mod tests {
         for role in [Role::Medecin, Role::Assistant] {
             for f in [
                 "users_meta.json", "security_meta.json", "USERS_META.json", "audit_log.bin",
-                "app_settings.json", "../secret.json", "a/../../b.json", "/etc/passwd",
+                "app_settings.json", "meddoc_receipts.json", "meddoc_receipt_counter.json", "meddoc_attachments.json", "../secret.json", "a/../../b.json", "/etc/passwd",
                 "C:\\Windows\\x.json", "a\\b.json", "", "dir//x.json",
             ] {
                 assert!(!file_allowed(role, f, FileMode::Read), "{role:?} lecture {f}");

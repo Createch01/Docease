@@ -1,6 +1,7 @@
 mod access;
 mod ai;
 mod attachments;
+mod receipts;
 mod audit;
 mod backup;
 mod backup_pj;
