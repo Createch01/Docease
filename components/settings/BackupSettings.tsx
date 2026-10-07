@@ -5,6 +5,7 @@ import {
   backupService, formatAge, formatStamp, isTauri, redundancyMessage,
 } from '../../services/backupService';
 import { dataService } from '../../services/dataService';
+import { formatSize as formatBytes, heavyWarning } from '../../services/attachmentService';
 import { toastService } from '../../services/toastService';
 import RecoverySheetModal from './RecoverySheetModal';
 import { SettingsCard, input40, inputStyle, primaryButton } from './SettingsUI';
@@ -53,6 +54,41 @@ export const BackupBanner: React.FC<{ status: BackupStatus }> = ({ status }) => 
 };
 
 /** Alerte orange permanente (non fermable) tant que les sauvegardes ne sont pas sur deux disques distincts. */
+/** Pièces jointes : alerte orange au-delà de 1 Go (espace des disques de sauvegarde), sinon rappel du volume. */
+export const AttachmentsAlert: React.FC<{ status: BackupStatus; always?: boolean }> = ({ status, always }) => {
+  const warning = heavyWarning({ bytes: status.attachments_bytes, level: status.attachments_level });
+  if (!warning && !(always && status.attachments_count > 0)) return null;
+  const st = LEVEL_STYLE.warning;
+  if (!warning) {
+    return <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>Pièces jointes : {status.attachments_count} fichier{status.attachments_count > 1 ? 's' : ''}, {formatBytes(status.attachments_bytes)} (copiés une seule fois à côté des sauvegardes).</p>;
+  }
+  return (
+    <div role="status" className="flex items-start gap-3 p-4 rounded-lg" style={{ background: st.bg, color: st.fg }}>
+      <AlertTriangle size={20} className="shrink-0" />
+      <p className="text-[13px] font-medium">{warning}</p>
+    </div>
+  );
+};
+
+/** Alerte rouge : pièces locales altérées, exclues de la sauvegarde (le reste est sauvegardé), jusqu'à résolution. */
+export const AlteredAttachmentsAlert: React.FC<{ status: BackupStatus }> = ({ status }) => {
+  const list = status.altered_attachments ?? [];
+  if (list.length === 0) return null;
+  const st = LEVEL_STYLE.alert;
+  return (
+    <div role="alert" className="flex items-start gap-3 p-4 rounded-lg" style={{ background: st.bg, color: st.fg }}>
+      <ShieldAlert size={20} className="shrink-0" />
+      <div className="text-[13px]">
+        <p className="font-semibold">{list.length} pièce{list.length > 1 ? 's' : ''} jointe{list.length > 1 ? 's' : ''} altérée{list.length > 1 ? 's' : ''} sur ce poste : non sauvegardée{list.length > 1 ? 's' : ''}.</p>
+        <p className="mt-0.5">Les données et les autres pièces sont sauvegardées normalement. Supprimez la pièce ou restaurez-la depuis une sauvegarde ; la dernière bonne copie déjà présente est conservée.</p>
+        <ul className="mt-1 list-disc pl-5">
+          {list.map(a => <li key={a.id}>Pièce {a.id} — {a.patient_name ?? 'patient inconnu'}</li>)}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
 export const RedundancyAlert: React.FC<{ status: BackupStatus }> = ({ status }) => {
   const text = redundancyMessage(status.redundancy);
   if (!text) return null;
@@ -106,12 +142,16 @@ const BackupSettings: React.FC = () => {
       >
         <BackupBanner status={status} />
         <RedundancyAlert status={status} />
+        <AttachmentsAlert status={status} always />
+        <AlteredAttachmentsAlert status={status} />
         <button type="button" className={primaryButton} style={{ background: 'var(--color-primary)' }} disabled={busy || !status.configured}
                 onClick={() => run(async () => {
                   const r = await backupService.runNow();
                   const bad = r.destinations.filter(d => !d.ok);
                   if (bad.length) toastService.error(`Sauvegarde faite, mais un emplacement a échoué : ${bad[0].error}`);
-                  else toastService.success(`Sauvegarde effectuée (${r.files} fichiers).`);
+                  else if (r.attachments_altered > 0) toastService.warning(`Sauvegarde effectuée, mais ${r.attachments_altered} pièce${r.attachments_altered > 1 ? 's' : ''} jointe${r.attachments_altered > 1 ? 's' : ''} altérée${r.attachments_altered > 1 ? 's' : ''} sur ce poste n'${r.attachments_altered > 1 ? 'ont' : 'a'} pas été sauvegardée${r.attachments_altered > 1 ? 's' : ''}. Voir l'alerte rouge.`);
+                  else if (r.attachments_missing > 0) toastService.warning(`Sauvegarde effectuée, mais ${r.attachments_missing} pièce${r.attachments_missing > 1 ? 's' : ''} jointe${r.attachments_missing > 1 ? 's' : ''} manque${r.attachments_missing > 1 ? 'nt' : ''} sur ce poste et n'${r.attachments_missing > 1 ? 'ont' : 'a'} pas pu être sauvegardée${r.attachments_missing > 1 ? 's' : ''}.`);
+                  else toastService.success(`Sauvegarde effectuée (${r.files} fichiers${r.attachments ? `, ${r.attachments} pièce${r.attachments > 1 ? 's' : ''} jointe${r.attachments > 1 ? 's' : ''}` : ''}).`);
                 })}>
           <HardDriveDownload size={15} /> {busy ? 'En cours…' : 'Sauvegarder maintenant'}
         </button>
@@ -122,6 +162,10 @@ const BackupSettings: React.FC = () => {
             si la dernière date de plus de 24 h, puis toutes les 24 h pendant la session, au verrouillage et à la fermeture (la fenêtre attend alors la fin de la sauvegarde, 30 s au plus, avec l'indicateur « Sauvegarde en cours… »).
             <strong> Aucune sauvegarde n'a lieu application fermée.</strong> Conservation : 7 quotidiennes, 4 hebdomadaires, 12 mensuelles.
           </span>
+        </p>
+        <p className="text-[12px] flex items-start gap-2" style={{ color: 'var(--color-text-muted)' }}>
+          <HardDriveDownload size={14} className="mt-0.5 shrink-0" />
+          <span><strong>Pour copier une sauvegarde à la main, copiez le dossier entier (fichier .dcb + dossier pieces-jointes).</strong> Les pièces jointes sont dans le dossier « pieces-jointes », à côté des fichiers .dcb.</span>
         </p>
       </SettingsCard>
 
@@ -269,6 +313,7 @@ const RestoreCard: React.FC<{ status: BackupStatus }> = ({ status }) => {
   const [label, setLabel] = useState('');
   const [pass, setPass] = useState('');
   const [preview, setPreview] = useState<BackupPreview | null>(null);
+  const [attRestore, setAttRestore] = useState<{ restored: number; missing: number } | null>(null);
   const [confirmText, setConfirmText] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -281,7 +326,7 @@ const RestoreCard: React.FC<{ status: BackupStatus }> = ({ status }) => {
     try { await fn(); } catch (e) { setError(e instanceof BackupError ? e.message : 'Erreur inattendue.'); }
     finally { setBusy(false); }
   };
-  const reset = () => { setStep('choose'); setPreview(null); setPass(''); setConfirmText(''); setError(null); };
+  const reset = () => { setStep('choose'); setPreview(null); setAttRestore(null); setPass(''); setConfirmText(''); setError(null); };
 
   return (
     <SettingsCard title="Restaurer une sauvegarde" icon={<RotateCcw size={16} />}
@@ -331,10 +376,16 @@ const RestoreCard: React.FC<{ status: BackupStatus }> = ({ status }) => {
             ))}
           </div>
           <p className="text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
-            Dernière activité : <strong>{preview.last_activity || 'inconnue'}</strong>
+            {preview.attachments > 0 && <>Pièces jointes : <strong>{preview.attachments}</strong> · </>}Dernière activité : <strong>{preview.last_activity || 'inconnue'}</strong>
             {preview.created_at && <> · sauvegarde créée le {new Date(preview.created_at).toLocaleString('fr-FR')}</>}
             {preview.format === 1 && <> · ancien format d'export</>}
           </p>
+          {preview.attachments_missing > 0 && (
+            <div role="alert" className="p-3 rounded-lg text-[13px] flex items-start gap-2" style={{ background: 'var(--color-warning-50)', color: 'var(--color-warning-800)' }}>
+              <AlertTriangle size={15} className="mt-0.5 shrink-0" />
+              <span><strong>{preview.attachments_missing} pièce{preview.attachments_missing > 1 ? 's' : ''} jointe{preview.attachments_missing > 1 ? 's' : ''} introuvable{preview.attachments_missing > 1 ? 's' : ''}</strong> à côté de cette sauvegarde (dossier « pieces-jointes »). La restauration des données reste possible ; ces pièces apparaîtront « fichier manquant » dans le dossier du patient.</span>
+            </div>
+          )}
           <div className="p-3 rounded-lg text-[13px]" style={{ background: 'var(--color-danger-50)', color: 'var(--color-danger-700)' }}>
             Cette action <strong>remplace toutes les données actuelles</strong> (patients, ordonnances, rendez-vous, réglages du cabinet, catalogue). Les comptes et mots de passe ne changent pas. Une copie de sécurité de l'état actuel est faite avant.
           </div>
@@ -342,7 +393,7 @@ const RestoreCard: React.FC<{ status: BackupStatus }> = ({ status }) => {
           <div className="flex gap-2">
             <button type="button" className={secondaryButton} style={secondaryStyle} onClick={reset} disabled={busy}>Retour</button>
             <button type="button" className={primaryButton} style={{ background: 'var(--color-danger-700, #b91c1c)' }} disabled={busy || confirmText.trim().toUpperCase() !== 'RESTAURER'}
-                    onClick={() => guard(async () => { const r = await backupService.restore(path, pass); setSafety(r.safety_copy); setStep('done'); })}>
+                    onClick={() => guard(async () => { const r = await backupService.restore(path, pass); setSafety(r.safety_copy); setAttRestore({ restored: r.attachments_restored, missing: r.attachments_missing }); setStep('done'); })}>
               {busy ? 'Restauration…' : 'Restaurer'}
             </button>
           </div>
@@ -352,6 +403,11 @@ const RestoreCard: React.FC<{ status: BackupStatus }> = ({ status }) => {
       {step === 'done' && (
         <div className="space-y-3">
           <p className="text-[13px] font-medium flex items-center gap-2" style={{ color: 'var(--color-success-700, #15803d)' }}><CheckCircle2 size={16} /> Restauration terminée.</p>
+          {attRestore && (attRestore.restored > 0 || attRestore.missing > 0) && (
+            <p className="text-[13px]" style={{ color: attRestore.missing > 0 ? 'var(--color-warning-800)' : 'var(--color-text-muted)' }}>
+              Pièces jointes restaurées : {attRestore.restored}{attRestore.missing > 0 && <> · <strong>{attRestore.missing} introuvable{attRestore.missing > 1 ? 's' : ''}</strong> (« fichier manquant » dans le dossier du patient)</>}.
+            </p>
+          )}
           {safety && <p className="text-[12px]" style={{ color: 'var(--color-text-muted)' }}>Copie de sécurité de l'état précédent : {safety}</p>}
           <button type="button" className={primaryButton} style={{ background: 'var(--color-primary)' }} onClick={() => { dataService.reset(); window.location.reload(); }}>
             Recharger DocEase

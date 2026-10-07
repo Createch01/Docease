@@ -195,6 +195,10 @@ pub fn notifications_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
         let identity: Vec<Value> = read_list(&dir, &key, "meddoc_patients.json").iter().map(super::scoped::identity_only).collect();
         (identity, Vec::new(), Vec::new(), None)
     };
+    let mut backup = backup;
+    if let Some(b) = backup.as_mut() {
+        super::backup::name_altered(b, &patients);
+    }
     let mut items = build(&Inputs { role, today: &today, appointments: &appointments, patients: &patients, results: &results, notes: &notes, backup: backup.as_ref() });
     items.extend(sanitize_extra(role, extra.unwrap_or_default()));
 

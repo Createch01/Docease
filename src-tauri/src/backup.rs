@@ -37,6 +37,7 @@ use serde_json::{json, Value};
 use sha2::{Digest, Sha256};
 
 use super::access::{gate, Role, Session};
+use super::backup_pj as pj;
 use super::users::{data_key_of, write_atomic};
 use super::{audit, data_dir, util, AppState, KEY_LEN, NONCE_LEN};
 
@@ -98,6 +99,8 @@ pub enum BackupError {
     DestinationUnavailable(String),
     InvalidDestination(String),
     Verification(String),
+    /// Espace libre insuffisant sur un emplacement de sauvegarde.
+    InsufficientSpace(String),
     Io(String),
 }
 
@@ -118,6 +121,7 @@ impl BackupError {
             BackupError::DestinationUnavailable(_) => "DESTINATION_UNAVAILABLE",
             BackupError::InvalidDestination(_) => "INVALID_DESTINATION",
             BackupError::Verification(_) => "VERIFICATION_FAILED",
+            BackupError::InsufficientSpace(_) => "INSUFFICIENT_SPACE",
             BackupError::Io(_) => "IO",
         }
     }
@@ -138,6 +142,7 @@ impl BackupError {
             BackupError::DestinationUnavailable(d) => format!("Emplacement inaccessible : {d}"),
             BackupError::InvalidDestination(d) => format!("Dossier refusé : {d}"),
             BackupError::Verification(d) => format!("Vérification de la sauvegarde échouée : {d}"),
+            BackupError::InsufficientSpace(d) => format!("Espace insuffisant sur l'emplacement de sauvegarde ({d})."),
             BackupError::Io(d) => d.clone(),
         }
     }
@@ -150,7 +155,7 @@ impl std::fmt::Display for BackupError {
     }
 }
 
-type Res<T> = Result<T, BackupError>;
+pub(crate) type Res<T> = Result<T, BackupError>;
 
 fn io<E: std::fmt::Display>(e: E) -> BackupError {
     BackupError::Io(e.to_string())
@@ -187,14 +192,18 @@ pub fn collect(dir: &Path, key: &[u8; KEY_LEN]) -> Res<Files> {
     Ok(files)
 }
 
-fn bundle_bytes(files: &Files) -> Res<Vec<u8>> {
-    serde_json::to_vec(&json!({
+/// Contenu en clair du `.dcb` ; `attachments` : liste des pièces + clé de sauvegarde (voir `backup_pj`).
+fn bundle_bytes_with(files: &Files, attachments: Option<&pj::Bundle>) -> Res<Vec<u8>> {
+    let mut root = json!({
         "format": 2,
         "created_at": util::now_iso(),
         "app_version": env!("CARGO_PKG_VERSION"),
         "files": files,
-    }))
-    .map_err(io)
+    });
+    if let Some(a) = attachments {
+        root["attachments"] = a.to_json();
+    }
+    serde_json::to_vec(&root).map_err(io)
 }
 
 // ─── Chiffrement ─────────────────────────────────────────────────────────────
@@ -260,6 +269,8 @@ pub struct Opened {
     pub files: Files,
     pub created_at: Option<String>,
     pub app_version: Option<String>,
+    /// Pièces jointes référencées (clé de sauvegarde + liste) ; `None` : aucune.
+    pub attachments: Option<pj::Bundle>,
 }
 
 fn valid_files(map: &serde_json::Map<String, Value>, v1_keys: bool) -> Res<Files> {
@@ -305,6 +316,7 @@ fn open_v2(root: &Value, passphrase: &str) -> Res<Opened> {
         files: valid_files(files, false)?,
         created_at: bundle.get("created_at").and_then(|v| v.as_str()).map(String::from),
         app_version: bundle.get("app_version").and_then(|v| v.as_str()).map(String::from),
+        attachments: bundle.get("attachments").and_then(pj::Bundle::from_json),
     })
 }
 
@@ -324,7 +336,7 @@ fn open_v1(root: &Value, passphrase: &str) -> Res<Opened> {
         .map_err(|_| BackupError::WrongPassphraseOrCorrupted)?;
     let payload: Value = serde_json::from_slice(&plain).map_err(|_| BackupError::Corrupted)?;
     let map = payload.as_object().ok_or(BackupError::Corrupted)?;
-    Ok(Opened { format: 1, files: valid_files(map, true)?, created_at: None, app_version: None })
+    Ok(Opened { format: 1, files: valid_files(map, true)?, created_at: None, app_version: None, attachments: None })
 }
 
 /// Déchiffre un fichier de sauvegarde (v2, ou v1 en lecture seule).
@@ -355,6 +367,10 @@ pub struct Preview {
     pub appointments: usize,
     /// Date (AAAA-MM-JJ) la plus récente parmi consultations, ordonnances et rendez-vous.
     pub last_activity: Option<String>,
+    /// Pièces jointes référencées par la sauvegarde.
+    pub attachments: usize,
+    /// Parmi elles, celles introuvables (ou de taille inattendue) à côté du fichier : « N pièces jointes introuvables ».
+    pub attachments_missing: usize,
 }
 
 fn list_len(files: &Files, name: &str) -> usize {
@@ -385,6 +401,8 @@ pub fn preview(o: &Opened) -> Preview {
         prescriptions: list_len(&o.files, "meddoc_prescriptions.json"),
         appointments: list_len(&o.files, "meddoc_appointments.json"),
         last_activity: last,
+        attachments: o.attachments.as_ref().map_or(0, |a| a.items.len()),
+        attachments_missing: 0,
     }
 }
 
@@ -397,6 +415,9 @@ pub struct Meta {
     /// Phrase de passe chiffrée par la clé de données (base64) : jamais en clair.
     #[serde(default)]
     pub wrapped_passphrase: Option<String>,
+    /// Clé de sauvegarde des pièces jointes, enveloppée par la clé de données (base64).
+    #[serde(default)]
+    pub wrapped_att_key: Option<String>,
     #[serde(default)]
     pub primary: Option<String>,
     #[serde(default)]
@@ -411,6 +432,9 @@ pub struct Meta {
     pub primary_error: Option<String>,
     #[serde(default)]
     pub secondary_error: Option<String>,
+    /// Pièces locales altérées, exclues de la dernière sauvegarde (alerte jusqu'à résolution).
+    #[serde(default)]
+    pub altered: Vec<pj::Altered>,
 }
 
 pub fn load_meta(dir: &Path) -> Res<Meta> {
@@ -421,7 +445,7 @@ pub fn load_meta(dir: &Path) -> Res<Meta> {
     }
 }
 
-fn save_meta(dir: &Path, meta: &Meta) -> Res<()> {
+pub(crate) fn save_meta(dir: &Path, meta: &Meta) -> Res<()> {
     let mut m = meta.clone();
     m.v = 1;
     write_atomic(&dir.join(META_FILE), &serde_json::to_vec_pretty(&m).map_err(io)?).map_err(BackupError::Io)
@@ -579,6 +603,7 @@ fn rotate(dest: &Path) -> usize {
     for n in names.iter().filter(|n| !keep.contains(*n)) {
         if fs::remove_file(dest.join(SUBDIR).join(n)).is_ok() {
             removed += 1;
+            pj::remove_sidecar(dest, n);
         }
     }
     removed
@@ -600,6 +625,13 @@ pub struct RunReport {
     pub files: usize,
     pub destinations: Vec<DestResult>,
     pub rotated: usize,
+    /// Pièces jointes référencées par cette sauvegarde, copiées pour la première fois (au moins un
+    /// emplacement), et absentes de ce poste (non sauvegardables).
+    pub attachments: usize,
+    pub attachments_copied: usize,
+    pub attachments_missing: usize,
+    /// Pièces locales altérées : exclues de cette sauvegarde, signalées jusqu'à résolution.
+    pub attachments_altered: usize,
 }
 
 fn write_one(dest: &Path, name: &str, sealed: &[u8]) -> Res<PathBuf> {
@@ -626,16 +658,65 @@ pub fn run_backup(dir: &Path, key: &[u8; KEY_LEN], now: u64) -> Res<RunReport> {
     if files.is_empty() {
         return Err(BackupError::NothingToBackup);
     }
-    let plain = bundle_bytes(&files)?;
-    let sealed = seal(&passphrase, &plain)?;
+    let mut prepared = pj::prepare(dir, key, &mut meta)?;
+    let mut plain = bundle_bytes_with(&files, prepared.as_ref().map(|p| &p.bundle))?;
+    let mut sealed = seal(&passphrase, &plain)?;
     let name = file_name(now);
 
     let mut results = Vec::new();
     let mut rotated = 0;
     let mut verified = false;
+    let mut copied_max = 0usize;
     let dests: Vec<(bool, String)> = std::iter::once((true, primary)).chain(meta.secondary.clone().map(|s| (false, s))).collect();
-    for (is_primary, dest) in &dests {
-        let outcome = write_one(Path::new(dest), &name, &sealed).and_then(|path| {
+
+    // Phase 1 — pièces jointes d'abord (espace libre contrôlé, copie unique). Une pièce locale altérée
+    // n'arrête rien : elle est écartée, la dernière bonne copie reste en place.
+    let mut recheck: std::collections::HashSet<String> = meta.altered.iter().map(|a| a.id.clone()).collect();
+    if let Some(p) = &prepared {
+        recheck.extend(pj::local_check(dir, key, &p.bundle, now));
+    }
+    let mut synced: Vec<Res<pj::Synced>> = Vec::new();
+    for (_, dest) in &dests {
+        synced.push(match &prepared {
+            Some(p) => pj::sync_dest(dir, key, &p.bundle, Path::new(dest), sealed.len() as u64, now, &recheck),
+            None => Ok(pj::Synced::default()),
+        });
+    }
+    let mut altered_ids: Vec<String> = Vec::new();
+    for s in synced.iter().flatten() {
+        for id in &s.altered {
+            if !altered_ids.contains(id) {
+                altered_ids.push(id.clone());
+            }
+        }
+    }
+    // Aucune bonne copie nulle part : la pièce n'est pas référencée par cette sauvegarde.
+    let dropped: Vec<String> = altered_ids.iter().filter(|id| synced.iter().flatten().all(|s| s.no_good_copy.contains(*id))).cloned().collect();
+    if let Some(p) = prepared.as_mut() {
+        if !dropped.is_empty() {
+            p.bundle.items.retain(|i| !dropped.contains(&i.id));
+            plain = bundle_bytes_with(&files, Some(&p.bundle))?;
+            sealed = seal(&passphrase, &plain)?;
+        }
+    }
+    meta.altered = match &prepared {
+        Some(p) => altered_ids.iter().map(|id| pj::Altered { id: id.clone(), patient_id: p.patient_of.get(id).cloned().unwrap_or_default(), patient_name: None }).collect(),
+        None => Vec::new(),
+    };
+
+    // Phase 2 — liste (.pj), puis .dcb : une sauvegarde ne référence jamais une pièce absente de l'emplacement.
+    for ((is_primary, dest), sync) in dests.iter().zip(synced) {
+        let staged = sync.and_then(|s| {
+            if let Some(p) = &prepared {
+                let ids: Vec<String> = p.bundle.items.iter().filter(|i| !s.no_good_copy.contains(&i.id)).map(|i| i.id.clone()).collect();
+                pj::write_sidecar(Path::new(dest), &name, &ids)?;
+            }
+            Ok(s.copied)
+        });
+        if let Ok(c) = &staged {
+            copied_max = copied_max.max(*c);
+        }
+        let outcome = staged.and_then(|_| write_one(Path::new(dest), &name, &sealed)).and_then(|path| {
             // Déchiffrement de contrôle (une fois suffit : les octets sont identiques partout).
             if !verified {
                 let bytes = fs::read(&path).map_err(io)?;
@@ -651,10 +732,12 @@ pub fn run_backup(dir: &Path, key: &[u8; KEY_LEN], now: u64) -> Res<RunReport> {
         match outcome {
             Ok(_) => {
                 rotated += rotate(Path::new(dest));
+                pj::gc(Path::new(dest));
                 results.push(DestResult { path: dest.clone(), ok: true, error: None });
                 if *is_primary { meta.primary_error = None } else { meta.secondary_error = None }
             }
             Err(e) => {
+                pj::remove_sidecar(Path::new(dest), &name);
                 results.push(DestResult { path: dest.clone(), ok: false, error: Some(e.message()) });
                 if *is_primary { meta.primary_error = Some(e.message()) } else { meta.secondary_error = Some(e.message()) }
             }
@@ -673,7 +756,17 @@ pub fn run_backup(dir: &Path, key: &[u8; KEY_LEN], now: u64) -> Res<RunReport> {
         let first = results.first().and_then(|r| r.error.clone()).unwrap_or_default();
         return Err(BackupError::DestinationUnavailable(first));
     }
-    Ok(RunReport { file_name: name, bytes: sealed.len(), files: files.len(), destinations: results, rotated })
+    Ok(RunReport {
+        file_name: name,
+        bytes: sealed.len(),
+        files: files.len(),
+        destinations: results,
+        rotated,
+        attachments: prepared.as_ref().map_or(0, |p| p.bundle.items.len()),
+        attachments_copied: copied_max,
+        attachments_missing: prepared.as_ref().map_or(0, |p| p.missing_local),
+        attachments_altered: meta.altered.len(),
+    })
 }
 
 /// Vrai si une sauvegarde est configurée et que la dernière date de plus de 24 h (ou n'a
@@ -730,6 +823,20 @@ pub struct Status {
     /// Alerte permanente (orange) tant que les sauvegardes ne sont pas sur deux supports :
     /// `no_secondary` (aucun second emplacement) ou `same_disk` (les deux sur le même disque).
     pub redundancy: Option<&'static str>,
+    /// Pièces jointes stockées sur ce poste : nombre, taille cumulée et niveau (`heavy` au-delà de 1 Go).
+    pub attachments_count: usize,
+    pub attachments_bytes: u64,
+    pub attachments_level: &'static str,
+    /// Pièces locales altérées exclues de la dernière sauvegarde (alerte rouge jusqu'à résolution).
+    /// `patient_name` est ajouté à la lecture par `name_altered` (jamais enregistré).
+    pub altered_attachments: Vec<pj::Altered>,
+}
+
+/// Renseigne le nom du patient (lu dans le fichier patients déchiffré) pour l'affichage.
+pub fn name_altered(s: &mut Status, patients: &[serde_json::Value]) {
+    for a in &mut s.altered_attachments {
+        a.patient_name = patients.iter().find(|p| p.get("id").and_then(|v| v.as_str()) == Some(a.patient_id.as_str())).and_then(|p| p.get("name")?.as_str().map(String::from));
+    }
 }
 
 #[cfg(windows)]
@@ -795,7 +902,23 @@ pub fn status(dir: &Path, now: u64) -> Res<Status> {
         }
     };
     let redundancy = redundancy_of(&meta);
-    Ok(Status { has_passphrase, configured, last_success_at: meta.last_success_at, age_secs: age, last_error: meta.last_error, destinations, level, reason, redundancy })
+    let (attachments_count, attachments_bytes) = pj::local_usage(dir);
+    Ok(Status {
+        has_passphrase,
+        configured,
+        last_success_at: meta.last_success_at,
+        age_secs: age,
+        last_error: meta.last_error.clone(),
+        destinations,
+        level,
+        reason,
+        redundancy,
+        attachments_count,
+        attachments_bytes,
+        attachments_level: super::attachments::level_for(attachments_bytes),
+        // Une pièce supprimée depuis la dernière sauvegarde n'est plus un problème à résoudre.
+        altered_attachments: meta.altered.into_iter().filter(|a| super::attachments::blob_path(dir, &a.id).is_file()).collect(),
+    })
 }
 
 // ─── Liste, aperçu, restauration ─────────────────────────────────────────────
@@ -838,7 +961,12 @@ fn read_backup_file(path: &Path) -> Res<Vec<u8>> {
 }
 
 pub fn inspect(path: &Path, passphrase: &str) -> Res<Preview> {
-    Ok(preview(&open(&read_backup_file(path)?, passphrase)?))
+    let opened = open(&read_backup_file(path)?, passphrase)?;
+    let mut p = preview(&opened);
+    if let Some(b) = &opened.attachments {
+        p.attachments_missing = pj::count_missing(path, b);
+    }
+    Ok(p)
 }
 
 #[derive(Serialize, Debug)]
@@ -846,6 +974,9 @@ pub struct RestoreReport {
     pub restored: usize,
     pub removed: usize,
     pub safety_copy: Option<String>,
+    pub attachments_restored: usize,
+    /// Pièces jointes introuvables ou altérées dans la sauvegarde : elles apparaissent « fichier manquant ».
+    pub attachments_missing: usize,
 }
 
 /// Copie brute (chiffrée par la clé de données, sans phrase de passe) de l'état actuel :
@@ -956,12 +1087,59 @@ pub fn restore_files(dir: &Path, key: &[u8; KEY_LEN], files: &Files, now: u64) -
         cleanup(&staged);
         return Err(e);
     }
-    Ok(RestoreReport { restored: files.len(), removed: current.len(), safety_copy: safety.map(|p| p.display().to_string()) })
+    Ok(RestoreReport { restored: files.len(), removed: current.len(), safety_copy: safety.map(|p| p.display().to_string()), attachments_restored: 0, attachments_missing: 0 })
 }
 
 pub fn restore(dir: &Path, key: &[u8; KEY_LEN], path: &Path, passphrase: &str, now: u64) -> Res<RestoreReport> {
     let opened = open(&read_backup_file(path)?, passphrase)?;
-    restore_files(dir, key, &opened.files, now)
+    // 1. Pièces jointes préparées (déchiffrées avec la clé de la sauvegarde, rechiffrées avec la clé du poste).
+    let staged = pj::stage_restore(dir, key, path, opened.attachments.as_ref())?;
+    // 2. Échange du dossier (l'ancien est mis de côté), puis restauration des données ; en cas d'échec, retour arrière.
+    let store = super::attachments::store_dir(dir);
+    let old = dir.join(format!("{}.old", super::attachments::DIR));
+    let _ = fs::remove_dir_all(&old);
+    let had_store = store.exists();
+    let swap = (|| -> Res<()> {
+        if had_store {
+            fs::rename(&store, &old).map_err(io)?;
+        }
+        fs::rename(&staged.dir, &store).map_err(io)
+    })();
+    if let Err(e) = swap {
+        if had_store && !store.exists() && old.exists() {
+            let _ = fs::rename(&old, &store);
+        }
+        let _ = fs::remove_dir_all(&staged.dir);
+        return Err(e);
+    }
+    match restore_files(dir, key, &opened.files, now) {
+        Ok(mut report) => {
+            // L'ancien dossier rejoint la copie de sécurité (déplacé, pas copié), sinon il est supprimé.
+            match &report.safety_copy {
+                Some(safety) if old.exists() => {
+                    if fs::rename(&old, Path::new(safety).join(super::attachments::DIR)).is_err() {
+                        let _ = fs::remove_dir_all(&old);
+                    }
+                }
+                _ => {
+                    let _ = fs::remove_dir_all(&old);
+                }
+            }
+            if let Some(b) = &opened.attachments {
+                pj::adopt_key(dir, key, b)?;
+            }
+            report.attachments_restored = staged.restored;
+            report.attachments_missing = staged.missing;
+            Ok(report)
+        }
+        Err(e) => {
+            let _ = fs::remove_dir_all(&store);
+            if had_store {
+                let _ = fs::rename(&old, &store);
+            }
+            Err(e)
+        }
+    }
 }
 
 // ─── Sauvegarde automatique : à la fermeture et au verrouillage ──────────────
@@ -1085,8 +1263,19 @@ async fn blocking<T: Send + 'static>(f: impl FnOnce() -> Res<T> + Send + 'static
 #[tauri::command]
 pub async fn backup_status<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>) -> Result<Status, String> {
     gate(&app, &state, "backup_status")?;
-    let (_, dir) = parts(&app, &state)?;
-    blocking(move || status(&dir, util::now_secs())).await
+    let (key, dir) = parts(&app, &state)?;
+    blocking(move || {
+        let mut st = status(&dir, util::now_secs())?;
+        if !st.altered_attachments.is_empty() {
+            let patients = match super::read_enc_json_in(&dir, &key, "meddoc_patients.json") {
+                Ok(Some(serde_json::Value::Array(a))) => a,
+                _ => Vec::new(),
+            };
+            name_altered(&mut st, &patients);
+        }
+        Ok(st)
+    })
+    .await
 }
 
 #[tauri::command]

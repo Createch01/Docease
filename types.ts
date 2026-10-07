@@ -195,7 +195,10 @@ export interface LabRequest {
 export interface MedicalResultAttachment {
   name: string;
   type: string;
-  url: string; // data: URL (base64) of the file
+  /** Ancien format : data: URL (base64) stocké dans le résultat. Remplacé par `attachmentId` (migration). */
+  url?: string;
+  /** Pièce stockée chiffrée par Rust (voir services/attachmentService). */
+  attachmentId?: string;
 }
 
 export interface MedicalResult {

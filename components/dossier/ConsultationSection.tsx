@@ -4,6 +4,7 @@ import { useI18n } from '../../i18n';
 import { dataService } from '../../services/dataService';
 import { ClinicalConsultation } from '../../types';
 import ConsultationAssistant from './ConsultationAssistant';
+import AttachmentChip from './AttachmentChip';
 import { todayLocal } from '../../utils/localDate';
 
 interface ConsultationSectionProps {
@@ -130,6 +131,7 @@ const ConsultationSection: React.FC<ConsultationSectionProps> = ({ patientId, pa
                                                 <span className="text-[9px] font-black text-gray-400 italic">{c.date} à {c.time}</span>
                                             </div>
                                         </div>
+                                        <AttachmentChip patientId={c.patientId} linkedType="consultation" linkedId={c.id} />
                                     </div>
                                     <div className={`grid grid-cols-2 gap-6 ${dir === 'rtl' ? 'pr-4 border-r' : 'pl-4 border-l'} border-gray-50`}>
                                         <div>

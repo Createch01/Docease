@@ -1,7 +1,10 @@
 mod access;
 mod ai;
+mod attachments;
 mod audit;
 mod backup;
+mod backup_pj;
+mod media_clean;
 mod messaging;
 mod notifications;
 mod scoped;
@@ -545,6 +548,12 @@ pub fn run() {
         scoped::kiosk_queue,
         notifications::notifications_list,
         notifications::notifications_set_state,
+        attachments::attachment_add,
+        attachments::attachment_list,
+        attachments::attachment_update,
+        attachments::attachment_read,
+        attachments::attachment_delete,
+        attachments::attachments_status,
         messaging::appointment_mark_sent,
         messaging::whatsapp_open,
         ai::ai_status,

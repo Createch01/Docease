@@ -35,6 +35,7 @@ base64 = "0.22"
 bip39 = "2"
 pbkdf2 = "0.12"
 sha2 = "0.10"
+image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
 
 # Argon2 est très lent en profil dev (tests et dérivations de clé) : on l'optimise.

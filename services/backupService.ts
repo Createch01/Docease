@@ -20,6 +20,12 @@ export interface BackupStatus {
     level: BackupLevel;
     reason: string | null;
     redundancy: BackupRedundancy | null;
+    /** Pièces jointes de ce poste : nombre, taille cumulée, niveau (`heavy` au-delà de 1 Go). */
+    attachments_count: number;
+    attachments_bytes: number;
+    attachments_level: 'ok' | 'heavy';
+    /** Pièces locales altérées, exclues de la dernière sauvegarde : alerte rouge jusqu'à résolution. */
+    altered_attachments: { id: string; patient_id: string; patient_name: string | null }[];
 }
 
 export interface BackupEntry { path: string; name: string; role: 'principal' | 'secours'; stamp: string; size: number }
@@ -30,6 +36,12 @@ export interface BackupRunReport {
     files: number;
     destinations: { path: string; ok: boolean; error: string | null }[];
     rotated: number;
+    attachments: number;
+    attachments_copied: number;
+    /** Pièces dont le fichier chiffré manque sur ce poste (non sauvegardées). */
+    attachments_missing: number;
+    /** Pièces locales altérées : exclues de cette sauvegarde (le reste est sauvegardé), signalées. */
+    attachments_altered: number;
 }
 
 export interface BackupPreview {
@@ -42,9 +54,19 @@ export interface BackupPreview {
     prescriptions: number;
     appointments: number;
     last_activity: string | null;
+    attachments: number;
+    /** Pièces jointes introuvables à côté du fichier de sauvegarde. */
+    attachments_missing: number;
 }
 
-export interface BackupRestoreReport { restored: number; removed: number; safety_copy: string | null }
+export interface BackupRestoreReport {
+    restored: number;
+    removed: number;
+    safety_copy: string | null;
+    attachments_restored: number;
+    /** Pièces introuvables ou altérées : elles apparaissent « fichier manquant » dans le dossier. */
+    attachments_missing: number;
+}
 
 /** Erreur Rust `CODE|message` → code stable + message affichable. */
 export class BackupError extends Error {

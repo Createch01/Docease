@@ -2,6 +2,10 @@ import { useAiEnabled } from '../../services/useAiEnabled';
 import React, { useState, useMemo, useRef } from 'react';
 import { Plus, ShieldCheck, Paperclip, X, Eye, Layers, List, FlaskConical, Radio, FileQuestion } from 'lucide-react';
 import { dataService } from '../../services/dataService';
+import { attachmentService, toDataUrl, checkFile, defaultTitle } from '../../services/attachmentService';
+import { makeThumb } from '../../services/attachmentThumb';
+import AttachmentChip from './AttachmentChip';
+import { toastService } from '../../services/toastService';
 import { MedicalResult, MedicalResultAttachment, MedicalResultType } from '../../types';
 import { useI18n } from '../../i18n';
 import { todayLocal } from '../../utils/localDate';
@@ -25,13 +29,6 @@ const TYPE_ICONS: Record<MedicalResultType, React.ReactNode> = {
     autre: <FileQuestion size={14} />,
 };
 
-const readFileAsDataUrl = (file: File): Promise<string> => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-});
-
 const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName, refreshTrigger, onNavigate }) => {
     const aiEnabled = useAiEnabled();
     const { t, dir } = useI18n();
@@ -39,7 +36,9 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
     const [newResult, setNewResult] = useState<{ title: string; interpretation: string; resultType: MedicalResultType; prescriberName: string; analysisId: string }>({
         title: '', interpretation: '', resultType: 'biologie', prescriberName: '', analysisId: ''
     });
-    const [pendingAttachments, setPendingAttachments] = useState<MedicalResultAttachment[]>([]);
+    // Fichiers choisis, envoyés (chiffrés) à Rust à l'enregistrement du résultat : jamais stockés dans le résultat lui-même.
+    const [pendingFiles, setPendingFiles] = useState<{ name: string; mime: string; bytes: Uint8Array }[]>([]);
+    const pendingAttachments = pendingFiles.map(f => ({ name: f.name, type: f.mime }));
     const [typeFilter, setTypeFilter] = useState<MedicalResultType | 'all'>('all');
     const [grouped, setGrouped] = useState(false);
     const [previewAttachment, setPreviewAttachment] = useState<MedicalResultAttachment | null>(null);
@@ -65,21 +64,34 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
         return groups;
     }, [filteredResults]);
 
+    // Pièce stockée par Rust : lue déchiffrée en mémoire, affichée depuis une URL data: (aucun fichier temporaire).
+    const openAttachment = async (att: MedicalResultAttachment) => {
+        if (!att.attachmentId) { setPreviewAttachment(att); return; }
+        try {
+            const bytes = await attachmentService.read(att.attachmentId);
+            setPreviewAttachment({ ...att, url: toDataUrl(bytes, att.type) });
+        } catch (e) {
+            toastService.error(typeof e === 'string' ? e : "Le fichier n'a pas pu être ouvert.");
+        }
+    };
+
     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         if (!files) return;
-        const newAttachments: MedicalResultAttachment[] = [];
+        const added: { name: string; mime: string; bytes: Uint8Array }[] = [];
         for (let i = 0; i < files.length; i++) {
             const file = files.item(i) as File;
-            const url = await readFileAsDataUrl(file);
-            newAttachments.push({ name: file.name, type: file.type, url });
+            const check = checkFile(file);
+            if (check.ok === false) { toastService.error(`${file.name} : ${check.message}`); continue; }
+            added.push({ name: file.name, mime: check.mime, bytes: new Uint8Array(await file.arrayBuffer()) });
         }
-        setPendingAttachments(prev => [...prev, ...newAttachments]);
+        setPendingFiles(prev => [...prev, ...added]);
         if (fileInputRef.current) fileInputRef.current.value = '';
     };
 
-    const handleSaveResult = () => {
+    const handleSaveResult = async () => {
         if (!patientId || !newResult.title) return;
+        const files = pendingFiles;
         const res: MedicalResult = {
             id: Date.now().toString(),
             date: todayLocal(),
@@ -90,13 +102,29 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
             prescriberName: newResult.prescriberName || undefined,
             analysisId: newResult.analysisId || undefined,
             patientId: patientId,
-            attachments: pendingAttachments,
+            attachments: [],
         };
-        dataService.saveMedicalResult(res);
+        await dataService.saveMedicalResult(res);
         setIsAddingResult(false);
         setNewResult({ title: '', interpretation: '', resultType: 'biologie', prescriberName: '', analysisId: '' });
-        setPendingAttachments([]);
+        setPendingFiles([]);
+        // Les fichiers sont chiffrés par Rust (type vérifié sur le contenu, métadonnées des photos retirées) et liés au résultat.
+        const refs: MedicalResultAttachment[] = [];
+        for (const f of files) {
+            try {
+                const meta = await attachmentService.add({
+                    patientId, title: defaultTitle(f.name), category: res.resultType === 'imagerie' ? 'imagerie' : res.resultType === 'biologie' ? 'biologie' : 'autre',
+                    examDate: res.date, linkedType: 'result', linkedId: res.id, thumb: await makeThumb(f.bytes, f.mime),
+                }, f.bytes);
+                refs.push({ name: f.name, type: f.mime, attachmentId: meta.id });
+            } catch (e) {
+                toastService.error(`${f.name} : ${typeof e === 'string' ? e : "enregistrement impossible."}`);
+            }
+            f.bytes.fill(0);
+        }
+        if (refs.length) await dataService.saveMedicalResult({ ...res, attachments: refs });
         window.dispatchEvent(new Event('meddoc_data_update'));
+        window.dispatchEvent(new Event('docease_attachments_changed'));
     };
 
     const renderCard = (res: MedicalResult) => (
@@ -131,10 +159,11 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
                     <p className={`text-xs font-black text-gray-700 leading-relaxed ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>{res.interpretation}</p>
                 </div>
             )}
+            <div className="mb-2"><AttachmentChip patientId={res.patientId} linkedType="result" linkedId={res.id} excludeIds={res.attachments.map(a => a.attachmentId || '').filter(Boolean)} /></div>
             {res.attachments.length > 0 && (
                 <div className="flex flex-wrap gap-2">
                     {res.attachments.map((att, i) => (
-                        <button key={i} onClick={() => setPreviewAttachment(att)} className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[10px] font-bold hover:bg-blue-100 transition-all">
+                        <button key={i} onClick={() => void openAttachment(att)} className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[10px] font-bold hover:bg-blue-100 transition-all">
                             <Eye size={12} /> {att.name}
                         </button>
                     ))}
@@ -219,21 +248,21 @@ const ResultsSection: React.FC<ResultsSectionProps> = ({ patientId, patientName,
                             value={newResult.interpretation} placeholder={t('observations_placeholder')} onChange={e => setNewResult({ ...newResult, interpretation: e.target.value })} />
                     </div>
                     <div className="space-y-2">
-                        <label className="text-[10px] font-black text-gray-400 uppercase ml-2 text-left block">Pièces jointes (PDF, images)</label>
-                        <input ref={fileInputRef} type="file" multiple accept=".pdf,image/*" onChange={handleFileChange} className="text-xs" />
+                        <label className="text-[10px] font-black text-gray-400 uppercase ml-2 text-left block">Pièces jointes (PDF, JPG, PNG — 20 Mo au plus)</label>
+                        <input ref={fileInputRef} type="file" multiple accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png" onChange={handleFileChange} className="text-xs" />
                         {pendingAttachments.length > 0 && (
                             <div className="flex flex-wrap gap-2 pt-1">
                                 {pendingAttachments.map((att, i) => (
                                     <span key={i} className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg text-[10px] font-bold">
                                         <Paperclip size={11} /> {att.name}
-                                        <button onClick={() => setPendingAttachments(pendingAttachments.filter((_, idx) => idx !== i))}><X size={11} /></button>
+                                        <button onClick={() => setPendingFiles(prev => prev.filter((_, idx) => idx !== i))}><X size={11} /></button>
                                     </span>
                                 ))}
                             </div>
                         )}
                     </div>
                     <div className={`flex justify-end gap-3 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
-                        <button onClick={() => { setIsAddingResult(false); setPendingAttachments([]); }} className="px-5 py-2 text-[10px] font-black uppercase text-gray-400">{t('cancel')}</button>
+                        <button onClick={() => { setIsAddingResult(false); setPendingFiles([]); }} className="px-5 py-2 text-[10px] font-black uppercase text-gray-400">{t('cancel')}</button>
                         <button onClick={handleSaveResult} className="px-5 py-2 bg-blue-600 text-white rounded-xl text-[10px] font-black uppercase tracking-widest">{t('save')}</button>
                     </div>
                 </div>

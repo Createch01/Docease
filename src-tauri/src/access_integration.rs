@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{ai, audit, messaging, notifications, scoped, settings, users, AppState, TEST_DATA_DIR};
+use super::{ai, attachments, audit, messaging, notifications, scoped, settings, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -105,6 +105,12 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "kiosk_queue" => done(scoped::kiosk_queue(a(), st!())),
         "notifications_list" => done(notifications::notifications_list(a(), st!(), None)),
         "notifications_set_state" => done(notifications::notifications_set_state(a(), st!(), "appointments_changed:p1".into(), "fp".into(), "dismiss".into())),
+        "attachment_add" => done(attachments::attachment_add(a(), st!(), json!({"patientId": "p1", "title": "T", "category": "ECG", "examDate": "2026-10-01"}), "JVBERi0=".into())),
+        "attachment_list" => done(attachments::attachment_list(a(), st!(), "p1".into())),
+        "attachment_update" => done(attachments::attachment_update(a(), st!(), "pj-0000000000000000".into(), json!({"title": "x"}))),
+        "attachment_read" => done(attachments::attachment_read(a(), st!(), "pj-0000000000000000".into())),
+        "attachment_delete" => done(attachments::attachment_delete(a(), st!(), "pj-0000000000000000".into())),
+        "attachments_status" => done(attachments::attachments_status(a(), st!())),
         "appointment_mark_sent" => done(messaging::appointment_mark_sent(a(), st!(), "a-inconnu".into(), "reminder".into())),
         // Numéro invalide : refusé par la validation AVANT toute ouverture (jamais d'ouverture réelle en test).
         "whatsapp_open" => done(messaging::whatsapp_open(a(), st!(), "0612345678".into(), "bonjour".into(), "a1".into(), "reminder".into())),

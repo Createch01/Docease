@@ -10,7 +10,8 @@
     "build:desktop": "tauri build",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run"
+    "test": "vitest run",
+    "pdfjs:assets": "node tools/copy-pdfjs-assets.cjs"
   },
   "dependencies": {
     "@tauri-apps/api": "2.9",
@@ -22,6 +23,7 @@
     "cheerio": "^1.2.0",
     "html2pdf.js": "^0.14.0",
     "lucide-react": "^0.408.0",
+    "pdfjs-dist": "6.4.299",
     "qrcode.react": "^4.2.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
