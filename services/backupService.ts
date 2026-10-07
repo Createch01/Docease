@@ -24,6 +24,8 @@ export interface BackupStatus {
     attachments_count: number;
     attachments_bytes: number;
     attachments_level: 'ok' | 'heavy';
+    /** Pièces locales altérées, exclues de la dernière sauvegarde : alerte rouge jusqu'à résolution. */
+    altered_attachments: { id: string; patient_id: string; patient_name: string | null }[];
 }
 
 export interface BackupEntry { path: string; name: string; role: 'principal' | 'secours'; stamp: string; size: number }
@@ -38,6 +40,8 @@ export interface BackupRunReport {
     attachments_copied: number;
     /** Pièces dont le fichier chiffré manque sur ce poste (non sauvegardées). */
     attachments_missing: number;
+    /** Pièces locales altérées : exclues de cette sauvegarde (le reste est sauvegardé), signalées. */
+    attachments_altered: number;
 }
 
 export interface BackupPreview {

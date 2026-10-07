@@ -31,6 +31,20 @@ pub fn items(s: &Status) -> Vec<Item> {
         "warning" => out.push(item("backup:late", "todo", "Dernière sauvegarde de plus de 24 h".into(), vec![], "backup_now", "warning".into(), true)),
         _ => {}
     }
+    // Pièce jointe locale altérée : exclue de la sauvegarde, alerte rouge jusqu'à résolution.
+    // Identifiant de la pièce et patient seulement, jamais de contenu.
+    for a in &s.altered_attachments {
+        let who = a.patient_name.clone().unwrap_or_else(|| "patient inconnu".into());
+        out.push(item(
+            &format!("backup:altered:{}", a.id),
+            "critical",
+            format!("Pièce jointe altérée, non sauvegardée — {who}"),
+            vec![format!("Pièce {}", a.id), "Supprimez-la ou restaurez-la ; le reste de la sauvegarde a été effectué.".into()],
+            "open_backup_settings",
+            format!("altered:{}", a.id),
+            false,
+        ));
+    }
     if let Some(r) = s.redundancy {
         let title = if r == "same_disk" { "Les deux sauvegardes sont sur le même disque" } else { "Aucun second emplacement de sauvegarde" };
         out.push(item("backup:redundancy", "todo", title.into(), vec![], "open_backup_settings", r.into(), true));

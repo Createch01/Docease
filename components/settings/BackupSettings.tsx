@@ -70,6 +70,25 @@ export const AttachmentsAlert: React.FC<{ status: BackupStatus; always?: boolean
   );
 };
 
+/** Alerte rouge : pièces locales altérées, exclues de la sauvegarde (le reste est sauvegardé), jusqu'à résolution. */
+export const AlteredAttachmentsAlert: React.FC<{ status: BackupStatus }> = ({ status }) => {
+  const list = status.altered_attachments ?? [];
+  if (list.length === 0) return null;
+  const st = LEVEL_STYLE.alert;
+  return (
+    <div role="alert" className="flex items-start gap-3 p-4 rounded-lg" style={{ background: st.bg, color: st.fg }}>
+      <ShieldAlert size={20} className="shrink-0" />
+      <div className="text-[13px]">
+        <p className="font-semibold">{list.length} pièce{list.length > 1 ? 's' : ''} jointe{list.length > 1 ? 's' : ''} altérée{list.length > 1 ? 's' : ''} sur ce poste : non sauvegardée{list.length > 1 ? 's' : ''}.</p>
+        <p className="mt-0.5">Les données et les autres pièces sont sauvegardées normalement. Supprimez la pièce ou restaurez-la depuis une sauvegarde ; la dernière bonne copie déjà présente est conservée.</p>
+        <ul className="mt-1 list-disc pl-5">
+          {list.map(a => <li key={a.id}>Pièce {a.id} — {a.patient_name ?? 'patient inconnu'}</li>)}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
 export const RedundancyAlert: React.FC<{ status: BackupStatus }> = ({ status }) => {
   const text = redundancyMessage(status.redundancy);
   if (!text) return null;
@@ -124,11 +143,13 @@ const BackupSettings: React.FC = () => {
         <BackupBanner status={status} />
         <RedundancyAlert status={status} />
         <AttachmentsAlert status={status} always />
+        <AlteredAttachmentsAlert status={status} />
         <button type="button" className={primaryButton} style={{ background: 'var(--color-primary)' }} disabled={busy || !status.configured}
                 onClick={() => run(async () => {
                   const r = await backupService.runNow();
                   const bad = r.destinations.filter(d => !d.ok);
                   if (bad.length) toastService.error(`Sauvegarde faite, mais un emplacement a échoué : ${bad[0].error}`);
+                  else if (r.attachments_altered > 0) toastService.warning(`Sauvegarde effectuée, mais ${r.attachments_altered} pièce${r.attachments_altered > 1 ? 's' : ''} jointe${r.attachments_altered > 1 ? 's' : ''} altérée${r.attachments_altered > 1 ? 's' : ''} sur ce poste n'${r.attachments_altered > 1 ? 'ont' : 'a'} pas été sauvegardée${r.attachments_altered > 1 ? 's' : ''}. Voir l'alerte rouge.`);
                   else if (r.attachments_missing > 0) toastService.warning(`Sauvegarde effectuée, mais ${r.attachments_missing} pièce${r.attachments_missing > 1 ? 's' : ''} jointe${r.attachments_missing > 1 ? 's' : ''} manque${r.attachments_missing > 1 ? 'nt' : ''} sur ce poste et n'${r.attachments_missing > 1 ? 'ont' : 'a'} pas pu être sauvegardée${r.attachments_missing > 1 ? 's' : ''}.`);
                   else toastService.success(`Sauvegarde effectuée (${r.files} fichiers${r.attachments ? `, ${r.attachments} pièce${r.attachments > 1 ? 's' : ''} jointe${r.attachments > 1 ? 's' : ''}` : ''}).`);
                 })}>

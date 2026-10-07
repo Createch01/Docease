@@ -214,8 +214,16 @@ fn no_attachments_means_no_key_no_folder_no_sidecar() {
     }
 }
 
+fn corrupt_local(d: &Path, id: &str) {
+    let p = attachments::blob_path(d, id);
+    let mut bytes = fs::read(&p).unwrap();
+    let n = bytes.len() - 3;
+    bytes[n] ^= 1;
+    fs::write(&p, &bytes).unwrap();
+}
+
 #[test]
-fn locally_missing_piece_is_skipped_and_reported_but_altered_one_stops_the_backup() {
+fn locally_missing_piece_is_skipped_and_reported() {
     fast_kdf();
     let d = station("local", &KEY_A);
     let (a, _b) = configure(&d, &KEY_A, false);
@@ -223,22 +231,67 @@ fn locally_missing_piece_is_skipped_and_reported_but_altered_one_stops_the_backu
     let gone = attach(&d, &KEY_A, "Disparue", pdf("DISPARUE"));
     fs::remove_file(attachments::blob_path(&d, &gone.id)).unwrap();
     let r = backup::run_backup(&d, &KEY_A, T0).unwrap();
-    assert_eq!((r.attachments, r.attachments_missing), (1, 1));
+    assert_eq!((r.attachments, r.attachments_missing, r.attachments_altered), (1, 1, 0));
     assert_eq!(blob_files(&a), vec![format!("{}.dcp", ok.id)]);
-    // Nouvelle pièce locale altérée : la sauvegarde échoue clairement (jamais incomplète en silence), rien n'est laissé.
-    let bad = attach(&d, &KEY_A, "Abîmée", pdf("ABIMEE"));
-    let p = attachments::blob_path(&d, &bad.id);
-    let mut bytes = fs::read(&p).unwrap();
-    let n = bytes.len() - 3;
-    bytes[n] ^= 1;
-    fs::write(&p, &bytes).unwrap();
-    let before = dcb_files(&a).len();
-    let err = backup::run_backup(&d, &KEY_A, T0 + 86_400).unwrap_err();
-    assert!(err.message().contains("altérée"), "{}", err.message());
-    assert_eq!(dcb_files(&a).len(), before, "aucun .dcb écrit");
-    assert_eq!(fs::read_dir(a.join(BACKUP_SUBDIR)).unwrap().flatten().filter(|e| e.file_name().to_string_lossy().ends_with(".pj")).count(), 1, "aucun .pj de l'échec");
-    assert_eq!(blob_files(&a), vec![format!("{}.dcp", ok.id)], "aucune copie partielle de la pièce altérée");
-    for x in [&d, &a] {
+    let _ = fs::remove_dir_all(&d);
+    let _ = fs::remove_dir_all(&a);
+}
+
+#[test]
+fn altered_local_piece_does_not_fail_the_backup_and_keeps_its_last_good_copy() {
+    fast_kdf();
+    let d = station("altered", &KEY_A);
+    let (a, b) = configure(&d, &KEY_A, true);
+    let ok = attach(&d, &KEY_A, "Ok", pdf("OK"));
+    let was_good = attach(&d, &KEY_A, "Bonne puis abîmée", pdf("BONNE"));
+    let r0 = backup::run_backup(&d, &KEY_A, T0).unwrap();
+    assert_eq!((r0.attachments, r0.attachments_altered), (2, 0));
+    let good_copy = [&a, &b].map(|x| fs::read(blobs_dir(x).join(format!("{}.dcp", was_good.id))).unwrap());
+
+    // 1) Pièce abîmée APRÈS une première bonne copie : sauvegarde réussie, copie conservée, alerte.
+    corrupt_local(&d, &was_good.id);
+    let fresh = attach(&d, &KEY_A, "Nouvelle", pdf("NOUVELLE"));
+    let r1 = backup::run_backup(&d, &KEY_A, T0 + 86_400).expect("la sauvegarde ne doit pas échouer");
+    assert!(r1.destinations.iter().all(|x| x.ok));
+    assert_eq!((r1.attachments, r1.attachments_altered, r1.attachments_copied), (3, 1, 1));
+    for (n, dest) in [&a, &b].into_iter().enumerate() {
+        assert!(blob_files(dest).contains(&format!("{}.dcp", fresh.id)), "les autres pièces sont sauvegardées");
+        assert!(blob_files(dest).contains(&format!("{}.dcp", ok.id)));
+        assert_eq!(fs::read(blobs_dir(dest).join(format!("{}.dcp", was_good.id))).unwrap(), good_copy[n], "dernière bonne copie intacte");
+    }
+    let st = backup::status(&d, T0 + 86_400).unwrap();
+    assert_eq!(st.altered_attachments.len(), 1);
+    assert_eq!((st.altered_attachments[0].id.as_str(), st.altered_attachments[0].patient_id.as_str()), (was_good.id.as_str(), "p1"));
+    assert!(st.altered_attachments[0].patient_name.is_none(), "nom jamais enregistré");
+
+    // 2) Rotation : la dernière bonne copie n'est pas supprimée (le .pj la référence toujours).
+    for day in 2..40u64 {
+        backup::run_backup(&d, &KEY_A, T0 + day * 86_400).unwrap();
+    }
+    for dest in [&a, &b] {
+        assert!(blob_files(dest).contains(&format!("{}.dcp", was_good.id)), "copie conservée après rotation");
+    }
+    assert_eq!(backup::status(&d, T0 + 40 * 86_400).unwrap().altered_attachments.len(), 1, "alerte tant que non résolue, même sans recopie");
+
+    // 3) Pièce abîmée dès le départ (aucune bonne copie) : écartée de la sauvegarde, aucune copie partielle.
+    let never = attach(&d, &KEY_A, "Jamais copiée", pdf("JAMAIS"));
+    corrupt_local(&d, &never.id);
+    let r3 = backup::run_backup(&d, &KEY_A, T0 + 41 * 86_400).unwrap();
+    assert_eq!((r3.attachments, r3.attachments_altered), (3, 2));
+    assert!(!blob_files(&a).contains(&format!("{}.dcp", never.id)));
+    let newest = dcb_files(&a).last().unwrap().clone();
+    let opened = backup::open(&fs::read(newest).unwrap(), PASS).unwrap();
+    assert!(opened.attachments.unwrap().items.iter().all(|i| i.id != never.id), "non référencée par la sauvegarde");
+
+    // 4) Résolution : suppression de la pièce → l'alerte disparaît ; la bonne pièce restaurée aussi.
+    attachments::delete(&d, &KEY_A, &never.id).unwrap();
+    assert_eq!(backup::status(&d, T0 + 42 * 86_400).unwrap().altered_attachments.len(), 1);
+    attachments::delete(&d, &KEY_A, &was_good.id).unwrap();
+    assert_eq!(backup::status(&d, T0 + 42 * 86_400).unwrap().altered_attachments.len(), 0);
+    let r4 = backup::run_backup(&d, &KEY_A, T0 + 43 * 86_400).unwrap();
+    assert_eq!(r4.attachments_altered, 0);
+    assert!(backup::load_meta(&d).unwrap().altered.is_empty());
+    for x in [&d, &a, &b] {
         let _ = fs::remove_dir_all(x);
     }
 }

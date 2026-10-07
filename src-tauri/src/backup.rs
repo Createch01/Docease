@@ -432,6 +432,9 @@ pub struct Meta {
     pub primary_error: Option<String>,
     #[serde(default)]
     pub secondary_error: Option<String>,
+    /// Pièces locales altérées, exclues de la dernière sauvegarde (alerte jusqu'à résolution).
+    #[serde(default)]
+    pub altered: Vec<pj::Altered>,
 }
 
 pub fn load_meta(dir: &Path) -> Res<Meta> {
@@ -627,6 +630,8 @@ pub struct RunReport {
     pub attachments: usize,
     pub attachments_copied: usize,
     pub attachments_missing: usize,
+    /// Pièces locales altérées : exclues de cette sauvegarde, signalées jusqu'à résolution.
+    pub attachments_altered: usize,
 }
 
 fn write_one(dest: &Path, name: &str, sealed: &[u8]) -> Res<PathBuf> {
@@ -653,9 +658,9 @@ pub fn run_backup(dir: &Path, key: &[u8; KEY_LEN], now: u64) -> Res<RunReport> {
     if files.is_empty() {
         return Err(BackupError::NothingToBackup);
     }
-    let prepared = pj::prepare(dir, key, &mut meta)?;
-    let plain = bundle_bytes_with(&files, prepared.as_ref().map(|p| &p.bundle))?;
-    let sealed = seal(&passphrase, &plain)?;
+    let mut prepared = pj::prepare(dir, key, &mut meta)?;
+    let mut plain = bundle_bytes_with(&files, prepared.as_ref().map(|p| &p.bundle))?;
+    let mut sealed = seal(&passphrase, &plain)?;
     let name = file_name(now);
 
     let mut results = Vec::new();
@@ -663,13 +668,50 @@ pub fn run_backup(dir: &Path, key: &[u8; KEY_LEN], now: u64) -> Res<RunReport> {
     let mut verified = false;
     let mut copied_max = 0usize;
     let dests: Vec<(bool, String)> = std::iter::once((true, primary)).chain(meta.secondary.clone().map(|s| (false, s))).collect();
-    for (is_primary, dest) in &dests {
-        // Pièces jointes d'abord (espace libre contrôlé, copie unique), puis la liste (.pj), puis le .dcb :
-        // une sauvegarde ne référence jamais une pièce absente de l'emplacement.
-        let staged = prepared.as_ref().map_or(Ok(0), |p| {
-            let copied = pj::sync_dest(dir, key, &p.bundle, Path::new(dest), sealed.len() as u64, now)?;
-            pj::write_sidecar(Path::new(dest), &name, &p.bundle.items.iter().map(|i| i.id.clone()).collect::<Vec<_>>())?;
-            Ok(copied)
+
+    // Phase 1 — pièces jointes d'abord (espace libre contrôlé, copie unique). Une pièce locale altérée
+    // n'arrête rien : elle est écartée, la dernière bonne copie reste en place.
+    let mut recheck: std::collections::HashSet<String> = meta.altered.iter().map(|a| a.id.clone()).collect();
+    if let Some(p) = &prepared {
+        recheck.extend(pj::local_check(dir, key, &p.bundle, now));
+    }
+    let mut synced: Vec<Res<pj::Synced>> = Vec::new();
+    for (_, dest) in &dests {
+        synced.push(match &prepared {
+            Some(p) => pj::sync_dest(dir, key, &p.bundle, Path::new(dest), sealed.len() as u64, now, &recheck),
+            None => Ok(pj::Synced::default()),
+        });
+    }
+    let mut altered_ids: Vec<String> = Vec::new();
+    for s in synced.iter().flatten() {
+        for id in &s.altered {
+            if !altered_ids.contains(id) {
+                altered_ids.push(id.clone());
+            }
+        }
+    }
+    // Aucune bonne copie nulle part : la pièce n'est pas référencée par cette sauvegarde.
+    let dropped: Vec<String> = altered_ids.iter().filter(|id| synced.iter().flatten().all(|s| s.no_good_copy.contains(*id))).cloned().collect();
+    if let Some(p) = prepared.as_mut() {
+        if !dropped.is_empty() {
+            p.bundle.items.retain(|i| !dropped.contains(&i.id));
+            plain = bundle_bytes_with(&files, Some(&p.bundle))?;
+            sealed = seal(&passphrase, &plain)?;
+        }
+    }
+    meta.altered = match &prepared {
+        Some(p) => altered_ids.iter().map(|id| pj::Altered { id: id.clone(), patient_id: p.patient_of.get(id).cloned().unwrap_or_default(), patient_name: None }).collect(),
+        None => Vec::new(),
+    };
+
+    // Phase 2 — liste (.pj), puis .dcb : une sauvegarde ne référence jamais une pièce absente de l'emplacement.
+    for ((is_primary, dest), sync) in dests.iter().zip(synced) {
+        let staged = sync.and_then(|s| {
+            if let Some(p) = &prepared {
+                let ids: Vec<String> = p.bundle.items.iter().filter(|i| !s.no_good_copy.contains(&i.id)).map(|i| i.id.clone()).collect();
+                pj::write_sidecar(Path::new(dest), &name, &ids)?;
+            }
+            Ok(s.copied)
         });
         if let Ok(c) = &staged {
             copied_max = copied_max.max(*c);
@@ -723,6 +765,7 @@ pub fn run_backup(dir: &Path, key: &[u8; KEY_LEN], now: u64) -> Res<RunReport> {
         attachments: prepared.as_ref().map_or(0, |p| p.bundle.items.len()),
         attachments_copied: copied_max,
         attachments_missing: prepared.as_ref().map_or(0, |p| p.missing_local),
+        attachments_altered: meta.altered.len(),
     })
 }
 
@@ -784,6 +827,16 @@ pub struct Status {
     pub attachments_count: usize,
     pub attachments_bytes: u64,
     pub attachments_level: &'static str,
+    /// Pièces locales altérées exclues de la dernière sauvegarde (alerte rouge jusqu'à résolution).
+    /// `patient_name` est ajouté à la lecture par `name_altered` (jamais enregistré).
+    pub altered_attachments: Vec<pj::Altered>,
+}
+
+/// Renseigne le nom du patient (lu dans le fichier patients déchiffré) pour l'affichage.
+pub fn name_altered(s: &mut Status, patients: &[serde_json::Value]) {
+    for a in &mut s.altered_attachments {
+        a.patient_name = patients.iter().find(|p| p.get("id").and_then(|v| v.as_str()) == Some(a.patient_id.as_str())).and_then(|p| p.get("name")?.as_str().map(String::from));
+    }
 }
 
 #[cfg(windows)]
@@ -855,7 +908,7 @@ pub fn status(dir: &Path, now: u64) -> Res<Status> {
         configured,
         last_success_at: meta.last_success_at,
         age_secs: age,
-        last_error: meta.last_error,
+        last_error: meta.last_error.clone(),
         destinations,
         level,
         reason,
@@ -863,6 +916,8 @@ pub fn status(dir: &Path, now: u64) -> Res<Status> {
         attachments_count,
         attachments_bytes,
         attachments_level: super::attachments::level_for(attachments_bytes),
+        // Une pièce supprimée depuis la dernière sauvegarde n'est plus un problème à résoudre.
+        altered_attachments: meta.altered.into_iter().filter(|a| super::attachments::blob_path(dir, &a.id).is_file()).collect(),
     })
 }
 
@@ -1208,8 +1263,19 @@ async fn blocking<T: Send + 'static>(f: impl FnOnce() -> Res<T> + Send + 'static
 #[tauri::command]
 pub async fn backup_status<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>) -> Result<Status, String> {
     gate(&app, &state, "backup_status")?;
-    let (_, dir) = parts(&app, &state)?;
-    blocking(move || status(&dir, util::now_secs())).await
+    let (key, dir) = parts(&app, &state)?;
+    blocking(move || {
+        let mut st = status(&dir, util::now_secs())?;
+        if !st.altered_attachments.is_empty() {
+            let patients = match super::read_enc_json_in(&dir, &key, "meddoc_patients.json") {
+                Ok(Some(serde_json::Value::Array(a))) => a,
+                _ => Vec::new(),
+            };
+            name_altered(&mut st, &patients);
+        }
+        Ok(st)
+    })
+    .await
 }
 
 #[tauri::command]

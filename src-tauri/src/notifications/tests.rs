@@ -34,6 +34,7 @@ fn status(level: &'static str, reason: Option<&str>, redundancy: Option<&'static
         attachments_count: 0,
         attachments_bytes: 0,
         attachments_level: "ok",
+        altered_attachments: Vec::new(),
         destinations: vec![DestStatus { role: "principal", path: "D:\\sauvegardes".into(), accessible, error: None }],
         level,
         reason: reason.map(String::from),
@@ -132,4 +133,16 @@ fn sorted_critical_then_todo_then_info() {
     let sorted = apply_state(run(Role::Medecin, Some(&late)), &BTreeMap::new(), TODAY);
     let ranks: Vec<u8> = sorted.iter().map(|i| rank(&i.severity)).collect();
     assert!(ranks.windows(2).all(|w| w[0] <= w[1]), "{ranks:?}");
+}
+
+#[test]
+fn altered_attachment_is_a_critical_doctor_only_backup_alert_without_content() {
+    use crate::backup_pj::Altered;
+    let mut b = status("ok", None, None, true);
+    b.altered_attachments = vec![Altered { id: "a1b2".into(), patient_id: "p1".into(), patient_name: Some("HAYAT Salma".into()) }];
+    let items = run(Role::Medecin, Some(&b));
+    let it = items.iter().find(|i| i.id == "backup:altered:a1b2").expect("alerte");
+    assert_eq!((it.severity.as_str(), it.kind.as_str(), it.dismissible), ("critical", "backup", false));
+    assert!(it.title.contains("HAYAT Salma") && it.lines.iter().any(|l| l.contains("a1b2")));
+    assert!(run(Role::Assistant, Some(&b)).iter().all(|i| i.kind != "backup"), "jamais pour l'assistante");
 }

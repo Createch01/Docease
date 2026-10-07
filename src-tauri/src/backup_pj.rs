@@ -104,6 +104,19 @@ pub struct Prepared {
     pub bundle: Bundle,
     /// Entrées d'index dont le fichier chiffré manque sur ce poste (non sauvegardées, signalées).
     pub missing_local: usize,
+    /// Pièce → patient (identifiants seulement), pour signaler une pièce locale altérée.
+    pub patient_of: std::collections::HashMap<String, String>,
+}
+
+/// Pièce locale altérée (ou disparue entre-temps) : exclue de la sauvegarde et signalée jusqu'à
+/// résolution. Enregistrée dans `backup_meta.json` (en clair) : identifiants seulement, jamais de
+/// contenu ni de nom ; `patient_name` n'est renseigné qu'à la lecture, pour l'affichage.
+#[derive(Serialize, Deserialize, Clone, Debug, PartialEq)]
+pub struct Altered {
+    pub id: String,
+    pub patient_id: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub patient_name: Option<String>,
 }
 
 /// `None` s'il n'y a aucune pièce jointe (aucune clé créée).
@@ -115,14 +128,16 @@ pub fn prepare(dir: &Path, data_key: &[u8; KEY_LEN], meta: &mut Meta) -> Res<Opt
     let key = ensure_att_key(dir, meta, data_key)?;
     let mut items = Vec::new();
     let mut missing_local = 0;
+    let mut patient_of = std::collections::HashMap::new();
     for m in index {
         if blob_path(dir, &m.id).is_file() {
+            patient_of.insert(m.id.clone(), m.patient_id.clone());
             items.push(Item { id: m.id, size: m.size, sha256: m.sha256 });
         } else {
             missing_local += 1;
         }
     }
-    Ok(Some(Prepared { bundle: Bundle { key, items }, missing_local }))
+    Ok(Some(Prepared { bundle: Bundle { key, items }, missing_local, patient_of }))
 }
 
 // ─── Espace libre ────────────────────────────────────────────────────────────
@@ -170,24 +185,49 @@ fn blob_ok(pj: &Path, it: &Item) -> bool {
     fs::metadata(pj.join(format!("{}.{}", it.id, attachments::EXT))).map_or(false, |m| m.is_file() && m.len() == it.size + OVERHEAD)
 }
 
+/// Résultat de la copie vers un emplacement.
+#[derive(Default, Debug)]
+pub struct Synced {
+    pub copied: usize,
+    /// Pièces dont l'original local est altéré ou introuvable : NON copiées, le reste continue.
+    pub altered: Vec<String>,
+    /// Parmi elles, celles dont cet emplacement n'a aucune bonne copie (rien à conserver).
+    pub no_good_copy: std::collections::HashSet<String>,
+}
+
 /// Espace libre (pièces à copier + sauvegarde × 1,2 + marge), puis copie des pièces absentes.
-/// Renvoie le nombre de pièces copiées.
-pub fn sync_dest(dir: &Path, data_key: &[u8; KEY_LEN], bundle: &Bundle, dest: &Path, dcb_len: u64, now: u64) -> Res<usize> {
+/// `recheck` : pièces déjà signalées altérées, revérifiées à chaque sauvegarde même si l'emplacement
+/// en a une bonne copie (sans quoi l'alerte disparaîtrait sans que rien ne soit résolu).
+/// Une pièce locale altérée n'interrompt pas la sauvegarde : elle est écartée et signalée, et la
+/// dernière bonne copie déjà présente est laissée intacte.
+pub fn sync_dest(dir: &Path, data_key: &[u8; KEY_LEN], bundle: &Bundle, dest: &Path, dcb_len: u64, now: u64, recheck: &std::collections::HashSet<String>) -> Res<Synced> {
     // Même règle que l'écriture du .dcb : un emplacement absent n'est jamais recréé en silence.
     super::backup::check_dir(dest)?;
     let pj = blobs_dir(dest);
     let corrupt = deep_check(&pj, bundle, now);
-    let todo: Vec<&Item> = bundle.items.iter().filter(|i| !blob_ok(&pj, i) || corrupt.contains(&i.id)).collect();
+    let todo: Vec<&Item> = bundle.items.iter().filter(|i| !blob_ok(&pj, i) || corrupt.contains(&i.id) || recheck.contains(&i.id)).collect();
     let need = todo.iter().map(|i| i.size + OVERHEAD).sum::<u64>() + dcb_len + dcb_len / 5 + SPACE_MARGIN;
     space_verdict(need, free_space(dest), &dest.display().to_string())?;
+    let mut out = Synced::default();
     if todo.is_empty() {
-        return Ok(0);
+        return Ok(out);
     }
     fs::create_dir_all(&pj).map_err(io)?;
     for it in &todo {
-        copy_one(dir, data_key, &bundle.key, &pj, it)?;
+        match read_local(dir, data_key, it) {
+            Ok(plain) => {
+                copy_one(&bundle.key, &pj, it, &plain)?;
+                out.copied += 1;
+            }
+            Err(_) => {
+                out.altered.push(it.id.clone());
+                if !blob_ok(&pj, it) || corrupt.contains(&it.id) {
+                    out.no_good_copy.insert(it.id.clone());
+                }
+            }
+        }
     }
-    Ok(todo.len())
+    Ok(out)
 }
 
 /// Budget de vérification approfondie par sauvegarde et par emplacement (lecture + déchiffrement).
@@ -224,13 +264,41 @@ fn deep_check(pj: &Path, bundle: &Bundle, now: u64) -> std::collections::HashSet
     bad
 }
 
-fn copy_one(dir: &Path, data_key: &[u8; KEY_LEN], att_key: &[u8; KEY_LEN], pj: &Path, it: &Item) -> Res<()> {
-    let sealed = fs::read(blob_path(dir, &it.id)).map_err(|_| BackupError::Io(format!("pièce jointe {} introuvable sur ce poste", it.id)))?;
-    let plain = open_aad(data_key, it.id.as_bytes(), &sealed).map_err(|_| BackupError::Io(format!("pièce jointe {} altérée sur ce poste : supprimez-la ou restaurez-la", it.id)))?;
+/// Contenu en clair de l'original local, vérifié (déchiffrement + taille + empreinte).
+fn read_local(dir: &Path, data_key: &[u8; KEY_LEN], it: &Item) -> Result<Vec<u8>, String> {
+    let sealed = fs::read(blob_path(dir, &it.id)).map_err(|_| format!("pièce jointe {} introuvable sur ce poste", it.id))?;
+    let plain = open_aad(data_key, it.id.as_bytes(), &sealed).map_err(|_| format!("pièce jointe {} altérée sur ce poste", it.id))?;
     if sha256_hex(&plain) != it.sha256 || plain.len() as u64 != it.size {
-        return Err(BackupError::Io(format!("pièce jointe {} altérée sur ce poste : supprimez-la ou restaurez-la", it.id)));
+        return Err(format!("pièce jointe {} altérée sur ce poste", it.id));
     }
-    let out = seal_aad(att_key, it.id.as_bytes(), &plain).map_err(BackupError::Io)?;
+    Ok(plain)
+}
+
+/// Même principe que `deep_check`, côté poste : un lot tournant d'originaux locaux est relu et
+/// vérifié à chaque sauvegarde, pour repérer une pièce abîmée APRÈS sa première bonne copie.
+pub fn local_check(dir: &Path, data_key: &[u8; KEY_LEN], bundle: &Bundle, now: u64) -> std::collections::HashSet<String> {
+    let mut bad = std::collections::HashSet::new();
+    let n = bundle.items.len();
+    if n == 0 {
+        return bad;
+    }
+    let start = ((now / 86_400) as usize) % n;
+    let mut spent = 0u64;
+    for k in 0..n {
+        let it = &bundle.items[(start + k) % n];
+        if spent + it.size > DEEP_CHECK_BYTES && spent > 0 {
+            break;
+        }
+        spent += it.size;
+        if read_local(dir, data_key, it).is_err() {
+            bad.insert(it.id.clone());
+        }
+    }
+    bad
+}
+
+fn copy_one(att_key: &[u8; KEY_LEN], pj: &Path, it: &Item, plain: &[u8]) -> Res<()> {
+    let out = seal_aad(att_key, it.id.as_bytes(), plain).map_err(BackupError::Io)?;
     let path = pj.join(format!("{}.{}", it.id, attachments::EXT));
     super::users::write_atomic(&path, &out).map_err(BackupError::Io)?;
     // Contrôle : relu, déchiffré, empreinte identique.

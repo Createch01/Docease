@@ -102,6 +102,13 @@ describe('sauvegarde et restauration : ce que voit le médecin', () => {
         expect(read('components/BackupDashboardCard.tsx')).toContain('<AttachmentsAlert status={status} />');
     });
 
+    it('une pièce locale altérée ne fait pas échouer la sauvegarde : alerte rouge dans les réglages et le tableau de bord', () => {
+        expect(settings).toContain('export const AlteredAttachmentsAlert');
+        expect(settings).toContain('<AlteredAttachmentsAlert status={status} />');
+        expect(read('components/BackupDashboardCard.tsx')).toContain('<AlteredAttachmentsAlert status={status} />');
+        expect(read('src-tauri/src/notifications/backup_source.rs')).toContain('backup:altered:');
+    });
+
     it('SECURITY.md documente les pièces jointes', () => {
         const sec = read('SECURITY.md');
         for (const k of ['Pièces jointes du dossier patient', 'att_key', 'tant qu\'elles sont conservées', 'pdfjs-dist', 'attachment_open']) expect(sec).toContain(k);
