@@ -179,7 +179,7 @@ pub fn notifications_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     let role = require_session(session)?.role;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    let today = util::today_utc();
+    let today = util::today_local();
 
     let appointments = read_list(&dir, &key, "meddoc_appointments.json");
     // Fichiers médicaux et financiers : lus seulement pour le médecin.
@@ -215,7 +215,7 @@ pub fn notifications_set_state<R: tauri::Runtime>(app: tauri::AppHandle<R>, stat
     let mut st = read_state(&dir, &key)?;
     match action.as_str() {
         "snooze" => {
-            let tomorrow = util::date_utc(util::now_secs() + 86_400);
+            let tomorrow = util::next_day(&util::today_local()).unwrap_or_default();
             st.insert(id, Entry { fp: fingerprint, mode: "snoozed".into(), until: tomorrow });
         }
         "dismiss" => {

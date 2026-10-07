@@ -11,17 +11,10 @@ use serde_json::Value;
 use super::Item;
 use crate::messaging::normalize_whatsapp_number;
 use crate::util;
+use crate::util::next_day;
 
 fn s<'a>(v: &'a Value, k: &str) -> &'a str {
     v.get(k).and_then(|x| x.as_str()).unwrap_or("")
-}
-
-/// Lendemain d'une date AAAA-MM-JJ.
-pub fn next_day(day: &str) -> Option<String> {
-    let mut it = day.split('-');
-    let (y, m, d) = (it.next()?.parse::<i64>().ok()?, it.next()?.parse::<u32>().ok()?, it.next()?.parse::<u32>().ok()?);
-    let secs = util::days_from_civil(y, m, d) * 86_400 + 86_400;
-    u64::try_from(secs).ok().map(util::date_utc)
 }
 
 /// Rendez-vous de demain à rappeler (références dans `appointments`).
@@ -124,6 +117,24 @@ mod tests {
         assert_eq!(next_day("2028-02-28").as_deref(), Some("2028-02-29"));
         assert_eq!(next_day("n'importe quoi"), None);
     }
+
+
+    #[test]
+    fn reminders_follow_the_local_day_around_local_midnight() {
+        // 23:30 UTC le 06/10 = 00:30 le 07/10 à Casablanca : « aujourd'hui » est le 07, « demain » le 08.
+        let secs = util::days_from_civil(2026, 10, 6) as u64 * 86_400 + 23 * 3_600 + 1_800;
+        let today_local = util::date_local_at(secs, 3_600);
+        let today_utc = util::date_utc(secs);
+        assert_eq!((today_local.as_str(), today_utc.as_str()), ("2026-10-07", "2026-10-06"));
+        let patients = vec![patient("p1", Some("yes"), "0612345678")];
+        let apps = vec![
+            appt("rdv-du-08", Some("p1"), json!({"date": "2026-10-08"})),
+            appt("rdv-du-07", Some("p1"), json!({"date": "2026-10-07"})),
+        ];
+        assert_eq!(ids(eligible(&apps, &patients, &today_local)), vec!["rdv-du-08"], "rappel du lendemain LOCAL");
+        assert_eq!(ids(eligible(&apps, &patients, &today_utc)), vec!["rdv-du-07"], "(le calcul UTC se trompait de jour)");
+    }
+
 
     #[test]
     fn selects_only_eligible_appointments() {

@@ -300,7 +300,7 @@ pub fn queue_save_identity<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: t
 pub fn billing_today_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<Vec<Value>, String> {
     gate(&app, &state, "billing_today_list")?;
     let key = data_key_of(&state)?;
-    Ok(payments_today(&read_list(&data_dir(&app)?, &key, NOTES_FILE)?, &util::today_utc()))
+    Ok(payments_today(&read_list(&data_dir(&app)?, &key, NOTES_FILE)?, &util::today_local()))
 }
 
 #[tauri::command]
@@ -310,7 +310,7 @@ pub fn billing_today_save<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     let dir = data_dir(&app)?;
     let mut notes = read_list(&dir, &key, NOTES_FILE)?;
     let patients = read_list(&dir, &key, PATIENTS_FILE)?;
-    let view = apply_payment(&mut notes, &patients, &payment, &util::today_utc(), &random_note_id())?;
+    let view = apply_payment(&mut notes, &patients, &payment, &util::today_local(), &random_note_id())?;
     write_enc_json_in(&dir, &key, NOTES_FILE, &Value::Array(notes))?;
     audit::log(&app, session.as_ref(), "billing_today_save", view.get("status").and_then(|s| s.as_str()).unwrap_or(""), true);
     Ok(view)

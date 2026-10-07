@@ -118,6 +118,7 @@ dependencies = [
  "argon2",
  "base64 0.22.1",
  "bip39",
+ "chrono",
  "log",
  "pbkdf2",
  "rand 0.8.5",
