@@ -43,6 +43,8 @@ export interface ReceiptView {
     duplicates: number;
     /** Rang du duplicata qui vient d'être enregistré (réponse de `duplicate` seulement). */
     duplicateRank: number | null;
+    /** Horodatage (Rust) de ce duplicata. */
+    duplicateAt: string | null;
 }
 
 export interface ReceiptVerifyReport { ok: boolean; count: number; lastNumber: string | null; problems: string[] }

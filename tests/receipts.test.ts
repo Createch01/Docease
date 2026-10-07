@@ -14,7 +14,7 @@ const doctor = { cabinetName: 'Cabinet Test', nameFr: 'Dr X', specialtyFr: 'Méd
 const base: ReceiptView = {
     kind: 'receipt', number: 'REC-2026-00042', seq: 42, year: 2026, date: '2026-10-07', issuedAt: '2026-10-07T10:00:00Z', issuedBy: 'Dr',
     noteId: 'n1', patientId: 'p1', patientName: 'HAYAT Salma', amountCents: 25050, amountInWords: 'Deux cent cinquante dirhams et cinquante centimes',
-    paymentMode: 'CASH', label: 'Consultation', balanceDueCents: 0, legal: {}, status: 'valid', cancelledBy: null, duplicates: 0, duplicateRank: null,
+    paymentMode: 'CASH', label: 'Consultation', balanceDueCents: 0, legal: {}, status: 'valid', cancelledBy: null, duplicates: 0, duplicateRank: null, duplicateAt: null,
 };
 
 const html = (r: ReceiptView, dup?: { rank: number; printedAt: string }) => renderToStaticMarkup(React.createElement(ReceiptTemplate, { receipt: r, doctor, duplicate: dup }));
@@ -105,5 +105,48 @@ describe('reçu : garde-fous', () => {
 
     it('registre immuable côté service : aucune modification ni suppression', () => {
         expect(service).not.toMatch(/receipt_(update|delete|edit|remove)/);
+    });
+});
+
+describe('reçu : interface câblée sur les bonnes règles', () => {
+    const cashier = read('components/CashierView.tsx');
+    const finances = read('components/dossier/FinancesSection.tsx');
+    const dialogs = read('components/ReceiptDialogs.tsx');
+    const modal = read('components/ReceiptModal.tsx');
+    const cabinet = read('components/settings/CabinetSettings.tsx');
+    const app = read('App.tsx');
+
+    it("la caisse (assistante) n'émet que des reçus par défaut et réimprime en duplicata", () => {
+        expect(cashier).toContain('receiptService.issue(row.id)');
+        expect(cashier).not.toContain('detail');
+        expect(cashier).toContain('receiptService.duplicate(number)');
+        expect(cashier).toContain('<ReceiptModal');
+    });
+
+    it("l'option « détailler les actes » et l'annulation sont dans le dossier du médecin, jamais dans la caisse", () => {
+        expect(finances).toContain('<ReceiptIssueDialog');
+        expect(finances).toContain('<CancelReceiptDialog');
+        expect(dialogs).toContain('receiptService.issue(noteId, detail)');
+        expect(dialogs).toContain('receiptService.cancel(receipt.number, reason)');
+        expect(cashier).not.toContain('receiptService.cancel');
+    });
+
+    it("l'aperçu enregistre le duplicata avant d'afficher le bandeau, et imprime A5", () => {
+        expect(modal).toContain("format: 'a5'");
+        expect(modal).toContain('receipt.duplicateAt');
+        expect(modal).toContain('window.print()');
+    });
+
+    it('réglages : mention de TVA vide par défaut, vérification du registre, alerte « À faire »', () => {
+        expect(cabinet).toContain("'vatExemptionNote'");
+        expect(cabinet).toContain('<ReceiptsRegistryCard />');
+        expect(read('services/dataService.ts')).not.toMatch(/vatExemptionNote:\s*'[^']/);
+        expect(app).toContain("case 'open_receipts_settings'");
+        expect(read('components/TodoDrawer.tsx')).toContain('open_receipts_settings');
+    });
+
+    it('SECURITY.md documente les reçus', () => {
+        const sec = read('SECURITY.md');
+        for (const k of ['Reçus de paiement', 'REC-AAAA-NNNNN', 'ajout seul', 'receipts_verify', 'ne reculent jamais', 'reçu d\'annulation']) expect(sec).toContain(k);
     });
 });

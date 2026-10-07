@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Wallet, Check, Loader2 } from 'lucide-react';
+import { Wallet, Check, Loader2, Receipt } from 'lucide-react';
 import { dataService } from '../services/dataService';
 import { DayPayment, PaymentMode, PaymentStatus, paymentService } from '../services/paymentService';
 import { toastService } from '../services/toastService';
+import { ReceiptView, receiptService } from '../services/receiptService';
+import ReceiptModal from './ReceiptModal';
 
 // Encaissement des visites du jour : une ligne par patient de la salle d'attente.
 // Montant dû, montant payé, mode et statut uniquement — pas d'historique, pas de
@@ -34,6 +36,9 @@ const CashierView: React.FC = () => {
     const currency = dataService.getDoctorInfo().currency || 'DH';
     const [rows, setRows] = useState<Row[]>([]);
     const [loading, setLoading] = useState(true);
+    // Reçus du jour (Rust) et reçu ouvert en aperçu. Émettre et réimprimer : jour seulement, contrôlé par Rust.
+    const [receipts, setReceipts] = useState<ReceiptView[]>([]);
+    const [openReceipt, setOpenReceipt] = useState<ReceiptView | null>(null);
 
     const load = useCallback(async () => {
         const payments = await paymentService.listToday();
@@ -60,6 +65,7 @@ const CashierView: React.FC = () => {
             });
         }
         setRows(next);
+        setReceipts(await receiptService.listToday().catch(() => []));
         setLoading(false);
     }, []);
 
@@ -87,6 +93,31 @@ const CashierView: React.FC = () => {
             setRows(rs => rs.map(r => (r.patientId === row.patientId ? { ...r, saving: false } : r)));
             toastService.error(typeof e === 'string' ? e : 'Enregistrement impossible.');
         }
+    };
+
+    const issue = async (row: Row) => {
+        if (!row.id) return;
+        try {
+            setOpenReceipt(await receiptService.issue(row.id));
+            setReceipts(await receiptService.listToday().catch(() => []));
+        } catch (e: any) {
+            toastService.error(e instanceof Error ? e.message : 'Émission du reçu impossible.');
+        }
+    };
+
+    const reprint = async (number: string) => {
+        try { setOpenReceipt(await receiptService.duplicate(number)); }
+        catch (e: any) { toastService.error(e instanceof Error ? e.message : 'Duplicata impossible.'); }
+    };
+
+    // Affichage seulement : Rust recalcule et décide à l'émission.
+    const receiptState = (row: Row) => {
+        const mine = receipts.filter(r => r.noteId === row.id);
+        const covered = mine.filter(r => r.kind === 'receipt' && r.status === 'valid').reduce((n, r) => n + r.amountCents, 0);
+        const due = parseFloat(row.due.replace(',', '.'));
+        const paid = row.status === 'PAID' ? due : row.status === 'UNPAID' ? 0 : parseFloat(row.paid.replace(',', '.'));
+        const canIssue = !!row.id && !row.dirty && Number.isFinite(paid) && Math.round(paid * 100) > covered;
+        return { canIssue, valid: mine.filter(r => r.kind === 'receipt' && r.status === 'valid') };
     };
 
     const empty = useMemo(() => !loading && rows.length === 0, [loading, rows]);
@@ -150,9 +181,29 @@ const CashierView: React.FC = () => {
                             style={{ background: 'var(--color-primary)' }}>
                             {r.saving ? <Loader2 size={15} className="animate-spin" /> : <Check size={15} />} Enregistrer
                         </button>
+                        {(() => {
+                            const st = receiptState(r);
+                            return (
+                                <>
+                                    {st.canIssue && (
+                                        <button type="button" onClick={() => issue(r)} className="h-10 px-4 rounded-lg border text-[13px] font-medium flex items-center gap-2 bg-white"
+                                            style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}>
+                                            <Receipt size={15} /> Reçu
+                                        </button>
+                                    )}
+                                    {st.valid.map(v => (
+                                        <button key={v.number} type="button" onClick={() => reprint(v.number)} title="Réimprimer : un duplicata est enregistré, sans nouveau numéro"
+                                            className="h-10 px-3 rounded-lg border text-[12px] font-medium bg-white" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
+                                            Duplicata <span className="font-mono">{v.number}</span>
+                                        </button>
+                                    ))}
+                                </>
+                            );
+                        })()}
                     </div>
                 ))}
             </div>
+            {openReceipt && <ReceiptModal receipt={openReceipt} onClose={() => setOpenReceipt(null)} />}
         </div>
     );
 };

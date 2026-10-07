@@ -351,6 +351,7 @@ fn duplicate_never_takes_a_number_and_ranks_increase() {
     let d1 = duplicate(&d, &KEY, &a.number, &doctor(), NOW, TODAY).unwrap();
     let d2 = duplicate(&d, &KEY, &a.number, &assistant(), NOW, TODAY).unwrap();
     assert_eq!((d1.duplicate_rank, d2.duplicate_rank), (Some(1), Some(2)));
+    assert_eq!(d1.duplicate_at.as_deref(), Some(NOW), "horodatage fourni par Rust");
     assert_eq!(d2.entry, a, "contenu figé identique à l'original");
     assert_eq!(d2.duplicates, 2);
     // Pas de nouveau numéro : le suivant reste le 3e.

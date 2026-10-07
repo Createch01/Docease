@@ -437,6 +437,8 @@ pub struct View {
     pub duplicates: u32,
     /// Rang du duplicata qui vient d'être enregistré (réponse de `duplicate` seulement).
     pub duplicate_rank: Option<u32>,
+    /// Horodatage (Rust) de ce duplicata, imprimé sur le bandeau.
+    pub duplicate_at: Option<String>,
 }
 
 fn view_of(entries: &[Entry], e: &Entry) -> View {
@@ -447,7 +449,7 @@ fn view_of(entries: &[Entry], e: &Entry) -> View {
         _ => "valid",
     };
     let duplicates = entries.iter().filter(|d| d.kind == "duplicate" && d.number == e.number).count() as u32;
-    View { entry: e.clone(), status: status.into(), cancelled_by, duplicates, duplicate_rank: None }
+    View { entry: e.clone(), status: status.into(), cancelled_by, duplicates, duplicate_rank: None, duplicate_at: None }
 }
 
 fn find<'a>(entries: &'a [Entry], number: &str) -> Result<&'a Entry, String> {
@@ -547,6 +549,7 @@ pub fn duplicate(dir: &Path, key: &[u8; KEY_LEN], number: &str, who: &Actor, now
     save(dir, key, &entries)?;
     let mut v = view_of(&entries, &orig);
     v.duplicate_rank = Some(rank);
+    v.duplicate_at = Some(now_iso.to_string());
     Ok(v)
 }
 
