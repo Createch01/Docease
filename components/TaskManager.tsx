@@ -33,6 +33,7 @@ import { securityService } from '../services/securityService';
 import { sessionService } from '../services/sessionService';
 import { Task, TaskPriority, TaskCategory, AppUser } from '../types';
 import ConfirmModal from './ConfirmModal';
+import { todayLocal } from '../utils/localDate';
 
 
 type SortField = 'priority' | 'date' | 'status';
@@ -62,7 +63,7 @@ const TaskManager: React.FC = () => {
     priority: 'Moyenne',
     category: 'Admin',
     assignedTo: '',
-    dueDate: new Date().toISOString().split('T')[0],
+    dueDate: todayLocal(),
   });
 
   const [confirmModal, setConfirmModal] = useState<{
@@ -116,7 +117,7 @@ const TaskManager: React.FC = () => {
       priority: 'Moyenne',
       category: 'Admin',
       assignedTo: '',
-      dueDate: new Date().toISOString().split('T')[0]
+      dueDate: todayLocal()
     });
   };
 
@@ -157,7 +158,7 @@ const TaskManager: React.FC = () => {
   };
 
   const isLate = (dueDate: string) => {
-    const today = new Date().toISOString().split('T')[0];
+    const today = todayLocal();
     return dueDate < today;
   };
 

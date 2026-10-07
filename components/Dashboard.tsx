@@ -36,6 +36,7 @@ import { billingService } from '../services/billingService';
 import { vaccinationService } from '../services/vaccinationService';
 import { Patient, HonoraryNote, Appointment } from '../types';
 import { formatAge } from '../utils/formatters';
+import { localDateStr, localMonthStr, todayLocal } from '../utils/localDate';
 
 interface DashboardProps {
   onNewPrescription: (patient?: Patient) => void;
@@ -57,16 +58,16 @@ const getLastNDays = (n: number): string[] => {
   for (let i = n - 1; i >= 0; i--) {
     const d = new Date();
     d.setDate(d.getDate() - i);
-    days.push(d.toISOString().split('T')[0]);
+    days.push(localDateStr(d));
   }
   return days;
 };
 
-const today = new Date().toISOString().split('T')[0];
+const today = todayLocal();
 const currentMonth = today.substring(0, 7); // YYYY-MM
 const prevMonthDate = new Date();
 prevMonthDate.setMonth(prevMonthDate.getMonth() - 1);
-const prevMonth = prevMonthDate.toISOString().substring(0, 7);
+const prevMonth = localMonthStr(prevMonthDate);
 
 // ─── Composant principal ───────────────────────────────────────────────────────
 

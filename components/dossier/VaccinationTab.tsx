@@ -4,6 +4,7 @@ import { vaccinationService, isCalendarVerified, CALENDAR_UNVERIFIED_MESSAGE } f
 import { CheckCircle, AlertCircle, Clock, Calendar, Syringe, Save, Trash2, Printer, X } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import { useI18n } from '../../i18n';
+import { todayLocal } from '../../utils/localDate';
 
 interface VaccinationTabProps {
     patient: Patient;
@@ -60,7 +61,7 @@ const VaccinationTab: React.FC<VaccinationTabProps> = ({ patient }) => {
 
     const startEdit = (v: Vaccine) => {
         setEditingId(v.id);
-        setEditDate(new Date().toISOString().split('T')[0]);
+        setEditDate(todayLocal());
     };
 
     // Group by Age

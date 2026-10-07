@@ -3,6 +3,7 @@ import { Upload, FileText, Play, CheckCircle, AlertTriangle, Info, Loader2, X, P
 import { smartDocService } from '../../services/smartDocService';
 import { SmartDocAnalysis, Task } from '../../types';
 import { dataService } from '../../services/dataService';
+import { todayLocal } from '../../utils/localDate';
 
 const SmartDocInterface: React.FC = () => {
     const [file, setFile] = useState<File | null>(null);
@@ -51,7 +52,7 @@ const SmartDocInterface: React.FC = () => {
             description: content,
             priority: 'Moyenne',
             category: type,
-            dueDate: new Date().toISOString().split('T')[0],
+            dueDate: todayLocal(),
             isCompleted: false,
             createdAt: new Date().toISOString()
         };

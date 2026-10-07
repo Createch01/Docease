@@ -5,6 +5,7 @@ import { toastService } from '../services/toastService';
 import { Patient, PatientType } from '../types';
 import WhatsAppConsentField, { WhatsAppConsent } from './WhatsAppConsentField';
 import { calculateAgeYears, getAgeCategory, formatDate } from '../utils/formatters';
+import { todayLocal } from '../utils/localDate';
 
 interface Form {
   lastName: string;
@@ -138,7 +139,7 @@ const PatientDirectory: React.FC = () => {
             <input className={input} style={inputStyle} placeholder="Nom" aria-label="Nom" autoFocus value={form.lastName} onChange={e => set({ lastName: e.target.value })} />
             <input className={input} style={inputStyle} placeholder="Prénom" aria-label="Prénom" value={form.firstName} onChange={e => set({ firstName: e.target.value })} />
             <input className={input} style={inputStyle} placeholder="Téléphone" aria-label="Téléphone" type="tel" value={form.phone} onChange={e => set({ phone: e.target.value })} />
-            <input className={input} style={inputStyle} aria-label="Date de naissance" type="date" max={new Date().toISOString().split('T')[0]} value={form.dateOfBirth} onChange={e => set({ dateOfBirth: e.target.value })} />
+            <input className={input} style={inputStyle} aria-label="Date de naissance" type="date" max={todayLocal()} value={form.dateOfBirth} onChange={e => set({ dateOfBirth: e.target.value })} />
             <div className="flex gap-2 sm:col-span-2" role="radiogroup" aria-label="Sexe">
               {([['M', 'Homme'], ['F', 'Femme']] as const).map(([v, label]) => (
                 <button key={v} type="button" role="radio" aria-checked={form.sex === v} onClick={() => set({ sex: v })}

@@ -31,6 +31,7 @@ import { useAiEnabled } from '../services/useAiEnabled';
 import { settingsService } from '../services/settingsService';
 import { formatAge, formatNom } from '../utils/formatters';
 import PatientsList from './PatientsList';
+import { todayLocal } from '../utils/localDate';
 
 type DossierTab = 'overview' | 'consultation' | 'ordonnance' | 'analyses' | 'resultats' | 'vaccination' | 'antecedents' | 'constantes' | 'documents' | 'facture' | 'certificats';
 
@@ -176,7 +177,7 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
     if (!selectedPatientProfile) return;
     const cons: ClinicalConsultation = {
       id: Date.now().toString(),
-      date: new Date().toISOString().split('T')[0],
+      date: todayLocal(),
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       patientId: selectedPatientProfile.id,
       motif: newConsultation.motif || '',

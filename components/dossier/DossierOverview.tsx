@@ -9,6 +9,7 @@ import PatientTimeline from './PatientTimeline';
 import { EMPTY_STATES } from '../../constants/emptyStates';
 import { formatDate } from '../../utils/formatters';
 import { getActiveTreatment } from '../../utils/activeTreatment';
+import { todayLocal } from '../../utils/localDate';
 
 interface DossierOverviewProps {
     patientId: string;
@@ -46,7 +47,7 @@ const DossierOverview: React.FC<DossierOverviewProps> = ({
             .sort((a, b) => `${a.date}T${a.time || '00:00'}`.localeCompare(`${b.date}T${b.time || '00:00'}`));
     }, [patientId, patientName, refreshTrigger]);
 
-    const todayStr = new Date().toISOString().split('T')[0];
+    const todayStr = todayLocal();
     const upcomingAppointments = useMemo(() => patientAppointments.filter(a => a.date >= todayStr), [patientAppointments]);
     const pastAppointments = useMemo(() => [...patientAppointments].filter(a => a.date < todayStr).reverse(), [patientAppointments]);
 

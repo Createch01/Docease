@@ -9,6 +9,7 @@ import { canOutput } from '../../services/cabinetSetup';
 import { settingsService } from '../../services/settingsService';
 import AnalysisPrescriptionTemplate from '../AnalysisPrescriptionTemplate';
 import { COMMON_ANALYSES } from '../../constants/medicalData';
+import { todayLocal } from '../../utils/localDate';
 
 interface AnalysesSectionProps {
     patientId: string;
@@ -48,7 +49,7 @@ const AnalysesSection: React.FC<AnalysesSectionProps> = ({ patientId, patientNam
 
         const req: LabRequest = {
             id: Date.now().toString(),
-            date: new Date().toISOString().split('T')[0],
+            date: todayLocal(),
             title: titleToSave,
             tests: newLabRequest.tests,
             status: 'REQUESTED',

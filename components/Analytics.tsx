@@ -28,6 +28,7 @@ import { Expense, ExpenseCategory, EXPENSE_CATEGORIES, Patient } from '../types'
 // @ts-ignore
 import { toastService } from '../services/toastService';
 import { canOutput } from '../services/cabinetSetup';
+import { localDateStr, localMonthStr, todayLocal } from '../utils/localDate';
 
 type TimeRange = 'Jour' | 'Semaine' | 'Mois' | 'Année';
 
@@ -119,7 +120,7 @@ const Analytics: React.FC = () => {
     amount: 0,
     category: EXPENSE_CATEGORIES[0],
     categoryDetail: '',
-    date: new Date().toISOString().split('T')[0],
+    date: todayLocal(),
     receiptDataUrl: undefined,
     noReceiptConfirmed: false
   });
@@ -128,7 +129,7 @@ const Analytics: React.FC = () => {
   const getPastDate = (daysAgo: number) => {
     const d = new Date();
     d.setDate(d.getDate() - daysAgo);
-    return d.toISOString().split('T')[0];
+    return localDateStr(d);
   };
 
   // Helper pour formater les labels du graphique
@@ -176,7 +177,7 @@ const Analytics: React.FC = () => {
     } else if (timeRange === 'Mois') {
       for (let i = 11; i >= 0; i--) {
         const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-        const key = d.toISOString().substring(0, 7);
+        const key = localMonthStr(d);
         dataMap[key] = { key, label: formatLabel(d.toISOString(), 'Mois'), count: 0, revenue: 0, expense: 0 };
       }
     }
@@ -305,7 +306,7 @@ const Analytics: React.FC = () => {
       amount: 0,
       category: EXPENSE_CATEGORIES[0],
       categoryDetail: '',
-      date: new Date().toISOString().split('T')[0],
+      date: todayLocal(),
       receiptDataUrl: undefined,
       noReceiptConfirmed: false
     });
@@ -363,7 +364,7 @@ const Analytics: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Recap_Fiscal_${timeRange}_${new Date().toISOString().split('T')[0]}.csv`;
+    link.download = `Recap_Fiscal_${timeRange}_${todayLocal()}.csv`;
     link.click();
     URL.revokeObjectURL(url);
     toastService.success('Export CSV généré.');
@@ -375,7 +376,7 @@ const Analytics: React.FC = () => {
 
     const opt = {
       margin: 10,
-      filename: `Recap_Fiscal_${timeRange}_${new Date().toISOString().split('T')[0]}.pdf`,
+      filename: `Recap_Fiscal_${timeRange}_${todayLocal()}.pdf`,
       image: { type: 'jpeg' as const, quality: 0.98 },
       html2canvas: { scale: 2.5, useCORS: true },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },

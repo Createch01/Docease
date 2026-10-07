@@ -4,6 +4,7 @@ import { useI18n } from '../../i18n';
 import { dataService } from '../../services/dataService';
 import { ClinicalConsultation } from '../../types';
 import ConsultationAssistant from './ConsultationAssistant';
+import { todayLocal } from '../../utils/localDate';
 
 interface ConsultationSectionProps {
     patientId: string;
@@ -30,7 +31,7 @@ const ConsultationSection: React.FC<ConsultationSectionProps> = ({ patientId, pa
         if (!patientId) return;
         const cons: ClinicalConsultation = {
             id: Date.now().toString(),
-            date: new Date().toISOString().split('T')[0],
+            date: todayLocal(),
             time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             patientId: patientId,
             motif: newConsultation.motif || '',
