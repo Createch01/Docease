@@ -153,28 +153,19 @@ pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, 
     if !["CASH", "CARD", "TRANSFER"].contains(&mode) {
         return Err("Mode de paiement invalide.".to_string());
     }
-    let status = str_field(input, "status").unwrap_or("");
-    if !["PAID", "UNPAID", "PARTIAL"].contains(&status) {
-        return Err("Statut de paiement invalide.".to_string());
-    }
+    // Le statut n'est JAMAIS lu : il est calculé à partir du montant payé (« Réglé » = payé ≥ dû).
     let requested_paid = num_field(input, "amountPaid").unwrap_or(0.0);
     if !valid_amount(requested_paid) {
         return Err("Montant payé invalide.".to_string());
     }
 
     let finish = |note: &mut Value, total: f64| -> Result<(), String> {
-        let paid = match status {
-            "PAID" => total,
-            "UNPAID" => 0.0,
-            _ => {
-                if !(requested_paid > 0.0 && requested_paid < total) {
-                    return Err("Paiement partiel : le montant payé doit être entre 0 et le montant dû.".to_string());
-                }
-                requested_paid
-            }
-        };
+        if requested_paid > total {
+            return Err("Le montant payé ne peut pas dépasser le montant dû.".to_string());
+        }
+        let paid = requested_paid;
         let obj = note.as_object_mut().ok_or("Note corrompue.")?;
-        obj.insert("status".into(), json!(status));
+        obj.insert("status".into(), json!(super::numbering::status_for(paid, total)));
         obj.insert("paymentMode".into(), json!(mode));
         obj.insert("amountPaid".into(), json!(paid));
         Ok(())
@@ -457,14 +448,22 @@ mod tests {
     fn existing_payment_changes_never_touch_the_amount_due() {
         let mut notes = vec![note("a", "2026-10-01", 300.0, "UNPAID")];
         let patients = vec![full_patient()];
-        let input = json!({"id": "a", "totalAmount": 1.0, "paymentMode": "CARD", "status": "PARTIAL", "amountPaid": 100.0, "services": []});
+        let input = json!({"id": "a", "totalAmount": 1.0, "paymentMode": "CARD", "status": "PAID", "amountPaid": 100.0, "services": []});
         let v = apply_payment(&mut notes, &patients, &input, "2026-10-01", "n", "2026-0001").unwrap();
         assert_eq!(v["totalAmount"], 300.0, "tarif inchangé");
         assert_eq!(v["amountPaid"], 100.0);
+        assert_eq!(v["status"], "PARTIAL", "statut calculé, pas celui envoyé (PAID)");
         assert_eq!(notes[0]["services"][0]["name"], "Echo");
         assert_eq!(notes[0]["prescriptionId"], "rx-9");
+        // « Réglé » n'existe que si le montant payé couvre le dû.
         let paid = json!({"id": "a", "paymentMode": "CASH", "status": "PAID", "amountPaid": 0});
-        assert_eq!(apply_payment(&mut notes, &patients, &paid, "2026-10-01", "n", "2026-0001").unwrap()["amountPaid"], 300.0);
+        let v = apply_payment(&mut notes, &patients, &paid, "2026-10-01", "n", "2026-0001").unwrap();
+        assert_eq!((v["amountPaid"].as_f64(), v["status"].as_str()), (Some(0.0), Some("UNPAID")));
+        let full = json!({"id": "a", "paymentMode": "CASH", "amountPaid": 300.0});
+        let v = apply_payment(&mut notes, &patients, &full, "2026-10-01", "n", "2026-0001").unwrap();
+        assert_eq!((v["amountPaid"].as_f64(), v["status"].as_str()), (Some(300.0), Some("PAID")));
+        let over = json!({"id": "a", "paymentMode": "CASH", "amountPaid": 301.0});
+        assert!(apply_payment(&mut notes, &patients, &over, "2026-10-01", "n", "2026-0001").is_err());
     }
 
     #[test]
@@ -480,13 +479,13 @@ mod tests {
         };
         let mut n2: Vec<Value> = vec![];
         assert!(apply_payment(&mut n2, &patients, &new(json!({"paymentMode": "BITCOIN"})), "2026-10-01", "n", "2026-0001").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"status": "WAT"})), "2026-10-01", "n", "2026-0001").is_err());
         assert!(apply_payment(&mut n2, &patients, &new(json!({"totalAmount": -5})), "2026-10-01", "n", "2026-0001").is_err());
         assert!(apply_payment(&mut n2, &patients, &new(json!({"patientId": "inconnu"})), "2026-10-01", "n", "2026-0001").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"status": "PARTIAL", "amountPaid": 300.0})), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(apply_payment(&mut n2, &patients, &new(json!({"amountPaid": 301.0})), "2026-10-01", "n", "2026-0001").is_err());
         assert!(n2.is_empty());
-        let v = apply_payment(&mut n2, &patients, &new(json!({})), "2026-10-01", "n1", "2026-0001").unwrap();
-        assert_eq!(v["totalAmount"], 300.0);
+        // Une nouvelle note qui annonce « Réglé » sans aucun paiement reste « Non payé ».
+        let v = apply_payment(&mut n2, &patients, &new(json!({"status": "PAID"})), "2026-10-01", "n1", "2026-0001").unwrap();
+        assert_eq!((v["totalAmount"].as_f64(), v["status"].as_str(), v["amountPaid"].as_f64()), (Some(300.0), Some("UNPAID"), Some(0.0)));
         assert_eq!(n2[0]["patientName"], "DUPONT Jean", "nom pris du dossier, pas de la saisie");
         assert_eq!(n2[0]["invoiceNumber"], "2026-0001");
     }

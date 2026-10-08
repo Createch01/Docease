@@ -158,11 +158,57 @@ fn year_of(today: &str) -> Result<u32, String> {
     today.get(..4).and_then(|y| y.parse().ok()).ok_or_else(|| "Date système invalide.".to_string())
 }
 
+/// Statut de paiement CALCULÉ à partir des sommes : jamais saisi. « Réglé » seulement si le montant payé
+/// couvre le montant dû.
+pub fn status_for(paid: f64, total: f64) -> &'static str {
+    if total > 0.0 && paid >= total {
+        "PAID"
+    } else if paid > 0.0 {
+        "PARTIAL"
+    } else {
+        "UNPAID"
+    }
+}
+
+/// Montant payé « hérité » d'une note enregistrée avant le calcul du statut (statut PAID sans montant payé).
+fn legacy_paid(prior: &Value) -> f64 {
+    let total = prior.get("totalAmount").and_then(|v| v.as_f64()).unwrap_or(0.0);
+    match prior.get("status").and_then(|v| v.as_str()) {
+        Some("PAID") => total,
+        Some("PARTIAL") => prior.get("amountPaid").and_then(|v| v.as_f64()).unwrap_or(0.0),
+        _ => 0.0,
+    }
+}
+
+/// Le statut de la note vient du montant payé, jamais du statut envoyé. Une note nouvelle sans montant
+/// payé est « Non payé » (même si l'interface annonce « Réglé »). Une note enregistrée avant ce calcul et
+/// non modifiée garde son statut octet pour octet.
+fn derive_payment(obj: &mut serde_json::Map<String, Value>, prior: Option<&Value>) {
+    let total = obj.get("totalAmount").and_then(|v| v.as_f64()).unwrap_or(0.0);
+    let sent = obj.get("amountPaid").and_then(|v| v.as_f64());
+    let unchanged_legacy = sent.is_none() && prior.map_or(false, |p| p.get("totalAmount").and_then(|v| v.as_f64()).unwrap_or(0.0) == total);
+    if unchanged_legacy {
+        if let Some(st) = prior.and_then(|p| p.get("status")).cloned() {
+            obj.insert("status".into(), st);
+        }
+        return;
+    }
+    let paid = match sent {
+        Some(v) => v.max(0.0),
+        None => prior.map_or(0.0, legacy_paid),
+    };
+    let status = status_for(paid, total);
+    if obj.get("status").and_then(|v| v.as_str()) != Some(status) {
+        obj.insert("status".into(), Value::String(status.to_string()));
+    }
+}
+
 /// Règles de numérotation appliquées à une écriture complète de la liste des notes (pur, testable).
 /// - note stockée annulée : réimposée telle quelle (figée) ;
 /// - note stockée numérotée : numéro et date stockés réimposés, champs d'annulation retirés ;
 /// - note stockée sans numéro : numérotée (sa date n'est pas réécrite) ;
 /// - note nouvelle : numérotée, date = jour d'émission ;
+/// - statut de paiement toujours recalculé à partir du montant payé (`derive_payment`) ;
 /// - note numérotée absente de la liste envoyée : conservée (une note numérotée ne se supprime pas).
 pub fn apply(stored: &[Value], incoming: Vec<Value>, counter: &mut Counter, today: &str) -> Result<Vec<Value>, String> {
     let year = year_of(today)?;
@@ -175,6 +221,7 @@ pub fn apply(stored: &[Value], incoming: Vec<Value>, counter: &mut Counter, toda
         }
         let id = obj.get("id").and_then(|v| v.as_str()).unwrap_or("").to_string();
         let prev = if id.is_empty() { None } else { stored.iter().find(|s| id_of(s) == id) };
+        let prior_for_status = prev.filter(|p| !is_cancelled(p));
         match prev {
             Some(p) if is_cancelled(p) => {
                 seen.push(id);
@@ -196,6 +243,7 @@ pub fn apply(stored: &[Value], incoming: Vec<Value>, counter: &mut Counter, toda
                 obj.insert("date".into(), Value::String(today.to_string()));
             }
         }
+        derive_payment(obj, prior_for_status);
         if !id.is_empty() {
             seen.push(id);
         }

@@ -271,7 +271,7 @@ fn a_note_with_valid_receipts_is_cancelled_only_after_its_receipts() {
     use crate::receipts::{self, Actor};
     let d = tmp("cancelreceipts");
     write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
-    save(&d, vec![note("a", "", "")], TODAY).unwrap();
+    save(&d, vec![with_payment("a", 300.0, "UNPAID", Some(300.0))], TODAY).unwrap();
     let doctor = Actor { name: "Dr".into(), role: Role::Medecin };
     let r = receipts::issue(&d, &KEY, "a", false, &doctor, "2026-10-08T09:00:00Z", TODAY).unwrap();
     assert!(cancel_ok(&d, "a").unwrap_err().contains("reçus valides"));
@@ -321,7 +321,7 @@ fn assistant_payment_uses_the_counter_and_shares_it_with_the_doctor() {
     assert_eq!(number_of(&stored[2]), "2026-0003");
     assert_eq!(v.get("invoiceNumber"), None, "le numéro n'est pas dans la vue de l'assistante");
     // Une retouche d'une note existante ne consomme rien ; un numéro envoyé par l'assistante est ignoré.
-    let v2 = save_payment(&d, &KEY, &new(json!({"id": "pay1", "status": "PAID", "invoiceNumber": "2026-0500"})), TODAY, "x").unwrap();
+    let v2 = save_payment(&d, &KEY, &new(json!({"id": "pay1", "amountPaid": 300, "invoiceNumber": "2026-0500"})), TODAY, "x").unwrap();
     assert_eq!(v2["status"], "PAID");
     assert_eq!(number_of(&read_notes(&d, &KEY)[2]), "2026-0003");
     assert_eq!(load_counter(&d, &KEY).get(2026), 3);
@@ -400,4 +400,66 @@ fn counter_file_is_reserved_and_the_journal_stays_content_free() {
             assert!(!line.contains(banned), "{line}");
         }
     }
+}
+
+// ─── Statut de paiement calculé ──────────────────────────────────────────────
+
+fn with_payment(id: &str, total: f64, claimed: &str, paid: Option<f64>) -> Value {
+    let mut n = json!({"id": id, "patientId": "p1", "date": "d", "invoiceNumber": "", "totalAmount": total, "status": claimed, "paymentMode": "CASH"});
+    if let Some(p) = paid {
+        n["amountPaid"] = json!(p);
+    }
+    n
+}
+
+#[test]
+fn status_is_computed_from_the_amount_paid_never_taken_from_the_frontend() {
+    assert_eq!((status_for(300.0, 300.0), status_for(350.0, 300.0), status_for(200.0, 300.0), status_for(0.0, 300.0), status_for(0.0, 0.0)), ("PAID", "PAID", "PARTIAL", "UNPAID", "UNPAID"));
+    let d = tmp("status");
+    // Le frontend annonce « Réglé » partout : seul le montant payé compte.
+    let out = save(&d, vec![
+        with_payment("a", 300.0, "PAID", None),
+        with_payment("b", 300.0, "PAID", Some(200.0)),
+        with_payment("c", 300.0, "UNPAID", Some(300.0)),
+        with_payment("d", 300.0, "PARTIAL", Some(-5.0)),
+        with_payment("e", 300.0, "PAID", Some(0.0)),
+    ], TODAY).unwrap();
+    let st: Vec<&str> = out.iter().map(|n| n["status"].as_str().unwrap()).collect();
+    assert_eq!(st, vec!["UNPAID", "PARTIAL", "PAID", "UNPAID", "UNPAID"]);
+    // Complément de paiement sur une note existante : repasse à « Réglé » seulement à 300.
+    let mut b = out[1].clone();
+    b["amountPaid"] = json!(299.99);
+    assert_eq!(save(&d, vec![b.clone()], TODAY).unwrap().iter().find(|n| n["id"] == "b").unwrap()["status"], "PARTIAL");
+    b["amountPaid"] = json!(300);
+    assert_eq!(save(&d, vec![b], TODAY).unwrap().iter().find(|n| n["id"] == "b").unwrap()["status"], "PAID");
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn a_stored_unpaid_note_cannot_be_flipped_to_paid_by_claiming_it() {
+    let d = tmp("flip");
+    let first = save(&d, vec![with_payment("a", 300.0, "UNPAID", None)], TODAY).unwrap();
+    let mut claim = first[0].clone();
+    claim["status"] = json!("PAID");
+    assert_eq!(save(&d, vec![claim], TODAY).unwrap()[0]["status"], "UNPAID");
+    // Montant dû relevé sur une note réglée sans montant payé enregistré (héritée) : devient partielle.
+    write_enc_json_in(&d, &KEY, NOTES_FILE, &json!([with_payment("old", 300.0, "PAID", None)])).unwrap();
+    let mut raised = read_notes(&d, &KEY)[0].clone();
+    raised["totalAmount"] = json!(500);
+    assert_eq!(save(&d, vec![raised], TODAY).unwrap()[0]["status"], "PARTIAL");
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn legacy_notes_keep_their_status_and_bytes_when_untouched() {
+    let d = tmp("legacy-status");
+    let legacy = vec![with_payment("p", 300.0, "PAID", None), with_payment("u", 100.0, "UNPAID", None), with_payment("z", 0.0, "PAID", None), with_payment("h", 500.0, "PARTIAL", Some(200.0))];
+    let mut numbered = legacy.clone();
+    for (i, n) in numbered.iter_mut().enumerate() {
+        n["invoiceNumber"] = json!(format!("2026-{:04}", i + 1));
+    }
+    write_enc_json_in(&d, &KEY, NOTES_FILE, &Value::Array(numbered.clone())).unwrap();
+    let out = save(&d, numbered.clone(), TODAY).unwrap();
+    assert_eq!(out, numbered);
+    let _ = fs::remove_dir_all(&d);
 }
