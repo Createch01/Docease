@@ -28,6 +28,15 @@ const HonoraryNoteTemplate: React.FC<HonoraryNoteTemplateProps> = ({ doctor, not
             scale={scale}
         >
             <div style={{ padding: '0 80px' }}>
+                {note.invoiceNumber && (
+                    <div data-testid="note-number" style={{ fontSize: '40px', fontWeight: 900, color: '#475569', marginBottom: '40px', fontFamily: 'monospace' }}>N° {note.invoiceNumber}</div>
+                )}
+                {note.cancelledAt && (
+                    <div data-testid="note-cancelled" style={{ border: '8px solid #b91c1c', color: '#b91c1c', padding: '30px 50px', marginBottom: '50px', fontWeight: 900, fontSize: '44px', textAlign: 'center' }}>
+                        NOTE ANNULÉE le {note.cancelledAt.slice(0, 10)}
+                        {note.cancellationReason && <div style={{ fontSize: '32px', fontWeight: 700, marginTop: '14px' }}>Motif : {note.cancellationReason}</div>}
+                    </div>
+                )}
                 {/* Nature de prestation (Listed Professional Table) */}
                 <div style={{ marginBottom: '60px' }}>
                     <h3 style={{ fontSize: '48px', fontWeight: 900, marginBottom: '50px', color: '#1e293b', textTransform: 'uppercase', borderBottom: '6px solid #4e84c4', paddingBottom: '20px', width: 'fit-content' }}>

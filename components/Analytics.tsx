@@ -358,6 +358,12 @@ const Analytics: React.FC = () => {
     rows.push(`${csvEscape('Total dépenses')};${totalExpensesPeriod.toFixed(2)}`);
     rows.push('');
     rows.push(`${csvEscape('Résultat net')};${netProfit.toFixed(2)}`);
+    // Notes annulées : hors totaux, mais leur numéro reste visible dans l'export.
+    const cancelledInPeriod = dataService.getAllHonoraryNotes().filter(n => n.cancelledAt && isInPeriod(n.date, periodStart, periodEnd));
+    if (cancelledInPeriod.length > 0) {
+      rows.push('');
+      rows.push(`${csvEscape('Notes annulées (hors totaux)')};${csvEscape(cancelledInPeriod.map(n => n.invoiceNumber).join(' '))}`);
+    }
 
     const csvContent = '﻿' + rows.join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });

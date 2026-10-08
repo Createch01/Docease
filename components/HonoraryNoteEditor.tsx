@@ -88,12 +88,9 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
         setServices(services.filter(s => s.name !== name));
     };
 
-    const handleSave = () => {
-        // Generate sequential invoice number
-        const existingNotes = dataService.getHonoraryNotes();
-        const currentYear = new Date().getFullYear();
-        const notesThisYear = existingNotes.filter(n => n.date.startsWith(currentYear.toString()));
-        const invoiceNumber = `${currentYear}-${String(notesThisYear.length + 1).padStart(4, '0')}`;
+    const handleSave = async () => {
+        // Le numéro et la date d'émission sont attribués par Rust à l'enregistrement.
+        const invoiceNumber = '';
 
         const note: HonoraryNote = {
             id: Date.now().toString(),
@@ -111,8 +108,8 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
             paymentMode
         };
 
-        dataService.saveHonoraryNote(note);
-        setSavedNote(note);
+        const stored = await dataService.saveHonoraryNote(note);
+        setSavedNote(stored);
         setIsPreview(true);
         window.dispatchEvent(new Event('meddoc_data_update'));
     };
@@ -174,9 +171,10 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
                             {/* Basic Info */}
                             <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-1">
-                                    <label className="text-[10px] font-black text-gray-400 uppercase ml-2">Date</label>
-                                    <input type="date" value={date} onChange={e => setDate(e.target.value)}
-                                        className="w-full p-3.5 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-sm outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all" />
+                                    <label className="text-[10px] font-black text-gray-400 uppercase ml-2">Date et numéro</label>
+                                    <div className="w-full p-3.5 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-sm text-gray-500" data-testid="note-date-readonly">
+                                        Jour de l'émission ({date}) — numéro attribué à l'enregistrement
+                                    </div>
                                 </div>
                                 <div className="space-y-1">
                                     <label className="text-[10px] font-black text-gray-400 uppercase ml-2">Mode de Paiement</label>

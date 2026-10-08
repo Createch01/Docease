@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock, Receipt } from 'lucide-react';
+import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock, Receipt, Ban } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import { HonoraryNote, HonoraryMasterService } from '../../types';
 import { billingService } from '../../services/billingService';
@@ -7,6 +7,7 @@ import { useI18n } from '../../i18n';
 import { ReceiptView, formatCents, receiptService, STATUS_LABEL } from '../../services/receiptService';
 import { toastService } from '../../services/toastService';
 import ReceiptModal from '../ReceiptModal';
+import CancelNoteDialog from '../CancelNoteDialog';
 import { CancelReceiptDialog, ReceiptIssueDialog } from '../ReceiptDialogs';
 
 interface FinancesSectionProps {
@@ -27,7 +28,10 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
     onPreviewNote
 }) => {
     const { t, lang, dir } = useI18n();
-    const honoraryNotes = useMemo(() => dataService.getHonoraryNotes(patientId), [patientId, refreshTrigger]);
+    // Liste : toutes les notes, annulées comprises (numéro conservé). Montants : notes actives seulement.
+    const honoraryNotes = useMemo(() => dataService.getAllHonoraryNotes(patientId), [patientId, refreshTrigger]);
+    const activeNotes = useMemo(() => honoraryNotes.filter(n => !n.cancelledAt), [honoraryNotes]);
+    const [cancelNote, setCancelNote] = useState<HonoraryNote | null>(null);
     const [toast, setToast] = useState<string | null>(null);
 
     // Reçus de ce patient (registre tenu par Rust) : émission, duplicata, annulation par reçu d'annulation.
@@ -43,9 +47,9 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
     };
 
     const stats = useMemo(() => {
-        const { total, collected, outstanding } = billingService.computeStats(honoraryNotes);
+        const { total, collected, outstanding } = billingService.computeStats(activeNotes);
         return { total, paid: collected, balance: outstanding };
-    }, [honoraryNotes]);
+    }, [activeNotes]);
 
     const handleQuickInvoice = () => {
         const note = billingService.buildQuickInvoice({ patientId, patientName, currency });
@@ -56,6 +60,7 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
     };
 
     const cycleStatus = (note: HonoraryNote) => {
+        if (note.cancelledAt) return;
         const order: HonoraryNote['status'][] = ['UNPAID', 'PARTIAL', 'PAID'];
         const next = order[(order.indexOf(note.status) + 1) % order.length];
         const updated: HonoraryNote = {
@@ -126,8 +131,13 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                     </thead>
                     <tbody>
                         {honoraryNotes.length > 0 ? honoraryNotes.map(note => (
-                            <tr key={note.id} className="border-b border-gray-50 text-[11px] font-black hover:bg-emerald-50/20 transition-all group">
-                                <td className="p-6 text-gray-400 font-mono">#{note.invoiceNumber}</td>
+                            <tr key={note.id} className={`border-b border-gray-50 text-[11px] font-black hover:bg-emerald-50/20 transition-all group ${note.cancelledAt ? 'opacity-60' : ''}`}>
+                                <td className="p-6 text-gray-400 font-mono">
+                                    #{note.invoiceNumber || '—'}
+                                    {note.cancelledAt && (
+                                        <span title={`Annulée le ${note.cancelledAt.slice(0, 10)} par ${note.cancelledBy ?? ''} — ${note.cancellationReason ?? ''}`} className="ml-2 px-2 py-0.5 rounded-lg bg-red-100 text-red-700 text-[9px] uppercase tracking-widest">Annulée</span>
+                                    )}
+                                </td>
                                 <td className="p-6">
                                     <div className="flex items-center gap-2">
                                         <span className="w-2 h-2 rounded-full bg-emerald-500/20" />
@@ -139,14 +149,15 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                         {note.services.filter(s => s.checked).map(s => s.name).join(', ') || 'Consultation'}
                                     </div>
                                 </td>
-                                <td className={`p-6 text-lg ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>
+                                <td className={`p-6 text-lg ${dir === 'rtl' ? 'text-left' : 'text-right'} ${note.cancelledAt ? 'line-through' : ''}`}>
                                     <span className="text-emerald-700">{note.totalAmount}</span>
                                     <span className="text-[10px] text-gray-300 ml-1 ml-1">{currency}</span>
                                 </td>
                                 <td className="p-6 text-center">
                                     <button
                                         onClick={() => cycleStatus(note)}
-                                        title="Cliquer pour changer le statut"
+                                        disabled={!!note.cancelledAt}
+                                        title={note.cancelledAt ? `Note annulée : ${note.cancellationReason ?? ''}` : 'Cliquer pour changer le statut'}
                                         className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest inline-flex items-center gap-2 transition-all hover:scale-105 ${note.status === 'PAID' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : note.status === 'PARTIAL' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-red-50 text-red-600 border border-red-100'}`}
                                     >
                                         {note.status === 'PAID' ? <CheckCircle size={10} /> : note.status === 'PARTIAL' ? <Clock size={10} /> : <div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />}
@@ -155,7 +166,7 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                 </td>
                                 <td className={`p-6 shrink-0 ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>
                                     <div className={`flex justify-end gap-2 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
-                                        {note.status !== 'UNPAID' && (
+                                        {note.status !== 'UNPAID' && !note.cancelledAt && (
                                             <button onClick={() => setIssueFor(note.id)} title="Émettre un reçu" className="p-3 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-100 rounded-2xl transition-all shadow-sm">
                                                 <Receipt size={18} />
                                             </button>
@@ -163,14 +174,21 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                         <button onClick={() => onPreviewNote(note)} title={t('overview')} className="p-3 bg-white text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-100 rounded-2xl transition-all shadow-sm hover:shadow-emerald-100">
                                             <FileText size={18} />
                                         </button>
-                                        <button onClick={() => {
-                                            if (window.confirm(t('delete_honorary_note_confirm'))) {
-                                                dataService.deleteHonoraryNote(note.id);
-                                                window.dispatchEvent(new Event('meddoc_data_update'));
-                                            }
-                                        }} title={t('delete')} className="p-3 bg-white text-gray-400 hover:bg-red-500 hover:text-white border border-gray-100 hover:border-red-400 rounded-2xl transition-all">
-                                            <Trash2 size={18} />
-                                        </button>
+                                        {note.invoiceNumber ? (
+                                            !note.cancelledAt && (
+                                                <button onClick={() => setCancelNote(note)} title="Annuler la note (le numéro est conservé)" className="p-3 bg-white text-gray-400 hover:bg-red-500 hover:text-white border border-gray-100 hover:border-red-400 rounded-2xl transition-all">
+                                                    <Ban size={18} />
+                                                </button>
+                                            )
+                                        ) : (
+                                            <button onClick={() => {
+                                                if (window.confirm(t('delete_honorary_note_confirm'))) {
+                                                    dataService.deleteHonoraryNote(note.id).then(() => window.dispatchEvent(new Event('meddoc_data_update'))).catch(e => toastService.error(e instanceof Error ? e.message : 'Suppression impossible.'));
+                                                }
+                                            }} title={t('delete')} className="p-3 bg-white text-gray-400 hover:bg-red-500 hover:text-white border border-gray-100 hover:border-red-400 rounded-2xl transition-all">
+                                                <Trash2 size={18} />
+                                            </button>
+                                        )}
                                     </div>
                                 </td>
                             </tr>
@@ -215,6 +233,7 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
 
             {issueFor && <ReceiptIssueDialog noteId={issueFor} onClose={() => setIssueFor(null)} onIssued={r => { setIssueFor(null); setOpenReceipt(r); loadReceipts(); }} />}
             {cancelFor && <CancelReceiptDialog receipt={cancelFor} onClose={() => setCancelFor(null)} onCancelled={r => { setCancelFor(null); setOpenReceipt(r); loadReceipts(); }} />}
+            {cancelNote && <CancelNoteDialog note={cancelNote} onClose={() => setCancelNote(null)} onCancelled={() => { setCancelNote(null); window.dispatchEvent(new Event('meddoc_data_update')); loadReceipts(); }} />}
             {openReceipt && <ReceiptModal receipt={openReceipt} onClose={() => setOpenReceipt(null)} />}
         </div>
     );

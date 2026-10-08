@@ -247,6 +247,10 @@ export interface HonoraryNote {
   paymentMode: 'CASH' | 'CARD' | 'TRANSFER';
   includeCin?: string;
   includePhone?: string;
+  /** Posés par Rust seulement (annulation d'une note numérotée) : jamais par l'interface. */
+  cancelledAt?: string;
+  cancelledBy?: string;
+  cancellationReason?: string;
 }
 
 export type FontSizeOption = 'small' | 'medium' | 'large';

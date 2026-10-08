@@ -6,6 +6,7 @@ import { normalizeRoute } from './settingsRoutes';
 import { SettingsPageFrame, SettingsCard, TextField, TextAreaField, ImageField, SettingsLink, Toggle } from './SettingsUI';
 import { useDoctorDraft } from './useDoctorDraft';
 import ReceiptsRegistryCard from './ReceiptsRegistryCard';
+import NumberingCard from './NumberingCard';
 import { sessionService } from '../../services/sessionService';
 import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 import { SettingsPageProps } from './ProfileSettings';
@@ -92,6 +93,7 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
           </SettingsCard>
 
           {sessionService.isMedecin() && <ReceiptsRegistryCard />}
+          {sessionService.isMedecin() && <NumberingCard />}
         </div>
       )}
 

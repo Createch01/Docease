@@ -3,16 +3,7 @@ import { dataService } from './dataService';
 import { formatCurrencyToWords } from '../utils/numberToWords';
 import { todayLocal } from '../utils/localDate';
 
-const generateInvoiceNumber = (): string => {
-    const existingNotes = dataService.getHonoraryNotes();
-    const currentYear = new Date().getFullYear();
-    const notesThisYear = existingNotes.filter(n => n.date.startsWith(currentYear.toString()));
-    return `${currentYear}-${String(notesThisYear.length + 1).padStart(4, '0')}`;
-};
-
 export const billingService = {
-    generateInvoiceNumber,
-
     // Builds (but does not save) a quick honorary note for a patient, defaulting to the
     // practice's standard consultation fee. Reused by FinancesSection's Quick Invoice
     // button and by PrescriptionEditor's "create the matching invoice?" prompt.
@@ -34,7 +25,7 @@ export const billingService = {
             patientName: params.patientName,
             prescriptionId: params.prescriptionId,
             date: todayLocal(),
-            invoiceNumber: generateInvoiceNumber(),
+            invoiceNumber: '', // attribué par Rust à l'enregistrement (compteur), jamais calculé ici
             services: [{ name: consultationService.name, price: total, checked: true }],
             totalAmount: total,
             totalInWords: formatCurrencyToWords(total, params.currency),

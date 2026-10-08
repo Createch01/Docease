@@ -672,27 +672,49 @@ export const dataService = {
   },
 
   // --- HONORARY NOTES ---
-  getHonoraryNotes: (patientId?: string): HonoraryNote[] => {
+  /** Toutes les notes, annulées comprises (liste du dossier, écriture). */
+  getAllHonoraryNotes: (patientId?: string): HonoraryNote[] => {
     const storageKey = STORAGE_KEYS.HONORARY_NOTES;
     const all: HonoraryNote[] = cache[storageKey] || [];
     return patientId ? all.filter(n => n.patientId === patientId) : all;
   },
 
-  saveHonoraryNote: async (note: HonoraryNote) => {
+  /** Notes actives : une note annulée ne compte plus dans les montants, impayés ni statistiques. */
+  getHonoraryNotes: (patientId?: string): HonoraryNote[] =>
+    dataService.getAllHonoraryNotes(patientId).filter(n => !n.cancelledAt),
+
+  /** Relit les notes telles que Rust les a enregistrées (numéro, date, annulation). */
+  reloadHonoraryNotes: async () => {
     const storageKey = STORAGE_KEYS.HONORARY_NOTES;
-    const all = dataService.getHonoraryNotes();
+    if (typeof (window as any).__TAURI_INTERNALS__ === 'undefined') return;
+    cache[storageKey] = await storageService.load<HonoraryNote[]>(storageKey, cache[storageKey] || []);
+    notifyUpdate(storageKey);
+  },
+
+  /**
+   * Enregistre la note et renvoie la note TELLE QUE STOCKÉE : le numéro et la date d'émission sont
+   * attribués par Rust (compteur), jamais calculés ici.
+   */
+  saveHonoraryNote: async (note: HonoraryNote): Promise<HonoraryNote> => {
+    const storageKey = STORAGE_KEYS.HONORARY_NOTES;
+    const all = dataService.getAllHonoraryNotes();
     const index = all.findIndex(n => n.id === note.id);
     if (index !== -1) all[index] = note;
     else all.push(note);
 
     cache[storageKey] = all;
     await storageService.save(storageKey, all);
+    await dataService.reloadHonoraryNotes();
     notifyUpdate(storageKey);
+    return dataService.getAllHonoraryNotes().find(n => n.id === note.id) ?? note;
   },
 
+  /** Seule une note jamais numérotée se supprime ; une note numérotée s'annule (honoraryNoteService.cancel). */
   deleteHonoraryNote: async (id: string) => {
     const storageKey = STORAGE_KEYS.HONORARY_NOTES;
-    const all = dataService.getHonoraryNotes().filter(n => n.id !== id);
+    const existing = dataService.getAllHonoraryNotes().find(n => n.id === id);
+    if (existing?.invoiceNumber) throw new Error('Une note numérotée ne peut pas être supprimée : annulez-la.');
+    const all = dataService.getAllHonoraryNotes().filter(n => n.id !== id);
     cache[storageKey] = all;
     await storageService.save(storageKey, all);
     notifyUpdate(storageKey);
