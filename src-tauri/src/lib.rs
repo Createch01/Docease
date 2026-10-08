@@ -495,22 +495,27 @@ mod tests {
 
         // A phrase with one word swapped must fail the BIP39 checksum, not silently
         // "recover" garbage.
-        // Remplacer le dernier mot casse la somme de contrôle dans la grande majorité des cas, pas dans tous
-        // (quelques bits de contrôle seulement) : un seul essai donnait un test instable. On essaie donc
-        // plusieurs mots et on exige que la grande majorité soit refusée.
+        // Déterministe : on cherche dans la liste BIP39 un mot de remplacement dont la bibliothèque elle-même
+        // CONFIRME que la phrase reste composée de mots valides mais que sa somme de contrôle est invalide
+        // (vérification indépendante de `parse_recovery_phrase`), puis on exige que la récupération la refuse.
+        use bip39::{Error as Bip39Error, Language};
         let words: Vec<&str> = phrase.split_whitespace().collect();
         let last = words.len() - 1;
-        let candidates = ["abandon", "ability", "able", "about", "above", "absent", "absorb", "abstract", "absurd", "abuse", "access", "accident", "account", "accuse", "achieve", "acid", "acoustic", "acquire", "across", "act"];
-        let (mut tried, mut refused) = (0, 0);
-        for c in candidates.iter().filter(|c| **c != words[last]) {
-            let mut w = words.clone();
-            w[last] = c;
-            tried += 1;
-            if parse_recovery_phrase(&w.join(" ")).is_err() {
-                refused += 1;
-            }
-        }
-        assert!(refused * 4 >= tried * 3, "somme de contrôle : {refused} refus sur {tried} essais");
+        let bad_checksum = Language::English
+            .word_list()
+            .iter()
+            .filter(|c| **c != words[last])
+            .map(|c| {
+                let mut w = words.clone();
+                w[last] = c;
+                w.join(" ")
+            })
+            .find(|candidate| {
+                Mnemonic::parse_in_normalized_without_checksum_check(Language::English, candidate).is_ok()
+                    && matches!(Mnemonic::parse_in_normalized(Language::English, candidate), Err(Bip39Error::InvalidChecksum))
+            })
+            .expect("au moins un mot de remplacement rend la somme de contrôle invalide");
+        assert!(parse_recovery_phrase(&bad_checksum).is_err(), "somme de contrôle invalide : récupération refusée");
         // Un mot inconnu est toujours refusé.
         let mut unknown = words.clone();
         unknown[last] = "zzzzzz";
