@@ -203,10 +203,57 @@ fn derive_payment(obj: &mut serde_json::Map<String, Value>, prior: Option<&Value
     }
 }
 
+/// Année d'une date `AAAA-MM-JJ` ; sinon repli sur l'année du jour.
+fn year_of_date(date: &str, fallback: u32) -> u32 {
+    date.get(..4).filter(|y| y.bytes().all(|b| b.is_ascii_digit())).and_then(|y| y.parse().ok()).unwrap_or(fallback)
+}
+
+/// Numéros des notes HÉRITÉES (stockées sans numéro) : uniques, attribués dans l'ORDRE CHRONOLOGIQUE de
+/// leur date (à date égale, ordre du fichier), avec l'année DE LEUR DATE, à la suite du compteur de cette
+/// année. `only` : si fourni, seules ces notes (celles de l'écriture en cours) sont numérotées, pour ne pas
+/// consommer de numéro pour une note en cours de suppression. Les doublons déjà numérotés ne sont jamais
+/// touchés.
+fn legacy_assignments(stored: &[Value], counter: &mut Counter, today_year: u32, only: Option<&[String]>) -> BTreeMap<String, String> {
+    let mut todo: Vec<(String, usize, &Value)> = stored
+        .iter()
+        .enumerate()
+        .filter(|(_, n)| !has_number(n) && !is_cancelled(n) && !id_of(n).is_empty() && only.map_or(true, |ids| ids.iter().any(|i| i == id_of(n))))
+        .map(|(i, n)| (n.get("date").and_then(|d| d.as_str()).unwrap_or("").to_string(), i, n))
+        .collect();
+    todo.sort_by(|a, b| (a.0.as_str(), a.1).cmp(&(b.0.as_str(), b.1)));
+    let mut out = BTreeMap::new();
+    for (date, _, n) in todo {
+        out.insert(id_of(n).to_string(), counter.next(year_of_date(&date, today_year)));
+    }
+    out
+}
+
+/// Migration explicite (médecin) : numérote d'un coup toutes les notes héritées sans numéro, dans l'ordre
+/// chronologique, sans modifier leur date ni aucun autre champ. Renvoie le nombre de notes numérotées.
+pub fn migrate_legacy(dir: &Path, key: &[u8; KEY_LEN], today: &str) -> Result<usize, String> {
+    let year = year_of(today)?;
+    let (mut pending, mut notes) = begin(dir, key, true)?;
+    let assigned = legacy_assignments(&notes, &mut pending.counter, year, None);
+    if assigned.is_empty() {
+        return Ok(0);
+    }
+    for n in notes.iter_mut() {
+        if let Some(num) = assigned.get(id_of(n)) {
+            if let Some(o) = n.as_object_mut() {
+                o.insert("invoiceNumber".into(), Value::String(num.clone()));
+            }
+        }
+    }
+    write_enc_json_in(dir, key, NOTES_FILE, &Value::Array(notes))?;
+    pending.commit()?;
+    Ok(assigned.len())
+}
+
 /// Règles de numérotation appliquées à une écriture complète de la liste des notes (pur, testable).
 /// - note stockée annulée : réimposée telle quelle (figée) ;
 /// - note stockée numérotée : numéro et date stockés réimposés, champs d'annulation retirés ;
-/// - note stockée sans numéro : numérotée (sa date n'est pas réécrite) ;
+/// - note stockée sans numéro (héritée) : numérotée dans l'ordre chronologique de sa date, avec l'année de sa
+///   date (sa date n'est pas réécrite) ;
 /// - note nouvelle : numérotée, date = jour d'émission ;
 /// - statut de paiement toujours recalculé à partir du montant payé (`derive_payment`) ;
 /// - note numérotée absente de la liste envoyée : conservée (une note numérotée ne se supprime pas).
@@ -214,6 +261,9 @@ pub fn apply(stored: &[Value], incoming: Vec<Value>, counter: &mut Counter, toda
     let year = year_of(today)?;
     let mut out: Vec<Value> = Vec::with_capacity(incoming.len());
     let mut seen: Vec<String> = Vec::new();
+    // Notes héritées sans numéro présentes dans cette écriture : numérotées d'abord, dans l'ordre chronologique.
+    let incoming_ids: Vec<String> = incoming.iter().map(|n| id_of(n).to_string()).filter(|i| !i.is_empty()).collect();
+    let legacy = legacy_assignments(stored, counter, year, Some(&incoming_ids));
     for mut n in incoming {
         let obj = n.as_object_mut().ok_or("Note invalide.")?;
         for f in CANCEL_FIELDS {
@@ -236,7 +286,8 @@ pub fn apply(stored: &[Value], incoming: Vec<Value>, counter: &mut Counter, toda
                 };
             }
             Some(_) => {
-                obj.insert("invoiceNumber".into(), Value::String(counter.next(year)));
+                let num = legacy.get(&id).cloned().unwrap_or_else(|| counter.next(year));
+                obj.insert("invoiceNumber".into(), Value::String(num));
             }
             None => {
                 obj.insert("invoiceNumber".into(), Value::String(counter.next(year)));
@@ -410,6 +461,20 @@ pub fn honorary_note_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: 
     let key = data_key_of(&state)?;
     let r = cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &session.name, &util::now_iso());
     audit::log(&app, Some(&session), "note_cancel", if r.is_ok() { &id } else { "refusé" }, r.is_ok());
+    r
+}
+
+/// Migration des notes héritées sans numéro (médecin) : lancée à l'ouverture de la session médecin.
+#[tauri::command]
+pub fn invoice_numbering_migrate<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<usize, String> {
+    let session = require_session(gate(&app, &state, "invoice_numbering_migrate")?)?;
+    let key = data_key_of(&state)?;
+    let r = migrate_legacy(&data_dir(&app)?, &key, &util::today_local());
+    if let Ok(n) = &r {
+        if *n > 0 {
+            audit::log(&app, Some(&session), "note_numbering_migrate", &format!("{n} note(s)"), true);
+        }
+    }
     r
 }
 

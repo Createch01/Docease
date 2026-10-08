@@ -495,11 +495,26 @@ mod tests {
 
         // A phrase with one word swapped must fail the BIP39 checksum, not silently
         // "recover" garbage.
-        let mut words: Vec<&str> = phrase.split_whitespace().collect();
+        // Remplacer le dernier mot casse la somme de contrôle dans la grande majorité des cas, pas dans tous
+        // (quelques bits de contrôle seulement) : un seul essai donnait un test instable. On essaie donc
+        // plusieurs mots et on exige que la grande majorité soit refusée.
+        let words: Vec<&str> = phrase.split_whitespace().collect();
         let last = words.len() - 1;
-        words[last] = if words[last] == "abandon" { "ability" } else { "abandon" };
-        let tampered = words.join(" ");
-        assert!(parse_recovery_phrase(&tampered).is_err());
+        let candidates = ["abandon", "ability", "able", "about", "above", "absent", "absorb", "abstract", "absurd", "abuse", "access", "accident", "account", "accuse", "achieve", "acid", "acoustic", "acquire", "across", "act"];
+        let (mut tried, mut refused) = (0, 0);
+        for c in candidates.iter().filter(|c| **c != words[last]) {
+            let mut w = words.clone();
+            w[last] = c;
+            tried += 1;
+            if parse_recovery_phrase(&w.join(" ")).is_err() {
+                refused += 1;
+            }
+        }
+        assert!(refused * 4 >= tried * 3, "somme de contrôle : {refused} refus sur {tried} essais");
+        // Un mot inconnu est toujours refusé.
+        let mut unknown = words.clone();
+        unknown[last] = "zzzzzz";
+        assert!(parse_recovery_phrase(&unknown.join(" ")).is_err());
     }
 
     /// A syntactically valid phrase that simply belongs to a different install must
@@ -579,6 +594,7 @@ pub fn run() {
         receipts::receipts_verify,
         numbering::honorary_note_cancel,
         numbering::invoice_numbering_check,
+        numbering::invoice_numbering_migrate,
         messaging::appointment_mark_sent,
         messaging::whatsapp_open,
         ai::ai_status,

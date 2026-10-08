@@ -68,6 +68,12 @@ describe("numérotation des notes : l'interface n'attribue plus de numéro", () 
         expect(read('components/TodoDrawer.tsx')).toContain('open_numbering_settings');
     });
 
+    it("les notes héritées sont numérotées par la commande de migration à l'ouverture de la session médecin", () => {
+        expect(data).toContain("invoke<number>('invoice_numbering_migrate')");
+        expect(data).toContain('sessionService.isMedecin()');
+        expect(read('src-tauri/src/lib.rs')).toContain('numbering::invoice_numbering_migrate');
+    });
+
     it('SECURITY.md documente la numérotation', () => {
         const sec = read('SECURITY.md');
         for (const k of ['Numérotation des notes d\'honoraires', 'meddoc_invoice_counter.json', 'jour d\'émission', 'annulation', 'jamais réattribué']) expect(sec).toContain(k);

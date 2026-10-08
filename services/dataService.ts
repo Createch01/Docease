@@ -1,5 +1,6 @@
 import { sessionService } from './sessionService';
 import { VaccinationRecord, DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
+import { invoke } from '@tauri-apps/api/core';
 import { storageService } from './storageService';
 import { aiService } from './aiService';
 import { normalizeAppointmentSettings } from './appointmentDefaults';
@@ -189,6 +190,20 @@ export const dataService = {
           if (report.migrated || report.reused || report.skipped.length) console.log(`📎 Pièces des résultats : ${report.migrated} migrée(s), ${report.reused} déjà présente(s), ${report.skipped.length} laissée(s) en l'état.`);
         } catch (error) {
           console.error('Migration des pièces des résultats : anciennes pièces conservées.', error);
+        }
+      }
+
+      // Notes d'honoraires héritées sans numéro → numérotées par Rust (ordre chronologique, année de leur date).
+      // Médecin seulement, application Tauri seulement ; ne modifie ni les dates ni les autres champs, relançable.
+      if (sessionService.isMedecin() && typeof (window as any).__TAURI_INTERNALS__ !== 'undefined' && (cache[STORAGE_KEYS.HONORARY_NOTES] || []).some((n: HonoraryNote) => !n.invoiceNumber)) {
+        try {
+          const count = await invoke<number>('invoice_numbering_migrate');
+          if (count > 0) {
+            await dataService.reloadHonoraryNotes();
+            console.log(`🔢 Numérotation : ${count} note(s) héritée(s) numérotée(s).`);
+          }
+        } catch (error) {
+          console.error('Numérotation des notes héritées : notes conservées en l\'état.', error);
         }
       }
 

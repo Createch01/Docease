@@ -120,6 +120,7 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "receipts_verify" => done(receipts::receipts_verify(a(), st!())),
         "honorary_note_cancel" => done(numbering::honorary_note_cancel(a(), st!(), "n-inconnue".into(), "erreur de saisie".into())),
         "invoice_numbering_check" => done(numbering::invoice_numbering_check(a(), st!())),
+        "invoice_numbering_migrate" => done(numbering::invoice_numbering_migrate(a(), st!()).map(|_| ())),
         "appointment_mark_sent" => done(messaging::appointment_mark_sent(a(), st!(), "a-inconnu".into(), "reminder".into())),
         // Numéro invalide : refusé par la validation AVANT toute ouverture (jamais d'ouverture réelle en test).
         "whatsapp_open" => done(messaging::whatsapp_open(a(), st!(), "0612345678".into(), "bonjour".into(), "a1".into(), "reminder".into())),

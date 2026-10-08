@@ -118,7 +118,7 @@ fn legacy_unnumbered_notes_are_numbered_on_next_write_keeping_their_date() {
     write_enc_json_in(&d, &KEY, NOTES_FILE, &json!([note("old", "", "2025-05-05")])).unwrap();
     let stored = read_notes(&d, &KEY);
     let out = save(&d, stored, TODAY).unwrap();
-    assert_eq!((number_of(&out[0]), out[0]["date"].as_str()), ("2026-0001", Some("2025-05-05")));
+    assert_eq!((number_of(&out[0]), out[0]["date"].as_str()), ("2025-0001", Some("2025-05-05")), "année de la date de la note héritée");
     // Désormais figée.
     let mut again = out[0].clone();
     again["date"] = json!("2026-01-01");
@@ -461,5 +461,84 @@ fn legacy_notes_keep_their_status_and_bytes_when_untouched() {
     write_enc_json_in(&d, &KEY, NOTES_FILE, &Value::Array(numbered.clone())).unwrap();
     let out = save(&d, numbered.clone(), TODAY).unwrap();
     assert_eq!(out, numbered);
+    let _ = fs::remove_dir_all(&d);
+}
+
+// ─── Migration des notes héritées ────────────────────────────────────────────
+
+#[test]
+fn legacy_notes_are_numbered_chronologically_with_the_year_of_their_date() {
+    let d = tmp("migrate");
+    // Fichier dans le désordre : numérotées par date croissante, année de leur date, après les numéros existants.
+    let legacy = vec![
+        note("c", "", "2026-03-10"), note("a", "", "2025-12-30"), note("existing", "2026-0004", "2026-02-02"),
+        note("b", "", "2026-01-05"), note("same1", "", "2026-03-10"), note("z", "", "2025-02-01"),
+    ];
+    write_enc_json_in(&d, &KEY, NOTES_FILE, &Value::Array(legacy.clone())).unwrap();
+    assert_eq!(migrate_legacy(&d, &KEY, TODAY).unwrap(), 5);
+    let out = read_notes(&d, &KEY);
+    let num = |id: &str| number_of(out.iter().find(|n| n["id"] == id).unwrap()).to_string();
+    assert_eq!((num("z"), num("a")), ("2025-0001".into(), "2025-0002".into()));
+    assert_eq!((num("b"), num("c"), num("same1")), ("2026-0005".into(), "2026-0006".into(), "2026-0007".into()), "date égale : ordre du fichier");
+    assert_eq!(num("existing"), "2026-0004");
+    // Dates et tous les autres champs intacts ; ordre du fichier intact.
+    for (before, after) in legacy.iter().zip(&out) {
+        let mut b = before.clone();
+        b["invoiceNumber"] = after["invoiceNumber"].clone();
+        assert_eq!(&b, after);
+    }
+    // Numéros uniques, compteur à jour, idempotent.
+    let mut all = numbers(&out);
+    all.sort();
+    all.dedup();
+    assert_eq!(all.len(), 6);
+    assert_eq!((load_counter(&d, &KEY).get(2025), load_counter(&d, &KEY).get(2026)), (2, 7));
+    assert_eq!(migrate_legacy(&d, &KEY, TODAY).unwrap(), 0);
+    assert_eq!(read_notes(&d, &KEY), out);
+    // Une nouvelle note prend la suite de l'année en cours.
+    let after = save(&d, [out, vec![note("new", "", "")]].concat(), "2026-10-08").unwrap();
+    assert_eq!(number_of(after.last().unwrap()), "2026-0008");
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn migration_never_renumbers_issued_notes_even_duplicates_and_ignores_cancelled_ones() {
+    let d = tmp("migrate-dup");
+    let mut cancelled = note("x", "2026-0002", "2026-01-01");
+    cancelled["cancelledAt"] = json!("t");
+    let notes = vec![note("a", "2026-0002", "2026-01-01"), cancelled, note("legacy", "", "2026-01-02")];
+    write_enc_json_in(&d, &KEY, NOTES_FILE, &Value::Array(notes)).unwrap();
+    assert_eq!(migrate_legacy(&d, &KEY, TODAY).unwrap(), 1);
+    let out = read_notes(&d, &KEY);
+    assert_eq!(numbers(&out), vec!["2026-0002", "2026-0002", "2026-0003"], "doublon hérité conservé, seulement signalé");
+    assert_eq!(check(&out).duplicates, vec!["2026-0002"]);
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn a_legacy_note_removed_from_the_write_does_not_burn_a_number() {
+    let d = tmp("migrate-del");
+    write_enc_json_in(&d, &KEY, NOTES_FILE, &json!([note("keep", "", "2026-01-01"), note("drop", "", "2026-01-02")])).unwrap();
+    let kept = read_notes(&d, &KEY)[0].clone();
+    let out = save(&d, vec![kept], TODAY).unwrap();
+    assert_eq!(numbers(&out), vec!["2026-0001"]);
+    assert_eq!(load_counter(&d, &KEY).get(2026), 1);
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn numbers_beyond_9999_are_well_formed_checked_and_sequential() {
+    let d = tmp("beyond");
+    write_enc_json_in(&d, &KEY, NOTES_FILE, &json!([note("a", "2026-9999", "2026-01-01"), note("b", "2026-10000", "2026-01-02")])).unwrap();
+    let r = check(&read_notes(&d, &KEY));
+    assert!(r.malformed.is_empty() && r.duplicates.is_empty(), "5 chiffres = numéro valide");
+    assert_eq!(r.years[0].last, 10000);
+    assert_eq!(r.gaps_total, 9998, "trous réels signalés, sans plantage");
+    assert_eq!(r.gaps.len(), 30, "liste bornée");
+    let out = save(&d, [read_notes(&d, &KEY), vec![note("n", "", "")]].concat(), TODAY).unwrap();
+    assert_eq!(number_of(&out[2]), "2026-10001");
+    let mut c = Counter::default();
+    c.years.insert("2026".into(), 99_999);
+    assert_eq!(c.next(2026), "2026-100000");
     let _ = fs::remove_dir_all(&d);
 }
