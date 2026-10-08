@@ -95,3 +95,21 @@ describe('pièces jointes dans la sauvegarde', () => {
         expect(collect).not.toContain('pieces_jointes');
     });
 });
+
+describe('registre des reçus dans la sauvegarde', () => {
+    const rec = read('src-tauri/src/receipts.rs');
+    const access = read('src-tauri/src/access.rs');
+    const backup = read('src-tauri/src/backup.rs');
+
+    it('le registre et le compteur sont des fichiers meddoc_* gérés par Rust, donc sauvegardés', () => {
+        expect(rec).toContain('pub const REGISTRY_FILE: &str = "meddoc_receipts.json"');
+        expect(rec).toContain('pub const COUNTER_FILE: &str = "meddoc_receipt_counter.json"');
+        expect(access).toContain('"meddoc_receipts"');
+        expect(access).toContain('"meddoc_receipt_counter"');
+    });
+
+    it('la restauration ne fait jamais reculer le registre ni le compteur', () => {
+        expect(backup).toContain('receipts::merge_for_restore');
+        expect(rec).toContain('pub fn merge_for_restore');
+    });
+});

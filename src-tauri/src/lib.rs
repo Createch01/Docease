@@ -1,6 +1,7 @@
 mod access;
 mod ai;
 mod attachments;
+mod receipts;
 mod audit;
 mod backup;
 mod backup_pj;
@@ -554,6 +555,13 @@ pub fn run() {
         attachments::attachment_read,
         attachments::attachment_delete,
         attachments::attachments_status,
+        receipts::receipt_issue,
+        receipts::receipt_list,
+        receipts::receipt_list_today,
+        receipts::receipt_get,
+        receipts::receipt_duplicate,
+        receipts::receipt_cancel,
+        receipts::receipts_verify,
         messaging::appointment_mark_sent,
         messaging::whatsapp_open,
         ai::ai_status,

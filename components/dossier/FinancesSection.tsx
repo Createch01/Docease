@@ -1,9 +1,13 @@
-import React, { useMemo, useState } from 'react';
-import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock } from 'lucide-react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock, Receipt } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import { HonoraryNote, HonoraryMasterService } from '../../types';
 import { billingService } from '../../services/billingService';
 import { useI18n } from '../../i18n';
+import { ReceiptView, formatCents, receiptService, STATUS_LABEL } from '../../services/receiptService';
+import { toastService } from '../../services/toastService';
+import ReceiptModal from '../ReceiptModal';
+import { CancelReceiptDialog, ReceiptIssueDialog } from '../ReceiptDialogs';
 
 interface FinancesSectionProps {
     patientId: string;
@@ -25,6 +29,18 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
     const { t, lang, dir } = useI18n();
     const honoraryNotes = useMemo(() => dataService.getHonoraryNotes(patientId), [patientId, refreshTrigger]);
     const [toast, setToast] = useState<string | null>(null);
+
+    // Reçus de ce patient (registre tenu par Rust) : émission, duplicata, annulation par reçu d'annulation.
+    const [receipts, setReceipts] = useState<ReceiptView[]>([]);
+    const [openReceipt, setOpenReceipt] = useState<ReceiptView | null>(null);
+    const [issueFor, setIssueFor] = useState<string | null>(null);
+    const [cancelFor, setCancelFor] = useState<ReceiptView | null>(null);
+    const loadReceipts = useCallback(() => { receiptService.list(patientId).then(setReceipts).catch(() => setReceipts([])); }, [patientId]);
+    useEffect(() => { loadReceipts(); }, [loadReceipts, refreshTrigger]);
+    const reprint = async (number: string) => {
+        try { setOpenReceipt(await receiptService.duplicate(number)); loadReceipts(); }
+        catch (e) { toastService.error(e instanceof Error ? e.message : 'Duplicata impossible.'); }
+    };
 
     const stats = useMemo(() => {
         const { total, collected, outstanding } = billingService.computeStats(honoraryNotes);
@@ -139,6 +155,11 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                 </td>
                                 <td className={`p-6 shrink-0 ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>
                                     <div className={`flex justify-end gap-2 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
+                                        {note.status !== 'UNPAID' && (
+                                            <button onClick={() => setIssueFor(note.id)} title="Émettre un reçu" className="p-3 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-100 rounded-2xl transition-all shadow-sm">
+                                                <Receipt size={18} />
+                                            </button>
+                                        )}
                                         <button onClick={() => onPreviewNote(note)} title={t('overview')} className="p-3 bg-white text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-100 rounded-2xl transition-all shadow-sm hover:shadow-emerald-100">
                                             <FileText size={18} />
                                         </button>
@@ -164,6 +185,37 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                     </tbody>
                 </table>
             </div>
+
+            <div className="bg-white rounded-[2rem] border border-gray-100 shadow-sm p-6" aria-label="Reçus de paiement">
+                <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4">Reçus de paiement</h3>
+                {receipts.length === 0 ? (
+                    <p className="text-[12px] text-gray-400 italic">Aucun reçu émis pour ce patient.</p>
+                ) : (
+                    <table className="w-full text-left text-[12px]">
+                        <thead><tr className="text-[10px] uppercase tracking-widest text-gray-400"><th className="py-2">N°</th><th>Date</th><th>Montant</th><th>État</th><th className="text-right">Actions</th></tr></thead>
+                        <tbody>
+                            {receipts.map(r => (
+                                <tr key={r.number} className="border-t border-gray-50">
+                                    <td className="py-2 font-mono">{r.number}</td>
+                                    <td>{r.date}</td>
+                                    <td className={r.amountCents < 0 ? 'text-red-600' : ''}>{formatCents(r.amountCents)}</td>
+                                    <td>{STATUS_LABEL[r.status]}{r.cancelledBy ? ` (${r.cancelledBy})` : ''}</td>
+                                    <td className="text-right space-x-2">
+                                        <button type="button" className="px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50" onClick={() => reprint(r.number)}>Duplicata</button>
+                                        {r.status === 'valid' && (
+                                            <button type="button" className="px-3 py-1.5 rounded-lg border border-red-200 text-red-600 hover:bg-red-50" onClick={() => setCancelFor(r)}>Annuler</button>
+                                        )}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+
+            {issueFor && <ReceiptIssueDialog noteId={issueFor} onClose={() => setIssueFor(null)} onIssued={r => { setIssueFor(null); setOpenReceipt(r); loadReceipts(); }} />}
+            {cancelFor && <CancelReceiptDialog receipt={cancelFor} onClose={() => setCancelFor(null)} onCancelled={r => { setCancelFor(null); setOpenReceipt(r); loadReceipts(); }} />}
+            {openReceipt && <ReceiptModal receipt={openReceipt} onClose={() => setOpenReceipt(null)} />}
         </div>
     );
 };

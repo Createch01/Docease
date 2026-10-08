@@ -977,6 +977,8 @@ pub struct RestoreReport {
     pub attachments_restored: usize,
     /// Pièces jointes introuvables ou altérées dans la sauvegarde : elles apparaissent « fichier manquant ».
     pub attachments_missing: usize,
+    /// Reçus émis après cette sauvegarde et conservés (le registre des reçus ne recule jamais).
+    pub receipts_kept: usize,
 }
 
 /// Copie brute (chiffrée par la clé de données, sans phrase de passe) de l'état actuel :
@@ -1029,6 +1031,10 @@ pub fn restore_files(dir: &Path, key: &[u8; KEY_LEN], files: &Files, now: u64) -
         return Err(BackupError::Corrupted);
     }
     let safety = safety_copy(dir, now)?;
+    // Registre et compteur des reçus : jamais en arrière (voir `receipts::merge_for_restore`).
+    let mut merged_files = files.clone();
+    let merged = super::receipts::merge_for_restore(dir, key, &mut merged_files);
+    let files = &merged_files;
 
     // 1. Préparation (rien de visible n'a changé tant que ça échoue).
     let mut staged: Vec<(PathBuf, PathBuf)> = Vec::new();
@@ -1087,7 +1093,7 @@ pub fn restore_files(dir: &Path, key: &[u8; KEY_LEN], files: &Files, now: u64) -
         cleanup(&staged);
         return Err(e);
     }
-    Ok(RestoreReport { restored: files.len(), removed: current.len(), safety_copy: safety.map(|p| p.display().to_string()), attachments_restored: 0, attachments_missing: 0 })
+    Ok(RestoreReport { restored: files.len(), removed: current.len(), safety_copy: safety.map(|p| p.display().to_string()), attachments_restored: 0, attachments_missing: 0, receipts_kept: merged.kept_after_backup })
 }
 
 pub fn restore(dir: &Path, key: &[u8; KEY_LEN], path: &Path, passphrase: &str, now: u64) -> Res<RestoreReport> {

@@ -306,6 +306,9 @@ const AppContent: React.FC = () => {
       case 'open_backup_settings':
         if (openSettings({ section: 'database' })) setTodoOpen(false);
         return;
+      case 'open_receipts_settings':
+        if (openSettings({ section: 'cabinet', tab: 'coordonnees' })) setTodoOpen(false);
+        return;
       case 'open_reminders':
         setRemindersOpen(true);
         return;

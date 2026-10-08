@@ -146,6 +146,8 @@ export interface DoctorInfo {
   ice?: string;
   taxId?: string;
   ordreNumber?: string;
+  /** Mention libre d'exonération de TVA (saisie par le médecin, vide par défaut), reprise sur les reçus. */
+  vatExemptionNote?: string;
 
   // Cabinet
   hours?: string;

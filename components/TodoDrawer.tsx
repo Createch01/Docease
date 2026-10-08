@@ -15,6 +15,7 @@ const ACTION_LABEL: Record<TodoItem['action'], string> = {
   backup_now: 'Sauvegarder maintenant',
   open_backup_settings: 'Ouvrir les réglages',
   open_billing: 'Ouvrir la comptabilité',
+  open_receipts_settings: 'Vérifier le registre',
 };
 
 interface Props {

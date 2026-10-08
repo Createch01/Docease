@@ -5,6 +5,8 @@ import { isCalendarVerified, CALENDAR_UNVERIFIED_MESSAGE } from '../../services/
 import { normalizeRoute } from './settingsRoutes';
 import { SettingsPageFrame, SettingsCard, TextField, TextAreaField, ImageField, SettingsLink, Toggle } from './SettingsUI';
 import { useDoctorDraft } from './useDoctorDraft';
+import ReceiptsRegistryCard from './ReceiptsRegistryCard';
+import { sessionService } from '../../services/sessionService';
 import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 import { SettingsPageProps } from './ProfileSettings';
 
@@ -12,7 +14,7 @@ import { SettingsPageProps } from './ProfileSettings';
 // (DoctorInfo) et partagent un seul bouton Enregistrer.
 const CABINET_FIELDS = [
   'cabinetName', 'phone', 'gsm', 'email', 'fax', 'website', 'addressFr', 'addressAr',
-  'ice', 'patente', 'taxId', 'rc',
+  'ice', 'patente', 'taxId', 'rc', 'vatExemptionNote',
   'logoUrl',
   'hours',
   'vaccinationEnabled',
@@ -74,6 +76,13 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
               <TextField mono label="Identifiant fiscal" value={draft.taxId} onChange={v => update({ taxId: v })} placeholder="N° IF" />
               <TextField mono label="RC (optionnel)" value={draft.rc} onChange={v => update({ rc: v })} placeholder="Registre Commerce" />
             </div>
+            <TextField
+              label="Mention d'exonération de TVA (optionnel)"
+              value={draft.vatExemptionNote}
+              onChange={v => update({ vatExemptionNote: v })}
+              placeholder="Texte exact à faire figurer sur les reçus"
+              hint="Rien n'est ajouté par défaut. Reprise telle quelle en pied de reçu, avec les identifiants ci-dessus (INPE, IF, ICE, patente, n° d'ordre) : seuls les champs renseignés apparaissent."
+            />
             <div className="p-3.5 rounded-md flex gap-2.5" style={{ background: 'var(--color-primary-50)' }}>
               <Info size={16} className="shrink-0 mt-0.5" style={{ color: 'var(--color-primary)' }} />
               <p className="text-[12px] leading-relaxed" style={{ color: 'var(--color-primary)' }}>
@@ -81,6 +90,8 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
               </p>
             </div>
           </SettingsCard>
+
+          {sessionService.isMedecin() && <ReceiptsRegistryCard />}
         </div>
       )}
 
