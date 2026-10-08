@@ -5,7 +5,7 @@ const src = readFileSync('components/Analytics.tsx', 'utf8');
 
 describe('Comptabilité C0 — résultat de trésorerie', () => {
     it('le résultat se calcule sur l\'encaissé, jamais sur le facturé', () => {
-        expect(src).toContain('const netProfit = recettesEncaissees - totalExpensesPeriod;');
+        expect(src).toContain('const netProfit = toDh(summary?.resultCents ?? 0);');
         expect(src).not.toMatch(/netProfit\s*=\s*recettesFacturees/);
     });
     it('libellé « Résultat (encaissé − dépenses) », facturé affiché à part', () => {

@@ -95,6 +95,22 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     // Notes d'honoraires : annulation et contrôle de numérotation réservés au médecin
     // Registre d'encaissements : remboursement, consultation, vérification et migration réservés au médecin
     // Comptabilité : agrégats et journal complet réservés au médecin ; l'assistante ne voit que les écritures du jour
+    // Dépenses : l'assistante saisit une dépense courante du jour (contrôlé dans `expenses.rs`) et voit celles du jour ; le reste est réservé au médecin
+    ("expense_add", Rule::AnySession),
+    ("expenses_today", Rule::AnySession),
+    ("expense_suppliers", Rule::AnySession),
+    ("expense_categories", Rule::AnySession),
+    ("expense_cancel", Rule::Medecin),
+    ("expense_correct", Rule::Medecin),
+    ("expense_list", Rule::Medecin),
+    ("expense_category_add", Rule::Medecin),
+    ("expense_category_set_active", Rule::Medecin),
+    ("expenses_migrate", Rule::Medecin),
+    ("expenses_verify", Rule::Medecin),
+    // Clôture de période : médecin seulement
+    ("periods_list", Rule::Medecin),
+    ("period_close", Rule::Medecin),
+    ("period_reopen", Rule::Medecin),
     ("accounting_summary", Rule::Medecin),
     ("accounting_journal", Rule::Medecin),
     ("accounting_journal_today", Rule::AnySession),
@@ -216,7 +232,7 @@ pub enum FileMode {
 
 /// Fichiers internes que `load_json`/`save_json` ne doivent jamais toucher, quel que
 /// soit le rôle (comptes, métadonnées de sécurité).
-const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments", "meddoc_receipts", "meddoc_receipt_counter", "meddoc_invoice_counter", "meddoc_payments"];
+const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments", "meddoc_receipts", "meddoc_receipt_counter", "meddoc_invoice_counter", "meddoc_payments", "meddoc_expenses", "meddoc_expense_counter", "meddoc_expense_categories", "meddoc_periods"];
 
 /// Fichiers lisibles/écrivables par l'assistante via `load_json`/`save_json`.
 /// Tout le reste (patients, file d'attente, honoraires, fiche cabinet…) passe par des
@@ -262,7 +278,7 @@ mod tests {
         "backup_status", "backup_set_passphrase", "backup_change_passphrase", "backup_set_destinations", "backup_run_now",
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
         "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
-        "receipt_list", "receipt_cancel", "receipts_verify", "accounting_summary", "accounting_journal", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
+        "receipt_list", "receipt_cancel", "receipts_verify", "expense_cancel", "expense_correct", "expense_list", "expense_category_add", "expense_category_set_active", "expenses_migrate", "expenses_verify", "periods_list", "period_close", "period_reopen", "accounting_summary", "accounting_journal", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
     ];
 
     #[test]
@@ -367,6 +383,8 @@ mod tests {
             include_str!("numbering.rs"),
             include_str!("payments.rs"),
             include_str!("accounting.rs"),
+            include_str!("expenses.rs"),
+            include_str!("periods.rs"),
             include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();

@@ -37,6 +37,9 @@ pub const EXT: &str = "dcp";
 pub const MAX_FILE_BYTES: usize = 20 * 1024 * 1024;
 /// Au-delà de 1 Go au total : alerte « lourd pour la sauvegarde » (D2) — pas de plafond dur.
 pub const HEAVY_BYTES: u64 = 1024 * 1024 * 1024;
+/// Propriétaire réservé des justificatifs de dépenses du cabinet (aucun patient ne peut avoir cet identifiant).
+pub const CABINET_OWNER: &str = "__cabinet__";
+
 pub const CATEGORIES: &[&str] = &["ECG", "biologie", "imagerie", "courrier", "autre"];
 const MAX_TITLE_CHARS: usize = 120;
 const MAX_THUMB_BYTES: usize = 24 * 1024;
@@ -276,11 +279,18 @@ pub fn add(dir: &Path, key: &[u8; KEY_LEN], input: AddInput, raw: Vec<u8>, by: &
         check_thumb(t)?;
     }
     let _g = lock();
-    let patient_ok = read_list(dir, key, "meddoc_patients.json").iter().any(|p| p.get("id").and_then(|v| v.as_str()) == Some(input.patient_id.as_str()));
-    if input.patient_id.is_empty() || !patient_ok {
-        return Err("Patient introuvable.".into());
+    if input.patient_id == CABINET_OWNER {
+        // Justificatif de dépense du cabinet : aucun lien clinique.
+        if input.linked_type.is_some() || input.linked_id.is_some() {
+            return Err("Un justificatif de dépense n'a pas de lien clinique.".into());
+        }
+    } else {
+        let patient_ok = read_list(dir, key, "meddoc_patients.json").iter().any(|p| p.get("id").and_then(|v| v.as_str()) == Some(input.patient_id.as_str()));
+        if input.patient_id.is_empty() || !patient_ok {
+            return Err("Patient introuvable.".into());
+        }
+        check_link(dir, key, &input.patient_id, &input.linked_type, &input.linked_id)?;
     }
-    check_link(dir, key, &input.patient_id, &input.linked_type, &input.linked_id)?;
 
     // Nettoyage des métadonnées AVANT l'empreinte et le chiffrement.
     let stored = media_clean::clean(kind, raw)?;
@@ -388,6 +398,9 @@ pub fn delete(dir: &Path, key: &[u8; KEY_LEN], id: &str) -> Result<Meta, String>
     let _g = lock();
     let mut index = load_index(dir, key)?;
     let pos = index.iter().position(|m| m.id == id).ok_or("Pièce jointe introuvable.")?;
+    if index[pos].patient_id == CABINET_OWNER {
+        return Err("Un justificatif de dépense est une pièce comptable : il ne se supprime pas.".into());
+    }
     let removed = index.remove(pos);
     save_index(dir, key, &index)?;
     let _ = fs::remove_file(blob_path(dir, id));
@@ -439,7 +452,7 @@ pub fn status(dir: &Path, key: &[u8; KEY_LEN]) -> Result<Status, String> {
         bytes,
         level: level_for(bytes),
         missing: index.iter().filter(|m| !blob_path(dir, &m.id).is_file()).count(),
-        orphan_records: index.iter().filter(|m| !patients.iter().any(|p| p.get("id").and_then(|v| v.as_str()) == Some(m.patient_id.as_str()))).count(),
+        orphan_records: index.iter().filter(|m| m.patient_id != CABINET_OWNER && !patients.iter().any(|p| p.get("id").and_then(|v| v.as_str()) == Some(m.patient_id.as_str()))).count(),
         swept,
     })
 }

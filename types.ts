@@ -617,31 +617,6 @@ export interface PrescriptionDraft {
   selectedTests: string[];
 }
 
-export const EXPENSE_CATEGORIES = [
-  'Loyer & charges du local',
-  'Salaires & charges sociales (CNSS)',
-  'Fournitures médicales & consommables',
-  'Équipement médical & amortissement',
-  'Assurance professionnelle (RC médicale)',
-  'Taxe professionnelle (patente)',
-  'Frais comptable/juridique',
-  'Formation continue',
-  'Électricité/eau/téléphone/internet',
-  'Autre',
-] as const;
-export type ExpenseCategory = typeof EXPENSE_CATEGORIES[number];
-
-export interface Expense {
-  id: string;
-  date: string;
-  category: ExpenseCategory;
-  categoryDetail?: string; // Required when category === 'Autre'
-  label: string;
-  amount: number;
-  receiptDataUrl?: string; // Base64 photo/scan of the justificatif
-  noReceiptConfirmed?: boolean; // Explicit "sans justificatif" acknowledgement
-}
-
 export type ResourceType = 'JSON' | 'PDF' | 'Word' | 'Manuel';
 
 export interface MedicalResource {

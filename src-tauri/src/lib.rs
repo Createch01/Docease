@@ -4,6 +4,8 @@ mod attachments;
 mod numbering;
 mod payments;
 mod accounting;
+mod expenses;
+mod periods;
 mod receipts;
 mod audit;
 mod backup;
@@ -599,6 +601,20 @@ pub fn run() {
         receipts::receipt_duplicate,
         receipts::receipt_cancel,
         receipts::receipts_verify,
+        expenses::expense_add,
+        expenses::expense_cancel,
+        expenses::expense_correct,
+        expenses::expense_list,
+        expenses::expenses_today,
+        expenses::expense_suppliers,
+        expenses::expense_categories,
+        expenses::expense_category_add,
+        expenses::expense_category_set_active,
+        expenses::expenses_migrate,
+        expenses::expenses_verify,
+        periods::periods_list,
+        periods::period_close,
+        periods::period_reopen,
         accounting::accounting_summary,
         accounting::accounting_journal,
         accounting::accounting_journal_today,

@@ -30,7 +30,7 @@ fn get(notes: &[Value], id: &str) -> Value {
 }
 
 fn sum(d: &Path, from: &str, to: &str, gran: &str) -> Summary {
-    summarize(&payments::load(d, &KEY).unwrap(), &numbering::read_notes(d, &KEY), from, to, gran).unwrap()
+    summarize(&payments::load(d, &KEY).unwrap(), &numbering::read_notes(d, &KEY), &[], from, to, gran).unwrap()
 }
 
 #[test]
@@ -135,13 +135,13 @@ fn migrated_lines_are_flagged_and_neutralized_pairs_are_kept_out_of_the_totals()
 fn periods_are_validated_and_granularities_fill_empty_buckets() {
     let d = tmp("periods");
     let e = payments::load(&d, &KEY).unwrap();
-    assert!(summarize(&e, &[], "2026-02-31", "2026-03-01", "day").is_err());
-    assert!(summarize(&e, &[], "2026-03-02", "2026-03-01", "day").is_err());
-    assert!(summarize(&e, &[], "2026-03-01", "2026-03-02", "hour").is_err());
-    assert!(summarize(&e, &[], "1990-01-01", "2026-03-02", "day").unwrap_err().contains("trop longue"));
-    assert_eq!(summarize(&e, &[], "2026-01-15", "2026-04-03", "month").unwrap().buckets.iter().map(|b| b.key.as_str()).collect::<Vec<_>>(), vec!["2026-01", "2026-02", "2026-03", "2026-04"]);
-    assert_eq!(summarize(&e, &[], "2024-06-01", "2026-04-03", "year").unwrap().buckets.len(), 3);
-    assert_eq!(summarize(&e, &[], "2026-10-07", "2026-10-13", "week").unwrap().buckets.iter().map(|b| b.key.as_str()).collect::<Vec<_>>(), vec!["2026-10-05", "2026-10-12"]);
+    assert!(summarize(&e, &[], &[], "2026-02-31", "2026-03-01", "day").is_err());
+    assert!(summarize(&e, &[], &[], "2026-03-02", "2026-03-01", "day").is_err());
+    assert!(summarize(&e, &[], &[], "2026-03-01", "2026-03-02", "hour").is_err());
+    assert!(summarize(&e, &[], &[], "1990-01-01", "2026-03-02", "day").unwrap_err().contains("trop longue"));
+    assert_eq!(summarize(&e, &[], &[], "2026-01-15", "2026-04-03", "month").unwrap().buckets.iter().map(|b| b.key.as_str()).collect::<Vec<_>>(), vec!["2026-01", "2026-02", "2026-03", "2026-04"]);
+    assert_eq!(summarize(&e, &[], &[], "2024-06-01", "2026-04-03", "year").unwrap().buckets.len(), 3);
+    assert_eq!(summarize(&e, &[], &[], "2026-10-07", "2026-10-13", "week").unwrap().buckets.iter().map(|b| b.key.as_str()).collect::<Vec<_>>(), vec!["2026-10-05", "2026-10-12"]);
     let _ = fs::remove_dir_all(&d);
 }
 

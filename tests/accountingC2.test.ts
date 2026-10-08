@@ -14,7 +14,7 @@ describe('Comptabilité C2 — recettes sur le registre', () => {
     it('le facturé reste séparé ; carte « Reste à encaisser » ; résultat sur l\'encaissé', () => {
         expect(analytics).toContain("label: 'Facturé'");
         expect(analytics).toContain("label: 'Reste à encaisser'");
-        expect(analytics).toContain('const netProfit = recettesEncaissees - totalExpensesPeriod;');
+        expect(analytics).toContain('const netProfit = toDh(summary?.resultCents ?? 0);');
     });
     it("le front n'additionne aucun montant du registre (agrégats calculés par Rust)", () => {
         const svc = read('services/accountingService.ts');

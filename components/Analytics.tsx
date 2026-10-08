@@ -24,13 +24,15 @@ import {
   Table as TableIcon
 } from 'lucide-react';
 import { dataService } from '../services/dataService';
-import { Expense, ExpenseCategory, EXPENSE_CATEGORIES, Patient } from '../types';
+import { Patient } from '../types';
 // @ts-ignore
 import { toastService } from '../services/toastService';
 import { canOutput } from '../services/cabinetSetup';
 import { localDateStr, todayLocal } from '../utils/localDate';
 import { Granularity, Summary, accountingService, toDh } from '../services/accountingService';
 import JournalTab from './accounting/JournalTab';
+import ExpensesTab from './accounting/ExpensesTab';
+import PeriodsPanel from './accounting/PeriodsPanel';
 
 type TimeRange = 'Jour' | 'Semaine' | 'Mois' | 'Année';
 
@@ -97,13 +99,6 @@ const parseLocalDay = (dateStr: string): Date => {
   return new Date(y, (m || 1) - 1, d || 1);
 };
 
-const readFileAsDataUrl = (file: File): Promise<string> => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.onload = () => resolve(reader.result as string);
-  reader.onerror = reject;
-  reader.readAsDataURL(file);
-});
-
 /** Plage et granularité du graphique selon la période choisie (les tranches viennent de Rust). */
 const chartRange = (range: TimeRange): { from: string; to: string; gran: Granularity } => {
   const now = new Date();
@@ -127,13 +122,10 @@ const csvEscape = (value: string) => `"${value.replace(/"/g, '""')}"`;
 const Analytics: React.FC = () => {
   const [timeRange, setTimeRange] = useState<TimeRange>('Jour');
   const [activeTab, setActiveTab] = useState<'overview' | 'journal' | 'expenses' | 'patients'>('overview');
-  const [showExpenseForm, setShowExpenseForm] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
-  const [expenseError, setExpenseError] = useState('');
   const [showInvoiced, setShowInvoiced] = useState(false);
 
   const honoraryNotes = useMemo(() => dataService.getHonoraryNotes(), [refreshTrigger]);
-  const expenses = useMemo(() => dataService.getExpenses(), [refreshTrigger]);
   const allPatients = useMemo(() => dataService.getAllPatients(), [refreshTrigger]);
   const doctor = dataService.getDoctorInfo();
   const currency = doctor.currency || 'DH';
@@ -143,55 +135,6 @@ const Analytics: React.FC = () => {
     window.addEventListener('meddoc_data_update', handleUpdate);
     return () => window.removeEventListener('meddoc_data_update', handleUpdate);
   }, []);
-
-  const [newExpense, setNewExpense] = useState<Partial<Expense>>({
-    label: '',
-    amount: 0,
-    category: EXPENSE_CATEGORIES[0],
-    categoryDetail: '',
-    date: todayLocal(),
-    receiptDataUrl: undefined,
-    noReceiptConfirmed: false
-  });
-
-  // Helper pour générer des dates passées
-  const getPastDate = (daysAgo: number) => {
-    const d = new Date();
-    d.setDate(d.getDate() - daysAgo);
-    return localDateStr(d);
-  };
-
-  // Helper pour formater les labels du graphique
-  const formatLabel = (dateStr: string, range: TimeRange) => {
-    const d = parseLocalDay(dateStr);
-    try {
-      if (range === 'Jour') return d.toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' });
-      if (range === 'Mois') return d.toLocaleDateString('fr-FR', { month: 'short', year: '2-digit' });
-      if (range === 'Année') return d.getFullYear().toString();
-      if (range === 'Semaine') {
-        const oneJan = new Date(d.getFullYear(), 0, 1);
-        const numberOfDays = Math.floor((d.getTime() - oneJan.getTime()) / (24 * 60 * 60 * 1000));
-        const weekNum = Math.ceil((d.getDay() + 1 + numberOfDays) / 7);
-        return `Sem. ${weekNum}`;
-      }
-    } catch (e) {
-      return dateStr;
-    }
-    return dateStr;
-  };
-
-  const keyForDate = (dateStr: string, range: TimeRange) => {
-    if (range === 'Mois') return dateStr.substring(0, 7);
-    if (range === 'Année') return dateStr.substring(0, 4);
-    if (range === 'Semaine') {
-      const d = parseLocalDay(dateStr);
-      const firstDayOfYear = new Date(d.getFullYear(), 0, 1);
-      const pastDaysOfYear = (d.getTime() - firstDayOfYear.getTime()) / 86400000;
-      const weekNum = Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
-      return `${d.getFullYear()}-W${weekNum}`;
-    }
-    return dateStr;
-  };
 
   // --- Période courante sélectionnée (jour/semaine/mois/année en cours) ---
   const { start: periodStart, end: periodEnd } = useMemo(() => getPeriodBounds(timeRange, new Date()), [timeRange]);
@@ -221,7 +164,7 @@ const Analytics: React.FC = () => {
     count: b.invoicedCount,
     revenue: toDh(b.invoicedCents),
     collected: toDh(b.netCents),
-    expense: 0,
+    expense: toDh(b.expensesCents),
   })), [chart]);
   const maxVal = Math.max(...stats.map(s => Math.max(s.collected, s.expense, showInvoiced ? s.revenue : 0)), 1);
 
@@ -229,24 +172,21 @@ const Analytics: React.FC = () => {
     () => honoraryNotes.filter(n => isInPeriod(n.date, periodStart, periodEnd)),
     [honoraryNotes, periodStart, periodEnd]
   );
-  const periodExpenses = useMemo(
-    () => expenses.filter(e => isInPeriod(e.date, periodStart, periodEnd)),
-    [expenses, periodStart, periodEnd]
-  );
-
   const recettesFacturees = toDh(summary?.invoicedCents ?? 0);
   // Encaissé = net du registre des encaissements à la date du PAIEMENT (paiements − remboursements).
   const recettesEncaissees = toDh(summary?.netCents ?? 0);
   // Reste à encaisser : notes non annulées, toutes dates.
   const recettesEnAttente = toDh(summary?.outstandingCents ?? 0);
-  const totalExpensesPeriod = periodExpenses.reduce((sum, e) => sum + e.amount, 0);
+  // Dépenses actives hors « à amortir » (date de la dépense), et résultat : calculés par Rust.
+  const totalExpensesPeriod = toDh(summary?.expensesCents ?? 0);
+  const expensesCount = summary?.expensesCount ?? 0;
   // Résultat de trésorerie : encaissé − dépenses payées. Le facturé n'y entre jamais.
-  const netProfit = recettesEncaissees - totalExpensesPeriod;
+  const netProfit = toDh(summary?.resultCents ?? 0);
   const cancelledInPeriod = useMemo(
     () => dataService.getAllHonoraryNotes().filter(n => n.cancelledAt && isInPeriod(n.date, periodStart, periodEnd)),
     [honoraryNotes, periodStart, periodEnd]
   );
-  const receiptsCount = periodExpenses.filter(e => !!e.receiptDataUrl).length;
+  const receiptsCount = expensesCount - (summary?.expensesWithoutReceipt ?? 0);
 
   // --- Statistiques patients de la période ---
   const firstInvoiceDateByPatient = useMemo(() => {
@@ -279,56 +219,7 @@ const Analytics: React.FC = () => {
   const tauxRecouvrement = summary && summary.invoicedCents > 0 ? (summary.netCents / summary.invoicedCents) * 100 : 0;
 
   // --- Dépenses par catégorie (période) pour l'export fiscal ---
-  const expensesByCategory = useMemo(() => {
-    const map: Record<string, number> = {};
-    periodExpenses.forEach(e => {
-      map[e.category] = (map[e.category] || 0) + e.amount;
-    });
-    return Object.entries(map).sort((a, b) => b[1] - a[1]);
-  }, [periodExpenses]);
-
-  const handleReceiptUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    try {
-      const dataUrl = await readFileAsDataUrl(file);
-      setNewExpense(prev => ({ ...prev, receiptDataUrl: dataUrl, noReceiptConfirmed: false }));
-      setExpenseError('');
-    } catch {
-      toastService.error("Impossible de lire le fichier du justificatif.");
-    }
-  };
-
-  const handleAddExpense = () => {
-    if (!newExpense.label || !newExpense.amount) {
-      setExpenseError('Le libellé et le montant sont obligatoires.');
-      return;
-    }
-    if (newExpense.category === 'Autre' && !newExpense.categoryDetail) {
-      setExpenseError('Merci de préciser la nature de la dépense pour la catégorie "Autre".');
-      return;
-    }
-    if (!newExpense.receiptDataUrl && !newExpense.noReceiptConfirmed) {
-      setExpenseError('Joignez un justificatif ou cochez explicitement "Sans justificatif".');
-      return;
-    }
-    setExpenseError('');
-    dataService.saveExpense({
-      ...newExpense as Expense,
-      id: Date.now().toString()
-    });
-    setNewExpense({
-      label: '',
-      amount: 0,
-      category: EXPENSE_CATEGORIES[0],
-      categoryDetail: '',
-      date: todayLocal(),
-      receiptDataUrl: undefined,
-      noReceiptConfirmed: false
-    });
-    setShowExpenseForm(false);
-    toastService.success('Dépense enregistrée.');
-  };
+  const expensesByCategory: [string, number][] = (summary?.expensesByCategory ?? []).filter(c => !c.amortizable).map(c => [c.category, toDh(c.cents)]);
 
   const kpis = [
     {
@@ -360,7 +251,7 @@ const Analytics: React.FC = () => {
     {
       label: 'Dépenses',
       value: formatMoney(totalExpensesPeriod, currency),
-      sub: `${receiptsCount}/${periodExpenses.length} justificatifs joints`,
+      sub: `${receiptsCount}/${expensesCount} justificatifs joints`,
       icon: Receipt,
       color: 'text-red-600',
       bg: 'bg-red-50'
@@ -507,6 +398,8 @@ const Analytics: React.FC = () => {
       <p className="text-xs font-semibold text-gray-400 -mt-4">
         Période sélectionnée : <span className="text-emerald-600">{periodLabel}</span>
       </p>
+
+      <PeriodsPanel from={localDateStr(periodStart)} to={localDateStr(periodEnd)} refresh={refreshTrigger} onChanged={() => setRefreshTrigger(v => v + 1)} />
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
         {kpis.map((kpi, i) => (
@@ -688,174 +581,7 @@ const Analytics: React.FC = () => {
       )}
 
       {activeTab === 'expenses' && (
-        <div className="space-y-8 animate-in fade-in slide-in-from-left-4 duration-500">
-          <div className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
-              <div className="flex items-center gap-4">
-                <div className="p-4 bg-red-600 text-white rounded-3xl shadow-lg shadow-red-200">
-                  <Receipt size={24} />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-semibold text-gray-900 ">Journal des Dépenses</h3>
-                  <p className="text-xs text-gray-400 font-bold ">Enregistrez chaque frais professionnel avec justificatif pour calculer votre bénéfice réel.</p>
-                </div>
-              </div>
-              <button
-                onClick={() => setShowExpenseForm(!showExpenseForm)}
-                className="flex items-center gap-2 px-6 py-4 bg-emerald-600 text-white font-semibold rounded-2xl hover:bg-emerald-700 transition-all active:scale-95 text-xs shadow-lg shadow-emerald-100"
-              >
-                <Plus size={18} />
-                Nouvelle Dépense
-              </button>
-            </div>
-
-            {showExpenseForm && (
-              <div className="mb-12 p-8 bg-gray-50 rounded-3xl border border-gray-100 space-y-6 animate-in zoom-in-95 duration-300">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                  <div className="md:col-span-2">
-                    <label className="text-[10px] font-semibold text-gray-400 mb-2 block">Libellé / Description</label>
-                    <input
-                      type="text"
-                      value={newExpense.label}
-                      onChange={(e) => setNewExpense({ ...newExpense, label: e.target.value })}
-                      placeholder="Ex: Loyer, Electricité, Fournitures..."
-                      className="w-full px-5 py-4 bg-white border border-gray-200 rounded-2xl focus:border-emerald-500 outline-none font-bold"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-semibold text-gray-400 mb-2 block">Montant ({currency})</label>
-                    <input
-                      type="number"
-                      value={newExpense.amount || ''}
-                      onChange={(e) => setNewExpense({ ...newExpense, amount: Number(e.target.value) })}
-                      className="w-full px-5 py-4 bg-white border border-gray-200 rounded-2xl focus:border-emerald-500 outline-none font-bold"
-                    />
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-semibold text-gray-400 mb-2 block">Date</label>
-                    <input
-                      type="date"
-                      value={newExpense.date}
-                      onChange={(e) => setNewExpense({ ...newExpense, date: e.target.value })}
-                      className="w-full px-5 py-4 bg-white border border-gray-200 rounded-2xl focus:border-emerald-500 outline-none font-bold"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="text-[10px] font-semibold text-gray-400 mb-2 block">Catégorie</label>
-                    <select
-                      value={newExpense.category}
-                      onChange={(e) => setNewExpense({ ...newExpense, category: e.target.value as ExpenseCategory })}
-                      className="w-full px-5 py-4 bg-white border border-gray-200 rounded-2xl focus:border-emerald-500 outline-none font-bold"
-                    >
-                      {EXPENSE_CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-                    </select>
-                  </div>
-                  {newExpense.category === 'Autre' && (
-                    <div>
-                      <label className="text-[10px] font-semibold text-gray-400 mb-2 block">Précision (obligatoire)</label>
-                      <input
-                        type="text"
-                        value={newExpense.categoryDetail || ''}
-                        onChange={(e) => setNewExpense({ ...newExpense, categoryDetail: e.target.value })}
-                        placeholder="Précisez la nature de la dépense"
-                        className="w-full px-5 py-4 bg-white border border-gray-200 rounded-2xl focus:border-emerald-500 outline-none font-bold"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                  <div>
-                    <label className="text-[10px] font-semibold text-gray-400 mb-2 block">Justificatif (photo/scan)</label>
-                    <label className="flex items-center gap-3 w-full px-5 py-4 bg-white border border-dashed border-gray-300 rounded-2xl font-bold text-gray-500 cursor-pointer hover:border-emerald-400 transition-colors">
-                      <Upload size={18} />
-                      {newExpense.receiptDataUrl ? 'Justificatif joint ✓' : 'Choisir un fichier...'}
-                      <input type="file" accept="image/*,.pdf" className="hidden" onChange={handleReceiptUpload} />
-                    </label>
-                  </div>
-                  <div className="flex items-center gap-3 pt-8">
-                    <input
-                      type="checkbox"
-                      id="no-receipt"
-                      checked={!!newExpense.noReceiptConfirmed}
-                      onChange={(e) => setNewExpense({ ...newExpense, noReceiptConfirmed: e.target.checked, receiptDataUrl: e.target.checked ? undefined : newExpense.receiptDataUrl })}
-                      className="w-5 h-5 accent-emerald-600"
-                    />
-                    <label htmlFor="no-receipt" className="text-xs font-semibold text-gray-500 flex items-center gap-2">
-                      <ImageOff size={16} />
-                      Sans justificatif
-                    </label>
-                  </div>
-                </div>
-
-                {expenseError && (
-                  <p className="text-xs font-semibold text-red-600 ">{expenseError}</p>
-                )}
-
-                <button
-                  onClick={handleAddExpense}
-                  className="w-full h-[60px] bg-emerald-600 text-white font-semibold rounded-2xl hover:bg-emerald-700 transition-all text-xs "
-                >
-                  Confirmer
-                </button>
-              </div>
-            )}
-
-            <div className="overflow-hidden border border-gray-50 rounded-3xl">
-              <table className="w-full text-left">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-8 py-5 text-[10px] font-semibold text-gray-400 ">Date</th>
-                    <th className="px-8 py-5 text-[10px] font-semibold text-gray-400 ">Description</th>
-                    <th className="px-8 py-5 text-[10px] font-semibold text-gray-400 ">Catégorie</th>
-                    <th className="px-8 py-5 text-[10px] font-semibold text-gray-400 text-center">Justificatif</th>
-                    <th className="px-8 py-5 text-[10px] font-semibold text-gray-400 text-right">Montant</th>
-                    <th className="px-8 py-5"></th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-50">
-                  {expenses.length === 0 ? (
-                    <tr>
-                      <td colSpan={6} className="px-8 py-12 text-center text-gray-300">
-                        <Receipt size={48} className="mx-auto mb-4 opacity-10" />
-                        <p className="font-bold text-sm">Aucune dépense enregistrée</p>
-                      </td>
-                    </tr>
-                  ) : (
-                    expenses.slice().reverse().map((exp) => (
-                      <tr key={exp.id} className="hover:bg-gray-50/50 transition-colors group">
-                        <td className="px-8 py-6 font-bold text-gray-500 text-sm italic">{exp.date}</td>
-                        <td className="px-8 py-6 font-semibold text-gray-900 ">{exp.label}</td>
-                        <td className="px-8 py-6 text-xs font-bold text-gray-500">{exp.category === 'Autre' ? (exp.categoryDetail || 'Autre') : exp.category}</td>
-                        <td className="px-8 py-6 text-center">
-                          {exp.receiptDataUrl ? (
-                            <a href={exp.receiptDataUrl} target="_blank" rel="noreferrer" className="text-emerald-600 text-[10px] font-semibold hover:underline">Voir</a>
-                          ) : exp.noReceiptConfirmed ? (
-                            <span className="text-[10px] font-semibold text-gray-400 ">Sans justificatif</span>
-                          ) : (
-                            <span className="text-[10px] font-semibold text-red-400 ">Manquant</span>
-                          )}
-                        </td>
-                        <td className="px-8 py-6 font-semibold text-red-600 text-right">-{formatMoney(exp.amount, currency)}</td>
-                        <td className="px-8 py-6 text-right">
-                          <button
-                            onClick={() => dataService.deleteExpense(exp.id)}
-                            className="p-2.5 text-gray-300 hover:text-red-500 transition-colors"
-                          >
-                            <Trash2 size={18} />
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <ExpensesTab from={localDateStr(periodStart)} to={localDateStr(periodEnd)} currency={currency} refresh={refreshTrigger} onChanged={() => setRefreshTrigger(v => v + 1)} />
       )}
 
       {activeTab === 'patients' && (

@@ -16,6 +16,7 @@ use std::path::Path;
 use serde::Serialize;
 use serde_json::Value;
 
+use super::expenses;
 use super::numbering;
 use super::payments::{self, Entry, MODES};
 use super::{read_enc_json_in, KEY_LEN};
@@ -46,6 +47,8 @@ pub struct Bucket {
     /// Notes non annulées émises dans cette tranche.
     pub invoiced_cents: i64,
     pub invoiced_count: usize,
+    /// Dépenses actives de la tranche, hors « à amortir ».
+    pub expenses_cents: i64,
 }
 
 #[derive(Serialize, Debug, Clone, PartialEq)]
@@ -71,6 +74,16 @@ pub struct Summary {
     /// Σ (dû − net encaissé) des notes non annulées, toutes dates.
     pub outstanding_cents: i64,
     pub outstanding_notes: usize,
+    /// Dépenses actives (date de la dépense) hors « à amortir » : seules à venir en déduction du résultat.
+    pub expenses_cents: i64,
+    /// Achats de matériel « à amortir » : listés, exclus du résultat.
+    pub amortizable_cents: i64,
+    pub expenses_count: usize,
+    pub expenses_without_receipt: usize,
+    pub expenses_by_category: Vec<expenses::CategoryTotal>,
+    pub expenses_by_mode: Vec<expenses::ModeAmount>,
+    /// Résultat de trésorerie = net encaissé − dépenses (hors « à amortir »).
+    pub result_cents: i64,
 }
 
 // ─── Dates ───────────────────────────────────────────────────────────────────
@@ -190,7 +203,7 @@ fn is_neutralization_pair(e: &Entry, neutralized: &BTreeSet<&str>) -> bool {
     neutralized.contains(e.note_id.as_str()) && (e.kind == "migrated" || (e.kind == "refund" && e.by == "migration"))
 }
 
-pub fn summarize(entries: &[Entry], notes: &[Value], from: &str, to: &str, gran: &str) -> Result<Summary, String> {
+pub fn summarize(entries: &[Entry], notes: &[Value], expense_entries: &[expenses::Entry], from: &str, to: &str, gran: &str) -> Result<Summary, String> {
     let (f, t) = check_period(from, to)?;
     if !["day", "week", "month", "year"].contains(&gran) {
         return Err("Granularité inconnue.".into());
@@ -198,7 +211,7 @@ pub fn summarize(entries: &[Entry], notes: &[Value], from: &str, to: &str, gran:
     let neutralized = neutralized_notes(entries);
     let mut buckets: BTreeMap<String, (Bucket, BTreeSet<String>)> = BTreeMap::new();
     for k in bucket_keys(f, t, gran)? {
-        buckets.insert(k.clone(), (Bucket { key: k, gross_cents: 0, refunds_cents: 0, net_cents: 0, payments_count: 0, patients_count: 0, by_mode: empty_modes(), invoiced_cents: 0, invoiced_count: 0 }, BTreeSet::new()));
+        buckets.insert(k.clone(), (Bucket { key: k, gross_cents: 0, refunds_cents: 0, net_cents: 0, payments_count: 0, patients_count: 0, by_mode: empty_modes(), invoiced_cents: 0, invoiced_count: 0, expenses_cents: 0 }, BTreeSet::new()));
     }
     let mut s = Summary {
         from: from.into(),
@@ -218,6 +231,13 @@ pub fn summarize(entries: &[Entry], notes: &[Value], from: &str, to: &str, gran:
         invoiced_count: 0,
         outstanding_cents: 0,
         outstanding_notes: 0,
+        expenses_cents: 0,
+        amortizable_cents: 0,
+        expenses_count: 0,
+        expenses_without_receipt: 0,
+        expenses_by_category: Vec::new(),
+        expenses_by_mode: Vec::new(),
+        result_cents: 0,
     };
     let mut patients: BTreeSet<&str> = BTreeSet::new();
     for e in entries {
@@ -277,6 +297,22 @@ pub fn summarize(entries: &[Entry], notes: &[Value], from: &str, to: &str, gran:
         if due > 0 {
             s.outstanding_cents += due;
             s.outstanding_notes += 1;
+        }
+    }
+    // Dépenses actives, à la date de la dépense (comptabilité de caisse) ; annulées exclues.
+    let cancelled: BTreeSet<&str> = expense_entries.iter().filter(|e| e.kind == "cancellation").filter_map(|e| e.cancels.as_deref()).collect();
+    let active: Vec<&expenses::Entry> = expense_entries.iter().filter(|e| e.kind == "expense" && !cancelled.contains(e.id.as_str()) && e.date_expense.as_str() >= from && e.date_expense.as_str() <= to).collect();
+    let t = expenses::totals_of(active.iter().copied());
+    s.expenses_cents = t.expenses_cents;
+    s.amortizable_cents = t.amortizable_cents;
+    s.expenses_count = t.count;
+    s.expenses_without_receipt = t.without_receipt;
+    s.expenses_by_category = t.by_category;
+    s.expenses_by_mode = t.by_mode;
+    s.result_cents = s.net_cents - s.expenses_cents;
+    for e in active.iter().filter(|e| !e.amortizable) {
+        if let Some((b, _)) = bucket_key(&e.date_expense, gran).and_then(|k| buckets.get_mut(&k)) {
+            b.expenses_cents += e.amount_cents;
         }
     }
     s.buckets = buckets.into_values().map(|(mut b, p)| { b.patients_count = p.len(); b }).collect();
@@ -422,7 +458,8 @@ pub fn accounting_summary<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     gate(&app, &state, "accounting_summary")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    summarize(&payments::load(&dir, &key)?, &numbering::read_notes_strict(&dir, &key)?, &from, &to, &granularity)
+    expenses::ensure_migrated(&dir, &key, &util::today_local())?;
+    summarize(&payments::load(&dir, &key)?, &numbering::read_notes_strict(&dir, &key)?, &expenses::load(&dir, &key)?, &from, &to, &granularity)
 }
 
 #[tauri::command]

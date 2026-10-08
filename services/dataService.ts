@@ -1,5 +1,5 @@
 import { sessionService } from './sessionService';
-import { VaccinationRecord, DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, Expense, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
+import { VaccinationRecord, DoctorInfo, Medicine, Patient, Prescription, DailyReport, MedicineCategory, MealTiming, Task, Appointment, AppointmentPriority, AppointmentSettings, AppUser, UserRole, MedicalResource, ResourceType, ClinicalConsultation, LabRequest, MedicalResult, HonoraryNote, HonoraryMasterService, MedicalCertificate } from '../types';
 import { invoke } from '@tauri-apps/api/core';
 import { storageService } from './storageService';
 import { aiService } from './aiService';
@@ -21,7 +21,6 @@ const STORAGE_KEYS = {
   APPOINTMENTS: 'meddoc_appointments',
   CAPACITIES: 'meddoc_capacities',
   APPOINTMENT_SETTINGS: 'meddoc_appointment_settings',
-  EXPENSES: 'meddoc_expenses',
   MEDICAL_RESOURCES: 'meddoc_medical_resources',
   CONSULTATIONS: 'meddoc_consultations',
   LAB_REQUESTS: 'meddoc_lab_requests',
@@ -215,6 +214,17 @@ export const dataService = {
           if (count > 0) console.log(`💶 Encaissements : ${count} paiement(s) existant(s) repris au registre.`);
         } catch (error) {
           console.error('Reprise des encaissements existants : registre inchangé.', error);
+        }
+      }
+
+      // Anciennes dépenses (liste simple, justificatif en base64) → registre chaîné, justificatifs en pièces jointes chiffrées.
+      // Médecin seulement, application de bureau seulement ; l'original est conservé, relançable sans effet.
+      if (sessionService.isMedecin() && typeof (window as any).__TAURI_INTERNALS__ !== 'undefined') {
+        try {
+          const count = await invoke<number>('expenses_migrate');
+          if (count > 0) console.log(`🧾 Dépenses : ${count} dépense(s) existante(s) reprise(s) au registre.`);
+        } catch (error) {
+          console.error('Reprise des anciennes dépenses : fichier conservé en l\'état.', error);
         }
       }
 
@@ -541,32 +551,6 @@ export const dataService = {
     const prescriptions = dataService.getPrescriptions().filter(p => p.id !== id);
     cache[storageKey] = prescriptions;
     await storageService.save(storageKey, prescriptions);
-    notifyUpdate(storageKey);
-  },
-
-  getExpenses: (): Expense[] => cache[STORAGE_KEYS.EXPENSES] || [],
-
-  saveExpense: async (expense: Expense) => {
-    const storageKey = STORAGE_KEYS.EXPENSES;
-    const expenses = dataService.getExpenses();
-    const index = expenses.findIndex(e => e.id === expense.id);
-    let updatedExpenses;
-
-    if (index !== -1) {
-      updatedExpenses = expenses.map((e, i) => i === index ? expense : e);
-    } else {
-      updatedExpenses = [...expenses, { ...expense, id: expense.id || Date.now().toString() }];
-    }
-    cache[storageKey] = updatedExpenses;
-    await storageService.save(storageKey, updatedExpenses);
-    notifyUpdate(storageKey);
-  },
-
-  deleteExpense: async (id: string) => {
-    const storageKey = STORAGE_KEYS.EXPENSES;
-    const expenses = dataService.getExpenses().filter(e => e.id !== id);
-    cache[storageKey] = expenses;
-    await storageService.save(storageKey, expenses);
     notifyUpdate(storageKey);
   },
 

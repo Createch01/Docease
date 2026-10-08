@@ -270,6 +270,7 @@ pub fn reconcile(dir: &Path, key: &[u8; KEY_LEN], stored: &[Value], out: &mut [V
         if claimed > ledger {
             let target = claimed.min(total);
             if target > ledger {
+                super::periods::ensure_open(dir, key, today)?;
                 let mode = mode_of(n);
                 if !MODES.contains(&mode.as_str()) {
                     return Err("Mode de paiement invalide.".into());
@@ -329,6 +330,7 @@ pub fn refund(dir: &Path, key: &[u8; KEY_LEN], role: Role, note_id: &str, amount
     }
     let cents = super::receipts::to_cents(amount)?;
     let reason = clean_reason(reason)?;
+    super::periods::ensure_open(dir, key, today)?;
     let (pending, mut notes) = numbering::begin(dir, key, true)?;
     let mut entries = load(dir, key)?;
     migrate_into(&mut entries, &notes, today);
@@ -378,6 +380,7 @@ pub fn settle_for_cancel(dir: &Path, key: &[u8; KEY_LEN], notes: &[Value], id: &
             }
             Some(mode) if !MODES.contains(&mode) => outcome = Err("Mode de paiement invalide.".into()),
             Some(mode) => {
+                super::periods::ensure_open(dir, key, today)?;
                 let patient = notes.iter().find(|n| id_of(n) == id).and_then(|n| n.get("patientId")).and_then(|v| v.as_str()).unwrap_or("").to_string();
                 push_sealed(
                     &mut entries,

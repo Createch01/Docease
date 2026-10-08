@@ -3,6 +3,8 @@ import { invoke } from '@tauri-apps/api/core';
 // Agrégats comptables : TOUT est calculé par Rust (src-tauri/src/accounting.rs), en centimes entiers.
 // L'interface n'additionne jamais de montants : elle affiche ce que Rust renvoie.
 
+import type { CategoryTotal, ModeAmount } from './expenseService';
+
 export type Granularity = 'day' | 'week' | 'month' | 'year';
 
 export interface ModeTotal {
@@ -24,6 +26,8 @@ export interface Bucket {
     byMode: ModeTotal[];
     invoicedCents: number;
     invoicedCount: number;
+    /** Dépenses actives de la tranche, hors « à amortir ». */
+    expensesCents: number;
 }
 
 export interface Summary {
@@ -47,6 +51,16 @@ export interface Summary {
     /** Σ (dû − net encaissé) des notes non annulées, toutes dates. */
     outstandingCents: number;
     outstandingNotes: number;
+    /** Dépenses actives (date de la dépense), hors « à amortir » : seules en déduction du résultat. */
+    expensesCents: number;
+    /** Achats de matériel « à amortir » : listés, exclus du résultat. */
+    amortizableCents: number;
+    expensesCount: number;
+    expensesWithoutReceipt: number;
+    expensesByCategory: CategoryTotal[];
+    expensesByMode: ModeAmount[];
+    /** Résultat = net encaissé − dépenses (hors « à amortir »), calculé par Rust. */
+    resultCents: number;
 }
 
 export interface JournalRow {

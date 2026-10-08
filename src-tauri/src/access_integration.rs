@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{accounting, ai, attachments, audit, messaging, notifications, numbering, payments, receipts, scoped, settings, users, AppState, TEST_DATA_DIR};
+use super::{accounting, ai, attachments, audit, expenses, messaging, notifications, numbering, payments, periods, receipts, scoped, settings, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -119,6 +119,20 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "receipt_cancel" => done(receipts::receipt_cancel(a(), st!(), "REC-2026-00001".into(), "erreur de saisie".into())),
         "receipts_verify" => done(receipts::receipts_verify(a(), st!())),
         "honorary_note_refund_and_cancel" => done(numbering::honorary_note_refund_and_cancel(a(), st!(), "n-inconnue".into(), "erreur de saisie".into(), "CASH".into())),
+        "expense_add" => done(expenses::expense_add(a(), st!(), expenses::NewExpense::default())),
+        "expense_cancel" => done(expenses::expense_cancel(a(), st!(), "DEP-2026-00001".into(), "erreur de saisie".into())),
+        "expense_correct" => done(expenses::expense_correct(a(), st!(), "DEP-2026-00001".into(), "erreur de saisie".into(), expenses::NewExpense::default())),
+        "expense_list" => done(expenses::expense_list(a(), st!(), "2026-01-01".into(), "2026-12-31".into(), None, None, None)),
+        "expenses_today" => done(expenses::expenses_today(a(), st!())),
+        "expense_suppliers" => done(expenses::expense_suppliers(a(), st!())),
+        "expense_categories" => done(expenses::expense_categories(a(), st!())),
+        "expense_category_add" => done(expenses::expense_category_add(a(), st!(), "Nouvelle catégorie".into())),
+        "expense_category_set_active" => done(expenses::expense_category_set_active(a(), st!(), "Divers".into(), true)),
+        "expenses_migrate" => done(expenses::expenses_migrate(a(), st!())),
+        "expenses_verify" => done(expenses::expenses_verify(a(), st!())),
+        "periods_list" => done(periods::periods_list(a(), st!())),
+        "period_close" => done(periods::period_close(a(), st!(), "2020-01".into())),
+        "period_reopen" => done(periods::period_reopen(a(), st!(), "2020-01".into(), "erreur de saisie".into())),
         "accounting_summary" => done(accounting::accounting_summary(a(), st!(), "2026-01-01".into(), "2026-12-31".into(), "month".into())),
         "accounting_journal" => done(accounting::accounting_journal(a(), st!(), "2026-01-01".into(), "2026-12-31".into(), None, None)),
         "accounting_journal_today" => done(accounting::accounting_journal_today(a(), st!())),
@@ -165,7 +179,7 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
 fn all_files() -> Vec<String> {
     let mut v: Vec<String> = [
         "doctor_info", "patients", "prescriptions", "daily_reports", "medicines", "today_queue", "tasks",
-        "appointments", "capacities", "appointment_settings", "expenses", "last_backup", "medical_resources",
+        "appointments", "capacities", "appointment_settings", "last_backup", "medical_resources",
         "consultations", "lab_requests", "medical_results", "honorary_notes", "honorary_master_services",
         "medical_certificates", "notification_state", "vaccinations",
     ]

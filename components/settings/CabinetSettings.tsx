@@ -8,6 +8,7 @@ import { useDoctorDraft } from './useDoctorDraft';
 import ReceiptsRegistryCard from './ReceiptsRegistryCard';
 import NumberingCard from './NumberingCard';
 import PaymentsRegistryCard from './PaymentsRegistryCard';
+import ExpenseCategoriesCard from './ExpenseCategoriesCard';
 import { sessionService } from '../../services/sessionService';
 import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 import { SettingsPageProps } from './ProfileSettings';
@@ -96,6 +97,7 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
           {sessionService.isMedecin() && <ReceiptsRegistryCard />}
           {sessionService.isMedecin() && <NumberingCard />}
           {sessionService.isMedecin() && <PaymentsRegistryCard />}
+          {sessionService.isMedecin() && <ExpenseCategoriesCard />}
         </div>
       )}
 
