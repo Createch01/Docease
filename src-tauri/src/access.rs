@@ -99,6 +99,7 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("payments_verify", Rule::Medecin),
     ("payments_migrate", Rule::Medecin),
     ("honorary_note_cancel", Rule::Medecin),
+    ("honorary_note_refund_and_cancel", Rule::Medecin),
     ("invoice_numbering_check", Rule::Medecin),
     ("invoice_numbering_migrate", Rule::Medecin),
     ("appointment_mark_sent", Rule::AnySession),
@@ -257,7 +258,7 @@ mod tests {
         "backup_status", "backup_set_passphrase", "backup_change_passphrase", "backup_set_destinations", "backup_run_now",
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
         "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
-        "receipt_list", "receipt_cancel", "receipts_verify", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
+        "receipt_list", "receipt_cancel", "receipts_verify", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
     ];
 
     #[test]

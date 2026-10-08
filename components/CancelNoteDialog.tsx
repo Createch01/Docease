@@ -2,17 +2,24 @@ import React, { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { HonoraryNote } from '../types';
 import { honoraryNoteService } from '../services/honoraryNoteService';
+import { PAY_MODES, PayMode } from './PaymentFields';
 
 /** Médecin : annulation d'une note numérotée. Le numéro est conservé ; la note ne compte plus dans les montants. */
 const CancelNoteDialog: React.FC<{ note: HonoraryNote; onClose: () => void; onCancelled: () => void }> = ({ note, onClose, onCancelled }) => {
+    const collected = note.status === 'PAID' ? note.totalAmount : note.status === 'PARTIAL' ? (note.amountPaid ?? 0) : 0;
     const [reason, setReason] = useState('');
+    const [mode, setMode] = useState<PayMode>(note.paymentMode);
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const ok = reason.trim().length >= 3 && reason.trim().length <= 200;
     const submit = async () => {
         setBusy(true);
         setError(null);
-        try { await honoraryNoteService.cancel(note.id, reason); onCancelled(); }
+        try {
+            if (collected > 0) await honoraryNoteService.refundAndCancel(note.id, reason, mode);
+            else await honoraryNoteService.cancel(note.id, reason);
+            onCancelled();
+        }
         catch (e) { setError(e instanceof Error ? e.message : 'Annulation impossible.'); setBusy(false); }
     };
     return (
@@ -22,6 +29,17 @@ const CancelNoteDialog: React.FC<{ note: HonoraryNote; onClose: () => void; onCa
                 <p className="text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
                     La note reste dans la liste avec son numéro, marquée « Annulée » (date et auteur enregistrés). Elle ne compte plus dans les montants, les impayés ni les statistiques, et ne peut plus être modifiée. Une note numérotée ne se supprime jamais.
                 </p>
+                {collected > 0 && (
+                    <div className="p-3 rounded-lg text-[13px] space-y-2" style={{ background: 'var(--color-warning-50, #fffbeb)', color: 'var(--color-text)' }}>
+                        <p>Cette note est encaissée ({collected} DH). Elle ne peut être annulée qu'après remboursement : « Rembourser puis annuler » enregistre le remboursement au registre des encaissements puis annule la note, avec le même motif.</p>
+                        <label className="block text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
+                            Mode de remboursement
+                            <select className="h-10 px-3 rounded-lg border text-[14px] outline-none bg-white block mt-1" style={{ borderColor: 'var(--color-border)' }} value={mode} onChange={e => setMode(e.target.value as PayMode)}>
+                                {PAY_MODES.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
+                            </select>
+                        </label>
+                    </div>
+                )}
                 <label className="block text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
                     Motif (obligatoire, 200 caractères au plus)
                     <textarea className="w-full mt-1 p-2 rounded-lg border text-[14px] outline-none bg-white" style={{ borderColor: 'var(--color-border)' }} rows={3} maxLength={200}
@@ -31,7 +49,7 @@ const CancelNoteDialog: React.FC<{ note: HonoraryNote; onClose: () => void; onCa
                 <div className="flex justify-end gap-2">
                     <button type="button" className="h-10 px-4 rounded-lg border text-[13px] font-medium bg-white disabled:opacity-40" style={{ borderColor: 'var(--color-border)' }} onClick={onClose} disabled={busy}>Retour</button>
                     <button type="button" className="h-10 px-4 rounded-lg text-white text-[13px] font-medium flex items-center gap-2 disabled:opacity-40" style={{ background: 'var(--color-danger)' }} onClick={submit} disabled={busy || !ok}>
-                        {busy && <Loader2 size={15} className="animate-spin" />} Annuler la note
+                        {busy && <Loader2 size={15} className="animate-spin" />} {collected > 0 ? 'Rembourser puis annuler' : 'Annuler la note'}
                     </button>
                 </div>
             </div>

@@ -266,3 +266,53 @@ fn migrated_payments_already_created_on_cancelled_notes_are_neutralized_without_
     assert_eq!(load(&d, &KEY).unwrap().len(), 5);
     let _ = fs::remove_dir_all(&d);
 }
+
+#[test]
+fn a_note_still_collected_cannot_be_cancelled_until_refunded() {
+    let d = tmp("cancel-guard");
+    write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
+    save(&d, vec![note("a", 300.0, Some(300.0), "CHEQUE"), note("u", 100.0, None, "CASH")]);
+    let cancel = |id: &str| numbering::cancel(&d, &KEY, Role::Medecin, id, "Erreur de saisie", "Dr", "2026-10-08T10:00:00Z");
+    // Encaissée : refusée, rien n'est annulé ni écrit.
+    let err = cancel("a").unwrap_err();
+    assert!(err.contains("encaissée") && err.contains("300,00"), "{err}");
+    assert!(!numbering::is_cancelled(find(&numbering::read_notes(&d, &KEY), "a")));
+    assert_eq!(load(&d, &KEY).unwrap().len(), 1);
+    // Jamais payée : s'annule comme avant.
+    assert!(cancel("u").is_ok());
+    // Après un remboursement complet par le chemin normal, l'annulation passe.
+    refund(&d, &KEY, Role::Medecin, "a", 300.0, "CHEQUE", "Erreur de tarif", "Dr", TODAY).unwrap();
+    assert!(cancel("a").is_ok());
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn refund_and_cancel_is_one_reason_two_entries_and_medecin_only() {
+    let d = tmp("refund-cancel");
+    save(&d, vec![note("a", 300.0, Some(200.0), "CASH")]);
+    let go = |role: Role, mode: &str, reason: &str| numbering::refund_and_cancel(&d, &KEY, role, "a", reason, mode, "Dr", "2026-10-08T10:00:00Z");
+    assert!(go(Role::Assistant, "CASH", "Erreur de saisie").unwrap_err().contains("médecin"));
+    assert!(go(Role::Medecin, "BITCOIN", "Erreur de saisie").unwrap_err().contains("Mode de paiement"));
+    assert!(go(Role::Medecin, "CASH", "").unwrap_err().contains("obligatoire"));
+    let notes = numbering::read_notes(&d, &KEY);
+    assert!(!numbering::is_cancelled(find(&notes, "a")) && load(&d, &KEY).unwrap().len() == 1, "les refus n'écrivent rien");
+    let done = go(Role::Medecin, "CASH", "Séance annulée par le patient").unwrap();
+    assert_eq!(done["cancellationReason"], "Séance annulée par le patient");
+    let l = load(&d, &KEY).unwrap();
+    assert_eq!(l.len(), 2);
+    assert_eq!((l[1].kind.as_str(), l[1].amount_cents, l[1].reason.as_deref(), l[1].mode.as_str()), ("refund", -20_000, Some("Séance annulée par le patient"), "CASH"));
+    assert_eq!(net_cents(&l, "a"), 0);
+    assert!(verify_entries(&l).ok);
+    assert!(go(Role::Medecin, "CASH", "Séance annulée par le patient").unwrap_err().contains("déjà annulée"));
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn legacy_paid_note_is_migrated_then_refused_for_cancellation() {
+    let d = tmp("cancel-legacy");
+    write_enc_json_in(&d, &KEY, numbering::NOTES_FILE, &Value::Array(vec![legacy_paid("p", "2026-0001", "2026-09-01")])).unwrap();
+    let err = numbering::cancel(&d, &KEY, Role::Medecin, "p", "Erreur de saisie", "Dr", "t").unwrap_err();
+    assert!(err.contains("encaissée"), "{err}");
+    assert_eq!(load(&d, &KEY).unwrap().len(), 1, "le paiement hérité est repris au registre même si l'annulation est refusée");
+    let _ = fs::remove_dir_all(&d);
+}

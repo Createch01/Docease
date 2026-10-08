@@ -64,3 +64,14 @@ describe('Registre d\'encaissements (C1) — côté Rust', () => {
         expect(read('src-tauri/src/backup.rs')).toContain('super::payments::merge_for_restore(dir, key, &mut merged_files)');
     });
 });
+
+describe('Annulation d\'une note encaissée (C1-fix)', () => {
+    it('l\'annulation d\'une note encaissée passe par « Rembourser puis annuler » (un motif, deux écritures par Rust)', () => {
+        const dlg = read('components/CancelNoteDialog.tsx');
+        expect(dlg).toContain('honoraryNoteService.refundAndCancel(note.id, reason, mode)');
+        expect(dlg).toContain('Rembourser puis annuler');
+        expect(read('services/honoraryNoteService.ts')).toContain("'honorary_note_refund_and_cancel'");
+        expect(read('src-tauri/src/access.rs')).toContain('("honorary_note_refund_and_cancel", Rule::Medecin)');
+        expect(read('src-tauri/src/numbering.rs')).toContain('super::payments::settle_for_cancel(');
+    });
+});

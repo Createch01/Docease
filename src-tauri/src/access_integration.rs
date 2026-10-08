@@ -118,6 +118,7 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "receipt_duplicate" => done(receipts::receipt_duplicate(a(), st!(), "REC-2026-00001".into())),
         "receipt_cancel" => done(receipts::receipt_cancel(a(), st!(), "REC-2026-00001".into(), "erreur de saisie".into())),
         "receipts_verify" => done(receipts::receipts_verify(a(), st!())),
+        "honorary_note_refund_and_cancel" => done(numbering::honorary_note_refund_and_cancel(a(), st!(), "n-inconnue".into(), "erreur de saisie".into(), "CASH".into())),
         "payment_refund" => done(payments::payment_refund(a(), st!(), "n-inconnue".into(), 10.0, "CASH".into(), "erreur de saisie".into())),
         "payments_list" => done(payments::payments_list(a(), st!(), None)),
         "payments_verify" => done(payments::payments_verify(a(), st!())),

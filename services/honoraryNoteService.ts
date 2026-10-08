@@ -39,6 +39,15 @@ export const honoraryNoteService = {
         await dataService.reloadHonoraryNotes();
         return note;
     },
+    /**
+     * Médecin : « Rembourser puis annuler » une note encore encaissée. Un seul motif, deux écritures posées par
+     * Rust : remboursement du net encaissé (registre des encaissements) puis annulation de la note.
+     */
+    refundAndCancel: async (id: string, reason: string, refundMode: string): Promise<HonoraryNote> => {
+        const note = await call<HonoraryNote>('honorary_note_refund_and_cancel', { id, reason, refundMode });
+        await dataService.reloadHonoraryNotes();
+        return note;
+    },
     /** Médecin : doublons, trous et numéros mal formés hérités (information seulement). */
     check: () => call<NumberingCheck>('invoice_numbering_check'),
 };

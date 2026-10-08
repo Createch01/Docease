@@ -219,6 +219,11 @@ fn non_list_payload_is_refused_without_touching_the_file() {
 
 use crate::access::Role;
 
+/// Annule en remboursant d'abord le net encaissé (une note encore encaissée ne s'annule pas autrement).
+fn cancel_refunding(d: &Path, id: &str) -> Result<Value, String> {
+    refund_and_cancel(d, &KEY, Role::Medecin, id, "Erreur de saisie", "CASH", "Dr", "2026-10-08T10:00:00Z")
+}
+
 fn cancel_ok(d: &Path, id: &str) -> Result<Value, String> {
     cancel(d, &KEY, Role::Medecin, id, "  Erreur   de saisie ", "Dr", "2026-10-08T10:00:00Z")
 }
@@ -276,7 +281,8 @@ fn a_note_with_valid_receipts_is_cancelled_only_after_its_receipts() {
     let r = receipts::issue(&d, &KEY, "a", false, &doctor, "2026-10-08T09:00:00Z", TODAY).unwrap();
     assert!(cancel_ok(&d, "a").unwrap_err().contains("reçus valides"));
     receipts::cancel(&d, &KEY, &r.number, "erreur", &doctor, "2026-10-08T09:30:00Z", TODAY).unwrap();
-    assert!(cancel_ok(&d, "a").is_ok());
+    assert!(cancel_ok(&d, "a").unwrap_err().contains("encaissée"));
+    assert!(cancel_refunding(&d, "a").is_ok());
     // Une note annulée n'accepte plus de reçu.
     assert!(receipts::issue(&d, &KEY, "a", false, &doctor, "t", TODAY).unwrap_err().contains("annulée"));
     let _ = fs::remove_dir_all(&d);
@@ -329,7 +335,7 @@ fn assistant_payment_uses_the_counter_and_shares_it_with_the_doctor() {
     let after = save(&d, [read_notes(&d, &KEY), vec![note("m3", "", "")]].concat(), TODAY).unwrap();
     assert_eq!(number_of(&after[3]), "2026-0004");
     // Une note annulée n'est plus modifiable par l'assistante ni listée dans l'encaissement du jour.
-    cancel_ok(&d, "pay1").unwrap();
+    cancel_refunding(&d, "pay1").unwrap();
     assert!(save_payment(&d, &KEY, &new(json!({"id": "pay1", "status": "UNPAID"})), TODAY, "x", "test").unwrap_err().contains("annulée"));
     assert!(crate::scoped::payments_today(&read_notes(&d, &KEY), TODAY).iter().all(|p| p["id"] != "pay1"));
     let _ = fs::remove_dir_all(&d);

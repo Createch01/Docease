@@ -603,6 +603,7 @@ pub fn run() {
         payments::payments_verify,
         payments::payments_migrate,
         numbering::honorary_note_cancel,
+        numbering::honorary_note_refund_and_cancel,
         numbering::invoice_numbering_check,
         numbering::invoice_numbering_migrate,
         messaging::appointment_mark_sent,

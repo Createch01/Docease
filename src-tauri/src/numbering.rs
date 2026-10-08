@@ -328,6 +328,17 @@ const MAX_REASON_CHARS: usize = 200;
 /// reste dans la liste avec son numéro, figée ; elle ne compte plus dans les montants. Une note jamais
 /// numérotée se supprime ; une note qui a des reçus valides ne s'annule qu'après l'annulation des reçus.
 pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &str, reason: &str, by: &str, now_iso: &str) -> Result<Value, String> {
+    cancel_with(dir, key, role, id, reason, by, now_iso, None)
+}
+
+/// « Rembourser puis annuler » : un motif, deux écritures (remboursement du net encaissé au registre, puis
+/// annulation de la note), sous le même verrou.
+pub fn refund_and_cancel(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &str, reason: &str, refund_mode: &str, by: &str, now_iso: &str) -> Result<Value, String> {
+    cancel_with(dir, key, role, id, reason, by, now_iso, Some(refund_mode))
+}
+
+/// Une note encore encaissée (net du registre > 0) ne s'annule pas : il faut d'abord la rembourser.
+fn cancel_with(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &str, reason: &str, by: &str, now_iso: &str, refund_mode: Option<&str>) -> Result<Value, String> {
     if role != super::access::Role::Medecin {
         return Err("Seul le médecin peut annuler une note d'honoraires.".into());
     }
@@ -351,6 +362,8 @@ pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &s
     if receipts.iter().any(|r| r.kind == "receipt" && r.note_id == id && !super::receipts::is_cancelled(&receipts, &r.number)) {
         return Err("Cette note a des reçus valides : annulez d'abord ses reçus.".into());
     }
+    // Registre d'abord (remboursement éventuel), notes ensuite.
+    super::payments::settle_for_cancel(dir, key, &notes, id, refund_mode, &reason, by, &super::util::today_local())?;
     let obj = notes[i].as_object_mut().ok_or("Note invalide.")?;
     obj.insert("cancelledAt".into(), Value::String(now_iso.to_string()));
     obj.insert("cancelledBy".into(), Value::String(by.to_string()));
@@ -464,6 +477,16 @@ pub fn honorary_note_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: 
     let key = data_key_of(&state)?;
     let r = cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &session.name, &util::now_iso());
     audit::log(&app, Some(&session), "note_cancel", if r.is_ok() { &id } else { "refusé" }, r.is_ok());
+    r
+}
+
+/// Journal : l'identifiant de la note seulement (jamais le motif, le patient ni le montant).
+#[tauri::command]
+pub fn honorary_note_refund_and_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String, reason: String, refund_mode: String) -> Result<Value, String> {
+    let session = require_session(gate(&app, &state, "honorary_note_refund_and_cancel")?)?;
+    let key = data_key_of(&state)?;
+    let r = refund_and_cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &refund_mode, &session.name, &util::now_iso());
+    audit::log(&app, Some(&session), "note_refund_cancel", if r.is_ok() { &id } else { "refusé" }, r.is_ok());
     r
 }
 
