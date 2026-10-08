@@ -191,3 +191,28 @@ données qu'il restitue.
 - Statut et montant payé d'une note : calculés par Rust depuis le registre (`payments::reconcile`, sous le verrou de numérotation, registre écrit avant les notes).
 - Remboursement : médecin seulement (l'assistante n'a pas d'accès) ; à rouvrir si l'assistante doit pouvoir rembourser des espèces.
 - **Question ouverte (C2/C4)** : l'annulation d'une note n'efface pas ses encaissements du registre. Les agrégats excluront les notes annulées (règle déjà posée) ; pour la caisse (C4), un encaissement espèces sur une note annulée doit être remboursé (écriture négative) pour que le théorique reste juste. Option : refuser l'annulation d'une note encore encaissée tant qu'elle n'est pas remboursée.
+
+## 8. Principes (niveau professionnel) — valables pour toute la comptabilité
+
+- **R1. Comptabilité de caisse** : une recette se compte à la **date du paiement** (registre `meddoc_payments.json`), jamais à la date ou au statut de la note.
+- **R2. Tout est en ajout seul** : aucune recette, dépense ou mouvement n'est modifié ni supprimé. Une correction est une écriture d'annulation / contre-passation (motif, date posée par Rust, auteur), dans un registre chaîné par empreintes comme les encaissements.
+- **R3. Montants en centimes (`i64`)** partout côté Rust ; l'arrondi n'existe qu'à l'affichage.
+- **R4. Tous les agrégats sont calculés en Rust** ; l'interface n'additionne jamais de montants.
+- **R5. Clôture de période** : un mois clôturé (médecin) n'accepte plus aucune écriture datée dans ce mois ; réouverture par le médecin seulement, avec motif, tracée au registre des périodes. Choix : seul un mois **déjà terminé** se clôture (le mois en cours reste ouvert, la caisse du jour n'est jamais bloquée) ; un paiement reçu aujourd'hui sur une ancienne note reste permis (il est daté d'aujourd'hui). Les écritures de reprise (« migrées ») et leurs compensations sont exemptes.
+- **R6. Dates en jour local** (`util::today_local`), format `AAAA-MM-JJ`.
+- **R7. Rôles** : médecin = tout. Assistante = saisie des dépenses courantes (du jour, hors investissement) et consultation du journal **du jour** ; ni clôture, ni prélèvements, ni vue annuelle / résultat, ni liste complète. Inscrit dans `access::COMMAND_RULES` et vérifié par `access_integration.rs`.
+
+## 9. C2 — Recettes sur le registre
+
+- Commande `accounting_summary(from, to, granularity)` : par jour / semaine / mois / année : encaissé brut, remboursements, net, ventilation par mode (espèces / chèque / virement / carte), nombre de paiements, patients distincts. Facturé = notes **non annulées** par date d'émission. « Reste à encaisser » = Σ (dû − net du registre) des notes non annulées, toutes dates.
+- Les lignes « migré » sont comptées et **identifiées** (montant et nombre migrés). Exception : la paire « encaissement migré à tort + remboursement de neutralisation » d'une note annulée est **exclue du brut et des remboursements** (net inchangé : 0) et affichée à part (« neutralisé »), pour ne pas gonfler les deux colonnes.
+- Commande `accounting_journal(from, to, mode?, kind?)` : lignes (date, heure locale, n° de note, patient, type, mode, montant, auteur, motif, migré, note annulée) + sous-totaux par jour + totaux par mode. Commande `accounting_journal_today` (toute session) : écritures du jour seulement, sans nom de patient.
+- Interface : `Analytics.tsx` ne lit plus le statut des notes pour l'encaissé ; onglet « Journal des recettes » (le contrôle d'intégrité y est déplacé).
+
+## 10. C3 — Dépenses professionnelles (Rust)
+
+- Registre `meddoc_expenses.json` (chiffré, ajout seul, chaîné). Entrée `DEP-AAAA-NNNNN` (compteur Rust `meddoc_expense_counter.json`, max(compteur, registre) + 1, jamais en arrière après restauration) : date de la dépense (≤ aujourd'hui, hors mois clôturé), date de saisie (Rust), catégorie (liste validée par Rust), sous-catégorie, fournisseur, n° de facture fournisseur, libellé, TTC et TVA en centimes, mode (espèces / chèque / virement / carte / prélèvement), n° de chèque, justificatifs (pièces jointes chiffrées, propriétaire réservé « cabinet »), auteur. Annulation = entrée `cancellation` (motif obligatoire) ; l'originale reste visible barrée ; « Corriger » = annuler + recréer pré-rempli.
+- Les anciennes dépenses (format non chaîné, `receiptDataUrl` en base64) sont reprises une fois (mode inconnu → « espèces », marquées « migré ») ; leur justificatif devient une pièce jointe chiffrée.
+- Catégories : liste par défaut modifiable (réglages), une catégorie utilisée se désactive, ne se supprime pas ; « Achat de matériel » est marquée « à amortir » : listée, **exclue** du résultat.
+- Résultat = net encaissé − dépenses actives (hors « à amortir »), calculé par `accounting_summary`.
+- Clôture : `period_close(mois)` / `period_reopen(mois, motif)` (médecin), registre `meddoc_periods.json` chaîné ; indicateur « Mois clôturé » dans Comptabilité.
