@@ -83,7 +83,7 @@ const CashierView: React.FC = () => {
         try {
             const saved = await paymentService.saveToday({
                 id: row.id, patientId: row.patientId, patientName: row.patientName,
-                totalAmount: due, amountPaid: Number.isFinite(paid) ? paid : 0, paymentMode: row.mode, status: row.status,
+                totalAmount: due, amountPaid: Number.isFinite(paid) ? paid : 0, paymentMode: row.mode,
             });
             setRows(rs => rs.map(r => (r.patientId === row.patientId
                 ? { ...r, id: saved.id, due: String(saved.totalAmount), paid: String(saved.amountPaid), status: saved.status, mode: saved.paymentMode, dirty: false, saving: false }
@@ -156,7 +156,7 @@ const CashierView: React.FC = () => {
                                 onChange={e => patch(r.patientId, { due: e.target.value })} />
                         </label>
                         <label className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-                            Statut
+                            Paiement
                             <select className={`${field} block mt-1`} style={fieldStyle} value={r.status}
                                 onChange={e => patch(r.patientId, { status: e.target.value as PaymentStatus })}>
                                 {STATUSES.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}

@@ -4,15 +4,25 @@ import { formatCurrencyToWords } from '../utils/numberToWords';
 import { todayLocal } from '../utils/localDate';
 
 export const billingService = {
-    // Builds (but does not save) a quick honorary note for a patient, defaulting to the
-    // practice's standard consultation fee. Reused by FinancesSection's Quick Invoice
-    // button and by PrescriptionEditor's "create the matching invoice?" prompt.
+    /** Tarif proposé par défaut dans la fenêtre « Facture rapide » (modifiable). */
+    defaultQuickAmount: (): number => {
+        const masters = dataService.getHonoraryMasterServices();
+        const standardFee = dataService.getDoctorInfo().standardConsultationFee;
+        const consultationService = masters.find(m => m.name.toLowerCase().includes('consultation')) || { name: 'Consultation', price: standardFee || 300 };
+        return standardFee ?? consultationService.price;
+    },
+
+    // Builds (but does not save) a quick honorary note for a patient. Le montant réellement encaissé est
+    // fourni par l'appelant (fenêtre de confirmation) : une note n'est JAMAIS « réglée » d'office. Le
+    // statut est calculé et enregistré par Rust (payé ≥ dû) ; celui-ci n'est qu'indicatif.
     buildQuickInvoice: (params: {
         patientId: string;
         patientName: string;
         currency: string;
         amount?: number;
         prescriptionId?: string;
+        amountPaid: number;
+        paymentMode: 'CASH' | 'CARD' | 'TRANSFER';
     }): HonoraryNote => {
         const masters = dataService.getHonoraryMasterServices();
         const standardFee = dataService.getDoctorInfo().standardConsultationFee;
@@ -29,8 +39,9 @@ export const billingService = {
             services: [{ name: consultationService.name, price: total, checked: true }],
             totalAmount: total,
             totalInWords: formatCurrencyToWords(total, params.currency),
-            status: 'PAID',
-            paymentMode: 'CASH',
+            status: params.amountPaid >= total && total > 0 ? 'PAID' : params.amountPaid > 0 ? 'PARTIAL' : 'UNPAID',
+            amountPaid: params.amountPaid,
+            paymentMode: params.paymentMode,
         };
     },
 

@@ -11,15 +11,19 @@ import { toastService } from '../services/toastService';
 import { canOutput } from '../services/cabinetSetup';
 import { settingsService } from '../services/settingsService';
 import { todayLocal } from '../utils/localDate';
+import PaymentFields, { DEFAULT_PAYMENT, PaymentChoice, amountPaidOf } from './PaymentFields';
+import ExistingNoteNotice, { todaysNotes } from './ExistingNoteNotice';
 
 interface HonoraryNoteEditorProps {
+    /** « Imprimer la note … » : ouvre l'aperçu de la note du jour déjà existante. */
+    onOpenExisting?: (note: HonoraryNote) => void;
     patient: Patient;
     visitId?: string;
     onClose: () => void;
 }
 
 
-const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitId, onClose }) => {
+const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitId, onClose, onOpenExisting }) => {
     const doctor = dataService.getDoctorInfo();
     const [date, setDate] = useState(todayLocal());
     // While printing, only the dedicated print layer is mounted (see usePrintMode).
@@ -31,8 +35,11 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
     const [services, setServices] = useState<HonoraryService[]>([]);
     const [total, setTotal] = useState(0);
     const [totalWords, setTotalWords] = useState('');
-    const [status, setStatus] = useState<'PAID' | 'UNPAID'>('PAID');
-    const [paymentMode, setPaymentMode] = useState<'CASH' | 'CARD' | 'TRANSFER'>('CASH');
+    // Jamais « Payé » par défaut : le paiement est choisi explicitement (le statut est calculé par Rust).
+    const [payment, setPayment] = useState<PaymentChoice>(DEFAULT_PAYMENT);
+    // Une visite = une note : si une note du jour existe déjà, on propose de l'imprimer d'abord.
+    const [existingToday] = useState(() => todaysNotes(dataService.getAllHonoraryNotes(patient.id), patient.id, todayLocal())[0]);
+    const [createAnother, setCreateAnother] = useState(false);
     const [isPreview, setIsPreview] = useState(false);
     const [savedNote, setSavedNote] = useState<HonoraryNote | null>(null);
 
@@ -92,8 +99,11 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
         // Le numéro et la date d'émission sont attribués par Rust à l'enregistrement.
         const invoiceNumber = '';
 
+        const paid = amountPaidOf(payment, total);
+        if ('error' in paid) { toastService.error(paid.error); return; }
         const note: HonoraryNote = {
-            id: Date.now().toString(),
+            // Enregistrer puis imprimer / exporter ne doit jamais créer une seconde note.
+            id: savedNote?.id ?? Date.now().toString(),
             patientId: patient.id,
             patientName: patient.name,
             patientPhone: patient.phone || undefined,
@@ -104,8 +114,9 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
             services: services.filter(s => s.checked || s.price! > 0),
             totalAmount: total,
             totalInWords: totalWords,
-            status,
-            paymentMode
+            status: paid.paid >= total && total > 0 ? 'PAID' : paid.paid > 0 ? 'PARTIAL' : 'UNPAID', // indicatif : Rust recalcule
+            amountPaid: paid.paid,
+            paymentMode: payment.mode,
         };
 
         const stored = await dataService.saveHonoraryNote(note);
@@ -144,6 +155,10 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
             });
     };
 
+    if (existingToday && !createAnother) {
+        return <ExistingNoteNotice note={existingToday} currency={doctor.currency || 'DH'} onOpen={() => (onOpenExisting ? onOpenExisting(existingToday) : onClose())} onCreateAnother={() => setCreateAnother(true)} onClose={onClose} />;
+    }
+
     return (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-300">
             <div className="bg-white rounded-[2.5rem] shadow-2xl w-full max-w-5xl h-[90vh] flex flex-col overflow-hidden">
@@ -176,14 +191,8 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
                                         Jour de l'émission ({date}) — numéro attribué à l'enregistrement
                                     </div>
                                 </div>
-                                <div className="space-y-1">
-                                    <label className="text-[10px] font-black text-gray-400 uppercase ml-2">Mode de Paiement</label>
-                                    <select value={paymentMode} onChange={e => setPaymentMode(e.target.value as any)}
-                                        className="w-full p-3.5 bg-gray-50 border border-gray-100 rounded-2xl font-bold text-sm outline-none focus:ring-4 focus:ring-blue-500/5 focus:border-blue-500 transition-all">
-                                        <option value="CASH">Espèces (Cash)</option>
-                                        <option value="CARD">Carte Bancaire</option>
-                                        <option value="TRANSFER">Virement</option>
-                                    </select>
+                                <div className="space-y-1 col-span-2">
+                                    <PaymentFields value={payment} onChange={setPayment} currency={doctor.currency || 'DH'} />
                                 </div>
                             </div>
 

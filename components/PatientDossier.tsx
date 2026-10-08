@@ -694,7 +694,7 @@ const PatientDossier: React.FC<{ onNavigate?: (view: string, data?: any) => void
 
       {/* ── MODALS ── */}
       {isAddingNote && selectedPatientProfile && (
-        <HonoraryNoteEditor patient={selectedPatientProfile} onClose={() => setIsAddingNote(false)} />
+        <HonoraryNoteEditor patient={selectedPatientProfile} onClose={() => setIsAddingNote(false)} onOpenExisting={n => { setIsAddingNote(false); setSelectedNote(n); }} />
       )}
 
       {isAddingCertificate && selectedPatientProfile && (

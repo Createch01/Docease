@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock, Receipt, Ban } from 'lucide-react';
+import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock, Receipt, Ban, Banknote } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import { HonoraryNote, HonoraryMasterService } from '../../types';
 import { billingService } from '../../services/billingService';
@@ -8,6 +8,8 @@ import { ReceiptView, formatCents, receiptService, STATUS_LABEL } from '../../se
 import { toastService } from '../../services/toastService';
 import ReceiptModal from '../ReceiptModal';
 import CancelNoteDialog from '../CancelNoteDialog';
+import QuickInvoiceDialog from '../QuickInvoiceDialog';
+import RecordPaymentDialog from '../RecordPaymentDialog';
 import { CancelReceiptDialog, ReceiptIssueDialog } from '../ReceiptDialogs';
 
 interface FinancesSectionProps {
@@ -32,6 +34,8 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
     const honoraryNotes = useMemo(() => dataService.getAllHonoraryNotes(patientId), [patientId, refreshTrigger]);
     const activeNotes = useMemo(() => honoraryNotes.filter(n => !n.cancelledAt), [honoraryNotes]);
     const [cancelNote, setCancelNote] = useState<HonoraryNote | null>(null);
+    const [quickOpen, setQuickOpen] = useState(false);
+    const [payNote, setPayNote] = useState<HonoraryNote | null>(null);
     const [toast, setToast] = useState<string | null>(null);
 
     // Reçus de ce patient (registre tenu par Rust) : émission, duplicata, annulation par reçu d'annulation.
@@ -51,26 +55,8 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
         return { total, paid: collected, balance: outstanding };
     }, [activeNotes]);
 
-    const handleQuickInvoice = () => {
-        const note = billingService.buildQuickInvoice({ patientId, patientName, currency });
-        dataService.saveHonoraryNote(note);
-        setToast(t('quick_invoice_generated'));
-        setTimeout(() => setToast(null), 3000);
-        window.dispatchEvent(new Event('meddoc_data_update'));
-    };
-
-    const cycleStatus = (note: HonoraryNote) => {
-        if (note.cancelledAt) return;
-        const order: HonoraryNote['status'][] = ['UNPAID', 'PARTIAL', 'PAID'];
-        const next = order[(order.indexOf(note.status) + 1) % order.length];
-        const updated: HonoraryNote = {
-            ...note,
-            status: next,
-            amountPaid: next === 'PARTIAL' ? (note.amountPaid ?? Math.round(note.totalAmount / 2)) : undefined,
-        };
-        dataService.saveHonoraryNote(updated);
-        window.dispatchEvent(new Event('meddoc_data_update'));
-    };
+    // « Facture rapide » ouvre toujours une fenêtre (montant, paiement, mode) : aucune note n'est créée d'office.
+    const handleQuickInvoice = () => setQuickOpen(true);
 
     return (
         <div className="space-y-6 animate-in fade-in duration-500 relative">
@@ -121,12 +107,12 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                 <table className={`w-full ${dir === 'rtl' ? 'text-right' : 'text-left'}`}>
                     <thead>
                         <tr className="bg-gray-50/50 border-b border-gray-100">
-                            <th className={`p-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ${dir === 'rtl' ? 'text-right' : ''}`}>{t('note_number')}</th>
-                            <th className={`p-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ${dir === 'rtl' ? 'text-right' : ''}`}>{t('date')}</th>
-                            <th className={`p-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ${dir === 'rtl' ? 'text-right' : ''}`}>{t('benefits')}</th>
-                            <th className={`p-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>{t('amount')}</th>
-                            <th className="p-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] text-center">{t('status')}</th>
-                            <th className={`p-6 text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>{t('actions')}</th>
+                            <th className={`p-6 text-[12px] font-semibold text-gray-500 ${dir === 'rtl' ? 'text-right' : ''}`}>{t('fin_col_note')}</th>
+                            <th className={`p-6 text-[12px] font-semibold text-gray-500 ${dir === 'rtl' ? 'text-right' : ''}`}>{t('fin_col_date')}</th>
+                            <th className={`p-6 text-[12px] font-semibold text-gray-500 ${dir === 'rtl' ? 'text-right' : ''}`}>{t('fin_col_benefits')}</th>
+                            <th className={`p-6 text-[12px] font-semibold text-gray-500 ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>{t('fin_col_amount')}</th>
+                            <th className="p-6 text-[12px] font-semibold text-gray-500 text-center">{t('fin_col_status')}</th>
+                            <th className={`p-6 text-[12px] font-semibold text-gray-500 ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>{t('fin_col_actions')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -150,22 +136,30 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                     </div>
                                 </td>
                                 <td className={`p-6 text-lg ${dir === 'rtl' ? 'text-left' : 'text-right'} ${note.cancelledAt ? 'line-through' : ''}`}>
-                                    <span className="text-emerald-700">{note.totalAmount}</span>
+                                    <span className={note.cancelledAt ? 'text-gray-400' : 'text-emerald-700'}>{note.totalAmount}</span>
                                     <span className="text-[10px] text-gray-300 ml-1 ml-1">{currency}</span>
                                 </td>
                                 <td className="p-6 text-center">
-                                    <button
-                                        onClick={() => cycleStatus(note)}
-                                        disabled={!!note.cancelledAt}
-                                        title={note.cancelledAt ? `Note annulée : ${note.cancellationReason ?? ''}` : 'Cliquer pour changer le statut'}
-                                        className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest inline-flex items-center gap-2 transition-all hover:scale-105 ${note.status === 'PAID' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : note.status === 'PARTIAL' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-red-50 text-red-600 border border-red-100'}`}
-                                    >
-                                        {note.status === 'PAID' ? <CheckCircle size={10} /> : note.status === 'PARTIAL' ? <Clock size={10} /> : <div className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />}
-                                        {note.status === 'PAID' ? t('paid') : note.status === 'PARTIAL' ? `${note.amountPaid || 0}/${note.totalAmount}` : t('unpaid')}
-                                    </button>
+                                    {note.cancelledAt ? (
+                                        <span title={`Annulée le ${note.cancelledAt.slice(0, 10)} par ${note.cancelledBy ?? ''} — ${note.cancellationReason ?? ''}`}
+                                            className="px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest inline-flex items-center gap-2 bg-gray-100 text-red-700 border border-red-100" data-testid="status-cancelled">
+                                            <Ban size={10} /> {t('note_cancelled')}
+                                        </span>
+                                    ) : (
+                                        <span data-testid={`status-${note.status}`}
+                                            className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest inline-flex items-center gap-2 ${note.status === 'PAID' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : note.status === 'PARTIAL' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                                            {note.status === 'PAID' ? <CheckCircle size={10} /> : note.status === 'PARTIAL' ? <Clock size={10} /> : <div className="w-2 h-2 rounded-full bg-red-400" />}
+                                            {note.status === 'PAID' ? t('paid') : note.status === 'PARTIAL' ? `${note.amountPaid || 0}/${note.totalAmount}` : t('unpaid')}
+                                        </span>
+                                    )}
                                 </td>
                                 <td className={`p-6 shrink-0 ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>
                                     <div className={`flex justify-end gap-2 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
+                                        {!note.cancelledAt && note.status !== 'PAID' && (
+                                            <button onClick={() => setPayNote(note)} title="Enregistrer un paiement" className="p-3 bg-white text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-100 rounded-2xl transition-all shadow-sm">
+                                                <Banknote size={18} />
+                                            </button>
+                                        )}
                                         {note.status !== 'UNPAID' && !note.cancelledAt && (
                                             <button onClick={() => setIssueFor(note.id)} title="Émettre un reçu" className="p-3 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-100 rounded-2xl transition-all shadow-sm">
                                                 <Receipt size={18} />
@@ -210,11 +204,12 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                     <p className="text-[12px] text-gray-400 italic">Aucun reçu émis pour ce patient.</p>
                 ) : (
                     <table className="w-full text-left text-[12px]">
-                        <thead><tr className="text-[10px] uppercase tracking-widest text-gray-400"><th className="py-2">N°</th><th>Date</th><th>Montant</th><th>État</th><th className="text-right">Actions</th></tr></thead>
+                        <thead><tr className="text-[12px] font-semibold text-gray-500"><th className="py-2">N°</th><th>Note</th><th>Date</th><th>Montant</th><th>État</th><th className="text-right">Actions</th></tr></thead>
                         <tbody>
                             {receipts.map(r => (
                                 <tr key={r.number} className="border-t border-gray-50">
                                     <td className="py-2 font-mono">{r.number}</td>
+                                    <td className="font-mono" data-testid="receipt-note">{honoraryNotes.find(n => n.id === r.noteId)?.invoiceNumber || '—'}</td>
                                     <td>{r.date}</td>
                                     <td className={r.amountCents < 0 ? 'text-red-600' : ''}>{formatCents(r.amountCents)}</td>
                                     <td>{STATUS_LABEL[r.status]}{r.cancelledBy ? ` (${r.cancelledBy})` : ''}</td>
@@ -233,6 +228,13 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
 
             {issueFor && <ReceiptIssueDialog noteId={issueFor} onClose={() => setIssueFor(null)} onIssued={r => { setIssueFor(null); setOpenReceipt(r); loadReceipts(); }} />}
             {cancelFor && <CancelReceiptDialog receipt={cancelFor} onClose={() => setCancelFor(null)} onCancelled={r => { setCancelFor(null); setOpenReceipt(r); loadReceipts(); }} />}
+            {quickOpen && (
+                <QuickInvoiceDialog patientId={patientId} patientName={patientName} currency={currency}
+                    onClose={() => setQuickOpen(false)}
+                    onOpenExisting={n => { setQuickOpen(false); onPreviewNote(n); }}
+                    onCreated={() => { setQuickOpen(false); setToast(t('quick_invoice_generated')); setTimeout(() => setToast(null), 3000); window.dispatchEvent(new Event('meddoc_data_update')); }} />
+            )}
+            {payNote && <RecordPaymentDialog note={payNote} currency={currency} onClose={() => setPayNote(null)} onSaved={() => { setPayNote(null); window.dispatchEvent(new Event('meddoc_data_update')); }} />}
             {cancelNote && <CancelNoteDialog note={cancelNote} onClose={() => setCancelNote(null)} onCancelled={() => { setCancelNote(null); window.dispatchEvent(new Event('meddoc_data_update')); loadReceipts(); }} />}
             {openReceipt && <ReceiptModal receipt={openReceipt} onClose={() => setOpenReceipt(null)} />}
         </div>

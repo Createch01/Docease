@@ -20,6 +20,9 @@ export interface DayPayment {
     status: PaymentStatus;
 }
 
+/** Saisie d'encaissement : le statut n'est jamais envoyé, Rust le calcule à partir du montant payé. */
+export type DayPaymentInput = Omit<DayPayment, 'status'> & { status?: PaymentStatus };
+
 const isTauri = (): boolean => typeof (window as any).__TAURI_INTERNALS__ !== 'undefined';
 const todayDate = () => todayLocal();
 
@@ -41,7 +44,7 @@ export const paymentService = {
     },
 
     // Crée (sans id) ou met à jour (avec id) l'encaissement d'une visite du jour.
-    saveToday: async (payment: DayPayment): Promise<DayPayment> => {
+    saveToday: async (payment: DayPaymentInput): Promise<DayPayment> => {
         if (!isTauri()) {
             // Aperçu navigateur uniquement : pas de Rust, donc pas de contrôle.
             const existing = payment.id ? dataService.getHonoraryNotes().find(n => n.id === payment.id) : undefined;
@@ -56,7 +59,7 @@ export const paymentService = {
                     totalAmount: payment.totalAmount,
                     totalInWords: '',
                 }),
-                status: payment.status,
+                status: payment.amountPaid >= payment.totalAmount && payment.totalAmount > 0 ? 'PAID' : payment.amountPaid > 0 ? 'PARTIAL' : 'UNPAID', // aperçu navigateur seulement
                 paymentMode: payment.paymentMode,
                 amountPaid: payment.amountPaid,
             };
