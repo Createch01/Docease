@@ -156,12 +156,55 @@ fn diverges(n: &Value, net: i64) -> bool {
 
 // ─── Migration ───────────────────────────────────────────────────────────────
 
-/// Une entrée `migrated` par note déjà payée / partielle qui n'en a aucune. Renvoie le nombre ajouté.
+pub const MIGRATION_REFUND_REASON: &str = "Annulation antérieure à la migration";
+
+/// Une note annulée n'a jamais d'encaissement « migré ». Si le registre en contient déjà un (migration faite
+/// avant cette règle), un remboursement « migré » du même montant est AJOUTÉ (rien n'est supprimé), daté du
+/// jour de l'annulation : le net de la note redevient 0. Idempotent. Renvoie le nombre d'écritures ajoutées.
+fn neutralize_cancelled(entries: &mut Vec<Entry>, stored: &[Value], today: &str) -> usize {
+    let mut added = 0;
+    for n in stored {
+        let id = id_of(n);
+        if id.is_empty() || !numbering::is_cancelled(n) {
+            continue;
+        }
+        let migrated: i64 = entries.iter().filter(|e| e.note_id == id && e.kind == "migrated").map(|e| e.amount_cents).sum();
+        let neutralized: i64 = entries.iter().filter(|e| e.note_id == id && e.kind == "refund" && e.by == "migration").map(|e| -e.amount_cents).sum();
+        let todo = (migrated - neutralized).min(net_cents(entries, id));
+        if todo <= 0 {
+            continue;
+        }
+        let mode = entries.iter().find(|e| e.note_id == id && e.kind == "migrated").map_or_else(|| mode_of(n), |e| e.mode.clone());
+        let day = n.get("cancelledAt").and_then(|d| d.as_str()).and_then(|d| d.get(..10)).filter(|d| valid_day(d)).unwrap_or(today).to_string();
+        push_sealed(
+            entries,
+            Entry {
+                seq: 0,
+                kind: "refund".into(),
+                date: day,
+                at: super::util::now_iso(),
+                note_id: id.to_string(),
+                patient_id: n.get("patientId").and_then(|v| v.as_str()).unwrap_or("").to_string(),
+                amount_cents: -todo,
+                mode,
+                reason: Some(MIGRATION_REFUND_REASON.into()),
+                by: "migration".into(),
+                prev_hash: String::new(),
+                hash: String::new(),
+            },
+        );
+        added += 1;
+    }
+    added
+}
+
+/// Une entrée `migrated` par note déjà payée / partielle qui n'en a aucune (jamais pour une note annulée),
+/// puis neutralisation des encaissements migrés d'une note annulée. Renvoie le nombre d'écritures ajoutées.
 fn migrate_into(entries: &mut Vec<Entry>, stored: &[Value], today: &str) -> usize {
     let mut added = 0;
     for n in stored {
         let id = id_of(n);
-        if id.is_empty() || entries.iter().any(|e| e.note_id == id) {
+        if id.is_empty() || numbering::is_cancelled(n) || entries.iter().any(|e| e.note_id == id) {
             continue;
         }
         let paid = claimed_cents(n).min(MAX_CENTS);
@@ -188,7 +231,7 @@ fn migrate_into(entries: &mut Vec<Entry>, stored: &[Value], today: &str) -> usiz
         );
         added += 1;
     }
-    added
+    added + neutralize_cancelled(entries, stored, today)
 }
 
 /// Migration explicite (médecin), à l'ouverture de la session. Renvoie le nombre d'entrées ajoutées.

@@ -213,3 +213,56 @@ fn restore_never_shortens_the_register() {
     assert_eq!(kept.len(), 2, "les encaissements postérieurs à la sauvegarde sont conservés");
     let _ = fs::remove_dir_all(&d);
 }
+
+fn legacy_paid(id: &str, number: &str, date: &str) -> Value {
+    let mut n = note(id, 300.0, None, "CASH");
+    n["status"] = json!("PAID");
+    n["date"] = json!(date);
+    n["invoiceNumber"] = json!(number);
+    n
+}
+
+#[test]
+fn migration_never_creates_a_payment_for_a_cancelled_note() {
+    let d = tmp("mig-cancelled");
+    let mut c = legacy_paid("c", "2026-0006", "2026-10-01");
+    c["cancelledAt"] = json!("2026-10-02T09:00:00Z");
+    write_enc_json_in(&d, &KEY, numbering::NOTES_FILE, &Value::Array(vec![legacy_paid("a", "2026-0001", "2026-10-01"), c])).unwrap();
+    assert_eq!(migrate(&d, &KEY, TODAY).unwrap(), 1);
+    let l = load(&d, &KEY).unwrap();
+    assert_eq!(l.len(), 1);
+    assert_eq!(l[0].note_id, "a");
+    assert_eq!(migrate(&d, &KEY, TODAY).unwrap(), 0);
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn migrated_payments_already_created_on_cancelled_notes_are_neutralized_without_deleting_anything() {
+    let d = tmp("neutralize");
+    let notes = vec![legacy_paid("a", "2026-0001", "2026-10-01"), legacy_paid("b", "2026-0006", "2026-10-01"), legacy_paid("c", "2026-0008", "2026-10-03")];
+    write_enc_json_in(&d, &KEY, numbering::NOTES_FILE, &Value::Array(notes.clone())).unwrap();
+    assert_eq!(migrate(&d, &KEY, TODAY).unwrap(), 3); // ancien comportement : tout migré
+    let before = load(&d, &KEY).unwrap();
+    // Les notes b et c sont annulées après coup (ou l'étaient déjà : le registre les avait migrées à tort).
+    let mut cancelled = notes.clone();
+    cancelled[1]["cancelledAt"] = json!("2026-10-02T09:00:00Z");
+    cancelled[2]["cancelledAt"] = json!("2026-10-05T09:00:00Z");
+    write_enc_json_in(&d, &KEY, numbering::NOTES_FILE, &Value::Array(cancelled)).unwrap();
+    assert_eq!(migrate(&d, &KEY, TODAY).unwrap(), 2);
+    let l = load(&d, &KEY).unwrap();
+    assert_eq!(&l[..3], &before[..], "rien n'est supprimé ni modifié");
+    assert_eq!(l.len(), 5);
+    let neut: Vec<(&str, i64, &str, &str, Option<&str>)> = l[3..].iter().map(|e| (e.note_id.as_str(), e.amount_cents, e.kind.as_str(), e.date.as_str(), e.reason.as_deref())).collect();
+    assert_eq!(neut, vec![
+        ("b", -30_000, "refund", "2026-10-02", Some(MIGRATION_REFUND_REASON)),
+        ("c", -30_000, "refund", "2026-10-05", Some(MIGRATION_REFUND_REASON)),
+    ]);
+    assert_eq!((net_cents(&l, "a"), net_cents(&l, "b"), net_cents(&l, "c")), (30_000, 0, 0));
+    assert!(verify_entries(&l).ok);
+    assert_eq!(l.iter().map(|e| e.amount_cents).sum::<i64>(), 30_000);
+    // Idempotent, y compris par le chemin d'écriture de notes.
+    assert_eq!(migrate(&d, &KEY, TODAY).unwrap(), 0);
+    save(&d, vec![legacy_paid("a", "2026-0001", "2026-10-01")]);
+    assert_eq!(load(&d, &KEY).unwrap().len(), 5);
+    let _ = fs::remove_dir_all(&d);
+}
