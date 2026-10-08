@@ -17,12 +17,12 @@ const PaymentsRegistryCard: React.FC = () => {
     setError(null);
     try {
       setReport(await paymentRegistryService.verify());
-      setEntries(await paymentRegistryService.list(30));
+      setEntries(await paymentRegistryService.list(500));
     } catch (e) { setReport(null); setEntries([]); setError(e instanceof Error ? e.message : 'Vérification impossible.'); }
     finally { setBusy(false); }
   };
 
-  const noteNumber = (id: string) => dataService.getAllHonoraryNotes().find(n => n.id === id)?.invoiceNumber || '—';
+  const noteOf = (id: string) => dataService.getAllHonoraryNotes().find(n => n.id === id);
 
   return (
     <SettingsCard
@@ -41,6 +41,18 @@ const PaymentsRegistryCard: React.FC = () => {
           <CheckCircle2 size={16} /> Registre intact : {report.count} écriture{report.count > 1 ? 's' : ''} dont {report.migrated} migrée{report.migrated > 1 ? 's' : ''} et {report.refunds} remboursement{report.refunds > 1 ? 's' : ''} ; net encaissé {formatCents(report.netCents)}.
         </p>
       )}
+      {report && report.neutralizedNotes > 0 && (
+        <p className="text-[13px]" style={{ color: 'var(--color-text)' }}>{report.neutralizedNotes} note{report.neutralizedNotes > 1 ? 's' : ''} annulée{report.neutralizedNotes > 1 ? 's' : ''} neutralisée{report.neutralizedNotes > 1 ? 's' : ''} (encaissement migré à tort compensé par un remboursement « migré » ; rien n'a été supprimé).</p>
+      )}
+      {report && report.cancelledNotSettled > 0 && (
+        <p role="alert" className="text-[13px]" style={{ color: 'var(--color-warning-800)' }}>{report.cancelledNotSettled} note{report.cancelledNotSettled > 1 ? 's' : ''} annulée{report.cancelledNotSettled > 1 ? 's' : ''} avec un net encaissé non nul : à rembourser.</p>
+      )}
+      {report && report.netByDay.length > 0 && (
+        <div className="text-[12px]" style={{ color: 'var(--color-text)' }}>
+          <p className="font-medium mb-1" style={{ color: 'var(--color-text-subtle)' }}>Net encaissé par jour</p>
+          <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-4">{report.netByDay.map(d => <li key={d.date} className="flex justify-between"><span>{d.date}</span><span>{formatCents(d.netCents)}</span></li>)}</ul>
+        </div>
+      )}
       {report && !report.ok && (
         <div role="alert" className="p-3.5 rounded-md text-[13px]" style={{ background: 'var(--color-danger-50)', color: 'var(--color-danger-700)' }}>
           <p className="font-semibold flex items-center gap-2"><ShieldAlert size={16} /> Anomalie dans le registre</p>
@@ -52,7 +64,7 @@ const PaymentsRegistryCard: React.FC = () => {
           <table className="w-full text-[12px] text-left" style={{ color: 'var(--color-text)' }}>
             <thead>
               <tr style={{ color: 'var(--color-text-subtle)' }}>
-                <th className="py-1 pr-3 font-medium">Date</th><th className="py-1 pr-3 font-medium">Note</th><th className="py-1 pr-3 font-medium">Type</th>
+                <th className="py-1 pr-3 font-medium">Date</th><th className="py-1 pr-3 font-medium">Note</th><th className="py-1 pr-3 font-medium">État</th><th className="py-1 pr-3 font-medium">Type</th>
                 <th className="py-1 pr-3 font-medium text-right">Montant</th><th className="py-1 pr-3 font-medium">Mode</th><th className="py-1 font-medium">Par</th>
               </tr>
             </thead>
@@ -60,7 +72,8 @@ const PaymentsRegistryCard: React.FC = () => {
               {entries.map(e => (
                 <tr key={e.seq} className="border-t" style={{ borderColor: 'var(--color-border)' }} title={e.reason ? `Motif : ${e.reason}` : undefined}>
                   <td className="py-1 pr-3">{e.date}</td>
-                  <td className="py-1 pr-3 font-mono">{noteNumber(e.noteId)}</td>
+                  <td className="py-1 pr-3 font-mono">{noteOf(e.noteId)?.invoiceNumber || '—'}</td>
+                  <td className="py-1 pr-3">{noteOf(e.noteId)?.cancelledAt ? 'Note annulée' : ''}</td>
                   <td className="py-1 pr-3">{PAYMENT_KIND_LABEL[e.kind] ?? e.kind}</td>
                   <td className="py-1 pr-3 text-right">{formatCents(e.amountCents)}</td>
                   <td className="py-1 pr-3">{PAYMENT_MODE_LABEL[e.mode] ?? e.mode}</td>

@@ -27,6 +27,12 @@ export interface PaymentRegistryReport {
     migrated: number;
     refunds: number;
     netCents: number;
+    /** Net encaissé par jour de paiement, du plus récent au plus ancien. */
+    netByDay: { date: string; netCents: number }[];
+    /** Notes annulées dont l'encaissement migré à tort a été neutralisé. */
+    neutralizedNotes: number;
+    /** Notes annulées dont le net n'est pas 0 (anomalie héritée). */
+    cancelledNotSettled: number;
     problems: string[];
 }
 

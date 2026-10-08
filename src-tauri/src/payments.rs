@@ -424,12 +424,25 @@ pub fn merge_for_restore(dir: &Path, key: &[u8; KEY_LEN], files: &mut BTreeMap<S
 
 #[derive(Serialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
+pub struct DayNet {
+    pub date: String,
+    pub net_cents: i64,
+}
+
+#[derive(Serialize, Debug, Clone, PartialEq)]
+#[serde(rename_all = "camelCase")]
 pub struct VerifyReport {
     pub ok: bool,
     pub count: usize,
     pub migrated: usize,
     pub refunds: usize,
     pub net_cents: i64,
+    /// Net encaissé par jour de paiement (encaissements − remboursements), du plus récent au plus ancien.
+    pub net_by_day: Vec<DayNet>,
+    /// Notes annulées dont l'encaissement migré à tort a été neutralisé par un remboursement « migré ».
+    pub neutralized_notes: usize,
+    /// Notes annulées dont le net encaissé n'est pas 0 (anomalie héritée : à rembourser). Rempli par la commande.
+    pub cancelled_not_settled: usize,
     pub problems: Vec<String>,
 }
 
@@ -453,12 +466,20 @@ pub fn verify_entries(entries: &[Entry]) -> VerifyReport {
         }
         prev = e.hash.clone();
     }
+    let mut by_day: BTreeMap<String, i64> = BTreeMap::new();
+    for e in entries {
+        *by_day.entry(e.date.clone()).or_insert(0) += e.amount_cents;
+    }
+    let neutralized: std::collections::BTreeSet<&str> = entries.iter().filter(|e| e.kind == "refund" && e.by == "migration").map(|e| e.note_id.as_str()).collect();
     VerifyReport {
         ok: problems.is_empty(),
         count: entries.len(),
         migrated: entries.iter().filter(|e| e.kind == "migrated").count(),
         refunds: entries.iter().filter(|e| e.kind == "refund").count(),
         net_cents: entries.iter().map(|e| e.amount_cents).sum(),
+        net_by_day: by_day.into_iter().rev().map(|(date, net_cents)| DayNet { date, net_cents }).collect(),
+        neutralized_notes: neutralized.len(),
+        cancelled_not_settled: 0,
         problems,
     }
 }
@@ -494,7 +515,11 @@ pub fn payments_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::
 pub fn payments_verify<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<VerifyReport, String> {
     gate(&app, &state, "payments_verify")?;
     let key = data_key_of(&state)?;
-    Ok(verify_entries(&load(&data_dir(&app)?, &key)?))
+    let dir = data_dir(&app)?;
+    let entries = load(&dir, &key)?;
+    let mut report = verify_entries(&entries);
+    report.cancelled_not_settled = numbering::read_notes(&dir, &key).iter().filter(|n| numbering::is_cancelled(n) && net_cents(&entries, id_of(n)) != 0).count();
+    Ok(report)
 }
 
 /// Migration des notes déjà payées (médecin) : lancée à l'ouverture de sa session.

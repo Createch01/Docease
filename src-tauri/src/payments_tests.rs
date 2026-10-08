@@ -261,6 +261,10 @@ fn migrated_payments_already_created_on_cancelled_notes_are_neutralized_without_
     assert!(verify_entries(&l).ok);
     assert_eq!(l.iter().map(|e| e.amount_cents).sum::<i64>(), 30_000);
     // Idempotent, y compris par le chemin d'écriture de notes.
+    let rep = verify_entries(&l);
+    assert_eq!(rep.neutralized_notes, 2);
+    let days: Vec<(&str, i64)> = rep.net_by_day.iter().map(|d| (d.date.as_str(), d.net_cents)).collect();
+    assert_eq!(days, vec![("2026-10-05", -30_000), ("2026-10-03", 30_000), ("2026-10-02", -30_000), ("2026-10-01", 60_000)]);
     assert_eq!(migrate(&d, &KEY, TODAY).unwrap(), 0);
     save(&d, vec![legacy_paid("a", "2026-0001", "2026-10-01")]);
     assert_eq!(load(&d, &KEY).unwrap().len(), 5);
