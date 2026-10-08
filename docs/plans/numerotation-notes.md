@@ -129,3 +129,25 @@ alerte rouge (ces écarts sont historiques). Le journal d'accès ne reçoit rien
 
 Interdire ou encadrer la suppression d'une note déjà remise ; notes d'avoir ; renumérotation d'archives ;
 numéro de facture légal avec mentions obligatoires (à définir avec vos obligations comptables).
+
+---
+
+## Décisions validées (ajoutées après validation du plan)
+
+1. **D1 modifiée — année = jour d'ÉMISSION** (attribution du numéro), pas la date saisie. La date d'une
+   **nouvelle** note est fixée par Rust au jour d'émission ; une fois le numéro attribué, la date n'est
+   **plus modifiable** (réimposée dans le crochet `save_json`). La numérotation suit l'ordre chronologique
+   d'émission. *Précision de mise en œuvre* : une note **existante sans numéro** (D4) reçoit un numéro à sa
+   prochaine écriture **sans que sa date soit réécrite** (on ne modifie pas un document déjà remis) ; sa
+   date est figée à partir de là.
+2. **D5 confirmée, étendue** : doublons et trous hérités seulement **signalés**, dans les réglages **et**
+   dans « À faire » (médecin, orange, ignorable ; réapparaît si le constat change). Jamais corrigés
+   automatiquement.
+3. **D6 remplacée — suppression interdite, annulation à la place.** Une note numérotée ne peut plus être
+   supprimée (refus Rust dans le crochet). Elle est **annulée** : statut « Annulée », motif obligatoire,
+   date et auteur posés par Rust, numéro conservé et visible dans la liste et les exports. **Médecin
+   seulement** (contrôle Rust). Une note annulée est figée (plus aucune modification) et **ne compte plus**
+   dans les montants, les impayés, les statistiques ni l'encaissement du jour. La suppression reste
+   possible pour une note **jamais numérotée**. Une note ayant des reçus valides ne s'annule qu'après
+   annulation de ses reçus.
+
