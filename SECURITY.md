@@ -176,3 +176,8 @@ Code : `src-tauri/src/attachments.rs` (stockage), `media_clean.rs` (nettoyage de
 - **Remboursement** (`payment_refund`, médecin seulement) : entrée **négative**, motif obligatoire (3 à 200 caractères), montant au plus égal au net encaissé de la note ; l'encaissement d'origine n'est jamais modifié. Journal d'audit : identifiant de note et montant, jamais le motif.
 - **Migration** : chaque note déjà payée ou partielle, sans entrée, reçoit une entrée `migrated` datée de la date de la note, avec son mode existant (idempotente ; aucune note n'est réécrite).
 - **Restauration** : le registre du poste n'est jamais raccourci par une sauvegarde plus ancienne.
+
+## Rembourser puis annuler, agrégats comptables
+
+- **Une note encore encaissée ne s'annule pas** : `honorary_note_cancel` refuse tant que le net du registre des encaissements n'est pas 0 (une note héritée payée est d'abord reprise au registre). `honorary_note_refund_and_cancel` (médecin seulement) fait les deux d'un seul geste, sous le verrou de numérotation : un motif, une écriture négative au registre PUIS l'annulation ; si l'une échoue, rien n'est annulé. La migration ne crée jamais d'encaissement pour une note annulée ; un encaissement « migré » déjà créé sur une note annulée est compensé par un remboursement « migré » (jamais supprimé).
+- **Agrégats calculés par Rust** (`accounting_summary`, `accounting_journal` : médecin seulement ; `accounting_journal_today` : toute session, écritures du jour, sans nom de patient). Comptabilité de caisse (date du paiement), centimes entiers, lecture seule ; l'interface n'additionne aucun montant.

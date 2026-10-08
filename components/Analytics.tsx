@@ -1,5 +1,5 @@
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   BarChart,
   TrendingUp,
@@ -28,7 +28,9 @@ import { Expense, ExpenseCategory, EXPENSE_CATEGORIES, Patient } from '../types'
 // @ts-ignore
 import { toastService } from '../services/toastService';
 import { canOutput } from '../services/cabinetSetup';
-import { localDateStr, localMonthStr, todayLocal } from '../utils/localDate';
+import { localDateStr, todayLocal } from '../utils/localDate';
+import { Granularity, Summary, accountingService, toDh } from '../services/accountingService';
+import JournalTab from './accounting/JournalTab';
 
 type TimeRange = 'Jour' | 'Semaine' | 'Mois' | 'Année';
 
@@ -89,10 +91,6 @@ const isInPeriod = (dateStr: string, start: Date, end: Date) => {
   return d >= localDateStr(start) && d <= localDateStr(end);
 };
 
-/** Montant réellement reçu sur une note (PAID = dû, PARTIAL = montant payé, sinon 0). */
-const collectedOf = (n: { status: string; totalAmount: number; amountPaid?: number }) =>
-  n.status === 'PAID' ? n.totalAmount : n.status === 'PARTIAL' ? Math.min(n.amountPaid || 0, n.totalAmount) : 0;
-
 /** AAAA-MM-JJ -> minuit LOCAL (new Date('AAAA-MM-JJ') serait minuit UTC). */
 const parseLocalDay = (dateStr: string): Date => {
   const [y, m, d] = dateStr.slice(0, 10).split('-').map(Number);
@@ -106,11 +104,29 @@ const readFileAsDataUrl = (file: File): Promise<string> => new Promise((resolve,
   reader.readAsDataURL(file);
 });
 
+/** Plage et granularité du graphique selon la période choisie (les tranches viennent de Rust). */
+const chartRange = (range: TimeRange): { from: string; to: string; gran: Granularity } => {
+  const now = new Date();
+  const d = new Date(now);
+  if (range === 'Jour') { d.setDate(d.getDate() - 13); return { from: localDateStr(d), to: localDateStr(now), gran: 'day' }; }
+  if (range === 'Semaine') { d.setDate(d.getDate() - 49); return { from: localDateStr(d), to: localDateStr(now), gran: 'week' }; }
+  if (range === 'Mois') { d.setMonth(d.getMonth() - 11, 1); return { from: localDateStr(d), to: localDateStr(now), gran: 'month' }; }
+  d.setFullYear(d.getFullYear() - 4, 0, 1);
+  return { from: localDateStr(d), to: localDateStr(now), gran: 'year' };
+};
+
+const bucketLabel = (key: string, gran: Granularity): string => {
+  if (gran === 'year') return key;
+  if (gran === 'month') return parseLocalDay(`${key}-01`).toLocaleDateString('fr-FR', { month: 'short', year: '2-digit' });
+  const d = parseLocalDay(key).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short' });
+  return gran === 'week' ? `Sem. ${d}` : d;
+};
+
 const csvEscape = (value: string) => `"${value.replace(/"/g, '""')}"`;
 
 const Analytics: React.FC = () => {
   const [timeRange, setTimeRange] = useState<TimeRange>('Jour');
-  const [activeTab, setActiveTab] = useState<'overview' | 'expenses' | 'patients'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'journal' | 'expenses' | 'patients'>('overview');
   const [showExpenseForm, setShowExpenseForm] = useState(false);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [expenseError, setExpenseError] = useState('');
@@ -177,52 +193,37 @@ const Analytics: React.FC = () => {
     return dateStr;
   };
 
-  // Moteur d'agrégation pour le graphique d'évolution (recettes facturées vs dépenses)
-  const stats = useMemo(() => {
-    const dataMap: Record<string, DataPoint> = {};
-    const now = new Date();
-
-    if (timeRange === 'Jour') {
-      for (let i = 13; i >= 0; i--) {
-        const d = getPastDate(i);
-        dataMap[d] = { key: d, label: formatLabel(d, 'Jour'), count: 0, revenue: 0, collected: 0, expense: 0 };
-      }
-    } else if (timeRange === 'Mois') {
-      for (let i = 11; i >= 0; i--) {
-        const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-        const key = localMonthStr(d);
-        dataMap[key] = { key, label: formatLabel(localDateStr(d), 'Mois'), count: 0, revenue: 0, collected: 0, expense: 0 };
-      }
-    }
-
-    honoraryNotes.forEach(n => {
-      const key = keyForDate(n.date, timeRange);
-      if (!dataMap[key]) {
-        if (timeRange === 'Jour' || timeRange === 'Mois') return;
-        dataMap[key] = { key, label: formatLabel(n.date, timeRange), count: 0, revenue: 0, collected: 0, expense: 0 };
-      }
-      dataMap[key].count += 1;
-      dataMap[key].revenue += n.totalAmount;
-      dataMap[key].collected += collectedOf(n);
-    });
-
-    expenses.forEach(e => {
-      const key = keyForDate(e.date, timeRange);
-      if (!dataMap[key]) {
-        if (timeRange === 'Jour' || timeRange === 'Mois') return;
-        dataMap[key] = { key, label: formatLabel(e.date, timeRange), count: 0, revenue: 0, collected: 0, expense: 0 };
-      }
-      dataMap[key].expense += e.amount;
-    });
-
-    return Object.values(dataMap).sort((a, b) => a.key.localeCompare(b.key));
-  }, [honoraryNotes, expenses, timeRange]);
-
-  const maxVal = Math.max(...stats.map(s => Math.max(s.collected, s.expense, showInvoiced ? s.revenue : 0)), 1);
-
   // --- Période courante sélectionnée (jour/semaine/mois/année en cours) ---
   const { start: periodStart, end: periodEnd } = useMemo(() => getPeriodBounds(timeRange, new Date()), [timeRange]);
   const periodLabel = getPeriodLabel(timeRange, periodStart, periodEnd);
+
+  // --- Chiffres de la période : calculés par Rust (registre des encaissements, centimes entiers) ---
+  const [summary, setSummary] = useState<Summary | null>(null);
+  const [chart, setChart] = useState<Summary | null>(null);
+  const [accountingError, setAccountingError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    const range = chartRange(timeRange);
+    setAccountingError(null);
+    Promise.all([
+      accountingService.summary(localDateStr(periodStart), localDateStr(periodEnd), 'day'),
+      accountingService.summary(range.from, range.to, range.gran),
+    ]).then(([a, b]) => { if (alive) { setSummary(a); setChart(b); } })
+      .catch(e => { if (alive) { setSummary(null); setChart(null); setAccountingError(e instanceof Error ? e.message : 'Calcul impossible.'); } });
+    return () => { alive = false; };
+  }, [timeRange, periodStart, periodEnd, refreshTrigger]);
+
+  // Série du graphique : une barre par tranche renvoyée par Rust (encaissé net ; facturé en option).
+  const stats: DataPoint[] = useMemo(() => (chart?.buckets ?? []).map(b => ({
+    key: b.key,
+    label: bucketLabel(b.key, chart!.granularity),
+    count: b.invoicedCount,
+    revenue: toDh(b.invoicedCents),
+    collected: toDh(b.netCents),
+    expense: 0,
+  })), [chart]);
+  const maxVal = Math.max(...stats.map(s => Math.max(s.collected, s.expense, showInvoiced ? s.revenue : 0)), 1);
 
   const periodInvoices = useMemo(
     () => honoraryNotes.filter(n => isInPeriod(n.date, periodStart, periodEnd)),
@@ -233,10 +234,11 @@ const Analytics: React.FC = () => {
     [expenses, periodStart, periodEnd]
   );
 
-  const recettesFacturees = periodInvoices.reduce((sum, n) => sum + n.totalAmount, 0);
-  // Encaissé = argent réellement reçu (une note partielle compte son montant payé).
-  const recettesEncaissees = periodInvoices.reduce((sum, n) => sum + collectedOf(n), 0);
-  const recettesEnAttente = recettesFacturees - recettesEncaissees;
+  const recettesFacturees = toDh(summary?.invoicedCents ?? 0);
+  // Encaissé = net du registre des encaissements à la date du PAIEMENT (paiements − remboursements).
+  const recettesEncaissees = toDh(summary?.netCents ?? 0);
+  // Reste à encaisser : notes non annulées, toutes dates.
+  const recettesEnAttente = toDh(summary?.outstandingCents ?? 0);
   const totalExpensesPeriod = periodExpenses.reduce((sum, e) => sum + e.amount, 0);
   // Résultat de trésorerie : encaissé − dépenses payées. Le facturé n'y entre jamais.
   const netProfit = recettesEncaissees - totalExpensesPeriod;
@@ -274,7 +276,7 @@ const Analytics: React.FC = () => {
   ).length;
   const recurringPatientsCount = patientIdsInPeriod.length - newPatientsCount;
   const panierMoyen = patientIdsInPeriod.length > 0 ? recettesFacturees / patientIdsInPeriod.length : 0;
-  const tauxRecouvrement = recettesFacturees > 0 ? (recettesEncaissees / recettesFacturees) * 100 : 0;
+  const tauxRecouvrement = summary && summary.invoicedCents > 0 ? (summary.netCents / summary.invoicedCents) * 100 : 0;
 
   // --- Dépenses par catégorie (période) pour l'export fiscal ---
   const expensesByCategory = useMemo(() => {
@@ -332,7 +334,7 @@ const Analytics: React.FC = () => {
     {
       label: 'Facturé',
       value: formatMoney(recettesFacturees, currency),
-      sub: `${periodInvoices.length} note${periodInvoices.length > 1 ? 's' : ''} · ${formatMoney(recettesEnAttente, currency)} à percevoir`,
+      sub: `${summary?.invoicedCount ?? 0} note${(summary?.invoicedCount ?? 0) > 1 ? 's' : ''} émise${(summary?.invoicedCount ?? 0) > 1 ? 's' : ''} (hors annulées)`,
       icon: CreditCard,
       color: 'text-slate-600',
       bg: 'bg-slate-100'
@@ -340,10 +342,20 @@ const Analytics: React.FC = () => {
     {
       label: 'Encaissé',
       value: formatMoney(recettesEncaissees, currency),
-      sub: 'Argent effectivement reçu',
+      sub: summary
+        ? `${formatMoney(toDh(summary.grossCents), currency)} reçus − ${formatMoney(toDh(summary.refundsCents), currency)} remboursés${summary.migratedCount > 0 ? ` · dont ${formatMoney(toDh(summary.migratedCents), currency)} repris (migré)` : ''}`
+        : (accountingError ?? 'Calcul en cours…'),
       icon: Wallet,
       color: 'text-emerald-600',
       bg: 'bg-emerald-50'
+    },
+    {
+      label: 'Reste à encaisser',
+      value: formatMoney(recettesEnAttente, currency),
+      sub: `${summary?.outstandingNotes ?? 0} note${(summary?.outstandingNotes ?? 0) > 1 ? 's' : ''} non soldée${(summary?.outstandingNotes ?? 0) > 1 ? 's' : ''} (toutes dates)`,
+      icon: Percent,
+      color: 'text-amber-600',
+      bg: 'bg-amber-50'
     },
     {
       label: 'Dépenses',
@@ -370,8 +382,8 @@ const Analytics: React.FC = () => {
     rows.push('');
     rows.push('Recettes;Montant');
     rows.push(`${csvEscape('Total facturé')};${recettesFacturees.toFixed(2)}`);
-    rows.push(`${csvEscape('Total encaissé')};${recettesEncaissees.toFixed(2)}`);
-    rows.push(`${csvEscape('En attente de paiement')};${recettesEnAttente.toFixed(2)}`);
+    rows.push(`${csvEscape('Total encaissé (à la date du paiement)')};${recettesEncaissees.toFixed(2)}`);
+    rows.push(`${csvEscape('Reste à encaisser (toutes dates)')};${recettesEnAttente.toFixed(2)}`);
     rows.push('');
     rows.push('Dépenses par catégorie;Montant');
     expensesByCategory.forEach(([cat, amount]) => {
@@ -440,6 +452,12 @@ const Analytics: React.FC = () => {
             Aperçu
           </button>
           <button
+            onClick={() => setActiveTab('journal')}
+            className={`px-6 py-2 rounded-xl text-xs font-semibold transition-all ${activeTab === 'journal' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-400'}`}
+          >
+            Journal des recettes
+          </button>
+          <button
             onClick={() => setActiveTab('expenses')}
             className={`px-6 py-2 rounded-xl text-xs font-semibold transition-all ${activeTab === 'expenses' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-400'}`}
           >
@@ -490,7 +508,7 @@ const Analytics: React.FC = () => {
         Période sélectionnée : <span className="text-emerald-600">{periodLabel}</span>
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
         {kpis.map((kpi, i) => (
           <div key={i} className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 group hover:border-emerald-200 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-900/5">
             <div className={`w-14 h-14 rounded-2xl ${kpi.bg} ${kpi.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
@@ -663,6 +681,10 @@ const Analytics: React.FC = () => {
             </div>
           </div>
         </>
+      )}
+
+      {activeTab === 'journal' && (
+        <JournalTab from={localDateStr(periodStart)} to={localDateStr(periodEnd)} refresh={refreshTrigger} />
       )}
 
       {activeTab === 'expenses' && (
@@ -887,7 +909,7 @@ const Analytics: React.FC = () => {
                   ></div>
                 </div>
                 <p className="text-sm font-bold text-gray-500">
-                  <span className="text-2xl font-semibold text-emerald-600">{Math.round(tauxRecouvrement)}%</span> du montant facturé a été effectivement encaissé ({formatMoney(recettesEncaissees, currency)} sur {formatMoney(recettesFacturees, currency)}).
+                  <span className="text-2xl font-semibold text-emerald-600">{Math.round(tauxRecouvrement)}%</span> du facturé de la période correspond à l'encaissé de la période ({formatMoney(recettesEncaissees, currency)} sur {formatMoney(recettesFacturees, currency)}).
                 </p>
               </>
             )}
@@ -906,7 +928,7 @@ const Analytics: React.FC = () => {
             <tbody>
               <tr><td style={{ padding: '4px 0' }}>Total facturé (à part)</td><td style={{ textAlign: 'right' }}>{formatMoney(recettesFacturees, currency)}</td></tr>
               <tr><td style={{ padding: '4px 0' }}>Total encaissé</td><td style={{ textAlign: 'right' }}>{formatMoney(recettesEncaissees, currency)}</td></tr>
-              <tr><td style={{ padding: '4px 0' }}>En attente de paiement</td><td style={{ textAlign: 'right' }}>{formatMoney(recettesEnAttente, currency)}</td></tr>
+              <tr><td style={{ padding: '4px 0' }}>Reste à encaisser (toutes dates)</td><td style={{ textAlign: 'right' }}>{formatMoney(recettesEnAttente, currency)}</td></tr>
             </tbody>
           </table>
 

@@ -3,6 +3,7 @@ mod ai;
 mod attachments;
 mod numbering;
 mod payments;
+mod accounting;
 mod receipts;
 mod audit;
 mod backup;
@@ -598,6 +599,9 @@ pub fn run() {
         receipts::receipt_duplicate,
         receipts::receipt_cancel,
         receipts::receipts_verify,
+        accounting::accounting_summary,
+        accounting::accounting_journal,
+        accounting::accounting_journal_today,
         payments::payment_refund,
         payments::payments_list,
         payments::payments_verify,

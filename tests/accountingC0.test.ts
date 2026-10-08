@@ -23,7 +23,7 @@ describe('Comptabilité C0 — résultat de trésorerie', () => {
         expect(src).toContain('localDateStr(start)');
     });
     it('le graphique trace l\'encaissé et les dépenses (facturé en option)', () => {
-        expect(src).toContain('dataMap[key].collected += collectedOf(n);');
+        expect(src).toContain('collected: toDh(b.netCents)');
         expect(src).toContain('showInvoiced');
     });
     it('titres et onglets : casse normale, ni extra-bold ni majuscules forcées', () => {

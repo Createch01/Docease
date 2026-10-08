@@ -94,6 +94,10 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("receipts_verify", Rule::Medecin),
     // Notes d'honoraires : annulation et contrôle de numérotation réservés au médecin
     // Registre d'encaissements : remboursement, consultation, vérification et migration réservés au médecin
+    // Comptabilité : agrégats et journal complet réservés au médecin ; l'assistante ne voit que les écritures du jour
+    ("accounting_summary", Rule::Medecin),
+    ("accounting_journal", Rule::Medecin),
+    ("accounting_journal_today", Rule::AnySession),
     ("payment_refund", Rule::Medecin),
     ("payments_list", Rule::Medecin),
     ("payments_verify", Rule::Medecin),
@@ -258,7 +262,7 @@ mod tests {
         "backup_status", "backup_set_passphrase", "backup_change_passphrase", "backup_set_destinations", "backup_run_now",
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
         "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
-        "receipt_list", "receipt_cancel", "receipts_verify", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
+        "receipt_list", "receipt_cancel", "receipts_verify", "accounting_summary", "accounting_journal", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
     ];
 
     #[test]
@@ -362,6 +366,7 @@ mod tests {
             include_str!("receipts.rs"),
             include_str!("numbering.rs"),
             include_str!("payments.rs"),
+            include_str!("accounting.rs"),
             include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();

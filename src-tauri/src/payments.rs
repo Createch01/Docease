@@ -113,7 +113,7 @@ fn id_of(n: &Value) -> &str {
     n.get("id").and_then(|v| v.as_str()).unwrap_or("")
 }
 
-fn total_cents(n: &Value) -> i64 {
+pub fn total_cents(n: &Value) -> i64 {
     cents_of(n.get("totalAmount").and_then(|v| v.as_f64()).unwrap_or(0.0)).max(0)
 }
 
