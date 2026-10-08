@@ -577,6 +577,8 @@ pub fn run() {
         receipts::receipt_duplicate,
         receipts::receipt_cancel,
         receipts::receipts_verify,
+        numbering::honorary_note_cancel,
+        numbering::invoice_numbering_check,
         messaging::appointment_mark_sent,
         messaging::whatsapp_open,
         ai::ai_status,

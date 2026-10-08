@@ -1034,6 +1034,7 @@ pub fn restore_files(dir: &Path, key: &[u8; KEY_LEN], files: &Files, now: u64) -
     // Registre et compteur des reçus : jamais en arrière (voir `receipts::merge_for_restore`).
     let mut merged_files = files.clone();
     let merged = super::receipts::merge_for_restore(dir, key, &mut merged_files);
+    super::numbering::merge_for_restore(dir, key, &mut merged_files);
     let files = &merged_files;
 
     // 1. Préparation (rien de visible n'a changé tant que ça échoue).

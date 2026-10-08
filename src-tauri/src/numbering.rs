@@ -114,6 +114,15 @@ pub fn read_notes(dir: &Path, key: &[u8; KEY_LEN]) -> Vec<Value> {
     }
 }
 
+/// Lecture stricte : fichier absent = liste vide ; fichier illisible = erreur (jamais écrasé en silence).
+pub fn read_notes_strict(dir: &Path, key: &[u8; KEY_LEN]) -> Result<Vec<Value>, String> {
+    match read_enc_json_in(dir, key, NOTES_FILE)? {
+        None => Ok(Vec::new()),
+        Some(Value::Array(a)) => Ok(a),
+        Some(_) => Err("Fichier des notes d'honoraires illisible.".into()),
+    }
+}
+
 /// Compteur à écrire APRÈS le fichier des notes ; garde le verrou jusque-là.
 pub struct Pending {
     _guard: MutexGuard<'static, ()>,
@@ -134,13 +143,15 @@ impl Pending {
 
 /// Ouvre une section critique : verrou PUIS lecture des notes stockées (jamais l'inverse, sinon deux
 /// écritures simultanées se verraient périmées) et compteur réparé à partir d'elles.
-pub fn begin(dir: &Path, key: &[u8; KEY_LEN]) -> (Pending, Vec<Value>) {
+/// `strict` : un fichier illisible est une erreur (chemins qui réécrivent la liste à partir de ce qu'ils
+/// lisent) ; sinon il est traité comme vide (écriture complète envoyée par le médecin).
+pub fn begin(dir: &Path, key: &[u8; KEY_LEN], strict: bool) -> Result<(Pending, Vec<Value>), String> {
     let guard = lock();
-    let stored = read_notes(dir, key);
+    let stored = if strict { read_notes_strict(dir, key)? } else { read_notes(dir, key) };
     let original = load_counter(dir, key);
     let mut counter = original.clone();
     counter.absorb(&stored);
-    (Pending { _guard: guard, dir: dir.to_path_buf(), key: *key, original, counter }, stored)
+    Ok((Pending { _guard: guard, dir: dir.to_path_buf(), key: *key, original, counter }, stored))
 }
 
 fn year_of(today: &str) -> Result<u32, String> {
@@ -201,9 +212,164 @@ pub fn apply(stored: &[Value], incoming: Vec<Value>, counter: &mut Counter, toda
 /// Crochet de `save_json` : renvoie la liste à écrire et le compteur à écrire ensuite (`commit`).
 pub fn on_save(dir: &Path, key: &[u8; KEY_LEN], incoming: Value, today: &str) -> Result<(Value, Pending), String> {
     let Value::Array(list) = incoming else { return Err("Format des notes invalide.".into()) };
-    let (mut pending, stored) = begin(dir, key);
+    let (mut pending, stored) = begin(dir, key, false)?;
     let out = apply(&stored, list, &mut pending.counter, today)?;
     Ok((Value::Array(out), pending))
+}
+
+// ─── Annulation ──────────────────────────────────────────────────────────────
+
+const MIN_REASON_CHARS: usize = 3;
+const MAX_REASON_CHARS: usize = 200;
+
+/// Annule une note numérotée (médecin seulement) : motif obligatoire, date et auteur posés ici. La note
+/// reste dans la liste avec son numéro, figée ; elle ne compte plus dans les montants. Une note jamais
+/// numérotée se supprime ; une note qui a des reçus valides ne s'annule qu'après l'annulation des reçus.
+pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &str, reason: &str, by: &str, now_iso: &str) -> Result<Value, String> {
+    if role != super::access::Role::Medecin {
+        return Err("Seul le médecin peut annuler une note d'honoraires.".into());
+    }
+    let reason: String = reason.chars().filter(|c| !c.is_control()).collect::<String>().split_whitespace().collect::<Vec<_>>().join(" ");
+    let n = reason.chars().count();
+    if n < MIN_REASON_CHARS {
+        return Err("Le motif de l'annulation est obligatoire.".into());
+    }
+    if n > MAX_REASON_CHARS {
+        return Err(format!("Motif trop long ({MAX_REASON_CHARS} caractères au plus)."));
+    }
+    let (pending, mut notes) = begin(dir, key, true)?;
+    let i = notes.iter().position(|x| id_of(x) == id).ok_or("Note introuvable.")?;
+    if !has_number(&notes[i]) {
+        return Err("Cette note n'a jamais été numérotée : supprimez-la plutôt que de l'annuler.".into());
+    }
+    if is_cancelled(&notes[i]) {
+        return Err("Cette note est déjà annulée.".into());
+    }
+    let receipts = super::receipts::load(dir, key)?;
+    if receipts.iter().any(|r| r.kind == "receipt" && r.note_id == id && !super::receipts::is_cancelled(&receipts, &r.number)) {
+        return Err("Cette note a des reçus valides : annulez d'abord ses reçus.".into());
+    }
+    let obj = notes[i].as_object_mut().ok_or("Note invalide.")?;
+    obj.insert("cancelledAt".into(), Value::String(now_iso.to_string()));
+    obj.insert("cancelledBy".into(), Value::String(by.to_string()));
+    obj.insert("cancellationReason".into(), Value::String(reason));
+    let done = notes[i].clone();
+    write_enc_json_in(dir, key, NOTES_FILE, &Value::Array(notes))?;
+    pending.commit()?;
+    Ok(done)
+}
+
+// ─── Contrôle de cohérence (information, rien n'est corrigé) ─────────────────
+
+#[derive(Serialize, Debug, Clone, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct YearInfo {
+    pub year: u32,
+    pub last: u64,
+    pub count: usize,
+}
+
+#[derive(Serialize, Debug, Clone, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct CheckReport {
+    /// Faux s'il existe un doublon, un numéro mal formé ou un trou.
+    pub clean: bool,
+    pub years: Vec<YearInfo>,
+    pub duplicates: Vec<String>,
+    pub malformed: Vec<String>,
+    /// Numéros manquants dans la suite (au plus `MAX_LISTED`), et leur nombre total.
+    pub gaps: Vec<String>,
+    pub gaps_total: usize,
+    /// Notes sans numéro (héritées) : numérotées à leur prochaine écriture.
+    pub unnumbered: usize,
+    pub cancelled: usize,
+}
+
+const MAX_LISTED: usize = 30;
+
+pub fn check(notes: &[Value]) -> CheckReport {
+    let mut seen: BTreeMap<String, usize> = BTreeMap::new();
+    let mut by_year: BTreeMap<u32, std::collections::BTreeSet<u64>> = BTreeMap::new();
+    let (mut malformed, mut unnumbered, mut cancelled) = (Vec::new(), 0usize, 0usize);
+    let mut counts: BTreeMap<u32, usize> = BTreeMap::new();
+    for n in notes {
+        if is_cancelled(n) {
+            cancelled += 1;
+        }
+        let num = number_of(n);
+        if num.is_empty() {
+            unnumbered += 1;
+            continue;
+        }
+        *seen.entry(num.to_string()).or_insert(0) += 1;
+        match parse_number(num) {
+            Some((y, s)) => {
+                by_year.entry(y).or_default().insert(s);
+                *counts.entry(y).or_insert(0) += 1;
+            }
+            None => malformed.push(num.to_string()),
+        }
+    }
+    let duplicates: Vec<String> = seen.iter().filter(|(_, c)| **c > 1).map(|(k, _)| k.clone()).take(MAX_LISTED).collect();
+    let mut gaps = Vec::new();
+    let mut gaps_total = 0usize;
+    for (y, set) in &by_year {
+        let last = set.iter().next_back().copied().unwrap_or(0);
+        for s in 1..=last {
+            if !set.contains(&s) {
+                gaps_total += 1;
+                if gaps.len() < MAX_LISTED {
+                    gaps.push(format_number(*y, s));
+                }
+            }
+        }
+    }
+    malformed.truncate(MAX_LISTED);
+    let years = by_year.iter().map(|(y, set)| YearInfo { year: *y, last: set.iter().next_back().copied().unwrap_or(0), count: counts.get(y).copied().unwrap_or(0) }).collect();
+    CheckReport { clean: duplicates.is_empty() && malformed.is_empty() && gaps_total == 0, years, duplicates, malformed, gaps, gaps_total, unnumbered, cancelled }
+}
+
+// ─── Restauration ────────────────────────────────────────────────────────────
+
+/// Le compteur ne recule jamais à la restauration : maximum, par année, du compteur du poste et de celui
+/// de la sauvegarde. Un numéro attribué après la sauvegarde reste « brûlé » même si sa note est perdue.
+pub fn merge_for_restore(dir: &Path, key: &[u8; KEY_LEN], files: &mut BTreeMap<String, Value>) {
+    let mut best = load_counter(dir, key);
+    if let Some(restored) = files.get(COUNTER_FILE).and_then(|v| serde_json::from_value::<Counter>(v.clone()).ok()) {
+        best.max_with(&restored);
+    }
+    if let Some(Value::Array(notes)) = files.get(NOTES_FILE) {
+        best.absorb(notes);
+    }
+    if !best.years.is_empty() {
+        if let Ok(v) = serde_json::to_value(&best) {
+            files.insert(COUNTER_FILE.to_string(), v);
+        }
+    }
+}
+
+// ─── Commandes ───────────────────────────────────────────────────────────────
+
+use super::access::{gate, require_session};
+use super::audit;
+use super::users::data_key_of;
+use super::{data_dir, util, AppState};
+
+/// Journal : l'identifiant de la note seulement (jamais le motif, le patient ni le montant).
+#[tauri::command]
+pub fn honorary_note_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String, reason: String) -> Result<Value, String> {
+    let session = require_session(gate(&app, &state, "honorary_note_cancel")?)?;
+    let key = data_key_of(&state)?;
+    let r = cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &session.name, &util::now_iso());
+    audit::log(&app, Some(&session), "note_cancel", if r.is_ok() { &id } else { "refusé" }, r.is_ok());
+    r
+}
+
+#[tauri::command]
+pub fn invoice_numbering_check<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<CheckReport, String> {
+    gate(&app, &state, "invoice_numbering_check")?;
+    let key = data_key_of(&state)?;
+    Ok(check(&read_notes_strict(&data_dir(&app)?, &key)?))
 }
 
 #[cfg(test)]

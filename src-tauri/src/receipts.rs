@@ -368,6 +368,9 @@ pub fn issue(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, detail: bool, who: 
     let _g = lock();
     let notes = read_list(dir, key, NOTES_FILE);
     let note = notes.iter().find(|n| s(n, "id") == note_id).ok_or("Encaissement introuvable.")?;
+    if super::numbering::is_cancelled(note) {
+        return Err("Cette note d'honoraires est annulée : aucun reçu ne peut être émis.".into());
+    }
     if who.role == Role::Assistant {
         if s(note, "date") != today {
             return Err("Seuls les reçus des encaissements du jour peuvent être émis.".into());

@@ -113,3 +113,19 @@ describe('registre des reçus dans la sauvegarde', () => {
         expect(rec).toContain('pub fn merge_for_restore');
     });
 });
+
+describe('compteur de numérotation des notes dans la sauvegarde', () => {
+    const num = read('src-tauri/src/numbering.rs');
+    const access = read('src-tauri/src/access.rs');
+    const backup = read('src-tauri/src/backup.rs');
+
+    it('le compteur est un fichier meddoc_* géré par Rust, réservé et sauvegardé', () => {
+        expect(num).toContain('pub const COUNTER_FILE: &str = "meddoc_invoice_counter.json"');
+        expect(access).toContain('"meddoc_invoice_counter"');
+    });
+
+    it('la restauration ne fait jamais reculer le compteur', () => {
+        expect(backup).toContain('numbering::merge_for_restore');
+        expect(num).toContain('pub fn merge_for_restore');
+    });
+});

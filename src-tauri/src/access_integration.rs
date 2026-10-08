@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{ai, attachments, audit, messaging, notifications, receipts, scoped, settings, users, AppState, TEST_DATA_DIR};
+use super::{ai, attachments, audit, messaging, notifications, numbering, receipts, scoped, settings, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -118,6 +118,8 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "receipt_duplicate" => done(receipts::receipt_duplicate(a(), st!(), "REC-2026-00001".into())),
         "receipt_cancel" => done(receipts::receipt_cancel(a(), st!(), "REC-2026-00001".into(), "erreur de saisie".into())),
         "receipts_verify" => done(receipts::receipts_verify(a(), st!())),
+        "honorary_note_cancel" => done(numbering::honorary_note_cancel(a(), st!(), "n-inconnue".into(), "erreur de saisie".into())),
+        "invoice_numbering_check" => done(numbering::invoice_numbering_check(a(), st!())),
         "appointment_mark_sent" => done(messaging::appointment_mark_sent(a(), st!(), "a-inconnu".into(), "reminder".into())),
         // Numéro invalide : refusé par la validation AVANT toute ouverture (jamais d'ouverture réelle en test).
         "whatsapp_open" => done(messaging::whatsapp_open(a(), st!(), "0612345678".into(), "bonjour".into(), "a1".into(), "reminder".into())),
@@ -238,7 +240,7 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     // d'attente, encaissement — filtrés par Rust), les rendez-vous, le journal et le fichier
     // de sécurité de départ. Aucun fichier médical, de comptes ou interne.
     let allowed_written = [
-        "meddoc_appointments.json", "meddoc_patients.json", "meddoc_today_queue.json", "meddoc_honorary_notes.json", notifications::STATE_FILE,
+        "meddoc_appointments.json", "meddoc_patients.json", "meddoc_today_queue.json", "meddoc_honorary_notes.json", numbering::COUNTER_FILE, notifications::STATE_FILE,
         super::SECURITY_FILE, audit::AUDIT_FILE,
     ];
     for f in fs::read_dir(&dir).unwrap().flatten().map(|e| e.file_name().to_string_lossy().to_string()) {

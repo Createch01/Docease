@@ -7,7 +7,7 @@ use super::Item;
 pub fn items(notes: &[Value]) -> Vec<Item> {
     let mut count = 0usize;
     let mut due = 0f64;
-    for n in notes {
+    for n in notes.iter().filter(|n| !crate::numbering::is_cancelled(n)) {
         let status = n.get("status").and_then(|x| x.as_str()).unwrap_or("UNPAID");
         if status == "PAID" {
             continue;

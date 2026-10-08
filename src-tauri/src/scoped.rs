@@ -139,7 +139,8 @@ fn payment_view(n: &Value) -> Value {
 }
 
 pub fn payments_today(notes: &[Value], today: &str) -> Vec<Value> {
-    notes.iter().filter(|n| str_field(n, "date") == Some(today)).map(payment_view).collect()
+    // Une note annulée ne compte plus dans l'encaissement du jour.
+    notes.iter().filter(|n| str_field(n, "date") == Some(today) && !super::numbering::is_cancelled(n)).map(payment_view).collect()
 }
 
 /// Applique une saisie d'encaissement sur les notes (visites du jour seulement).
@@ -147,7 +148,7 @@ pub fn payments_today(notes: &[Value], today: &str) -> Vec<Value> {
 ///   (le montant dû / les tarifs ne sont jamais modifiés) ;
 /// - nouvelle note : créée pour un patient existant, montant dû saisi, une seule
 ///   ligne « Consultation ».
-pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, today: &str, new_id: &str) -> Result<Value, String> {
+pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, today: &str, new_id: &str, new_number: &str) -> Result<Value, String> {
     let mode = str_field(input, "paymentMode").unwrap_or("");
     if !["CASH", "CARD", "TRANSFER"].contains(&mode) {
         return Err("Mode de paiement invalide.".to_string());
@@ -181,6 +182,9 @@ pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, 
 
     if let Some(id) = id_of(input) {
         let note = notes.iter_mut().find(|n| id_of(n) == Some(id)).ok_or("Encaissement introuvable.")?;
+        if super::numbering::is_cancelled(note) {
+            return Err("Cette note est annulée.".to_string());
+        }
         if str_field(note, "date") != Some(today) {
             return Err("Seules les visites du jour peuvent être modifiées.".to_string());
         }
@@ -195,15 +199,13 @@ pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, 
     if !valid_amount(total) {
         return Err("Montant dû invalide.".to_string());
     }
-    let year = &today[..4];
-    let count = notes.iter().filter(|n| str_field(n, "date").map_or(false, |d| d.starts_with(year))).count();
     let mut note = json!({
         "id": new_id,
         "patientId": patient_id,
         "patientName": patient.get("name").cloned().unwrap_or(json!("")),
         "patientPhone": patient.get("phone"),
         "date": today,
-        "invoiceNumber": format!("{year}-{:04}", count + 1),
+        "invoiceNumber": new_number,
         "services": [{"name": "Consultation", "price": total, "checked": true}],
         "totalAmount": total,
         "totalInWords": "",
@@ -303,15 +305,29 @@ pub fn billing_today_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     Ok(payments_today(&read_list(&data_dir(&app)?, &key, NOTES_FILE)?, &util::today_local()))
 }
 
+/// Encaissement de l'assistante, sous le verrou de numérotation commun à tous les chemins : le numéro d'une
+/// nouvelle note vient du compteur Rust (jamais d'un comptage), la note est écrite AVANT le compteur.
+pub fn save_payment(dir: &Path, key: &[u8; super::KEY_LEN], payment: &Value, today: &str, new_id: &str) -> Result<Value, String> {
+    let (mut pending, mut notes) = super::numbering::begin(dir, key, true)?;
+    let patients = read_list(dir, key, PATIENTS_FILE)?;
+    let year: u32 = today.get(..4).and_then(|y| y.parse().ok()).ok_or("Date système invalide.")?;
+    let mut tentative = pending.counter.clone();
+    let number = tentative.next(year);
+    let view = apply_payment(&mut notes, &patients, payment, today, new_id, &number)?;
+    if id_of(payment).is_none() {
+        pending.counter = tentative; // nouvelle note : le numéro est consommé
+    }
+    write_enc_json_in(dir, key, NOTES_FILE, &Value::Array(notes))?;
+    pending.commit()?;
+    Ok(view)
+}
+
 #[tauri::command]
 pub fn billing_today_save<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, payment: Value) -> Result<Value, String> {
     let session = gate(&app, &state, "billing_today_save")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    let mut notes = read_list(&dir, &key, NOTES_FILE)?;
-    let patients = read_list(&dir, &key, PATIENTS_FILE)?;
-    let view = apply_payment(&mut notes, &patients, &payment, &util::today_local(), &random_note_id())?;
-    write_enc_json_in(&dir, &key, NOTES_FILE, &Value::Array(notes))?;
+    let view = save_payment(&dir, &key, &payment, &util::today_local(), &random_note_id())?;
     audit::log(&app, session.as_ref(), "billing_today_save", view.get("status").and_then(|s| s.as_str()).unwrap_or(""), true);
     Ok(view)
 }
@@ -442,13 +458,13 @@ mod tests {
         let mut notes = vec![note("a", "2026-10-01", 300.0, "UNPAID")];
         let patients = vec![full_patient()];
         let input = json!({"id": "a", "totalAmount": 1.0, "paymentMode": "CARD", "status": "PARTIAL", "amountPaid": 100.0, "services": []});
-        let v = apply_payment(&mut notes, &patients, &input, "2026-10-01", "n").unwrap();
+        let v = apply_payment(&mut notes, &patients, &input, "2026-10-01", "n", "2026-0001").unwrap();
         assert_eq!(v["totalAmount"], 300.0, "tarif inchangé");
         assert_eq!(v["amountPaid"], 100.0);
         assert_eq!(notes[0]["services"][0]["name"], "Echo");
         assert_eq!(notes[0]["prescriptionId"], "rx-9");
         let paid = json!({"id": "a", "paymentMode": "CASH", "status": "PAID", "amountPaid": 0});
-        assert_eq!(apply_payment(&mut notes, &patients, &paid, "2026-10-01", "n").unwrap()["amountPaid"], 300.0);
+        assert_eq!(apply_payment(&mut notes, &patients, &paid, "2026-10-01", "n", "2026-0001").unwrap()["amountPaid"], 300.0);
     }
 
     #[test]
@@ -456,20 +472,20 @@ mod tests {
         let mut notes = vec![note("old", "2026-09-30", 300.0, "UNPAID")];
         let patients = vec![full_patient()];
         let ok = |status: &str| json!({"id": "old", "paymentMode": "CASH", "status": status, "amountPaid": 0});
-        assert!(apply_payment(&mut notes, &patients, &ok("PAID"), "2026-10-01", "n").is_err());
+        assert!(apply_payment(&mut notes, &patients, &ok("PAID"), "2026-10-01", "n", "2026-0001").is_err());
         let new = |extra: Value| {
             let mut v = json!({"patientId": "p1", "totalAmount": 300.0, "paymentMode": "CASH", "status": "UNPAID", "amountPaid": 0});
             v.as_object_mut().unwrap().extend(extra.as_object().unwrap().clone());
             v
         };
         let mut n2: Vec<Value> = vec![];
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"paymentMode": "BITCOIN"})), "2026-10-01", "n").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"status": "WAT"})), "2026-10-01", "n").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"totalAmount": -5})), "2026-10-01", "n").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"patientId": "inconnu"})), "2026-10-01", "n").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"status": "PARTIAL", "amountPaid": 300.0})), "2026-10-01", "n").is_err());
+        assert!(apply_payment(&mut n2, &patients, &new(json!({"paymentMode": "BITCOIN"})), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(apply_payment(&mut n2, &patients, &new(json!({"status": "WAT"})), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(apply_payment(&mut n2, &patients, &new(json!({"totalAmount": -5})), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(apply_payment(&mut n2, &patients, &new(json!({"patientId": "inconnu"})), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(apply_payment(&mut n2, &patients, &new(json!({"status": "PARTIAL", "amountPaid": 300.0})), "2026-10-01", "n", "2026-0001").is_err());
         assert!(n2.is_empty());
-        let v = apply_payment(&mut n2, &patients, &new(json!({})), "2026-10-01", "n1").unwrap();
+        let v = apply_payment(&mut n2, &patients, &new(json!({})), "2026-10-01", "n1", "2026-0001").unwrap();
         assert_eq!(v["totalAmount"], 300.0);
         assert_eq!(n2[0]["patientName"], "DUPONT Jean", "nom pris du dossier, pas de la saisie");
         assert_eq!(n2[0]["invoiceNumber"], "2026-0001");

@@ -214,3 +214,190 @@ fn non_list_payload_is_refused_without_touching_the_file() {
     assert_eq!(fs::read(d.join(NOTES_FILE)).unwrap(), before);
     let _ = fs::remove_dir_all(&d);
 }
+
+// ─── Annulation, contrôle, assistante, restauration ──────────────────────────
+
+use crate::access::Role;
+
+fn cancel_ok(d: &Path, id: &str) -> Result<Value, String> {
+    cancel(d, &KEY, Role::Medecin, id, "  Erreur   de saisie ", "Dr", "2026-10-08T10:00:00Z")
+}
+
+#[test]
+fn cancellation_keeps_the_number_and_freezes_the_note() {
+    let d = tmp("cancel");
+    let notes = save(&d, vec![note("a", "", ""), note("b", "", "")], TODAY).unwrap();
+    let c = cancel_ok(&d, "a").unwrap();
+    assert_eq!((number_of(&c), c["cancelledBy"].as_str(), c["cancellationReason"].as_str()), ("2026-0001", Some("Dr"), Some("Erreur de saisie")));
+    assert_eq!(c["cancelledAt"], "2026-10-08T10:00:00Z");
+    let stored = read_notes(&d, &KEY);
+    assert_eq!(stored.len(), 2, "la note reste dans la liste");
+    assert!(is_cancelled(&stored[0]) && !is_cancelled(&stored[1]));
+    // Figée : toute retouche du frontend est écartée, et elle ne peut pas être « dé-annulée ».
+    let mut edit = notes[0].clone();
+    edit["totalAmount"] = json!(1);
+    let after = save(&d, vec![edit, stored[1].clone()], TODAY).unwrap();
+    assert_eq!(after[0], stored[0]);
+    // Le numéro annulé n'est jamais réattribué.
+    let after = save(&d, [after, vec![note("n", "", "")]].concat(), TODAY).unwrap();
+    assert_eq!(number_of(&after[2]), "2026-0003");
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn cancellation_rules() {
+    let d = tmp("cancelrules");
+    save(&d, vec![note("a", "", "")], TODAY).unwrap();
+    // Médecin seulement.
+    assert!(cancel(&d, &KEY, Role::Assistant, "a", "erreur", "Sara", "t").unwrap_err().contains("médecin"));
+    // Motif obligatoire et borné.
+    for bad in ["", "   ", "ab"] {
+        assert!(cancel(&d, &KEY, Role::Medecin, "a", bad, "Dr", "t").unwrap_err().contains("obligatoire"), "{bad:?}");
+    }
+    assert!(cancel(&d, &KEY, Role::Medecin, "a", &"x".repeat(201), "Dr", "t").unwrap_err().contains("trop long"));
+    assert!(cancel_ok(&d, "inconnue").unwrap_err().contains("introuvable"));
+    assert!(!is_cancelled(&read_notes(&d, &KEY)[0]), "rien n'a été écrit par les refus");
+    // Une seule fois.
+    cancel_ok(&d, "a").unwrap();
+    assert!(cancel_ok(&d, "a").unwrap_err().contains("déjà annulée"));
+    // Une note jamais numérotée se supprime, elle ne s'annule pas.
+    write_enc_json_in(&d, &KEY, NOTES_FILE, &json!([note("old", "", "2025-01-01")])).unwrap();
+    assert!(cancel_ok(&d, "old").unwrap_err().contains("jamais été numérotée"));
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn a_note_with_valid_receipts_is_cancelled_only_after_its_receipts() {
+    use crate::receipts::{self, Actor};
+    let d = tmp("cancelreceipts");
+    write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
+    save(&d, vec![note("a", "", "")], TODAY).unwrap();
+    let doctor = Actor { name: "Dr".into(), role: Role::Medecin };
+    let r = receipts::issue(&d, &KEY, "a", false, &doctor, "2026-10-08T09:00:00Z", TODAY).unwrap();
+    assert!(cancel_ok(&d, "a").unwrap_err().contains("reçus valides"));
+    receipts::cancel(&d, &KEY, &r.number, "erreur", &doctor, "2026-10-08T09:30:00Z", TODAY).unwrap();
+    assert!(cancel_ok(&d, "a").is_ok());
+    // Une note annulée n'accepte plus de reçu.
+    assert!(receipts::issue(&d, &KEY, "a", false, &doctor, "t", TODAY).unwrap_err().contains("annulée"));
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn check_reports_duplicates_gaps_and_malformed_numbers_without_changing_anything() {
+    let notes = vec![
+        note("a", "2026-0001", "d"), note("b", "2026-0002", "d"), note("c", "2026-0002", "d"), note("d", "2026-0005", "d"),
+        note("e", "libre", "d"), note("f", "", "d"), note("g", "2025-0001", "d"),
+    ];
+    let before = notes.clone();
+    let r = check(&notes);
+    assert!(!r.clean);
+    assert_eq!(r.duplicates, vec!["2026-0002"]);
+    assert_eq!(r.malformed, vec!["libre"]);
+    assert_eq!((r.gaps_total, r.gaps.clone()), (2, vec!["2026-0003".to_string(), "2026-0004".to_string()]));
+    assert_eq!(r.unnumbered, 1);
+    assert_eq!(r.years.iter().map(|y| (y.year, y.last, y.count)).collect::<Vec<_>>(), vec![(2025, 1, 1), (2026, 5, 4)]);
+    assert_eq!(notes, before);
+    // Suite propre : rien à signaler, les notes annulées comptent comme numérotées.
+    let mut c = note("z", "2026-0002", "d");
+    c["cancelledAt"] = json!("t");
+    let ok = check(&[note("a", "2026-0001", "d"), c]);
+    assert!(ok.clean && ok.cancelled == 1);
+}
+
+#[test]
+fn assistant_payment_uses_the_counter_and_shares_it_with_the_doctor() {
+    use crate::scoped::save_payment;
+    let d = tmp("assist");
+    write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
+    let new = |extra: Value| {
+        let mut v = json!({"patientId": "p1", "totalAmount": 300, "amountPaid": 0, "paymentMode": "CASH", "status": "UNPAID"});
+        v.as_object_mut().unwrap().extend(extra.as_object().unwrap().clone());
+        v
+    };
+    // Le médecin a déjà émis des notes : l'assistante continue la suite.
+    save(&d, vec![note("m1", "", ""), note("m2", "", "")], TODAY).unwrap();
+    let v = save_payment(&d, &KEY, &new(json!({})), TODAY, "pay1").unwrap();
+    let stored = read_notes(&d, &KEY);
+    assert_eq!(number_of(&stored[2]), "2026-0003");
+    assert_eq!(v.get("invoiceNumber"), None, "le numéro n'est pas dans la vue de l'assistante");
+    // Une retouche d'une note existante ne consomme rien ; un numéro envoyé par l'assistante est ignoré.
+    let v2 = save_payment(&d, &KEY, &new(json!({"id": "pay1", "status": "PAID", "invoiceNumber": "2026-0500"})), TODAY, "x").unwrap();
+    assert_eq!(v2["status"], "PAID");
+    assert_eq!(number_of(&read_notes(&d, &KEY)[2]), "2026-0003");
+    assert_eq!(load_counter(&d, &KEY).get(2026), 3);
+    // Le médecin, ensuite, prend le numéro suivant.
+    let after = save(&d, [read_notes(&d, &KEY), vec![note("m3", "", "")]].concat(), TODAY).unwrap();
+    assert_eq!(number_of(&after[3]), "2026-0004");
+    // Une note annulée n'est plus modifiable par l'assistante ni listée dans l'encaissement du jour.
+    cancel_ok(&d, "pay1").unwrap();
+    assert!(save_payment(&d, &KEY, &new(json!({"id": "pay1", "status": "UNPAID"})), TODAY, "x").unwrap_err().contains("annulée"));
+    assert!(crate::scoped::payments_today(&read_notes(&d, &KEY), TODAY).iter().all(|p| p["id"] != "pay1"));
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn concurrent_doctor_and_assistant_never_share_a_number() {
+    use crate::scoped::save_payment;
+    let d = tmp("mixed");
+    write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
+    let handles: Vec<_> = (0..10)
+        .map(|i| {
+            let d = d.clone();
+            std::thread::spawn(move || {
+                if i % 2 == 0 {
+                    save(&d, vec![note(&format!("m{i}"), "", "")], TODAY).unwrap();
+                } else {
+                    let p = json!({"patientId": "p1", "totalAmount": 100, "amountPaid": 0, "paymentMode": "CASH", "status": "UNPAID"});
+                    save_payment(&d, &KEY, &p, TODAY, &format!("a{i}")).unwrap();
+                }
+            })
+        })
+        .collect();
+    for h in handles {
+        h.join().unwrap();
+    }
+    let mut got = numbers(&read_notes(&d, &KEY));
+    got.sort();
+    assert_eq!(got, (1..=10).map(|n| format_number(2026, n)).collect::<Vec<_>>());
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn restore_never_moves_the_counter_back() {
+    let d = tmp("restore");
+    save(&d, vec![note("a", "", ""), note("b", "", ""), note("c", "", "")], TODAY).unwrap();
+    // Sauvegarde ancienne : un seul numéro attribué, plus un compteur 2025.
+    let mut old_counter = Counter::default();
+    old_counter.years.insert("2026".into(), 1);
+    old_counter.years.insert("2025".into(), 80);
+    let mut files = BTreeMap::new();
+    files.insert(COUNTER_FILE.to_string(), serde_json::to_value(&old_counter).unwrap());
+    files.insert(NOTES_FILE.to_string(), json!([note("a", "2026-0001", TODAY)]));
+    merge_for_restore(&d, &KEY, &mut files);
+    let merged: Counter = serde_json::from_value(files[COUNTER_FILE].clone()).unwrap();
+    assert_eq!((merged.get(2026), merged.get(2025)), (3, 80), "maximum par année");
+    // Poste neuf, sauvegarde sans compteur : le maximum des notes restaurées fait foi.
+    let fresh = tmp("restore-fresh");
+    let mut files = BTreeMap::new();
+    files.insert(NOTES_FILE.to_string(), json!([note("a", "2026-0007", TODAY)]));
+    merge_for_restore(&fresh, &KEY, &mut files);
+    let merged: Counter = serde_json::from_value(files[COUNTER_FILE].clone()).unwrap();
+    assert_eq!(merged.get(2026), 7);
+    for x in [&d, &fresh] {
+        let _ = fs::remove_dir_all(x);
+    }
+}
+
+#[test]
+fn counter_file_is_reserved_and_the_journal_stays_content_free() {
+    for role in [Role::Medecin, Role::Assistant] {
+        assert!(!crate::access::file_allowed(role, COUNTER_FILE, crate::access::FileMode::Read), "{role:?}");
+        assert!(!crate::access::file_allowed(role, COUNTER_FILE, crate::access::FileMode::Write), "{role:?}");
+    }
+    let src = include_str!("numbering.rs");
+    for line in src.lines().filter(|l| l.contains("audit::log(")) {
+        for banned in ["reason", "patient", "amount", "total"] {
+            assert!(!line.contains(banned), "{line}");
+        }
+    }
+}

@@ -25,6 +25,7 @@ use super::{data_dir, read_enc_json_in, util, write_enc_json_in, AppState, KEY_L
 
 mod appointments_source;
 mod backup_source;
+mod numbering_source;
 mod receipts_source;
 mod reminders_source;
 mod results_source;
@@ -52,7 +53,7 @@ pub struct Item {
     pub lines: Vec<String>,
     #[serde(default)]
     pub count: usize,
-    /// `open_dossier` · `open_appointments` · `open_reminders` · `backup_now` · `open_backup_settings` · `open_billing` · `open_receipts_settings`
+    /// `open_dossier` · `open_appointments` · `open_reminders` · `backup_now` · `open_backup_settings` · `open_billing` · `open_receipts_settings` · `open_numbering_settings`
     pub action: String,
     /// Empreinte du contenu : un élément ignoré réapparaît quand elle change.
     pub fingerprint: String,
@@ -96,6 +97,7 @@ pub fn build(i: &Inputs) -> Vec<Item> {
         }
         items.extend(results_source::items(i.results, i.patients));
         items.extend(unpaid_source::items(i.notes));
+        items.extend(numbering_source::items(i.notes));
     }
     // Garde-fou final : jamais un type hors liste pour l'assistante.
     if i.role == Role::Assistant {
