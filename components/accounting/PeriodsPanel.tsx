@@ -21,7 +21,8 @@ const lastClosedCandidates = (): string[] => {
     return out;
 };
 
-const PeriodsPanel: React.FC<{ from: string; to: string; refresh: number; onChanged: () => void }> = ({ from, to, refresh, onChanged }) => {
+/** `left` : la barre de période (sélecteur) ; le bouton « Clôtures de périodes » se place à sa droite. */
+const PeriodsPanel: React.FC<{ left: React.ReactNode; refresh: number; onChanged: () => void }> = ({ left, refresh, onChanged }) => {
     const [view, setView] = useState<PeriodsView | null>(null);
     const [open, setOpen] = useState(false);
     const [busy, setBusy] = useState<string | null>(null);
@@ -31,9 +32,8 @@ const PeriodsPanel: React.FC<{ from: string; to: string; refresh: number; onChan
     const load = useCallback(() => { periodService.list().then(setView).catch(() => setView(null)); }, []);
     useEffect(() => { if (sessionService.isMedecin()) load(); }, [load, refresh]);
 
-    if (!sessionService.isMedecin() || !view) return null;
+    if (!sessionService.isMedecin() || !view) return <div>{left}</div>;
 
-    const inRange = view.closed.filter(m => m >= from.slice(0, 7) && m <= to.slice(0, 7));
     const act = async (month: string, fn: () => Promise<unknown>) => {
         setBusy(month);
         setError(null);
@@ -43,15 +43,12 @@ const PeriodsPanel: React.FC<{ from: string; to: string; refresh: number; onChan
     };
 
     return (
-        <div className="flex flex-col gap-2 -mt-3">
-            <div className="flex flex-wrap items-center gap-3 text-[13px]" style={{ color: 'var(--color-text)' }}>
-                {inRange.length > 0 && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 h-7 rounded-md" style={{ background: 'var(--color-warning-50, #fffbeb)', color: 'var(--color-warning-800, #92400e)' }}>
-                        <Lock size={13} /> {inRange.length > 1 ? 'Mois clôturés' : 'Mois clôturé'} : {inRange.map(monthLabel).join(', ')}
-                    </span>
-                )}
-                <button type="button" onClick={() => setOpen(o => !o)} className="h-7 px-3 rounded-md border text-[12px] font-medium bg-white" style={border}>
-                    {open ? 'Masquer les clôtures' : 'Clôtures de périodes'}
+        <div className="flex flex-col gap-3">
+            <div className="flex flex-wrap items-center gap-3">
+                {left}
+                <button type="button" onClick={() => setOpen(o => !o)} aria-expanded={open}
+                    className="h-9 px-3 rounded-lg border text-[13px] font-medium bg-white ml-auto inline-flex items-center gap-1.5 whitespace-nowrap" style={border}>
+                    <Lock size={14} /> {open ? 'Masquer les clôtures' : 'Clôtures de périodes'}
                 </button>
             </div>
             {open && (

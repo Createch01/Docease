@@ -12,3 +12,15 @@ export const getDevAutoUnlockPassword = (): string | null => {
     }
     return null;
 };
+
+/**
+ * DEV ONLY — désactive le verrouillage automatique par inactivité (VITE_DEV_DISABLE_AUTO_LOCK=1 dans .env.local).
+ * La condition `import.meta.env.DEV` est évaluée à l'appel et remplacée par `false` dans un build : en production le
+ * verrou reste actif, quelle que soit la variable. (Côté Rust, le délai n'est déjà jamais appliqué dans un build de debug.)
+ */
+export const isDevAutoLockDisabled = (): boolean => {
+    if (import.meta.env.DEV) {
+        return import.meta.env.VITE_DEV_DISABLE_AUTO_LOCK === '1';
+    }
+    return false;
+};

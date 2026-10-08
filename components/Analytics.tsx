@@ -29,12 +29,13 @@ import { Patient } from '../types';
 import { toastService } from '../services/toastService';
 import { canOutput } from '../services/cabinetSetup';
 import { localDateStr, todayLocal } from '../utils/localDate';
+import { chartRangeFor, periodLabel as labelOfPeriod } from '../utils/period';
 import { Granularity, Summary, accountingService, toDh } from '../services/accountingService';
 import JournalTab from './accounting/JournalTab';
 import ExpensesTab from './accounting/ExpensesTab';
 import PeriodsPanel from './accounting/PeriodsPanel';
+import PeriodSelector, { usePeriod } from './accounting/PeriodSelector';
 
-type TimeRange = 'Jour' | 'Semaine' | 'Mois' | 'Année';
 
 interface DataPoint {
   key: string;
@@ -48,46 +49,10 @@ interface DataPoint {
 const formatMoney = (amount: number, currency: string) => {
   const safeCurrency = currency || 'DH';
   const safeAmount = Number.isFinite(amount) ? amount : 0;
-  return `${safeAmount.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} ${safeCurrency}`;
+  // Espaces insécables : le montant et la devise ne se séparent jamais à la ligne.
+  return `${safeAmount.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}\u00A0${safeCurrency}`.replace(/[ \u202F]/g, '\u00A0');
 };
 
-// Bornes de la période courante sélectionnée (jour/semaine/mois/année en cours)
-const getPeriodBounds = (range: TimeRange, now: Date): { start: Date; end: Date } => {
-  const start = new Date(now);
-  const end = new Date(now);
-
-  if (range === 'Jour') {
-    start.setHours(0, 0, 0, 0);
-    end.setHours(23, 59, 59, 999);
-  } else if (range === 'Semaine') {
-    const dayOffset = (start.getDay() + 6) % 7; // Lundi = début de semaine
-    start.setDate(start.getDate() - dayOffset);
-    start.setHours(0, 0, 0, 0);
-    end.setTime(start.getTime());
-    end.setDate(end.getDate() + 6);
-    end.setHours(23, 59, 59, 999);
-  } else if (range === 'Mois') {
-    start.setDate(1);
-    start.setHours(0, 0, 0, 0);
-    end.setFullYear(start.getFullYear(), start.getMonth() + 1, 0);
-    end.setHours(23, 59, 59, 999);
-  } else {
-    start.setMonth(0, 1);
-    start.setHours(0, 0, 0, 0);
-    end.setMonth(11, 31);
-    end.setHours(23, 59, 59, 999);
-  }
-  return { start, end };
-};
-
-const getPeriodLabel = (range: TimeRange, start: Date, end: Date) => {
-  if (range === 'Jour') return start.toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', year: 'numeric' });
-  if (range === 'Semaine') return `${start.toLocaleDateString('fr-FR')} — ${end.toLocaleDateString('fr-FR')}`;
-  if (range === 'Mois') return start.toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
-  return start.getFullYear().toString();
-};
-
-// Comparaison de jours locaux (AAAA-MM-JJ) : jamais d'instant UTC (voir utils/localDate).
 const isInPeriod = (dateStr: string, start: Date, end: Date) => {
   const d = (dateStr || '').slice(0, 10);
   return d >= localDateStr(start) && d <= localDateStr(end);
@@ -97,17 +62,6 @@ const isInPeriod = (dateStr: string, start: Date, end: Date) => {
 const parseLocalDay = (dateStr: string): Date => {
   const [y, m, d] = dateStr.slice(0, 10).split('-').map(Number);
   return new Date(y, (m || 1) - 1, d || 1);
-};
-
-/** Plage et granularité du graphique selon la période choisie (les tranches viennent de Rust). */
-const chartRange = (range: TimeRange): { from: string; to: string; gran: Granularity } => {
-  const now = new Date();
-  const d = new Date(now);
-  if (range === 'Jour') { d.setDate(d.getDate() - 13); return { from: localDateStr(d), to: localDateStr(now), gran: 'day' }; }
-  if (range === 'Semaine') { d.setDate(d.getDate() - 49); return { from: localDateStr(d), to: localDateStr(now), gran: 'week' }; }
-  if (range === 'Mois') { d.setMonth(d.getMonth() - 11, 1); return { from: localDateStr(d), to: localDateStr(now), gran: 'month' }; }
-  d.setFullYear(d.getFullYear() - 4, 0, 1);
-  return { from: localDateStr(d), to: localDateStr(now), gran: 'year' };
 };
 
 const bucketLabel = (key: string, gran: Granularity): string => {
@@ -120,7 +74,6 @@ const bucketLabel = (key: string, gran: Granularity): string => {
 const csvEscape = (value: string) => `"${value.replace(/"/g, '""')}"`;
 
 const Analytics: React.FC = () => {
-  const [timeRange, setTimeRange] = useState<TimeRange>('Jour');
   const [activeTab, setActiveTab] = useState<'overview' | 'journal' | 'expenses' | 'patients'>('overview');
   const [refreshTrigger, setRefreshTrigger] = useState(0);
   const [showInvoiced, setShowInvoiced] = useState(false);
@@ -137,8 +90,11 @@ const Analytics: React.FC = () => {
   }, []);
 
   // --- Période courante sélectionnée (jour/semaine/mois/année en cours) ---
-  const { start: periodStart, end: periodEnd } = useMemo(() => getPeriodBounds(timeRange, new Date()), [timeRange]);
-  const periodLabel = getPeriodLabel(timeRange, periodStart, periodEnd);
+  // Période partagée par tous les onglets (mémorisée pour la session) : seules les bornes AAAA-MM-JJ circulent.
+  const period = usePeriod();
+  const periodStart = useMemo(() => parseLocalDay(period.from), [period.from]);
+  const periodEnd = useMemo(() => { const d = parseLocalDay(period.to); d.setHours(23, 59, 59, 999); return d; }, [period.to]);
+  const periodLabel = labelOfPeriod(period);
 
   // --- Chiffres de la période : calculés par Rust (registre des encaissements, centimes entiers) ---
   const [summary, setSummary] = useState<Summary | null>(null);
@@ -147,15 +103,15 @@ const Analytics: React.FC = () => {
 
   useEffect(() => {
     let alive = true;
-    const range = chartRange(timeRange);
+    const range = chartRangeFor(period);
     setAccountingError(null);
     Promise.all([
-      accountingService.summary(localDateStr(periodStart), localDateStr(periodEnd), 'day'),
+      accountingService.summary(period.from, period.to, 'day'),
       accountingService.summary(range.from, range.to, range.gran),
     ]).then(([a, b]) => { if (alive) { setSummary(a); setChart(b); } })
       .catch(e => { if (alive) { setSummary(null); setChart(null); setAccountingError(e instanceof Error ? e.message : 'Calcul impossible.'); } });
     return () => { alive = false; };
-  }, [timeRange, periodStart, periodEnd, refreshTrigger]);
+  }, [period, refreshTrigger]);
 
   // Série du graphique : une barre par tranche renvoyée par Rust (encaissé net ; facturé en option).
   const stats: DataPoint[] = useMemo(() => (chart?.buckets ?? []).map(b => ({
@@ -262,6 +218,7 @@ const Analytics: React.FC = () => {
       sub: netProfit >= 0 ? 'Solde excédentaire' : 'Solde déficitaire',
       icon: TrendingUp,
       color: netProfit >= 0 ? 'text-emerald-600' : 'text-red-600',
+      valueClass: netProfit >= 0 ? 'text-emerald-600' : 'text-red-600',
       bg: netProfit >= 0 ? 'bg-emerald-50' : 'bg-red-50'
     },
   ];
@@ -294,7 +251,7 @@ const Analytics: React.FC = () => {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Recap_Fiscal_${timeRange}_${todayLocal()}.csv`;
+    link.download = `Recap_Fiscal_${period.from}_${period.to}.csv`;
     link.click();
     URL.revokeObjectURL(url);
     toastService.success('Export CSV généré.');
@@ -306,7 +263,7 @@ const Analytics: React.FC = () => {
 
     const opt = {
       margin: 10,
-      filename: `Recap_Fiscal_${timeRange}_${todayLocal()}.pdf`,
+      filename: `Recap_Fiscal_${period.from}_${period.to}.pdf`,
       image: { type: 'jpeg' as const, quality: 0.98 },
       html2canvas: { scale: 2.5, useCORS: true },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' as const },
@@ -328,88 +285,49 @@ const Analytics: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 animate-in fade-in slide-in-from-right-4 duration-500 pb-20">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-        <div>
-          <h2 className="text-3xl font-semibold text-gray-900 ">Comptabilité</h2>
-          <p className="text-gray-500 font-medium">Recettes, dépenses et résultat de trésorerie du cabinet.</p>
+    <div className="max-w-7xl mx-auto space-y-6 pb-20 min-w-0">
+      <header className="space-y-4">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="min-w-0">
+            <h2 className="text-[26px] leading-8 font-semibold" style={{ color: 'var(--color-text)' }}>Comptabilité</h2>
+            <p className="text-[14px]" style={{ color: 'var(--color-text-muted)' }}>Recettes, dépenses et résultat de trésorerie du cabinet.</p>
+          </div>
+          <div className="flex gap-2 shrink-0">
+            <button onClick={handleExportCSV}
+              className="h-9 px-4 inline-flex items-center gap-2 bg-white border rounded-lg text-[13px] font-medium whitespace-nowrap hover:bg-[var(--color-surface-alt)]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}>
+              <TableIcon size={15} /> Excel/CSV
+            </button>
+            <button onClick={handleExportPDF}
+              className="h-9 px-4 inline-flex items-center gap-2 rounded-lg text-[13px] font-medium whitespace-nowrap text-white" style={{ background: 'var(--color-text)' }}>
+              <FileText size={15} /> PDF
+            </button>
+          </div>
         </div>
 
-        <div className="flex bg-gray-100 p-1 rounded-2xl border border-gray-200 shadow-inner">
-          <button
-            onClick={() => setActiveTab('overview')}
-            className={`px-6 py-2 rounded-xl text-xs font-semibold transition-all ${activeTab === 'overview' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-400'}`}
-          >
-            Aperçu
-          </button>
-          <button
-            onClick={() => setActiveTab('journal')}
-            className={`px-6 py-2 rounded-xl text-xs font-semibold transition-all ${activeTab === 'journal' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-400'}`}
-          >
-            Journal des recettes
-          </button>
-          <button
-            onClick={() => setActiveTab('expenses')}
-            className={`px-6 py-2 rounded-xl text-xs font-semibold transition-all ${activeTab === 'expenses' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-400'}`}
-          >
-            Dépenses
-          </button>
-          <button
-            onClick={() => setActiveTab('patients')}
-            className={`px-6 py-2 rounded-xl text-xs font-semibold transition-all ${activeTab === 'patients' ? 'bg-white text-emerald-600 shadow-sm' : 'text-gray-400'}`}
-          >
-            Patients
-          </button>
-        </div>
-
-        <div className="flex p-1.5 bg-gray-100 rounded-[1.5rem] border border-gray-200 shadow-inner">
-          {(['Jour', 'Semaine', 'Mois', 'Année'] as TimeRange[]).map((range) => (
-            <button
-              key={range}
-              onClick={() => setTimeRange(range)}
-              className={`px-6 py-2.5 rounded-2xl text-[10px] font-semibold transition-all duration-300 ${timeRange === range
-                ? 'bg-white text-emerald-600 shadow-md ring-1 ring-gray-200'
-                : 'text-gray-400 hover:text-gray-600'
-                }`}
-            >
-              {range}
+        <nav className="flex gap-1 border-b overflow-x-auto" style={{ borderColor: 'var(--color-border)' }} aria-label="Sections de la comptabilité">
+          {([['overview', 'Aperçu'], ['journal', 'Journal des recettes'], ['expenses', 'Dépenses'], ['patients', 'Patients']] as const).map(([id, name]) => (
+            <button key={id} onClick={() => setActiveTab(id)} aria-current={activeTab === id ? 'page' : undefined}
+              className="px-4 h-10 text-[14px] font-medium whitespace-nowrap -mb-px border-b-2 transition-colors"
+              style={activeTab === id ? { borderColor: 'var(--color-primary)', color: 'var(--color-primary)' } : { borderColor: 'transparent', color: 'var(--color-text-muted)' }}>
+              {name}
             </button>
           ))}
-        </div>
+        </nav>
 
-        <div className="flex gap-2">
-          <button
-            onClick={handleExportCSV}
-            className="flex items-center gap-2 px-5 py-3 bg-white border border-gray-200 text-gray-700 font-semibold rounded-2xl hover:border-emerald-300 hover:text-emerald-600 transition-all active:scale-95 text-[10px] shadow-sm"
-          >
-            <TableIcon size={16} />
-            Excel/CSV
-          </button>
-          <button
-            onClick={handleExportPDF}
-            className="flex items-center gap-2 px-5 py-3 bg-gray-900 text-white font-semibold rounded-2xl hover:bg-gray-800 transition-all active:scale-95 text-[10px] shadow-sm"
-          >
-            <FileText size={16} />
-            PDF
-          </button>
-        </div>
-      </div>
+        <PeriodsPanel left={<PeriodSelector />} refresh={refreshTrigger} onChanged={() => setRefreshTrigger(v => v + 1)} />
+      </header>
 
-      <p className="text-xs font-semibold text-gray-400 -mt-4">
-        Période sélectionnée : <span className="text-emerald-600">{periodLabel}</span>
-      </p>
-
-      <PeriodsPanel from={localDateStr(periodStart)} to={localDateStr(periodEnd)} refresh={refreshTrigger} onChanged={() => setRefreshTrigger(v => v + 1)} />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-5 gap-6">
+      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(200px,1fr))] lg:grid-cols-3 2xl:grid-cols-5">
         {kpis.map((kpi, i) => (
-          <div key={i} className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-100 group hover:border-emerald-200 transition-all duration-500 hover:shadow-2xl hover:shadow-emerald-900/5">
-            <div className={`w-14 h-14 rounded-2xl ${kpi.bg} ${kpi.color} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500`}>
-              <kpi.icon size={28} />
+          <div key={i} className="bg-white rounded-xl border p-4 min-w-0" style={{ borderColor: 'var(--color-border)' }}>
+            <div className="flex items-center gap-2.5 mb-2">
+              <div className={`w-9 h-9 rounded-lg ${kpi.bg} ${kpi.color} flex items-center justify-center shrink-0`}>
+                <kpi.icon size={18} />
+              </div>
+              <p className="text-[13px] font-medium leading-tight" style={{ color: 'var(--color-text-muted)' }}>{kpi.label}</p>
             </div>
-            <p className="text-[10px] font-semibold text-gray-400 mb-1">{kpi.label}</p>
-            <p className="text-3xl font-semibold text-gray-900 mb-1">{kpi.value}</p>
-            <p className="text-xs text-gray-400 font-bold">{kpi.sub}</p>
+            <p className={`text-[26px] leading-8 font-semibold whitespace-nowrap ${kpi.valueClass ?? ''}`} style={kpi.valueClass ? undefined : { color: 'var(--color-text)' }}>{kpi.value}</p>
+            <p className="text-[12px] mt-1 leading-snug" style={{ color: 'var(--color-text-subtle)' }}>{kpi.sub}</p>
           </div>
         ))}
       </div>

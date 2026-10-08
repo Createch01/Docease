@@ -28,7 +28,7 @@ describe('Comptabilité C2 — recettes sur le registre', () => {
         expect(j).toContain('accountingService.journal(from, to');
         expect(j).toContain("Vérifier l'intégrité");
         expect(j).toContain("var(--color-danger-700, #b91c1c)"); // montants négatifs en rouge
-        expect(analytics).toContain("setActiveTab('journal')");
+        expect(analytics).toContain("['journal', 'Journal des recettes']");
         expect(read('components/settings/CabinetSettings.tsx')).toContain('PaymentsRegistryCard'); // contrôle détaillé conservé dans les réglages
     });
     it('droits Rust : agrégats médecin seulement, journal du jour pour toute session', () => {

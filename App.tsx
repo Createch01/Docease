@@ -20,6 +20,7 @@ import { autoImportService } from './services/autoImportService';
 import { securityService } from './services/securityService';
 import { sessionService } from './services/sessionService';
 import { useInactivityLock } from './services/useInactivityLock';
+import { isDevAutoLockDisabled } from './services/devAutoUnlock';
 import { Patient, Permission, PrescriptionDraft } from './types';
 import { LogOut, BookOpen, Wallet, Lock, Monitor } from 'lucide-react';
 import {
@@ -232,7 +233,7 @@ const AppContent: React.FC = () => {
         if (isSettingsHash(window.location.hash)) window.history.replaceState(null, '', window.location.pathname + window.location.search);
       }
       securityService.getSettings()
-        .then(s => setAutoLockMinutes(s.enforced ? s.inactivityMinutes : 0))
+        .then(s => setAutoLockMinutes(s.enforced && !isDevAutoLockDisabled() ? s.inactivityMinutes : 0))
         .catch(() => setAutoLockMinutes(0));
       setIsDataLoaded(true);
     };
@@ -550,7 +551,7 @@ const AppContent: React.FC = () => {
                 </div>
                 <div className="text-[11px] truncate flex items-center gap-1" style={{ color: 'var(--color-text-subtle)' }}>
                   <span className="w-1.5 h-1.5 rounded-full dot-pulse" style={{ background: 'var(--color-secondary)' }} />
-                  {sessionService.isMedecin() ? (doctor.specialtyFr || t('doctor')) : 'Assistante'}
+                  {(sessionService.isMedecin() ? (doctor.specialtyFr || t('doctor')) : 'Assistante').replace(/^[\s·.–—-]+|[\s·.–—-]+$/g, '') || t('doctor')}
                 </div>
               </div>
             </div>
