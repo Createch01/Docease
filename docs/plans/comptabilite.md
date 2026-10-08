@@ -184,3 +184,10 @@ données qu'il restitue.
   `Analytics.tsx` (titres, onglets) ; la correction globale (471 occurrences, 48 fichiers) sera une
   étape séparée plus tard.
 - Arrêt après C1 pour les tests de l'utilisateur. Aucune fusion avant les tests T5–T7 de la numérotation.
+
+## 7. C1 livré — points à connaître
+
+- Registre `meddoc_payments.json` (`src-tauri/src/payments.rs`) ; modes `CASH` · `CHEQUE` · `TRANSFER` · `CARD`.
+- Statut et montant payé d'une note : calculés par Rust depuis le registre (`payments::reconcile`, sous le verrou de numérotation, registre écrit avant les notes).
+- Remboursement : médecin seulement (l'assistante n'a pas d'accès) ; à rouvrir si l'assistante doit pouvoir rembourser des espèces.
+- **Question ouverte (C2/C4)** : l'annulation d'une note n'efface pas ses encaissements du registre. Les agrégats excluront les notes annulées (règle déjà posée) ; pour la caisse (C4), un encaissement espèces sur une note annulée doit être remboursé (écriture négative) pour que le théorique reste juste. Option : refuser l'annulation d'une note encore encaissée tant qu'elle n'est pas remboursée.

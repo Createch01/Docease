@@ -168,3 +168,11 @@ Code : `src-tauri/src/attachments.rs` (stockage), `media_clean.rs` (nettoyage de
 - **Restauration** : le compteur ne recule jamais (maximum par année du compteur du poste, de celui de la sauvegarde et des notes restaurées) ; un numéro attribué après la sauvegarde reste « brûlé » même si sa note est perdue.
 - **Statut de paiement calculé** : « Réglé » n'existe que si le montant payé couvre le montant dû ; Rust recalcule le statut à chaque écriture (médecin et assistante) et ne lit jamais celui envoyé par l'interface. Une note neuve sans paiement est « Non payé » quoi que l'interface annonce ; une note héritée non modifiée garde son statut octet pour octet.
 - **Une visite = une note** : l'interface avertit avant de créer une seconde note du jour pour un patient (proposition d'imprimer la note existante) ; la facture rapide ouvre toujours une fenêtre (montant, paiement, mode) et n'enregistre jamais « Réglé » d'office.
+
+## Registre d'encaissements
+
+- **Ajout seul, chaîné par empreintes** (`meddoc_payments.json`, chiffré, sauvegardé, réservé : ni `load_json` ni `save_json`). Chaque paiement reçu est une entrée (date du jour LOCAL posée par Rust, montant en centimes, mode espèces / chèque / virement / carte, auteur de la session, note liée). Une entrée modifiée, retirée ou insérée est détectée par `payments_verify`.
+- **Le montant payé et le statut d'une note sont calculés par Rust depuis ce registre.** À chaque écriture de notes (médecin via `save_json`, assistante via `billing_today_save`), un montant annoncé au-dessus du registre devient une entrée `payment` (plafonnée au montant dû) ; un montant annoncé en dessous, ou le statut envoyé, est ignoré : une interface périmée ou malveillante ne peut ni effacer ni diminuer un paiement.
+- **Remboursement** (`payment_refund`, médecin seulement) : entrée **négative**, motif obligatoire (3 à 200 caractères), montant au plus égal au net encaissé de la note ; l'encaissement d'origine n'est jamais modifié. Journal d'audit : identifiant de note et montant, jamais le motif.
+- **Migration** : chaque note déjà payée ou partielle, sans entrée, reçoit une entrée `migrated` datée de la date de la note, avec son mode existant (idempotente ; aucune note n'est réécrite).
+- **Restauration** : le registre du poste n'est jamais raccourci par une sauvegarde plus ancienne.

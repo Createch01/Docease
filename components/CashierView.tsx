@@ -23,8 +23,9 @@ interface Row {
 
 const MODES: Array<{ id: PaymentMode; label: string }> = [
     { id: 'CASH', label: 'Espèces' },
-    { id: 'CARD', label: 'Carte' },
+    { id: 'CHEQUE', label: 'Chèque' },
     { id: 'TRANSFER', label: 'Virement' },
+    { id: 'CARD', label: 'Carte' },
 ];
 const STATUSES: Array<{ id: PaymentStatus; label: string }> = [
     { id: 'UNPAID', label: 'Non payé' },

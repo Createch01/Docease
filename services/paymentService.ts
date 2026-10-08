@@ -7,7 +7,7 @@ import { todayLocal } from '../utils/localDate';
 // payé, mode, statut — rien d'autre (ni historique, ni totaux, ni contenu d'ordonnance,
 // ni tarifs). Le filtrage et les règles sont appliqués par Rust (scoped.rs).
 export type PaymentStatus = 'PAID' | 'UNPAID' | 'PARTIAL';
-export type PaymentMode = 'CASH' | 'CARD' | 'TRANSFER';
+export type PaymentMode = 'CASH' | 'CARD' | 'TRANSFER' | 'CHEQUE';
 
 export interface DayPayment {
     id?: string;

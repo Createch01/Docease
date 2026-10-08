@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{ai, attachments, audit, messaging, notifications, numbering, receipts, scoped, settings, users, AppState, TEST_DATA_DIR};
+use super::{ai, attachments, audit, messaging, notifications, numbering, payments, receipts, scoped, settings, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -118,6 +118,10 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "receipt_duplicate" => done(receipts::receipt_duplicate(a(), st!(), "REC-2026-00001".into())),
         "receipt_cancel" => done(receipts::receipt_cancel(a(), st!(), "REC-2026-00001".into(), "erreur de saisie".into())),
         "receipts_verify" => done(receipts::receipts_verify(a(), st!())),
+        "payment_refund" => done(payments::payment_refund(a(), st!(), "n-inconnue".into(), 10.0, "CASH".into(), "erreur de saisie".into())),
+        "payments_list" => done(payments::payments_list(a(), st!(), None)),
+        "payments_verify" => done(payments::payments_verify(a(), st!())),
+        "payments_migrate" => done(payments::payments_migrate(a(), st!())),
         "honorary_note_cancel" => done(numbering::honorary_note_cancel(a(), st!(), "n-inconnue".into(), "erreur de saisie".into())),
         "invoice_numbering_check" => done(numbering::invoice_numbering_check(a(), st!())),
         "invoice_numbering_migrate" => done(numbering::invoice_numbering_migrate(a(), st!()).map(|_| ())),

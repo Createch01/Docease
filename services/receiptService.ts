@@ -87,7 +87,7 @@ export const formatCents = (cents: number): string => {
     return cents < 0 ? `− ${text}` : text;
 };
 
-export const PAYMENT_MODE_LABEL: Record<string, string> = { CASH: 'Espèces', CARD: 'Carte bancaire', TRANSFER: 'Virement' };
+export const PAYMENT_MODE_LABEL: Record<string, string> = { CASH: 'Espèces', CHEQUE: 'Chèque', CARD: 'Carte bancaire', TRANSFER: 'Virement' };
 
 /** Mentions légales renseignées, dans l'ordre d'affichage. Une mention vide n'apparaît jamais. */
 export const legalLines = (legal: ReceiptLegal): string[] => {

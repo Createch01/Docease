@@ -3,7 +3,7 @@ import { Loader2 } from 'lucide-react';
 import { HonoraryNote } from '../types';
 import { dataService } from '../services/dataService';
 import { toastService } from '../services/toastService';
-import { PayMode } from './PaymentFields';
+import { PAY_MODES, PayMode } from './PaymentFields';
 
 /** Paiement reçu en plus sur une note existante : le statut en découle (calculé par Rust), il ne se saisit pas. */
 const RecordPaymentDialog: React.FC<{ note: HonoraryNote; currency: string; onClose: () => void; onSaved: () => void }> = ({ note, currency, onClose, onSaved }) => {
@@ -44,9 +44,7 @@ const RecordPaymentDialog: React.FC<{ note: HonoraryNote; currency: string; onCl
                 <label className="block text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
                     Mode de paiement
                     <select className="h-10 px-3 rounded-lg border text-[14px] outline-none bg-white block mt-1" style={{ borderColor: 'var(--color-border)' }} value={mode} onChange={e => setMode(e.target.value as PayMode)}>
-                        <option value="CASH">Espèces</option>
-                        <option value="CARD">Carte bancaire</option>
-                        <option value="TRANSFER">Virement</option>
+                        {PAY_MODES.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
                     </select>
                 </label>
                 {error && <p role="alert" className="text-[13px]" style={{ color: 'var(--color-danger-700)' }}>{error}</p>}

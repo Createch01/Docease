@@ -5,7 +5,14 @@ import React from 'react';
 // payé ≥ dû) est calculé et enregistré par Rust.
 
 export type PayKind = 'UNPAID' | 'PAID' | 'PARTIAL';
-export type PayMode = 'CASH' | 'CARD' | 'TRANSFER';
+export type PayMode = 'CASH' | 'CARD' | 'TRANSFER' | 'CHEQUE';
+
+export const PAY_MODES: Array<{ id: PayMode; label: string }> = [
+    { id: 'CASH', label: 'Espèces' },
+    { id: 'CHEQUE', label: 'Chèque' },
+    { id: 'TRANSFER', label: 'Virement' },
+    { id: 'CARD', label: 'Carte bancaire' },
+];
 
 export interface PaymentChoice {
     kind: PayKind;
@@ -57,9 +64,7 @@ const PaymentFields: React.FC<{ value: PaymentChoice; onChange: (c: PaymentChoic
         <label className="block text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
             Mode de paiement
             <select className={`${field} block mt-1`} style={fieldStyle} value={value.mode} onChange={e => onChange({ ...value, mode: e.target.value as PayMode })}>
-                <option value="CASH">Espèces</option>
-                <option value="CARD">Carte bancaire</option>
-                <option value="TRANSFER">Virement</option>
+                {PAY_MODES.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
             </select>
         </label>
     </div>

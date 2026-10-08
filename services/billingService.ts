@@ -22,7 +22,7 @@ export const billingService = {
         amount?: number;
         prescriptionId?: string;
         amountPaid: number;
-        paymentMode: 'CASH' | 'CARD' | 'TRANSFER';
+        paymentMode: 'CASH' | 'CARD' | 'TRANSFER' | 'CHEQUE';
     }): HonoraryNote => {
         const masters = dataService.getHonoraryMasterServices();
         const standardFee = dataService.getDoctorInfo().standardConsultationFee;

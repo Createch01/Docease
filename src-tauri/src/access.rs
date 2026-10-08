@@ -93,6 +93,11 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("receipt_cancel", Rule::Medecin),
     ("receipts_verify", Rule::Medecin),
     // Notes d'honoraires : annulation et contrôle de numérotation réservés au médecin
+    // Registre d'encaissements : remboursement, consultation, vérification et migration réservés au médecin
+    ("payment_refund", Rule::Medecin),
+    ("payments_list", Rule::Medecin),
+    ("payments_verify", Rule::Medecin),
+    ("payments_migrate", Rule::Medecin),
     ("honorary_note_cancel", Rule::Medecin),
     ("invoice_numbering_check", Rule::Medecin),
     ("invoice_numbering_migrate", Rule::Medecin),
@@ -206,7 +211,7 @@ pub enum FileMode {
 
 /// Fichiers internes que `load_json`/`save_json` ne doivent jamais toucher, quel que
 /// soit le rôle (comptes, métadonnées de sécurité).
-const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments", "meddoc_receipts", "meddoc_receipt_counter", "meddoc_invoice_counter"];
+const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments", "meddoc_receipts", "meddoc_receipt_counter", "meddoc_invoice_counter", "meddoc_payments"];
 
 /// Fichiers lisibles/écrivables par l'assistante via `load_json`/`save_json`.
 /// Tout le reste (patients, file d'attente, honoraires, fiche cabinet…) passe par des
@@ -252,7 +257,7 @@ mod tests {
         "backup_status", "backup_set_passphrase", "backup_change_passphrase", "backup_set_destinations", "backup_run_now",
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
         "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
-        "receipt_list", "receipt_cancel", "receipts_verify", "honorary_note_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
+        "receipt_list", "receipt_cancel", "receipts_verify", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
     ];
 
     #[test]
@@ -355,6 +360,7 @@ mod tests {
             include_str!("attachments.rs"),
             include_str!("receipts.rs"),
             include_str!("numbering.rs"),
+            include_str!("payments.rs"),
             include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();

@@ -19,7 +19,7 @@ fn note(id: &str, number: &str, date: &str) -> Value {
 
 /// Équivalent de `save_json` pour le fichier des notes : crochet, écriture, puis compteur.
 fn save(d: &Path, list: Vec<Value>, today: &str) -> Result<Vec<Value>, String> {
-    let (data, pending) = on_save(d, &KEY, Value::Array(list), today)?;
+    let (data, pending) = on_save(d, &KEY, Value::Array(list), today, "test")?;
     write_enc_json_in(d, &KEY, NOTES_FILE, &data)?;
     pending.commit()?;
     Ok(read_notes(d, &KEY))
@@ -209,8 +209,8 @@ fn non_list_payload_is_refused_without_touching_the_file() {
     let d = tmp("bad");
     save(&d, vec![note("a", "", "")], TODAY).unwrap();
     let before = fs::read(d.join(NOTES_FILE)).unwrap();
-    assert!(on_save(&d, &KEY, json!({"x": 1}), TODAY).is_err());
-    assert!(on_save(&d, &KEY, json!([1, 2]), TODAY).is_err());
+    assert!(on_save(&d, &KEY, json!({"x": 1}), TODAY, "test").is_err());
+    assert!(on_save(&d, &KEY, json!([1, 2]), TODAY, "test").is_err());
     assert_eq!(fs::read(d.join(NOTES_FILE)).unwrap(), before);
     let _ = fs::remove_dir_all(&d);
 }
@@ -316,12 +316,12 @@ fn assistant_payment_uses_the_counter_and_shares_it_with_the_doctor() {
     };
     // Le médecin a déjà émis des notes : l'assistante continue la suite.
     save(&d, vec![note("m1", "", ""), note("m2", "", "")], TODAY).unwrap();
-    let v = save_payment(&d, &KEY, &new(json!({})), TODAY, "pay1").unwrap();
+    let v = save_payment(&d, &KEY, &new(json!({})), TODAY, "pay1", "test").unwrap();
     let stored = read_notes(&d, &KEY);
     assert_eq!(number_of(&stored[2]), "2026-0003");
     assert_eq!(v.get("invoiceNumber"), None, "le numéro n'est pas dans la vue de l'assistante");
     // Une retouche d'une note existante ne consomme rien ; un numéro envoyé par l'assistante est ignoré.
-    let v2 = save_payment(&d, &KEY, &new(json!({"id": "pay1", "amountPaid": 300, "invoiceNumber": "2026-0500"})), TODAY, "x").unwrap();
+    let v2 = save_payment(&d, &KEY, &new(json!({"id": "pay1", "amountPaid": 300, "invoiceNumber": "2026-0500"})), TODAY, "x", "test").unwrap();
     assert_eq!(v2["status"], "PAID");
     assert_eq!(number_of(&read_notes(&d, &KEY)[2]), "2026-0003");
     assert_eq!(load_counter(&d, &KEY).get(2026), 3);
@@ -330,7 +330,7 @@ fn assistant_payment_uses_the_counter_and_shares_it_with_the_doctor() {
     assert_eq!(number_of(&after[3]), "2026-0004");
     // Une note annulée n'est plus modifiable par l'assistante ni listée dans l'encaissement du jour.
     cancel_ok(&d, "pay1").unwrap();
-    assert!(save_payment(&d, &KEY, &new(json!({"id": "pay1", "status": "UNPAID"})), TODAY, "x").unwrap_err().contains("annulée"));
+    assert!(save_payment(&d, &KEY, &new(json!({"id": "pay1", "status": "UNPAID"})), TODAY, "x", "test").unwrap_err().contains("annulée"));
     assert!(crate::scoped::payments_today(&read_notes(&d, &KEY), TODAY).iter().all(|p| p["id"] != "pay1"));
     let _ = fs::remove_dir_all(&d);
 }
@@ -348,7 +348,7 @@ fn concurrent_doctor_and_assistant_never_share_a_number() {
                     save(&d, vec![note(&format!("m{i}"), "", "")], TODAY).unwrap();
                 } else {
                     let p = json!({"patientId": "p1", "totalAmount": 100, "amountPaid": 0, "paymentMode": "CASH", "status": "UNPAID"});
-                    save_payment(&d, &KEY, &p, TODAY, &format!("a{i}")).unwrap();
+                    save_payment(&d, &KEY, &p, TODAY, &format!("a{i}"), "test").unwrap();
                 }
             })
         })

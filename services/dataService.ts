@@ -207,6 +207,17 @@ export const dataService = {
         }
       }
 
+      // Notes déjà payées ou partielles → une entrée « migrée » au registre d'encaissements (médecin, Tauri).
+      // Le registre est la source du montant payé ; la migration ne modifie aucune note et se relance sans effet.
+      if (sessionService.isMedecin() && typeof (window as any).__TAURI_INTERNALS__ !== 'undefined') {
+        try {
+          const count = await invoke<number>('payments_migrate');
+          if (count > 0) console.log(`💶 Encaissements : ${count} paiement(s) existant(s) repris au registre.`);
+        } catch (error) {
+          console.error('Reprise des encaissements existants : registre inchangé.', error);
+        }
+      }
+
       isInitialized = true;
       notifyUpdate('all');
       console.log("🚀 DataService initialized successfully");

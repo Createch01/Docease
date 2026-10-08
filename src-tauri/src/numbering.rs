@@ -7,6 +7,7 @@
 //!   ni `load_json` ni `save_json`). Premier lancement après mise à jour = migration non destructive.
 //! - Ordre d'écriture : 1) fichier des notes, 2) compteur. Un plantage entre les deux laisse un compteur
 //!   en retard, rattrapé par le `max` ; jamais deux notes de même numéro.
+//! - Montant payé / statut : rapprochés du registre d'encaissements (`payments::reconcile`).
 //! - Crochet de `save_json` (médecin) : numéro et date imposés par Rust, numéro jamais modifié, note
 //!   numérotée jamais supprimée (annulation à la place, voir `cancel`), champs d'annulation posés
 //!   uniquement par Rust.
@@ -309,10 +310,12 @@ pub fn apply(stored: &[Value], incoming: Vec<Value>, counter: &mut Counter, toda
 }
 
 /// Crochet de `save_json` : renvoie la liste à écrire et le compteur à écrire ensuite (`commit`).
-pub fn on_save(dir: &Path, key: &[u8; KEY_LEN], incoming: Value, today: &str) -> Result<(Value, Pending), String> {
+pub fn on_save(dir: &Path, key: &[u8; KEY_LEN], incoming: Value, today: &str, by: &str) -> Result<(Value, Pending), String> {
     let Value::Array(list) = incoming else { return Err("Format des notes invalide.".into()) };
     let (mut pending, stored) = begin(dir, key, false)?;
-    let out = apply(&stored, list, &mut pending.counter, today)?;
+    let mut out = apply(&stored, list, &mut pending.counter, today)?;
+    // Montant payé et statut viennent du registre d'encaissements (voir `payments`), écrit AVANT les notes.
+    super::payments::reconcile(dir, key, &stored, &mut out, today, by)?;
     Ok((Value::Array(out), pending))
 }
 

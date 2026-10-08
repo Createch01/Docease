@@ -2,6 +2,7 @@ mod access;
 mod ai;
 mod attachments;
 mod numbering;
+mod payments;
 mod receipts;
 mod audit;
 mod backup;
@@ -403,7 +404,7 @@ fn save_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<Ap
     // Ordre : fichier des notes d'abord, compteur ensuite (voir `numbering`).
     let (data, numbering_pending) = if filename == numbering::NOTES_FILE {
         let dir = path.parent().unwrap_or(std::path::Path::new(""));
-        let (d, p) = numbering::on_save(dir, &key, data, &util::today_local())?;
+        let (d, p) = numbering::on_save(dir, &key, data, &util::today_local(), &session.name)?;
         (d, Some(p))
     } else {
         (data, None)
@@ -597,6 +598,10 @@ pub fn run() {
         receipts::receipt_duplicate,
         receipts::receipt_cancel,
         receipts::receipts_verify,
+        payments::payment_refund,
+        payments::payments_list,
+        payments::payments_verify,
+        payments::payments_migrate,
         numbering::honorary_note_cancel,
         numbering::invoice_numbering_check,
         numbering::invoice_numbering_migrate,

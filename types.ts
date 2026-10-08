@@ -244,7 +244,7 @@ export interface HonoraryNote {
   totalInWords: string;
   status: 'PAID' | 'UNPAID' | 'PARTIAL';
   amountPaid?: number; // Only meaningful when status === 'PARTIAL'
-  paymentMode: 'CASH' | 'CARD' | 'TRANSFER';
+  paymentMode: 'CASH' | 'CARD' | 'TRANSFER' | 'CHEQUE';
   includeCin?: string;
   includePhone?: string;
   /** Posés par Rust seulement (annulation d'une note numérotée) : jamais par l'interface. */

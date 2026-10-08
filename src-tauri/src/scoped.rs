@@ -150,7 +150,7 @@ pub fn payments_today(notes: &[Value], today: &str) -> Vec<Value> {
 ///   ligne « Consultation ».
 pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, today: &str, new_id: &str, new_number: &str) -> Result<Value, String> {
     let mode = str_field(input, "paymentMode").unwrap_or("");
-    if !["CASH", "CARD", "TRANSFER"].contains(&mode) {
+    if !super::payments::MODES.contains(&mode) {
         return Err("Mode de paiement invalide.".to_string());
     }
     // Le statut n'est JAMAIS lu : il est calculé à partir du montant payé (« Réglé » = payé ≥ dû).
@@ -298,13 +298,19 @@ pub fn billing_today_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
 
 /// Encaissement de l'assistante, sous le verrou de numérotation commun à tous les chemins : le numéro d'une
 /// nouvelle note vient du compteur Rust (jamais d'un comptage), la note est écrite AVANT le compteur.
-pub fn save_payment(dir: &Path, key: &[u8; super::KEY_LEN], payment: &Value, today: &str, new_id: &str) -> Result<Value, String> {
+pub fn save_payment(dir: &Path, key: &[u8; super::KEY_LEN], payment: &Value, today: &str, new_id: &str, by: &str) -> Result<Value, String> {
     let (mut pending, mut notes) = super::numbering::begin(dir, key, true)?;
     let patients = read_list(dir, key, PATIENTS_FILE)?;
     let year: u32 = today.get(..4).and_then(|y| y.parse().ok()).ok_or("Date système invalide.")?;
     let mut tentative = pending.counter.clone();
     let number = tentative.next(year);
-    let view = apply_payment(&mut notes, &patients, payment, today, new_id, &number)?;
+    let stored = notes.clone();
+    let mut view = apply_payment(&mut notes, &patients, payment, today, new_id, &number)?;
+    // Montant payé et statut : rapprochés du registre d'encaissements (une baisse ne retire rien).
+    super::payments::reconcile(dir, key, &stored, &mut notes, today, by)?;
+    if let Some(n) = notes.iter().find(|n| id_of(n) == view.get("id").and_then(|v| v.as_str())) {
+        view = payment_view(n);
+    }
     if id_of(payment).is_none() {
         pending.counter = tentative; // nouvelle note : le numéro est consommé
     }
@@ -318,7 +324,7 @@ pub fn billing_today_save<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     let session = gate(&app, &state, "billing_today_save")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    let view = save_payment(&dir, &key, &payment, &util::today_local(), &random_note_id())?;
+    let view = save_payment(&dir, &key, &payment, &util::today_local(), &random_note_id(), session.as_ref().map_or("", |s| s.name.as_str()))?;
     audit::log(&app, session.as_ref(), "billing_today_save", view.get("status").and_then(|s| s.as_str()).unwrap_or(""), true);
     Ok(view)
 }

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock, Receipt, Ban, Banknote } from 'lucide-react';
+import { Plus, Wallet, FileText, Trash2, Zap, CheckCircle, Clock, Receipt, Ban, Banknote, Undo2 } from 'lucide-react';
 import { dataService } from '../../services/dataService';
 import { HonoraryNote, HonoraryMasterService } from '../../types';
 import { billingService } from '../../services/billingService';
@@ -8,6 +8,8 @@ import { ReceiptView, formatCents, receiptService, STATUS_LABEL } from '../../se
 import { toastService } from '../../services/toastService';
 import ReceiptModal from '../ReceiptModal';
 import CancelNoteDialog from '../CancelNoteDialog';
+import RefundDialog from '../RefundDialog';
+import { sessionService } from '../../services/sessionService';
 import QuickInvoiceDialog from '../QuickInvoiceDialog';
 import RecordPaymentDialog from '../RecordPaymentDialog';
 import { CancelReceiptDialog, ReceiptIssueDialog } from '../ReceiptDialogs';
@@ -36,6 +38,7 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
     const [cancelNote, setCancelNote] = useState<HonoraryNote | null>(null);
     const [quickOpen, setQuickOpen] = useState(false);
     const [payNote, setPayNote] = useState<HonoraryNote | null>(null);
+    const [refundNote, setRefundNote] = useState<HonoraryNote | null>(null);
     const [toast, setToast] = useState<string | null>(null);
 
     // Reçus de ce patient (registre tenu par Rust) : émission, duplicata, annulation par reçu d'annulation.
@@ -160,6 +163,11 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                                 <Banknote size={18} />
                                             </button>
                                         )}
+                                        {sessionService.isMedecin() && note.status !== 'UNPAID' && !note.cancelledAt && (
+                                            <button onClick={() => setRefundNote(note)} title="Rembourser le patient" className="p-3 bg-white text-amber-600 hover:bg-amber-600 hover:text-white border border-amber-100 rounded-2xl transition-all shadow-sm">
+                                                <Undo2 size={18} />
+                                            </button>
+                                        )}
                                         {note.status !== 'UNPAID' && !note.cancelledAt && (
                                             <button onClick={() => setIssueFor(note.id)} title="Émettre un reçu" className="p-3 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-100 rounded-2xl transition-all shadow-sm">
                                                 <Receipt size={18} />
@@ -235,6 +243,7 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                     onCreated={() => { setQuickOpen(false); setToast(t('quick_invoice_generated')); setTimeout(() => setToast(null), 3000); window.dispatchEvent(new Event('meddoc_data_update')); }} />
             )}
             {payNote && <RecordPaymentDialog note={payNote} currency={currency} onClose={() => setPayNote(null)} onSaved={() => { setPayNote(null); window.dispatchEvent(new Event('meddoc_data_update')); }} />}
+            {refundNote && <RefundDialog note={refundNote} currency={currency} onClose={() => setRefundNote(null)} onDone={() => { setRefundNote(null); window.dispatchEvent(new Event('meddoc_data_update')); }} />}
             {cancelNote && <CancelNoteDialog note={cancelNote} onClose={() => setCancelNote(null)} onCancelled={() => { setCancelNote(null); window.dispatchEvent(new Event('meddoc_data_update')); loadReceipts(); }} />}
             {openReceipt && <ReceiptModal receipt={openReceipt} onClose={() => setOpenReceipt(null)} />}
         </div>
