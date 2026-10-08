@@ -1,6 +1,7 @@
 mod access;
 mod ai;
 mod attachments;
+mod numbering;
 mod receipts;
 mod audit;
 mod backup;
@@ -398,9 +399,23 @@ fn save_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<Ap
         data
     };
 
+    // Notes d'honoraires : numéro (compteur Rust), date d'émission et annulation posés par Rust, jamais par le frontend.
+    // Ordre : fichier des notes d'abord, compteur ensuite (voir `numbering`).
+    let (data, numbering_pending) = if filename == numbering::NOTES_FILE {
+        let dir = path.parent().unwrap_or(std::path::Path::new(""));
+        let (d, p) = numbering::on_save(dir, &key, data, &util::today_local())?;
+        (d, Some(p))
+    } else {
+        (data, None)
+    };
+
     let json_str = serde_json::to_string(&data).map_err(|e| e.to_string())?;
     let encrypted = encrypt(&key, json_str.as_bytes())?;
-    users::write_atomic(&path, &encrypted)
+    users::write_atomic(&path, &encrypted)?;
+    if let Some(p) = numbering_pending {
+        p.commit()?;
+    }
+    Ok(())
 }
 
 #[tauri::command]
