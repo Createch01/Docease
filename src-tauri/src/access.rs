@@ -127,6 +127,7 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     // Grille tarifaire : l'assistante lit et utilise (remises bornées par Rust) ; création / modification / réglages réservés au médecin
     ("tariff_grid", Rule::AnySession),
     ("tariff_free_control_offer", Rule::AnySession),
+    ("tariff_preview", Rule::AnySession),
     ("tariff_act_save", Rule::Medecin),
     ("tariff_act_set_active", Rule::Medecin),
     ("tariff_settings_save", Rule::Medecin),

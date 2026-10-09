@@ -858,6 +858,58 @@ pub fn tariff_settings_save<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: 
     r
 }
 
+/// Aperçu d'une note en cours de saisie (aucune écriture) : lignes, remises et totaux CALCULÉS par Rust avec
+/// les droits de la session. L'interface n'additionne jamais de montants : elle affiche ce résultat.
+#[derive(Serialize, Debug, Clone, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct Preview {
+    pub lines: Vec<Value>,
+    pub note_discount: Option<Value>,
+    pub gross_cents: i64,
+    pub line_discounts_cents: i64,
+    pub note_discount_cents: i64,
+    pub discount_cents: i64,
+    pub net_cents: i64,
+    pub in_words: String,
+}
+
+pub fn preview(inputs: &[LineInput], note_discount: Option<&DiscountInput>, p: &Pricing) -> Result<Preview, String> {
+    let c = compute(inputs, note_discount, p)?;
+    Ok(Preview {
+        discount_cents: c.discount_total(),
+        in_words: receipts::amount_in_words(c.net),
+        lines: c.lines,
+        note_discount: c.note_discount,
+        gross_cents: c.gross,
+        line_discounts_cents: c.line_discounts,
+        note_discount_cents: c.note_discount_cents,
+        net_cents: c.net,
+    })
+}
+
+/// Aperçu pour l'écran de note (médecin) ou d'encaissement (assistante).
+#[tauri::command]
+pub fn tariff_preview<R: tauri::Runtime>(
+    app: tauri::AppHandle<R>,
+    state: tauri::State<AppState>,
+    lines: Vec<LineInput>,
+    note_discount: Option<DiscountInput>,
+    patient_id: Option<String>,
+) -> Result<Preview, String> {
+    let session = require_session(gate(&app, &state, "tariff_preview")?)?;
+    let key = data_key_of(&state)?;
+    let dir = data_dir(&app)?;
+    let grid = load(&dir, &key)?;
+    let today = util::today_local();
+    let eligible = match patient_id.as_deref() {
+        Some(p) if !p.is_empty() => free_control_offer(&numbering::read_notes(&dir, &key), &payments::load(&dir, &key)?, p, &today, grid.settings.free_control_days).is_some(),
+        _ => false,
+    };
+    let now = util::now_iso();
+    let p = Pricing { grid: &grid, role: session.role, by: &session.name, now: &now, today: &today, free_control_eligible: eligible };
+    preview(&lines, note_discount.as_ref(), &p)
+}
+
 /// Reprise des notes sans lignes (médecin) : lancée à l'ouverture de sa session ; relançable sans effet.
 #[tauri::command]
 pub fn tariffs_migrate<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>) -> Result<usize, String> {

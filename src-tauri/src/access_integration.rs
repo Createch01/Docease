@@ -145,6 +145,7 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "invoice_numbering_check" => done(numbering::invoice_numbering_check(a(), st!())),
         "tariff_grid" => done(tariff::tariff_grid(a(), st!())),
         "tariff_free_control_offer" => done(tariff::tariff_free_control_offer(a(), st!(), "p1".into())),
+        "tariff_preview" => done(tariff::tariff_preview(a(), st!(), vec![tariff::LineInput { act_id: Some("act-consultation".into()), ..Default::default() }], None, Some("p1".into()))),
         "tariff_act_save" => done(tariff::tariff_act_save(a(), st!(), tariff::ActInput { code: "X".into(), label: "Acte test".into(), category: "AUTRE".into(), ..Default::default() })),
         "tariff_act_set_active" => done(tariff::tariff_act_set_active(a(), st!(), "act-consultation".into(), false)),
         "tariff_settings_save" => done(tariff::tariff_settings_save(a(), st!(), 10, 7)),

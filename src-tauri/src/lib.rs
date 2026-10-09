@@ -640,6 +640,7 @@ pub fn run() {
         numbering::invoice_numbering_migrate,
         tariff::tariff_grid,
         tariff::tariff_free_control_offer,
+        tariff::tariff_preview,
         tariff::tariff_act_save,
         tariff::tariff_act_set_active,
         tariff::tariff_settings_save,

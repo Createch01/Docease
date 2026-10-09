@@ -534,3 +534,15 @@ fn the_receipt_recalls_gross_discount_and_net_of_the_note() {
     assert_eq!(all[0], e);
     let _ = fs::remove_dir_all(&d);
 }
+
+#[test]
+fn the_preview_is_the_same_computation_as_the_emission() {
+    let g = grid_with(10);
+    let mut l = line("act-consultation");
+    l.discount = Some(pct(10, "CONFRERE"));
+    let p = preview(&[l.clone(), line("act-ecg")], None, &pricing(&g, Role::Assistant, false)).unwrap();
+    assert_eq!((p.gross_cents, p.discount_cents, p.net_cents, p.in_words.as_str()), (50_000, 3_000, 47_000, "Quatre cent soixante-dix dirhams"));
+    // Les refus de l'émission sont ceux de l'aperçu (assistante au-delà du plafond).
+    l.discount = Some(pct(11, "CONFRERE"));
+    assert!(preview(&[l], None, &pricing(&g, Role::Assistant, false)).unwrap_err().starts_with("Remise réservée au médecin"));
+}
