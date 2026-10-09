@@ -5,6 +5,7 @@ mod numbering;
 mod payments;
 mod accounting;
 mod expenses;
+mod identity;
 mod periods;
 mod receipts;
 mod audit;
@@ -404,6 +405,15 @@ fn save_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<Ap
         data
     };
 
+    // Fiche cabinet : identité professionnelle validée par Rust (ICE 15 chiffres, INPE / IF / TP numériques).
+    let data = if filename == receipts::DOCTOR_INFO_FILE {
+        let dir = path.parent().unwrap_or(std::path::Path::new(""));
+        let stored = read_enc_json_in(dir, &key, &filename).ok().flatten();
+        identity::on_save(dir, &key, stored.as_ref(), data)?
+    } else {
+        data
+    };
+
     // Notes d'honoraires : numéro (compteur Rust), date d'émission et annulation posés par Rust, jamais par le frontend.
     // Ordre : fichier des notes d'abord, compteur ensuite (voir `numbering`).
     let (data, numbering_pending) = if filename == numbering::NOTES_FILE {
@@ -634,6 +644,9 @@ pub fn run() {
         tariff::tariff_act_set_active,
         tariff::tariff_settings_save,
         tariff::tariffs_migrate,
+        identity::identity_stamp_set,
+        identity::identity_stamp,
+        identity::identity_check,
         messaging::appointment_mark_sent,
         messaging::whatsapp_open,
         ai::ai_status,

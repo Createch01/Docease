@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{accounting, ai, attachments, audit, expenses, messaging, notifications, numbering, payments, periods, receipts, scoped, settings, tariff, users, AppState, TEST_DATA_DIR};
+use super::{accounting, ai, attachments, audit, expenses, identity, messaging, notifications, numbering, payments, periods, receipts, scoped, settings, tariff, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -148,6 +148,9 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "tariff_act_save" => done(tariff::tariff_act_save(a(), st!(), tariff::ActInput { code: "X".into(), label: "Acte test".into(), category: "AUTRE".into(), ..Default::default() })),
         "tariff_act_set_active" => done(tariff::tariff_act_set_active(a(), st!(), "act-consultation".into(), false)),
         "tariff_settings_save" => done(tariff::tariff_settings_save(a(), st!(), 10, 7)),
+        "identity_stamp_set" => done(identity::identity_stamp_set(a(), st!(), "JVBERi0=".into())),
+        "identity_stamp" => done(identity::identity_stamp(a(), st!())),
+        "identity_check" => done(identity::identity_check(a(), st!())),
         "tariffs_migrate" => done(tariff::tariffs_migrate(a(), st!())),
         "invoice_numbering_migrate" => done(numbering::invoice_numbering_migrate(a(), st!()).map(|_| ())),
         "appointment_mark_sent" => done(messaging::appointment_mark_sent(a(), st!(), "a-inconnu".into(), "reminder".into())),

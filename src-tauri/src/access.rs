@@ -131,6 +131,10 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("tariff_act_set_active", Rule::Medecin),
     ("tariff_settings_save", Rule::Medecin),
     ("tariffs_migrate", Rule::Medecin),
+    // Identité professionnelle : écriture du cachet et contrôle d'exhaustivité = médecin ; lecture du cachet pour imprimer = toute session
+    ("identity_stamp_set", Rule::Medecin),
+    ("identity_stamp", Rule::AnySession),
+    ("identity_check", Rule::Medecin),
     ("appointment_mark_sent", Rule::AnySession),
     ("whatsapp_open", Rule::AnySession),
     ("notifications_set_state", Rule::AnySession),
@@ -288,7 +292,7 @@ mod tests {
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
         "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
         "receipt_list", "receipt_cancel", "receipts_verify", "expense_cancel", "expense_correct", "expense_list", "expense_category_add", "expense_category_set_active", "expenses_migrate", "expenses_verify", "periods_list", "period_close", "period_reopen", "accounting_summary", "accounting_journal", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
-        "tariff_act_save", "tariff_act_set_active", "tariff_settings_save", "tariffs_migrate",
+        "tariff_act_save", "tariff_act_set_active", "tariff_settings_save", "tariffs_migrate", "identity_stamp_set", "identity_check",
     ];
 
     #[test]
@@ -396,6 +400,7 @@ mod tests {
             include_str!("expenses.rs"),
             include_str!("periods.rs"),
             include_str!("tariff.rs"),
+            include_str!("identity.rs"),
             include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();
