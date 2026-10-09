@@ -97,6 +97,8 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     // Comptabilité : agrégats et journal complet réservés au médecin ; l'assistante ne voit que les écritures du jour
     // Dépenses : l'assistante saisit une dépense courante du jour (contrôlé dans `expenses.rs`) et voit celles du jour ; le reste est réservé au médecin
     ("expense_add", Rule::AnySession),
+    // Justificatif (photo / PDF chiffré) de l'assistante pour SES dépenses du jour : pièce « cabinet » rattachée par `expense_add`
+    ("expense_receipt_add", Rule::AnySession),
     ("expenses_today", Rule::AnySession),
     ("expense_suppliers", Rule::AnySession),
     ("expense_categories", Rule::AnySession),

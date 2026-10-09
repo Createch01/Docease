@@ -21,8 +21,10 @@ describe('Comptabilité C3 — dépenses et clôture de période (interface)', (
     });
     it('justificatifs : pièces jointes chiffrées du cabinet, aucun base64 stocké dans la dépense', () => {
         const dlg = read('components/accounting/ExpenseDialog.tsx');
-        expect(dlg).toContain("const CABINET = '__cabinet__'");
-        expect(dlg).toContain('attachmentService.add(');
+        // Médecin ET assistante : pièce chiffrée créée par Rust (`expense_receipt_add`, propriétaire « cabinet »).
+        expect(dlg).toContain('expenseService.addReceipt(');
+        expect(dlg).not.toContain('attachmentService.add(');
+        expect(dlg).not.toMatch(/isMedecin && \(\s*<div className="space-y-2">\s*<p className=\{label\} style=\{sub\}>Justificatifs/);
         expect(dlg).not.toMatch(/readAsDataURL|dataUrl/);
     });
     it('nouveaux écrans : casse normale, ni extra-bold ni majuscules forcées', () => {

@@ -1,4 +1,5 @@
 import { invoke } from '@tauri-apps/api/core';
+import { bytesToBase64 } from './attachmentService';
 
 // Dépenses et clôtures de période : tout est décidé et calculé par Rust (src-tauri/src/expenses.rs, periods.rs).
 // L'interface n'écrit aucune dépense, n'attribue aucun numéro DEP et n'additionne aucun montant.
@@ -93,6 +94,12 @@ const call = async <T>(cmd: string, args?: Record<string, unknown>): Promise<T> 
 
 export const expenseService = {
     add: (expense: ExpenseInput) => call<ExpenseEntry>('expense_add', { expense }),
+    /**
+     * Justificatif (photo / PDF) d'une dépense du jour : pièce chiffrée créée par Rust (EXIF supprimé), accessible
+     * aussi à l'assistante. L'identifiant renvoyé est transmis ensuite à `add` dans `receiptIds`.
+     */
+    addReceipt: (bytes: Uint8Array, title: string) =>
+        call<{ id: string; title: string }>('expense_receipt_add', { dataBase64: bytesToBase64(bytes), title }),
     cancel: (id: string, reason: string) => call<ExpenseEntry>('expense_cancel', { id, reason }),
     /** « Corriger » : annulation de l'originale + nouvelle dépense, en une seule écriture. */
     correct: (id: string, reason: string, expense: ExpenseInput) => call<ExpenseEntry>('expense_correct', { id, reason, expense }),

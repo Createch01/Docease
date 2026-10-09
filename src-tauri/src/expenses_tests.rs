@@ -161,14 +161,37 @@ fn assistant_enters_only_todays_ordinary_expenses() {
     assert!(go(new(TODAY, "Fournitures de bureau", 3_000)).is_ok());
     assert!(go(new("2026-10-07", "Fournitures de bureau", 3_000)).unwrap_err().contains("du jour"));
     assert!(go(new(TODAY, AMORTIZABLE_CATEGORY, 3_000)).unwrap_err().contains("médecin"));
+    // Justificatif : l'assistante ajoute SA pièce (photo / PDF chiffré) puis la rattache à sa dépense du jour.
+    let mine = add_receipt(&d, &KEY, pdf(), "Facture pharmacie", "Sara", "2026-10-08T10:00:00Z", TODAY).unwrap();
+    assert_eq!((mine.patient_id.as_str(), mine.created_by.as_str()), (attachments::CABINET_OWNER, "Sara"));
+    assert!(attachments::blob_path(&d, &mine.id).is_file(), "fichier chiffré écrit");
     let mut n = new(TODAY, "Divers", 3_000);
-    n.receipt_ids = vec![receipt(&d)];
-    assert!(go(n).unwrap_err().contains("justificatif"));
+    n.receipt_ids = vec![mine.id.clone()];
+    let e = go(n.clone()).unwrap();
+    assert_eq!(e.receipt_ids, vec![mine.id.clone()]);
+    // Déjà rattachée : refus. Pièce du médecin ou d'une autre session : refus.
+    assert!(go(n).unwrap_err().contains("Justificatif"));
+    let doctors = receipt(&d);
+    let mut n = new(TODAY, "Divers", 3_000);
+    n.receipt_ids = vec![doctors];
+    assert!(go(n).unwrap_err().contains("Justificatif"));
+    let other = add_receipt(&d, &KEY, pdf(), "", "Autre assistante", "2026-10-08T10:00:00Z", TODAY).unwrap();
+    let mut n = new(TODAY, "Divers", 3_000);
+    n.receipt_ids = vec![other.id];
+    assert!(go(n).unwrap_err().contains("Justificatif"));
+    // Pièce comptable : elle ne se supprime pas ; un fichier qui n'est ni PDF ni image est refusé.
+    assert!(attachments::delete(&d, &KEY, &mine.id).unwrap_err().contains("comptable"));
+    assert!(add_receipt(&d, &KEY, b"MZ exe".to_vec(), "x", "Sara", "2026-10-08T10:00:00Z", TODAY).is_err());
+    // Plafond de pièces en attente.
+    for _ in 0..MAX_PENDING_RECEIPTS {
+        let _ = add_receipt(&d, &KEY, pdf(), "p", "Sara", "2026-10-08T10:00:00Z", TODAY);
+    }
+    assert!(add_receipt(&d, &KEY, pdf(), "p", "Sara", "2026-10-08T10:00:00Z", TODAY).unwrap_err().contains("en attente"));
     assert!(cancel(&d, &KEY, Role::Assistant, "DEP-2026-00001", "Erreur de saisie", "Sara", TODAY).is_err());
     assert!(add_category(&d, &KEY, Role::Assistant, "Autre").is_err());
     assert!(set_category_active(&d, &KEY, Role::Assistant, "Divers", false).is_err());
     let today = list(&load(&d, &KEY).unwrap(), "0000-01-01", "9999-12-31", None, None, None, Some(TODAY));
-    assert_eq!(today.rows.len(), 1);
+    assert_eq!(today.rows.len(), 2);
     let _ = fs::remove_dir_all(&d);
 }
 

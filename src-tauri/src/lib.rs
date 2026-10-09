@@ -602,6 +602,7 @@ pub fn run() {
         receipts::receipt_cancel,
         receipts::receipts_verify,
         expenses::expense_add,
+        expenses::expense_receipt_add,
         expenses::expense_cancel,
         expenses::expense_correct,
         expenses::expense_list,

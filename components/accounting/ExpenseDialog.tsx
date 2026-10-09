@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Loader2, Paperclip, X } from 'lucide-react';
 import { EXPENSE_MODES, ExpenseCategory, ExpenseInput, ExpenseMode, ExpenseView, expenseService } from '../../services/expenseService';
-import { attachmentService, checkFile, defaultTitle } from '../../services/attachmentService';
+import { checkFile, defaultTitle } from '../../services/attachmentService';
 import { sessionService } from '../../services/sessionService';
 import { todayLocal } from '../../utils/localDate';
 
@@ -9,7 +9,6 @@ import { todayLocal } from '../../utils/localDate';
 // catégories valides, mois clôturés et montants sont contrôlés par Rust. « Corriger » = annuler + recréer
 // (motif obligatoire), une seule écriture côté Rust.
 
-const CABINET = '__cabinet__';
 const field = 'h-10 px-3 rounded-lg border text-[14px] outline-none bg-white w-full';
 const border = { borderColor: 'var(--color-border)' } as React.CSSProperties;
 const label = 'block text-[12px] font-medium';
@@ -60,7 +59,7 @@ const ExpenseDialog: React.FC<Props> = ({ initial, currency, onClose, onDone }) 
         if (check.ok === false) { setError(check.message); return; }
         try {
             const bytes = new Uint8Array(await file.arrayBuffer());
-            const meta = await attachmentService.add({ patientId: CABINET, title: defaultTitle(file.name), category: 'autre', examDate: todayLocal() }, bytes);
+            const meta = await expenseService.addReceipt(bytes, defaultTitle(file.name));
             setReceipts(r => [...r, { id: meta.id, name: file.name }]);
             setError(null);
         } catch (err) {
@@ -133,7 +132,7 @@ const ExpenseDialog: React.FC<Props> = ({ initial, currency, onClose, onDone }) 
                     )}
                 </div>
 
-                {isMedecin && (
+                {(
                     <div className="space-y-2">
                         <p className={label} style={sub}>Justificatifs (PDF, JPG ou PNG ; stockés chiffrés)</p>
                         <div className="flex flex-wrap gap-2 items-center">

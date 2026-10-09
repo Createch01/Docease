@@ -120,6 +120,7 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "receipts_verify" => done(receipts::receipts_verify(a(), st!())),
         "honorary_note_refund_and_cancel" => done(numbering::honorary_note_refund_and_cancel(a(), st!(), "n-inconnue".into(), "erreur de saisie".into(), "CASH".into())),
         "expense_add" => done(expenses::expense_add(a(), st!(), expenses::NewExpense::default())),
+        "expense_receipt_add" => done(expenses::expense_receipt_add(a(), st!(), "JVBERi0=".into(), "Facture".into())),
         "expense_cancel" => done(expenses::expense_cancel(a(), st!(), "DEP-2026-00001".into(), "erreur de saisie".into())),
         "expense_correct" => done(expenses::expense_correct(a(), st!(), "DEP-2026-00001".into(), "erreur de saisie".into(), expenses::NewExpense::default())),
         "expense_list" => done(expenses::expense_list(a(), st!(), "2026-01-01".into(), "2026-12-31".into(), None, None, None)),

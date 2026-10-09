@@ -314,9 +314,6 @@ fn build(dir: &Path, key: &[u8; KEY_LEN], role: Role, n: &NewExpense, by: &str, 
     if n.receipt_ids.len() > MAX_RECEIPTS {
         return Err(format!("{MAX_RECEIPTS} justificatifs au plus."));
     }
-    if role == Role::Assistant && !n.receipt_ids.is_empty() {
-        return Err("L'assistante ne joint pas de justificatif : le médecin le fera.".into());
-    }
     if !n.receipt_ids.is_empty() {
         let index = super::attachments::load_index(dir, key)?;
         for id in &n.receipt_ids {
@@ -357,12 +354,65 @@ fn assign_id(entries: &[Entry], counter: &mut Counter, mut e: Entry, today: &str
 
 // ─── Opérations ──────────────────────────────────────────────────────────────
 
+/// Pièces jointes de dépenses (propriétaire « cabinet ») déjà rattachées à une écriture du registre.
+fn attached_ids(entries: &[Entry]) -> BTreeSet<&str> {
+    entries.iter().flat_map(|e| e.receipt_ids.iter().map(|s| s.as_str())).collect()
+}
+
+/// L'assistante ne rattache que SES justificatifs du jour, pas encore utilisés : jamais celui du médecin,
+/// d'une autre session, d'un autre jour, ni une pièce déjà liée à une dépense.
+fn check_assistant_receipts(dir: &Path, key: &[u8; KEY_LEN], ids: &[String], by: &str, today: &str, entries: &[Entry]) -> Result<(), String> {
+    if ids.is_empty() {
+        return Ok(());
+    }
+    let index = super::attachments::load_index(dir, key)?;
+    let used = attached_ids(entries);
+    for id in ids {
+        let own_today = index.iter().any(|m| &m.id == id && m.patient_id == super::attachments::CABINET_OWNER && m.created_by == by && m.exam_date == today);
+        if !own_today || used.contains(id.as_str()) {
+            return Err("Justificatif refusé : l'assistante ne rattache que les justificatifs qu'elle a ajoutés aujourd'hui.".into());
+        }
+    }
+    Ok(())
+}
+
+/// Plafond de pièces ajoutées par session et par jour qui ne sont pas encore rattachées à une dépense.
+const MAX_PENDING_RECEIPTS: usize = 10;
+
+/// Justificatif (assistante ou médecin) : pièce jointe chiffrée (propriétaire « cabinet », métadonnées
+/// d'image supprimées), rattachée ensuite à une dépense du jour par `add`.
+pub fn add_receipt(dir: &Path, key: &[u8; KEY_LEN], raw: Vec<u8>, title: &str, by: &str, now: &str, today: &str) -> Result<super::attachments::Meta, String> {
+    ensure_migrated(dir, key, today)?;
+    let _g = lock();
+    let entries = load(dir, key)?;
+    let used = attached_ids(&entries);
+    let pending = super::attachments::load_index(dir, key)?
+        .iter()
+        .filter(|m| m.patient_id == super::attachments::CABINET_OWNER && m.created_by == by && m.exam_date == today && !used.contains(m.id.as_str()))
+        .count();
+    if pending >= MAX_PENDING_RECEIPTS {
+        return Err(format!("Trop de justificatifs en attente ({MAX_PENDING_RECEIPTS} au plus) : enregistrez d'abord les dépenses correspondantes."));
+    }
+    let title = clean(title, 100, "Titre", false)?;
+    let input = super::attachments::AddInput {
+        patient_id: super::attachments::CABINET_OWNER.into(),
+        title: if title.is_empty() { "Justificatif".into() } else { title },
+        category: "autre".into(),
+        exam_date: today.into(),
+        ..Default::default()
+    };
+    super::attachments::add(dir, key, input, raw, by, now, today)
+}
+
 pub fn add(dir: &Path, key: &[u8; KEY_LEN], role: Role, n: &NewExpense, by: &str, today: &str) -> Result<Entry, String> {
     ensure_migrated(dir, key, today)?;
     let _g = lock();
     let mut entries = load(dir, key)?;
     let mut counter = load_counter(dir, key);
     let e = build(dir, key, role, n, by, today, false)?;
+    if role == Role::Assistant {
+        check_assistant_receipts(dir, key, &n.receipt_ids, by, today, &entries)?;
+    }
     let e = assign_id(&entries, &mut counter, e, today)?;
     let done = push_sealed(&mut entries, e);
     save(dir, key, &entries)?;
@@ -747,6 +797,23 @@ pub fn expense_add<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::St
     let key = data_key_of(&state)?;
     let r = add(&data_dir(&app)?, &key, session.role, &expense, &session.name, &util::today_local());
     audit::log(&app, Some(&session), "expense_add", &match &r { Ok(e) => format!("{} {}", e.id, e.amount_cents), Err(_) => "refusé".into() }, r.is_ok());
+    r
+}
+
+/// Justificatif (photo ou PDF) joint à une dépense du jour : renvoie la pièce, dont l'identifiant est ensuite
+/// transmis à `expense_add`. Journal : identifiant seulement.
+#[tauri::command]
+pub fn expense_receipt_add<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, data_base64: String, title: String) -> Result<super::attachments::Meta, String> {
+    use base64::Engine as _;
+    let session = require_session(gate(&app, &state, "expense_receipt_add")?)?;
+    let key = data_key_of(&state)?;
+    // Garde-fou avant décodage : 20 Mo → ~27 Mo de base64.
+    if data_base64.len() > super::attachments::MAX_FILE_BYTES / 3 * 4 + 8 {
+        return Err(format!("Fichier trop volumineux ({} Mo au plus).", super::attachments::MAX_FILE_BYTES / 1024 / 1024));
+    }
+    let raw = base64::engine::general_purpose::STANDARD.decode(data_base64.as_bytes()).map_err(|_| "Fichier illisible.".to_string())?;
+    let r = add_receipt(&data_dir(&app)?, &key, raw, &title, &session.name, &util::now_iso(), &util::today_local());
+    audit::log(&app, Some(&session), "expense_receipt_add", &match &r { Ok(m) => m.id.clone(), Err(_) => "refusé".into() }, r.is_ok());
     r
 }
 
