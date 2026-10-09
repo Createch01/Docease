@@ -25,7 +25,7 @@ pub const REGISTRY_FILE: &str = "meddoc_receipts.json";
 pub const COUNTER_FILE: &str = "meddoc_receipt_counter.json";
 const NOTES_FILE: &str = "meddoc_honorary_notes.json";
 const PATIENTS_FILE: &str = "meddoc_patients.json";
-const DOCTOR_INFO_FILE: &str = "meddoc_doctor_info.json";
+pub(crate) const DOCTOR_INFO_FILE: &str = "meddoc_doctor_info.json";
 /// 10 000 000,00 DH (même borne que l'encaissement, `scoped::MAX_AMOUNT`).
 pub const MAX_CENTS: i64 = 1_000_000_000;
 pub const DEFAULT_LABEL: &str = "Consultation";

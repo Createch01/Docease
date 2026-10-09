@@ -20,7 +20,7 @@ use tauri::test::MockRuntime;
 use tauri::{AppHandle, Manager};
 
 use super::access::{rule_for, Role, Rule, Session};
-use super::{accounting, ai, attachments, audit, expenses, messaging, notifications, numbering, payments, periods, receipts, scoped, settings, users, AppState, TEST_DATA_DIR};
+use super::{accounting, ai, attachments, audit, expenses, messaging, notifications, numbering, payments, periods, receipts, scoped, settings, tariff, users, AppState, TEST_DATA_DIR};
 
 type H = AppHandle<MockRuntime>;
 
@@ -143,6 +143,12 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "payments_migrate" => done(payments::payments_migrate(a(), st!())),
         "honorary_note_cancel" => done(numbering::honorary_note_cancel(a(), st!(), "n-inconnue".into(), "erreur de saisie".into())),
         "invoice_numbering_check" => done(numbering::invoice_numbering_check(a(), st!())),
+        "tariff_grid" => done(tariff::tariff_grid(a(), st!())),
+        "tariff_free_control_offer" => done(tariff::tariff_free_control_offer(a(), st!(), "p1".into())),
+        "tariff_act_save" => done(tariff::tariff_act_save(a(), st!(), tariff::ActInput { code: "X".into(), label: "Acte test".into(), category: "AUTRE".into(), ..Default::default() })),
+        "tariff_act_set_active" => done(tariff::tariff_act_set_active(a(), st!(), "act-consultation".into(), false)),
+        "tariff_settings_save" => done(tariff::tariff_settings_save(a(), st!(), 10, 7)),
+        "tariffs_migrate" => done(tariff::tariffs_migrate(a(), st!())),
         "invoice_numbering_migrate" => done(numbering::invoice_numbering_migrate(a(), st!()).map(|_| ())),
         "appointment_mark_sent" => done(messaging::appointment_mark_sent(a(), st!(), "a-inconnu".into(), "reminder".into())),
         // Numéro invalide : refusé par la validation AVANT toute ouverture (jamais d'ouverture réelle en test).
@@ -265,6 +271,8 @@ fn every_command_enforces_roles_for_assistant_locked_and_medecin_sessions() {
     // de sécurité de départ. Aucun fichier médical, de comptes ou interne.
     let allowed_written = [
         "meddoc_appointments.json", "meddoc_patients.json", "meddoc_today_queue.json", "meddoc_honorary_notes.json", numbering::COUNTER_FILE, notifications::STATE_FILE,
+        // Justificatif de dépense joint par l'assistante (pièce chiffrée « cabinet » + index) : voir `expense_receipt_add`.
+        attachments::INDEX_FILE, attachments::DIR,
         super::SECURITY_FILE, audit::AUDIT_FILE,
     ];
     for f in fs::read_dir(&dir).unwrap().flatten().map(|e| e.file_name().to_string_lossy().to_string()) {

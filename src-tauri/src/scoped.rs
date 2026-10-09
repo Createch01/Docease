@@ -35,6 +35,8 @@ pub const IDENTITY_FIELDS: &[&str] = &[
 
 const CLINIC_PUBLIC_FIELDS: &[&str] = &[
     "cabinetName", "nameFr", "nameAr", "specialtyFr", "specialtyAr", "currency", "phone", "addressFr", "addressAr", "hours",
+    // Identité professionnelle imprimée sur tous les documents : lecture seule (ni RIB ni CNSS).
+    "ordreNumber", "inpe", "taxId", "patente", "ice",
 ];
 
 const MAX_AMOUNT: f64 = 10_000_000.0;
@@ -146,9 +148,9 @@ pub fn payments_today(notes: &[Value], today: &str) -> Vec<Value> {
 /// Applique une saisie d'encaissement sur les notes (visites du jour seulement).
 /// - note existante du jour : seuls statut, montant payé et mode changent
 ///   (le montant dû / les tarifs ne sont jamais modifiés) ;
-/// - nouvelle note : créée pour un patient existant, montant dû saisi, une seule
-///   ligne « Consultation ».
-pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, today: &str, new_id: &str, new_number: &str) -> Result<Value, String> {
+/// - nouvelle note : créée pour un patient existant à partir d'ACTES DE LA GRILLE (`lines`) ; montant, remises
+///   et instantané calculés par Rust (`tariff`). Aucun montant libre, aucune ligne libre pour l'assistante.
+pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, today: &str, new_id: &str, new_number: &str, pricing: &super::tariff::Pricing, issuer: Option<Value>) -> Result<Value, String> {
     let mode = str_field(input, "paymentMode").unwrap_or("");
     if !super::payments::MODES.contains(&mode) {
         return Err("Mode de paiement invalide.".to_string());
@@ -186,7 +188,14 @@ pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, 
 
     let patient_id = str_field(input, "patientId").ok_or("Patient requis.")?;
     let patient = patients.iter().find(|p| id_of(p) == Some(patient_id)).ok_or("Patient introuvable.")?;
-    let total = num_field(input, "totalAmount").ok_or("Montant dû requis.")?;
+    let lines = input.get("lines").filter(|l| l.is_array()).ok_or("Choisissez un acte de la grille tarifaire.")?;
+    let inputs: Vec<super::tariff::LineInput> = serde_json::from_value(lines.clone()).map_err(|_| "Lignes de la note invalides.".to_string())?;
+    let note_discount: Option<super::tariff::DiscountInput> = match input.get("noteDiscount") {
+        None | Some(Value::Null) => None,
+        Some(v) => Some(serde_json::from_value(v.clone()).map_err(|_| "Remise de la note invalide.".to_string())?),
+    };
+    let computed = super::tariff::compute(&inputs, note_discount.as_ref(), pricing)?;
+    let total = computed.net as f64 / 100.0;
     if !valid_amount(total) {
         return Err("Montant dû invalide.".to_string());
     }
@@ -197,10 +206,10 @@ pub fn apply_payment(notes: &mut Vec<Value>, patients: &[Value], input: &Value, 
         "patientPhone": patient.get("phone"),
         "date": today,
         "invoiceNumber": new_number,
-        "services": [{"name": "Consultation", "price": total, "checked": true}],
-        "totalAmount": total,
-        "totalInWords": "",
     });
+    if let Some(o) = note.as_object_mut() {
+        super::tariff::write_into_note(o, &computed, issuer);
+    }
     finish(&mut note, total)?;
     let view = payment_view(&note);
     notes.push(note);
@@ -298,14 +307,24 @@ pub fn billing_today_list<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
 
 /// Encaissement de l'assistante, sous le verrou de numérotation commun à tous les chemins : le numéro d'une
 /// nouvelle note vient du compteur Rust (jamais d'un comptage), la note est écrite AVANT le compteur.
-pub fn save_payment(dir: &Path, key: &[u8; super::KEY_LEN], payment: &Value, today: &str, new_id: &str, by: &str) -> Result<Value, String> {
+pub fn save_payment(dir: &Path, key: &[u8; super::KEY_LEN], payment: &Value, today: &str, new_id: &str, by: &str, role: super::access::Role) -> Result<Value, String> {
     let (mut pending, mut notes) = super::numbering::begin(dir, key, true)?;
     let patients = read_list(dir, key, PATIENTS_FILE)?;
     let year: u32 = today.get(..4).and_then(|y| y.parse().ok()).ok_or("Date système invalide.")?;
     let mut tentative = pending.counter.clone();
     let number = tentative.next(year);
     let stored = notes.clone();
-    let mut view = apply_payment(&mut notes, &patients, payment, today, new_id, &number)?;
+    // Grille, éligibilité au contrôle gratuit et instantané de l'identité : décidés ici, jamais par l'interface.
+    let grid = super::tariff::load(dir, key)?;
+    let eligible = id_of(payment).is_none() && {
+        let entries = super::payments::load(dir, key)?;
+        let patient = str_field(payment, "patientId").unwrap_or("");
+        super::tariff::free_control_offer(&stored, &entries, patient, today, grid.settings.free_control_days).is_some()
+    };
+    let issuer = read_enc_json_in(dir, key, DOCTOR_INFO_FILE)?.map(|i| super::tariff::issuer_snapshot(&i));
+    let now = util::now_iso();
+    let pricing = super::tariff::Pricing { grid: &grid, role, by, now: &now, today, free_control_eligible: eligible };
+    let mut view = apply_payment(&mut notes, &patients, payment, today, new_id, &number, &pricing, issuer)?;
     // Montant payé et statut : rapprochés du registre d'encaissements (une baisse ne retire rien).
     super::payments::reconcile(dir, key, &stored, &mut notes, today, by)?;
     if let Some(n) = notes.iter().find(|n| id_of(n) == view.get("id").and_then(|v| v.as_str())) {
@@ -324,7 +343,8 @@ pub fn billing_today_save<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: ta
     let session = gate(&app, &state, "billing_today_save")?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    let view = save_payment(&dir, &key, &payment, &util::today_local(), &random_note_id(), session.as_ref().map_or("", |s| s.name.as_str()))?;
+    let role = session.as_ref().map(|s| s.role).ok_or("Session requise : déverrouillez DocEase.")?;
+    let view = save_payment(&dir, &key, &payment, &util::today_local(), &random_note_id(), session.as_ref().map_or("", |s| s.name.as_str()), role)?;
     audit::log(&app, session.as_ref(), "billing_today_save", view.get("status").and_then(|s| s.as_str()).unwrap_or(""), true);
     Ok(view)
 }
@@ -357,6 +377,19 @@ mod tests {
             "cin": "AB123", "address": "rue X", "allergies": "pénicilline", "pathologies": "HTA",
             "currentMedications": [{"name": "X"}], "vitalSigns": [{"bp": "12/8"}], "weight": "80"
         })
+    }
+
+    fn test_grid() -> super::super::tariff::Grid {
+        let mut g = super::super::tariff::default_grid();
+        g.acts[0].price_cents = Some(30_000);
+        g
+    }
+
+    /// `apply_payment` côté assistante avec une grille où « Consultation » vaut 300 DH.
+    fn ap(notes: &mut Vec<Value>, patients: &[Value], input: &Value, today: &str, id: &str, num: &str) -> Result<Value, String> {
+        let g = test_grid();
+        let p = super::super::tariff::Pricing { grid: &g, role: super::super::access::Role::Assistant, by: "Sara", now: "2026-10-01T09:00:00Z", today, free_control_eligible: false };
+        apply_payment(notes, patients, input, today, id, num, &p, None)
     }
 
     #[test]
@@ -426,7 +459,7 @@ mod tests {
     #[test]
     fn clinic_info_is_a_whitelist() {
         let v = clinic_public(&json!({"nameFr": "Dr X", "currency": "DH", "stampUrl": "data:...", "signatureUrl": "data:...", "inpe": "1", "standardConsultationFee": 300}));
-        assert_eq!(v.as_object().unwrap().len(), 2);
+        assert_eq!(v.as_object().unwrap().len(), 3, "nom, devise et INPE seulement (identité en lecture) : ni cachet, signature ni tarif");
     }
 
     fn note(id: &str, date: &str, total: f64, status: &str) -> Value {
@@ -455,7 +488,7 @@ mod tests {
         let mut notes = vec![note("a", "2026-10-01", 300.0, "UNPAID")];
         let patients = vec![full_patient()];
         let input = json!({"id": "a", "totalAmount": 1.0, "paymentMode": "CARD", "status": "PAID", "amountPaid": 100.0, "services": []});
-        let v = apply_payment(&mut notes, &patients, &input, "2026-10-01", "n", "2026-0001").unwrap();
+        let v = ap(&mut notes, &patients, &input, "2026-10-01", "n", "2026-0001").unwrap();
         assert_eq!(v["totalAmount"], 300.0, "tarif inchangé");
         assert_eq!(v["amountPaid"], 100.0);
         assert_eq!(v["status"], "PARTIAL", "statut calculé, pas celui envoyé (PAID)");
@@ -463,13 +496,13 @@ mod tests {
         assert_eq!(notes[0]["prescriptionId"], "rx-9");
         // « Réglé » n'existe que si le montant payé couvre le dû.
         let paid = json!({"id": "a", "paymentMode": "CASH", "status": "PAID", "amountPaid": 0});
-        let v = apply_payment(&mut notes, &patients, &paid, "2026-10-01", "n", "2026-0001").unwrap();
+        let v = ap(&mut notes, &patients, &paid, "2026-10-01", "n", "2026-0001").unwrap();
         assert_eq!((v["amountPaid"].as_f64(), v["status"].as_str()), (Some(0.0), Some("UNPAID")));
         let full = json!({"id": "a", "paymentMode": "CASH", "amountPaid": 300.0});
-        let v = apply_payment(&mut notes, &patients, &full, "2026-10-01", "n", "2026-0001").unwrap();
+        let v = ap(&mut notes, &patients, &full, "2026-10-01", "n", "2026-0001").unwrap();
         assert_eq!((v["amountPaid"].as_f64(), v["status"].as_str()), (Some(300.0), Some("PAID")));
         let over = json!({"id": "a", "paymentMode": "CASH", "amountPaid": 301.0});
-        assert!(apply_payment(&mut notes, &patients, &over, "2026-10-01", "n", "2026-0001").is_err());
+        assert!(ap(&mut notes, &patients, &over, "2026-10-01", "n", "2026-0001").is_err());
     }
 
     #[test]
@@ -477,20 +510,24 @@ mod tests {
         let mut notes = vec![note("old", "2026-09-30", 300.0, "UNPAID")];
         let patients = vec![full_patient()];
         let ok = |status: &str| json!({"id": "old", "paymentMode": "CASH", "status": status, "amountPaid": 0});
-        assert!(apply_payment(&mut notes, &patients, &ok("PAID"), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(ap(&mut notes, &patients, &ok("PAID"), "2026-10-01", "n", "2026-0001").is_err());
         let new = |extra: Value| {
-            let mut v = json!({"patientId": "p1", "totalAmount": 300.0, "paymentMode": "CASH", "status": "UNPAID", "amountPaid": 0});
+            let mut v = json!({"patientId": "p1", "lines": [{"actId": "act-consultation"}], "paymentMode": "CASH", "status": "UNPAID", "amountPaid": 0});
             v.as_object_mut().unwrap().extend(extra.as_object().unwrap().clone());
             v
         };
         let mut n2: Vec<Value> = vec![];
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"paymentMode": "BITCOIN"})), "2026-10-01", "n", "2026-0001").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"totalAmount": -5})), "2026-10-01", "n", "2026-0001").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"patientId": "inconnu"})), "2026-10-01", "n", "2026-0001").is_err());
-        assert!(apply_payment(&mut n2, &patients, &new(json!({"amountPaid": 301.0})), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(ap(&mut n2, &patients, &new(json!({"paymentMode": "BITCOIN"})), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(ap(&mut n2, &patients, &new(json!({"lines": [{"actId": "act-consultation", "quantity": 0}]})), "2026-10-01", "n", "2026-0001").is_err());
+        // Pas de montant libre : sans acte de la grille, la note n'est pas créée.
+        assert!(ap(&mut n2, &patients, &new(json!({"lines": null, "totalAmount": 300.0})), "2026-10-01", "n", "2026-0001").unwrap_err().contains("grille"));
+        // Acte sans prix (ECG préchargé) : non utilisable.
+        assert!(ap(&mut n2, &patients, &new(json!({"lines": [{"actId": "act-ecg"}]})), "2026-10-01", "n", "2026-0001").unwrap_err().contains("pas de prix"));
+        assert!(ap(&mut n2, &patients, &new(json!({"patientId": "inconnu"})), "2026-10-01", "n", "2026-0001").is_err());
+        assert!(ap(&mut n2, &patients, &new(json!({"amountPaid": 301.0})), "2026-10-01", "n", "2026-0001").is_err());
         assert!(n2.is_empty());
         // Une nouvelle note qui annonce « Réglé » sans aucun paiement reste « Non payé ».
-        let v = apply_payment(&mut n2, &patients, &new(json!({"status": "PAID"})), "2026-10-01", "n1", "2026-0001").unwrap();
+        let v = ap(&mut n2, &patients, &new(json!({"status": "PAID"})), "2026-10-01", "n1", "2026-0001").unwrap();
         assert_eq!((v["totalAmount"].as_f64(), v["status"].as_str(), v["amountPaid"].as_f64()), (Some(300.0), Some("UNPAID"), Some(0.0)));
         assert_eq!(n2[0]["patientName"], "DUPONT Jean", "nom pris du dossier, pas de la saisie");
         assert_eq!(n2[0]["invoiceNumber"], "2026-0001");

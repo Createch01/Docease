@@ -93,7 +93,7 @@ fn save(dir: &Path, key: &[u8; KEY_LEN], entries: &[Entry]) -> Result<(), String
 
 // ─── Montants ────────────────────────────────────────────────────────────────
 
-fn cents_of(x: f64) -> i64 {
+pub fn cents_of(x: f64) -> i64 {
     if x.is_finite() {
         (x * 100.0).round() as i64
     } else {
@@ -101,7 +101,7 @@ fn cents_of(x: f64) -> i64 {
     }
 }
 
-fn amount_json(cents: i64) -> Value {
+pub fn amount_json(cents: i64) -> Value {
     if cents % 100 == 0 {
         json!(cents / 100)
     } else {

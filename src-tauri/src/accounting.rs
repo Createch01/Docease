@@ -35,6 +35,15 @@ pub struct ModeTotal {
 
 #[derive(Serialize, Debug, Clone, PartialEq)]
 #[serde(rename_all = "camelCase")]
+pub struct ReasonTotal {
+    pub reason: String,
+    pub cents: i64,
+    /// Nombre de remises accordées avec ce motif.
+    pub count: usize,
+}
+
+#[derive(Serialize, Debug, Clone, PartialEq)]
+#[serde(rename_all = "camelCase")]
 pub struct Bucket {
     /// Jour, lundi de la semaine, `AAAA-MM` ou `AAAA` selon la granularité.
     pub key: String,
@@ -69,8 +78,16 @@ pub struct Summary {
     pub neutralized_cents: i64,
     pub by_mode: Vec<ModeTotal>,
     pub buckets: Vec<Bucket>,
+    /// Facturé NET (après remises) des notes non annulées de la période.
     pub invoiced_cents: i64,
     pub invoiced_count: usize,
+    /// Facturé BRUT, au tarif (avant remises), mêmes notes.
+    pub gross_invoiced_cents: i64,
+    /// Total des remises (lignes + note), et détail par motif.
+    pub discounts_cents: i64,
+    pub discounts_by_reason: Vec<ReasonTotal>,
+    /// Notes de la période à 0 DH par remise (gratuités).
+    pub free_count: usize,
     /// Σ (dû − net encaissé) des notes non annulées, toutes dates.
     pub outstanding_cents: i64,
     pub outstanding_notes: usize,
@@ -229,6 +246,10 @@ pub fn summarize(entries: &[Entry], notes: &[Value], expense_entries: &[expenses
         buckets: Vec::new(),
         invoiced_cents: 0,
         invoiced_count: 0,
+        gross_invoiced_cents: 0,
+        discounts_cents: 0,
+        discounts_by_reason: Vec::new(),
+        free_count: 0,
         outstanding_cents: 0,
         outstanding_notes: 0,
         expenses_cents: 0,
@@ -278,6 +299,7 @@ pub fn summarize(entries: &[Entry], notes: &[Value], expense_entries: &[expenses
         }
     }
     s.patients_count = patients.len();
+    let mut reasons: BTreeMap<String, (i64, usize)> = BTreeMap::new();
     for n in notes {
         if numbering::is_cancelled(n) {
             continue;
@@ -288,6 +310,21 @@ pub fn summarize(entries: &[Entry], notes: &[Value], expense_entries: &[expenses
         if date >= from && date <= to {
             s.invoiced_cents += total;
             s.invoiced_count += 1;
+            // Brut au tarif et remises : une note sans lignes (héritée) n'a ni remise ni écart de tarif.
+            let gross = n.get("grossCents").and_then(|v| v.as_i64()).unwrap_or(total);
+            let discount = n.get("discountCents").and_then(|v| v.as_i64()).unwrap_or(0);
+            s.gross_invoiced_cents += gross;
+            s.discounts_cents += discount;
+            if discount > 0 && total == 0 {
+                s.free_count += 1;
+            }
+            let line_discounts = n.get("lines").and_then(|l| l.as_array()).into_iter().flatten().filter_map(|l| l.get("discount"));
+            for d in line_discounts.chain(n.get("noteDiscount")) {
+                let reason = d.get("reason").and_then(|v| v.as_str()).unwrap_or("AUTRE").to_string();
+                let e = reasons.entry(reason).or_insert((0, 0));
+                e.0 += d.get("cents").and_then(|v| v.as_i64()).unwrap_or(0);
+                e.1 += 1;
+            }
             if let Some((b, _)) = bucket_key(date, gran).and_then(|k| buckets.get_mut(&k)) {
                 b.invoiced_cents += total;
                 b.invoiced_count += 1;
@@ -299,6 +336,9 @@ pub fn summarize(entries: &[Entry], notes: &[Value], expense_entries: &[expenses
             s.outstanding_notes += 1;
         }
     }
+    let mut by_reason: Vec<ReasonTotal> = reasons.into_iter().map(|(reason, (cents, count))| ReasonTotal { reason, cents, count }).collect();
+    by_reason.sort_by(|a, b| b.cents.cmp(&a.cents).then(a.reason.cmp(&b.reason)));
+    s.discounts_by_reason = by_reason;
     // Dépenses actives, à la date de la dépense (comptabilité de caisse) ; annulées exclues.
     let cancelled: BTreeSet<&str> = expense_entries.iter().filter(|e| e.kind == "cancellation").filter_map(|e| e.cancels.as_deref()).collect();
     let active: Vec<&expenses::Entry> = expense_entries.iter().filter(|e| e.kind == "expense" && !cancelled.contains(e.id.as_str()) && e.date_expense.as_str() >= from && e.date_expense.as_str() <= to).collect();

@@ -70,9 +70,9 @@ fn an_assigned_number_and_date_can_never_be_changed() {
     let mut tampered = first[0].clone();
     tampered["invoiceNumber"] = json!("2026-0777");
     tampered["date"] = json!("2019-03-03");
-    tampered["totalAmount"] = json!(450); // les autres champs restent modifiables
+    tampered["totalAmount"] = json!(450); // le montant est figé avec les lignes (T1) : réimposé à l'écriture
     let out = save(&d, vec![tampered], "2026-11-01").unwrap();
-    assert_eq!((number_of(&out[0]), out[0]["date"].as_str(), out[0]["totalAmount"].as_i64()), ("2026-0001", Some(TODAY), Some(450)));
+    assert_eq!((number_of(&out[0]), out[0]["date"].as_str(), out[0]["totalAmount"].as_i64()), ("2026-0001", Some(TODAY), Some(300)));
     assert_eq!(load_counter(&d, &KEY).get(2026), 1, "aucun numéro consommé par une retouche");
     let _ = fs::remove_dir_all(&d);
 }
@@ -310,24 +310,31 @@ fn check_reports_duplicates_gaps_and_malformed_numbers_without_changing_anything
     assert!(ok.clean && ok.cancelled == 1);
 }
 
+/// Grille de test : « Consultation » à `cents` (l'assistante crée ses notes depuis la grille).
+fn price_consultation(d: &Path, cents: i64) {
+    let a = crate::tariff::ActInput { id: Some("act-consultation".into()), code: "CS".into(), label: "Consultation".into(), category: "CONSULTATION".into(), price_cents: Some(cents), ..Default::default() };
+    crate::tariff::save_act(d, &KEY, Role::Medecin, &a, "Dr", "2026-10-08T08:00:00Z", TODAY).unwrap();
+}
+
 #[test]
 fn assistant_payment_uses_the_counter_and_shares_it_with_the_doctor() {
     use crate::scoped::save_payment;
     let d = tmp("assist");
     write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
+    price_consultation(&d, 30_000);
     let new = |extra: Value| {
-        let mut v = json!({"patientId": "p1", "totalAmount": 300, "amountPaid": 0, "paymentMode": "CASH", "status": "UNPAID"});
+        let mut v = json!({"patientId": "p1", "lines": [{"actId": "act-consultation"}], "amountPaid": 0, "paymentMode": "CASH", "status": "UNPAID"});
         v.as_object_mut().unwrap().extend(extra.as_object().unwrap().clone());
         v
     };
     // Le médecin a déjà émis des notes : l'assistante continue la suite.
     save(&d, vec![note("m1", "", ""), note("m2", "", "")], TODAY).unwrap();
-    let v = save_payment(&d, &KEY, &new(json!({})), TODAY, "pay1", "test").unwrap();
+    let v = save_payment(&d, &KEY, &new(json!({})), TODAY, "pay1", "test", Role::Assistant).unwrap();
     let stored = read_notes(&d, &KEY);
     assert_eq!(number_of(&stored[2]), "2026-0003");
     assert_eq!(v.get("invoiceNumber"), None, "le numéro n'est pas dans la vue de l'assistante");
     // Une retouche d'une note existante ne consomme rien ; un numéro envoyé par l'assistante est ignoré.
-    let v2 = save_payment(&d, &KEY, &new(json!({"id": "pay1", "amountPaid": 300, "invoiceNumber": "2026-0500"})), TODAY, "x", "test").unwrap();
+    let v2 = save_payment(&d, &KEY, &new(json!({"id": "pay1", "amountPaid": 300, "invoiceNumber": "2026-0500"})), TODAY, "x", "test", Role::Assistant).unwrap();
     assert_eq!(v2["status"], "PAID");
     assert_eq!(number_of(&read_notes(&d, &KEY)[2]), "2026-0003");
     assert_eq!(load_counter(&d, &KEY).get(2026), 3);
@@ -336,7 +343,7 @@ fn assistant_payment_uses_the_counter_and_shares_it_with_the_doctor() {
     assert_eq!(number_of(&after[3]), "2026-0004");
     // Une note annulée n'est plus modifiable par l'assistante ni listée dans l'encaissement du jour.
     cancel_refunding(&d, "pay1").unwrap();
-    assert!(save_payment(&d, &KEY, &new(json!({"id": "pay1", "status": "UNPAID"})), TODAY, "x", "test").unwrap_err().contains("annulée"));
+    assert!(save_payment(&d, &KEY, &new(json!({"id": "pay1", "status": "UNPAID"})), TODAY, "x", "test", Role::Assistant).unwrap_err().contains("annulée"));
     assert!(crate::scoped::payments_today(&read_notes(&d, &KEY), TODAY).iter().all(|p| p["id"] != "pay1"));
     let _ = fs::remove_dir_all(&d);
 }
@@ -346,6 +353,7 @@ fn concurrent_doctor_and_assistant_never_share_a_number() {
     use crate::scoped::save_payment;
     let d = tmp("mixed");
     write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
+    price_consultation(&d, 10_000);
     let handles: Vec<_> = (0..10)
         .map(|i| {
             let d = d.clone();
@@ -353,8 +361,8 @@ fn concurrent_doctor_and_assistant_never_share_a_number() {
                 if i % 2 == 0 {
                     save(&d, vec![note(&format!("m{i}"), "", "")], TODAY).unwrap();
                 } else {
-                    let p = json!({"patientId": "p1", "totalAmount": 100, "amountPaid": 0, "paymentMode": "CASH", "status": "UNPAID"});
-                    save_payment(&d, &KEY, &p, TODAY, &format!("a{i}"), "test").unwrap();
+                    let p = json!({"patientId": "p1", "lines": [{"actId": "act-consultation"}], "amountPaid": 0, "paymentMode": "CASH", "status": "UNPAID"});
+                    save_payment(&d, &KEY, &p, TODAY, &format!("a{i}"), "test", Role::Assistant).unwrap();
                 }
             })
         })
@@ -420,7 +428,7 @@ fn with_payment(id: &str, total: f64, claimed: &str, paid: Option<f64>) -> Value
 
 #[test]
 fn status_is_computed_from_the_amount_paid_never_taken_from_the_frontend() {
-    assert_eq!((status_for(300.0, 300.0), status_for(350.0, 300.0), status_for(200.0, 300.0), status_for(0.0, 300.0), status_for(0.0, 0.0)), ("PAID", "PAID", "PARTIAL", "UNPAID", "UNPAID"));
+    assert_eq!((status_for(300.0, 300.0), status_for(350.0, 300.0), status_for(200.0, 300.0), status_for(0.0, 300.0), status_for(0.0, 0.0)), ("PAID", "PAID", "PARTIAL", "UNPAID", "FREE"));
     let d = tmp("status");
     // Le frontend annonce « Réglé » partout : seul le montant payé compte.
     let out = save(&d, vec![

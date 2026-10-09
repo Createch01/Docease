@@ -182,18 +182,20 @@ fn assistant_payments_go_through_the_same_register_with_her_name() {
     use crate::scoped::save_payment;
     let d = tmp("assist");
     write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
-    let v = save_payment(&d, &KEY, &json!({"patientId": "p1", "totalAmount": 300, "amountPaid": 120, "paymentMode": "CHEQUE"}), TODAY, "pay1", "Assistante").unwrap();
+    // Grille : « Consultation » à 300 DH (l'assistante crée ses notes depuis la grille, jamais d'un montant libre).
+    crate::tariff::save_act(&d, &KEY, Role::Medecin, &crate::tariff::ActInput { id: Some("act-consultation".into()), code: "CS".into(), label: "Consultation".into(), category: "CONSULTATION".into(), price_cents: Some(30_000), ..Default::default() }, "Dr", "2026-10-08T08:00:00Z", TODAY).unwrap();
+    let v = save_payment(&d, &KEY, &json!({"patientId": "p1", "lines": [{"actId": "act-consultation"}], "amountPaid": 120, "paymentMode": "CHEQUE"}), TODAY, "pay1", "Assistante", Role::Assistant).unwrap();
     assert_eq!(v["status"], "PARTIAL");
     let id = v["id"].as_str().unwrap().to_string();
     // Elle ne peut pas baisser le montant payé ensuite : le registre garde 120.
-    let v2 = save_payment(&d, &KEY, &json!({"id": id, "totalAmount": 300, "amountPaid": 0, "paymentMode": "CASH"}), TODAY, "x", "Assistante").unwrap();
+    let v2 = save_payment(&d, &KEY, &json!({"id": id, "totalAmount": 300, "amountPaid": 0, "paymentMode": "CASH"}), TODAY, "x", "Assistante", Role::Assistant).unwrap();
     assert_eq!((v2["status"].as_str(), v2["amountPaid"].as_f64()), (Some("PARTIAL"), Some(120.0)));
-    let v3 = save_payment(&d, &KEY, &json!({"id": id, "totalAmount": 300, "amountPaid": 300, "paymentMode": "CASH"}), TODAY, "x", "Assistante").unwrap();
+    let v3 = save_payment(&d, &KEY, &json!({"id": id, "totalAmount": 300, "amountPaid": 300, "paymentMode": "CASH"}), TODAY, "x", "Assistante", Role::Assistant).unwrap();
     assert_eq!(v3["status"], "PAID");
     let l = load(&d, &KEY).unwrap();
     let got: Vec<(i64, &str, &str)> = l.iter().map(|e| (e.amount_cents, e.mode.as_str(), e.by.as_str())).collect();
     assert_eq!(got, vec![(12_000, "CHEQUE", "Assistante"), (18_000, "CASH", "Assistante")]);
-    assert!(save_payment(&d, &KEY, &json!({"patientId": "p1", "totalAmount": 100, "amountPaid": 100, "paymentMode": "BITCOIN"}), TODAY, "z", "Assistante").is_err());
+    assert!(save_payment(&d, &KEY, &json!({"patientId": "p1", "lines": [{"actId": "act-consultation"}], "amountPaid": 100, "paymentMode": "BITCOIN"}), TODAY, "z", "Assistante", Role::Assistant).is_err());
     let _ = fs::remove_dir_all(&d);
 }
 

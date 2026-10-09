@@ -162,7 +162,10 @@ fn year_of(today: &str) -> Result<u32, String> {
 /// Statut de paiement CALCULÉ à partir des sommes : jamais saisi. « Réglé » seulement si le montant payé
 /// couvre le montant dû.
 pub fn status_for(paid: f64, total: f64) -> &'static str {
-    if total > 0.0 && paid >= total {
+    if total <= 0.0 {
+        // Note à 0 DH (gratuité) : ni « Réglé » ni « Impayé ».
+        "FREE"
+    } else if paid >= total {
         "PAID"
     } else if paid > 0.0 {
         "PARTIAL"
@@ -311,8 +314,15 @@ pub fn apply(stored: &[Value], incoming: Vec<Value>, counter: &mut Counter, toda
 
 /// Crochet de `save_json` : renvoie la liste à écrire et le compteur à écrire ensuite (`commit`).
 pub fn on_save(dir: &Path, key: &[u8; KEY_LEN], incoming: Value, today: &str, by: &str) -> Result<(Value, Pending), String> {
-    let Value::Array(list) = incoming else { return Err("Format des notes invalide.".into()) };
+    on_save_as(dir, key, incoming, today, by, super::access::Role::Medecin)
+}
+
+/// Même crochet, avec le rôle de la session (lignes, remises et droits décidés par `tariff::prepare_notes`).
+pub fn on_save_as(dir: &Path, key: &[u8; KEY_LEN], incoming: Value, today: &str, by: &str, role: super::access::Role) -> Result<(Value, Pending), String> {
+    let Value::Array(mut list) = incoming else { return Err("Format des notes invalide.".into()) };
     let (mut pending, stored) = begin(dir, key, false)?;
+    // Lignes, remises, totaux et instantané d'identité : calculés / réimposés par Rust AVANT la numérotation.
+    super::tariff::prepare_notes(dir, key, &stored, &mut list, role, by, &super::util::now_iso(), today)?;
     let mut out = apply(&stored, list, &mut pending.counter, today)?;
     // Montant payé et statut viennent du registre d'encaissements (voir `payments`), écrit AVANT les notes.
     super::payments::reconcile(dir, key, &stored, &mut out, today, by)?;

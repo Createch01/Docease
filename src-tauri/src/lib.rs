@@ -15,6 +15,7 @@ mod messaging;
 mod notifications;
 mod scoped;
 mod settings;
+mod tariff;
 mod users;
 mod util;
 #[cfg(test)]
@@ -407,7 +408,7 @@ fn save_json<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<Ap
     // Ordre : fichier des notes d'abord, compteur ensuite (voir `numbering`).
     let (data, numbering_pending) = if filename == numbering::NOTES_FILE {
         let dir = path.parent().unwrap_or(std::path::Path::new(""));
-        let (d, p) = numbering::on_save(dir, &key, data, &util::today_local(), &session.name)?;
+        let (d, p) = numbering::on_save_as(dir, &key, data, &util::today_local(), &session.name, session.role)?;
         (d, Some(p))
     } else {
         (data, None)
@@ -627,6 +628,12 @@ pub fn run() {
         numbering::honorary_note_refund_and_cancel,
         numbering::invoice_numbering_check,
         numbering::invoice_numbering_migrate,
+        tariff::tariff_grid,
+        tariff::tariff_free_control_offer,
+        tariff::tariff_act_save,
+        tariff::tariff_act_set_active,
+        tariff::tariff_settings_save,
+        tariff::tariffs_migrate,
         messaging::appointment_mark_sent,
         messaging::whatsapp_open,
         ai::ai_status,

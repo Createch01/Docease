@@ -124,6 +124,13 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("honorary_note_refund_and_cancel", Rule::Medecin),
     ("invoice_numbering_check", Rule::Medecin),
     ("invoice_numbering_migrate", Rule::Medecin),
+    // Grille tarifaire : l'assistante lit et utilise (remises bornées par Rust) ; création / modification / réglages réservés au médecin
+    ("tariff_grid", Rule::AnySession),
+    ("tariff_free_control_offer", Rule::AnySession),
+    ("tariff_act_save", Rule::Medecin),
+    ("tariff_act_set_active", Rule::Medecin),
+    ("tariff_settings_save", Rule::Medecin),
+    ("tariffs_migrate", Rule::Medecin),
     ("appointment_mark_sent", Rule::AnySession),
     ("whatsapp_open", Rule::AnySession),
     ("notifications_set_state", Rule::AnySession),
@@ -234,7 +241,7 @@ pub enum FileMode {
 
 /// Fichiers internes que `load_json`/`save_json` ne doivent jamais toucher, quel que
 /// soit le rôle (comptes, métadonnées de sécurité).
-const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments", "meddoc_receipts", "meddoc_receipt_counter", "meddoc_invoice_counter", "meddoc_payments", "meddoc_expenses", "meddoc_expense_counter", "meddoc_expense_categories", "meddoc_periods"];
+const RESERVED_STEMS: &[&str] = &["users_meta", "security_meta", "audit_log", "app_settings", "backup_meta", "meddoc_attachments", "meddoc_receipts", "meddoc_receipt_counter", "meddoc_invoice_counter", "meddoc_payments", "meddoc_expenses", "meddoc_expense_counter", "meddoc_expense_categories", "meddoc_periods", "meddoc_tariffs"];
 
 /// Fichiers lisibles/écrivables par l'assistante via `load_json`/`save_json`.
 /// Tout le reste (patients, file d'attente, honoraires, fiche cabinet…) passe par des
@@ -281,6 +288,7 @@ mod tests {
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
         "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
         "receipt_list", "receipt_cancel", "receipts_verify", "expense_cancel", "expense_correct", "expense_list", "expense_category_add", "expense_category_set_active", "expenses_migrate", "expenses_verify", "periods_list", "period_close", "period_reopen", "accounting_summary", "accounting_journal", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
+        "tariff_act_save", "tariff_act_set_active", "tariff_settings_save", "tariffs_migrate",
     ];
 
     #[test]
@@ -387,6 +395,7 @@ mod tests {
             include_str!("accounting.rs"),
             include_str!("expenses.rs"),
             include_str!("periods.rs"),
+            include_str!("tariff.rs"),
             include_str!("notifications/mod.rs"),
         ];
         let mut seen = Vec::new();
