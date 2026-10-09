@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { AlertTriangle, Percent, Plus, Trash2 } from 'lucide-react';
 import {
-    DISCOUNT_REASONS, DiscountInput, DiscountKind, LineInput, Preview, TariffGrid, categoryLabel,
+    DISCOUNT_REASONS, DiscountInput, DiscountKind, LineInput, Preview, TariffGrid,
     gridIsEmpty, isUsableAct, tariffService, ControlOffer,
 } from '../../services/tariffService';
 import { formatCents } from '../../services/receiptService';
@@ -201,7 +201,7 @@ const NoteLinesEditor: React.FC<Props> = ({ grid, isMedecin, patientId, currency
                                 <label className="text-[11px] font-medium flex-1 min-w-[200px]" style={sub}>Acte
                                     <select aria-label="Acte" className={`${field} w-full block mt-0.5`} style={border} value={l.actId} onChange={e => setLine(l.key, { actId: e.target.value })}>
                                         <option value="">Choisir un acte…</option>
-                                        {acts.map(a => <option key={a.id} value={a.id}>{a.label} — {categoryLabel(a.category)} — {formatCents(a.priceCents ?? 0)}</option>)}
+                                        {acts.map(a => <option key={a.id} value={a.id}>{a.label} — {formatCents(a.priceCents ?? 0)}</option>)}
                                     </select>
                                 </label>
                             )}
