@@ -16,6 +16,7 @@ import { useTariffGrid } from './tariffs/useTariffGrid';
 import { Preview } from '../services/tariffService';
 import { sessionService } from '../services/sessionService';
 import { settingsHash } from './settings/settingsRoutes';
+import IdentityBanner from './tariffs/IdentityBanner';
 
 interface HonoraryNoteEditorProps {
     /** « Imprimer la note … » : ouvre l'aperçu de la note du jour déjà existante. */
@@ -154,6 +155,7 @@ const HonoraryNoteEditor: React.FC<HonoraryNoteEditorProps> = ({ patient, visitI
                     {/* Form Side */}
                     <div className={`flex-1 overflow-y-auto p-6 ${isPreview ? 'hidden lg:block lg:w-1/2' : 'w-full'}`}>
                         <div className="space-y-6">
+                            <IdentityBanner onNavigate={onClose} />
                             <div className="p-3 rounded-lg border text-[13px]" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }} data-testid="note-date-readonly">
                                 Jour de l'émission ({date}) — numéro attribué à l'enregistrement
                             </div>

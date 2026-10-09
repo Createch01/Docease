@@ -120,7 +120,8 @@ describe('T1 — impression de la note d’honoraires', () => {
     });
 
     it('aucun texte doublement encodé dans la sortie', () => {
-        expect(html).not.toMatch(/Ã[ -¿]|â€/);
+        const mojibake = new RegExp('[' + String.fromCharCode(0xC3) + '][' + String.fromCharCode(0xA0) + '-' + String.fromCharCode(0xBF) + ']|' + String.fromCharCode(0xE2) + String.fromCharCode(0x20AC));
+        expect(html).not.toMatch(mojibake);
         expect(discountText({ kind: 'PERCENT', percent: 15, reason: 'GESTE' })).toBe('Remise 15 % – Geste du cabinet');
         expect(discountText({ kind: 'AMOUNT', reason: 'AUTRE', reasonText: 'Voisin' })).toBe('Remise – Autre : Voisin');
     });

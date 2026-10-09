@@ -46,8 +46,16 @@ export interface Summary {
     neutralizedCents: number;
     byMode: ModeTotal[];
     buckets: Bucket[];
+    /** Facturé NET (après remises) des notes non annulées de la période. */
     invoicedCents: number;
     invoicedCount: number;
+    /** Facturé BRUT au tarif (avant remises), mêmes notes. */
+    grossInvoicedCents: number;
+    /** Total des remises (lignes + note) et détail par motif. */
+    discountsCents: number;
+    discountsByReason: { reason: string; cents: number; count: number }[];
+    /** Notes de la période à 0 DH par remise (gratuités). */
+    freeCount: number;
     /** Σ (dû − net encaissé) des notes non annulées, toutes dates. */
     outstandingCents: number;
     outstandingNotes: number;

@@ -35,6 +35,7 @@ import JournalTab from './accounting/JournalTab';
 import ExpensesTab from './accounting/ExpensesTab';
 import PeriodsPanel from './accounting/PeriodsPanel';
 import PeriodSelector, { usePeriod } from './accounting/PeriodSelector';
+import DiscountsCard from './accounting/DiscountsCard';
 
 
 interface DataPoint {
@@ -334,6 +335,8 @@ const Analytics: React.FC = () => {
 
       {activeTab === 'overview' && (
         <>
+          <DiscountsCard summary={summary} />
+
           {/* Graphique d'évolution Recettes / Dépenses */}
           <div className="bg-white p-10 rounded-[3rem] shadow-sm border border-gray-100 overflow-hidden relative">
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-4">
