@@ -47,9 +47,11 @@ export const SETTINGS_GROUPS: SettingsGroupDef[] = [
       { id: 'profile', label: 'Mon profil', icon: User,
         description: 'Votre identité de médecin, vos identifiants professionnels, votre cachet et votre signature.' },
       { id: 'cabinet', label: 'Cabinet', icon: Building2, sharedDraft: true,
-        description: 'Coordonnées, logo et horaires du cabinet, repris sur tous vos documents.',
+        description: 'Coordonnées, identité professionnelle, tarifs des actes, logo et horaires du cabinet.',
         tabs: [
           { id: 'coordonnees', label: 'Coordonnées' },
+          { id: 'identite', label: 'Identité professionnelle' },
+          { id: 'tarifs', label: 'Tarifs des actes' },
           { id: 'logo', label: 'Logo' },
           { id: 'horaires', label: 'Horaires' },
           { id: 'modules', label: 'Modules' },

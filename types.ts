@@ -146,6 +146,10 @@ export interface DoctorInfo {
   ice?: string;
   taxId?: string;
   ordreNumber?: string;
+  /** Identité professionnelle (T1) : CNSS employeur et RIB facultatifs ; cachet = pièce jointe chiffrée. */
+  cnssEmployer?: string;
+  rib?: string;
+  stampAttachmentId?: string;
   /** Mention libre d'exonération de TVA (saisie par le médecin, vide par défaut), reprise sur les reçus. */
   vatExemptionNote?: string;
 
@@ -242,8 +246,23 @@ export interface HonoraryNote {
   services: HonoraryService[];
   totalAmount: number;
   totalInWords: string;
-  status: 'PAID' | 'UNPAID' | 'PARTIAL';
+  /** `FREE` : note à 0 DH (gratuité) — ni réglée ni impayée. Calculé par Rust. */
+  status: 'PAID' | 'UNPAID' | 'PARTIAL' | 'FREE';
   amountPaid?: number; // Only meaningful when status === 'PARTIAL'
+  /**
+   * T1 — lignes de la note. À l'envoi : choix de l'utilisateur (acte, quantité, remise) ; à la lecture : lignes
+   * CALCULÉES et figées par Rust (prix, libellé, remises, auteur, date). Voir services/tariffService.ts.
+   */
+  lines?: NoteLine[];
+  noteDiscount?: NoteDiscount | null;
+  /** Posés par Rust (centimes) : brut au tarif, remises, net, payé, reste à payer. */
+  grossCents?: number;
+  discountCents?: number;
+  netCents?: number;
+  paidCents?: number;
+  balanceCents?: number;
+  /** Identité professionnelle figée à l'émission. */
+  issuer?: NoteIssuer;
   paymentMode: 'CASH' | 'CARD' | 'TRANSFER' | 'CHEQUE';
   includeCin?: string;
   includePhone?: string;
@@ -251,6 +270,50 @@ export interface HonoraryNote {
   cancelledAt?: string;
   cancelledBy?: string;
   cancellationReason?: string;
+}
+
+export interface NoteDiscount {
+  kind: 'PERCENT' | 'AMOUNT' | 'FREE';
+  percent?: number;
+  amountCents?: number;
+  reason: string;
+  reasonText?: string;
+  /** Posés par Rust. */
+  cents?: number;
+  by?: string;
+  at?: string;
+  date?: string;
+}
+
+export interface NoteLine {
+  actId?: string;
+  code?: string;
+  category?: string;
+  label?: string;
+  quantity?: number;
+  unitPriceCents?: number;
+  tariffUnitCents?: number;
+  grossCents?: number;
+  discount?: NoteDiscount;
+  discountCents?: number;
+  netCents?: number;
+}
+
+export interface NoteIssuer {
+  name?: string;
+  cabinetName?: string;
+  specialty?: string;
+  ordreNumber?: string;
+  inpe?: string;
+  ifNumber?: string;
+  tp?: string;
+  ice?: string;
+  cnss?: string;
+  address?: string;
+  phone?: string;
+  email?: string;
+  rib?: string;
+  hasStamp?: boolean;
 }
 
 export type FontSizeOption = 'small' | 'medium' | 'large';

@@ -2,11 +2,12 @@ import { invoke } from '@tauri-apps/api/core';
 import { HonoraryNote } from '../types';
 import { dataService } from './dataService';
 import { todayLocal } from '../utils/localDate';
+import { DiscountInput, LineInput } from './tariffService';
 
 // Encaissement des visites du JOUR, tel que l'assistante le voit : montant dû, montant
 // payé, mode, statut — rien d'autre (ni historique, ni totaux, ni contenu d'ordonnance,
 // ni tarifs). Le filtrage et les règles sont appliqués par Rust (scoped.rs).
-export type PaymentStatus = 'PAID' | 'UNPAID' | 'PARTIAL';
+export type PaymentStatus = 'PAID' | 'UNPAID' | 'PARTIAL' | 'FREE';
 export type PaymentMode = 'CASH' | 'CARD' | 'TRANSFER' | 'CHEQUE';
 
 export interface DayPayment {
@@ -20,8 +21,17 @@ export interface DayPayment {
     status: PaymentStatus;
 }
 
-/** Saisie d'encaissement : le statut n'est jamais envoyé, Rust le calcule à partir du montant payé. */
-export type DayPaymentInput = Omit<DayPayment, 'status'> & { status?: PaymentStatus };
+/**
+ * Saisie d'encaissement : le statut n'est jamais envoyé, Rust le calcule à partir du montant payé. Une NOUVELLE
+ * note se crée à partir d'actes de la grille (`lines`, remise éventuelle à motif) : montant dû, remises et
+ * plafond de l'assistante sont décidés par Rust.
+ */
+export type DayPaymentInput = Omit<DayPayment, 'status' | 'totalAmount'> & {
+    status?: PaymentStatus;
+    totalAmount?: number;
+    lines?: LineInput[];
+    noteDiscount?: DiscountInput | null;
+};
 
 const isTauri = (): boolean => typeof (window as any).__TAURI_INTERNALS__ !== 'undefined';
 const todayDate = () => todayLocal();

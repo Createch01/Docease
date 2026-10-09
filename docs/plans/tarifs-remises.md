@@ -119,7 +119,7 @@ Interface : carte « Remises & gratuités » avec détail par motif.
 Note d'honoraires (A4, `DocumentShell` conservé) : en-tête cabinet ; tableau (libellé, qté, P.U., remise, total) ;
 sous-total brut, remises avec motif, net à payer, déjà payé, reste ; « Arrêtée la présente note à la somme de :
 … » (Rust, `receipts::amount_in_words`) ; pied IF / TP / ICE / INPE ; cachet. Ligne gratuite : « Gratuit – motif ».
-Reçu : mêmes mentions de pied, cachet, rappel brut/remises/net/payé/reste. Aucun `Ã©` (test d'encodage).
+Reçu : mêmes mentions de pied, cachet, rappel brut/remises/net/payé/reste. Aucun accent doublement encodé (test d'encodage existant).
 
 ## 7. Tests
 

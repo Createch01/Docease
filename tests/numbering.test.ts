@@ -18,7 +18,7 @@ describe("numérotation des notes : l'interface n'attribue plus de numéro", () 
             expect(src, name).not.toMatch(/generateInvoiceNumber|notesThisYear|padStart\(4|getFullYear\(\)/);
         }
         expect(billing).toContain("invoiceNumber: ''");
-        expect(editor).toContain("const invoiceNumber = '';");
+        expect(editor).toContain("invoiceNumber: '', // attribué par Rust");
     });
 
     it("l'éditeur affiche la date en lecture seule et utilise la note relue (numéro de Rust)", () => {

@@ -33,7 +33,7 @@ describe('Registre d\'encaissements (C1) — branchement de l\'interface', () =>
         const svc = read('services/paymentRegistryService.ts');
         expect(svc).toContain("'payment_refund'");
         const fin = read('components/dossier/FinancesSection.tsx');
-        expect(fin).toContain('sessionService.isMedecin() && note.status !== \'UNPAID\' && !note.cancelledAt');
+        expect(fin).toContain('sessionService.isMedecin() && note.status !== \'UNPAID\' && note.status !== \'FREE\' && !note.cancelledAt');
         expect(fin).toContain('<RefundDialog');
     });
 
@@ -51,7 +51,7 @@ describe('Registre d\'encaissements (C1) — côté Rust', () => {
         }
         expect(access).toContain('"meddoc_payments"');
         const lib = read('src-tauri/src/lib.rs');
-        expect(lib).toContain('numbering::on_save(dir, &key, data, &util::today_local(), &session.name)');
+        expect(lib).toContain('numbering::on_save_as(dir, &key, data, &util::today_local(), &session.name, session.role)');
         expect(lib).toContain('payments::payment_refund');
     });
 

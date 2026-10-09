@@ -4,11 +4,16 @@ import { dataService } from '../services/dataService';
 import { DayPayment, PaymentMode, PaymentStatus, paymentService } from '../services/paymentService';
 import { toastService } from '../services/toastService';
 import { ReceiptView, receiptService } from '../services/receiptService';
+import { Preview } from '../services/tariffService';
+import { sessionService } from '../services/sessionService';
 import ReceiptModal from './ReceiptModal';
+import NoteLinesEditor, { NoteDraft, draftToInput, emptyDraft } from './tariffs/NoteLinesEditor';
+import { useTariffGrid } from './tariffs/useTariffGrid';
 
 // Encaissement des visites du jour : une ligne par patient de la salle d'attente.
-// Montant dû, montant payé, mode et statut uniquement — pas d'historique, pas de
-// totaux, pas d'ordonnance, pas de tarifs (voir src-tauri/src/scoped.rs).
+// Une NOUVELLE note se crée à partir d'actes de la grille ; montant dû, remises (plafond du médecin) et
+// gratuité (contrôle gratuit) sont décidés par Rust (src-tauri/src/tariff.rs, scoped.rs). Pas d'historique,
+// pas de totaux, pas d'ordonnance : l'assistante ne voit que les montants du jour.
 interface Row {
     patientId: string;
     patientName: string;
@@ -19,6 +24,9 @@ interface Row {
     status: PaymentStatus;
     dirty: boolean;
     saving: boolean;
+    /** Nouvelle note : actes choisis + aperçu calculé par Rust. */
+    draft: NoteDraft;
+    preview: Preview | null;
 }
 
 const MODES: Array<{ id: PaymentMode; label: string }> = [
@@ -35,6 +43,8 @@ const STATUSES: Array<{ id: PaymentStatus; label: string }> = [
 
 const CashierView: React.FC = () => {
     const currency = dataService.getDoctorInfo().currency || 'DH';
+    const isMedecin = sessionService.isMedecin();
+    const { grid } = useTariffGrid();
     const [rows, setRows] = useState<Row[]>([]);
     const [loading, setLoading] = useState(true);
     // Reçus du jour (Rust) et reçu ouvert en aperçu. Émettre et réimprimer : jour seulement, contrôlé par Rust.
@@ -54,6 +64,7 @@ const CashierView: React.FC = () => {
                 patientId: q.id, patientName: q.name, id: p?.id,
                 due: p ? String(p.totalAmount) : '', paid: p ? String(p.amountPaid) : '',
                 mode: p?.paymentMode ?? 'CASH', status: p?.status ?? 'UNPAID', dirty: false, saving: false,
+                draft: emptyDraft(), preview: null,
             });
         }
         // Encaissements du jour de patients déjà sortis de la salle d'attente.
@@ -63,6 +74,7 @@ const CashierView: React.FC = () => {
                 patientId: p.patientId, patientName: p.patientName || '', id: p.id,
                 due: String(p.totalAmount), paid: String(p.amountPaid),
                 mode: p.paymentMode, status: p.status, dirty: false, saving: false,
+                draft: emptyDraft(), preview: null,
             });
         }
         setRows(next);
@@ -76,23 +88,29 @@ const CashierView: React.FC = () => {
         setRows(rs => rs.map(r => (r.patientId === patientId ? { ...r, ...changes, dirty: true } : r)));
 
     const save = async (row: Row) => {
-        const due = parseFloat(row.due.replace(',', '.'));
+        let due = parseFloat(row.due.replace(',', '.'));
+        let lines: ReturnType<typeof draftToInput> | null = null;
+        if (!row.id) {
+            lines = draftToInput(row.draft);
+            if (lines.lines.length === 0 || !row.preview) { toastService.error(lines.incomplete ?? 'Choisissez un acte de la grille.'); return; }
+            due = row.preview.netCents / 100; // net calculé par Rust
+        }
         const paid = row.status === 'PAID' ? due : row.status === 'UNPAID' ? 0 : parseFloat(row.paid.replace(',', '.'));
-        if (!row.id && !(due >= 0)) { toastService.error('Saisissez le montant dû.'); return; }
         if (row.status === 'PARTIAL' && !(paid > 0)) { toastService.error('Saisissez le montant déjà payé.'); return; }
         setRows(rs => rs.map(r => (r.patientId === row.patientId ? { ...r, saving: true } : r)));
         try {
             const saved = await paymentService.saveToday({
                 id: row.id, patientId: row.patientId, patientName: row.patientName,
-                totalAmount: due, amountPaid: Number.isFinite(paid) ? paid : 0, paymentMode: row.mode,
+                ...(lines ? { lines: lines.lines, noteDiscount: lines.noteDiscount } : { totalAmount: due }),
+                amountPaid: Number.isFinite(paid) ? paid : 0, paymentMode: row.mode,
             });
             setRows(rs => rs.map(r => (r.patientId === row.patientId
-                ? { ...r, id: saved.id, due: String(saved.totalAmount), paid: String(saved.amountPaid), status: saved.status, mode: saved.paymentMode, dirty: false, saving: false }
+                ? { ...r, id: saved.id, due: String(saved.totalAmount), paid: String(saved.amountPaid), status: saved.status, mode: saved.paymentMode, dirty: false, saving: false, draft: emptyDraft(), preview: null }
                 : r)));
             toastService.success('Encaissement enregistré');
         } catch (e: any) {
             setRows(rs => rs.map(r => (r.patientId === row.patientId ? { ...r, saving: false } : r)));
-            toastService.error(typeof e === 'string' ? e : 'Enregistrement impossible.');
+            toastService.error(e instanceof Error ? e.message : typeof e === 'string' ? e : 'Enregistrement impossible.');
         }
     };
 
@@ -116,7 +134,7 @@ const CashierView: React.FC = () => {
         const mine = receipts.filter(r => r.noteId === row.id);
         const covered = mine.filter(r => r.kind === 'receipt' && r.status === 'valid').reduce((n, r) => n + r.amountCents, 0);
         const due = parseFloat(row.due.replace(',', '.'));
-        const paid = row.status === 'PAID' ? due : row.status === 'UNPAID' ? 0 : parseFloat(row.paid.replace(',', '.'));
+        const paid = row.status === 'PAID' ? due : row.status === 'UNPAID' || row.status === 'FREE' ? 0 : parseFloat(row.paid.replace(',', '.'));
         const canIssue = !!row.id && !row.dirty && Number.isFinite(paid) && Math.round(paid * 100) > covered;
         return { canIssue, valid: mine.filter(r => r.kind === 'receipt' && r.status === 'valid') };
     };
@@ -132,7 +150,7 @@ const CashierView: React.FC = () => {
                     <Wallet size={22} /> Encaissement
                 </h1>
                 <p className="text-[13px] mt-1" style={{ color: 'var(--color-text-subtle)' }}>
-                    Visites du jour : montant dû, montant payé et mode de paiement.
+                    Visites du jour : acte, montant dû, montant payé et mode de paiement.
                 </p>
             </div>
 
@@ -145,62 +163,78 @@ const CashierView: React.FC = () => {
 
             <div className="space-y-3">
                 {rows.map(r => (
-                    <div key={r.patientId} className="bg-white rounded-xl border p-4 flex flex-wrap items-end gap-3" style={{ borderColor: 'var(--color-border)' }}>
-                        <div className="min-w-[180px] flex-1">
-                            <div className="text-[14px] font-medium truncate" style={{ color: 'var(--color-text)' }}>{r.patientName}</div>
-                            <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>{r.id ? 'Encaissement ouvert' : 'Pas encore encaissé'}</div>
-                        </div>
-                        <label className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-                            Dû ({currency})
-                            <input className={`${field} w-28 block mt-1`} style={fieldStyle} inputMode="decimal" value={r.due}
-                                disabled={!!r.id} title={r.id ? 'Le montant dû ne se modifie pas ici' : undefined}
-                                onChange={e => patch(r.patientId, { due: e.target.value })} />
-                        </label>
-                        <label className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-                            Paiement
-                            <select className={`${field} block mt-1`} style={fieldStyle} value={r.status}
-                                onChange={e => patch(r.patientId, { status: e.target.value as PaymentStatus })}>
-                                {STATUSES.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
-                            </select>
-                        </label>
-                        {r.status === 'PARTIAL' && (
-                            <label className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-                                Payé ({currency})
-                                <input className={`${field} w-28 block mt-1`} style={fieldStyle} inputMode="decimal" value={r.paid}
-                                    onChange={e => patch(r.patientId, { paid: e.target.value })} />
-                            </label>
-                        )}
-                        <label className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-                            Mode
-                            <select className={`${field} block mt-1`} style={fieldStyle} value={r.mode}
-                                onChange={e => patch(r.patientId, { mode: e.target.value as PaymentMode })}>
-                                {MODES.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
-                            </select>
-                        </label>
-                        <button type="button" disabled={!r.dirty || r.saving} onClick={() => save(r)}
-                            className="h-10 px-4 rounded-lg text-white text-[13px] font-medium flex items-center gap-2 disabled:opacity-40"
-                            style={{ background: 'var(--color-primary)' }}>
-                            {r.saving ? <Loader2 size={15} className="animate-spin" /> : <Check size={15} />} Enregistrer
-                        </button>
-                        {(() => {
-                            const st = receiptState(r);
-                            return (
+                    <div key={r.patientId} className="bg-white rounded-xl border p-4 space-y-3" style={{ borderColor: 'var(--color-border)' }}>
+                        <div className="flex flex-wrap items-end gap-3">
+                            <div className="min-w-[180px] flex-1">
+                                <div className="text-[14px] font-medium truncate" style={{ color: 'var(--color-text)' }}>{r.patientName}</div>
+                                <div className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>
+                                    {r.id ? (r.status === 'FREE' ? 'Gratuit — rien à encaisser' : 'Encaissement ouvert') : 'Pas encore encaissé'}
+                                </div>
+                            </div>
+                            {r.id && (
+                                <div className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
+                                    Dû ({currency})
+                                    <div className="h-10 flex items-center text-[14px]" style={{ color: 'var(--color-text)' }} title="Le montant dû ne se modifie pas ici">{r.due}</div>
+                                </div>
+                            )}
+                            {r.status !== 'FREE' && (
                                 <>
-                                    {st.canIssue && (
-                                        <button type="button" onClick={() => issue(r)} className="h-10 px-4 rounded-lg border text-[13px] font-medium flex items-center gap-2 bg-white"
-                                            style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}>
-                                            <Receipt size={15} /> Reçu
-                                        </button>
+                                    <label className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
+                                        Paiement
+                                        <select className={`${field} block mt-1`} style={fieldStyle} value={r.status}
+                                            onChange={e => patch(r.patientId, { status: e.target.value as PaymentStatus })}>
+                                            {STATUSES.map(s => <option key={s.id} value={s.id}>{s.label}</option>)}
+                                        </select>
+                                    </label>
+                                    {r.status === 'PARTIAL' && (
+                                        <label className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
+                                            Payé ({currency})
+                                            <input className={`${field} w-28 block mt-1`} style={fieldStyle} inputMode="decimal" value={r.paid}
+                                                onChange={e => patch(r.patientId, { paid: e.target.value })} />
+                                        </label>
                                     )}
-                                    {st.valid.map(v => (
-                                        <button key={v.number} type="button" onClick={() => reprint(v.number)} title="Réimprimer : un duplicata est enregistré, sans nouveau numéro"
-                                            className="h-10 px-3 rounded-lg border text-[12px] font-medium bg-white" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
-                                            Duplicata <span className="font-mono">{v.number}</span>
-                                        </button>
-                                    ))}
+                                    <label className="text-[11px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
+                                        Mode
+                                        <select className={`${field} block mt-1`} style={fieldStyle} value={r.mode}
+                                            onChange={e => patch(r.patientId, { mode: e.target.value as PaymentMode })}>
+                                            {MODES.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
+                                        </select>
+                                    </label>
                                 </>
-                            );
-                        })()}
+                            )}
+                            <button type="button" disabled={!r.dirty || r.saving || r.status === 'FREE'} onClick={() => save(r)}
+                                className="h-10 px-4 rounded-lg text-white text-[13px] font-medium flex items-center gap-2 disabled:opacity-40"
+                                style={{ background: 'var(--color-primary)' }}>
+                                {r.saving ? <Loader2 size={15} className="animate-spin" /> : <Check size={15} />} Enregistrer
+                            </button>
+                            {(() => {
+                                const st = receiptState(r);
+                                return (
+                                    <>
+                                        {st.canIssue && (
+                                            <button type="button" onClick={() => issue(r)} className="h-10 px-4 rounded-lg border text-[13px] font-medium flex items-center gap-2 bg-white"
+                                                style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}>
+                                                <Receipt size={15} /> Reçu
+                                            </button>
+                                        )}
+                                        {st.valid.map(v => (
+                                            <button key={v.number} type="button" onClick={() => reprint(v.number)} title="Réimprimer : un duplicata est enregistré, sans nouveau numéro"
+                                                className="h-10 px-3 rounded-lg border text-[12px] font-medium bg-white" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}>
+                                                Duplicata <span className="font-mono">{v.number}</span>
+                                            </button>
+                                        ))}
+                                    </>
+                                );
+                            })()}
+                        </div>
+                        {!r.id && (
+                            <NoteLinesEditor
+                                grid={grid} isMedecin={isMedecin} patientId={r.patientId} currency={currency} single
+                                draft={r.draft}
+                                onChange={d => patch(r.patientId, { draft: d })}
+                                onPreview={p => setRows(rs => rs.map(x => (x.patientId === r.patientId && x.preview?.netCents !== p?.netCents ? { ...x, preview: p, due: p ? String(p.netCents / 100) : '' } : x)))}
+                            />
+                        )}
                     </div>
                 ))}
             </div>

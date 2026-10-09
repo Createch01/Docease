@@ -27,11 +27,18 @@ export function useDoctorDraft<K extends keyof DoctorInfo>(
 
   const update = useCallback((patch: Partial<Pick<DoctorInfo, K>>) => setDraft(d => ({ ...d, ...patch })), []);
 
-  const save = useCallback(async (afterSave?: (values: Pick<DoctorInfo, K>, previous: Pick<DoctorInfo, K>) => void) => {
-    await dataService.saveDoctorInfo({ ...dataService.getDoctorInfo(), ...draft });
+  // Renvoie false si Rust refuse la fiche (ex. ICE ≠ 15 chiffres) : rien n'est écrit, le brouillon est conservé.
+  const save = useCallback(async (afterSave?: (values: Pick<DoctorInfo, K>, previous: Pick<DoctorInfo, K>) => void): Promise<boolean> => {
+    try {
+      await dataService.saveDoctorInfo({ ...dataService.getDoctorInfo(), ...draft });
+    } catch (e) {
+      toastService.error(e instanceof Error ? e.message : typeof e === 'string' ? e : 'Enregistrement refusé.');
+      return false;
+    }
     afterSave?.(draft, saved);
     setSaved(draft);
     toastService.success('Modifications enregistrées');
+    return true;
   }, [draft, saved]);
 
   return { draft, update, dirty, save };

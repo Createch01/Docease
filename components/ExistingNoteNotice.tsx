@@ -1,7 +1,7 @@
 import React from 'react';
 import { HonoraryNote } from '../types';
 
-const STATUS_FR: Record<string, string> = { PAID: 'Réglé', PARTIAL: 'Partiel', UNPAID: 'Non payé' };
+const STATUS_FR: Record<string, string> = { PAID: 'Réglé', PARTIAL: 'Partiel', UNPAID: 'Non payé', FREE: 'Gratuit' };
 
 /** Notes non annulées de ce patient datées du jour (une visite = une note). */
 export const todaysNotes = (notes: HonoraryNote[], patientId: string, today: string): HonoraryNote[] =>

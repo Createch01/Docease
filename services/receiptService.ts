@@ -38,6 +38,11 @@ export interface ReceiptView {
     legal: ReceiptLegal;
     cancelsNumber?: string;
     reason?: string;
+    /** Rappel de la note à l'émission (reçus récents) : n° de note, brut au tarif, remises, net, en centimes. */
+    noteNumber?: string;
+    grossCents?: number;
+    discountCents?: number;
+    noteTotalCents?: number;
     status: ReceiptStatus;
     cancelledBy: string | null;
     duplicates: number;

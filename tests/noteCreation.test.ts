@@ -74,7 +74,8 @@ describe('création de notes : aucun chemin ne crée une note « réglée » d�
         expect(editor).toContain('useState<PaymentChoice>(DEFAULT_PAYMENT)');
         expect(editor).not.toMatch(/useState<'PAID' \| 'UNPAID'>\('PAID'\)/);
         expect(editor).toContain('<PaymentFields');
-        expect(editor).toContain('id: savedNote?.id ?? Date.now().toString()');
+        // Enregistrer puis imprimer / exporter ne crée jamais une seconde note : la note déjà enregistrée est réutilisée.
+        expect(editor).toContain('if (savedNote) return savedNote;');
         expect(editor).toContain('<ExistingNoteNotice');
     });
 

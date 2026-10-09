@@ -109,7 +109,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNewPrescription, onNavigate, on
 
   // ── Carte 3 : Factures à régulariser ──────────────────────────────────────
   const unpaidNotes = useMemo(
-    () => allNotes.filter(n => n.status !== 'PAID'),
+    () => allNotes.filter(n => n.status !== 'PAID' && n.status !== 'FREE'),
     [allNotes]
   );
   const unpaidStats = useMemo(

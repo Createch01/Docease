@@ -217,6 +217,20 @@ export const dataService = {
         }
       }
 
+      // Notes sans lignes → une ligne « Honoraires » au montant actuel (aucun montant ne change ; sauvegarde préalable
+      // dans migration_backups/). Médecin seulement, application de bureau seulement ; relançable sans effet.
+      if (sessionService.isMedecin() && typeof (window as any).__TAURI_INTERNALS__ !== 'undefined') {
+        try {
+          const count = await invoke<number>('tariffs_migrate');
+          if (count > 0) {
+            await dataService.reloadHonoraryNotes();
+            console.log(`🏷️ Tarifs : ${count} note(s) reprise(s) en une ligne « Honoraires ».`);
+          }
+        } catch (error) {
+          console.error('Reprise des notes en lignes : notes conservées en l\'état.', error);
+        }
+      }
+
       // Anciennes dépenses (liste simple, justificatif en base64) → registre chaîné, justificatifs en pièces jointes chiffrées.
       // Médecin seulement, application de bureau seulement ; l'original est conservé, relançable sans effet.
       if (sessionService.isMedecin() && typeof (window as any).__TAURI_INTERNALS__ !== 'undefined') {
@@ -418,8 +432,22 @@ export const dataService = {
 
   saveDoctorInfo: async (info: DoctorInfo) => {
     const storageKey = STORAGE_KEYS.DOCTOR_INFO;
+    const previous = cache[storageKey];
     cache[storageKey] = info;
-    await storageService.save(storageKey, info);
+    try {
+      await storageService.save(storageKey, info);
+    } catch (e) {
+      // Refus de Rust (identité invalide…) : la fiche en mémoire reste celle du disque.
+      cache[storageKey] = previous;
+      throw e;
+    }
+    notifyUpdate(storageKey);
+  },
+
+  /** Relit la fiche cabinet depuis le disque (après une écriture faite par Rust : cachet, refus de validation). */
+  reloadDoctorInfo: async () => {
+    const storageKey = STORAGE_KEYS.DOCTOR_INFO;
+    cache[storageKey] = await storageService.load<DoctorInfo>(storageKey, cache[storageKey] || DEFAULT_DOCTOR_INFO);
     notifyUpdate(storageKey);
   },
 

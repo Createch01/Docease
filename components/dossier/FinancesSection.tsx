@@ -150,25 +150,25 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                         </span>
                                     ) : (
                                         <span data-testid={`status-${note.status}`}
-                                            className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest inline-flex items-center gap-2 ${note.status === 'PAID' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : note.status === 'PARTIAL' ? 'bg-amber-50 text-amber-700 border border-amber-200' : 'bg-red-50 text-red-600 border border-red-100'}`}>
-                                            {note.status === 'PAID' ? <CheckCircle size={10} /> : note.status === 'PARTIAL' ? <Clock size={10} /> : <div className="w-2 h-2 rounded-full bg-red-400" />}
-                                            {note.status === 'PAID' ? t('paid') : note.status === 'PARTIAL' ? `${note.amountPaid || 0}/${note.totalAmount}` : t('unpaid')}
+                                            className={`px-4 py-1.5 rounded-xl text-[9px] font-black uppercase tracking-widest inline-flex items-center gap-2 ${note.status === 'PAID' ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : note.status === 'PARTIAL' ? 'bg-amber-50 text-amber-700 border border-amber-200' : note.status === 'FREE' ? 'bg-slate-100 text-slate-600 border border-slate-200' : 'bg-red-50 text-red-600 border border-red-100'}`}>
+                                            {note.status === 'PAID' ? <CheckCircle size={10} /> : note.status === 'PARTIAL' ? <Clock size={10} /> : note.status === 'FREE' ? <CheckCircle size={10} /> : <div className="w-2 h-2 rounded-full bg-red-400" />}
+                                            {note.status === 'PAID' ? t('paid') : note.status === 'PARTIAL' ? `${note.amountPaid || 0}/${note.totalAmount}` : note.status === 'FREE' ? 'Gratuit' : t('unpaid')}
                                         </span>
                                     )}
                                 </td>
                                 <td className={`p-6 shrink-0 ${dir === 'rtl' ? 'text-left' : 'text-right'}`}>
                                     <div className={`flex justify-end gap-2 ${dir === 'rtl' ? 'flex-row-reverse' : ''}`}>
-                                        {!note.cancelledAt && note.status !== 'PAID' && (
+                                        {!note.cancelledAt && note.status !== 'PAID' && note.status !== 'FREE' && (
                                             <button onClick={() => setPayNote(note)} title="Enregistrer un paiement" className="p-3 bg-white text-emerald-600 hover:bg-emerald-600 hover:text-white border border-emerald-100 rounded-2xl transition-all shadow-sm">
                                                 <Banknote size={18} />
                                             </button>
                                         )}
-                                        {sessionService.isMedecin() && note.status !== 'UNPAID' && !note.cancelledAt && (
+                                        {sessionService.isMedecin() && note.status !== 'UNPAID' && note.status !== 'FREE' && !note.cancelledAt && (
                                             <button onClick={() => setRefundNote(note)} title="Rembourser le patient" className="p-3 bg-white text-amber-600 hover:bg-amber-600 hover:text-white border border-amber-100 rounded-2xl transition-all shadow-sm">
                                                 <Undo2 size={18} />
                                             </button>
                                         )}
-                                        {note.status !== 'UNPAID' && !note.cancelledAt && (
+                                        {note.status !== 'UNPAID' && note.status !== 'FREE' && !note.cancelledAt && (
                                             <button onClick={() => setIssueFor(note.id)} title="Émettre un reçu" className="p-3 bg-white text-blue-600 hover:bg-blue-600 hover:text-white border border-blue-100 rounded-2xl transition-all shadow-sm">
                                                 <Receipt size={18} />
                                             </button>

@@ -42,6 +42,10 @@ interface DocumentShellProps {
   showQr?: boolean;
   qrValue?: string;
   scale?: number;
+  /** Mentions du pied (IF, TP, ICE, INPE…) : remplace celles de la fiche cabinet (note d'honoraires : instantané figé). */
+  legalFooter?: string;
+  /** Cachet / signature (data: URL) imprimé dans la zone de signature. */
+  stampUrl?: string | null;
 }
 
 const DocumentShell: React.FC<DocumentShellProps> = ({
@@ -55,6 +59,8 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
   showQr: propShowQr,
   qrValue: propQrValue,
   scale = 1,
+  legalFooter,
+  stampUrl,
 }) => {
   const fontClass =
     appearance.fontFamily === 'serif' ? 'font-serif'
@@ -77,7 +83,7 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
   const qrValue = propQrValue
     || `Dr ${doctor.nameFr}\nPatient: ${patient.name || 'N/A'}\nDate: ${date}\n${title}`;
 
-  const footerIds = [['INPE', doctor.inpe], ['ICE', doctor.ice], ['IF', doctor.taxId]].filter(([, v]) => v).map(([k, v]) => `${k} ${v}`).join('  ·  ');
+  const footerIds = legalFooter ?? [['INPE', doctor.inpe], ['ICE', doctor.ice], ['IF', doctor.taxId]].filter(([, v]) => v).map(([k, v]) => `${k} ${v}`).join('  ·  ');
   const honorific = civility(patient.sex, patient.age, patient.type);
 
   return (
@@ -241,6 +247,7 @@ const DocumentShell: React.FC<DocumentShellProps> = ({
           {appearance.showSignature !== false && (
             <div style={{ position: 'absolute', [signatureZone.position === 'left' ? 'left' : 'right']: '160px', bottom: `${380 - footerVerticalOffset}px`,
                           width: `${signatureZone.width * PX_PER_MM}px`, height: `${Math.max(30, signatureZone.height) * PX_PER_MM}px`, textAlign: 'center' }}>
+              {stampUrl && <img src={stampUrl} alt="" data-testid="stamp" style={{ position: 'absolute', inset: '0 0 60px 0', margin: 'auto', maxWidth: '90%', maxHeight: 'calc(100% - 60px)', objectFit: 'contain' }} />}
               <div style={{ fontSize: '26px', color: '#94A3B8', fontWeight: 500, textTransform: 'uppercase', letterSpacing: '3px', borderBottom: '3px solid #CBD5E0', paddingBottom: '10px' }}>
                 {appearance.signatureLabel || signatureZone.label || 'Cachet & Signature'}
               </div>

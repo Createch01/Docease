@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertTriangle, Building2, Syringe, Clock, CreditCard, Globe, Image as ImageIcon, Info, Mail, MapPin, Phone, Printer, Smartphone } from 'lucide-react';
+import { AlertTriangle, BadgeCheck, Building2, Syringe, Clock, CreditCard, Globe, Image as ImageIcon, Info, Mail, MapPin, Phone, Printer, Smartphone, Stamp, Upload } from 'lucide-react';
 import { settingsService } from '../../services/settingsService';
 import { isCalendarVerified, CALENDAR_UNVERIFIED_MESSAGE } from '../../services/vaccinationService';
 import { normalizeRoute } from './settingsRoutes';
@@ -10,6 +10,12 @@ import NumberingCard from './NumberingCard';
 import PaymentsRegistryCard from './PaymentsRegistryCard';
 import ExpenseCategoriesCard from './ExpenseCategoriesCard';
 import { sessionService } from '../../services/sessionService';
+import TariffsSettings from './TariffsSettings';
+import IdentityBanner from '../tariffs/IdentityBanner';
+import { stampDataUrl, tariffService } from '../../services/tariffService';
+import { dataService } from '../../services/dataService';
+import { toastService } from '../../services/toastService';
+import { checkFile } from '../../services/attachmentService';
 import { resolveCabinetLogo } from '../../utils/cabinetLogo';
 import { SettingsPageProps } from './ProfileSettings';
 
@@ -18,6 +24,8 @@ import { SettingsPageProps } from './ProfileSettings';
 const CABINET_FIELDS = [
   'cabinetName', 'phone', 'gsm', 'email', 'fax', 'website', 'addressFr', 'addressAr',
   'ice', 'patente', 'taxId', 'rc', 'vatExemptionNote',
+  // Identité professionnelle (validée par Rust à l'enregistrement : ICE 15 chiffres, INPE / IF / TP numériques).
+  'nameFr', 'specialtyFr', 'ordreNumber', 'inpe', 'cnssEmployer', 'rib',
   'logoUrl',
   'hours',
   'vaccinationEnabled',
@@ -37,10 +45,37 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
   // Le brouillon a été initialisé avec la lecture de secours (ancienne copie de
   // l'apparence) : l'enregistrement la réécrit ici ('' si aucun logo), puis
   // l'ancienne copie est supprimée.
-  const handleSave = () => save(() => {
-    const { logoUrl: _legacy, ...appearance } = settingsService.getAppearance();
-    if (_legacy !== undefined) settingsService.saveAppearance(appearance);
-  });
+  const handleSave = async () => {
+    const ok = await save(() => {
+      const { logoUrl: _legacy, ...appearance } = settingsService.getAppearance();
+      if (_legacy !== undefined) settingsService.saveAppearance(appearance);
+    });
+    if (ok) setIdentityVersion(v => v + 1);
+  };
+
+  const [identityVersion, setIdentityVersion] = React.useState(0);
+  const [stamp, setStamp] = React.useState<string | null>(null);
+  React.useEffect(() => {
+    let alive = true;
+    tariffService.stamp().then(s => { if (alive) setStamp(stampDataUrl(s)); }).catch(() => undefined);
+    return () => { alive = false; };
+  }, [identityVersion]);
+
+  const pickStamp = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    const check = checkFile(file);
+    if (check.ok === false) { toastService.error(check.message); return; }
+    try {
+      await tariffService.setStamp(new Uint8Array(await file.arrayBuffer()));
+      await dataService.reloadDoctorInfo();
+      setIdentityVersion(v => v + 1);
+      toastService.success('Cachet enregistré (chiffré, métadonnées supprimées)');
+    } catch (err) {
+      toastService.error(err instanceof Error ? err.message : "Cachet refusé.");
+    }
+  };
 
   return (
     <SettingsPageFrame route={route} onNavigate={onNavigate} dirty={dirty} onSave={handleSave}>
@@ -71,12 +106,9 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
           <SettingsCard
             title="Identifiants fiscaux"
             icon={<CreditCard size={16} />}
-            actions={<SettingsLink onClick={() => onNavigate({ section: 'profile' })}>N° d'ordre et INPE dans Mon profil</SettingsLink>}
+            actions={<SettingsLink onClick={() => onNavigate({ section: 'cabinet', tab: 'identite' })}>Identité professionnelle (ICE, IF, TP, INPE…)</SettingsLink>}
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <TextField mono label="ICE" value={draft.ice} onChange={v => update({ ice: v })} placeholder="Numéro ICE" />
-              <TextField mono label="Patente" value={draft.patente} onChange={v => update({ patente: v })} placeholder="N° Patente" />
-              <TextField mono label="Identifiant fiscal" value={draft.taxId} onChange={v => update({ taxId: v })} placeholder="N° IF" />
               <TextField mono label="RC (optionnel)" value={draft.rc} onChange={v => update({ rc: v })} placeholder="Registre Commerce" />
             </div>
             <TextField
@@ -100,6 +132,44 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
           {sessionService.isMedecin() && <ExpenseCategoriesCard />}
         </div>
       )}
+
+      {tab === 'identite' && (
+        <div className="space-y-5 max-w-4xl">
+          <IdentityBanner version={identityVersion} />
+          <SettingsCard title="Identité professionnelle" icon={<BadgeCheck size={16} />}
+            description="Imprimée sur les notes d'honoraires et les reçus. Figée dans chaque note à l'émission : une note ancienne ne change pas si vous modifiez l'adresse.">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <TextField label="Nom" value={draft.nameFr} onChange={v => update({ nameFr: v })} placeholder="Dr ..." />
+              <TextField label="Spécialité" value={draft.specialtyFr} onChange={v => update({ specialtyFr: v })} placeholder="Cardiologie" />
+              <TextField mono label="N° d'inscription à l'Ordre" value={draft.ordreNumber} onChange={v => update({ ordreNumber: v })} />
+              <TextField mono label="INPE" value={draft.inpe} onChange={v => update({ inpe: v })} placeholder="Chiffres uniquement" hint={<span className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>Obligatoire</span>} />
+              <TextField mono label="Identifiant fiscal (IF)" value={draft.taxId} onChange={v => update({ taxId: v })} placeholder="Chiffres uniquement" hint={<span className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>Obligatoire</span>} />
+              <TextField mono label="Taxe professionnelle (TP)" value={draft.patente} onChange={v => update({ patente: v })} placeholder="Chiffres uniquement" />
+              <TextField mono label="ICE" value={draft.ice} onChange={v => update({ ice: v })} placeholder="15 chiffres" hint={<span className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>15 chiffres</span>} />
+              <TextField mono label="CNSS employeur (optionnel)" value={draft.cnssEmployer} onChange={v => update({ cnssEmployer: v })} />
+              <TextField label="Téléphone" value={draft.phone} onChange={v => update({ phone: v })} />
+              <TextField label="E-mail" type="email" value={draft.email} onChange={v => update({ email: v })} />
+            </div>
+            <TextAreaField label="Adresse" rows={2} value={draft.addressFr} onChange={v => update({ addressFr: v })} />
+            <TextField mono label="RIB (optionnel, pour les virements)" value={draft.rib} onChange={v => update({ rib: v })} />
+          </SettingsCard>
+
+          <SettingsCard title="Cachet et signature" icon={<Stamp size={16} />}
+            description="Image JPG ou PNG, enregistrée chiffrée ; les métadonnées (EXIF, GPS…) sont supprimées. Imprimée sur les notes et les reçus, y compris ceux de l'assistante.">
+            <div className="flex items-center gap-5">
+              <div className="w-40 h-24 rounded-lg border-2 border-dashed flex items-center justify-center bg-white overflow-hidden" style={{ borderColor: 'var(--color-border-strong)' }}>
+                {stamp ? <img src={stamp} alt="Cachet" className="max-w-full max-h-full object-contain" /> : <span className="text-[12px]" style={{ color: 'var(--color-text-faint)' }}>Aucun cachet</span>}
+              </div>
+              <label className="h-10 px-4 rounded-lg border text-[13px] font-medium inline-flex items-center gap-2 cursor-pointer bg-white" style={{ borderColor: 'var(--color-border)' }}>
+                <Upload size={15} /> {stamp ? 'Remplacer' : 'Choisir une image'}
+                <input type="file" accept="image/jpeg,image/png" className="hidden" onChange={pickStamp} />
+              </label>
+            </div>
+          </SettingsCard>
+        </div>
+      )}
+
+      {tab === 'tarifs' && sessionService.isMedecin() && <TariffsSettings />}
 
       {tab === 'logo' && (
         <div className="max-w-4xl">

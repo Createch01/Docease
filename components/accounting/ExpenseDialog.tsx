@@ -4,6 +4,7 @@ import { EXPENSE_MODES, ExpenseCategory, ExpenseInput, ExpenseMode, ExpenseView,
 import { checkFile, defaultTitle } from '../../services/attachmentService';
 import { sessionService } from '../../services/sessionService';
 import { todayLocal } from '../../utils/localDate';
+import { parseCents } from '../../utils/cents';
 
 // Saisie (ou correction) d'une dépense. L'interface ne fait que recueillir : numéro DEP, date de saisie, auteur,
 // catégories valides, mois clôturés et montants sont contrôlés par Rust. « Corriger » = annuler + recréer
@@ -14,12 +15,7 @@ const border = { borderColor: 'var(--color-border)' } as React.CSSProperties;
 const label = 'block text-[12px] font-medium';
 const sub = { color: 'var(--color-text-subtle)' } as React.CSSProperties;
 
-/** « 1 250,50 » → 125050 (centimes) ; null si invalide. */
-export const parseCents = (text: string): number | null => {
-    const t = text.replace(/\s/g, '').replace(',', '.');
-    if (!/^\d+(\.\d{1,2})?$/.test(t)) return null;
-    return Math.round(parseFloat(t) * 100);
-};
+export { parseCents };
 const toText = (cents?: number): string => (cents === undefined ? '' : (cents / 100).toFixed(2).replace('.', ','));
 
 interface Props { initial?: ExpenseView; currency: string; onClose: () => void; onDone: () => void }

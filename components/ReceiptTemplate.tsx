@@ -2,6 +2,7 @@ import React from 'react';
 import { DoctorInfo } from '../types';
 import { resolveCabinetLogo } from '../utils/cabinetLogo';
 import { PAYMENT_MODE_LABEL, ReceiptView, formatCents, legalLines } from '../services/receiptService';
+import { useStamp } from './tariffs/useStamp';
 
 // Reçu de paiement, A5 portrait (148 × 210 mm). Il ne reçoit QUE l'entrée figée du registre
 // (`ReceiptView`) et l'en-tête du cabinet : aucun patient, consultation, ordonnance ni résultat n'est
@@ -32,6 +33,9 @@ const ReceiptTemplate: React.FC<Props> = ({ receipt, doctor, duplicate, id = 're
     const logo = resolveCabinetLogo(doctor, null);
     const name = doctor.cabinetName || doctor.nameFr || doctor.name || '';
     const ids = legalLines(receipt.legal);
+    // Cachet : pièce jointe chiffrée lue par Rust (toute session) ; à défaut, l'ancienne image de la fiche cabinet.
+    const stampUrl = useStamp() ?? doctor.stampUrl ?? null;
+    const hasNoteRecall = !isCancellation && receipt.noteTotalCents != null;
     const title = isCancellation ? "REÇU D'ANNULATION" : 'REÇU DE PAIEMENT';
 
     return (
@@ -93,6 +97,20 @@ const ReceiptTemplate: React.FC<Props> = ({ receipt, doctor, duplicate, id = 're
                 <div data-testid="amount-words" style={{ fontSize: '10pt', marginTop: '1.5mm' }}>{receipt.amountInWords}</div>
             </div>
 
+            {hasNoteRecall && (
+                <table data-testid="note-recall" style={{ width: '100%', fontSize: '9.5pt', color: '#334155', marginTop: '1mm' }}>
+                    <tbody>
+                        {receipt.noteNumber && <tr><td>Note d'honoraires</td><td style={{ textAlign: 'right', fontFamily: 'monospace' }}>N° {receipt.noteNumber}</td></tr>}
+                        {(receipt.discountCents ?? 0) > 0 && receipt.grossCents != null && (
+                            <>
+                                <tr><td>Montant au tarif</td><td data-testid="recall-gross" style={{ textAlign: 'right' }}>{formatCents(receipt.grossCents)}</td></tr>
+                                <tr><td>Remises</td><td data-testid="recall-discount" style={{ textAlign: 'right' }}>− {formatCents(receipt.discountCents ?? 0)}</td></tr>
+                            </>
+                        )}
+                        <tr><td>Net de la note</td><td data-testid="recall-net" style={{ textAlign: 'right' }}>{formatCents(receipt.noteTotalCents ?? 0)}</td></tr>
+                    </tbody>
+                </table>
+            )}
             {!isCancellation && receipt.balanceDueCents > 0 && (
                 <div data-testid="balance-due" style={{ textAlign: 'right', fontSize: '10pt' }}>Reste dû : {formatCents(receipt.balanceDueCents)}</div>
             )}
@@ -102,7 +120,7 @@ const ReceiptTemplate: React.FC<Props> = ({ receipt, doctor, duplicate, id = 're
 
             {/* Cachet et signature du médecin */}
             <div style={{ position: 'absolute', right: '12mm', bottom: '26mm', width: '45mm', height: '24mm', textAlign: 'center' }}>
-                {doctor.stampUrl && <img src={doctor.stampUrl} alt="" style={{ maxHeight: '24mm', maxWidth: '45mm', objectFit: 'contain' }} />}
+                {stampUrl && <img src={stampUrl} alt="" data-testid="stamp" style={{ maxHeight: '24mm', maxWidth: '45mm', objectFit: 'contain' }} />}
                 {doctor.signatureUrl && <img src={doctor.signatureUrl} alt="" style={{ position: 'absolute', inset: 0, margin: 'auto', maxHeight: '24mm', maxWidth: '45mm', objectFit: 'contain' }} />}
             </div>
 
