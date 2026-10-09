@@ -142,3 +142,27 @@ Vitest : bandeaux, libellés, encodage. Puis `tsc`, `vitest`, `cargo test --lib`
 1. Plan. 2. Correctif C3. 3. `tariff.rs` (grille, lignes, remises, migration, statut Gratuit). 4. Identité
 professionnelle. 5. Agrégats + reçu. 6. Interface (grille, note multi-lignes, facture rapide, caisse,
 identité, carte remises). 7. Impression + vérification visuelle. 8. SECURITY.md + liste de tests manuels.
+
+## 9. Tests manuels (à faire par l'utilisateur)
+
+Jeu d'essai : Consultation 300 DH, ECG 200 DH, Contrôle 150 DH ; plafond assistante 10 % ; contrôle gratuit 14 jours.
+
+| # | Scénario | Résultat attendu |
+|---|---|---|
+| R1 | Première ouverture, Paramètres › Cabinet › Tarifs des actes | 8 actes préchargés, **tous sans prix**, bandeau « Complétez vos tarifs » ; assistante : « Créer la note » inactif avec le message de compléter les tarifs. |
+| R2 | Saisir 300 / 200 / 150 ; puis passer Consultation à 350 | Bandeau disparu ; ancienne note toujours **300,00 DH** ; nouvelle note **350,00 DH** ; historique des prix : 2 entrées. |
+| R3 | Migration : noter le « Facturé » de la période avant la mise à jour | Après : **même montant au centime** ; chaque ancienne note = 1 ligne « Honoraires » ; un dossier `migration_backups/pre-migration-…` ; un second lancement n'en crée pas. |
+| R4 | Note : Consultation + ECG, sans remise | Sous-total **500,00**, net **500,00**, « Cinq cents dirhams » ; 2 lignes à l'impression. |
+| R5 | Remise 10 % « Confrère » sur Consultation | Remise **30,00**, net **470,00** ; sans motif : refus ; « Autre » sans texte : refus. |
+| R6 | Assistante, plafond 0 % puis 10 % | 0 % : aucune remise proposée ; 10 % : remise 10 % acceptée (net **270,00**) ; 11 % : « Remise réservée au médecin ». |
+| R7 | Médecin : ECG gratuit, motif « Famille / proche » | Ligne « Gratuit – Famille / proche », net **0,00**, statut **Gratuit**, numéro attribué, **absente du Reste à encaisser**. Assistante : gratuité non acceptée. |
+| R8 | Contrôle gratuit : consultation payée il y a 7 j / non payée / payée il y a 15 j | 7 j : proposition avec la date, appliquée → **0,00** Gratuit ; non payée : aucune proposition ; 15 j : aucune proposition. |
+| R9 | Comptabilité après R5 + R7 (Consultation 300 − 10 % ; ECG 200 gratuit) | Brut **500,00** ; remises **230,00** (Confrère 30,00 ; Famille 200,00) ; net **270,00** ; gratuités **1**. |
+| R10 | Identité : ICE de 14 chiffres, INPE « 12AB » | Refus (« ICE : 15 chiffres exactement (14 saisis) », « INPE : chiffres uniquement ») ; ICE à 15 chiffres accepté ; sans INPE ou IF : bandeau « Identité professionnelle incomplète ». |
+| R11 | Émettre une note (adresse A) ; changer l'adresse en B ; réimprimer | Ancienne note : adresse **A** ; nouvelle note : adresse **B**. |
+| R12 | Impression de la note | En-tête, tableau (libellé, qté, P.U., remise, total), remises avec motif, net, déjà payé, reste, « Arrêtée la présente note à la somme de : … », pied IF / TP / ICE / INPE, cachet. |
+| R13 | Reçu d'un paiement partiel de 100 DH sur la note de R5 | Rappel : note, brut **300,00**, remise **30,00**, net **270,00**, reste dû **170,00**, pied IF / TP / ICE / INPE, cachet. |
+| R14 | Cachet : JPG avec GPS ; l'assistante imprime un reçu | Cachet imprimé sur la note et le reçu ; fichier chiffré sur le disque (aucun octet JPEG en clair) ; GPS absent. |
+| R15 | Assistante : dépense 80,00 DH avec photo du ticket | Dépense enregistrée avec justificatif ; le médecin l'ouvre ; l'assistante ne peut pas supprimer le justificatif. |
+| R16 | Assistante : Paramètres, ligne libre | Paramètres inaccessibles ; pas de bouton « Ligne libre » ; aucune édition de l'identité. |
+| R17 | Sauvegarde puis restauration | Grille, prix, notes (lignes, remises) identiques ; compteur de notes non reculé. |
