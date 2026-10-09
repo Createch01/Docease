@@ -514,3 +514,23 @@ fn amounts_in_words_are_correct_in_french() {
     assert_eq!(w(110_050), "Mille cent dirhams et cinquante centimes");
     assert_eq!(w(99_999_999), "Neuf cent quatre-vingt-dix-neuf mille neuf cent quatre-vingt-dix-neuf dirhams et quatre-vingt-dix-neuf centimes");
 }
+
+// ─── Reçu ────────────────────────────────────────────────────────────────────
+
+#[test]
+fn the_receipt_recalls_gross_discount_and_net_of_the_note() {
+    let d = tmp("rcpt");
+    priced(&d);
+    write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
+    let mut n = new_note("a", json!([{"actId": "act-consultation", "discount": {"kind": "PERCENT", "percent": 10, "reason": "CONFRERE"}}]));
+    n["amountPaid"] = json!(100);
+    dr(&d, vec![n]);
+    let who = receipts::Actor { name: "Sara".into(), role: Role::Assistant };
+    let e = receipts::issue(&d, &KEY, "a", false, &who, NOW, TODAY).unwrap();
+    assert_eq!((e.note_number.as_deref(), e.gross_cents, e.discount_cents, e.note_total_cents, e.balance_due_cents, e.amount_cents), (Some("2026-0001"), Some(30_000), Some(3_000), Some(27_000), 17_000, 10_000));
+    // Le registre relu (avec les nouveaux champs) garde une chaîne valide.
+    let all = receipts::load(&d, &KEY).unwrap();
+    assert_eq!(all.len(), 1);
+    assert_eq!(all[0], e);
+    let _ = fs::remove_dir_all(&d);
+}

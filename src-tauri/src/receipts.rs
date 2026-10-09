@@ -94,13 +94,23 @@ pub struct Entry {
     /// Duplicata : rang (1, 2, …).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub rank: Option<u32>,
+    /// T1 — rappel de la note au moment de l'émission (absents des reçus plus anciens : leurs empreintes
+    /// restent valides). N° de note, brut au tarif, remises et net de la note, en centimes.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub note_number: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub gross_cents: Option<i64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub discount_cents: Option<i64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub note_total_cents: Option<i64>,
     pub prev_hash: String,
     pub hash: String,
 }
 
 pub const ENTRY_FIELDS: &[&str] = &[
     "kind", "number", "seq", "year", "date", "issuedAt", "issuedBy", "noteId", "patientId", "patientName", "amountCents",
-    "amountInWords", "paymentMode", "label", "balanceDueCents", "legal", "cancelsNumber", "reason", "rank", "prevHash", "hash",
+    "amountInWords", "paymentMode", "label", "balanceDueCents", "legal", "cancelsNumber", "reason", "rank", "noteNumber", "grossCents", "discountCents", "noteTotalCents", "prevHash", "hash",
 ];
 
 #[derive(Serialize, Deserialize, Default, Clone, Debug)]
@@ -390,6 +400,11 @@ pub fn issue(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, detail: bool, who: 
     let total_cents = to_cents(total.max(paid))?;
     let label = label_for(note, detail);
     let mode = s(note, "paymentMode").to_string();
+    // Rappel de la note (T1) : numéro, brut au tarif, remises, net. Notes héritées sans lignes : brut = net.
+    let note_number = Some(super::numbering::number_of(note).to_string()).filter(|n| !n.is_empty());
+    let gross_cents = note.get("grossCents").and_then(|v| v.as_i64());
+    let discount_cents = note.get("discountCents").and_then(|v| v.as_i64());
+    let note_total_cents = total_cents;
     let legal = read_enc_json_in(dir, key, DOCTOR_INFO_FILE).ok().flatten().map(|i| legal_from_info(&i)).unwrap_or_default();
     let patient_name = s(patient, "name").to_string();
     let (issued_by, date) = (who.name.clone(), today.to_string());
@@ -419,6 +434,10 @@ pub fn issue(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, detail: bool, who: 
             cancels_number: None,
             reason: None,
             rank: None,
+            note_number,
+            gross_cents,
+            discount_cents,
+            note_total_cents: Some(note_total_cents),
             prev_hash: String::new(),
             hash: String::new(),
         })
@@ -508,6 +527,10 @@ pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: &str, who: 
             cancels_number: Some(number.clone()),
             reason: Some(reason),
             rank: None,
+            note_number: None,
+            gross_cents: None,
+            discount_cents: None,
+            note_total_cents: None,
             prev_hash: String::new(),
             hash: String::new(),
         })
@@ -544,6 +567,10 @@ pub fn duplicate(dir: &Path, key: &[u8; KEY_LEN], number: &str, who: &Actor, now
         cancels_number: None,
         reason: None,
         rank: Some(rank),
+        note_number: None,
+        gross_cents: None,
+        discount_cents: None,
+        note_total_cents: None,
         prev_hash: String::new(),
         hash: String::new(),
     };
