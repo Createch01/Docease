@@ -326,6 +326,8 @@ pub fn on_save_as(dir: &Path, key: &[u8; KEY_LEN], incoming: Value, today: &str,
     let mut out = apply(&stored, list, &mut pending.counter, today)?;
     // Montant payé et statut viennent du registre d'encaissements (voir `payments`), écrit AVANT les notes.
     super::payments::reconcile(dir, key, &stored, &mut out, today, by)?;
+    // Copies dérivées pour l'impression : payé et reste à payer (centimes), d'après le registre.
+    super::payments::stamp_balances(&super::payments::load(dir, key)?, &mut out);
     Ok((Value::Array(out), pending))
 }
 

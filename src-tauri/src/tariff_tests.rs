@@ -546,3 +546,21 @@ fn the_preview_is_the_same_computation_as_the_emission() {
     l.discount = Some(pct(11, "CONFRERE"));
     assert!(preview(&[l], None, &pricing(&g, Role::Assistant, false)).unwrap_err().starts_with("Remise réservée au médecin"));
 }
+
+#[test]
+fn paid_and_balance_are_derived_copies_that_follow_the_register() {
+    let d = tmp("balance");
+    priced(&d);
+    let mut n = new_note("a", json!([{"actId": "act-consultation", "discount": {"kind": "AMOUNT", "amountCents": 5_000, "reason": "GESTE"}}]));
+    n["amountPaid"] = json!(100);
+    let notes = dr(&d, vec![n]);
+    let a = find(&notes, "a");
+    assert_eq!((a["netCents"].as_i64(), a["paidCents"].as_i64(), a["balanceCents"].as_i64(), a["status"].as_str()), (Some(25_000), Some(10_000), Some(15_000), Some("PARTIAL")));
+    // Le reste suit les paiements suivants ; les lignes restent figées.
+    let mut again = a.clone();
+    again["amountPaid"] = json!(250);
+    let notes = dr(&d, vec![again]);
+    let a = find(&notes, "a");
+    assert_eq!((a["paidCents"].as_i64(), a["balanceCents"].as_i64(), a["status"].as_str(), a["netCents"].as_i64()), (Some(25_000), Some(0), Some("PAID"), Some(25_000)));
+    let _ = fs::remove_dir_all(&d);
+}

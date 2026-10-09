@@ -139,13 +139,34 @@ fn mode_of(n: &Value) -> String {
     n.get("paymentMode").and_then(|v| v.as_str()).unwrap_or("CASH").to_string()
 }
 
-/// Recopie le montant du registre dans la note (copie dérivée) et recalcule son statut.
+/// Recopie le montant du registre dans la note (copie dérivée) et recalcule son statut. `paidCents` et
+/// `balanceCents` (reste à payer) sont des copies dérivées, calculées ici pour l'impression de la note.
 fn write_back(n: &mut Value, net: i64) {
     let total = total_cents(n);
     let status = numbering::status_for(net as f64 / 100.0, total as f64 / 100.0);
     if let Some(o) = n.as_object_mut() {
         o.insert("amountPaid".into(), amount_json(net));
         o.insert("status".into(), Value::String(status.to_string()));
+        o.insert("paidCents".into(), json!(net.max(0)));
+        o.insert("balanceCents".into(), json!((total - net).max(0)));
+    }
+}
+
+/// Copies dérivées `paidCents` / `balanceCents` de toutes les notes non annulées (à appeler après le
+/// rapprochement). Note absente du registre (reprise pas encore faite) : montant annoncé par la note.
+pub fn stamp_balances(entries: &[Entry], notes: &mut [Value]) {
+    for n in notes.iter_mut() {
+        let id = id_of(n).to_string();
+        // Seules les notes à lignes (T1) : une note héritée non touchée garde ses octets.
+        if id.is_empty() || numbering::is_cancelled(n) || !n.get("lines").map_or(false, |l| l.is_array()) {
+            continue;
+        }
+        let paid = if entries.iter().any(|e| e.note_id == id) { net_cents(entries, &id) } else { claimed_cents(n) };
+        let total = total_cents(n);
+        if let Some(o) = n.as_object_mut() {
+            o.insert("paidCents".into(), json!(paid.max(0)));
+            o.insert("balanceCents".into(), json!((total - paid).max(0)));
+        }
     }
 }
 

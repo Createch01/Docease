@@ -794,6 +794,8 @@ pub fn migrate_notes(dir: &Path, key: &[u8; KEY_LEN]) -> Result<MigrationReport,
             wrap_legacy(o);
         }
     }
+    // Copies dérivées pour l'impression (payé / reste) : ajoutées, jamais utilisées pour décider.
+    super::payments::stamp_balances(&super::payments::load(dir, key)?, &mut notes);
     let after_total = sum(&notes);
     if after_total != before_total || statuses(&notes) != before_status {
         return Err("Migration annulée : un montant ou un statut aurait changé (aucune écriture).".into());

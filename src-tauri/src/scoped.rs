@@ -327,6 +327,7 @@ pub fn save_payment(dir: &Path, key: &[u8; super::KEY_LEN], payment: &Value, tod
     let mut view = apply_payment(&mut notes, &patients, payment, today, new_id, &number, &pricing, issuer)?;
     // Montant payé et statut : rapprochés du registre d'encaissements (une baisse ne retire rien).
     super::payments::reconcile(dir, key, &stored, &mut notes, today, by)?;
+    super::payments::stamp_balances(&super::payments::load(dir, key)?, &mut notes);
     if let Some(n) = notes.iter().find(|n| id_of(n) == view.get("id").and_then(|v| v.as_str())) {
         view = payment_view(n);
     }
