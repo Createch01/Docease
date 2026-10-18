@@ -429,6 +429,47 @@ pub fn settle_for_cancel(dir: &Path, key: &[u8; KEY_LEN], notes: &[Value], id: &
     outcome
 }
 
+/// « Rembourser puis annuler » : registre à écrire (rien n'est écrit ici) avec, si le net encaissé de la
+/// note est positif, une écriture négative du même montant. Renvoie (registre, net remboursé, registre modifié).
+pub fn prepare_full_refund(dir: &Path, key: &[u8; KEY_LEN], notes: &[Value], id: &str, mode: &str, reason: &str, by: &str, today: &str) -> Result<(Vec<Entry>, i64, bool), String> {
+    let mut entries = load(dir, key)?;
+    let before = entries.len();
+    migrate_into(&mut entries, notes, today);
+    let net = net_cents(&entries, id);
+    if net < 0 {
+        return Err("Le net encaissé de cette note est négatif : contrôlez le registre des encaissements.".into());
+    }
+    if net > 0 {
+        if !MODES.contains(&mode) {
+            return Err("Mode de paiement invalide.".into());
+        }
+        let patient = notes.iter().find(|n| id_of(n) == id).and_then(|n| n.get("patientId")).and_then(|v| v.as_str()).unwrap_or("").to_string();
+        push_sealed(
+            &mut entries,
+            Entry {
+                seq: 0,
+                kind: "refund".into(),
+                date: today.to_string(),
+                at: super::util::now_iso(),
+                note_id: id.to_string(),
+                patient_id: patient,
+                amount_cents: -net,
+                mode: mode.to_string(),
+                reason: Some(reason.to_string()),
+                by: by.to_string(),
+                prev_hash: String::new(),
+                hash: String::new(),
+            },
+        );
+    }
+    let changed = entries.len() > before;
+    Ok((entries, net, changed))
+}
+
+pub fn write_registry(dir: &Path, key: &[u8; KEY_LEN], entries: &[Entry]) -> Result<(), String> {
+    save(dir, key, entries)
+}
+
 // ─── Restauration ────────────────────────────────────────────────────────────
 
 /// Le registre ne recule jamais à la restauration : si le registre du poste est plus long et que le registre

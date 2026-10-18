@@ -346,7 +346,133 @@ pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &s
 /// « Rembourser puis annuler » : un motif, deux écritures (remboursement du net encaissé au registre, puis
 /// annulation de la note), sous le même verrou.
 pub fn refund_and_cancel(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &str, reason: &str, refund_mode: &str, by: &str, now_iso: &str) -> Result<Value, String> {
-    cancel_with(dir, key, role, id, reason, by, now_iso, Some(refund_mode))
+    refund_cancel_all(dir, key, role, id, reason, refund_mode, by, now_iso, &super::util::today_local())
+}
+
+#[cfg(test)]
+thread_local! {
+    /// Test : fait échouer l'écriture de l'étape n (0 paiements, 1 reçus, 2 compteur des reçus, 3 notes).
+    pub static FAIL_AT: std::cell::Cell<Option<usize>> = const { std::cell::Cell::new(None) };
+}
+
+fn step(_n: usize) -> Result<(), String> {
+    #[cfg(test)]
+    if FAIL_AT.with(|f| f.get()) == Some(_n) {
+        return Err("Écriture interrompue (test).".into());
+    }
+    Ok(())
+}
+
+/// Ce que fera « Rembourser puis annuler » (lecture seule, pour la fenêtre de confirmation).
+#[derive(Serialize, Debug, Clone, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct CancelPreview {
+    pub note_number: String,
+    pub net_cents: i64,
+    pub receipts: Vec<String>,
+    /// Mois clôturé qui bloque l'opération (AAAA-MM), le cas échéant, avec le message à afficher.
+    pub blocked: Option<String>,
+}
+
+fn closed_block(dir: &Path, key: &[u8; KEY_LEN], note_date: &str, today: &str) -> Option<String> {
+    for d in [today, note_date] {
+        if let Err(e) = super::periods::ensure_open(dir, key, d) {
+            return Some(e);
+        }
+    }
+    None
+}
+
+pub fn cancel_preview(dir: &Path, key: &[u8; KEY_LEN], id: &str, today: &str) -> Result<CancelPreview, String> {
+    let notes = read_notes_strict(dir, key)?;
+    let note = notes.iter().find(|x| id_of(x) == id).ok_or("Note introuvable.")?;
+    if !has_number(note) {
+        return Err("Cette note n'a jamais été numérotée : supprimez-la plutôt que de l'annuler.".into());
+    }
+    if is_cancelled(note) {
+        return Err("Cette note est déjà annulée.".into());
+    }
+    // Migration simulée : même calcul que l'opération (rien n'est écrit).
+    let (_, net, _) = super::payments::prepare_full_refund(dir, key, &notes, id, "CASH", "", "", today)?;
+    let receipts = super::receipts::valid_receipts_of(dir, key, id)?;
+    let blocked = closed_block(dir, key, note.get("date").and_then(|v| v.as_str()).unwrap_or(""), today);
+    Ok(CancelPreview { note_number: number_of(note).to_string(), net_cents: net, receipts, blocked })
+}
+
+/// « Rembourser puis annuler » en UNE action, tout ou rien : remboursement du net encaissé, annulation de
+/// tous les reçus valides, annulation de la note. Un motif, une date (Rust), un auteur. Sous les verrous des
+/// notes puis des reçus ; tout est préparé en mémoire, puis écrit (paiements, reçus, compteur, notes) ; si
+/// une écriture échoue, les fichiers déjà écrits sont remis dans leur état d'origine.
+pub fn refund_cancel_all(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &str, reason: &str, refund_mode: &str, by: &str, now_iso: &str, today: &str) -> Result<Value, String> {
+    if role != super::access::Role::Medecin {
+        return Err("Seul le médecin peut annuler une note d'honoraires.".into());
+    }
+    let reason: String = reason.chars().filter(|c| !c.is_control()).collect::<String>().split_whitespace().collect::<Vec<_>>().join(" ");
+    let n = reason.chars().count();
+    if n < MIN_REASON_CHARS {
+        return Err("Le motif de l'annulation est obligatoire.".into());
+    }
+    if n > MAX_REASON_CHARS {
+        return Err(format!("Motif trop long ({MAX_REASON_CHARS} caractères au plus)."));
+    }
+    let (pending, mut notes) = begin(dir, key, true)?;
+    let i = notes.iter().position(|x| id_of(x) == id).ok_or("Note introuvable.")?;
+    if !has_number(&notes[i]) {
+        return Err("Cette note n'a jamais été numérotée : supprimez-la plutôt que de l'annuler.".into());
+    }
+    if is_cancelled(&notes[i]) {
+        return Err("Cette note est déjà annulée.".into());
+    }
+    let note_date = notes[i].get("date").and_then(|v| v.as_str()).unwrap_or("").to_string();
+    if let Some(msg) = closed_block(dir, key, &note_date, today) {
+        return Err(msg);
+    }
+    let _rg = super::receipts::lock();
+    let who = super::receipts::Actor { name: by.to_string(), role };
+    // 1. Tout est préparé en mémoire : la moindre erreur ici n'écrit rien.
+    let (pay_entries, _net, pay_changed) = super::payments::prepare_full_refund(dir, key, &notes, id, refund_mode, &reason, by, today)?;
+    let plan = super::receipts::plan_cancel_all(dir, key, id, &reason, &who, now_iso, today)?;
+    let obj = notes[i].as_object_mut().ok_or("Note invalide.")?;
+    obj.insert("cancelledAt".into(), Value::String(now_iso.to_string()));
+    obj.insert("cancelledBy".into(), Value::String(by.to_string()));
+    obj.insert("cancellationReason".into(), Value::String(reason));
+    let done = notes[i].clone();
+    // 2. Écriture, avec état d'origine gardé pour le retour arrière.
+    let files: [(&str, &str); 4] = [
+        (super::payments::REGISTRY_FILE, "paiements"),
+        (super::receipts::REGISTRY_FILE, "reçus"),
+        (super::receipts::COUNTER_FILE, "compteur des reçus"),
+        (NOTES_FILE, "notes"),
+    ];
+    let mut originals: Vec<(&str, Option<Value>)> = Vec::new();
+    for (f, _) in &files {
+        originals.push((*f, read_enc_json_in(dir, key, f)?));
+    }
+    let write_all = || -> Result<(), String> {
+        step(0)?;
+        if pay_changed {
+            super::payments::write_registry(dir, key, &pay_entries)?;
+        }
+        step(1)?;
+        if plan.counter.is_some() {
+            super::receipts::write_plan_registry(dir, key, &plan)?;
+        }
+        step(2)?;
+        super::receipts::write_plan_counter(dir, key, &plan)?;
+        step(3)?;
+        write_enc_json_in(dir, key, NOTES_FILE, &Value::Array(notes.clone()))
+    };
+    if let Err(e) = write_all() {
+        for (f, orig) in &originals {
+            let _ = match orig {
+                Some(v) => write_enc_json_in(dir, key, f, v),
+                None => std::fs::remove_file(dir.join(f)).or_else(|x| if x.kind() == std::io::ErrorKind::NotFound { Ok(()) } else { Err(x) }).map_err(|x| x.to_string()),
+            };
+        }
+        return Err(format!("{e} Aucune modification n'a été conservée."));
+    }
+    pending.commit()?;
+    Ok(done)
 }
 
 /// Une note encore encaissée (net du registre > 0) ne s'annule pas : il faut d'abord la rembourser.
@@ -372,7 +498,7 @@ fn cancel_with(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &
     }
     let receipts = super::receipts::load(dir, key)?;
     if receipts.iter().any(|r| r.kind == "receipt" && r.note_id == id && !super::receipts::is_cancelled(&receipts, &r.number)) {
-        return Err("Cette note a des reçus valides : remboursez d'abord l'encaissement (« Rembourser », avec motif), annulez ses reçus, puis annulez la note.".into());
+        return Err("Cette note a des reçus valides : utilisez « Rembourser puis annuler » (une seule action), ou remboursez, annulez ses reçus, puis annulez la note.".into());
     }
     // Registre d'abord (remboursement éventuel), notes ensuite.
     super::payments::settle_for_cancel(dir, key, &notes, id, refund_mode, &reason, by, &super::util::today_local())?;
@@ -500,6 +626,14 @@ pub fn honorary_note_refund_and_cancel<R: tauri::Runtime>(app: tauri::AppHandle<
     let r = super::reasons::validate(&reason).and_then(|reason| refund_and_cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &refund_mode, &session.name, &util::now_iso()));
     audit::log(&app, Some(&session), "note_refund_cancel", if r.is_ok() { &id } else { "refusé" }, r.is_ok());
     r
+}
+
+/// Aperçu de « Rembourser puis annuler » : montant net, reçus concernés, mois clôturé éventuel (médecin).
+#[tauri::command]
+pub fn honorary_note_cancel_preview<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String) -> Result<CancelPreview, String> {
+    gate(&app, &state, "honorary_note_cancel_preview")?;
+    let key = data_key_of(&state)?;
+    cancel_preview(&data_dir(&app)?, &key, &id, &util::today_local())
 }
 
 /// Migration des notes héritées sans numéro (médecin) : lancée à l'ouverture de la session médecin.

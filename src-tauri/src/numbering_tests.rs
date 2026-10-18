@@ -558,3 +558,137 @@ fn numbers_beyond_9999_are_well_formed_checked_and_sequential() {
     assert_eq!(c.next(2026), "2026-100000");
     let _ = fs::remove_dir_all(&d);
 }
+
+// ─── « Rembourser puis annuler » : une seule action, tout ou rien ────────────
+
+mod refund_cancel_all {
+    use super::*;
+    use crate::{payments, periods, receipts};
+
+    const NOW: &str = "2026-10-08T10:00:00Z";
+
+    fn doctor() -> receipts::Actor {
+        receipts::Actor { name: "Dr".into(), role: Role::Medecin }
+    }
+
+    /// Note de 500 DH payée en deux fois (200 puis 300), un reçu par versement.
+    fn two_payments(tag: &str) -> PathBuf {
+        let d = tmp(tag);
+        write_enc_json_in(&d, &KEY, "meddoc_patients.json", &json!([{"id": "p1", "name": "A"}])).unwrap();
+        let mut n = note("a", "", "");
+        n["totalAmount"] = json!(500);
+        n["amountPaid"] = json!(200);
+        n["status"] = json!("UNPAID");
+        let out = save(&d, vec![n], TODAY).unwrap();
+        receipts::issue(&d, &KEY, "a", false, &doctor(), NOW, TODAY).unwrap();
+        let mut n = out[0].clone();
+        n["amountPaid"] = json!(500);
+        save(&d, vec![n], TODAY).unwrap();
+        receipts::issue(&d, &KEY, "a", false, &doctor(), NOW, TODAY).unwrap();
+        d
+    }
+
+    fn files(d: &Path) -> Vec<Option<Value>> {
+        [payments::REGISTRY_FILE, receipts::REGISTRY_FILE, receipts::COUNTER_FILE, NOTES_FILE].iter().map(|f| read_enc_json_in(d, &KEY, f).unwrap()).collect()
+    }
+
+    fn all(d: &Path, reason: &str, mode: &str) -> Result<Value, String> {
+        refund_cancel_all(d, &KEY, Role::Medecin, "a", reason, mode, "Dr", NOW, TODAY)
+    }
+
+    #[test]
+    fn one_action_refunds_the_net_cancels_every_receipt_and_the_note() {
+        let d = two_payments("rca-ok");
+        assert_eq!(payments::net_cents(&payments::load(&d, &KEY).unwrap(), "a"), 50_000);
+        let p = cancel_preview(&d, &KEY, "a", TODAY).unwrap();
+        assert_eq!((p.net_cents, p.receipts.len(), p.blocked.is_none()), (50_000, 2, true));
+        let done = all(&d, "Doublon", "CASH").unwrap();
+        assert_eq!((done["cancelledBy"].as_str(), done["cancellationReason"].as_str()), (Some("Dr"), Some("Doublon")));
+        // Paiements : un remboursement du net, mêmes motif / date / auteur.
+        let pays = payments::load(&d, &KEY).unwrap();
+        assert_eq!(payments::net_cents(&pays, "a"), 0);
+        let refund = pays.last().unwrap();
+        assert_eq!((refund.kind.as_str(), refund.amount_cents, refund.reason.as_deref(), refund.by.as_str(), refund.date.as_str()), ("refund", -50_000, Some("Doublon"), "Dr", TODAY));
+        // Reçus : les deux annulés, mêmes motif / date / auteur, numéros à la suite.
+        let regs = receipts::load(&d, &KEY).unwrap();
+        let cancels: Vec<_> = regs.iter().filter(|e| e.kind == "cancellation").collect();
+        assert_eq!(cancels.len(), 2);
+        assert!(cancels.iter().all(|c| c.reason.as_deref() == Some("Doublon") && c.issued_by == "Dr" && c.date == TODAY));
+        assert!(receipts::valid_receipts_of(&d, &KEY, "a").unwrap().is_empty());
+        // Intégrité des trois registres.
+        let rv = receipts::verify(&d, &KEY).unwrap();
+        assert!(rv.ok, "{:?}", rv.problems);
+        let pv = payments::verify_entries(&pays);
+        assert!(pv.ok, "{:?}", pv.problems);
+        assert!(check(&read_notes(&d, &KEY)).clean);
+        assert!(is_cancelled(&read_notes(&d, &KEY)[0]));
+        // Une seule fois.
+        assert!(all(&d, "Doublon", "CASH").unwrap_err().contains("déjà annulée"));
+        let _ = fs::remove_dir_all(&d);
+    }
+
+    #[test]
+    fn a_failure_at_any_write_leaves_everything_as_it_was() {
+        for step in 0..4 {
+            let d = two_payments(&format!("rca-fail{step}"));
+            let before = files(&d);
+            FAIL_AT.with(|f| f.set(Some(step)));
+            let err = all(&d, "Doublon", "CASH").unwrap_err();
+            FAIL_AT.with(|f| f.set(None));
+            assert!(err.contains("Aucune modification"), "{err}");
+            assert_eq!(files(&d), before, "étape {step} : état modifié");
+            assert!(!is_cancelled(&read_notes(&d, &KEY)[0]));
+            // Et l'opération réussit ensuite normalement.
+            assert!(all(&d, "Doublon", "CASH").is_ok());
+            let _ = fs::remove_dir_all(&d);
+        }
+    }
+
+    #[test]
+    fn a_refusal_before_writing_changes_nothing() {
+        let d = two_payments("rca-refuse");
+        let before = files(&d);
+        assert!(all(&d, "Doublon", "BITCOIN").unwrap_err().contains("invalide"), "mode inconnu");
+        assert!(all(&d, "x", "CASH").unwrap_err().contains("motif"), "motif trop court");
+        assert!(refund_cancel_all(&d, &KEY, Role::Assistant, "a", "Doublon", "CASH", "Sara", NOW, TODAY).unwrap_err().contains("médecin"));
+        assert!(refund_cancel_all(&d, &KEY, Role::Medecin, "inconnue", "Doublon", "CASH", "Dr", NOW, TODAY).unwrap_err().contains("introuvable"));
+        assert_eq!(files(&d), before);
+        let _ = fs::remove_dir_all(&d);
+    }
+
+    #[test]
+    fn a_partly_refunded_note_only_refunds_what_is_left() {
+        let d = two_payments("rca-partial");
+        payments::refund(&d, &KEY, Role::Medecin, "a", 100.0, "CASH", "Erreur de montant", "Dr", TODAY).unwrap();
+        assert_eq!(cancel_preview(&d, &KEY, "a", TODAY).unwrap().net_cents, 40_000);
+        all(&d, "Doublon", "CARD").unwrap();
+        let pays = payments::load(&d, &KEY).unwrap();
+        let refunds: Vec<i64> = pays.iter().filter(|e| e.kind == "refund").map(|e| e.amount_cents).collect();
+        assert_eq!(refunds, vec![-10_000, -40_000]);
+        assert_eq!(payments::net_cents(&pays, "a"), 0);
+        assert!(receipts::verify(&d, &KEY).unwrap().ok);
+        let _ = fs::remove_dir_all(&d);
+    }
+
+    #[test]
+    fn a_closed_month_refuses_and_writes_nothing() {
+        let d = two_payments("rca-closed");
+        periods::close(&d, &KEY, Role::Medecin, "2026-10", "Dr", "2026-11-02").unwrap();
+        let before = files(&d);
+        let err = all(&d, "Doublon", "CASH").unwrap_err();
+        assert!(err.contains("clôturé"), "{err}");
+        assert!(cancel_preview(&d, &KEY, "a", TODAY).unwrap().blocked.is_some(), "l'aperçu le signale");
+        assert_eq!(files(&d), before);
+        let _ = fs::remove_dir_all(&d);
+    }
+
+    #[test]
+    fn a_note_without_payment_or_receipt_is_simply_cancelled() {
+        let d = tmp("rca-empty");
+        save(&d, vec![note("a", "", "")], TODAY).unwrap();
+        // note() annonce un paiement : on le rembourse d'un coup, sans reçu à annuler.
+        let done = all(&d, "Autre — saisie en double", "CASH").unwrap();
+        assert!(is_cancelled(&done));
+        let _ = fs::remove_dir_all(&d);
+    }
+}

@@ -541,36 +541,92 @@ fn cancel_locked(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: String, 
                 return Err("Ce reçu atteste un encaissement toujours enregistré : l'annuler n'effacerait pas l'argent encaissé. Utilisez « Réémettre » (nouveau reçu, celui-ci est marqué remplacé) ou, si le patient est remboursé, enregistrez d'abord le remboursement (« Rembourser », avec motif).".into());
             }
         }
-        let amount = -orig.amount_cents;
-        Ok(Entry {
-            kind: "cancellation".into(),
-            number: new_number,
-            seq,
-            year,
-            date,
-            issued_at: now,
-            issued_by,
-            note_id: orig.note_id.clone(),
-            patient_id: orig.patient_id.clone(),
-            patient_name: orig.patient_name.clone(),
-            amount_cents: amount,
-            amount_in_words: amount_in_words(amount),
-            payment_mode: orig.payment_mode.clone(),
-            label: orig.label.clone(),
-            balance_due_cents: 0,
-            legal: orig.legal.clone(),
-            cancels_number: Some(number.clone()),
-            reason: Some(reason),
-            rank: None,
-            note_number: None,
-            gross_cents: None,
-            discount_cents: None,
-            note_total_cents: None,
-            replaces: None,
-            prev_hash: String::new(),
-            hash: String::new(),
-        })
+        Ok(cancellation_of(orig, new_number, seq, year, reason, issued_by, now, date))
     })
+}
+
+/// Reçu d'annulation d'un reçu : montant opposé, même suite de numéros.
+fn cancellation_of(orig: &Entry, number: String, seq: u64, year: u32, reason: String, issued_by: String, issued_at: String, date: String) -> Entry {
+    let amount = -orig.amount_cents;
+    Entry {
+        kind: "cancellation".into(),
+        number,
+        seq,
+        year,
+        date,
+        issued_at,
+        issued_by,
+        note_id: orig.note_id.clone(),
+        patient_id: orig.patient_id.clone(),
+        patient_name: orig.patient_name.clone(),
+        amount_cents: amount,
+        amount_in_words: amount_in_words(amount),
+        payment_mode: orig.payment_mode.clone(),
+        label: orig.label.clone(),
+        balance_due_cents: 0,
+        legal: orig.legal.clone(),
+        cancels_number: Some(orig.number.clone()),
+        reason: Some(reason),
+        rank: None,
+        note_number: None,
+        gross_cents: None,
+        discount_cents: None,
+        note_total_cents: None,
+        replaces: None,
+        prev_hash: String::new(),
+        hash: String::new(),
+    }
+}
+
+/// Reçus encore valides d'une note (lecture seule).
+pub fn valid_receipts_of(dir: &Path, key: &[u8; KEY_LEN], note_id: &str) -> Result<Vec<String>, String> {
+    let entries = load(dir, key)?;
+    Ok(entries.iter().filter(|e| e.kind == "receipt" && e.note_id == note_id && !is_cancelled(&entries, &e.number)).map(|e| e.number.clone()).collect())
+}
+
+/// Annulation de TOUS les reçus valides d'une note, préparée en mémoire (rien n'est écrit) : registre
+/// complet à écrire, nouveau compteur, numéros annulés. À appeler sous `lock()`.
+pub struct CancelAllPlan {
+    pub entries: Vec<Entry>,
+    pub counter: Option<(u32, u64)>,
+    pub cancelled: Vec<String>,
+}
+
+pub fn plan_cancel_all(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, reason: &str, who: &Actor, now_iso: &str, today: &str) -> Result<CancelAllPlan, String> {
+    let mut entries = load(dir, key)?;
+    let to_cancel: Vec<Entry> = entries.iter().filter(|e| e.kind == "receipt" && e.note_id == note_id && !is_cancelled(&entries, &e.number)).cloned().collect();
+    if to_cancel.is_empty() {
+        return Ok(CancelAllPlan { entries, counter: None, cancelled: Vec::new() });
+    }
+    let year: u32 = today.get(..4).and_then(|y| y.parse().ok()).ok_or("Date système invalide.")?;
+    if let Some(prev) = last_date(&entries) {
+        if today < prev {
+            return Err("La date du système est antérieure au dernier reçu émis : corrigez l'horloge avant d'annuler un reçu.".into());
+        }
+    }
+    let counter = load_counter(dir, key);
+    let mut last = last_seq(&entries, &counter, year);
+    let mut cancelled = Vec::new();
+    for orig in &to_cancel {
+        last += 1;
+        let c = cancellation_of(orig, format_number(year, last), last, year, reason.to_string(), who.name.clone(), now_iso.to_string(), today.to_string());
+        let c = seal(c, &entries);
+        entries.push(c);
+        cancelled.push(orig.number.clone());
+    }
+    Ok(CancelAllPlan { entries, counter: Some((year, last)), cancelled })
+}
+
+/// Écrit un plan (registre d'abord, compteur ensuite).
+pub fn write_plan_registry(dir: &Path, key: &[u8; KEY_LEN], plan: &CancelAllPlan) -> Result<(), String> {
+    save(dir, key, &plan.entries)
+}
+
+pub fn write_plan_counter(dir: &Path, key: &[u8; KEY_LEN], plan: &CancelAllPlan) -> Result<(), String> {
+    match plan.counter {
+        Some((year, last)) => save_counter(dir, key, &Counter { year, last }),
+        None => Ok(()),
+    }
 }
 
 /// « Réémettre » : le reçu est annulé (reçu d'annulation, avec motif) puis un NOUVEAU reçu du même

@@ -29,6 +29,8 @@ const call = async <T>(cmd: string, args?: Record<string, unknown>): Promise<T> 
     }
 };
 
+export interface CancelPreview { noteNumber: string; netCents: number; receipts: string[]; blocked: string | null }
+
 export const honoraryNoteService = {
     /**
      * Médecin : annule une note numérotée (motif obligatoire ; date et auteur posés par Rust). La note
@@ -43,6 +45,8 @@ export const honoraryNoteService = {
      * Médecin : « Rembourser puis annuler » une note encore encaissée. Un seul motif, deux écritures posées par
      * Rust : remboursement du net encaissé (registre des encaissements) puis annulation de la note.
      */
+    /** Aperçu de « Rembourser puis annuler » : net à rembourser, reçus concernés, mois clôturé éventuel (calculés par Rust). */
+    cancelPreview: (id: string) => call<CancelPreview>('honorary_note_cancel_preview', { id }),
     refundAndCancel: async (id: string, reason: string, refundMode: string): Promise<HonoraryNote> => {
         const note = await call<HonoraryNote>('honorary_note_refund_and_cancel', { id, reason, refundMode });
         await dataService.reloadHonoraryNotes();
