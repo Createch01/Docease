@@ -50,6 +50,8 @@ const DUE_SECS: u64 = 24 * 3600;
 const WARN_SECS: u64 = 24 * 3600;
 const ALERT_SECS: u64 = 48 * 3600;
 const RETRY_AFTER_FAILURE_SECS: u64 = 10 * 60;
+/// Au-delà, bandeau orange permanent : la dernière sauvegarde réussie est trop ancienne.
+pub const STALE_SECS: u64 = 3 * 24 * 3600;
 const MAX_BACKUP_BYTES: u64 = 512 * 1024 * 1024;
 const KEEP_DAILY: usize = 7;
 const KEEP_WEEKLY: usize = 4;
@@ -921,6 +923,25 @@ pub fn status(dir: &Path, now: u64) -> Res<Status> {
     })
 }
 
+/// Santé de la sauvegarde pour toute session (l'assistante voit un bandeau informatif) : ni chemin,
+/// ni phrase de passe, ni erreur détaillée.
+#[derive(Serialize, Debug, Clone, PartialEq)]
+pub struct Health {
+    pub configured: bool,
+    pub last_success_at: Option<u64>,
+    pub age_secs: Option<u64>,
+    /// Configurée mais dernière sauvegarde réussie de plus de 3 jours (ou jamais réussie).
+    pub stale: bool,
+}
+
+pub fn health(dir: &Path, now: u64) -> Res<Health> {
+    let meta = load_meta(dir)?;
+    let configured = meta.wrapped_passphrase.is_some() && meta.primary.is_some();
+    let age = meta.last_success_at.map(|t| now.saturating_sub(t));
+    let stale = configured && age.map_or(true, |a| a > STALE_SECS);
+    Ok(Health { configured, last_success_at: meta.last_success_at, age_secs: age, stale })
+}
+
 // ─── Liste, aperçu, restauration ─────────────────────────────────────────────
 
 #[derive(Serialize, Debug, Clone)]
@@ -1286,6 +1307,14 @@ pub async fn backup_status<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: t
         Ok(st)
     })
     .await
+}
+
+/// Lisible par toute session : le bandeau « données non sauvegardées » concerne aussi l'assistante.
+#[tauri::command]
+pub async fn backup_health<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<'_, AppState>) -> Result<Health, String> {
+    gate(&app, &state, "backup_health")?;
+    let dir = data_dir(&app)?;
+    blocking(move || health(&dir, util::now_secs())).await
 }
 
 #[tauri::command]
@@ -1764,6 +1793,27 @@ mod tests {
         assert_eq!(status(&d, 1_000_000 + 3 * h).unwrap().level, "ok");
         assert_eq!(status(&d, 1_000_000 + 30 * h).unwrap().level, "warning");
         assert_eq!(status(&d, 1_000_000 + 49 * h).unwrap().level, "alert");
+    }
+
+    #[test]
+    fn health_reports_unconfigured_fresh_and_stale_without_leaking_paths() {
+        let d = tmp("health");
+        let h = health(&d, 1_000_000).unwrap();
+        assert_eq!((h.configured, h.stale, h.age_secs), (false, false, None), "non configurée : pas « périmée », c'est le bandeau rouge");
+        let p = tmp("health-dest");
+        set_passphrase(&d, &KEY, PASS).unwrap();
+        assert!(!health(&d, 1).unwrap().configured, "phrase seule : pas configurée");
+        set_destinations(&d, Some(p.to_str().unwrap()), None).unwrap();
+        let h = health(&d, 1_000_000).unwrap();
+        assert_eq!((h.configured, h.stale), (true, true), "configurée mais jamais réussie");
+        let mut meta = load_meta(&d).unwrap();
+        meta.last_success_at = Some(1_000_000);
+        save_meta(&d, &meta).unwrap();
+        let day = 24 * 3600;
+        assert!(!health(&d, 1_000_000 + 3 * day).unwrap().stale, "3 jours pile : pas encore orange");
+        assert!(health(&d, 1_000_000 + 3 * day + 1).unwrap().stale, "plus de 3 jours : orange");
+        let json = serde_json::to_string(&health(&d, 1_000_000).unwrap()).unwrap();
+        assert!(!json.contains(p.to_str().unwrap()) && !json.contains("passphrase"), "{json}");
     }
 
     #[test]

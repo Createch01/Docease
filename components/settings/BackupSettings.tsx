@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { AlertTriangle, CheckCircle2, FolderOpen, HardDriveDownload, KeyRound, RotateCcw, ShieldAlert, X } from 'lucide-react';
 import {
-  BACKUP_STATUS_EVENT, BackupEntry, BackupError, BackupPreview, BackupStatus, MIN_PASSPHRASE,
-  backupService, formatAge, formatStamp, isTauri, redundancyMessage,
+  BACKUP_FOCUS_EVENT, BACKUP_STATUS_EVENT, BackupEntry, BackupError, BackupPreview, BackupStatus, MIN_PASSPHRASE,
+  backupService, consumeBackupConfigFocus, formatAge, formatStamp, isTauri, redundancyMessage,
 } from '../../services/backupService';
 import { dataService } from '../../services/dataService';
 import { formatSize as formatBytes, heavyWarning } from '../../services/attachmentService';
@@ -34,7 +34,7 @@ async function pickFile(): Promise<string | null> {
 }
 
 /** Bandeau d'état : « Dernière sauvegarde : il y a 3 h ✓ » ou alerte rouge. */
-export const BackupBanner: React.FC<{ status: BackupStatus }> = ({ status }) => {
+export const BackupBanner: React.FC<{ status: BackupStatus; onConfigure?: () => void }> = ({ status, onConfigure }) => {
   const st = LEVEL_STYLE[status.level];
   const text = status.level === 'ok'
     ? `Dernière sauvegarde : ${formatAge(status.age_secs)} ✓`
@@ -48,6 +48,11 @@ export const BackupBanner: React.FC<{ status: BackupStatus }> = ({ status }) => 
         <p className="font-semibold">{text}</p>
         {status.reason && <p className="mt-0.5">{status.reason}</p>}
         {status.last_error && status.level !== 'ok' && <p className="mt-0.5 opacity-80">{status.last_error}</p>}
+        {!status.configured && onConfigure && (
+          <button type="button" onClick={onConfigure} className="mt-2 h-9 px-4 rounded-lg text-[13px] font-semibold text-white" style={{ background: 'var(--color-danger-700, #b91c1c)' }}>
+            Configurer maintenant
+          </button>
+        )}
       </div>
     </div>
   );
@@ -119,6 +124,22 @@ const BackupSettings: React.FC = () => {
     return () => window.removeEventListener(BACKUP_STATUS_EVENT, refresh);
   }, [refresh]);
 
+  // Fait défiler jusqu'à la première étape de configuration manquante (phrase de passe, puis dossier).
+  const focusConfig = useCallback(() => {
+    const el = document.getElementById(status?.has_passphrase ? 'backup-destinations' : 'backup-passphrase');
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('ring-2', 'ring-offset-2');
+    window.setTimeout(() => el.classList.remove('ring-2', 'ring-offset-2'), 2500);
+  }, [status?.has_passphrase]);
+  useEffect(() => {
+    if (!status) return;
+    if (consumeBackupConfigFocus()) window.setTimeout(focusConfig, 60);
+    const onFocus = () => { consumeBackupConfigFocus(); focusConfig(); };
+    window.addEventListener(BACKUP_FOCUS_EVENT, onFocus);
+    return () => window.removeEventListener(BACKUP_FOCUS_EVENT, onFocus);
+  }, [status !== null, focusConfig]);
+
   const run = async (fn: () => Promise<void>) => {
     setBusy(true);
     try { await fn(); } catch (e) { toastService.error(e instanceof BackupError ? e.message : 'Erreur.'); }
@@ -140,7 +161,7 @@ const BackupSettings: React.FC = () => {
         icon={<HardDriveDownload size={16} />}
         description="Fichiers chiffrés (AES-256, clé dérivée de votre phrase de passe de sauvegarde) contenant toutes vos données."
       >
-        <BackupBanner status={status} />
+        <BackupBanner status={status} onConfigure={focusConfig} />
         <RedundancyAlert status={status} />
         <AttachmentsAlert status={status} always />
         <AlteredAttachmentsAlert status={status} />
@@ -155,6 +176,7 @@ const BackupSettings: React.FC = () => {
                 })}>
           <HardDriveDownload size={15} /> {busy ? 'En cours…' : 'Sauvegarder maintenant'}
         </button>
+        {!status.configured && <p className="text-[12px] font-medium" style={{ color: 'var(--color-danger-700)' }}>Disponible une fois la phrase de passe définie et le dossier de sauvegarde choisi (ci-dessous).</p>}
         <p className="text-[12px] flex items-start gap-2" style={{ color: 'var(--color-text-muted)' }}>
           <AlertTriangle size={14} className="mt-0.5 shrink-0" />
           <span>
@@ -169,18 +191,22 @@ const BackupSettings: React.FC = () => {
         </p>
       </SettingsCard>
 
-      {!status.has_passphrase ? <PassphraseCard busy={busy} run={run} onSaved={setSheetPhrase} /> : <ChangePassphraseCard busy={busy} run={run} onSaved={setSheetPhrase} />}
+      <div id="backup-passphrase" className="rounded-xl transition-shadow" style={{ ['--tw-ring-color' as any]: 'var(--color-danger-700, #b91c1c)' }}>
+        {!status.has_passphrase ? <PassphraseCard busy={busy} run={run} onSaved={setSheetPhrase} /> : <ChangePassphraseCard busy={busy} run={run} onSaved={setSheetPhrase} />}
+      </div>
 
-      <DestinationsCard status={status} busy={busy} run={run} disabled={!status.has_passphrase} />
+      <div id="backup-destinations" className="rounded-xl transition-shadow" style={{ ['--tw-ring-color' as any]: 'var(--color-danger-700, #b91c1c)' }}>
+        <DestinationsCard status={status} busy={busy} run={run} disabled={!status.has_passphrase} />
+      </div>
       <RestoreCard status={status} />
       {sheetPhrase && <RecoverySheetModal phrase={sheetPhrase} onClose={() => setSheetPhrase(null)} />}
     </div>
   );
 };
 
-type RunFn = (fn: () => Promise<void>) => Promise<void>;
+export type RunFn = (fn: () => Promise<void>) => Promise<void>;
 
-const PassphraseCard: React.FC<{ busy: boolean; run: RunFn; onSaved: (phrase: string) => void }> = ({ busy, run, onSaved }) => {
+export const PassphraseCard: React.FC<{ busy: boolean; run: RunFn; onSaved: (phrase: string) => void }> = ({ busy, run, onSaved }) => {
   const [pass, setPass] = useState('');
   const [again, setAgain] = useState('');
   const [noted, setNoted] = useState(false);
@@ -263,7 +289,7 @@ const ChangePassphraseCard: React.FC<{ busy: boolean; run: RunFn; onSaved: (phra
   );
 };
 
-const DestinationsCard: React.FC<{ status: BackupStatus; busy: boolean; run: RunFn; disabled: boolean }> = ({ status, busy, run, disabled }) => {
+export const DestinationsCard: React.FC<{ status: BackupStatus; busy: boolean; run: RunFn; disabled: boolean }> = ({ status, busy, run, disabled }) => {
   const current = (role: 'principal' | 'secours') => status.destinations.find(d => d.role === role);
   const [primary, setPrimary] = useState<string | null>(current('principal')?.path ?? null);
   const [secondary, setSecondary] = useState<string | null>(current('secours')?.path ?? null);

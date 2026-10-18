@@ -147,6 +147,7 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     // Journal d'accès : médecin uniquement
     ("audit_log_list", Rule::Medecin),
     // Sauvegarde / restauration : médecin uniquement
+    ("backup_health", Rule::AnySession),
     ("backup_status", Rule::Medecin),
     ("backup_set_passphrase", Rule::Medecin),
     ("backup_change_passphrase", Rule::Medecin),

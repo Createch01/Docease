@@ -563,6 +563,7 @@ pub fn run() {
         load_json,
         security_status,
         audit::audit_log_list,
+        backup::backup_health,
         backup::backup_status,
         backup::backup_set_passphrase,
         backup::backup_change_passphrase,

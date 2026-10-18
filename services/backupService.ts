@@ -8,6 +8,9 @@ export type BackupLevel = 'ok' | 'warning' | 'alert';
 /** Alerte orange permanente : pas de second emplacement, ou second emplacement sur le même disque. */
 export type BackupRedundancy = 'no_secondary' | 'same_disk';
 
+/** Santé visible par toute session (médecin et assistante) : sans chemin ni détail. */
+export interface BackupHealth { configured: boolean; last_success_at: number | null; age_secs: number | null; stale: boolean }
+
 export interface BackupDestStatus { role: 'principal' | 'secours'; path: string; accessible: boolean; error: string | null }
 
 export interface BackupStatus {
@@ -94,10 +97,18 @@ const call = async <T>(cmd: string, args?: Record<string, unknown>): Promise<T> 
 /** Événement Rust : la fenêtre est en cours de fermeture le temps d'une sauvegarde (voir `backup.rs`). */
 export const BACKUP_CLOSING_EVENT = 'backup-closing';
 export const BACKUP_STATUS_EVENT = 'docease_backup_status';
+/** Demande « va à la configuration » : posée avant d'ouvrir Paramètres › Base de données, consommée à son affichage. */
+export const BACKUP_FOCUS_EVENT = 'docease_backup_focus_config';
+let focusPending = false;
+export const requestBackupConfigFocus = () => { focusPending = true; window.dispatchEvent(new CustomEvent(BACKUP_FOCUS_EVENT)); };
+export const consumeBackupConfigFocus = (): boolean => { const p = focusPending; focusPending = false; return p; };
+/** Ancienneté (jours entiers) pour le bandeau orange. */
+export const ageDays = (secs: number | null): number | null => (secs === null ? null : Math.floor(secs / 86400));
 const changed = () => window.dispatchEvent(new CustomEvent(BACKUP_STATUS_EVENT));
 
 export const backupService = {
     status: () => call<BackupStatus>('backup_status'),
+    health: () => call<BackupHealth>('backup_health'),
     setPassphrase: async (passphrase: string) => { await call<void>('backup_set_passphrase', { passphrase }); changed(); },
     changePassphrase: async (oldPassphrase: string, newPassphrase: string) => {
         await call<void>('backup_change_passphrase', { oldPassphrase, newPassphrase });

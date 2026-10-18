@@ -164,6 +164,7 @@ fn call(name: &str, h: &H, file: &str) -> Result<(), String> {
         "set_inactivity_minutes" => done(settings::set_inactivity_minutes(a(), st!(), 15)),
         "session_touch" => done(settings::session_touch(a(), st!())),
         // Sauvegarde (asynchrones, médecin)
+        "backup_health" => done(tauri::async_runtime::block_on(super::backup::backup_health(a(), st!()))),
         "backup_status" => done(tauri::async_runtime::block_on(super::backup::backup_status(a(), st!()))),
         "backup_set_passphrase" => done(tauri::async_runtime::block_on(super::backup::backup_set_passphrase(a(), st!(), "une phrase de passe solide".into()))),
         "backup_change_passphrase" => done(tauri::async_runtime::block_on(super::backup::backup_change_passphrase(a(), st!(), "une phrase de passe solide".into(), "une autre phrase solide".into()))),

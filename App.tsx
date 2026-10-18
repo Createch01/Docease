@@ -14,7 +14,8 @@ import WaitingRoomKiosk from './components/WaitingRoomKiosk';
 import ToastContainer from './components/ToastContainer';
 import { dataService } from './services/dataService';
 import { notificationsService, TodoItem } from './services/notificationsService';
-import { backupService, BACKUP_STATUS_EVENT } from './services/backupService';
+import { backupService, BACKUP_STATUS_EVENT, requestBackupConfigFocus } from './services/backupService';
+import BackupGuard from './components/BackupGuard';
 import { toastService } from './services/toastService';
 import { autoImportService } from './services/autoImportService';
 import { securityService } from './services/securityService';
@@ -855,6 +856,7 @@ const AppContent: React.FC = () => {
           className="flex-1 overflow-y-auto scrollbar-hide"
           style={{ padding: '24px 28px' }}
         >
+          <BackupGuard isMedecin={sessionService.isMedecin()} onOpenSettings={() => { requestBackupConfigFocus(); openSettings({ section: 'database' }); }} />
           <div style={{
             maxWidth: currentView === 'new-prescription'
               || (currentView === 'settings' && settingsRoute.section === 'documents' && normalizeRoute(settingsRoute).tab === 'design')
