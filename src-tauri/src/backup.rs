@@ -1778,4 +1778,89 @@ mod tests {
             assert!(!is_backup_data_file(ko), "{ko}");
         }
     }
+
+    // ─── T7 : un numéro attribué après la sauvegarde n'est jamais réutilisé après restauration ───
+
+    fn t7_note(id: &str, total: f64, paid: f64) -> Value {
+        json!({"id": id, "patientId": "p1", "date": "2026-10-08", "invoiceNumber": "", "totalAmount": total, "amountPaid": paid,
+               "status": "UNPAID", "paymentMode": "CASH", "services": [{"name": "Consultation", "price": total, "checked": true}]})
+    }
+
+    fn t7_save(d: &Path, list: Vec<Value>, today: &str) -> Vec<Value> {
+        let (data, pending) = crate::numbering::on_save(d, &KEY, Value::Array(list), today, "Dr").unwrap();
+        super::super::write_enc_json_in(d, &KEY, crate::numbering::NOTES_FILE, &data).unwrap();
+        pending.commit().unwrap();
+        crate::numbering::read_notes(d, &KEY)
+    }
+
+    fn t7_issue(d: &Path, note_id: &str, today: &str) -> String {
+        let who = crate::receipts::Actor { name: "Dr".into(), role: Role::Medecin };
+        crate::receipts::issue(d, &KEY, note_id, false, &who, "2026-10-08T10:00:00Z", today).unwrap().number
+    }
+
+    fn t7_expense(d: &Path, today: &str) -> String {
+        let n = crate::expenses::NewExpense { date_expense: "2026-10-01".into(), category: "Divers".into(), supplier: "Pharma".into(), label: "Achat".into(), amount_cents: 1_000, mode: "CASH".into(), ..Default::default() };
+        crate::expenses::add(d, &KEY, Role::Medecin, &n, "Dr", today).unwrap().id
+    }
+
+    fn seq_of(id: &str) -> u64 {
+        id.rsplit('-').next().unwrap().parse().unwrap()
+    }
+
+    #[test]
+    fn t7_restoring_an_older_backup_never_reuses_a_note_receipt_or_expense_number() {
+        fast_kdf();
+        let d = tmp("t7");
+        put(&d, "meddoc_patients.json", &json!([{"id": "p1", "name": "HAYAT Salma"}]));
+        put(&d, "meddoc_doctor_info.json", &json!({"nameFr": "Dr X"}));
+        let (a, _b) = configured(&d);
+        let today = "2026-10-08";
+
+        // Note N, reçu, dépense, puis sauvegarde.
+        let notes = t7_save(&d, vec![t7_note("n1", 300.0, 300.0)], today);
+        let n_number = crate::numbering::number_of(&notes[0]).to_string();
+        let rec_n = t7_issue(&d, "n1", today);
+        let dep_n = t7_expense(&d, today);
+        let r = run_backup(&d, &KEY, 1_790_000_000).unwrap();
+        let backup = a.join(SUBDIR).join(&r.file_name);
+
+        // Note N+1, reçu, dépense APRÈS la sauvegarde.
+        let mut list = notes.clone();
+        list.push(t7_note("n2", 200.0, 200.0));
+        let notes = t7_save(&d, list, today);
+        let n1_number = crate::numbering::number_of(&notes[1]).to_string();
+        let rec_n1 = t7_issue(&d, "n2", today);
+        let dep_n1 = t7_expense(&d, today);
+        assert!(seq_of(&n1_number) > seq_of(&n_number) && seq_of(&rec_n1) > seq_of(&rec_n) && seq_of(&dep_n1) > seq_of(&dep_n));
+        let payments_before = crate::payments::load(&d, &KEY).unwrap().len();
+
+        // Restauration de la sauvegarde ancienne.
+        restore(&d, &KEY, &backup, PASS, 1_790_001_000).unwrap();
+        let after = crate::numbering::read_notes(&d, &KEY);
+        assert_eq!(after.len(), 1, "la note postérieure à la sauvegarde n'est pas dans les données restaurées");
+
+        // Nouvelles émissions : numéros strictement supérieurs à ceux d'avant la restauration.
+        let mut list = after.clone();
+        list.push(t7_note("n3", 100.0, 100.0));
+        let notes = t7_save(&d, list, today);
+        let n2_number = crate::numbering::number_of(notes.iter().find(|n| n["id"] == "n3").unwrap()).to_string();
+        assert!(seq_of(&n2_number) > seq_of(&n1_number), "note : {n2_number} doit dépasser {n1_number}");
+        let rec_new = t7_issue(&d, "n3", today);
+        assert!(seq_of(&rec_new) > seq_of(&rec_n1), "reçu : {rec_new} doit dépasser {rec_n1}");
+        let dep_new = t7_expense(&d, today);
+        assert!(seq_of(&dep_new) > seq_of(&dep_n1), "dépense : {dep_new} doit dépasser {dep_n1}");
+
+        // Registres intègres : encaissements (aucun perdu), reçus, dépenses, clôtures.
+        let pays = crate::payments::load(&d, &KEY).unwrap();
+        assert_eq!(pays.len(), payments_before + 1, "les encaissements postérieurs à la sauvegarde sont conservés");
+        assert!(crate::payments::verify_entries(&pays).ok, "{:?}", crate::payments::verify_entries(&pays).problems);
+        assert!(crate::receipts::verify(&d, &KEY).unwrap().ok, "{:?}", crate::receipts::verify(&d, &KEY).unwrap().problems);
+        let exps = crate::expenses::load(&d, &KEY).unwrap();
+        assert!(crate::expenses::verify_entries(&exps, true).ok);
+        assert_eq!(exps.len(), 3);
+        assert!(crate::periods::verify_entries(&crate::periods::load(&d, &KEY).unwrap()).is_empty());
+        for x in [&d, &a] {
+            let _ = fs::remove_dir_all(x);
+        }
+    }
 }
