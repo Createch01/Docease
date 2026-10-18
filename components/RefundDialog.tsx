@@ -3,6 +3,7 @@ import { Loader2 } from 'lucide-react';
 import { HonoraryNote } from '../types';
 import { paymentRegistryService } from '../services/paymentRegistryService';
 import { PAY_MODES, PayMode } from './PaymentFields';
+import ReasonPicker from './ReasonPicker';
 
 /**
  * Médecin : remboursement d'un patient. Ce n'est jamais une modification de l'encaissement d'origine : Rust
@@ -44,11 +45,7 @@ const RefundDialog: React.FC<{ note: HonoraryNote; currency: string; onClose: ()
                         {PAY_MODES.map(m => <option key={m.id} value={m.id}>{m.label}</option>)}
                     </select>
                 </label>
-                <label className="block text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-                    Motif (obligatoire, 200 caractères au plus)
-                    <textarea className="w-full mt-1 p-2 rounded-lg border text-[14px] outline-none bg-white" style={{ borderColor: 'var(--color-border)' }} rows={3} maxLength={200}
-                        value={reason} onChange={e => setReason(e.target.value)} placeholder="Ex. : consultation annulée par le patient" />
-                </label>
+                <ReasonPicker value={reason} onChange={setReason} />
                 {error && <p role="alert" className="text-[13px]" style={{ color: 'var(--color-danger-700)' }}>{error}</p>}
                 <div className="flex justify-end gap-2">
                     <button type="button" className="h-10 px-4 rounded-lg border text-[13px] font-medium bg-white disabled:opacity-40" style={{ borderColor: 'var(--color-border)' }} onClick={onClose} disabled={busy}>Retour</button>

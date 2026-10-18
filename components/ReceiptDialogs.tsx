@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Loader2 } from 'lucide-react';
 import { ReceiptView, receiptService } from '../services/receiptService';
+import ReasonPicker from './ReasonPicker';
 
 const overlay = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50';
 const card = 'bg-white rounded-xl shadow-2xl w-full max-w-md p-5 space-y-4';
@@ -46,35 +47,39 @@ export const ReceiptIssueDialog: React.FC<{ noteId: string; onClose: () => void;
     );
 };
 
-/** Médecin : annulation par reçu d'annulation. Le reçu d'origine est conservé tel quel. */
+/**
+ * Médecin : un reçu n'efface jamais un encaissement. « Réémettre » annule le reçu et en émet un nouveau
+ * (l'ancien est marqué remplacé) ; « Annuler » n'est accepté par Rust que si l'encaissement est déjà
+ * remboursé (« Rembourser », avec motif). Le reçu d'origine est toujours conservé.
+ */
 export const CancelReceiptDialog: React.FC<{ receipt: ReceiptView; onClose: () => void; onCancelled: (r: ReceiptView) => void }> = ({ receipt, onClose, onCancelled }) => {
     const [reason, setReason] = useState('');
     const [busy, setBusy] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const ok = reason.trim().length >= 3 && reason.trim().length <= 200;
-    const submit = async () => {
+    const submit = async (kind: 'cancel' | 'reissue') => {
         setBusy(true);
         setError(null);
-        try { onCancelled(await receiptService.cancel(receipt.number, reason)); }
+        try { onCancelled(kind === 'reissue' ? await receiptService.reissue(receipt.number, reason) : await receiptService.cancel(receipt.number, reason)); }
         catch (e) { setError(errorText(e)); setBusy(false); }
     };
     return (
         <div role="dialog" aria-modal="true" aria-label={`Annuler le reçu ${receipt.number}`} className={overlay}>
             <div className={card}>
-                <h2 className="text-[16px] font-semibold" style={{ color: 'var(--color-text)' }}>Annuler le reçu {receipt.number}</h2>
+                <h2 className="text-[16px] font-semibold" style={{ color: 'var(--color-text)' }}>Corriger ou annuler le reçu {receipt.number}</h2>
                 <p className="text-[13px]" style={{ color: 'var(--color-text-muted)' }}>
-                    Un reçu d'annulation, avec son propre numéro, sera émis. Le reçu d'origine est conservé et marqué « annulé » ; il n'est jamais supprimé.
+                    Annuler un reçu n'efface jamais l'encaissement. <strong>Réémettre</strong> : un nouveau reçu du même montant est émis, celui-ci est marqué « remplacé ».
+                    <strong> Annuler</strong> : possible seulement si le patient a été remboursé (enregistrez d'abord le remboursement, avec motif). Le reçu d'origine est toujours conservé.
                 </p>
-                <label className="block text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-                    Motif (obligatoire, 200 caractères au plus)
-                    <textarea className="w-full mt-1 p-2 rounded-lg border text-[14px] outline-none bg-white" style={{ borderColor: 'var(--color-border)' }} rows={3} maxLength={200}
-                        value={reason} onChange={e => setReason(e.target.value)} placeholder="Ex. : erreur de saisie du montant" />
-                </label>
+                <ReasonPicker value={reason} onChange={setReason} />
                 {error && <p role="alert" className="text-[13px]" style={{ color: 'var(--color-danger-700)' }}>{error}</p>}
                 <div className="flex justify-end gap-2">
                     <button type="button" className={ghost} style={{ borderColor: 'var(--color-border)' }} onClick={onClose} disabled={busy}>Retour</button>
-                    <button type="button" className={primary} style={{ background: 'var(--color-danger)' }} onClick={submit} disabled={busy || !ok}>
-                        {busy && <Loader2 size={15} className="animate-spin" />} Émettre le reçu d'annulation
+                    <button type="button" className={ghost} style={{ borderColor: 'var(--color-danger)', color: 'var(--color-danger)' }} onClick={() => submit('cancel')} disabled={busy || !ok}>
+                        Annuler (patient remboursé)
+                    </button>
+                    <button type="button" className={primary} style={{ background: 'var(--color-primary)' }} onClick={() => submit('reissue')} disabled={busy || !ok}>
+                        {busy && <Loader2 size={15} className="animate-spin" />} Réémettre le reçu
                     </button>
                 </div>
             </div>

@@ -16,7 +16,7 @@ export interface ReceiptLegal {
 
 export type ReceiptKind = 'receipt' | 'cancellation' | 'duplicate';
 /** `valid` · `cancelled` (reçu annulé) · `cancellation` (reçu d'annulation). */
-export type ReceiptStatus = 'valid' | 'cancelled' | 'cancellation';
+export type ReceiptStatus = 'valid' | 'cancelled' | 'replaced' | 'cancellation';
 
 export interface ReceiptView {
     kind: ReceiptKind;
@@ -45,6 +45,10 @@ export interface ReceiptView {
     noteTotalCents?: number;
     status: ReceiptStatus;
     cancelledBy: string | null;
+    /** Numéro du reçu émis en remplacement (statut `replaced`). */
+    replacedBy?: string | null;
+    /** Sur un reçu de remplacement : numéro du reçu remplacé. */
+    replaces?: string;
     duplicates: number;
     /** Rang du duplicata qui vient d'être enregistré (réponse de `duplicate` seulement). */
     duplicateRank: number | null;
@@ -76,6 +80,8 @@ export const receiptService = {
     duplicate: async (number: string) => { const r = await call<ReceiptView>('receipt_duplicate', { number }); changed(); return r; },
     /** Médecin : émet un reçu d'annulation (motif obligatoire). Le reçu d'origine n'est jamais modifié. */
     cancel: async (number: string, reason: string) => { const r = await call<ReceiptView>('receipt_cancel', { number, reason }); changed(); return r; },
+    /** Médecin : annule ce reçu (motif) et en émet un nouveau du même montant ; l'ancien est « remplacé ». L'encaissement n'est pas touché. */
+    reissue: async (number: string, reason: string) => { const r = await call<ReceiptView>('receipt_reissue', { number, reason }); changed(); return r; },
     get: (number: string) => call<ReceiptView>('receipt_get', { number }),
     /** Reçus émis aujourd'hui (assistante et médecin). */
     listToday: () => call<ReceiptView[]>('receipt_list_today'),
@@ -106,4 +112,4 @@ export const legalLines = (legal: ReceiptLegal): string[] => {
     return out;
 };
 
-export const STATUS_LABEL: Record<ReceiptStatus, string> = { valid: 'Valide', cancelled: 'Annulé', cancellation: "Reçu d'annulation" };
+export const STATUS_LABEL: Record<ReceiptStatus, string> = { valid: 'Valide', cancelled: 'Annulé', replaced: 'Remplacé', cancellation: "Reçu d'annulation" };

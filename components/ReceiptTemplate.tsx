@@ -29,7 +29,8 @@ const timeFr = (iso: string): string => {
 
 const ReceiptTemplate: React.FC<Props> = ({ receipt, doctor, duplicate, id = 'receipt-template' }) => {
     const isCancellation = receipt.kind === 'cancellation';
-    const cancelled = receipt.status === 'cancelled';
+    const cancelled = receipt.status === 'cancelled' || receipt.status === 'replaced';
+    const replaced = receipt.status === 'replaced';
     const logo = resolveCabinetLogo(doctor, null);
     const name = doctor.cabinetName || doctor.nameFr || doctor.name || '';
     const ids = legalLines(receipt.legal);
@@ -135,7 +136,7 @@ const ReceiptTemplate: React.FC<Props> = ({ receipt, doctor, duplicate, id = 're
             {(cancelled || isCancellation) && (
                 <div data-testid="watermark" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
                     <div style={{ transform: 'rotate(-28deg)', border: '1.2mm solid rgba(185,28,28,0.45)', color: 'rgba(185,28,28,0.45)', fontWeight: 900, fontSize: '34pt', padding: '2mm 8mm', textAlign: 'center', lineHeight: 1.1 }}>
-                        {isCancellation ? 'ANNULATION' : <>ANNULÉ<div style={{ fontSize: '11pt', fontWeight: 700 }}>voir {receipt.cancelledBy}</div></>}
+                        {isCancellation ? 'ANNULATION' : replaced ? <>REMPLACÉ<div style={{ fontSize: '11pt', fontWeight: 700 }}>par {receipt.replacedBy}</div></> : <>ANNULÉ<div style={{ fontSize: '11pt', fontWeight: 700 }}>voir {receipt.cancelledBy}</div></>}
                     </div>
                 </div>
             )}

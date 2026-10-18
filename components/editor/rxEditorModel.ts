@@ -197,6 +197,29 @@ export function rxResolveText(
   return el.text || '';
 }
 
+const ARABIC = /[؀-ۿ]/;
+const norm = (s: string) => s.replace(/[\s.]+/g, ' ').replace(/^\s*(?:ال)?(?:دكتور|د|dr|docteur)\s+/i, '').trim().toLowerCase();
+
+/**
+ * Textes libres de l'en-tête personnalisé qui ressemblent à un nom de médecin (arabe : commence par
+ * « د. » / « الدكتور » ; français : « Dr ») mais diffèrent du nom de l'Identité professionnelle.
+ * Les champs liés (bind) suivent la fiche : jamais en conflit.
+ */
+export function rxHeaderNameConflicts(elements: RxEditorElement[] | undefined, doctor: { nameFr?: string; nameAr?: string }): string[] {
+  const out: string[] = [];
+  for (const el of elements || []) {
+    if (el.type !== 'text' || el.bind || !el.visible) continue;
+    const t = (el.text || '').trim();
+    if (!t) continue;
+    if (ARABIC.test(t) && /^\s*(?:ال)?(?:دكتور|د\.)/.test(t)) {
+      if (doctor.nameAr && norm(t) !== norm(doctor.nameAr)) out.push(t);
+    } else if (/^\s*(?:dr|docteur)(?![\p{L}])/iu.test(t)) {
+      if (doctor.nameFr && norm(t) !== norm(doctor.nameFr)) out.push(t);
+    }
+  }
+  return out;
+}
+
 /** A sensible starting letterhead. Every value is overridable in the editor. */
 export function rxDefaultConfig(): RxLayoutConfig {
   return {

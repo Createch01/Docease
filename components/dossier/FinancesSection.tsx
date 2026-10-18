@@ -220,7 +220,7 @@ const FinancesSection: React.FC<FinancesSectionProps> = ({
                                     <td className="font-mono" data-testid="receipt-note">{honoraryNotes.find(n => n.id === r.noteId)?.invoiceNumber || '—'}</td>
                                     <td>{r.date}</td>
                                     <td className={r.amountCents < 0 ? 'text-red-600' : ''}>{formatCents(r.amountCents)}</td>
-                                    <td>{STATUS_LABEL[r.status]}{r.cancelledBy ? ` (${r.cancelledBy})` : ''}</td>
+                                    <td>{STATUS_LABEL[r.status]}{r.status === 'replaced' && r.replacedBy ? ` par ${r.replacedBy}` : r.cancelledBy ? ` (${r.cancelledBy})` : ''}</td>
                                     <td className="text-right space-x-2">
                                         <button type="button" className="px-3 py-1.5 rounded-lg border border-gray-200 hover:bg-gray-50" onClick={() => reprint(r.number)}>Duplicata</button>
                                         {r.status === 'valid' && (

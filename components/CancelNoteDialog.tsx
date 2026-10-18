@@ -3,6 +3,7 @@ import { Loader2 } from 'lucide-react';
 import { HonoraryNote } from '../types';
 import { honoraryNoteService } from '../services/honoraryNoteService';
 import { PAY_MODES, PayMode } from './PaymentFields';
+import ReasonPicker from './ReasonPicker';
 
 /** Médecin : annulation d'une note numérotée. Le numéro est conservé ; la note ne compte plus dans les montants. */
 const CancelNoteDialog: React.FC<{ note: HonoraryNote; onClose: () => void; onCancelled: () => void }> = ({ note, onClose, onCancelled }) => {
@@ -40,11 +41,7 @@ const CancelNoteDialog: React.FC<{ note: HonoraryNote; onClose: () => void; onCa
                         </label>
                     </div>
                 )}
-                <label className="block text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>
-                    Motif (obligatoire, 200 caractères au plus)
-                    <textarea className="w-full mt-1 p-2 rounded-lg border text-[14px] outline-none bg-white" style={{ borderColor: 'var(--color-border)' }} rows={3} maxLength={200}
-                        value={reason} onChange={e => setReason(e.target.value)} placeholder="Ex. : note émise par erreur" />
-                </label>
+                <ReasonPicker value={reason} onChange={setReason} />
                 {error && <p role="alert" className="text-[13px]" style={{ color: 'var(--color-danger-700)' }}>{error}</p>}
                 <div className="flex justify-end gap-2">
                     <button type="button" className="h-10 px-4 rounded-lg border text-[13px] font-medium bg-white disabled:opacity-40" style={{ borderColor: 'var(--color-border)' }} onClick={onClose} disabled={busy}>Retour</button>

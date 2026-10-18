@@ -25,7 +25,7 @@ const CABINET_FIELDS = [
   'cabinetName', 'phone', 'gsm', 'email', 'fax', 'website', 'addressFr', 'addressAr',
   'ice', 'patente', 'taxId', 'rc', 'vatExemptionNote',
   // Identité professionnelle (validée par Rust à l'enregistrement : ICE 15 chiffres, INPE / IF / TP numériques).
-  'nameFr', 'specialtyFr', 'ordreNumber', 'inpe', 'cnssEmployer', 'rib',
+  'nameFr', 'nameAr', 'specialtyFr', 'ordreNumber', 'inpe', 'cnssEmployer', 'rib',
   'logoUrl',
   'hours',
   'vaccinationEnabled',
@@ -140,6 +140,8 @@ const CabinetSettings: React.FC<SettingsPageProps> = ({ route, onNavigate }) => 
             description="Imprimée sur les notes d'honoraires et les reçus. Figée dans chaque note à l'émission : une note ancienne ne change pas si vous modifiez l'adresse.">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <TextField label="Nom" value={draft.nameFr} onChange={v => update({ nameFr: v })} placeholder="Dr ..." />
+              <TextField rtl label="Nom en arabe" value={draft.nameAr} onChange={v => update({ nameAr: v })} placeholder="د. الاسم الكامل"
+                         hint={<span className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>Imprimé dans l'en-tête arabe</span>} />
               <TextField label="Spécialité" value={draft.specialtyFr} onChange={v => update({ specialtyFr: v })} placeholder="Cardiologie" />
               <TextField mono label="N° d'inscription à l'Ordre" value={draft.ordreNumber} onChange={v => update({ ordreNumber: v })} />
               <TextField mono label="INPE" value={draft.inpe} onChange={v => update({ inpe: v })} placeholder="Chiffres uniquement" hint={<span className="text-[11px]" style={{ color: 'var(--color-text-faint)' }}>Obligatoire</span>} />

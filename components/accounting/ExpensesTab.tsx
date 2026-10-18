@@ -6,6 +6,7 @@ import { formatCents } from '../../services/receiptService';
 import { sessionService } from '../../services/sessionService';
 import AttachmentViewer from '../dossier/AttachmentViewer';
 import ExpenseDialog from './ExpenseDialog';
+import ReasonPicker from '../ReasonPicker';
 
 // Dépenses : liste filtrable, totaux par catégorie calculés par Rust, justificatifs chiffrés.
 // Aucune dépense ne se modifie ni ne se supprime : annulation (motif) ou correction (annuler + recréer).
@@ -184,8 +185,7 @@ const ExpensesTab: React.FC<Props> = ({ from: defFrom, to: defTo, currency, refr
                     <div className="bg-white rounded-xl shadow-2xl w-full max-w-md p-5 space-y-4">
                         <h2 className="text-[16px] font-semibold" style={{ color: 'var(--color-text)' }}>Annuler la dépense {cancelFor.id}</h2>
                         <p className="text-[13px]" style={{ color: 'var(--color-text-muted)' }}>La dépense reste dans la liste, barrée, avec le motif, la date et l'auteur. Elle ne compte plus dans les totaux ni dans le résultat.</p>
-                        <label className="block text-[12px] font-medium" style={{ color: 'var(--color-text-subtle)' }}>Motif (obligatoire, 200 caractères au plus)
-                            <textarea className="w-full mt-1 p-2 rounded-lg border text-[14px] outline-none bg-white" style={border} rows={3} maxLength={200} value={cancelReason} onChange={e => setCancelReason(e.target.value)} /></label>
+                        <ReasonPicker value={cancelReason} onChange={setCancelReason} />
                         {cancelError && <p role="alert" className="text-[13px]" style={{ color: 'var(--color-danger-700)' }}>{cancelError}</p>}
                         <div className="flex justify-end gap-2">
                             <button type="button" className="h-10 px-4 rounded-lg border text-[13px] font-medium bg-white" style={border} onClick={() => setCancelFor(null)}>Retour</button>

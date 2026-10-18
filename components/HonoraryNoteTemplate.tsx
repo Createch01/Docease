@@ -38,6 +38,7 @@ export const issuerDoctor = (note: HonoraryNote, doctor: DoctorInfo): DoctorInfo
     return {
         ...doctor,
         nameFr: i.name ?? doctor.nameFr,
+        nameAr: i.nameAr ?? doctor.nameAr,
         specialtyFr: i.specialty ?? doctor.specialtyFr,
         addressFr: i.address ?? doctor.addressFr,
         phone: i.phone ?? doctor.phone,

@@ -626,6 +626,7 @@ pub fn issuer_snapshot(info: &Value) -> Value {
     let mut o = Map::new();
     for (k, v) in [
         ("name", name),
+        ("nameAr", g("nameAr")),
         ("cabinetName", g("cabinetName")),
         ("specialty", g("specialtyFr")),
         ("ordreNumber", g("ordreNumber")),

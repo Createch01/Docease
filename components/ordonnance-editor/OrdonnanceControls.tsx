@@ -5,6 +5,8 @@
 
 import React, { useState } from 'react';
 import { RxIcon, RX_ICON_LABELS } from '../editor/RxContactIcons';
+import { rxHeaderNameConflicts } from '../editor/rxEditorModel';
+import { settingsService } from '../../services/settingsService';
 import { OrdonnanceAppearance, OrdDoctor, OrdTheme, FooterField, ORD_THEMES } from './ordonnanceModel';
 
 const T = {
@@ -207,6 +209,17 @@ const OrdonnanceControls: React.FC<OrdonnanceControlsProps> = ({ appearance: A, 
 
       {/* ── HEADER ── */}
       <Section title="En-tête" icon={<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9"><path d="M4 6h16M4 12h16M4 18h16" /></svg>}>
+        {(() => {
+          const conflicts = rxHeaderNameConflicts(settingsService.getAppearance().customTemplateConfig?.layoutConfig?.elements, { nameFr: doctor.name, nameAr: doctor.nameAr });
+          if (conflicts.length === 0) return null;
+          return (
+            <div role="alert" className="mb-3 p-2.5 rounded-lg" style={{ background: '#FFFBEB', color: '#B45309', fontSize: 11.5, lineHeight: 1.4 }}>
+              <strong>Nom différent de l'Identité professionnelle.</strong> Votre en-tête personnalisé contient « {conflicts.join(' », « ')} », qui ne correspond pas au nom enregistré
+              ({[doctor.name, doctor.nameAr].filter(Boolean).join(' / ') || 'non renseigné'}). Corrigez le texte de l'en-tête ou mettez à jour
+              l'identité{onEditCabinet ? <> (<button type="button" onClick={onEditCabinet} style={{ textDecoration: 'underline', fontWeight: 600 }}>Cabinet</button>)</> : null}.
+            </div>
+          );
+        })()}
         <Row label="Nom du médecin" hint={`${A.header.name.fontSize}px`}>
           <Slider value={A.header.name.fontSize} min={12} max={36} onChange={v => set('header.name.fontSize', v)} />
         </Row>

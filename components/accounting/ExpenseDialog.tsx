@@ -5,6 +5,7 @@ import { checkFile, defaultTitle } from '../../services/attachmentService';
 import { sessionService } from '../../services/sessionService';
 import { todayLocal } from '../../utils/localDate';
 import { parseCents } from '../../utils/cents';
+import ReasonPicker from '../ReasonPicker';
 
 // Saisie (ou correction) d'une dépense. L'interface ne fait que recueillir : numéro DEP, date de saisie, auteur,
 // catégories valides, mois clôturés et montants sont contrôlés par Rust. « Corriger » = annuler + recréer
@@ -148,8 +149,7 @@ const ExpenseDialog: React.FC<Props> = ({ initial, currency, onClose, onDone }) 
                 )}
 
                 {initial && (
-                    <label className={label} style={sub}>Motif de la correction (obligatoire, 200 caractères au plus)
-                        <textarea className="w-full mt-1 p-2 rounded-lg border text-[14px] outline-none bg-white" style={border} rows={2} maxLength={200} value={reason} onChange={e => setReason(e.target.value)} placeholder="Ex. : montant erroné" /></label>
+                    <ReasonPicker title="Motif de la correction (obligatoire)" value={reason} onChange={setReason} />
                 )}
 
                 {error && <p role="alert" className="text-[13px]" style={{ color: 'var(--color-danger-700)' }}>{error}</p>}

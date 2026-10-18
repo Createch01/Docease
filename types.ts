@@ -301,6 +301,8 @@ export interface NoteLine {
 
 export interface NoteIssuer {
   name?: string;
+  /** Nom en arabe figé à l'émission (absent des notes plus anciennes : fiche actuelle). */
+  nameAr?: string;
   cabinetName?: string;
   specialty?: string;
   ordreNumber?: string;
