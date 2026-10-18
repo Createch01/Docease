@@ -91,6 +91,7 @@ pub const COMMAND_RULES: &[(&str, Rule)] = &[
     ("receipt_duplicate", Rule::AnySession),
     ("receipt_list", Rule::Medecin),
     ("receipt_cancel", Rule::Medecin),
+    ("receipt_reissue", Rule::Medecin),
     ("receipts_verify", Rule::Medecin),
     // Notes d'honoraires : annulation et contrôle de numérotation réservés au médecin
     // Registre d'encaissements : remboursement, consultation, vérification et migration réservés au médecin
@@ -292,7 +293,7 @@ mod tests {
         "backup_status", "backup_set_passphrase", "backup_change_passphrase", "backup_set_destinations", "backup_run_now",
         "backup_run_if_due", "backup_list", "backup_inspect", "backup_restore",
         "attachment_add", "attachment_list", "attachment_update", "attachment_read", "attachment_delete", "attachments_status",
-        "receipt_list", "receipt_cancel", "receipts_verify", "expense_cancel", "expense_correct", "expense_list", "expense_category_add", "expense_category_set_active", "expenses_migrate", "expenses_verify", "periods_list", "period_close", "period_reopen", "accounting_summary", "accounting_journal", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
+        "receipt_list", "receipt_cancel", "receipt_reissue", "receipts_verify", "expense_cancel", "expense_correct", "expense_list", "expense_category_add", "expense_category_set_active", "expenses_migrate", "expenses_verify", "periods_list", "period_close", "period_reopen", "accounting_summary", "accounting_journal", "payment_refund", "payments_list", "payments_verify", "payments_migrate", "honorary_note_cancel", "honorary_note_refund_and_cancel", "invoice_numbering_check", "invoice_numbering_migrate",
         "tariff_act_save", "tariff_act_set_active", "tariff_settings_save", "tariffs_migrate", "identity_stamp_set", "identity_check",
     ];
 

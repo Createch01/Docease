@@ -7,6 +7,7 @@ mod accounting;
 mod expenses;
 mod identity;
 mod periods;
+mod reasons;
 mod receipts;
 mod audit;
 mod backup;
@@ -611,6 +612,7 @@ pub fn run() {
         receipts::receipt_get,
         receipts::receipt_duplicate,
         receipts::receipt_cancel,
+        receipts::receipt_reissue,
         receipts::receipts_verify,
         expenses::expense_add,
         expenses::expense_receipt_add,

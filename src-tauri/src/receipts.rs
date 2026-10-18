@@ -104,13 +104,17 @@ pub struct Entry {
     pub discount_cents: Option<i64>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub note_total_cents: Option<i64>,
+    /// Reçu émis en remplacement d'un reçu annulé par « Réémettre » : numéro du reçu remplacé.
+    /// Absent des reçus plus anciens : leurs empreintes restent valides.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub replaces: Option<String>,
     pub prev_hash: String,
     pub hash: String,
 }
 
 pub const ENTRY_FIELDS: &[&str] = &[
     "kind", "number", "seq", "year", "date", "issuedAt", "issuedBy", "noteId", "patientId", "patientName", "amountCents",
-    "amountInWords", "paymentMode", "label", "balanceDueCents", "legal", "cancelsNumber", "reason", "rank", "noteNumber", "grossCents", "discountCents", "noteTotalCents", "prevHash", "hash",
+    "amountInWords", "paymentMode", "label", "balanceDueCents", "legal", "cancelsNumber", "reason", "rank", "noteNumber", "grossCents", "discountCents", "noteTotalCents", "replaces", "prevHash", "hash",
 ];
 
 #[derive(Serialize, Deserialize, Default, Clone, Debug)]
@@ -376,6 +380,10 @@ fn covered_cents(entries: &[Entry], note_id: &str) -> i64 {
 /// L'assistante : notes du jour seulement, libellé par défaut seulement.
 pub fn issue(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, detail: bool, who: &Actor, now_iso: &str, today: &str) -> Result<Entry, String> {
     let _g = lock();
+    issue_locked(dir, key, note_id, detail, who, now_iso, today, None)
+}
+
+fn issue_locked(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, detail: bool, who: &Actor, now_iso: &str, today: &str, replaces: Option<String>) -> Result<Entry, String> {
     let notes = read_list(dir, key, NOTES_FILE);
     let note = notes.iter().find(|n| s(n, "id") == note_id).ok_or("Encaissement introuvable.")?;
     if super::numbering::is_cancelled(note) {
@@ -438,6 +446,7 @@ pub fn issue(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, detail: bool, who: 
             gross_cents,
             discount_cents,
             note_total_cents: Some(note_total_cents),
+            replaces: replaces.clone(),
             prev_hash: String::new(),
             hash: String::new(),
         })
@@ -452,9 +461,11 @@ pub fn issue(dir: &Path, key: &[u8; KEY_LEN], note_id: &str, detail: bool, who: 
 pub struct View {
     #[serde(flatten)]
     pub entry: Entry,
-    /// `valid` · `cancelled` (reçu annulé) · `cancellation` (reçu d'annulation).
+    /// `valid` · `cancelled` (reçu annulé) · `replaced` (annulé et réémis) · `cancellation` (reçu d'annulation).
     pub status: String,
     pub cancelled_by: Option<String>,
+    /// Numéro du reçu émis en remplacement (réémission) : le reçu est alors « remplacé ».
+    pub replaced_by: Option<String>,
     /// Nombre de duplicata déjà imprimés.
     pub duplicates: u32,
     /// Rang du duplicata qui vient d'être enregistré (réponse de `duplicate` seulement).
@@ -465,13 +476,15 @@ pub struct View {
 
 fn view_of(entries: &[Entry], e: &Entry) -> View {
     let cancelled_by = entries.iter().find(|c| c.kind == "cancellation" && c.cancels_number.as_deref() == Some(e.number.as_str())).map(|c| c.number.clone());
-    let status = match (e.kind.as_str(), &cancelled_by) {
-        ("cancellation", _) => "cancellation",
-        (_, Some(_)) => "cancelled",
+    let replaced_by = entries.iter().find(|r| r.kind == "receipt" && r.replaces.as_deref() == Some(e.number.as_str())).map(|r| r.number.clone());
+    let status = match (e.kind.as_str(), &cancelled_by, &replaced_by) {
+        ("cancellation", _, _) => "cancellation",
+        (_, Some(_), Some(_)) => "replaced",
+        (_, Some(_), None) => "cancelled",
         _ => "valid",
     };
     let duplicates = entries.iter().filter(|d| d.kind == "duplicate" && d.number == e.number).count() as u32;
-    View { entry: e.clone(), status: status.into(), cancelled_by, duplicates, duplicate_rank: None, duplicate_at: None }
+    View { entry: e.clone(), status: status.into(), cancelled_by, replaced_by, duplicates, duplicate_rank: None, duplicate_at: None }
 }
 
 fn find<'a>(entries: &'a [Entry], number: &str) -> Result<&'a Entry, String> {
@@ -483,7 +496,18 @@ const MAX_REASON_CHARS: usize = 200;
 
 /// Reçu d'annulation : même suite de numéros, montant négatif. Médecin seulement. Le reçu d'origine
 /// reste intact ; il est « annulé » par déduction.
+///
+/// Un reçu n'efface JAMAIS un encaissement : tant que le registre des paiements enregistre l'argent
+/// que ce reçu atteste, il ne peut pas être annulé seul. Il faut soit le réémettre (`reissue`), soit
+/// rembourser l'encaissement (« Rembourser », avec motif), puis annuler le reçu.
 pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: &str, who: &Actor, now_iso: &str, today: &str) -> Result<Entry, String> {
+    let reason = check_cancel_input(who, reason)?;
+    let _g = lock();
+    let payments = super::payments::load(dir, key).unwrap_or_default();
+    cancel_locked(dir, key, number, reason, who, now_iso, today, Some(payments))
+}
+
+fn check_cancel_input(who: &Actor, reason: &str) -> Result<String, String> {
     if who.role != Role::Medecin {
         return Err("Seul le médecin peut annuler un reçu.".into());
     }
@@ -495,7 +519,12 @@ pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: &str, who: 
     if n > MAX_REASON_CHARS {
         return Err(format!("Motif trop long ({MAX_REASON_CHARS} caractères au plus)."));
     }
-    let _g = lock();
+    Ok(reason)
+}
+
+/// `payments` = Some : l'encaissement doit déjà être remboursé ; None : réémission (l'encaissement
+/// reste couvert par le nouveau reçu).
+fn cancel_locked(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: String, who: &Actor, now_iso: &str, today: &str, payments: Option<Vec<super::payments::Entry>>) -> Result<Entry, String> {
     let number = number.to_string();
     let (issued_by, now, date) = (who.name.clone(), now_iso.to_string(), today.to_string());
     append_numbered(dir, key, today, move |entries, new_number, seq, year| {
@@ -505,6 +534,12 @@ pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: &str, who: 
         }
         if is_cancelled(entries, &number) {
             return Err("Ce reçu est déjà annulé.".into());
+        }
+        if let Some(p) = &payments {
+            let still_backed = super::payments::net_cents(p, &orig.note_id) > covered_cents(entries, &orig.note_id) - orig.amount_cents;
+            if still_backed {
+                return Err("Ce reçu atteste un encaissement toujours enregistré : l'annuler n'effacerait pas l'argent encaissé. Utilisez « Réémettre » (nouveau reçu, celui-ci est marqué remplacé) ou, si le patient est remboursé, enregistrez d'abord le remboursement (« Rembourser », avec motif).".into());
+            }
         }
         let amount = -orig.amount_cents;
         Ok(Entry {
@@ -531,10 +566,39 @@ pub fn cancel(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: &str, who: 
             gross_cents: None,
             discount_cents: None,
             note_total_cents: None,
+            replaces: None,
             prev_hash: String::new(),
             hash: String::new(),
         })
     })
+}
+
+/// « Réémettre » : le reçu est annulé (reçu d'annulation, avec motif) puis un NOUVEAU reçu du même
+/// montant est émis ; l'ancien est marqué « remplacé ». L'encaissement n'est pas touché. Médecin seulement.
+pub fn reissue(dir: &Path, key: &[u8; KEY_LEN], number: &str, reason: &str, who: &Actor, now_iso: &str, today: &str) -> Result<Entry, String> {
+    let reason = check_cancel_input(who, reason)?;
+    let _g = lock();
+    // Vérifications avant toute écriture : jamais de reçu annulé sans remplaçant.
+    let entries = load(dir, key)?;
+    let orig = find(&entries, number)?.clone();
+    if orig.kind != "receipt" {
+        return Err("Un reçu d'annulation ne peut pas être réémis.".into());
+    }
+    if is_cancelled(&entries, number) {
+        return Err("Ce reçu est déjà annulé ou remplacé.".into());
+    }
+    let notes = read_list(dir, key, NOTES_FILE);
+    let note = notes.iter().find(|n| s(n, "id") == orig.note_id).ok_or("Encaissement introuvable.")?;
+    if super::numbering::is_cancelled(note) {
+        return Err("Cette note d'honoraires est annulée : aucun reçu ne peut être émis.".into());
+    }
+    let (_, paid) = note_paid_total(note);
+    if to_cents(paid)? - (covered_cents(&entries, &orig.note_id) - orig.amount_cents) <= 0 {
+        return Err("Aucun versement à reçuer pour cette note : réémission impossible.".into());
+    }
+    let detail = orig.label != label_for(note, false);
+    cancel_locked(dir, key, number, reason, who, now_iso, today, None)?;
+    issue_locked(dir, key, &orig.note_id, detail, who, now_iso, today, Some(number.to_string()))
 }
 
 /// Enregistre une réimpression (rang croissant) ; n'attribue AUCUN nouveau numéro. L'assistante :
@@ -571,6 +635,7 @@ pub fn duplicate(dir: &Path, key: &[u8; KEY_LEN], number: &str, who: &Actor, now
         gross_cents: None,
         discount_cents: None,
         note_total_cents: None,
+        replaces: None,
         prev_hash: String::new(),
         hash: String::new(),
     };
@@ -765,10 +830,26 @@ pub fn receipt_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri:
     let session = require_session(gate(&app, &state, "receipt_cancel")?)?;
     let key = data_key_of(&state)?;
     let dir = data_dir(&app)?;
-    let r = cancel(&dir, &key, &number, &reason, &actor_of(&session), &util::now_iso(), &util::today_local());
+    let r = super::reasons::validate(&reason).and_then(|reason| cancel(&dir, &key, &number, &reason, &actor_of(&session), &util::now_iso(), &util::today_local()));
     match &r {
         Ok(e) => audit::log(&app, Some(&session), "receipt_cancel", &format!("{} annule {}", e.number, number), true),
         Err(_) => audit::log(&app, Some(&session), "receipt_cancel", "refusé", false),
+    }
+    let e = r?;
+    let entries = load(&dir, &key)?;
+    Ok(view_of(&entries, &e))
+}
+
+/// « Réémettre » : annule le reçu (motif) et en émet un nouveau, l'ancien est marqué remplacé (médecin).
+#[tauri::command]
+pub fn receipt_reissue<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, number: String, reason: String) -> Result<View, String> {
+    let session = require_session(gate(&app, &state, "receipt_reissue")?)?;
+    let key = data_key_of(&state)?;
+    let dir = data_dir(&app)?;
+    let r = super::reasons::validate(&reason).and_then(|reason| reissue(&dir, &key, &number, &reason, &actor_of(&session), &util::now_iso(), &util::today_local()));
+    match &r {
+        Ok(e) => audit::log(&app, Some(&session), "receipt_reissue", &format!("{} remplace {}", e.number, number), true),
+        Err(_) => audit::log(&app, Some(&session), "receipt_reissue", "refusé", false),
     }
     let e = r?;
     let entries = load(&dir, &key)?;

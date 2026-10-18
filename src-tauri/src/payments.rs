@@ -520,7 +520,7 @@ use super::{data_dir, util, AppState};
 pub fn payment_refund<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, note_id: String, amount: f64, mode: String, reason: String) -> Result<Entry, String> {
     let session = require_session(gate(&app, &state, "payment_refund")?)?;
     let key = data_key_of(&state)?;
-    let r = refund(&data_dir(&app)?, &key, session.role, &note_id, amount, &mode, &reason, &session.name, &util::today_local());
+    let r = super::reasons::validate(&reason).and_then(|reason| refund(&data_dir(&app)?, &key, session.role, &note_id, amount, &mode, &reason, &session.name, &util::today_local()));
     audit::log(&app, Some(&session), "payment_refund", &match &r { Ok(e) => format!("{} {}", note_id, e.amount_cents), Err(_) => "refusé".into() }, r.is_ok());
     r
 }

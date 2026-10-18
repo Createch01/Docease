@@ -280,9 +280,11 @@ fn a_note_with_valid_receipts_is_cancelled_only_after_its_receipts() {
     let doctor = Actor { name: "Dr".into(), role: Role::Medecin };
     let r = receipts::issue(&d, &KEY, "a", false, &doctor, "2026-10-08T09:00:00Z", TODAY).unwrap();
     assert!(cancel_ok(&d, "a").unwrap_err().contains("reçus valides"));
-    receipts::cancel(&d, &KEY, &r.number, "erreur", &doctor, "2026-10-08T09:30:00Z", TODAY).unwrap();
-    assert!(cancel_ok(&d, "a").unwrap_err().contains("encaissée"));
-    assert!(cancel_refunding(&d, "a").is_ok());
+    // Le reçu atteste un encaissement toujours enregistré : il ne s'annule qu'après le remboursement.
+    assert!(receipts::cancel(&d, &KEY, &r.number, "Doublon", &doctor, "2026-10-08T09:30:00Z", TODAY).unwrap_err().contains("Rembourser"));
+    crate::payments::refund(&d, &KEY, Role::Medecin, "a", 300.0, "CASH", "Demande du patient", "Dr", TODAY).unwrap();
+    receipts::cancel(&d, &KEY, &r.number, "Demande du patient", &doctor, "2026-10-08T09:30:00Z", TODAY).unwrap();
+    assert!(cancel_ok(&d, "a").is_ok(), "encaissement remboursé, reçus annulés : la note peut être annulée");
     // Une note annulée n'accepte plus de reçu.
     assert!(receipts::issue(&d, &KEY, "a", false, &doctor, "t", TODAY).unwrap_err().contains("annulée"));
     let _ = fs::remove_dir_all(&d);

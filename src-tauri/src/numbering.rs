@@ -372,7 +372,7 @@ fn cancel_with(dir: &Path, key: &[u8; KEY_LEN], role: super::access::Role, id: &
     }
     let receipts = super::receipts::load(dir, key)?;
     if receipts.iter().any(|r| r.kind == "receipt" && r.note_id == id && !super::receipts::is_cancelled(&receipts, &r.number)) {
-        return Err("Cette note a des reçus valides : annulez d'abord ses reçus.".into());
+        return Err("Cette note a des reçus valides : remboursez d'abord l'encaissement (« Rembourser », avec motif), annulez ses reçus, puis annulez la note.".into());
     }
     // Registre d'abord (remboursement éventuel), notes ensuite.
     super::payments::settle_for_cancel(dir, key, &notes, id, refund_mode, &reason, by, &super::util::today_local())?;
@@ -487,7 +487,7 @@ use super::{data_dir, util, AppState};
 pub fn honorary_note_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String, reason: String) -> Result<Value, String> {
     let session = require_session(gate(&app, &state, "honorary_note_cancel")?)?;
     let key = data_key_of(&state)?;
-    let r = cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &session.name, &util::now_iso());
+    let r = super::reasons::validate(&reason).and_then(|reason| cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &session.name, &util::now_iso()));
     audit::log(&app, Some(&session), "note_cancel", if r.is_ok() { &id } else { "refusé" }, r.is_ok());
     r
 }
@@ -497,7 +497,7 @@ pub fn honorary_note_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: 
 pub fn honorary_note_refund_and_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String, reason: String, refund_mode: String) -> Result<Value, String> {
     let session = require_session(gate(&app, &state, "honorary_note_refund_and_cancel")?)?;
     let key = data_key_of(&state)?;
-    let r = refund_and_cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &refund_mode, &session.name, &util::now_iso());
+    let r = super::reasons::validate(&reason).and_then(|reason| refund_and_cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &refund_mode, &session.name, &util::now_iso()));
     audit::log(&app, Some(&session), "note_refund_cancel", if r.is_ok() { &id } else { "refusé" }, r.is_ok());
     r
 }

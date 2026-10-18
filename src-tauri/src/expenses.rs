@@ -821,7 +821,7 @@ pub fn expense_receipt_add<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: t
 pub fn expense_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String, reason: String) -> Result<Entry, String> {
     let session = require_session(gate(&app, &state, "expense_cancel")?)?;
     let key = data_key_of(&state)?;
-    let r = cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &session.name, &util::today_local());
+    let r = super::reasons::validate(&reason).and_then(|reason| cancel(&data_dir(&app)?, &key, session.role, &id, &reason, &session.name, &util::today_local()));
     audit::log(&app, Some(&session), "expense_cancel", if r.is_ok() { &id } else { "refusé" }, r.is_ok());
     r
 }
@@ -830,7 +830,7 @@ pub fn expense_cancel<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri:
 pub fn expense_correct<R: tauri::Runtime>(app: tauri::AppHandle<R>, state: tauri::State<AppState>, id: String, reason: String, expense: NewExpense) -> Result<Entry, String> {
     let session = require_session(gate(&app, &state, "expense_correct")?)?;
     let key = data_key_of(&state)?;
-    let r = correct(&data_dir(&app)?, &key, session.role, &id, &reason, &expense, &session.name, &util::today_local());
+    let r = super::reasons::validate(&reason).and_then(|reason| correct(&data_dir(&app)?, &key, session.role, &id, &reason, &expense, &session.name, &util::today_local()));
     audit::log(&app, Some(&session), "expense_correct", &match &r { Ok((_, e)) => format!("{id} → {}", e.id), Err(_) => "refusé".into() }, r.is_ok());
     r.map(|(_, e)| e)
 }

@@ -492,3 +492,63 @@ fn diverging_registries_keep_the_backup_but_the_counter_never_goes_back() {
         let _ = fs::remove_dir_all(d);
     }
 }
+
+// ─── Annuler un reçu n'efface jamais un encaissement ─────────────────────────
+
+/// Note enregistrée comme à l'écran (registre des paiements alimenté par Rust) : 300 DH encaissés.
+fn paid_note_in_registry(d: &Path) -> String {
+    let incoming = json!([{"id": "n1", "patientId": "p1", "date": TODAY, "invoiceNumber": "", "totalAmount": 300, "amountPaid": 300, "status": "UNPAID", "paymentMode": "CASH",
+                           "services": [{"name": "Consultation", "price": 300, "checked": true}]}]);
+    let (data, pending) = crate::numbering::on_save(d, &KEY, incoming, TODAY, "Dr").unwrap();
+    write_enc_json_in(d, &KEY, NOTES_FILE, &data).unwrap();
+    pending.commit().unwrap();
+    "n1".into()
+}
+
+#[test]
+fn a_receipt_cannot_be_cancelled_while_its_payment_is_still_in_the_registry() {
+    let d = tmp("cancel-rule");
+    let id = paid_note_in_registry(&d);
+    let r = issue_at(&d, &id, TODAY).unwrap();
+    let before = crate::payments::load(&d, &KEY).unwrap();
+    let err = cancel(&d, &KEY, &r.number, "Doublon", &doctor(), NOW, TODAY).unwrap_err();
+    assert!(err.contains("Réémettre") && err.contains("Rembourser"), "{err}");
+    // Rien n'a bougé : ni reçu d'annulation, ni encaissement.
+    assert_eq!(load(&d, &KEY).unwrap().len(), 1);
+    assert_eq!(crate::payments::load(&d, &KEY).unwrap(), before);
+    assert_eq!(crate::payments::net_cents(&before, &id), 30_000);
+
+    // Remboursement (motif) → l'encaissement n'existe plus → le reçu peut être annulé.
+    crate::payments::refund(&d, &KEY, Role::Medecin, &id, 300.0, "CASH", "Demande du patient", "Dr", TODAY).unwrap();
+    let c = cancel(&d, &KEY, &r.number, "Demande du patient", &doctor(), NOW, TODAY).unwrap();
+    assert_eq!((c.kind.as_str(), c.amount_cents), ("cancellation", -30_000));
+    // Le registre des paiements garde l'encaissement ET le remboursement (jamais effacés).
+    let after = crate::payments::load(&d, &KEY).unwrap();
+    assert_eq!(after.len(), before.len() + 1);
+    assert_eq!(&after[..before.len()], &before[..]);
+    assert!(verify(&d, &KEY).unwrap().ok);
+    let _ = fs::remove_dir_all(&d);
+}
+
+#[test]
+fn reissue_replaces_the_receipt_without_touching_the_payment() {
+    let d = tmp("reissue");
+    let id = paid_note_in_registry(&d);
+    let r = issue_at(&d, &id, TODAY).unwrap();
+    let before = crate::payments::load(&d, &KEY).unwrap();
+    assert!(reissue(&d, &KEY, &r.number, "Doublon", &assistant(), NOW, TODAY).is_err(), "médecin seulement");
+    let n = reissue(&d, &KEY, &r.number, "Erreur de montant — libellé corrigé", &doctor(), NOW, TODAY).unwrap();
+    assert_eq!((n.kind.as_str(), n.amount_cents, n.replaces.as_deref()), ("receipt", 30_000, Some(r.number.as_str())));
+    assert_ne!(n.number, r.number);
+    let entries = load(&d, &KEY).unwrap();
+    assert_eq!(entries.len(), 3, "reçu, annulation, nouveau reçu");
+    assert_eq!(view_of(&entries, &entries[0]).status, "replaced");
+    assert_eq!(view_of(&entries, &entries[0]).replaced_by.as_deref(), Some(n.number.as_str()));
+    assert_eq!(view_of(&entries, &entries[2]).status, "valid");
+    assert_eq!(crate::payments::load(&d, &KEY).unwrap(), before, "encaissement intact");
+    assert!(verify(&d, &KEY).unwrap().ok, "{:?}", verify(&d, &KEY).unwrap().problems);
+    // L'ancien reçu ne peut plus être réémis ni annulé ; le nouveau est protégé par la même règle.
+    assert!(reissue(&d, &KEY, &r.number, "Doublon", &doctor(), NOW, TODAY).is_err());
+    assert!(cancel(&d, &KEY, &n.number, "Doublon", &doctor(), NOW, TODAY).is_err());
+    let _ = fs::remove_dir_all(&d);
+}
